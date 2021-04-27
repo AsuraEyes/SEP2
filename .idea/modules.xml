@@ -4,7 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/SEP2.iml" filepath="$PROJECT_DIR$/.idea/SEP2.iml" />
       <module fileurl="file://$PROJECT_DIR$/ShareIt/ShareIt.iml" filepath="$PROJECT_DIR$/ShareIt/ShareIt.iml" />
-      <module fileurl="file://$PROJECT_DIR$/test/test.iml" filepath="$PROJECT_DIR$/test/test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ShareIt/ground_classes.iml" filepath="$PROJECT_DIR$/ShareIt/ground_classes.iml" />
     </modules>
   </component>
 </project>
