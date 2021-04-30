@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane layoutX="-6.0" prefHeight="168.0" prefWidth="1286.0" style="-fx-background-color: #A3A1A8;">
+         <children>
+            <Label layoutX="65.0" layoutY="55.0" style="-fx-border-color: #fff587; -fx-border-width: 5px; -fx-border-radius: 10px;" text="Share it!" textFill="#fff587">
+               <font>
+                  <Font name="Californian FB Italic" size="40.0" />
+               </font>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </Label>
+            <Label layoutX="1107.0" layoutY="125.0" text="Logged in as: username" />
+            <Label layoutX="1095.0" layoutY="68.0" style="-fx-border-width: 5px; -fx-background-color: #fff587; -fx-background-radius: 30px;" text="Log in / sign in" textFill="#7d6b7d">
+               <font>
+                  <Font name="Californian FB" size="20.0" />
+               </font>
+               <padding>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+               </padding>
+            </Label>
+            <Label layoutX="555.0" layoutY="73.0" text="Reported members" textFill="#fff587">
+               <font>
+                  <Font name="Californian FB" size="20.0" />
+               </font>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </Label>
+            <Label layoutX="906.0" layoutY="73.0" text="Chat" textFill="#fff587">
+               <font>
+                  <Font name="Californian FB" size="20.0" />
+               </font>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </Label>
+            <Label layoutX="313.0" layoutY="73.0" text="Reviews" textFill="#fff587">
+               <font>
+                  <Font name="Californian FB" size="20.0" />
+               </font>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </Label>
+         </children>
+      </AnchorPane>
+      <TextField layoutX="542.0" layoutY="196.0" prefHeight="30.0" prefWidth="194.0" text="Ex. Drill Makita">
+         <padding>
+            <Insets bottom="10.0" left="20.0" right="10.0" top="10.0" />
+         </padding></TextField>
+      <Button layoutX="788.0" layoutY="195.0" mnemonicParsing="false" style="-fx-border-radius: 30px; -fx-background-radius: 30px; -fx-background-color: #A3A1A8; -fx-border-color: #A3A1A8;" text="Search" textFill="WHITE">
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </Button>
+      <VBox layoutY="259.0" prefHeight="464.0" prefWidth="1280.0" style="-fx-border-color: #FF665A; -fx-border-width: 3; -fx-background-color: #FF665A;">
+         <effect>
+            <ColorAdjust />
+         </effect>
+         <padding>
+            <Insets bottom="20.0" left="160.0" right="160.0" top="20.0" />
+         </padding>
+         <children>
+            <Label prefHeight="44.0" prefWidth="200.0" text="Reported  members" textFill="WHITE">
+               <font>
+                  <Font name="Californian FB" size="20.0" />
+               </font>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </Label>
+            <TextArea prefHeight="423.0" prefWidth="558.0" promptText="Username: Yo" text="Username: john doe&#10;Comment: john doe did something...&#10;">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding></TextArea>
+         </children>
+      </VBox>
+      <Line endX="1239.0" endY="152.8000030517578" layoutX="1.0" layoutY="16.0" startX="26.200008392333984" startY="152.8000030517578" stroke="#7d6b7d" strokeWidth="2.0" />
+      <Line endX="1239.0" endY="152.8000030517578" layoutX="1.0" layoutY="29.0" startX="26.200008392333984" startY="152.8000030517578" stroke="#7d6b7d" strokeWidth="2.0" />
+   </children>
+</AnchorPane>

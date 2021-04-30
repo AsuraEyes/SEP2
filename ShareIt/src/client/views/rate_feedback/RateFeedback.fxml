@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import org.controlsfx.control.Rating?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox layoutY="268.0" pickOnBounds="false" prefHeight="371.0" prefWidth="1280.0" style="-fx-border-color: #FF8C64; -fx-border-width: 3; -fx-background-color: #FF8C64;">
+         <effect>
+            <ColorAdjust />
+         </effect>
+         <padding>
+            <Insets bottom="20.0" left="350.0" right="350.0" top="20.0" />
+         </padding>
+         <children>
+            <GridPane pickOnBounds="false" prefHeight="276.0" prefWidth="575.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="480.0" minWidth="10.0" prefWidth="463.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" prefWidth="95.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="49.60001220703125" minHeight="43.200018310546874" prefHeight="43.200018310546874" />
+                  <RowConstraints maxHeight="38.599981689453124" minHeight="10.0" prefHeight="38.599981689453124" />
+                  <RowConstraints maxHeight="35.199981689453125" minHeight="10.0" prefHeight="31.999969482421875" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="168.80001831054688" minHeight="10.0" prefHeight="168.00003051757812" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Rating prefHeight="0.0" prefWidth="176.0" GridPane.rowIndex="2">
+                     <GridPane.margin>
+                        <Insets top="10.0" />
+                     </GridPane.margin></Rating>
+                  <Label prefHeight="31.0" prefWidth="107.0" text="Rating 1" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </Label>
+                  <TextArea prefHeight="132.0" prefWidth="460.0" promptText="sdfvfdsfsdfsfdf" GridPane.rowIndex="3">
+                     <GridPane.margin>
+                        <Insets right="20.0" top="20.0" />
+                     </GridPane.margin>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </TextArea>
+                  <Button alignment="TOP_LEFT" mnemonicParsing="false" style="-fx-border-radius: 30px; -fx-background-radius: 30px; -fx-background-color: #A3A1A8; -fx-border-color: #A3A1A8;" text="Submit" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </Button>
+                  <Label text="User Review" textFill="#fff587">
+                     <font>
+                        <Font name="Californian FB" size="20.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                     <GridPane.margin>
+                        <Insets bottom="10.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label prefHeight="50.0" prefWidth="238.0" text="Username" textFill="WHITE" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="20.0" top="20.0" />
+               </VBox.margin>
+            </GridPane>
+         </children>
+      </VBox>
+      <TextField layoutX="543.0" layoutY="205.0" prefHeight="30.0" prefWidth="194.0" style="-fx-border-radius: 30px; -fx-background-radius: 30px;" text="Ex. Drill Makita">
+         <padding>
+            <Insets bottom="10.0" left="20.0" right="10.0" top="10.0" />
+         </padding>
+      </TextField>
+      <Button layoutX="798.0" layoutY="204.0" mnemonicParsing="false" style="-fx-border-radius: 30px; -fx-background-radius: 30px; -fx-background-color: #A3A1A8; -fx-border-color: #A3A1A8;" text="Search" textFill="WHITE">
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </Button>
+      <Line endX="1239.0" endY="152.8000030517578" layoutX="1.0" layoutY="16.0" startX="26.200008392333984" startY="152.8000030517578" stroke="#7d6b7d" strokeWidth="2.0" />
+      <Line endX="1239.0" endY="152.8000030517578" layoutX="1.0" layoutY="29.0" startX="26.200008392333984" startY="152.8000030517578" stroke="#7d6b7d" strokeWidth="2.0" />
+      <AnchorPane prefHeight="168.0" prefWidth="1280.0" style="-fx-background-color: #A3A1A8;">
+         <children>
+            <Label layoutX="65.0" layoutY="55.0" style="-fx-border-color: #fff587; -fx-border-width: 5px; -fx-border-radius: 10px;" text="Share it!" textFill="#fff587">
+               <font>
+                  <Font name="Californian FB Italic" size="40.0" />
+               </font>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </Label>
+            <Label layoutX="1107.0" layoutY="125.0" text="Logged in as: username" />
+            <Label layoutX="1095.0" layoutY="68.0" style="-fx-border-width: 5px; -fx-background-color: #fff587; -fx-background-radius: 30px;" text="Log in / sign in" textFill="#7d6b7d">
+               <font>
+                  <Font name="Californian FB" size="20.0" />
+               </font>
+               <padding>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+               </padding>
+            </Label>
+            <Label layoutX="555.0" layoutY="73.0" text="Reported members" textFill="#fff587">
+               <font>
+                  <Font name="Californian FB" size="20.0" />
+               </font>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </Label>
+            <Label layoutX="906.0" layoutY="73.0" text="Chat" textFill="#fff587">
+               <font>
+                  <Font name="Californian FB" size="20.0" />
+               </font>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </Label>
+            <Label layoutX="313.0" layoutY="73.0" text="Reviews" textFill="#fff587">
+               <font>
+                  <Font name="Californian FB" size="20.0" />
+               </font>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </Label>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="966.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <AnchorPane layoutX="-1.0" prefHeight="168.0" prefWidth="1280.0" style="-fx-background-color: #A3A1A8;">
+            <children>
+                <Label layoutX="65.0" layoutY="55.0" style="-fx-border-color: #fff587; -fx-border-width: 5px; -fx-border-radius: 10px;" text="Share it!" textFill="#fff587">
+                    <font>
+                        <Font name="Californian FB Italic" size="40.0" />
+                    </font>
+                    <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                    </padding>
+                </Label>
+                <Label layoutX="1101.0" layoutY="125.0" text="Logged in as: username" />
+                <Label layoutX="1089.0" layoutY="67.0" style="-fx-border-width: 5px; -fx-background-color: #fff587; -fx-background-radius: 30px;" text="Log in / sign in" textFill="#7d6b7d">
+                    <font>
+                        <Font name="Californian FB" size="20.0" />
+                    </font>
+                    <padding>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                    </padding>
+                </Label>
+                <Label layoutX="737.0" layoutY="73.0" text="Reported members" textFill="#fff587">
+                    <font>
+                        <Font name="Californian FB" size="20.0" />
+                    </font>
+                    <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                    </padding>
+                </Label>
+                <Label layoutX="975.0" layoutY="72.0" text="Chat" textFill="#fff587">
+                    <font>
+                        <Font name="Californian FB" size="20.0" />
+                    </font>
+                    <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                    </padding>
+                </Label>
+                <Label layoutX="595.0" layoutY="73.0" text="Reviews" textFill="#fff587">
+                    <font>
+                        <Font name="Californian FB" size="20.0" />
+                    </font>
+                    <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                    </padding>
+                </Label>
+            </children>
+        </AnchorPane>
+        <Button layoutX="1072.0" layoutY="341.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="135.0" style="-fx-border-radius: 30px; -fx-background-radius: 30px; -fx-background-color: #A3A1A8; -fx-border-color: #A3A1A8;" text="Change" textFill="WHITE">
+            <padding>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            </padding>
+        </Button>
+      <VBox layoutX="-1.0" layoutY="253.0" prefHeight="219.0" prefWidth="268.0" style="-fx-background-color: #FF665A;" />
+      <VBox layoutX="177.0" layoutY="253.0" prefHeight="219.0" prefWidth="848.0" style="-fx-border-color: #FF665A; -fx-border-width: 3; -fx-background-color: #FF665A;">
+          <children>
+              <Label layoutX="9.0" layoutY="31.0" text="Username" textFill="WHITE">
+                  <font>
+                      <Font name="Californian FB" size="24.0" />
+                  </font>
+              </Label>
+              <Label layoutX="11.0" layoutY="53.0" text="Location: x" textFill="WHITE" wrapText="true">
+                  <padding>
+                      <Insets bottom="10.0" top="10.0" />
+                  </padding>
+              </Label>
+              <Label layoutX="42.0" layoutY="1.0" text="Rating: x" textFill="WHITE" wrapText="true">
+                  <padding>
+                      <Insets bottom="10.0" top="10.0" />
+                  </padding>
+              </Label>
+              <Label layoutX="14.0" layoutY="118.0" text="Address: x" textFill="WHITE" wrapText="true">
+                  <padding>
+                      <Insets bottom="10.0" top="10.0" />
+                  </padding>
+              </Label>
+              <Label layoutX="8.0" layoutY="82.0" text="Contact: x" textFill="WHITE" wrapText="true">
+                  <padding>
+                      <Insets bottom="10.0" top="10.0" />
+                  </padding>
+              </Label>
+              <Label layoutX="14.0" layoutY="155.0" text="Other information: whatever the user gives us here" textFill="WHITE" wrapText="true">
+                  <padding>
+                      <Insets bottom="10.0" top="10.0" />
+                  </padding>
+              </Label>
+          </children></VBox>
+      <Button layoutX="546.0" layoutY="522.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="189.0" style="-fx-border-radius: 30px; -fx-background-radius: 30px; -fx-background-color: #A3A1A8; -fx-border-color: #A3A1A8;" text="Add a new rental" textFill="WHITE">
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </Button>
+        <VBox layoutX="26.0" layoutY="593.0" prefHeight="242.0" prefWidth="235.0" style="-fx-border-color: #FF8C64; -fx-border-width: 3; -fx-background-color: #FF8C64;">
+            <children>
+                <Label text="Name of rental" textFill="WHITE">
+                    <font>
+                        <Font name="Californian FB" size="24.0" />
+                    </font>
+                </Label>
+                <Label prefHeight="30.0" prefWidth="112.0" text="Horsens" textFill="WHITE" wrapText="true" />
+                <Label prefHeight="30.0" prefWidth="112.0" text="170 DKK/day" textFill="WHITE" wrapText="true" />
+                <ImageView fitHeight="106.0" fitWidth="186.0" pickOnBounds="true" preserveRatio="true" />
+            </children>
+            <effect>
+                <ColorAdjust />
+            </effect>
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </padding>
+      </VBox>
+        <Line endX="1255.0" endY="152.79998779296875" layoutX="1.0" layoutY="16.0" startX="26.200008392333984" startY="152.8000030517578" stroke="#7d6b7d" strokeWidth="2.0" />
+        <Line endX="1255.0" endY="152.79998779296875" layoutX="1.0" layoutY="29.0" startX="26.200008392333984" startY="152.8000030517578" stroke="#7d6b7d" strokeWidth="2.0" />
+      <VBox layoutX="327.0" layoutY="593.0" prefHeight="242.0" prefWidth="235.0" style="-fx-border-color: #FF8C64; -fx-border-width: 3; -fx-background-color: #FF8C64;">
+         <children>
+            <Label text="Name of rental" textFill="WHITE">
+               <font>
+                  <Font name="Californian FB" size="24.0" />
+               </font>
+            </Label>
+            <Label prefHeight="30.0" prefWidth="112.0" text="Horsens" textFill="WHITE" wrapText="true" />
+            <Label prefHeight="30.0" prefWidth="112.0" text="170 DKK/day" textFill="WHITE" wrapText="true" />
+            <ImageView fitHeight="106.0" fitWidth="186.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+         <effect>
+            <ColorAdjust />
+         </effect>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+      </VBox>
+      <VBox layoutX="640.0" layoutY="593.0" prefHeight="242.0" prefWidth="235.0" style="-fx-border-color: #FF8C64; -fx-border-width: 3; -fx-background-color: #FF8C64;">
+         <children>
+            <Label text="Name of rental" textFill="WHITE">
+               <font>
+                  <Font name="Californian FB" size="24.0" />
+               </font>
+            </Label>
+            <Label prefHeight="30.0" prefWidth="112.0" text="Horsens" textFill="WHITE" wrapText="true" />
+            <Label prefHeight="30.0" prefWidth="112.0" text="170 DKK/day" textFill="WHITE" wrapText="true" />
+            <ImageView fitHeight="106.0" fitWidth="186.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+         <effect>
+            <ColorAdjust />
+         </effect>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+      </VBox>
+      <VBox layoutX="954.0" layoutY="593.0" prefHeight="242.0" prefWidth="235.0" style="-fx-border-color: #FF8C64; -fx-border-width: 3; -fx-background-color: #FF8C64;">
+         <children>
+            <Label text="Name of rental" textFill="WHITE">
+               <font>
+                  <Font name="Californian FB" size="24.0" />
+               </font>
+            </Label>
+            <Label prefHeight="30.0" prefWidth="112.0" text="Horsens" textFill="WHITE" wrapText="true" />
+            <Label prefHeight="30.0" prefWidth="112.0" text="170 DKK/day" textFill="WHITE" wrapText="true" />
+            <ImageView fitHeight="106.0" fitWidth="186.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+         <effect>
+            <ColorAdjust />
+         </effect>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+      </VBox>
+    </children>
+</AnchorPane>

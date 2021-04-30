@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane layoutX="-1.0" prefHeight="168.0" prefWidth="1280.0" style="-fx-background-color: #A3A1A8;">
+         <children>
+            <Label layoutX="65.0" layoutY="55.0" style="-fx-border-color: #fff587; -fx-border-width: 5px; -fx-border-radius: 10px;" text="Share it!" textFill="#fff587">
+               <font>
+                  <Font name="Californian FB Italic" size="40.0" />
+               </font>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </Label>
+            <Label layoutX="1101.0" layoutY="125.0" text="Logged in as: username" />
+            <Label layoutX="1089.0" layoutY="67.0" style="-fx-border-width: 5px; -fx-background-color: #fff587; -fx-background-radius: 30px;" text="Log in / sign in" textFill="#7d6b7d">
+               <font>
+                  <Font name="Californian FB" size="20.0" />
+               </font>
+               <padding>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+               </padding>
+            </Label>
+            <Label layoutX="737.0" layoutY="73.0" text="Reported members" textFill="#fff587">
+               <font>
+                  <Font name="Californian FB" size="20.0" />
+               </font>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </Label>
+            <Label layoutX="975.0" layoutY="72.0" text="Chat" textFill="#fff587">
+               <font>
+                  <Font name="Californian FB" size="20.0" />
+               </font>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </Label>
+            <Label layoutX="595.0" layoutY="73.0" text="Reviews" textFill="#fff587">
+               <font>
+                  <Font name="Californian FB" size="20.0" />
+               </font>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </Label>
+         </children>
+      </AnchorPane>
+      <TextField layoutX="541.0" layoutY="198.0" prefHeight="30.0" prefWidth="194.0" style="-fx-border-radius: 30px; -fx-background-radius: 30px;" text="Ex. Drill Makita">
+         <padding>
+            <Insets bottom="10.0" left="20.0" right="10.0" top="10.0" />
+         </padding></TextField>
+      <Button layoutX="767.0" layoutY="197.0" mnemonicParsing="false" style="-fx-border-radius: 30px; -fx-background-radius: 30px; -fx-background-color: #A3A1A8; -fx-border-color: #A3A1A8;" text="Search" textFill="WHITE">
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </Button>
+      <Line endX="1254.7999267578125" endY="152.8000030517578" layoutX="1.0" layoutY="16.0" startX="26.200008392333984" startY="152.8000030517578" stroke="#7d6b7d" strokeWidth="2.0" />
+      <Line endX="1255.5999755859375" endY="152.8000030517578" layoutX="1.0" layoutY="29.0" startX="26.200008392333984" startY="152.8000030517578" stroke="#7d6b7d" strokeWidth="2.0" />
+      <Button layoutX="37.0" layoutY="249.0" mnemonicParsing="false" style="-fx-border-radius: 30px; -fx-background-radius: 30px; -fx-background-color: #A3A1A8; -fx-border-color: #A3A1A8;" text="Go back to search results" textFill="WHITE">
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </Button>
+      <HBox alignment="CENTER" layoutX="-1.0" layoutY="326.0" prefHeight="371.0" prefWidth="1280.0" style="-fx-background-color: #FF8C64;">
+         <children>
+            <VBox prefHeight="371.0" prefWidth="1012.0" style="-fx-border-color: #FF8C64; -fx-border-width: 3; -fx-background-color: #FF8C64;">
+               <effect>
+                  <ColorAdjust />
+               </effect>
+               <padding>
+                  <Insets bottom="20.0" left="160.0" right="20.0" top="20.0" />
+               </padding>
+               <children>
+                  <Label text="Name of rental" textFill="WHITE">
+                     <font>
+                        <Font name="Californian FB" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label prefHeight="88.0" prefWidth="430.0" text="Description very very long description. Description very very long description. Description very very long description. Description very very long description. Description very very long description. Description very very long description. " textFill="WHITE" wrapText="true">
+                     <padding>
+                        <Insets bottom="10.0" top="10.0" />
+                     </padding>
+                  </Label>
+                  <Label text="State: perfect" textFill="WHITE" wrapText="true">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                     <padding>
+                        <Insets bottom="10.0" top="10.0" />
+                     </padding>
+                  </Label>
+                  <Label text="Price: 120 DKK/day" textFill="WHITE" wrapText="true">
+                     <padding>
+                        <Insets bottom="10.0" top="10.0" />
+                     </padding>
+                  </Label>
+                  <Label prefHeight="54.0" prefWidth="425.0" text="Other information: here there will be place for some other information. I don't really know what they would write here but whatever" textFill="WHITE" wrapText="true">
+                     <padding>
+                        <Insets bottom="10.0" top="10.0" />
+                     </padding>
+                  </Label>
+                  <Label prefWidth="387.0" text="Categories: Tools, Garden, Free time" textFill="WHITE" wrapText="true">
+                     <padding>
+                        <Insets bottom="10.0" top="10.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </VBox>
+            <ImageView fitHeight="289.0" fitWidth="273.0" pickOnBounds="true" preserveRatio="true">
+               <HBox.margin>
+                  <Insets right="160.0" />
+               </HBox.margin>
+            </ImageView>
+         </children>
+      </HBox>
+      <VBox layoutY="755.0" prefHeight="202.0" prefWidth="1280.0" style="-fx-background-color: #FF665A;">
+         <padding>
+            <Insets bottom="20.0" left="160.0" right="160.0" top="20.0" />
+         </padding>
+         <children>
+            <Label text="Username" textFill="WHITE">
+               <font>
+                  <Font name="Californian FB" size="24.0" />
+               </font>
+            </Label>
+            <Label text="Location: Horsens" textFill="WHITE" wrapText="true">
+               <padding>
+                  <Insets bottom="10.0" top="10.0" />
+               </padding>
+            </Label>
+            <Label text="Rating: 4/5" textFill="WHITE" wrapText="true">
+               <padding>
+                  <Insets bottom="10.0" top="10.0" />
+               </padding>
+            </Label>
+            <Button mnemonicParsing="false" style="-fx-border-radius: 30px; -fx-background-radius: 30px; -fx-background-color: #A3A1A8; -fx-border-color: #A3A1A8;" text="See more" textFill="WHITE">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
