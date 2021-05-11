@@ -6,6 +6,7 @@ import client.viewmodel.log_in.LogInViewModel;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import org.controlsfx.control.textfield.CustomPasswordField;
 
 import java.io.IOException;
 
@@ -14,6 +15,7 @@ public class LogInController
   public TextField searchField;
   public TextField userNameField;
   public Label errorLabel;
+  public CustomPasswordField passwordField;
 
   private LogInViewModel logInViewModel;
   private ViewHandler viewHandler;
