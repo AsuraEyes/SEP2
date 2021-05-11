@@ -23,8 +23,8 @@ public class LogInController
     this.viewHandler = viewHandler;
     logInViewModel = viewModelFactory.getLogInViewModel();
     userNameField.textProperty().bindBidirectional(logInViewModel.getUserName());
-    errorLabel.textProperty().bind(logInViewModel.getError());
-    searchField.textProperty().bindBidirectional(logInViewModel.getSearch());
+    errorLabel.textProperty().bind(logInViewModel.getErrorLabel());
+    searchField.textProperty().bindBidirectional(logInViewModel.getSearchField());
   }
 
   public void searchButton(ActionEvent actionEvent)
