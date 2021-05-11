@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import org.controlsfx.control.Rating?>
+
+<ScrollPane prefHeight="619.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <content>
+      <AnchorPane prefHeight="600.0" prefWidth="1280.0">
+         <children>
+            <TextField layoutX="543.0" layoutY="14.0" prefHeight="30.0" prefWidth="194.0" style="-fx-border-radius: 30px; -fx-background-radius: 30px;" text="Ex. Drill Makita">
+               <padding>
+                  <Insets bottom="10.0" left="20.0" right="10.0" top="10.0" />
+               </padding>
+            </TextField>
+            <Button layoutX="778.0" layoutY="13.0" mnemonicParsing="false" style="-fx-border-radius: 30px; -fx-background-radius: 30px; -fx-background-color: #A3A1A8; -fx-border-color: #A3A1A8;" text="Search" textFill="WHITE">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </Button>
+            <Button layoutX="27.0" layoutY="55.0" mnemonicParsing="false" style="-fx-border-radius: 30px; -fx-background-radius: 30px; -fx-background-color: #A3A1A8; -fx-border-color: #A3A1A8;" text="Go back to user's page" textFill="WHITE">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </Button>
+            <VBox layoutY="134.0" pickOnBounds="false" prefHeight="371.0" prefWidth="1280.0" style="-fx-border-color: #FF8C64; -fx-border-width: 3; -fx-background-color: #FF8C64;">
+               <effect>
+                  <ColorAdjust />
+               </effect>
+               <padding>
+                  <Insets bottom="20.0" left="350.0" right="350.0" top="20.0" />
+               </padding>
+               <children>
+                  <GridPane pickOnBounds="false" prefHeight="276.0" prefWidth="575.0">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="480.0" minWidth="10.0" prefWidth="463.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" prefWidth="95.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints maxHeight="61.600006103515625" minHeight="43.200018310546874" prefHeight="58.4000244140625" />
+                        <RowConstraints maxHeight="38.599981689453124" minHeight="10.0" prefHeight="21.799975585937503" />
+                        <RowConstraints maxHeight="35.199981689453125" minHeight="10.0" prefHeight="31.999969482421875" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="168.80001831054688" minHeight="10.0" prefHeight="168.00003051757812" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <Rating prefHeight="0.0" prefWidth="176.0" GridPane.rowIndex="2">
+                           <GridPane.margin>
+                              <Insets top="10.0" />
+                           </GridPane.margin>
+                        </Rating>
+                        <TextArea prefHeight="132.0" prefWidth="460.0" promptText="Add a commentary" GridPane.rowIndex="3">
+                           <GridPane.margin>
+                              <Insets right="20.0" top="20.0" />
+                           </GridPane.margin>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </TextArea>
+                        <Button alignment="TOP_LEFT" mnemonicParsing="false" style="-fx-border-radius: 30px; -fx-background-radius: 30px; -fx-background-color: #A3A1A8; -fx-border-color: #A3A1A8;" text="Submit" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
+                        </Button>
+                        <Label prefHeight="66.0" prefWidth="146.0" text="User Review" textFill="WHITE">
+                           <font>
+                              <Font name="Californian FB" size="24.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                           <GridPane.margin>
+                              <Insets bottom="10.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <Label prefHeight="50.0" prefWidth="238.0" text="Username" textFill="WHITE" GridPane.rowIndex="1">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="20.0" top="20.0" />
+                     </VBox.margin>
+                  </GridPane>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+   </content>
+</ScrollPane>
