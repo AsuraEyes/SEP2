@@ -1,26 +1,23 @@
 package client.core;
 
-import client.views.add_rental.AddRentalController;
 import client.views.chat_received_messages.ChatReceivedMessagesController;
 import client.views.chat_write_message.ChatWriteMessageController;
 import client.views.log_in.LogInController;
 import client.views.main_view.MainController;
+import client.views.menu.MenuController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.awt.*;
 import java.io.IOException;
 
 public class ViewHandler
 {
-  private Stage stage;
-  private Scene scene;
-  private ViewModelFactory viewModelFactory;
+  private final Stage stage;
+  private final Scene scene;
+  private final ViewModelFactory viewModelFactory;
 
   public ViewHandler(Stage stage, ViewModelFactory viewModelFactory)
   {
@@ -31,13 +28,13 @@ public class ViewHandler
 
   public void start() throws Exception
   {
-    setView(menu(),logIn());
+    setView(menu(),createAccount());
   }
 
   public void setView(Node menu, Node content) throws IOException
   {
     FXMLLoader loader = new FXMLLoader();
-    loader.setLocation(getClass().getResource("main_view/Main.fxml"));
+    loader.setLocation(getClass().getResource("/client/views/main_view/Main.fxml"));
     loader.load();
     MainController main = loader.getController();
     main.getMainPane().getChildren().setAll(menu,content);
@@ -49,17 +46,18 @@ public class ViewHandler
   public Node menu() throws IOException
   {
     FXMLLoader loader = new FXMLLoader();
-    loader.setLocation(getClass().getResource("create_account/CreateAccount.fxml"));
+    loader.setLocation(getClass().getResource("/client/views/menu/Menu.fxml"));
     Node menu = loader.load();
-    //TextFxmlController textFxmlController = loader.getController();
-    //textFxmlController.init(this);
+    MenuController menuController = loader.getController();
+    menuController.init(this, viewModelFactory);
+
     return menu;
   }
 
   public Node addRental() throws IOException
   {
     FXMLLoader loader = new FXMLLoader();
-    loader.setLocation(getClass().getResource("add_rental/AddRental.fxml"));
+    loader.setLocation(getClass().getResource("/client/views/add_rental/AddRental.fxml"));
     Node content = loader.load();
     //AddRentalController addRentalController = loader.getController();
     //addRentalController.init(viewModelFactory.getAddRentalViewModel());
@@ -70,7 +68,7 @@ public class ViewHandler
   public Node chatReceived() throws IOException
   {
     FXMLLoader loader = new FXMLLoader();
-    loader.setLocation(getClass().getResource("chat_received_messages/ChatReceivedMessages.fxml"));
+    loader.setLocation(getClass().getResource("/client/views/chat_received_messages/ChatRecievedMessages.fxml"));
     Node content = loader.load();
     ChatReceivedMessagesController chatReceivedMessagesController = loader.getController();
     chatReceivedMessagesController.init(this, viewModelFactory);
@@ -80,7 +78,7 @@ public class ViewHandler
   public Node chatWrite() throws IOException
   {
     FXMLLoader loader = new FXMLLoader();
-    loader.setLocation(getClass().getResource("chat_write_message/ChatWriteMessage.fxml"));
+    loader.setLocation(getClass().getResource("/client/views/chat_write_message/ChatWriteMessage.fxml"));
     Node content = loader.load();
     ChatWriteMessageController chatWriteMessageController = loader.getController();
     chatWriteMessageController.init();
@@ -90,7 +88,7 @@ public class ViewHandler
   public Node createAccount() throws IOException
   {
     FXMLLoader loader = new FXMLLoader();
-    loader.setLocation(getClass().getResource("create_account/CreateAccount.fxml"));
+    loader.setLocation(getClass().getResource("/client/views/create_account/CreateAccount.fxml"));
     Node content = loader.load();
     //LogInController logInController = loader.getController();
     //ogInController.init(this, viewModelFactory);
@@ -100,7 +98,7 @@ public class ViewHandler
   public Node logIn() throws IOException
   {
     FXMLLoader loader = new FXMLLoader();
-    loader.setLocation(getClass().getResource("log_in/LogIn.fxml"));
+    loader.setLocation(getClass().getResource("/client/views/log_in/LogIn.fxml"));
     Node content = loader.load();
     LogInController logInController = loader.getController();
     logInController.init(this, viewModelFactory);

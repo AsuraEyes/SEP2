@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.*?>
+<AnchorPane prefHeight="183.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.menu.MenuController">
+   <children>
+      <AnchorPane prefHeight="166.0" prefWidth="1280.0" style="-fx-background-color: #A3A1A8;">
+         <children>
+            <Label layoutX="65.0" layoutY="55.0" style="-fx-border-color: #fff587; -fx-border-width: 5px; -fx-border-radius: 10px;" text="Share it!" textFill="#fff587">
+               <font>
+                  <Font name="Californian FB Italic" size="40.0" />
+               </font>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </Label>
+            <Label layoutX="1097.0" layoutY="125.0" text="Logged in as: username" />
+            <Label layoutX="1085.0" layoutY="68.0" style="-fx-border-width: 5px; -fx-background-color: #fff587; -fx-background-radius: 30px;" text="Log in / sign in" textFill="#7d6b7d">
+               <font>
+                  <Font name="Californian FB" size="20.0" />
+               </font>
+               <padding>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+               </padding>
+            </Label>
+            <Label layoutX="739.0" layoutY="73.0" text="Reported members" textFill="#fff587">
+               <font>
+                  <Font name="Californian FB" size="20.0" />
+               </font>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </Label>
+            <Label layoutX="966.0" layoutY="73.0" text="Chat" textFill="#fff587">
+               <font>
+                  <Font name="Californian FB" size="20.0" />
+               </font>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </Label>
+            <Label layoutX="595.0" layoutY="73.0" text="Reviews" textFill="#fff587">
+               <font>
+                  <Font name="Californian FB" size="20.0" />
+               </font>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </Label>
+         </children>
+      </AnchorPane>
+      <Line endX="1254.7999267578125" endY="152.80001831054688" layoutY="15.0" startX="26.200008392333984" startY="152.8000030517578" stroke="#7d6b7d" strokeWidth="2.0" />
+      <Line endX="1255.5999755859375" endY="152.80001831054688" layoutY="23.0" startX="26.200008392333984" startY="152.8000030517578" stroke="#7d6b7d" strokeWidth="2.0" />
+   </children>
+</AnchorPane>

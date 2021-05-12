@@ -5,10 +5,10 @@ import javafx.beans.property.StringProperty;
 
 public class LogInViewModel
 {
-  private StringProperty userName;
-  private StringProperty errorLabel;
-  private StringProperty searchField;
-  private StringProperty passwordField;
+  private final StringProperty userName;
+  private final StringProperty errorLabel;
+  private final StringProperty searchField;
+  private final StringProperty passwordField;
 
   public LogInViewModel(){
     userName = new SimpleStringProperty("Username");

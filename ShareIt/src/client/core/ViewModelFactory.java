@@ -7,8 +7,8 @@ import client.viewmodel.log_in.LogInViewModel;
 public class ViewModelFactory
 {
   private LogInViewModel logInViewModel;
-  private ChatReceivedMessagesViewModel chatReceivedMessagesViewModel;
-  private ChatWriteMessageViewModel chatWriteMessageViewModel;
+  private final ChatReceivedMessagesViewModel chatReceivedMessagesViewModel;
+  private final ChatWriteMessageViewModel chatWriteMessageViewModel;
 
   public ViewModelFactory(){
     chatReceivedMessagesViewModel = new ChatReceivedMessagesViewModel();
