@@ -8,11 +8,13 @@ public class LogInViewModel
   private StringProperty userName;
   private StringProperty errorLabel;
   private StringProperty searchField;
+  private StringProperty passwordField;
 
   public LogInViewModel(){
     userName = new SimpleStringProperty("Username");
     errorLabel = new SimpleStringProperty();
     searchField = new SimpleStringProperty("Search");
+    passwordField = new SimpleStringProperty("Password");
   }
 
   public StringProperty getErrorLabel()
@@ -28,5 +30,10 @@ public class LogInViewModel
   public StringProperty getUserName()
   {
     return userName;
+  }
+
+  public StringProperty getPasswordField()
+  {
+    return passwordField;
   }
 }

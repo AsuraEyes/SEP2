@@ -67,17 +67,6 @@ public class ViewHandler
     return content;
   }
 
-  public Node logIn() throws IOException
-  {
-    FXMLLoader loader = new FXMLLoader();
-    loader.setLocation(getClass().getResource("log_in/LogIn.fxml"));
-    Node content = loader.load();
-    LogInController logInController = loader.getController();
-    logInController.init(this, viewModelFactory);
-    stage.setTitle("Add Rental");
-    return content;
-  }
-
   public Node chatReceived() throws IOException
   {
     FXMLLoader loader = new FXMLLoader();
@@ -85,7 +74,6 @@ public class ViewHandler
     Node content = loader.load();
     ChatReceivedMessagesController chatReceivedMessagesController = loader.getController();
     chatReceivedMessagesController.init();
-    stage.setTitle("Add Rental");
     return content;
   }
 
@@ -96,12 +84,81 @@ public class ViewHandler
     Node content = loader.load();
     ChatWriteMessageController chatWriteMessageController = loader.getController();
     chatWriteMessageController.init();
-    stage.setTitle("Add Rental");
     return content;
   }
 
-  public Node createAccount()
+  public Node createAccount() throws IOException
+  {
+    FXMLLoader loader = new FXMLLoader();
+    loader.setLocation(getClass().getResource("create_account/CreateAccount.fxml"));
+    Node content = loader.load();
+    //LogInController logInController = loader.getController();
+    //ogInController.init(this, viewModelFactory);
+    return content;
+  }
+
+  public Node logIn() throws IOException
+  {
+    FXMLLoader loader = new FXMLLoader();
+    loader.setLocation(getClass().getResource("log_in/LogIn.fxml"));
+    Node content = loader.load();
+    LogInController logInController = loader.getController();
+    logInController.init(this, viewModelFactory);
+    return content;
+  }
+
+  public Node manageAccount()
   {
     return null;
   }
+  public Node manageRentals()
+  {
+    return null;
+  }
+  public Node rateFeedback()
+  {
+    return null;
+  }
+  public Node reportMember()
+  {
+    return null;
+  }
+  public Node searchForMember()
+  {
+    return null;
+  }
+  public Node searchForRental()
+  {
+    return null;
+  }
+  public Node viewMemberProfile()
+  {
+    return null;
+  }
+  public Node viewRating()
+  {
+    return null;
+  }
+  public Node viewRatingFull()
+  {
+    return null;
+  }
+  public Node viewRental()
+  {
+    return null;
+  }
+  public Node viewReportedMember()
+  {
+    return null;
+  }
+  public Node viewReportedMemberList()
+  {
+    return null;
+  }
+  public Node welcomePage()
+  {
+    return null;
+  }
+
+
 }

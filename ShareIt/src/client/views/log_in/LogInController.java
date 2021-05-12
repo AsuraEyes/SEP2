@@ -27,6 +27,7 @@ public class LogInController
     userNameField.textProperty().bindBidirectional(logInViewModel.getUserName());
     errorLabel.textProperty().bind(logInViewModel.getErrorLabel());
     searchField.textProperty().bindBidirectional(logInViewModel.getSearchField());
+    passwordField.textProperty().bindBidirectional(logInViewModel.getPasswordField());
   }
 
   public void searchButton(ActionEvent actionEvent)

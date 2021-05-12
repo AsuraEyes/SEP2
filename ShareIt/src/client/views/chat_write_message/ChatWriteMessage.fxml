@@ -26,7 +26,7 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
             </Button>
-            <Button layoutX="27.0" layoutY="55.0" mnemonicParsing="false" style="-fx-border-radius: 30px; -fx-background-radius: 30px; -fx-background-color: #A3A1A8; -fx-border-color: #A3A1A8;" text="Go back to user's page" textFill="WHITE">
+            <Button layoutX="27.0" layoutY="55.0" mnemonicParsing="false" onAction="#onGoBack" style="-fx-border-radius: 30px; -fx-background-radius: 30px; -fx-background-color: #A3A1A8; -fx-border-color: #A3A1A8;" text="Go back to user's page" textFill="WHITE">
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
@@ -39,7 +39,7 @@
                   <Insets bottom="20.0" left="160.0" right="160.0" top="20.0" />
                </padding>
                <children>
-                  <Label text="To: Username" textFill="WHITE">
+                  <Label fx:id="toUsernameLabel" text="To: Username" textFill="WHITE">
                      <font>
                         <Font name="Californian FB" size="24.0" />
                      </font>
@@ -50,7 +50,7 @@
                         <Insets bottom="20.0" top="20.0" />
                      </VBox.margin>
                   </Label>
-                  <TextArea prefHeight="341.0" prefWidth="558.0" promptText="Text text text">
+                  <TextArea fx:id="textChatArea" prefHeight="341.0" prefWidth="558.0" promptText="Text text text">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
@@ -63,7 +63,7 @@
                   </TextArea>
                   <HBox>
                      <children>
-                        <TextField prefHeight="38.0" prefWidth="885.0">
+                        <TextField fx:id="inputTextChatField" prefHeight="38.0" prefWidth="885.0">
                            <padding>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </padding>
@@ -71,7 +71,7 @@
                               <Insets right="20.0" />
                            </HBox.margin>
                         </TextField>
-                        <Button mnemonicParsing="false" style="-fx-border-radius: 30px; -fx-background-radius: 30px; -fx-background-color: #A3A1A8; -fx-border-color: #A3A1A8;" text="Send" textFill="WHITE">
+                        <Button mnemonicParsing="false" onAction="#onSend" style="-fx-border-radius: 30px; -fx-background-radius: 30px; -fx-background-color: #A3A1A8; -fx-border-color: #A3A1A8;" text="Send" textFill="WHITE">
                            <padding>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </padding>
