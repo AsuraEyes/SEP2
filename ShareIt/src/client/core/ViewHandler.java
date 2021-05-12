@@ -28,7 +28,7 @@ public class ViewHandler
 
   public void start() throws Exception
   {
-    setView(menu(),createAccount());
+    setView(menu(),manageRentals());
   }
 
   public void setView(Node menu, Node content) throws IOException
@@ -50,7 +50,6 @@ public class ViewHandler
     Node menu = loader.load();
     MenuController menuController = loader.getController();
     menuController.init(this, viewModelFactory);
-
     return menu;
   }
 
@@ -105,58 +104,121 @@ public class ViewHandler
     return content;
   }
 
-  public Node manageAccount()
+  public Node manageAccount() throws IOException
   {
-    return null;
+    FXMLLoader loader = new FXMLLoader();
+    loader.setLocation(getClass().getResource("/client/views/manage_account/ManageAccount.fxml"));
+    Node content = loader.load();
+    //LogInController logInController = loader.getController();
+    //ogInController.init(this, viewModelFactory);
+    return content;
   }
-  public Node manageRentals()
+  public Node manageRentals() throws IOException
   {
-    return null;
+    FXMLLoader loader = new FXMLLoader();
+    loader.setLocation(getClass().getResource("/client/views/manage_rentals/ManageRentals.fxml"));
+    Node content = loader.load();
+    //LogInController logInController = loader.getController();
+    //ogInController.init(this, viewModelFactory);
+    return content;
   }
-  public Node rateFeedback()
+  public Node rateFeedback() throws IOException
   {
-    return null;
+    FXMLLoader loader = new FXMLLoader();
+    loader.setLocation(getClass().getResource("/client/views/rate_feedback/RateFeedback.fxml"));
+    Node content = loader.load();
+    //LogInController logInController = loader.getController();
+    //ogInController.init(this, viewModelFactory);
+    return content;
   }
-  public Node reportMember()
+  public Node reportMember() throws IOException
   {
-    return null;
+    FXMLLoader loader = new FXMLLoader();
+    loader.setLocation(getClass().getResource("/client/views/report_member/ReportMember.fxml"));
+    Node content = loader.load();
+    //LogInController logInController = loader.getController();
+    //ogInController.init(this, viewModelFactory);
+    return content;
   }
-  public Node searchForMember()
+  public Node searchForMember() throws IOException
   {
-    return null;
+    FXMLLoader loader = new FXMLLoader();
+    loader.setLocation(getClass().getResource("/client/views/search_for_member/SearchForMember.fxml"));
+    Node content = loader.load();
+    //LogInController logInController = loader.getController();
+    //ogInController.init(this, viewModelFactory);
+    return content;
   }
-  public Node searchForRental()
+  public Node searchForRental() throws IOException
   {
-    return null;
+    FXMLLoader loader = new FXMLLoader();
+    loader.setLocation(getClass().getResource("/client/views/search_for_rental/SearchForRental.fxml"));
+    Node content = loader.load();
+    //LogInController logInController = loader.getController();
+    //ogInController.init(this, viewModelFactory);
+    return content;
   }
-  public Node viewMemberProfile()
+  public Node viewMemberProfile() throws IOException
   {
-    return null;
+    FXMLLoader loader = new FXMLLoader();
+    loader.setLocation(getClass().getResource("/client/views/view_member_profile/ViewMemberProfile.fxml"));
+    Node content = loader.load();
+    //LogInController logInController = loader.getController();
+    //ogInController.init(this, viewModelFactory);
+    return content;
   }
-  public Node viewRating()
+  public Node viewRating() throws IOException
   {
-    return null;
+    FXMLLoader loader = new FXMLLoader();
+    loader.setLocation(getClass().getResource("/client/views/view_rating/ViewRating.fxml"));
+    Node content = loader.load();
+    //LogInController logInController = loader.getController();
+    //ogInController.init(this, viewModelFactory);
+    return content;
   }
-  public Node viewRatingFull()
+  public Node viewRatingFull() throws IOException
   {
-    return null;
+    FXMLLoader loader = new FXMLLoader();
+    loader.setLocation(getClass().getResource("/client/views/view_rating_full/ViewRatingFull.fxml"));
+    Node content = loader.load();
+    //LogInController logInController = loader.getController();
+    //ogInController.init(this, viewModelFactory);
+    return content;
   }
-  public Node viewRental()
+  public Node viewRental() throws IOException
   {
-    return null;
+    FXMLLoader loader = new FXMLLoader();
+    loader.setLocation(getClass().getResource("/client/views/view_rental/ViewRental.fxml"));
+    Node content = loader.load();
+    //LogInController logInController = loader.getController();
+    //ogInController.init(this, viewModelFactory);
+    return content;
   }
-  public Node viewReportedMember()
+  public Node viewReportedMember() throws IOException
   {
-    return null;
+    FXMLLoader loader = new FXMLLoader();
+    loader.setLocation(getClass().getResource("/client/views/view_reported_member/ViewReportedMember.fxml"));
+    Node content = loader.load();
+    //LogInController logInController = loader.getController();
+    //ogInController.init(this, viewModelFactory);
+    return content;
   }
-  public Node viewReportedMemberList()
+  public Node viewReportedMemberList() throws IOException
   {
-    return null;
+    FXMLLoader loader = new FXMLLoader();
+    loader.setLocation(getClass().getResource("/client/views/view_reported_member_list/ViewReportedMemberList.fxml"));
+    Node content = loader.load();
+    //LogInController logInController = loader.getController();
+    //ogInController.init(this, viewModelFactory);
+    return content;
   }
-  public Node welcomePage()
+  public Node welcomePage() throws IOException
   {
-    return null;
+    FXMLLoader loader = new FXMLLoader();
+    loader.setLocation(getClass().getResource("/client/views/welcome_page/WelcomePage.fxml"));
+    Node content = loader.load();
+    //LogInController logInController = loader.getController();
+    //ogInController.init(this, viewModelFactory);
+    return content;
   }
-
-
 }
