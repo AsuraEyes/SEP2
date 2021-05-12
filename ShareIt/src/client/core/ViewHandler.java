@@ -73,7 +73,7 @@ public class ViewHandler
     loader.setLocation(getClass().getResource("chat_received_messages/ChatReceivedMessages.fxml"));
     Node content = loader.load();
     ChatReceivedMessagesController chatReceivedMessagesController = loader.getController();
-    chatReceivedMessagesController.init();
+    chatReceivedMessagesController.init(this, viewModelFactory);
     return content;
   }
 
