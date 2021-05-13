@@ -10,6 +10,8 @@ VALUES ('Kitchenware'),
        ('Furniture'),
        ('Sport equipment'),
        ('Musical instruments'),
+       ('Boardgames'),
+       ('Garden'),
        ('Other');
 
 SET SCHEMA 'share_it';
