@@ -6,3 +6,11 @@ CREATE DOMAIN bla_bla_type VARCHAR (1000000);
 CREATE TABLE city(
     name VARCHAR(100) PRIMARY KEY
 );
+
+CREATE TABLE category(
+    name VARCHAR (100) PRIMARY KEY
+);
+
+CREATE TABLE state(
+    name VARCHAR (100) PRIMARY KEY
+);
