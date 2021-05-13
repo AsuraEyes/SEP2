@@ -124,3 +124,29 @@ CREATE TABLE phone_no(
     PRIMARY KEY (country_code, number),
     FOREIGN KEY (member_id) REFERENCES member(id) ON DELETE CASCADE
 );
+
+CREATE OR REPLACE FUNCTION upd_average_review()
+    RETURNS TRIGGER
+    LANGUAGE plpgsql
+AS
+    $$
+    DECLARE calculated_review DECIMAL(2,1);
+        BEGIN
+        SELECT AVG(value)
+        INTO calculated_review
+        FROM share_it.rating
+        WHERE member_to = NEW.username;
+
+        UPDATE share_it.member
+        SET average_review = calculated_review
+        WHERE username = NEW.username;
+
+        RETURN NEW;
+    END;
+    $$;
+
+CREATE TRIGGER update_avg_review_trigger
+    AFTER INSERT OR UPDATE
+    ON share_it.member
+    FOR EACH ROW
+    EXECUTE FUNCTION upd_average_review();

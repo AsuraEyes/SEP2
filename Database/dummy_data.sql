@@ -17,7 +17,7 @@ VALUES ('Kitchenware'),
 SET SCHEMA 'share_it';
 
 INSERT INTO city (name)
-VALUES('CopenHagen'), ('Aarhus'), ('Vejle'), ('Odense'), ('Aalborg'),
+VALUES('Copenhagen'), ('Aarhus'), ('Vejle'), ('Odense'), ('Aalborg'),
        ('Esbjerg'), ('Randers'), ('Kolding'), ('Horsens'), ('Roskilde');
 
 INSERT INTO state VALUES ('New');
