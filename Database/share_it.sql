@@ -1,7 +1,8 @@
+DROP SCHEMA IF EXISTS  share_it CASCADE ;
 CREATE SCHEMA share_it;
 SET SCHEMA 'share_it';
 
-DROP DOMAIN IF EXISTS bla_bla_type;
+DROP DOMAIN IF EXISTS bla_bla_type CASCADE ;
 CREATE DOMAIN bla_bla_type VARCHAR (1000000);
 
 DROP TABLE IF EXISTS city;
@@ -40,8 +41,8 @@ DROP TABLE IF EXISTS rating;
 CREATE TABLE rating(
     value int CHECK ( value > 0 AND value < 6 ),
     commentary bla_bla_type,
-    member_from VARCHAR (100),
-    member_to VARCHAR (100),
+    member_from SERIAL,
+    member_to SERIAL,
     PRIMARY KEY (member_from, member_to),
     FOREIGN KEY (member_from) REFERENCES member(id) ON DELETE CASCADE ,
     FOREIGN KEY (member_to) REFERENCES member(id) ON DELETE CASCADE
@@ -51,8 +52,8 @@ DROP TABLE IF EXISTS message;
 CREATE TABLE message(
     text bla_bla_type,
     time TIMESTAMP,
-    member_from VARCHAR (100),
-    member_to VARCHAR (100),
+    member_from SERIAL,
+    member_to SERIAL,
     PRIMARY KEY (member_from, member_to),
     FOREIGN KEY (member_from) REFERENCES member(id) ON DELETE CASCADE ,
     FOREIGN KEY (member_to) REFERENCES member(id) ON DELETE CASCADE
@@ -66,9 +67,9 @@ CREATE TABLE rental(
     price int,
     otherInformation bla_bla_type,
     state_name VARCHAR (100),
-    member_username VARCHAR (100),
+    member_id SERIAL,
     FOREIGN KEY (state_name) REFERENCES state(name),
-    FOREIGN KEY (member_username) REFERENCES member(id) ON DELETE CASCADE
+    FOREIGN KEY (member_id) REFERENCES member(id) ON DELETE CASCADE
 );
 
 DROP TABLE IF EXISTS rental_category;
@@ -91,8 +92,8 @@ CREATE TABLE picture(
 DROP TABLE IF EXISTS report;
 CREATE TABLE report(
     commentary bla_bla_type,
-    member_from VARCHAR (100),
-    member_to VARCHAR (100),
+    member_from SERIAL,
+    member_to SERIAL,
     PRIMARY KEY (member_from, member_to),
     FOREIGN KEY (member_from) REFERENCES member(id) ON DELETE CASCADE ,
     FOREIGN KEY (member_to) REFERENCES member(id) ON DELETE CASCADE
@@ -108,8 +109,8 @@ DROP TABLE IF EXISTS warning;
 CREATE TABLE warning(
     text bla_bla_type,
     time TIMESTAMP,
-    member_from VARCHAR (100),
-    member_to VARCHAR (100),
+    member_from SERIAL,
+    member_to SERIAL,
     PRIMARY KEY (member_from, member_to),
     FOREIGN KEY (member_from) REFERENCES member(id) ON DELETE CASCADE ,
     FOREIGN KEY (member_to) REFERENCES member(id) ON DELETE CASCADE
@@ -119,7 +120,7 @@ DROP TABLE IF EXISTS phone_no;
 CREATE TABLE phone_no(
     country_code VARCHAR(50),
     number VARCHAR (50),
-    member_username VARCHAR(100),
+    member_id SERIAL,
     PRIMARY KEY (country_code, number),
-    FOREIGN KEY (member_username) REFERENCES member(id) ON DELETE CASCADE
+    FOREIGN KEY (member_id) REFERENCES member(id) ON DELETE CASCADE
 );
