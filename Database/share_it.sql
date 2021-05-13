@@ -10,3 +10,7 @@ CREATE TABLE city(
 CREATE TABLE category(
     name VARCHAR (100) PRIMARY KEY
 );
+
+CREATE TABLE state(
+    name VARCHAR (100) PRIMARY KEY
+);
