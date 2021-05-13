@@ -1,25 +1,44 @@
 package client.views.chat_write_message;
 
+import client.core.ViewHandler;
+import client.core.ViewModelFactory;
+import client.viewmodel.chat_write_message.ChatWriteMessageViewModel;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
+import java.io.IOException;
+
 public class ChatWriteMessageController
 {
-  public Label toUsernameLabel;
-  public TextArea textChatArea;
-  public TextField inputTextChatField;
+  @FXML
+  private Label toUsernameLabel;
+  @FXML
+  private TextArea textChatArea;
+  @FXML
+  private TextField inputTextChatField;
 
-  public void init(){
+  private ViewHandler viewHandler;
+  private ChatWriteMessageViewModel chatWriteMessageViewModel;
+
+  public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory){
+    this.viewHandler = viewHandler;
+    chatWriteMessageViewModel = viewModelFactory.getChatWriteMessagesViewModel();
+    //toUsernameLabel.textProperty().bind(chatWriteMessageViewModel.getUsername());
+    //textChatArea.textProperty().bindBidirectional(chatWriteMessageViewModel.getMessages());
+    //chatWriteMessageViewModel.loadLogs();
 
   }
 
-  public void onGoBack(ActionEvent actionEvent)
+  public void onGoBack(ActionEvent actionEvent) throws IOException
   {
+    viewHandler.setView(viewHandler.menu(), viewHandler.chatReceived());
   }
 
   public void onSend(ActionEvent actionEvent)
   {
+
   }
 }

@@ -7,7 +7,6 @@ public class ShareItApp extends Application
 {
   @Override
   public void start(Stage stage) throws Exception {
-
     //ModelFactory mf = new ModelFactory();
     ViewModelFactory viewModelFactory = new ViewModelFactory();
     ViewHandler viewHandler = new ViewHandler(stage, viewModelFactory);

@@ -11,7 +11,7 @@
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar://C:/Java jars/controlsfx-11.1.0.jar!/" />
+          <root url="jar://$USER_HOME$/Documents/Java/controlsfx-11.1.0.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

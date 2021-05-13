@@ -28,7 +28,7 @@ public class ViewHandler
 
   public void start() throws Exception
   {
-    setView(menu(),manageRentals());
+    setView(menu(),searchForRental());
   }
 
   public void setView(Node menu, Node content) throws IOException
@@ -80,7 +80,7 @@ public class ViewHandler
     loader.setLocation(getClass().getResource("/client/views/chat_write_message/ChatWriteMessage.fxml"));
     Node content = loader.load();
     ChatWriteMessageController chatWriteMessageController = loader.getController();
-    chatWriteMessageController.init();
+    //chatWriteMessageController.init();
     return content;
   }
 
