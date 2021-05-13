@@ -1,10 +1,17 @@
 package client.core;
 
+import client.views.add_rental.AddRentalController;
 import client.views.chat_received_messages.ChatReceivedMessagesController;
 import client.views.chat_write_message.ChatWriteMessageController;
+import client.views.create_account.CreateAccountController;
 import client.views.log_in.LogInController;
 import client.views.main_view.MainController;
 import client.views.menu.MenuController;
+import client.views.search_for_rental.SearchForRentalController;
+import client.views.view_rating.ViewRatingController;
+import client.views.view_reported_member.ViewReportedMemberController;
+import client.views.view_reported_member_list.ViewReportedMemberListController;
+import client.views.welcome_page.WelcomePageController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -58,8 +65,8 @@ public class ViewHandler
     FXMLLoader loader = new FXMLLoader();
     loader.setLocation(getClass().getResource("/client/views/add_rental/AddRental.fxml"));
     Node content = loader.load();
-    //AddRentalController addRentalController = loader.getController();
-    //addRentalController.init(viewModelFactory.getAddRentalViewModel());
+    AddRentalController addRentalController = loader.getController();
+    addRentalController.init(this, viewModelFactory);
     stage.setTitle("Add Rental");
     return content;
   }
@@ -89,8 +96,8 @@ public class ViewHandler
     FXMLLoader loader = new FXMLLoader();
     loader.setLocation(getClass().getResource("/client/views/create_account/CreateAccount.fxml"));
     Node content = loader.load();
-    //LogInController logInController = loader.getController();
-    //ogInController.init(this, viewModelFactory);
+    CreateAccountController createAccountController = loader.getController();
+    createAccountController.init(this, viewModelFactory);
     return content;
   }
 
@@ -154,8 +161,8 @@ public class ViewHandler
     FXMLLoader loader = new FXMLLoader();
     loader.setLocation(getClass().getResource("/client/views/search_for_rental/SearchForRental.fxml"));
     Node content = loader.load();
-    //LogInController logInController = loader.getController();
-    //ogInController.init(this, viewModelFactory);
+    SearchForRentalController searchForRentalController = loader.getController();
+    searchForRentalController.init(this, viewModelFactory);
     return content;
   }
   public Node viewMemberProfile() throws IOException
@@ -190,8 +197,8 @@ public class ViewHandler
     FXMLLoader loader = new FXMLLoader();
     loader.setLocation(getClass().getResource("/client/views/view_rental/ViewRental.fxml"));
     Node content = loader.load();
-    //LogInController logInController = loader.getController();
-    //ogInController.init(this, viewModelFactory);
+    ViewRatingController viewRatingController = loader.getController();
+    viewRatingController.init(this, viewModelFactory);
     return content;
   }
   public Node viewReportedMember() throws IOException
@@ -199,8 +206,8 @@ public class ViewHandler
     FXMLLoader loader = new FXMLLoader();
     loader.setLocation(getClass().getResource("/client/views/view_reported_member/ViewReportedMember.fxml"));
     Node content = loader.load();
-    //LogInController logInController = loader.getController();
-    //ogInController.init(this, viewModelFactory);
+    ViewReportedMemberController viewReportedMemberController = loader.getController();
+    viewReportedMemberController.init(this, viewModelFactory);
     return content;
   }
   public Node viewReportedMemberList() throws IOException
@@ -208,8 +215,8 @@ public class ViewHandler
     FXMLLoader loader = new FXMLLoader();
     loader.setLocation(getClass().getResource("/client/views/view_reported_member_list/ViewReportedMemberList.fxml"));
     Node content = loader.load();
-    //LogInController logInController = loader.getController();
-    //ogInController.init(this, viewModelFactory);
+    ViewReportedMemberListController viewReportedMemberListController = loader.getController();
+    viewReportedMemberListController.init(this, viewModelFactory);
     return content;
   }
   public Node welcomePage() throws IOException
@@ -217,8 +224,8 @@ public class ViewHandler
     FXMLLoader loader = new FXMLLoader();
     loader.setLocation(getClass().getResource("/client/views/welcome_page/WelcomePage.fxml"));
     Node content = loader.load();
-    //LogInController logInController = loader.getController();
-    //ogInController.init(this, viewModelFactory);
+    WelcomePageController welcomePageController = loader.getController();
+    welcomePageController.init(this, viewModelFactory);
     return content;
   }
 }
