@@ -21,7 +21,8 @@ CREATE TABLE state(
 
 DROP TABLE IF EXISTS member;
 CREATE TABLE member(
-    username VARCHAR (100) PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
+    username VARCHAR (100) UNIQUE ,
     password VARCHAR (100),
     email_address VARCHAR (200),
     other_information bla_bla_type,
@@ -33,6 +34,8 @@ CREATE TABLE member(
     FOREIGN KEY (address_city_name) REFERENCES city(name)
 );
 
+
+
 DROP TABLE IF EXISTS rating;
 CREATE TABLE rating(
     value int CHECK ( value > 0 AND value < 6 ),
@@ -40,8 +43,8 @@ CREATE TABLE rating(
     member_from VARCHAR (100),
     member_to VARCHAR (100),
     PRIMARY KEY (member_from, member_to),
-    FOREIGN KEY (member_from) REFERENCES member(username),
-    FOREIGN KEY (member_to) REFERENCES member(username)
+    FOREIGN KEY (member_from) REFERENCES member(id) ON DELETE CASCADE ,
+    FOREIGN KEY (member_to) REFERENCES member(id) ON DELETE CASCADE
 );
 
 DROP TABLE IF EXISTS message;
@@ -51,8 +54,8 @@ CREATE TABLE message(
     member_from VARCHAR (100),
     member_to VARCHAR (100),
     PRIMARY KEY (member_from, member_to),
-    FOREIGN KEY (member_from) REFERENCES member(username),
-    FOREIGN KEY (member_to) REFERENCES member(username)
+    FOREIGN KEY (member_from) REFERENCES member(id) ON DELETE CASCADE ,
+    FOREIGN KEY (member_to) REFERENCES member(id) ON DELETE CASCADE
 );
 
 DROP TABLE IF EXISTS rental;
@@ -65,7 +68,7 @@ CREATE TABLE rental(
     state_name VARCHAR (100),
     member_username VARCHAR (100),
     FOREIGN KEY (state_name) REFERENCES state(name),
-    FOREIGN KEY (member_username) REFERENCES member(username)
+    FOREIGN KEY (member_username) REFERENCES member(id) ON DELETE CASCADE
 );
 
 DROP TABLE IF EXISTS rental_category;
@@ -73,7 +76,7 @@ CREATE TABLE rental_category(
     rental_id SERIAL,
     category_name VARCHAR(100),
     PRIMARY KEY (rental_id, category_name),
-    FOREIGN KEY (rental_id) REFERENCES rental (id),
+    FOREIGN KEY (rental_id) REFERENCES rental (id) ON DELETE CASCADE ,
     FOREIGN KEY (category_name) REFERENCES category(name)
 );
 
@@ -82,7 +85,7 @@ CREATE TABLE picture(
     link bla_bla_type PRIMARY KEY ,
     description bla_bla_type,
     rental_id SERIAL,
-    FOREIGN KEY (rental_id) REFERENCES rental(id)
+    FOREIGN KEY (rental_id) REFERENCES rental(id) ON DELETE CASCADE
 );
 
 DROP TABLE IF EXISTS report;
@@ -91,8 +94,8 @@ CREATE TABLE report(
     member_from VARCHAR (100),
     member_to VARCHAR (100),
     PRIMARY KEY (member_from, member_to),
-    FOREIGN KEY (member_from) REFERENCES member(username),
-    FOREIGN KEY (member_to) REFERENCES member(username)
+    FOREIGN KEY (member_from) REFERENCES member(id) ON DELETE CASCADE ,
+    FOREIGN KEY (member_to) REFERENCES member(id) ON DELETE CASCADE
 );
 
 DROP TABLE IF EXISTS administrator;
@@ -108,6 +111,15 @@ CREATE TABLE warning(
     member_from VARCHAR (100),
     member_to VARCHAR (100),
     PRIMARY KEY (member_from, member_to),
-    FOREIGN KEY (member_from) REFERENCES member(username),
-    FOREIGN KEY (member_to) REFERENCES member(username)
+    FOREIGN KEY (member_from) REFERENCES member(id) ON DELETE CASCADE ,
+    FOREIGN KEY (member_to) REFERENCES member(id) ON DELETE CASCADE
+);
+
+DROP TABLE IF EXISTS phone_no;
+CREATE TABLE phone_no(
+    country_code VARCHAR(50),
+    number VARCHAR (50),
+    member_username VARCHAR(100),
+    PRIMARY KEY (country_code, number),
+    FOREIGN KEY (member_username) REFERENCES member(id) ON DELETE CASCADE
 );
