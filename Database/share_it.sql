@@ -1,20 +1,25 @@
 CREATE SCHEMA share_it;
 SET SCHEMA 'share_it';
 
+DROP DOMAIN IF EXISTS bla_bla_type;
 CREATE DOMAIN bla_bla_type VARCHAR (1000000);
 
+DROP TABLE IF EXISTS city;
 CREATE TABLE city(
     name VARCHAR(100) PRIMARY KEY
 );
 
+DROP TABLE IF EXISTS category;
 CREATE TABLE category(
     name VARCHAR (100) PRIMARY KEY
 );
 
+DROP TABLE IF EXISTS state;
 CREATE TABLE state(
     name VARCHAR (100) PRIMARY KEY
 );
 
+DROP TABLE IF EXISTS member;
 CREATE TABLE member(
     username VARCHAR (100) PRIMARY KEY,
     password VARCHAR (100),
@@ -27,6 +32,7 @@ CREATE TABLE member(
     FOREIGN KEY (address_city_name) REFERENCES city(name)
 );
 
+DROP TABLE IF EXISTS rating;
 CREATE TABLE rating(
     value int CHECK ( value > 0 AND value < 6 ),
     commentary bla_bla_type,
@@ -37,6 +43,7 @@ CREATE TABLE rating(
     FOREIGN KEY (member_to) REFERENCES member(username)
 );
 
+DROP TABLE IF EXISTS message;
 CREATE TABLE message(
     text bla_bla_type,
     time TIMESTAMP,
@@ -46,3 +53,4 @@ CREATE TABLE message(
     FOREIGN KEY (member_from) REFERENCES member(username),
     FOREIGN KEY (member_to) REFERENCES member(username)
 );
+
