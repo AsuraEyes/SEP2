@@ -5,15 +5,15 @@
     <content url="file://$MODULE_DIR$" />
     <orderEntry type="jdk" jdkName="16" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module-library" exported="">
+    <orderEntry type="library" exported="" name="JavaFX" level="application" />
+    <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/jar_files/controlsfx-8.40.11.jar!/" />
+          <root url="jar://$USER_HOME$/Documents/Java/controlsfx-11.1.0.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" exported="" name="JavaFX" level="application" />
   </component>
 </module>
