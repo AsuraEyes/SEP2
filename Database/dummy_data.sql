@@ -1,3 +1,16 @@
+SET SCHEMA 'share_it';
+
+INSERT INTO category(name)
+VALUES ('Kitchenware'),
+       ('Computer hardware'),
+       ('Medical equipment'),
+       ('Fishing gear'),
+       ('Office equipment'),
+       ('Tools'),
+       ('Furniture'),
+       ('Sport equipment'),
+       ('Musical instruments'),
+       ('Other');
 
 SET SCHEMA 'share_it';
 
