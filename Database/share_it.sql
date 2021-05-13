@@ -147,6 +147,6 @@ AS
 
 CREATE TRIGGER update_avg_review_trigger
     AFTER INSERT OR UPDATE
-    ON share_it.member
+    ON share_it.rating
     FOR EACH ROW
     EXECUTE FUNCTION upd_average_review();
