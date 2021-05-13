@@ -29,6 +29,7 @@ CREATE TABLE member(
     address_no VARCHAR(100),
     address_postal_code int,
     address_city_name VARCHAR (100),
+    average_review DECIMAL(2, 1),
     FOREIGN KEY (address_city_name) REFERENCES city(name)
 );
 
@@ -53,4 +54,5 @@ CREATE TABLE message(
     FOREIGN KEY (member_from) REFERENCES member(username),
     FOREIGN KEY (member_to) REFERENCES member(username)
 );
+
 
