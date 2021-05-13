@@ -55,4 +55,59 @@ CREATE TABLE message(
     FOREIGN KEY (member_to) REFERENCES member(username)
 );
 
+DROP TABLE IF EXISTS rental;
+CREATE TABLE rental(
+    id SERIAL PRIMARY KEY ,
+    name VARCHAR (200),
+    description bla_bla_type,
+    price int,
+    otherInformation bla_bla_type,
+    state_name VARCHAR (100),
+    member_username VARCHAR (100),
+    FOREIGN KEY (state_name) REFERENCES state(name),
+    FOREIGN KEY (member_username) REFERENCES member(username)
+);
 
+DROP TABLE IF EXISTS rental_category;
+CREATE TABLE rental_category(
+    rental_id SERIAL,
+    category_name VARCHAR(100),
+    PRIMARY KEY (rental_id, category_name),
+    FOREIGN KEY (rental_id) REFERENCES rental (id),
+    FOREIGN KEY (category_name) REFERENCES category(name)
+);
+
+DROP TABLE IF EXISTS picture;
+CREATE TABLE picture(
+    link bla_bla_type PRIMARY KEY ,
+    description bla_bla_type,
+    rental_id SERIAL,
+    FOREIGN KEY (rental_id) REFERENCES rental(id)
+);
+
+DROP TABLE IF EXISTS report;
+CREATE TABLE report(
+    commentary bla_bla_type,
+    member_from VARCHAR (100),
+    member_to VARCHAR (100),
+    PRIMARY KEY (member_from, member_to),
+    FOREIGN KEY (member_from) REFERENCES member(username),
+    FOREIGN KEY (member_to) REFERENCES member(username)
+);
+
+DROP TABLE IF EXISTS administrator;
+CREATE TABLE administrator(
+    username VARCHAR (100) PRIMARY KEY ,
+    password VARCHAR (100)
+);
+
+DROP TABLE IF EXISTS warning;
+CREATE TABLE warning(
+    text bla_bla_type,
+    time TIMESTAMP,
+    member_from VARCHAR (100),
+    member_to VARCHAR (100),
+    PRIMARY KEY (member_from, member_to),
+    FOREIGN KEY (member_from) REFERENCES member(username),
+    FOREIGN KEY (member_to) REFERENCES member(username)
+);
