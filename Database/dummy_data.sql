@@ -125,4 +125,6 @@ VALUES ('This is a warning for your misconduct', '2021-05-03 15:15:38', 'adminis
        ('Your account shall be deleted in the next 24 hours, due to your repeated inability to stick to our community guidelines.', '2021-05-03 15:15:39', 'administrator', 7),
        ('Your account is currently being suspended and put under investigation', '2021-05-03 15:16:38', 'administrator', 4);
 
-
+SELECT * FROM member;
+INSERT INTO rating
+VALUES (5, 'Good rating', 8, 5);
