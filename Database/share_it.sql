@@ -54,7 +54,7 @@ CREATE TABLE message(
     time TIMESTAMP,
     member_from SERIAL,
     member_to SERIAL,
-    PRIMARY KEY (member_from, member_to),
+    PRIMARY KEY (member_from, member_to, time),
     FOREIGN KEY (member_from) REFERENCES member(id) ON DELETE CASCADE ,
     FOREIGN KEY (member_to) REFERENCES member(id) ON DELETE CASCADE
 );
@@ -109,10 +109,10 @@ DROP TABLE IF EXISTS warning;
 CREATE TABLE warning(
     text bla_bla_type,
     time TIMESTAMP,
-    member_from SERIAL,
+    administrator_from VARCHAR(100),
     member_to SERIAL,
-    PRIMARY KEY (member_from, member_to),
-    FOREIGN KEY (member_from) REFERENCES member(id) ON DELETE CASCADE ,
+    PRIMARY KEY (administrator_from, member_to, time),
+    FOREIGN KEY (administrator_from) REFERENCES administrator(username) ON DELETE CASCADE ,
     FOREIGN KEY (member_to) REFERENCES member(id) ON DELETE CASCADE
 );
 
