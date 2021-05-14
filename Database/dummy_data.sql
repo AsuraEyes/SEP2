@@ -107,4 +107,22 @@ VALUES ('45','26465768',1),
        ('48','512113543',11),
        ('45','23445670',12);
 
+INSERT INTO message
+VALUES ('Hi, is this product available', '2021-05-03 15:15:38', 7, 4),
+       ('Hello, yes this product is currently available for rent', '2021-05-03 15:18:47', 6, 1),
+       ('Great, would it be possible for us to meet somewhere?', '2021-05-03 15:33:09', 8, 4),
+       ('You can swing by tomorrow from 1-3 in the afternoon', '2021-05-03 15:37:52', 3, 11),
+       ('Great', '2021-05-03 15:38:06', 5, 13),
+       ('Sorry, this product has just been rented', '2021-05-03 15:16:38', 4, 7),
+       ('When can I come pick it up?', '2021-05-03 15:15:39', 12, 2);
+
+INSERT INTO warning
+VALUES ('This is a warning for your misconduct', '2021-05-03 15:15:38', DEFAULT, 9),
+       ('This is a warning for your misconduct', '2021-05-03 15:18:47', DEFAULT, 1),
+       ('This is a warning for your misconduct.', '2021-05-03 15:33:09', DEFAULT, 3),
+       ('This user is not worthy of this community.', '2021-05-03 15:38:06', DEFAULT, 2),
+       ('Your account is currently being suspended and put under investigation', '2021-05-03 15:37:52', DEFAULT, 5),
+       ('Your account shall be deleted in the next 24 hours, due to your repeated inability to stick to our community guidelines.', '2021-05-03 15:15:39', DEFAULT, 7),
+       ('Your account is currently being suspended and put under investigation', '2021-05-03 15:16:38', DEFAULT, 4);
+
 

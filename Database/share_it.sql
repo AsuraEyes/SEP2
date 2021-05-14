@@ -135,11 +135,11 @@ AS
         SELECT AVG(value)
         INTO calculated_review
         FROM share_it.rating
-        WHERE member_to = NEW.username;
+        WHERE member_to = NEW.member_to;
 
         UPDATE share_it.member
         SET average_review = calculated_review
-        WHERE username = NEW.username;
+        WHERE id = NEW.member_to;
 
         RETURN NEW;
     END;
