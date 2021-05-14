@@ -23,15 +23,15 @@ CREATE TABLE state(
 DROP TABLE IF EXISTS member;
 CREATE TABLE member(
     id SERIAL PRIMARY KEY,
-    username VARCHAR (100) UNIQUE ,
-    password VARCHAR (100),
+    username VARCHAR (100) UNIQUE NOT NULL,
+    password VARCHAR (100) NOT NULL,
     email_address VARCHAR (200),
     other_information bla_bla_type,
-    address_street VARCHAR (100),
-    address_no VARCHAR(100),
-    address_postal_code int,
-    address_city_name VARCHAR (100),
-    average_review DECIMAL(2, 1),
+    address_street VARCHAR (100) NOT NULL,
+    address_no VARCHAR(100) NOT NULL,
+    address_postal_code int NOT NULL,
+    address_city_name VARCHAR (100) NOT NULL,
+    average_review DECIMAL(2, 1) DEFAULT 0 NOT NULL,
     FOREIGN KEY (address_city_name) REFERENCES city(name)
 );
 
@@ -39,10 +39,10 @@ CREATE TABLE member(
 
 DROP TABLE IF EXISTS rating;
 CREATE TABLE rating(
-    value int CHECK ( value > 0 AND value < 6 ),
+    value int CHECK ( value > 0 AND value < 6 ) NOT NULL,
     commentary bla_bla_type,
-    member_from SERIAL,
-    member_to SERIAL,
+    member_from SERIAL NOT NULL,
+    member_to SERIAL NOT NULL,
     PRIMARY KEY (member_from, member_to),
     FOREIGN KEY (member_from) REFERENCES member(id) ON DELETE CASCADE ,
     FOREIGN KEY (member_to) REFERENCES member(id) ON DELETE CASCADE
@@ -50,10 +50,10 @@ CREATE TABLE rating(
 
 DROP TABLE IF EXISTS message;
 CREATE TABLE message(
-    text bla_bla_type,
-    time TIMESTAMP,
-    member_from SERIAL,
-    member_to SERIAL,
+    text bla_bla_type NOT NULL,
+    time TIMESTAMP NOT NULL,
+    member_from SERIAL NOT NULL,
+    member_to SERIAL NOT NULL,
     PRIMARY KEY (member_from, member_to, time),
     FOREIGN KEY (member_from) REFERENCES member(id) ON DELETE CASCADE ,
     FOREIGN KEY (member_to) REFERENCES member(id) ON DELETE CASCADE
@@ -62,20 +62,20 @@ CREATE TABLE message(
 DROP TABLE IF EXISTS rental;
 CREATE TABLE rental(
     id SERIAL PRIMARY KEY ,
-    name VARCHAR (200),
+    name VARCHAR (200) NOT NULL,
     description bla_bla_type,
-    price int,
+    price int NOT NULL NOT NULL,
     otherInformation bla_bla_type,
-    state_name VARCHAR (100),
-    member_id SERIAL,
+    state_name VARCHAR (100) NOT NULL,
+    member_id SERIAL NOT NULL,
     FOREIGN KEY (state_name) REFERENCES state(name),
     FOREIGN KEY (member_id) REFERENCES member(id) ON DELETE CASCADE
 );
 
 DROP TABLE IF EXISTS rental_category;
 CREATE TABLE rental_category(
-    rental_id SERIAL,
-    category_name VARCHAR(100),
+    rental_id SERIAL NOT NULL,
+    category_name VARCHAR(100) NOT NULL,
     PRIMARY KEY (rental_id, category_name),
     FOREIGN KEY (rental_id) REFERENCES rental (id) ON DELETE CASCADE ,
     FOREIGN KEY (category_name) REFERENCES category(name)
@@ -83,17 +83,17 @@ CREATE TABLE rental_category(
 
 DROP TABLE IF EXISTS picture;
 CREATE TABLE picture(
-    link bla_bla_type PRIMARY KEY ,
+    link bla_bla_type PRIMARY KEY,
     description bla_bla_type,
-    rental_id SERIAL,
+    rental_id SERIAL NOT NULL,
     FOREIGN KEY (rental_id) REFERENCES rental(id) ON DELETE CASCADE
 );
 
 DROP TABLE IF EXISTS report;
 CREATE TABLE report(
     commentary bla_bla_type,
-    member_from SERIAL,
-    member_to SERIAL,
+    member_from SERIAL NOT NULL,
+    member_to SERIAL NOT NULL,
     PRIMARY KEY (member_from, member_to),
     FOREIGN KEY (member_from) REFERENCES member(id) ON DELETE CASCADE ,
     FOREIGN KEY (member_to) REFERENCES member(id) ON DELETE CASCADE
@@ -102,15 +102,15 @@ CREATE TABLE report(
 DROP TABLE IF EXISTS administrator;
 CREATE TABLE administrator(
     username VARCHAR (100) PRIMARY KEY ,
-    password VARCHAR (100)
+    password VARCHAR (100) NOT NULL
 );
 
 DROP TABLE IF EXISTS warning;
 CREATE TABLE warning(
-    text bla_bla_type,
-    time TIMESTAMP,
-    administrator_from VARCHAR(100),
-    member_to SERIAL,
+    text bla_bla_type NOT NULL,
+    time TIMESTAMP NOT NULL ,
+    administrator_from VARCHAR(100) NOT NULL ,
+    member_to SERIAL NOT NULL ,
     PRIMARY KEY (administrator_from, member_to, time),
     FOREIGN KEY (administrator_from) REFERENCES administrator(username) ON DELETE CASCADE ,
     FOREIGN KEY (member_to) REFERENCES member(id) ON DELETE CASCADE
@@ -119,8 +119,8 @@ CREATE TABLE warning(
 DROP TABLE IF EXISTS phone_no;
 CREATE TABLE phone_no(
     country_code VARCHAR(50),
-    number VARCHAR (50),
-    member_id SERIAL,
+    number VARCHAR (50) NOT NULL ,
+    member_id SERIAL NOT NULL ,
     PRIMARY KEY (country_code, number),
     FOREIGN KEY (member_id) REFERENCES member(id) ON DELETE CASCADE
 );
