@@ -15,7 +15,7 @@ public class WelcomePageController {
     public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) {
         this.viewHandler = viewHandler;
         welcomePageViewModel = viewModelFactory.getWelcomePageViewModel();
-        searchField.textProperty().bindBidirectional(welcomePageViewModel.getSearchField());
+        //searchField.textProperty().bindBidirectional(welcomePageViewModel.getSearchField());
     }
 
     public void searchButton(ActionEvent actionEvent) {
