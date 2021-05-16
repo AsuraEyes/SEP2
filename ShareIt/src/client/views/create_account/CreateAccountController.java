@@ -11,11 +11,13 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import org.controlsfx.control.textfield.CustomPasswordField;
 
+import java.sql.SQLException;
+
 public class CreateAccountController {
     @FXML
     private TextField searchField;
     @FXML
-    private TextField userNameField;
+    private TextField usernameField;
     @FXML
     private PasswordField passwordField;
     @FXML
@@ -37,16 +39,16 @@ public class CreateAccountController {
     @FXML
     private TextField telephoneNo2Field;
     @FXML
-    private TextArea otherInfoField;
+    public TextArea otherInfoField;
 
     private CreateAccountViewModel createAccountViewModel;
     private ViewHandler viewHandler;
 
-    public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) {
+    public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws SQLException {
         this.viewHandler = viewHandler;
         createAccountViewModel = viewModelFactory.getCreateAccountViewModel();
         searchField.textProperty().bindBidirectional(createAccountViewModel.getSearchField());
-        userNameField.textProperty().bindBidirectional(createAccountViewModel.getUserNameField());
+        usernameField.textProperty().bindBidirectional(createAccountViewModel.getUsernameField());
         passwordField.textProperty().bindBidirectional(createAccountViewModel.getPasswordField());
         confirmPasswordField.textProperty().bindBidirectional(createAccountViewModel.getConfirmPasswordField());
         streetField.textProperty().bindBidirectional(createAccountViewModel.getStreetField());
@@ -67,7 +69,7 @@ public class CreateAccountController {
 
     }
 
-    public void createButton(ActionEvent actionEvent) {
-
+    public void createButton(ActionEvent actionEvent) throws SQLException {
+        createAccountViewModel.onCreateButtonPressed();
     }
 }

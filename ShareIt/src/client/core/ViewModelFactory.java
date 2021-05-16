@@ -13,6 +13,8 @@ import client.viewmodel.view_reported_member.ViewReportedMemberViewModel;
 import client.viewmodel.view_reported_member_list.ViewReportedMemberListViewModel;
 import client.viewmodel.welcome_page.WelcomePageViewModel;
 
+import java.sql.SQLException;
+
 public class ViewModelFactory
 {
   private LogInViewModel logInViewModel;
@@ -74,7 +76,7 @@ public class ViewModelFactory
     return welcomePageViewModel;
   }
 
-  public CreateAccountViewModel getCreateAccountViewModel() {
+  public CreateAccountViewModel getCreateAccountViewModel() throws SQLException {
     if (createAccountViewModel == null){
       createAccountViewModel = new CreateAccountViewModel();
     }

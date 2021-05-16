@@ -1,11 +1,15 @@
 package client.viewmodel.create_account;
 
+import client.model.database.member.MemberDAOImpl;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+import java.sql.SQLException;
+
 public class CreateAccountViewModel {
+    private MemberDAOImpl memberDAO;
     private final StringProperty searchField;
-    private final StringProperty userNameField;
+    private final StringProperty usernameField;
     private final StringProperty passwordField;
     private final StringProperty confirmPasswordField;
     private final StringProperty streetField;
@@ -17,26 +21,27 @@ public class CreateAccountViewModel {
     private final StringProperty telephoneNo2Field;
     private final StringProperty otherInfoField;
 
-    public CreateAccountViewModel(){
-        searchField = new SimpleStringProperty("Search");
-        userNameField = new SimpleStringProperty("Username");
-        passwordField = new SimpleStringProperty("Password");
-        confirmPasswordField = new SimpleStringProperty("Confirm Password");
-        streetField = new SimpleStringProperty("Street");
-        streetNumberField = new SimpleStringProperty("Street Number");
-        floorField = new SimpleStringProperty("Floor");
-        apartmentNoField = new SimpleStringProperty("Apartment Number");
-        emailField = new SimpleStringProperty("Email");
-        telephoneNo1Field = new SimpleStringProperty("Telephone Number 1");
-        telephoneNo2Field = new SimpleStringProperty("Telephone Number 2");
-        otherInfoField = new SimpleStringProperty("Other Information");
+    public CreateAccountViewModel() throws SQLException {
+        memberDAO = new MemberDAOImpl();
+        searchField = new SimpleStringProperty();
+        usernameField = new SimpleStringProperty();
+        passwordField = new SimpleStringProperty();
+        confirmPasswordField = new SimpleStringProperty();
+        streetField = new SimpleStringProperty();
+        streetNumberField = new SimpleStringProperty();
+        floorField = new SimpleStringProperty();
+        apartmentNoField = new SimpleStringProperty();
+        emailField = new SimpleStringProperty();
+        telephoneNo1Field = new SimpleStringProperty();
+        telephoneNo2Field = new SimpleStringProperty();
+        otherInfoField = new SimpleStringProperty();
     }
 
     public StringProperty getSearchField(){
         return searchField;
     }
-    public StringProperty getUserNameField(){
-        return userNameField;
+    public StringProperty getUsernameField(){
+        return usernameField;
     }
     public StringProperty getPasswordField(){
         return passwordField;
@@ -67,5 +72,9 @@ public class CreateAccountViewModel {
     }
     public StringProperty getOtherInfoField(){
         return otherInfoField;
+    }
+
+    public void onCreateButtonPressed() throws SQLException{
+        memberDAO.create(usernameField.getValue(), passwordField.getValue(), emailField.getValue(), otherInfoField.getValue(), streetField.getValue(), streetNumberField.getValue(), 666,  "Horsens");
     }
 }
