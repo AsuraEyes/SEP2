@@ -7,8 +7,10 @@ import client.views.create_account.CreateAccountController;
 import client.views.log_in.LogInController;
 import client.views.main_view.MainController;
 import client.views.menu.MenuController;
+import client.views.search_for_rental.Controller;
 import client.views.search_for_rental.SearchForRentalController;
 import client.views.view_rating.ViewRatingController;
+import client.views.view_rental.ViewRentalController;
 import client.views.view_reported_member.ViewReportedMemberController;
 import client.views.view_reported_member_list.ViewReportedMemberListController;
 import client.views.welcome_page.WelcomePageController;
@@ -35,7 +37,7 @@ public class ViewHandler
 
   public void start() throws Exception
   {
-    setView(menu(),logIn());
+    setView(menu(),searchForRental());
   }
 
   public void setView(Node menu, Node content) throws IOException
@@ -159,10 +161,12 @@ public class ViewHandler
   public Node searchForRental() throws IOException
   {
     FXMLLoader loader = new FXMLLoader();
-    loader.setLocation(getClass().getResource("/client/views/search_for_rental/SearchForRental.fxml"));
+    loader.setLocation(getClass().getResource("/client/views/search_for_rental/SearchForRentalv2.fxml"));
     Node content = loader.load();
-    SearchForRentalController searchForRentalController = loader.getController();
-    searchForRentalController.init(this, viewModelFactory);
+    Controller controller = loader.getController();
+    controller.init(this,viewModelFactory);
+    //SearchForRentalController searchForRentalController = loader.getController();
+    //searchForRentalController.init(this, viewModelFactory);
     return content;
   }
   public Node viewMemberProfile() throws IOException
@@ -197,8 +201,8 @@ public class ViewHandler
     FXMLLoader loader = new FXMLLoader();
     loader.setLocation(getClass().getResource("/client/views/view_rental/ViewRental.fxml"));
     Node content = loader.load();
-    ViewRatingController viewRatingController = loader.getController();
-    viewRatingController.init(this, viewModelFactory);
+    ViewRentalController viewRentalController = loader.getController();
+    viewRentalController.init(this);
     return content;
   }
   public Node viewReportedMember() throws IOException
@@ -227,5 +231,10 @@ public class ViewHandler
     WelcomePageController welcomePageController = loader.getController();
     welcomePageController.init(this, viewModelFactory);
     return content;
+  }
+
+  public Stage getStage()
+  {
+    return stage;
   }
 }
