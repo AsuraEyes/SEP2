@@ -13,6 +13,7 @@ public class ChatReceivedMessagesController
 {
   @FXML
   private TextField searchField;
+
   private ViewHandler viewHandler;
   private ChatReceivedMessagesViewModel chatReceivedMessagesViewModel;
 
