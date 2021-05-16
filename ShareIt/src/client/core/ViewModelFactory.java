@@ -5,12 +5,15 @@ import client.viewmodel.chat_received_messages.ChatReceivedMessagesViewModel;
 import client.viewmodel.chat_write_message.ChatWriteMessageViewModel;
 import client.viewmodel.create_account.CreateAccountViewModel;
 import client.viewmodel.log_in.LogInViewModel;
+import client.viewmodel.menu.MenuViewModel;
 import client.viewmodel.seatch_for_rental.SearchForRentalViewModel;
 import client.viewmodel.view_rating.ViewRatingViewModel;
 import client.viewmodel.view_rating_full.ViewRatingFullViewModel;
 import client.viewmodel.view_reported_member.ViewReportedMemberViewModel;
 import client.viewmodel.view_reported_member_list.ViewReportedMemberListViewModel;
 import client.viewmodel.welcome_page.WelcomePageViewModel;
+
+import java.sql.SQLException;
 
 public class ViewModelFactory
 {
@@ -25,6 +28,7 @@ public class ViewModelFactory
   private ViewReportedMemberViewModel viewReportedMemberViewModel;
   private ViewReportedMemberListViewModel viewReportedMemberListViewModel;
   private WelcomePageViewModel welcomePageViewModel;
+  private MenuViewModel menuViewModel;
 
   public ViewModelFactory(){
     chatReceivedMessagesViewModel = new ChatReceivedMessagesViewModel();
@@ -41,11 +45,20 @@ public class ViewModelFactory
 
   public ChatReceivedMessagesViewModel getChatReceivedMessagesViewModel()
   {
+    if(chatReceivedMessagesViewModel == null)
+    {
+      chatReceivedMessagesViewModel = new ChatReceivedMessagesViewModel();
+    }
     return chatReceivedMessagesViewModel;
   }
 
+
   public ChatWriteMessageViewModel getChatWriteMessagesViewModel()
   {
+    if(chatWriteMessageViewModel == null)
+    {
+      chatWriteMessageViewModel = new ChatWriteMessageViewModel();
+    }
     return chatWriteMessageViewModel;
   }
 
@@ -63,7 +76,7 @@ public class ViewModelFactory
     return welcomePageViewModel;
   }
 
-  public CreateAccountViewModel getCreateAccountViewModel() {
+  public CreateAccountViewModel getCreateAccountViewModel() throws SQLException {
     if (createAccountViewModel == null){
       createAccountViewModel = new CreateAccountViewModel();
     }
@@ -103,5 +116,13 @@ public class ViewModelFactory
       viewReportedMemberListViewModel = new ViewReportedMemberListViewModel();
     }
     return viewReportedMemberListViewModel;
+  }
+
+  public MenuViewModel getMenuViewModel(){
+    if(menuViewModel == null)
+    {
+      menuViewModel = new MenuViewModel();
+    }
+    return menuViewModel;
   }
 }

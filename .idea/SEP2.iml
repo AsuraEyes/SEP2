@@ -5,8 +5,7 @@
     <content url="file://$MODULE_DIR$" />
     <orderEntry type="jdk" jdkName="16" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" name="JavaFX" level="application" />
-    <orderEntry type="module-library">
+    <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
           <root url="jar://$USER_HOME$/Documents/Java/controlsfx-11.1.0.jar!/" />
@@ -15,5 +14,8 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" exported="" name="javafx" level="application" />
+    <orderEntry type="library" name="postgresql-42.2.20" level="project" />
+    <orderEntry type="library" name="JavaFX" level="project" />
   </component>
 </module>

@@ -38,4 +38,11 @@ public class AddRentalViewModel {
     public StringProperty getOtherInfoField(){
         return otherInfoField;
     }
+
+    public boolean validate(){
+        if (searchField.getValue().isEmpty()){
+            return false;
+        }
+        return true;
+    }
 }
