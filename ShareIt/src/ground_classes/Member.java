@@ -6,8 +6,8 @@ public class Member {
     private String password;
     private String emailAddress;
     private String otherInformation;
-    private PhoneNo phoneNo1;
-    private PhoneNo phoneNo2;
+    private String phoneNo1;
+    private String phoneNo2;
     private String addressStreet;
     private String addressNo;
     private int addressPostalCode;
@@ -15,7 +15,7 @@ public class Member {
     private float averageReview;
 
 
-    public Member(int id, String username, String password, String emailAddress, String otherInformation, PhoneNo phoneNo1, PhoneNo phoneNo2, String address_street, String address_no, int address_postal_code, String address_city) {
+    public Member(int id, String username, String password, String emailAddress, String otherInformation, String phoneNo1, String phoneNo2, String address_street, String address_no, int address_postal_code, String address_city) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -70,19 +70,19 @@ public class Member {
         this.otherInformation = otherInformation;
     }
 
-    public PhoneNo getPhoneNo1() {
+    public String getPhoneNo1() {
         return phoneNo1;
     }
 
-    public void setPhoneNo1(PhoneNo phoneNo1) {
+    public void setPhoneNo1(String phoneNo1) {
         this.phoneNo1 = phoneNo1;
     }
 
-    public PhoneNo getPhoneNo2() {
+    public String getPhoneNo2() {
         return phoneNo2;
     }
 
-    public void setPhoneNo2(PhoneNo phoneNo2) {
+    public void setPhoneNo2(String phoneNo2) {
         this.phoneNo2 = phoneNo2;
     }
 
