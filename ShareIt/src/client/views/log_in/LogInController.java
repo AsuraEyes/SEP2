@@ -10,6 +10,7 @@ import javafx.scene.control.TextField;
 import org.controlsfx.control.textfield.CustomPasswordField;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class LogInController
 {
@@ -45,8 +46,7 @@ public class LogInController
 
   }
 
-  public void createNewAccount(ActionEvent actionEvent) throws IOException
-  {
+  public void createNewAccount(ActionEvent actionEvent) throws IOException, SQLException {
     viewHandler.setView(viewHandler.menu(), viewHandler.createAccount());
   }
 }

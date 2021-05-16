@@ -19,6 +19,7 @@ import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class ViewHandler
 {
@@ -35,7 +36,7 @@ public class ViewHandler
 
   public void start() throws Exception
   {
-    setView(menu(),searchForRental());
+    setView(menu(),createAccount());
   }
 
   public void setView(Node menu, Node content) throws IOException
@@ -91,8 +92,7 @@ public class ViewHandler
     return content;
   }
 
-  public Node createAccount() throws IOException
-  {
+  public Node createAccount() throws IOException, SQLException {
     FXMLLoader loader = new FXMLLoader();
     loader.setLocation(getClass().getResource("/client/views/create_account/CreateAccount.fxml"));
     Node content = loader.load();
