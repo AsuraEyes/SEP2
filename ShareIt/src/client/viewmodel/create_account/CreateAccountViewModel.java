@@ -13,7 +13,6 @@ import java.util.ArrayList;
 
 public class CreateAccountViewModel {
     private ShareItModel model;
-    private final StringProperty searchField;
     private final StringProperty usernameField;
     private final StringProperty passwordField;
     private final StringProperty confirmPasswordField;
@@ -29,7 +28,6 @@ public class CreateAccountViewModel {
 
     public CreateAccountViewModel(ShareItModel model) throws SQLException {
         this.model = model;
-        searchField = new SimpleStringProperty();
         usernameField = new SimpleStringProperty();
         passwordField = new SimpleStringProperty();
         confirmPasswordField = new SimpleStringProperty();
@@ -43,9 +41,6 @@ public class CreateAccountViewModel {
         locationBox = new SimpleStringProperty();
     }
 
-    public StringProperty getSearchField(){
-        return searchField;
-    }
     public StringProperty getUsernameField(){
         return usernameField;
     }

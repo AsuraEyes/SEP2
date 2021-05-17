@@ -79,7 +79,7 @@
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </padding>
                         </TextField>
-                        <TextField fx:id="telephoneNo1Field" promptText="Telephone number 1" GridPane.columnIndex="2" GridPane.rowIndex="5">
+                        <TextField fx:id="telephoneNoField" promptText="Telephone number" GridPane.columnIndex="2" GridPane.rowIndex="5">
                            <GridPane.margin>
                               <Insets left="10.0" right="10.0" />
                            </GridPane.margin>
