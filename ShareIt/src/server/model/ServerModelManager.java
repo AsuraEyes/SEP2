@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public interface ServerModelManager extends Subject
 {
-    void checkData(String username, String password, String confirmPassword, String email, String otherInformation, String phone, String street, String streetNo, String postalCode, String city);
+    String checkData(String username, String password, String confirmPassword, String email, String otherInformation, String phone, String street, String streetNo, String postalCode, String city);
 
     void checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, Member member);
 
