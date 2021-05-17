@@ -1,19 +1,20 @@
 package client.views.manage_rentals;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class ManageRentalsController
 {
-  public TextField searchField;
+  @FXML private TextField searchField;
 
-  public Label nameOfRentalLabel;
-  public Label descriptionLabel;
-  public Label stateLabel;
-  public Label priceLabel;
-  public Label otherInformationLabel;
-  public Label categoryLabel;
+  @FXML private Label nameOfRentalLabel;
+  @FXML private Label descriptionLabel;
+  @FXML private Label stateLabel;
+  @FXML private Label priceLabel;
+  @FXML private Label otherInformationLabel;
+  @FXML private Label categoryLabel;
 
   public void searchButton(ActionEvent actionEvent)
   {
