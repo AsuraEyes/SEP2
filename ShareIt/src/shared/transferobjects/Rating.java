@@ -1,4 +1,4 @@
-package ground_classes;
+package shared.transferobjects;
 
 public class Rating {
     private double rating;
