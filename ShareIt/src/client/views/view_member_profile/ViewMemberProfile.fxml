@@ -40,56 +40,31 @@
                                     <Font name="Californian FB" size="24.0" />
                                  </font>
                               </Label>
-                              <Label layoutY="28.0" text="Location: " textFill="WHITE" wrapText="true">
+                              <Label fx:id="locationLabel" layoutY="28.0" text="Location: Horsens" textFill="WHITE" wrapText="true">
                                  <padding>
                                     <Insets bottom="10.0" top="10.0" />
                                  </padding>
                               </Label>
-                              <Label layoutY="65.5999984741211" text="Rating: " textFill="WHITE" wrapText="true">
+                              <Label fx:id="ratingLabel" layoutY="65.5999984741211" text="Rating: 1/5" textFill="WHITE" wrapText="true">
                                  <padding>
                                     <Insets bottom="10.0" top="10.0" />
                                  </padding>
                               </Label>
-                              <Label layoutY="103.19999694824219" text="Address: " textFill="WHITE" wrapText="true">
+                              <Label fx:id="addressLabel" layoutY="103.19999694824219" text="Address: Somethingvej" textFill="WHITE" wrapText="true">
                                  <padding>
                                     <Insets bottom="10.0" top="10.0" />
                                  </padding>
                               </Label>
-                              <Label layoutY="140.8000030517578" text="Contact: " textFill="WHITE" wrapText="true">
+                              <Label fx:id="contactLabel" layoutY="140.8000030517578" text="Contact: 213769420" textFill="WHITE" wrapText="true">
                                  <padding>
                                     <Insets bottom="10.0" top="10.0" />
                                  </padding>
                               </Label>
-                              <Label layoutY="178.39999389648438" text="Other information: " textFill="WHITE" wrapText="true">
+                              <Label fx:id="otherInformationLabel" layoutY="178.39999389648438" text="Other information: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" textFill="WHITE" wrapText="true">
                                  <padding>
                                     <Insets bottom="10.0" top="10.0" />
                                  </padding>
                               </Label>
-                              <Label fx:id="locationLabel" layoutX="51.0" layoutY="28.0" prefHeight="17.0" prefWidth="107.0" text="Horsens" textFill="WHITE" wrapText="true">
-                              <padding>
-                                 <Insets bottom="10.0" top="10.0" />
-                              </padding>
-                           </Label>
-                              <Label fx:id="ratingLabel" layoutX="38.0" layoutY="65.5999984741211" prefHeight="17.0" prefWidth="60.0" text="2/10" textFill="WHITE" wrapText="true">
-                              <padding>
-                                 <Insets bottom="10.0" top="10.0" />
-                              </padding>
-                           </Label>
-                              <Label fx:id="addressLabel" layoutX="47.0" layoutY="103.19999694824219" prefHeight="17.0" prefWidth="54.0" text="pula" textFill="WHITE" wrapText="true">
-                              <padding>
-                                 <Insets bottom="10.0" top="10.0" />
-                              </padding>
-                           </Label>
-                              <Label fx:id="contactLabel" layoutX="46.0" layoutY="140.8000030517578" prefHeight="17.0" prefWidth="96.0" text="213769420" textFill="WHITE" wrapText="true">
-                              <padding>
-                                 <Insets bottom="10.0" top="10.0" />
-                              </padding>
-                           </Label>
-                              <Label fx:id="otherInformationLabel" layoutX="105.0" layoutY="178.39999389648438" text="asfghdhfujsfhuvdjckfuj" textFill="WHITE" wrapText="true">
-                              <padding>
-                                 <Insets bottom="10.0" top="10.0" />
-                              </padding>
-                           </Label>
                            </children>
                         </AnchorPane>
                         <Button layoutX="893.0" layoutY="77.0" mnemonicParsing="false" onAction="#chatButton" style="-fx-border-radius: 30px; -fx-background-radius: 30px; -fx-background-color: #A3A1A8; -fx-border-color: #A3A1A8;" text="Chat" textFill="WHITE">
