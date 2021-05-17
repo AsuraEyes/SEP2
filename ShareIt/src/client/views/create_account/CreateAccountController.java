@@ -5,7 +5,10 @@ import client.core.ViewModelFactory;
 import client.viewmodel.create_account.CreateAccountViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -13,8 +16,6 @@ import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
 import org.controlsfx.control.textfield.CustomPasswordField;
 import org.controlsfx.validation.ValidationSupport;
-import org.controlsfx.validation.Validator;
-import shared.transferobjects.Member;
 
 import java.sql.SQLException;
 
@@ -38,15 +39,13 @@ public class CreateAccountController {
     @FXML
     private TextField postalCodeField;
     @FXML
-    private ChoiceBox<Member> locationBox;
+    private ChoiceBox locationBox;
     @FXML
     private TextField emailField;
     @FXML
-    private TextField telephoneNo1Field;
+    private TextField telephoneNoField;
     @FXML
-    private TextField telephoneNo2Field;
-    @FXML
-    public TextArea otherInfoField;
+    private TextArea otherInfoField;
 
     private CreateAccountViewModel createAccountViewModel;
     private ViewHandler viewHandler;
@@ -65,12 +64,8 @@ public class CreateAccountController {
         floorField.textProperty().bindBidirectional(createAccountViewModel.getFloorField());
         postalCodeField.textProperty().bindBidirectional(createAccountViewModel.getPostalCodeField());
         emailField.textProperty().bindBidirectional(createAccountViewModel.getEmailField());
-        telephoneNo1Field.textProperty().bindBidirectional(createAccountViewModel.getTelephoneNo1Field());
-        telephoneNo2Field.textProperty().bindBidirectional(createAccountViewModel.getTelephoneNo2Field());
+        telephoneNoField.textProperty().bindBidirectional(createAccountViewModel.getTelephoneNoField());
         otherInfoField.textProperty().bindBidirectional(createAccountViewModel.getOtherInfoField());
-
-
-
 
 
 //        validationSupport = new ValidationSupport();

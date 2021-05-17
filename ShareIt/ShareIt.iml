@@ -17,8 +17,7 @@
       </library>
     </orderEntry>
     <orderEntry type="library" exported="" name="postgresql-42.2.20" level="project" />
-    <orderEntry type="library" exported="" name="JavaFX" level="application" />
     <orderEntry type="library" exported="" name="JavaFX" level="project" />
-    <orderEntry type="library" exported="" name="javafx" level="application" />
+    <orderEntry type="library" name="JavaFX" level="application" />
   </component>
 </module>

@@ -4,12 +4,13 @@ import client.core.ViewHandler;
 import client.core.ViewModelFactory;
 import client.viewmodel.seatch_for_rental.SearchForRentalViewModel;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class SearchForRentalController {
-    public TextField searchField;
-    private Label rentalNameLabel;
+    @FXML private TextField searchField;
+    @FXML private Label rentalNameLabel;
     private Label locationLabel;
     private Label priceLabel;
     private Label otherInfoLabel;
