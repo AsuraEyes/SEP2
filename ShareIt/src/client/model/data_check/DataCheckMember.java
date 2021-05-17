@@ -11,7 +11,6 @@ public class DataCheckMember {
     //does not check for length of ANY of the given Strings
     //mention this in project report
 
-    private MemberDAO memberDAO;
     private String username;
     private String password;
     private String passwordAgain;
@@ -22,7 +21,6 @@ public class DataCheckMember {
     private int postalCodeNb;
 
     public DataCheckMember() throws SQLException {
-        memberDAO = new MemberDAOImpl();
     }
 
     public void checkData(String username, String password, String passwordAgain, String email, String otherInformation, String phone1, String phone2, String street, String streetNumber, String postalCode, String city) {
@@ -39,7 +37,7 @@ public class DataCheckMember {
                 if(oneContactInformationGiven()){
                     if(postalCodeIsNumber()){
                         try{
-                            memberDAO.create(username, password, email, otherInformation, street, streetNumber, postalCodeNb, city);
+                            MemberDAOImpl.getInstance().create(username, password, email, otherInformation, street, streetNumber, postalCodeNb, city);
                             System.out.println("successful");
                         }
                         catch (SQLException e){
@@ -73,7 +71,7 @@ public class DataCheckMember {
 
     private boolean uniqueUsername(){
         try{
-            return memberDAO.uniqueUsername(username);
+            return MemberDAOImpl.getInstance().uniqueUsername(username);
         }
         catch (SQLException e){
             return false;
