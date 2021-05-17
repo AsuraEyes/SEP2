@@ -36,15 +36,12 @@ public class CityDAOImpl implements CityDAO
   {
     try(Connection connection = getConnection()){
       PreparedStatement statement = connection.prepareStatement("SELECT * FROM share_it.city");
-      System.out.println("at least get here");
       ResultSet resultSet = statement.executeQuery();
       ArrayList<City> arrayListToReturn = new ArrayList<>();
       while(resultSet.next()){
-        System.out.println("get here");
         arrayListToReturn.add(new City(resultSet.getString("name")));
       }
       //return array list
-      System.out.println(arrayListToReturn);
       return arrayListToReturn;
     }
   }}

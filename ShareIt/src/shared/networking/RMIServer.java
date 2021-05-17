@@ -18,7 +18,7 @@ public interface RMIServer extends Remote
   void registerClient(RemoteObserver client) throws RemoteException;
   void unregisterClient(RemoteObserver client) throws RemoteException;
 
-  void checkMemberData(String username, String password, String confirmPassword, String email, String phone, String otherInformation, String street, String streetNo, String postalCode, String city) throws RemoteException;
+  String checkMemberData(String username, String password, String confirmPassword, String email, String phone, String otherInformation, String street, String streetNo, String postalCode, String city) throws RemoteException;
 
   ArrayList<City> getCityList() throws RemoteException;
 }

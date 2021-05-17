@@ -7,6 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import shared.transferobjects.City;
 
+import java.beans.PropertyChangeEvent;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -39,6 +40,7 @@ public class CreateAccountViewModel {
         telephoneNoField = new SimpleStringProperty();
         otherInfoField = new SimpleStringProperty();
         locationBox = new SimpleStringProperty();
+        //model.addListener("dataValidation", this::onDataValidation);
     }
 
     public StringProperty getUsernameField(){
@@ -75,8 +77,8 @@ public class CreateAccountViewModel {
         return locationBox;
     }
 
-    public void onCreateButtonPressed(String selectedCity) throws IOException {
-        model.checkMemberData(usernameField.getValue(), passwordField.getValue(), confirmPasswordField.getValue(), emailField.getValue(), telephoneNoField.getValue(), otherInfoField.getValue(), streetField.getValue(), streetNumberField.getValue()+", "+floorField.getValue(), postalCodeField.getValue(),  selectedCity);
+    public String onCreateButtonPressed(String selectedCity) throws IOException {
+        return model.checkMemberData(usernameField.getValue(), passwordField.getValue(), confirmPasswordField.getValue(), emailField.getValue(), telephoneNoField.getValue(), otherInfoField.getValue(), streetField.getValue(), streetNumberField.getValue()+", "+floorField.getValue(), postalCodeField.getValue(),  selectedCity);
     }
 
     public ObservableList<String> getLocations(){
@@ -88,4 +90,10 @@ public class CreateAccountViewModel {
         locationsList = FXCollections.observableArrayList(cityListString);
         return locationsList;
     }
+
+//    public void onDataValidation(PropertyChangeEvent evt){
+//        if(evt.getPropertyName().equals("success")){
+//
+//        }
+//    }
 }
