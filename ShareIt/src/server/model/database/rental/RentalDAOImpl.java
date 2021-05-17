@@ -126,4 +126,20 @@ public class RentalDAOImpl implements RentalDAO{
             statement.executeUpdate();
         }
     }
+
+    @Override
+    public int getNextAvailableId() throws SQLException {
+        try(Connection connection = getConnection()){
+            PreparedStatement statement = connection.prepareStatement("SELECT nextval(pg_get_serial_sequence('share_it.rental', 'id')) AS available_id;");
+            ResultSet resultSet = statement.executeQuery();
+            int nextAvailableId = 0;
+            if(resultSet.next()){
+                nextAvailableId =  resultSet.getInt("available_id");
+            }
+            else{
+                throw new SQLException("No keys generated");
+            }
+            return nextAvailableId;
+        }
+    }
 }

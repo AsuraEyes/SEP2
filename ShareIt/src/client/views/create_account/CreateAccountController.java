@@ -81,8 +81,8 @@ public class CreateAccountController {
                 .hideAfter(Duration.seconds(3));
     }
 
-    public void goBackToLogInButton(ActionEvent actionEvent) {
-
+    public void goBackToLogInButton(ActionEvent actionEvent) throws IOException {
+        viewHandler.setView(viewHandler.menu(), viewHandler.logIn());
     }
 
     public void createButton(ActionEvent actionEvent) throws IOException {
@@ -92,6 +92,7 @@ public class CreateAccountController {
             switch (message){
                 case "Adding successful":
                     notifications.owner(parent).text("Your account has been successfully created! You will be automatically directed to the welcome page in 5 seconds").title(message).showConfirm();
+
                     try {
                         Thread.sleep(5000);
                     } catch (InterruptedException e) {

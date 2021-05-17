@@ -24,7 +24,6 @@ public class CreateAccountViewModel {
     private final StringProperty emailField;
     private final StringProperty telephoneNoField;
     private final StringProperty otherInfoField;
-    private final ObservableValue locationBox;
     private ObservableList<String> locationsList;
 
     public CreateAccountViewModel(ShareItModel model) throws SQLException {
@@ -39,7 +38,6 @@ public class CreateAccountViewModel {
         emailField = new SimpleStringProperty();
         telephoneNoField = new SimpleStringProperty();
         otherInfoField = new SimpleStringProperty();
-        locationBox = new SimpleStringProperty();
         //model.addListener("dataValidation", this::onDataValidation);
     }
 
@@ -72,9 +70,6 @@ public class CreateAccountViewModel {
     }
     public StringProperty getOtherInfoField(){
         return otherInfoField;
-    }
-    public ObservableValue getLocationBox() {
-        return locationBox;
     }
 
     public String onCreateButtonPressed(String selectedCity) throws IOException {
