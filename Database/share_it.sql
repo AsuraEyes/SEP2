@@ -118,10 +118,9 @@ CREATE TABLE warning(
 
 DROP TABLE IF EXISTS phone_no;
 CREATE TABLE phone_no(
-    country_code VARCHAR(50),
     number VARCHAR (50) NOT NULL ,
     member_id INTEGER NOT NULL ,
-    PRIMARY KEY (country_code, number),
+    PRIMARY KEY (number),
     FOREIGN KEY (member_id) REFERENCES member(id) ON DELETE CASCADE
 );
 

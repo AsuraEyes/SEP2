@@ -1,5 +1,6 @@
 package client.viewmodel.log_in;
 
+import client.model.ShareItModel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -10,7 +11,7 @@ public class LogInViewModel
   private final StringProperty searchField;
   private final StringProperty passwordField;
 
-  public LogInViewModel(){
+  public LogInViewModel(ShareItModel shareItModel){
     userName = new SimpleStringProperty("Username");
     errorLabel = new SimpleStringProperty();
     searchField = new SimpleStringProperty("Search");
