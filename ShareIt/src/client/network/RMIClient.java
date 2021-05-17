@@ -2,7 +2,9 @@ package client.network;
 
 import shared.networking.RMIServer;
 import shared.networking.RemoteObserver;
+import shared.transferobjects.Category;
 import shared.transferobjects.City;
+import shared.transferobjects.Member;
 import shared.transferobjects.State;
 
 import java.beans.PropertyChangeListener;
@@ -52,6 +54,17 @@ public class RMIClient implements Client, RemoteObserver
   }
 
   @Override
+  public void checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, Member member) throws IOException {
+    try {
+      server.checkRentalData(name, pictureLink, description, price, otherInformation, stateName, member);
+    }
+    catch (RemoteException e){
+      e.printStackTrace();
+      throw new RuntimeException("Could not contact server");
+    }
+  }
+
+  @Override
   public ArrayList<City> getCityList() {
     try {
       return server.getCityList();
@@ -71,6 +84,17 @@ public class RMIClient implements Client, RemoteObserver
       e.printStackTrace();
     }
     return  null;
+  }
+
+  @Override
+  public ArrayList<Category> getCategoryList() {
+    try{
+      return server.getCategoryList();
+    }
+    catch (RemoteException e){
+      e.printStackTrace();
+    }
+    return null;
   }
 
   @Override public void addListener(String propertyName,

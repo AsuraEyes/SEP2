@@ -2,12 +2,8 @@ import client.core.ClientFactory;
 import client.core.ModelFactory;
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
-import server.model.database.category.CategoryDAOImpl;
-import server.model.database.city.CityDAOImpl;
-import server.model.database.member.MemberDAOImpl;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import server.model.database.rental.RentalDAOImpl;
 
 public class ShareItApp extends Application
 {

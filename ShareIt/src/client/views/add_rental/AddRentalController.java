@@ -22,9 +22,8 @@ import java.sql.SQLException;
 
 public class AddRentalController
 {
-  @FXML private CheckComboBox categoryComboBox;
+  @FXML private ChoiceBox categoryBox;
   @FXML private ChoiceBox stateBox;
-  @FXML private TextField searchField;
   @FXML private TextField nameField;
   @FXML private TextField descriptionField;
   @FXML private TextField priceField;
@@ -41,13 +40,19 @@ public class AddRentalController
     addRentalViewModel = viewModelFactory.getAddRentalViewModel();
     this.viewHandler = viewHandler;
     addRentalViewModel = viewModelFactory.getAddRentalViewModel();
-    searchField.textProperty().bindBidirectional(addRentalViewModel.getSearchField());
     nameField.textProperty().bindBidirectional(addRentalViewModel.getNameField());
     descriptionField.textProperty().bind(addRentalViewModel.getDescriptionField());
     stateBox.setItems(addRentalViewModel.getStates());
     stateBox.getSelectionModel().selectFirst();
     priceField.textProperty().bindBidirectional(addRentalViewModel.getPriceField());
     otherInfoField.textProperty().bind(addRentalViewModel.getOtherInfoField());
+    categoryBox.setItems(addRentalViewModel.getCategories());
+    categoryBox.getSelectionModel().selectFirst();
+
+    notifications =  Notifications.create()
+            .title("Error - invalid input!")
+            .graphic(new Rectangle(300, 300, Color.RED)) // sets node to display
+            .hideAfter(Duration.seconds(3));
   }
 
   public void searchButton(ActionEvent actionEvent)

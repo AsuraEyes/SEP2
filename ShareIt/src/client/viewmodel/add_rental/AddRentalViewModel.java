@@ -6,41 +6,46 @@ import javafx.beans.property.StringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import shared.transferobjects.City;
+import shared.transferobjects.Category;
+import shared.transferobjects.Member;
 import shared.transferobjects.State;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class AddRentalViewModel {
     private ShareItModel model;
-    private final StringProperty searchField;
     private final StringProperty nameField;
+    private final StringProperty pictureLinkField;
     private final StringProperty descriptionField;
-    private final ObservableValue stateBox;
-    private ObservableList<String> locationsList;
+    private final ObservableValue<String> stateBox;
+    private ObservableList<String> statesList;
     private final StringProperty priceField;
     private final StringProperty otherInfoField;
+    private final ObservableValue<String> categoryBox;
+    private ObservableList<String> categoriesList;
 
     public AddRentalViewModel(ShareItModel model){
         this.model = model;
-        searchField = new SimpleStringProperty("Search");
-        nameField = new SimpleStringProperty("Name");
-        descriptionField = new SimpleStringProperty("Description");
-        stateBox = new SimpleStringProperty("State");
-        priceField = new SimpleStringProperty("Price");
-        otherInfoField = new SimpleStringProperty("Other Information");
+        nameField = new SimpleStringProperty();
+        pictureLinkField = new SimpleStringProperty();
+        descriptionField = new SimpleStringProperty();
+        stateBox = new SimpleStringProperty();
+        priceField = new SimpleStringProperty();
+        otherInfoField = new SimpleStringProperty();
+        categoryBox = new SimpleStringProperty();
     }
 
-    public StringProperty getSearchField(){
-        return searchField;
-    }
     public StringProperty getNameField(){
         return nameField;
+    }
+    public StringProperty getPictureLinkField(){
+        return pictureLinkField;
     }
     public StringProperty getDescriptionField(){
         return descriptionField;
     }
-    public ObservableValue getStateBox(){
+    public ObservableValue<String> getStateBox(){
         return stateBox;
     }
     public StringProperty getPriceField(){
@@ -49,21 +54,30 @@ public class AddRentalViewModel {
     public StringProperty getOtherInfoField(){
         return otherInfoField;
     }
-
-    public boolean validate(){
-        if (searchField.getValue().isEmpty()){
-            return false;
-        }
-        return true;
+    public ObservableValue<String> getCategoryBox() {
+        return categoryBox;
     }
 
+    public void onAddRentalButtonPressed(String selectedState, String selectedCategory, Member member) throws IOException {
+        model.checkRentalData(nameField.getValue(), pictureLinkField.getValue(), descriptionField.getValue(), priceField.getValue(), otherInfoField.getValue(), selectedState, member);
+    }
     public ObservableList<String> getStates(){
         ArrayList<State> stateList = model.getStateList();
         ArrayList<String> stateListString = new ArrayList<>();
-        for (int i = 0; i < stateList.size(); i++) {
-            stateListString.add(stateList.get(i).toString());
+        for (State state : stateList) {
+            stateListString.add(state.toString());
         }
-        locationsList = FXCollections.observableArrayList(stateListString);
-        return locationsList;
+        statesList = FXCollections.observableArrayList(stateListString);
+        return statesList;
+    }
+
+    public ObservableList<String> getCategories(){
+        ArrayList<Category> categoryList = model.getCategoryList();
+        ArrayList<String> categoryListString = new ArrayList<>();
+        for (Category category : categoryList) {
+            categoryListString.add(category.toString());
+        }
+        categoriesList = FXCollections.observableArrayList(categoryListString);
+        return categoriesList;
     }
 }
