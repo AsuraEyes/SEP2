@@ -1,4 +1,4 @@
-package client.viewmodel.create_account;
+/*package client.viewmodel.create_account;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -38,4 +38,4 @@ class CreateAccountViewModelTest {
 //    }
 
 
-}
+}*/
