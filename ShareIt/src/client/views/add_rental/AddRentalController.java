@@ -30,7 +30,6 @@ public class AddRentalController
   @FXML private TextField descriptionField;
   @FXML private TextField priceField;
   @FXML private TextArea otherInfoField;
-  @FXML private AnchorPane parent;
   private Member member;
 
   private AddRentalViewModel addRentalViewModel;
@@ -64,9 +63,9 @@ public class AddRentalController
         .showError();
   }
 
-  public void addRentalButton(ActionEvent actionEvent) {
+  public void addRentalButton(ActionEvent actionEvent) throws IOException {
     boolean ok = true;
-    if(checkField(nameField) && checkField(descriptionField) && checkField(priceField) && checkField(otherInfoField)){
+    if(checkField(nameField) && checkField(descriptionField) && checkField(priceField) && checkArea(otherInfoField)){
       addRentalViewModel.onAddRentalButtonPressed(stateBox.getValue(), categoryBox.getValue(), member);
     }
   }
@@ -74,6 +73,14 @@ public class AddRentalController
   private boolean checkField(TextField nameOfField){
     if(nameOfField.textProperty().getValue() == null || nameOfField.textProperty().getValue().isBlank()){
       notifications.owner(parent).text(nameOfField.getPromptText()+" cannot be empty").showError();
+      return false;
+    }
+    return true;
+  }
+
+  private boolean checkArea(TextArea nameArea){
+    if (nameArea.textProperty().getValue() == null || nameArea.textProperty().getValue().isBlank()){
+      notifications.owner(parent).text(nameArea.getPromptText()+" cannot be empty").showError();
       return false;
     }
     return true;
