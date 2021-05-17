@@ -5,10 +5,7 @@ import client.core.ViewModelFactory;
 import client.viewmodel.create_account.CreateAccountViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -17,6 +14,7 @@ import org.controlsfx.control.Notifications;
 import org.controlsfx.control.textfield.CustomPasswordField;
 import org.controlsfx.validation.ValidationSupport;
 import org.controlsfx.validation.Validator;
+import shared.transferobjects.Member;
 
 import java.sql.SQLException;
 
@@ -40,7 +38,7 @@ public class CreateAccountController {
     @FXML
     private TextField postalCodeField;
     @FXML
-    private ComboBox locationBox;
+    private ChoiceBox<Member> locationBox;
     @FXML
     private TextField emailField;
     @FXML
@@ -70,6 +68,9 @@ public class CreateAccountController {
         telephoneNo1Field.textProperty().bindBidirectional(createAccountViewModel.getTelephoneNo1Field());
         telephoneNo2Field.textProperty().bindBidirectional(createAccountViewModel.getTelephoneNo2Field());
         otherInfoField.textProperty().bindBidirectional(createAccountViewModel.getOtherInfoField());
+
+
+
 
 
 //        validationSupport = new ValidationSupport();
