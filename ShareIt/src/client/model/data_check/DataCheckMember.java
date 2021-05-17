@@ -19,9 +19,6 @@ public class DataCheckMember {
     private String postalCode;
     private int postalCodeNb;
 
-    public DataCheckMember() throws SQLException {
-    }
-
     public void checkData(String username, String password, String passwordAgain, String email, String otherInformation, String phone, String street, String streetNumber, String postalCode, String city) {
         this.username = username;
         this.password = password;
@@ -30,40 +27,22 @@ public class DataCheckMember {
         this.phone = phone;
         this.postalCode = postalCode;
 
-        if(matchingPasswords()){
-            if(uniqueUsername()){
-                if(oneContactInformationGiven()){
-                    if(postalCodeIsNumber()){
-                        try{
-                            MemberDAOImpl.getInstance().create(username, password, email, phone, otherInformation, street, streetNumber, postalCodeNb, city);
-                            System.out.println("successful");
-                        }
-                        catch (SQLException e){
-
-                        }
-                    }
-                    else{
-                        System.out.println("postal code not number");
-                    }
-                }
-                else{
-                    System.out.println("no contact");
-                }
+        if(matchingPasswords() && uniqueUsername() && oneContactInformationGiven() && postalCodeIsNumber()){
+            try{
+                MemberDAOImpl.getInstance().create(username, password, email, phone, otherInformation, street, streetNumber, postalCodeNb, city);
+                System.out.println("successful");
             }
-            else {
-                System.out.println("Username not unique");
+            catch (SQLException e){
+                //
             }
         }
-        else{
-            System.out.println("password not matching");
-        }
-
     }
 
     private boolean matchingPasswords(){
         if(password.equals(passwordAgain)){
             return true;
         }
+        System.out.println("password not matching");
         return false;
     }
 
@@ -72,8 +51,10 @@ public class DataCheckMember {
             return MemberDAOImpl.getInstance().uniqueUsername(username);
         }
         catch (SQLException e){
-            return false;
+            System.out.println("database issue (probably forgot to change password ;) )");
         }
+        System.out.println("Username not unique");
+        return false;
     }
 
     private boolean oneContactInformationGiven(){
@@ -85,6 +66,7 @@ public class DataCheckMember {
         if(email != null){
             return !(email.trim().equals("") || email.isBlank() || email.isEmpty());
         }
+        System.out.println("no contact");
         return false;
     }
 
@@ -94,6 +76,7 @@ public class DataCheckMember {
             return true;
         }
         catch (NumberFormatException e){
+            System.out.println("postal code not number");
             return false;
         }
     }

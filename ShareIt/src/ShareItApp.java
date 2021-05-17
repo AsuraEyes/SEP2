@@ -15,7 +15,9 @@ public class ShareItApp extends Application
     ModelFactory modelFactory = new ModelFactory(clientFactory);
     ViewModelFactory viewModelFactory = new ViewModelFactory(modelFactory);
     ViewHandler viewHandler = new ViewHandler(stage, viewModelFactory);
-    MemberDAOImpl.getInstance().setPassword("CoDex21");
+    String timothyPassword = "CoDex21";
+    String maggiePassword = "SQLdatabaze";
+    MemberDAOImpl.getInstance().setPassword(maggiePassword);
     viewHandler.start();
    }
 }
