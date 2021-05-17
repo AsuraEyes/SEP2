@@ -17,44 +17,37 @@ import org.controlsfx.control.Notifications;
 import org.controlsfx.validation.ValidationSupport;
 import org.controlsfx.validation.Validator;
 
+import java.io.IOException;
+import java.sql.SQLException;
+
 public class AddRentalController
 {
   @FXML private CheckComboBox categoryComboBox;
-  @FXML private ChoiceBox stateChoiceBox;
+  @FXML private ChoiceBox stateBox;
   @FXML private TextField searchField;
   @FXML private TextField nameField;
   @FXML private TextField descriptionField;
   @FXML private TextField priceField;
   @FXML private TextArea otherInfoField;
   @FXML private AnchorPane parent;
-  private Notifications notifications;
 
-  private ValidationSupport validationSupport;
   private AddRentalViewModel addRentalViewModel;
   private ViewHandler viewHandler;
+  private ValidationSupport validationSupport;
+  private Notifications notifications;
 
-  public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory)
+  public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws SQLException, IOException
   {
     addRentalViewModel = viewModelFactory.getAddRentalViewModel();
     this.viewHandler = viewHandler;
-
-    validationSupport = new ValidationSupport();
-    validationSupport.registerValidator(nameField,
-        Validator.createEmptyValidator("Text is required"));
-
-
-    notifications = Notifications.create().title("ASDAASDASDQweqe")
-        .graphic(new Rectangle(300, 300, Color.RED)) // sets node to display
-        .hideAfter(Duration.seconds(1));
-
-
-        /*addRentalViewModel = viewModelFactory.getAddRentalViewModel();
-        searchField.textProperty().bindBidirectional(addRentalViewModel.getSearchField());
-        nameField.textProperty().bindBidirectional(addRentalViewModel.getNameField());
-        descriptionField.textProperty().bind(addRentalViewModel.getDescriptionField());
-        stateField.textProperty().bind(addRentalViewModel.getStateField());
-        priceField.textProperty().bindBidirectional(addRentalViewModel.getPriceField());
-        otherInfoField.textProperty().bind(addRentalViewModel.getOtherInfoField());*/
+    addRentalViewModel = viewModelFactory.getAddRentalViewModel();
+    searchField.textProperty().bindBidirectional(addRentalViewModel.getSearchField());
+    nameField.textProperty().bindBidirectional(addRentalViewModel.getNameField());
+    descriptionField.textProperty().bind(addRentalViewModel.getDescriptionField());
+    stateBox.setItems(addRentalViewModel.getStates());
+    stateBox.getSelectionModel().selectFirst();
+    priceField.textProperty().bindBidirectional(addRentalViewModel.getPriceField());
+    otherInfoField.textProperty().bind(addRentalViewModel.getOtherInfoField());
   }
 
   public void searchButton(ActionEvent actionEvent)

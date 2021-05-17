@@ -3,6 +3,7 @@ package client.network;
 import shared.networking.RMIServer;
 import shared.networking.RemoteObserver;
 import shared.transferobjects.City;
+import shared.transferobjects.State;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -59,6 +60,17 @@ public class RMIClient implements Client, RemoteObserver
       e.printStackTrace();
     }
     return null;
+  }
+
+  @Override
+  public ArrayList<State> getStateList() {
+    try{
+      return server.getStateList();
+    }
+    catch (RemoteException e){
+      e.printStackTrace();
+    }
+    return  null;
   }
 
   @Override public void addListener(String propertyName,

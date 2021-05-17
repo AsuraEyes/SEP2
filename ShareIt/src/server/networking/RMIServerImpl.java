@@ -6,6 +6,7 @@ import server.model.database.city.CityDAOImpl;
 import shared.networking.RMIServer;
 import shared.networking.RemoteObserver;
 import shared.transferobjects.City;
+import shared.transferobjects.State;
 
 
 import java.beans.PropertyChangeListener;
@@ -90,5 +91,10 @@ public class RMIServerImpl implements RMIServer
   @Override
   public ArrayList<City> getCityList() {
     return serverModelManager.getCityList();
+  }
+
+  @Override
+  public ArrayList<State> getStateList() throws RemoteException {
+    return serverModelManager.getStateList();
   }
 }

@@ -1,8 +1,10 @@
 package server.model;
 
+import client.model.database.state.StateDAOImpl;
 import server.model.data_check.DataCheckMember;
 import server.model.database.city.CityDAOImpl;
 import shared.transferobjects.City;
+import shared.transferobjects.State;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -48,6 +50,17 @@ public class ServerModelImpl implements ServerModelManager
       return (ArrayList<City>) CityDAOImpl.getInstance().readCity();
     }
     catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return null;
+  }
+
+  @Override
+  public ArrayList<State> getStateList() {
+    try {
+      return (ArrayList<State>) StateDAOImpl.getInstance().readState();
+    }
+    catch (SQLException e){
       e.printStackTrace();
     }
     return null;

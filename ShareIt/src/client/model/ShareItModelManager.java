@@ -2,6 +2,7 @@ package client.model;
 
 import client.network.Client;
 import shared.transferobjects.City;
+import shared.transferobjects.State;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -46,5 +47,10 @@ public class ShareItModelManager implements ShareItModel
   @Override
   public ArrayList<City> getCityList() {
     return client.getCityList();
+  }
+
+  @Override
+  public ArrayList<State> getStateList() {
+    return client.getStateList();
   }
 }

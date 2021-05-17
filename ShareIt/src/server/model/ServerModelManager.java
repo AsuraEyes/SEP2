@@ -1,6 +1,7 @@
 package server.model;
 
 import shared.transferobjects.City;
+import shared.transferobjects.State;
 import shared.util.Subject;
 
 import java.util.ArrayList;
@@ -12,4 +13,6 @@ public interface ServerModelManager extends Subject
     ArrayList<City> getCityList();
   /*void sendMessage(Message msg);
   String getMessages();*/
+
+    ArrayList<State> getStateList();
 }
