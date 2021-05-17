@@ -1,14 +1,22 @@
 package server.model;
 
+import server.model.data_check.DataCheckMember;
+import server.model.database.city.CityDAOImpl;
+import shared.transferobjects.City;
+
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class ServerModelImpl implements ServerModelManager
 {
   private PropertyChangeSupport support;
+  private DataCheckMember dataCheckMember;
 
   public ServerModelImpl(){
     support = new PropertyChangeSupport(this);
+    dataCheckMember = new DataCheckMember();
   }
 
   @Override public void addListener(String propertyName,
@@ -27,5 +35,21 @@ public class ServerModelImpl implements ServerModelManager
       support.removePropertyChangeListener(propertyName, listener);
     else
       support.removePropertyChangeListener(listener);
+  }
+
+  @Override
+  public void checkData(String username, String password, String confirmPassword, String email, String otherInformation, String phone, String street, String streetNo, String postalCode, String city) {
+    dataCheckMember.checkData(username, password, confirmPassword, email, otherInformation, phone, street, streetNo, postalCode, city);
+  }
+
+  @Override
+  public ArrayList<City> getCityList() {
+    try {
+      return (ArrayList<City>) CityDAOImpl.getInstance().readCity();
+    }
+    catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return null;
   }
 }

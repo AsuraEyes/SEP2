@@ -67,7 +67,7 @@ CREATE TABLE rental(
     picture_link bla_bla_type UNIQUE,
     description bla_bla_type,
     price int NOT NULL NOT NULL,
-    otherInformation bla_bla_type,
+    other_information bla_bla_type,
     state_name VARCHAR (100) NOT NULL,
     member_id INTEGER NOT NULL,
     FOREIGN KEY (state_name) REFERENCES state(name),

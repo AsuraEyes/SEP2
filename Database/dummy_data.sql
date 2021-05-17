@@ -69,7 +69,7 @@ VALUES ('Donec ipsum velit, varius non egestas molestie, consectetur quis eros. 
        ('Sed ut vestibulum neque. Vivamus nec tempus ligula. Curabitur leo tortor, convallis at suscipit quis, pellentesque ut neque. Praesent a consectetur ligula. Maecenas condimentum enim ligula, non dictum est accumsan tincidunt. Aliquam ornare neque leo, vitae vulputate ipsum aliquet id. Vivamus feugiat, purus non maximus placerat, ex nisi lacinia neque, a fermentum velit arcu eget metus. Morbi ac sapien nisi. Ut ultrices elementum gravida. Aliquam pharetra turpis est, eget maximus est dictum in. In ut pharetra massa.',5,7),
        ('Vestibulum sit amet turpis non velit tincidunt consectetur. Cras tempus urna id sapien efficitur, in bibendum sem tincidunt. Proin viverra ultrices augue, in blandit tortor accumsan eget. Etiam non eros nec ante hendrerit accumsan non volutpat diam. Duis tempor ex in lorem placerat, sed venenatis nisi iaculis. Sed at erat eu lacus mattis tempor. Aenean ac libero mattis, aliquet leo quis, pharetra purus.',6,7);
 
-INSERT INTO rental(name, picture_link, description, price, otherinformation, state_name, member_id)
+INSERT INTO rental(name, picture_link, description, price, other_information, state_name, member_id)
 VALUES ('Super duper chisels', 'x','This chisels are really amazing but sometimes does not work', 20, 'Not available for rent on Fridays', 'Good', 1),
        ('Even better drill','y', 'This drill is even more amazing and always works', 40, '', 'Like New', 5),
        ('Fishing rod','<' ,'Good for beginners to try out, not suitable for advanced fishers', 100, '', 'Fair', 3),
@@ -109,3 +109,5 @@ VALUES ('This is a warning for your misconduct', '2021-05-03 15:15:38', 'adminis
 SELECT * FROM member;
 INSERT INTO rating
 VALUES (5, 'Good rating', 8, 5);
+
+SELECT * FROM share_it.city

@@ -1,9 +1,11 @@
 package server.networking;
 
-
+import server.model.data_check.DataCheckMember;
 import server.model.ServerModelManager;
+import server.model.database.city.CityDAOImpl;
 import shared.networking.RMIServer;
 import shared.networking.RemoteObserver;
+import shared.transferobjects.City;
 
 
 import java.beans.PropertyChangeListener;
@@ -12,6 +14,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class RMIServerImpl implements RMIServer
@@ -77,5 +80,15 @@ public class RMIServerImpl implements RMIServer
       throws RemoteException
   {
 
+  }
+
+  @Override
+  public void checkMemberData(String username, String password, String confirmPassword, String email, String phone, String otherInformation, String street, String streetNo, String postalCode, String city) throws RemoteException {
+    serverModelManager.checkData(username, password, confirmPassword, email, otherInformation, phone, street, streetNo, postalCode, city);
+  }
+
+  @Override
+  public ArrayList<City> getCityList() {
+    return serverModelManager.getCityList();
   }
 }

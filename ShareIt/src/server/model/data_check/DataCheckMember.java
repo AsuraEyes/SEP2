@@ -1,8 +1,6 @@
-package client.model.data_check;
+package server.model.data_check;
 
-import client.model.database.member.MemberDAO;
-import client.model.database.member.MemberDAOImpl;
-import org.controlsfx.control.Notifications;
+import server.model.database.member.MemberDAOImpl;
 
 import java.sql.SQLException;
 
@@ -18,6 +16,10 @@ public class DataCheckMember {
     private String phone;
     private String postalCode;
     private int postalCodeNb;
+
+    public DataCheckMember(){
+
+    }
 
     public void checkData(String username, String password, String passwordAgain, String email, String otherInformation, String phone, String street, String streetNumber, String postalCode, String city) {
         this.username = username;
