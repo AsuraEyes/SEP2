@@ -60,7 +60,6 @@ public class RentalDAOImpl {
             statement.setString(1, "%"+name+"%");
             ResultSet resultSet = statement.executeQuery();
             ArrayList<Rental> arrayListToReturn = new ArrayList<>();
-            //correct this when doing search
             while (resultSet.next()){
                 int idOfSearchedRental = resultSet.getInt("id");
                 //get the member with this id or create it getting all the information
@@ -70,6 +69,19 @@ public class RentalDAOImpl {
             return arrayListToReturn;
         }
     }
+
+    /*public static Rental createBook(ResultSet resultSet) throws SQLException {
+        int id = resultSet.getInt("id");
+        String name = resultSet.getString("name");
+        String description = resultSet.getString("description");
+        int price = resultSet.getInt("price");
+        String other_information = resultSet.getString("other_information");
+        String state_name = resultSet.getString("state_name");
+        int member_id = resultSet.getInt("member_id");
+        String memberUsername = resultSet.getString("Username");
+        Member member = new Member(member_id, memberUsername);
+        return new Rental(id, name, description, price, other_information, state_name, member);
+    }*/
 
     @Override
     public void update(Rental rental) throws SQLException {
