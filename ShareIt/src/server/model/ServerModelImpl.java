@@ -38,8 +38,11 @@ public class ServerModelImpl implements ServerModelManager
   }
 
   @Override
-  public void checkData(String username, String password, String confirmPassword, String email, String otherInformation, String phone, String street, String streetNo, String postalCode, String city) {
-    dataCheckMember.checkData(username, password, confirmPassword, email, otherInformation, phone, street, streetNo, postalCode, city);
+  public String checkData(String username, String password, String confirmPassword, String email, String otherInformation, String phone, String street, String streetNo, String postalCode, String city) {
+    String message = dataCheckMember.checkData(username, password, confirmPassword, email, otherInformation, phone, street, streetNo, postalCode, city);
+
+    //support.firePropertyChange("dataValidation", 0, message);
+    return message;
   }
 
   @Override

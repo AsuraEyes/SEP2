@@ -70,9 +70,6 @@ public class CreateAccountController {
 
         locationBox.setItems(createAccountViewModel.getLocations());
         locationBox.getSelectionModel().selectFirst();
-        System.out.println("wugu");
-        //locationBox.selectionModelProperty().bind(createAccountViewModel.getLocationBox());
-
 
 //        validationSupport = new ValidationSupport();
 //        validationSupport.setErrorDecorationEnabled(false);
@@ -84,14 +81,28 @@ public class CreateAccountController {
                 .hideAfter(Duration.seconds(3));
     }
 
-    public void goBackToLogInButton(ActionEvent actionEvent) {
-
+    public void goBackToLogInButton(ActionEvent actionEvent) throws IOException {
+        viewHandler.setView(viewHandler.menu(), viewHandler.logIn());
     }
 
     public void createButton(ActionEvent actionEvent) throws IOException {
         boolean ok = true;
         if(checkField(usernameField) && checkField(passwordField) && checkField(confirmPasswordField) && checkField(streetField) && checkField(streetNumberField) && checkField(postalCodeField)){
-            createAccountViewModel.onCreateButtonPressed(locationBox.getValue());
+            String message = createAccountViewModel.onCreateButtonPressed(locationBox.getValue());
+            switch (message){
+                case "Adding successful":
+                    notifications.owner(parent).text("Your account has been successfully created! You will be automatically directed to the welcome page in 5 seconds").title(message).showConfirm();
+
+                    try {
+                        Thread.sleep(5000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    viewHandler.setView(viewHandler.menu(), viewHandler.welcomePage());
+                    break;
+                default:
+                    notifications.owner(parent).text(message).showError();
+            }
         }
     }
 
@@ -102,4 +113,5 @@ public class CreateAccountController {
         }
         return true;
     }
+
 }

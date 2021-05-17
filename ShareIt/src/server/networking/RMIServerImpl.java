@@ -65,7 +65,7 @@ public class RMIServerImpl implements RMIServer
     listener = evt ->{
       try
       {
-        client.update(evt.getNewValue());
+        client.update(evt.getPropertyName(), evt.getNewValue());
       }
       catch (RemoteException e)
       {
@@ -83,8 +83,8 @@ public class RMIServerImpl implements RMIServer
   }
 
   @Override
-  public void checkMemberData(String username, String password, String confirmPassword, String email, String phone, String otherInformation, String street, String streetNo, String postalCode, String city) throws RemoteException {
-    serverModelManager.checkData(username, password, confirmPassword, email, otherInformation, phone, street, streetNo, postalCode, city);
+  public String checkMemberData(String username, String password, String confirmPassword, String email, String phone, String otherInformation, String street, String streetNo, String postalCode, String city) throws RemoteException {
+    return serverModelManager.checkData(username, password, confirmPassword, email, otherInformation, phone, street, streetNo, postalCode, city);
   }
 
   @Override
