@@ -1,4 +1,4 @@
-/*package client.viewmodel.create_account;
+package client.viewmodel.create_account;
 
 import client.core.ClientFactory;
 import client.core.ModelFactory;
@@ -7,6 +7,7 @@ import client.core.ViewModelFactory;
 import client.model.ShareItModel;
 import client.model.ShareItModelManager;
 import client.network.Client;
+import client.viewmodel.create_account.CreateAccountViewModel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import org.junit.jupiter.api.BeforeEach;
@@ -43,18 +44,20 @@ class CreateAccountViewModelTest {
         StringProperty emailField = new SimpleStringProperty();
         StringProperty telephoneNoField = new SimpleStringProperty();
         StringProperty otherInfoField = new SimpleStringProperty();
-        vm.getUsernameField().bindBidirectional(usernameField);
-        vm.getPasswordField().bindBidirectional(passwordField);
-        vm.getConfirmPasswordField().bindBidirectional(confirmPasswordField);
-        vm.getStreetField().bindBidirectional(streetField);
-        vm.getStreetNumberField().bindBidirectional(streetNumberField);
-        vm.getFloorField().bindBidirectional(floorField);
-        vm.getPostalCodeField().bindBidirectional(postalCodeField);
-        vm.getEmailField().bindBidirectional(emailField);
-        vm.getTelephoneNoField().bindBidirectional(telephoneNoField);
-        vm.getOtherInfoField().bindBidirectional(otherInfoField);
 
-        usernameField.setValue("newUsername");
+
+        vm.getUsernameField().bind(usernameField);
+        vm.getPasswordField().bind(passwordField);
+        vm.getConfirmPasswordField().bind(confirmPasswordField);
+        vm.getStreetField().bind(streetField);
+        vm.getStreetNumberField().bind(streetNumberField);
+        vm.getFloorField().bind(floorField);
+        vm.getPostalCodeField().bind(postalCodeField);
+        vm.getEmailField().bind(emailField);
+        vm.getTelephoneNoField().bind(telephoneNoField);
+        vm.getOtherInfoField().bind(otherInfoField);
+
+        usernameField.setValue("brandNewUsername");
         passwordField.setValue("password");
         confirmPasswordField.setValue("password");
         streetField.setValue("Sundvej");
@@ -213,7 +216,7 @@ class CreateAccountViewModelTest {
         vm.getTelephoneNoField().bindBidirectional(telephoneNoField);
         vm.getOtherInfoField().bindBidirectional(otherInfoField);
 
-        usernameField.setValue("new_Bob420");
+        usernameField.setValue("newer_Bob");
         passwordField.setValue("SpongeBob<3");
         confirmPasswordField.setValue("SpongeBob<3");
         streetField.setValue("Sundvej");
@@ -252,7 +255,7 @@ class CreateAccountViewModelTest {
         vm.getTelephoneNoField().bindBidirectional(telephoneNoField);
         vm.getOtherInfoField().bindBidirectional(otherInfoField);
 
-        usernameField.setValue("new_Bob420");
+        usernameField.setValue("new_Bob_420_again");
         passwordField.setValue("SpongeBob<3");
         confirmPasswordField.setValue("SpongeBob<3");
         streetField.setValue("Sundvej");
@@ -291,7 +294,7 @@ class CreateAccountViewModelTest {
         vm.getTelephoneNoField().bindBidirectional(telephoneNoField);
         vm.getOtherInfoField().bindBidirectional(otherInfoField);
 
-        usernameField.setValue("new_Bob420");
+        usernameField.setValue("new_Bobby");
         passwordField.setValue("SpongeBob<3");
         confirmPasswordField.setValue("SpongeBob<3");
         streetField.setValue("Sundvej");
@@ -330,7 +333,7 @@ class CreateAccountViewModelTest {
         vm.getTelephoneNoField().bindBidirectional(telephoneNoField);
         vm.getOtherInfoField().bindBidirectional(otherInfoField);
 
-        usernameField.setValue("new_Bob420");
+        usernameField.setValue("new_Bobik");
         passwordField.setValue("SpongeBob<3");
         confirmPasswordField.setValue("SpongeBob<3");
         streetField.setValue("Sundvej");
@@ -343,9 +346,46 @@ class CreateAccountViewModelTest {
 
         String result = vm.onCreateButtonPressed("Horsens");
 
+        assertEquals("Adding successful", result);
+    }
+
+    @Test
+    public void invalidPostalCode() throws IOException {
+        StringProperty usernameField = new SimpleStringProperty();
+        StringProperty passwordField = new SimpleStringProperty();
+        StringProperty confirmPasswordField = new SimpleStringProperty();
+        StringProperty streetField = new SimpleStringProperty();
+        StringProperty streetNumberField = new SimpleStringProperty();
+        StringProperty floorField = new SimpleStringProperty();
+        StringProperty postalCodeField = new SimpleStringProperty();
+        StringProperty emailField = new SimpleStringProperty();
+        StringProperty telephoneNoField = new SimpleStringProperty();
+        StringProperty otherInfoField = new SimpleStringProperty();
+        vm.getUsernameField().bindBidirectional(usernameField);
+        vm.getPasswordField().bindBidirectional(passwordField);
+        vm.getConfirmPasswordField().bindBidirectional(confirmPasswordField);
+        vm.getStreetField().bindBidirectional(streetField);
+        vm.getStreetNumberField().bindBidirectional(streetNumberField);
+        vm.getFloorField().bindBidirectional(floorField);
+        vm.getPostalCodeField().bindBidirectional(postalCodeField);
+        vm.getEmailField().bindBidirectional(emailField);
+        vm.getTelephoneNoField().bindBidirectional(telephoneNoField);
+        vm.getOtherInfoField().bindBidirectional(otherInfoField);
+
+        usernameField.setValue("new_Bob_clear");
+        passwordField.setValue("SpongeBob<3");
+        confirmPasswordField.setValue("SpongeBob<3");
+        streetField.setValue("Sundvej");
+        streetNumberField.setValue("6B");
+        floorField.setValue("3");
+        postalCodeField.setValue("87Troll00");
+        emailField.setValue("valid.mail@gmail.com");
+        telephoneNoField.setValue("+45 82 69 42 08");
+        otherInfoField.setValue("Other information");
+
+        String result = vm.onCreateButtonPressed("Horsens");
+
         assertEquals("Postal code has to be a number.", result);
     }
 
-
-
-}*/
+}

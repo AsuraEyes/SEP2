@@ -18,8 +18,7 @@
       </library>
     </orderEntry>
     <orderEntry type="library" exported="" name="postgresql-42.2.20" level="project" />
-    <orderEntry type="library" exported="" name="JavaFX" level="application" />
-    <orderEntry type="module-library" scope="TEST">
+    <orderEntry type="module-library" exported="" scope="TEST">
       <library name="JUnit5.7.0">
         <CLASSES>
           <root url="jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter/5.7.0/junit-jupiter-5.7.0.jar!/" />
@@ -35,6 +34,7 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" scope="TEST" name="javafx" level="application" />
+    <orderEntry type="library" exported="" name="JavaFX" level="project" />
+    <orderEntry type="library" exported="" name="javafx" level="application" />
   </component>
 </module>
