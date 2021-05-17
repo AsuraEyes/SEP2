@@ -1,23 +1,24 @@
-package client.model.database.category;
+package client.model.database.city;
 
-import shared.transferobjects.Category;
+import shared.transferobjects.City;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CategoryDAOImpl implements CategoryDAO
+
+public class CityDAOImpl implements CityDAO
 {
-  private static CategoryDAOImpl instance;
+  private static client.model.database.city.CityDAOImpl instance;
   private String password;
 
-  private CategoryDAOImpl()throws SQLException{
+  private CityDAOImpl()throws SQLException{
     DriverManager.registerDriver(new org.postgresql.Driver());
   }
 
-  public static synchronized CategoryDAOImpl getInstance() throws SQLException{
+  public static synchronized client.model.database.city.CityDAOImpl getInstance() throws SQLException{
     if(instance == null){
-      instance = new CategoryDAOImpl();
+      instance = new client.model.database.city.CityDAOImpl();
     }
     return instance;
   }
@@ -30,19 +31,16 @@ public class CategoryDAOImpl implements CategoryDAO
     return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", password);
   }
 
-  @Override public List<Category> readCategory()
-      throws SQLException
+  @Override public List<City> readCity() throws SQLException
   {
     try(Connection connection = getConnection()){
-      PreparedStatement statement = connection.prepareStatement("SELECT * FROM share_it.category");
+      PreparedStatement statement = connection.prepareStatement("SELECT * FROM share_it.city");
       ResultSet resultSet = statement.executeQuery();
-      ArrayList<Category> arrayListToReturn = new ArrayList<>();
+      ArrayList<City> arrayListToReturn = new ArrayList<>();
       while(resultSet.next()){
-        arrayListToReturn.add(new Category(resultSet.getString("name")));
+        arrayListToReturn.add(new City(resultSet.getString("name")));
       }
       //return array list
       return arrayListToReturn;
     }
-  }
-
-}
+  }}
