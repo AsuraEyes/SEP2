@@ -17,7 +17,7 @@ public class ShareItApp extends Application
     ViewHandler viewHandler = new ViewHandler(stage, viewModelFactory);
     String timothyPassword = "CoDex21";
     String maggiePassword = "SQLdatabaze";
-    MemberDAOImpl.getInstance().setPassword(maggiePassword);
+    MemberDAOImpl.getInstance().setPassword(timothyPassword);
     viewHandler.start();
    }
 }
