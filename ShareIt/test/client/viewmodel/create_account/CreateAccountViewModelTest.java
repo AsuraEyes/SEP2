@@ -1,4 +1,4 @@
-package client.viewmodel.create_account;
+/*package client.viewmodel.create_account;
 
 import client.core.ClientFactory;
 import client.core.ModelFactory;
@@ -348,4 +348,4 @@ class CreateAccountViewModelTest {
 
 
 
-}
+}*/
