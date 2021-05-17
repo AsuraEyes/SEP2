@@ -1,8 +1,8 @@
 package server.model;
 
-import client.model.database.state.StateDAOImpl;
 import server.model.data_check.DataCheckMember;
 import server.model.database.city.CityDAOImpl;
+import server.model.database.state.StateDAOImpl;
 import shared.transferobjects.City;
 import shared.transferobjects.State;
 
