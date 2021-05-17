@@ -16,12 +16,14 @@ import org.controlsfx.control.CheckComboBox;
 import org.controlsfx.control.Notifications;
 import org.controlsfx.validation.ValidationSupport;
 import org.controlsfx.validation.Validator;
+import shared.transferobjects.Member;
 
 import java.io.IOException;
 import java.sql.SQLException;
 
 public class AddRentalController
 {
+  @FXML private AnchorPane parent;
   @FXML private ChoiceBox categoryBox;
   @FXML private ChoiceBox stateBox;
   @FXML private TextField nameField;
@@ -29,6 +31,7 @@ public class AddRentalController
   @FXML private TextField priceField;
   @FXML private TextArea otherInfoField;
   @FXML private AnchorPane parent;
+  private Member member;
 
   private AddRentalViewModel addRentalViewModel;
   private ViewHandler viewHandler;
@@ -61,8 +64,18 @@ public class AddRentalController
         .showError();
   }
 
-  public void addButton(ActionEvent actionEvent)
-  {
+  public void addRentalButton(ActionEvent actionEvent) {
+    boolean ok = true;
+    if(checkField(nameField) && checkField(descriptionField) && checkField(priceField) && checkField(otherInfoField)){
+      addRentalViewModel.onAddRentalButtonPressed(stateBox.getValue(), categoryBox.getValue(), member);
+    }
+  }
 
+  private boolean checkField(TextField nameOfField){
+    if(nameOfField.textProperty().getValue() == null || nameOfField.textProperty().getValue().isBlank()){
+      notifications.owner(parent).text(nameOfField.getPromptText()+" cannot be empty").showError();
+      return false;
+    }
+    return true;
   }
 }
