@@ -1,4 +1,4 @@
-package client.model.database.member;
+package server.model.database.member;
 
 import shared.transferobjects.Member;
 
@@ -30,23 +30,24 @@ public class MemberDAOImpl implements MemberDAO{
     }
 
     @Override
-    public Member create(String username, String password, String emailAddress, String otherInformation, String addressStreet, String addressNo, int addressPostalCode, String addressCity) throws SQLException {
+    public Member create(String username, String password, String emailAddress, String phoneNumber, String otherInformation, String addressStreet, String addressNo, int addressPostalCode, String addressCity) throws SQLException {
         try(Connection connection = getConnection()){
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO share_it.member(username, password, email_address, other_information, address_street, address_no, address_postal_code, address_city_name) VALUES (?, ?, ?, ?, ?, ?, ?, ?);", PreparedStatement.RETURN_GENERATED_KEYS);
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO share_it.member(username, password, email_address, phone_number, other_information, address_street, address_no, address_postal_code, address_city_name) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);", PreparedStatement.RETURN_GENERATED_KEYS);
             statement.setString(1, username);
             statement.setString(2, password);
             statement.setString(3, emailAddress);
-            statement.setString(4, otherInformation);
-            statement.setString(5, addressStreet);
-            statement.setString(6, addressNo);
-            statement.setInt(7, addressPostalCode);
-            statement.setString(8, addressCity);
+            statement.setString(4, phoneNumber);
+            statement.setString(5, otherInformation);
+            statement.setString(6, addressStreet);
+            statement.setString(7, addressNo);
+            statement.setInt(8, addressPostalCode);
+            statement.setString(9, addressCity);
             statement.executeUpdate();
 
             //this gets the generated id of the member
             ResultSet generatedKeys = statement.getGeneratedKeys();
             if(generatedKeys.next()){
-                return new Member(generatedKeys.getInt(1), username, password, emailAddress, otherInformation, null, null, addressStreet, addressNo, addressPostalCode, addressCity);
+                return new Member(generatedKeys.getInt(1), username, password, emailAddress, phoneNumber, otherInformation, addressStreet, addressNo, addressPostalCode, addressCity);
             }
             else{
                 throw new SQLException("No keys generated");

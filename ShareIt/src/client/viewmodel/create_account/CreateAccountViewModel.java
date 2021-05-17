@@ -1,16 +1,18 @@
 package client.viewmodel.create_account;
 
-import client.model.data_check.DataCheckMember;
-import client.model.database.member.MemberDAOImpl;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-import javafx.scene.layout.AnchorPane;
+import client.model.ShareItModel;
+import javafx.beans.property.*;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import shared.transferobjects.City;
 
-import java.lang.reflect.AnnotatedArrayType;
+import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class CreateAccountViewModel {
-    private DataCheckMember dataCheckMember;
+    private ShareItModel model;
     private final StringProperty searchField;
     private final StringProperty usernameField;
     private final StringProperty passwordField;
@@ -20,12 +22,13 @@ public class CreateAccountViewModel {
     private final StringProperty floorField;
     private final StringProperty postalCodeField;
     private final StringProperty emailField;
-    private final StringProperty telephoneNo1Field;
-    private final StringProperty telephoneNo2Field;
+    private final StringProperty telephoneNoField;
     private final StringProperty otherInfoField;
+    private final ObservableValue locationBox;
+    private ObservableList<String> locationsList;
 
-    public CreateAccountViewModel() throws SQLException {
-        dataCheckMember = new DataCheckMember();
+    public CreateAccountViewModel(ShareItModel model) throws SQLException {
+        this.model = model;
         searchField = new SimpleStringProperty();
         usernameField = new SimpleStringProperty();
         passwordField = new SimpleStringProperty();
@@ -35,9 +38,9 @@ public class CreateAccountViewModel {
         floorField = new SimpleStringProperty();
         postalCodeField = new SimpleStringProperty();
         emailField = new SimpleStringProperty();
-        telephoneNo1Field = new SimpleStringProperty();
-        telephoneNo2Field = new SimpleStringProperty();
+        telephoneNoField = new SimpleStringProperty();
         otherInfoField = new SimpleStringProperty();
+        locationBox = new SimpleStringProperty();
     }
 
     public StringProperty getSearchField(){
@@ -67,17 +70,27 @@ public class CreateAccountViewModel {
     public StringProperty getEmailField(){
         return emailField;
     }
-    public StringProperty getTelephoneNo1Field(){
-        return telephoneNo1Field;
-    }
-    public StringProperty getTelephoneNo2Field(){
-        return telephoneNo2Field;
+    public StringProperty getTelephoneNoField(){
+        return telephoneNoField;
     }
     public StringProperty getOtherInfoField(){
         return otherInfoField;
     }
+    public ObservableValue getLocationBox() {
+        return locationBox;
+    }
 
-    public void onCreateButtonPressed(){
-        dataCheckMember.checkData(usernameField.getValue(), passwordField.getValue(), confirmPasswordField.getValue(), emailField.getValue(), otherInfoField.getValue(), telephoneNo1Field.getValue(), telephoneNo2Field.getValue(), streetField.getValue(), streetNumberField.getValue()+", "+floorField.getValue(), postalCodeField.getValue(),  "Horsens");
+    public void onCreateButtonPressed(String selectedCity) throws IOException {
+        model.checkMemberData(usernameField.getValue(), passwordField.getValue(), confirmPasswordField.getValue(), emailField.getValue(), telephoneNoField.getValue(), otherInfoField.getValue(), streetField.getValue(), streetNumberField.getValue()+", "+floorField.getValue(), postalCodeField.getValue(),  selectedCity);
+    }
+
+    public ObservableList<String> getLocations(){
+        ArrayList<City> cityList = model.getCityList();
+        ArrayList<String> cityListString = new ArrayList<>();
+        for (int i = 0; i < cityList.size(); i++) {
+            cityListString.add(cityList.get(i).toString());
+        }
+        locationsList = FXCollections.observableArrayList(cityListString);
+        return locationsList;
     }
 }

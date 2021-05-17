@@ -1,4 +1,4 @@
-package client.model.database.rental;
+package server.model.database.rental;
 
 import shared.transferobjects.Member;
 import shared.transferobjects.Rental;
@@ -44,7 +44,7 @@ public class RentalDAOImpl implements RentalDAO{
                 e.printStackTrace();
             }
 
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO share_it.rental(name, picture_link, description, price, other_information, state_name, member_id) VALUES (?, ?, ?, ?, ?, ?, ?);", PreparedStatement.RETURN_GENERATED_KEYS);
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO share_it.rental(name, picture_link, description, price, otherinformation, state_name, member_id) VALUES (?, ?, ?, ?, ?, ?, ?);", PreparedStatement.RETURN_GENERATED_KEYS);
             statement.setString(1, name);
             statement.setBinaryStream(2, fis, (int)file.length());
             statement.setString(3, description);
@@ -105,7 +105,7 @@ public class RentalDAOImpl implements RentalDAO{
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
-            PreparedStatement statement = connection.prepareStatement("UPDATE share_it.rental SET name = ?, picture_link = ?, description = ?, price = ?, other_information = ?, state_name = ?, member_id = ? WHERE id = ?");
+            PreparedStatement statement = connection.prepareStatement("UPDATE share_it.rental SET name = ?, picture_link = ?, description = ?, price = ?, otherinformation = ?, state_name = ?, member_id = ? WHERE id = ?");
             statement.setString(1, rental.getName());
             statement.setBinaryStream(2, fis, (int)file.length());
             statement.setString(3, rental.getDescription());

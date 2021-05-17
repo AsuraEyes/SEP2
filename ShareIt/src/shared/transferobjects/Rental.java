@@ -1,6 +1,8 @@
 package shared.transferobjects;
 
-public class Rental {
+import java.io.Serializable;
+
+public class Rental implements Serializable {
     private int id;
     private String name;
     private String pictureLink;

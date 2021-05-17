@@ -16,7 +16,9 @@ import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
 import org.controlsfx.control.textfield.CustomPasswordField;
 import org.controlsfx.validation.ValidationSupport;
+import shared.transferobjects.City;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 public class CreateAccountController {
@@ -39,13 +41,11 @@ public class CreateAccountController {
     @FXML
     private TextField postalCodeField;
     @FXML
-    private ChoiceBox locationBox;
+    private ChoiceBox<String> locationBox;
     @FXML
     private TextField emailField;
     @FXML
-    private TextField telephoneNo1Field;
-    @FXML
-    private TextField telephoneNo2Field;
+    private TextField telephoneNoField;
     @FXML
     private TextArea otherInfoField;
 
@@ -54,7 +54,7 @@ public class CreateAccountController {
     private ValidationSupport validationSupport;
     private Notifications notifications;
 
-    public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws SQLException {
+    public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws SQLException, IOException {
         this.viewHandler = viewHandler;
         createAccountViewModel = viewModelFactory.getCreateAccountViewModel();
         searchField.textProperty().bindBidirectional(createAccountViewModel.getSearchField());
@@ -66,9 +66,13 @@ public class CreateAccountController {
         floorField.textProperty().bindBidirectional(createAccountViewModel.getFloorField());
         postalCodeField.textProperty().bindBidirectional(createAccountViewModel.getPostalCodeField());
         emailField.textProperty().bindBidirectional(createAccountViewModel.getEmailField());
-        telephoneNo1Field.textProperty().bindBidirectional(createAccountViewModel.getTelephoneNo1Field());
-        telephoneNo2Field.textProperty().bindBidirectional(createAccountViewModel.getTelephoneNo2Field());
+        telephoneNoField.textProperty().bindBidirectional(createAccountViewModel.getTelephoneNoField());
         otherInfoField.textProperty().bindBidirectional(createAccountViewModel.getOtherInfoField());
+
+        locationBox.setItems(createAccountViewModel.getLocations());
+        locationBox.getSelectionModel().selectFirst();
+        System.out.println("wugu");
+        //locationBox.selectionModelProperty().bind(createAccountViewModel.getLocationBox());
 
 
 //        validationSupport = new ValidationSupport();
@@ -89,10 +93,10 @@ public class CreateAccountController {
 
     }
 
-    public void createButton(ActionEvent actionEvent) throws SQLException {
+    public void createButton(ActionEvent actionEvent) throws IOException {
         boolean ok = true;
         if(checkField(usernameField) && checkField(passwordField) && checkField(confirmPasswordField) && checkField(streetField) && checkField(streetNumberField) && checkField(postalCodeField)){
-            createAccountViewModel.onCreateButtonPressed();
+            createAccountViewModel.onCreateButtonPressed(locationBox.getValue());
         }
     }
 
