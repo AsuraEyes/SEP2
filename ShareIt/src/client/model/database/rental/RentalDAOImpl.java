@@ -3,11 +3,14 @@ package client.model.database.rental;
 import shared.transferobjects.Member;
 import shared.transferobjects.Rental;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RentalDAOImpl {
+public class RentalDAOImpl implements RentalDAO{
     private static RentalDAOImpl instance;
     private String password;
 
@@ -31,21 +34,30 @@ public class RentalDAOImpl {
     }
 
     @Override
-    public Rental create(String name, String description, int price, String otherInformation, String stateName, Member member) throws SQLException {
+    public Rental create(String name, String pictureLink, String description, int price, String otherInformation, String stateName, Member member) throws SQLException {
         try(Connection connection = getConnection()){
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO share_it.rental(name, description, price, other_information, state_name, member_id) VALUES (?, ?, ?, ?, ?, ?);", PreparedStatement.RETURN_GENERATED_KEYS);
+            File file = new File(pictureLink);
+            FileInputStream fis = null;
+            try {
+                fis = new FileInputStream(file);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO share_it.rental(name, picture_link, description, price, other_information, state_name, member_id) VALUES (?, ?, ?, ?, ?, ?, ?);", PreparedStatement.RETURN_GENERATED_KEYS);
             statement.setString(1, name);
-            statement.setString(2, description);
-            statement.setInt(3, price);
-            statement.setString(4, otherInformation);
-            statement.setString(5, stateName);
-            statement.setInt(6, member.getId());
+            statement.setBinaryStream(2, fis, (int)file.length());
+            statement.setString(3, description);
+            statement.setInt(4, price);
+            statement.setString(5, otherInformation);
+            statement.setString(6, stateName);
+            statement.setInt(7, member.getId());
             statement.executeUpdate();
 
             //this gets the generated id of the member
             ResultSet generatedKeys = statement.getGeneratedKeys();
             if(generatedKeys.next()){
-                return new Rental(generatedKeys.getInt(1), name, description, price, otherInformation, stateName, member);
+                return new Rental(generatedKeys.getInt(1), name, pictureLink, description, price, otherInformation, stateName, member);
             }
             else{
                 throw new SQLException("No keys generated");
@@ -86,14 +98,22 @@ public class RentalDAOImpl {
     @Override
     public void update(Rental rental) throws SQLException {
         try(Connection connection = getConnection()) {
-            PreparedStatement statement = connection.prepareStatement("UPDATE share_it.rental SET name = ?, description = ?, price = ?, other_information = ?, state_name = ?, member_id = ? WHERE id = ?");
+            File file = new File(rental.getPictureLink());
+            FileInputStream fis = null;
+            try {
+                fis = new FileInputStream(file);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            PreparedStatement statement = connection.prepareStatement("UPDATE share_it.rental SET name = ?, picture_link = ?, description = ?, price = ?, other_information = ?, state_name = ?, member_id = ? WHERE id = ?");
             statement.setString(1, rental.getName());
-            statement.setString(2, rental.getDescription());
-            statement.setInt(3, rental.getPrice());
-            statement.setString(4, rental.getOtherInformation());
-            statement.setString(5, rental.getStateName());
-            statement.setInt(6, rental.getMember().getId());
-            statement.setInt(7, rental.getId());
+            statement.setBinaryStream(2, fis, (int)file.length());
+            statement.setString(3, rental.getDescription());
+            statement.setInt(4, rental.getPrice());
+            statement.setString(5, rental.getOtherInformation());
+            statement.setString(6, rental.getStateName());
+            statement.setInt(7, rental.getMember().getId());
+            statement.setInt(8, rental.getId());
             statement.executeUpdate();
         }
     }
