@@ -1,4 +1,4 @@
-package client.model.database.city;
+package server.model.database.city;
 
 import shared.transferobjects.City;
 import java.sql.SQLException;

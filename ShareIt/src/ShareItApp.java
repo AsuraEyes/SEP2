@@ -2,9 +2,12 @@ import client.core.ClientFactory;
 import client.core.ModelFactory;
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
-import client.model.database.member.MemberDAOImpl;
+import server.model.database.category.CategoryDAOImpl;
+import server.model.database.city.CityDAOImpl;
+import server.model.database.member.MemberDAOImpl;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import server.model.database.rental.RentalDAOImpl;
 
 public class ShareItApp extends Application
 {
@@ -15,9 +18,7 @@ public class ShareItApp extends Application
     ModelFactory modelFactory = new ModelFactory(clientFactory);
     ViewModelFactory viewModelFactory = new ViewModelFactory(modelFactory);
     ViewHandler viewHandler = new ViewHandler(stage, viewModelFactory);
-    String timothyPassword = "CoDex21";
-    String maggiePassword = "SQLdatabaze";
-    MemberDAOImpl.getInstance().setPassword(maggiePassword);
+
     viewHandler.start();
    }
 }

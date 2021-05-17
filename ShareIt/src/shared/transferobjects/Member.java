@@ -1,6 +1,8 @@
 package shared.transferobjects;
 
-public class Member {
+import java.io.Serializable;
+
+public class Member implements Serializable {
     private int id;
     private String username;
     private String password;

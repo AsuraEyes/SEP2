@@ -1,6 +1,9 @@
 package shared.transferobjects;
 
-public class City
+import java.io.Serial;
+import java.io.Serializable;
+
+public class City implements Serializable
 {
     private String name;
 
@@ -18,5 +21,8 @@ public class City
       this.name = name;
     }
 
+    public String toString(){
+        return name;
+    }
 
 }
