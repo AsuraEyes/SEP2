@@ -1,4 +1,4 @@
-package client.model.database.rental;
+package server.model.database.rental;
 
 import shared.transferobjects.Member;
 import shared.transferobjects.Rental;

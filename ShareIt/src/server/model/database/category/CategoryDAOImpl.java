@@ -1,4 +1,4 @@
-package client.model.database.category;
+package server.model.database.category;
 
 import shared.transferobjects.Category;
 

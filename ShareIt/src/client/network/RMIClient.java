@@ -2,6 +2,7 @@ package client.network;
 
 import shared.networking.RMIServer;
 import shared.networking.RemoteObserver;
+import shared.transferobjects.City;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -11,6 +12,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 
 public class RMIClient implements Client, RemoteObserver
 {
@@ -35,6 +37,28 @@ public class RMIClient implements Client, RemoteObserver
     {
       e.printStackTrace();
     }
+  }
+
+  @Override
+  public void checkMemberData(String username, String password, String confirmPassword, String email, String phone, String otherInformation, String street, String streetNo, String postalCode, String city) throws IOException {
+    try{
+      server.checkMemberData(username, password, confirmPassword, email, phone, otherInformation, street, streetNo, postalCode, city);
+    }
+    catch (RemoteException e){
+      e.printStackTrace();
+      throw new RuntimeException("Could not contact server");
+    }
+  }
+
+  @Override
+  public ArrayList<City> getCityList() {
+    try {
+      return server.getCityList();
+    }
+    catch (RemoteException e) {
+      e.printStackTrace();
+    }
+    return null;
   }
 
   @Override public void addListener(String propertyName,

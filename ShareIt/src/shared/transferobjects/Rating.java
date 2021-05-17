@@ -1,6 +1,8 @@
 package shared.transferobjects;
 
-public class Rating {
+import java.io.Serializable;
+
+public class Rating implements Serializable {
     private double rating;
     private String commentary;
 

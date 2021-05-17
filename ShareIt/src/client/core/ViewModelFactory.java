@@ -84,9 +84,9 @@ public class ViewModelFactory
     return welcomePageViewModel;
   }
 
-  public CreateAccountViewModel getCreateAccountViewModel() throws SQLException {
+  public CreateAccountViewModel getCreateAccountViewModel() throws SQLException, IOException {
     if (createAccountViewModel == null){
-      createAccountViewModel = new CreateAccountViewModel();
+      createAccountViewModel = new CreateAccountViewModel(modelFactory.getShareItModel());
     }
     return createAccountViewModel;
   }
