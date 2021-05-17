@@ -1,6 +1,6 @@
 package client.model.database.member;
 
-import ground_classes.Member;
+import shared.transferobjects.Member;
 
 import java.sql.SQLException;
 import java.util.List;
