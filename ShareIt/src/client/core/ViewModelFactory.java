@@ -13,10 +13,13 @@ import client.viewmodel.view_reported_member.ViewReportedMemberViewModel;
 import client.viewmodel.view_reported_member_list.ViewReportedMemberListViewModel;
 import client.viewmodel.welcome_page.WelcomePageViewModel;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 public class ViewModelFactory
 {
+  private ModelFactory modelFactory;
+
   private LogInViewModel logInViewModel;
   private ChatReceivedMessagesViewModel chatReceivedMessagesViewModel;
   private ChatWriteMessageViewModel chatWriteMessageViewModel;
@@ -30,15 +33,18 @@ public class ViewModelFactory
   private WelcomePageViewModel welcomePageViewModel;
   private MenuViewModel menuViewModel;
 
-  public ViewModelFactory(){
+  public ViewModelFactory(ModelFactory modelFactory) throws IOException
+  {
+    this.modelFactory = modelFactory;
+    logInViewModel = new LogInViewModel(modelFactory.getShareItModel());
     chatReceivedMessagesViewModel = new ChatReceivedMessagesViewModel();
     chatWriteMessageViewModel = new ChatWriteMessageViewModel();
   }
-  public LogInViewModel getLogInViewModel()
+  public LogInViewModel getLogInViewModel() throws IOException
   {
     if(logInViewModel == null)
     {
-      logInViewModel = new LogInViewModel();
+      logInViewModel = new LogInViewModel(modelFactory.getShareItModel());
     }
     return logInViewModel;
   }

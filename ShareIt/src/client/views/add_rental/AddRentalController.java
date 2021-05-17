@@ -51,6 +51,7 @@ public class AddRentalController {
         validationSupport = new ValidationSupport();
         validationSupport.registerValidator(nameField, Validator.createEmptyValidator("Text is required"));
 
+
         notifications =  Notifications.create()
             .title("ASDAASDASDQweqe")
             .graphic(new Rectangle(300, 300, Color.RED)) // sets node to display

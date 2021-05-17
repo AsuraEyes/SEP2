@@ -10,7 +10,10 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import org.controlsfx.control.textfield.CustomPasswordField;
+import org.controlsfx.validation.ValidationSupport;
+import org.controlsfx.validation.Validator;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 public class CreateAccountController {
@@ -43,8 +46,12 @@ public class CreateAccountController {
 
     private CreateAccountViewModel createAccountViewModel;
     private ViewHandler viewHandler;
+    private ValidationSupport validationSupport;
 
     public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws SQLException {
+        validationSupport = new ValidationSupport();
+        validationSupport.registerValidator(usernameField, Validator.createEmptyValidator("Text is required"));
+
         this.viewHandler = viewHandler;
         createAccountViewModel = viewModelFactory.getCreateAccountViewModel();
         searchField.textProperty().bindBidirectional(createAccountViewModel.getSearchField());
@@ -59,6 +66,7 @@ public class CreateAccountController {
         telephoneNo1Field.textProperty().bindBidirectional(createAccountViewModel.getTelephoneNo1Field());
         telephoneNo2Field.textProperty().bindBidirectional(createAccountViewModel.getTelephoneNo2Field());
         otherInfoField.textProperty().bindBidirectional(createAccountViewModel.getOtherInfoField());
+
     }
 
     public void searchButton(ActionEvent actionEvent) {
@@ -69,7 +77,13 @@ public class CreateAccountController {
 
     }
 
-    public void createButton(ActionEvent actionEvent) throws SQLException {
-        createAccountViewModel.onCreateButtonPressed();
+    public void createButton(ActionEvent actionEvent)
+        throws SQLException, IOException
+    {
+        if(!validationSupport.isInvalid())
+        {
+            createAccountViewModel.onCreateButtonPressed();
+            viewHandler.setView(viewHandler.menu(), viewHandler.logIn());
+        }
     }
 }

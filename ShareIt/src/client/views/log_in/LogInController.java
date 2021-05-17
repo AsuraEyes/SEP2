@@ -27,6 +27,7 @@ public class LogInController
   private ViewHandler viewHandler;
 
   public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory)
+      throws IOException
   {
     this.viewHandler = viewHandler;
     logInViewModel = viewModelFactory.getLogInViewModel();
