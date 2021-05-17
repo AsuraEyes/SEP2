@@ -63,6 +63,7 @@ DROP TABLE IF EXISTS rental;
 CREATE TABLE rental(
     id SERIAL PRIMARY KEY ,
     name VARCHAR (200) NOT NULL,
+    picture_link bla_bla_type UNIQUE,
     description bla_bla_type,
     price int NOT NULL NOT NULL,
     otherInformation bla_bla_type,
@@ -79,14 +80,6 @@ CREATE TABLE rental_category(
     PRIMARY KEY (rental_id, category_name),
     FOREIGN KEY (rental_id) REFERENCES rental (id) ON DELETE CASCADE ,
     FOREIGN KEY (category_name) REFERENCES category(name)
-);
-
-DROP TABLE IF EXISTS picture;
-CREATE TABLE picture(
-    link bla_bla_type PRIMARY KEY,
-    description bla_bla_type,
-    rental_id INTEGER NOT NULL,
-    FOREIGN KEY (rental_id) REFERENCES rental(id) ON DELETE CASCADE
 );
 
 DROP TABLE IF EXISTS report;
