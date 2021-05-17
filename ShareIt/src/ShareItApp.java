@@ -2,6 +2,7 @@ import client.core.ClientFactory;
 import client.core.ModelFactory;
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
+import client.model.database.member.MemberDAOImpl;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -13,6 +14,7 @@ public class ShareItApp extends Application
     ModelFactory modelFactory = new ModelFactory(clientFactory);
     ViewModelFactory viewModelFactory = new ViewModelFactory(modelFactory);
     ViewHandler viewHandler = new ViewHandler(stage, viewModelFactory);
+    MemberDAOImpl.getInstance().setPassword("SQLdatabaze");
     viewHandler.start();
    }
 }
