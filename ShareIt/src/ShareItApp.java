@@ -13,7 +13,6 @@ public class ShareItApp extends Application
 {
   @Override
   public void start(Stage stage) throws Exception {
-
     ClientFactory clientFactory = new ClientFactory();
     ModelFactory modelFactory = new ModelFactory(clientFactory);
     ViewModelFactory viewModelFactory = new ViewModelFactory(modelFactory);

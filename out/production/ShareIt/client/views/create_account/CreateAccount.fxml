@@ -2,26 +2,20 @@
 
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
+<?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-<?import org.controlsfx.control.textfield.*?>
-
+<?import javafx.scene.text.Font?>
+<?import org.controlsfx.control.textfield.CustomPasswordField?>
 <ScrollPane prefHeight="619.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.create_account.CreateAccountController">
    <content>
       <AnchorPane fx:id="parent" prefHeight="600.0" prefWidth="1280.0">
          <children>
-            <TextField fx:id="searchField" layoutX="543.0" layoutY="14.0" prefHeight="30.0" prefWidth="194.0" style="-fx-border-radius: 30px; -fx-background-radius: 30px;" text="Ex. Drill Makita">
-               <padding>
-                  <Insets bottom="10.0" left="20.0" right="10.0" top="10.0" />
-               </padding>
-            </TextField>
-            <Button layoutX="778.0" layoutY="13.0" mnemonicParsing="false" onAction="#searchButton" style="-fx-border-radius: 30px; -fx-background-radius: 30px; -fx-background-color: #A3A1A8; -fx-border-color: #A3A1A8;" text="Search" textFill="WHITE">
+            <Button layoutX="25.0" layoutY="25.0" mnemonicParsing="false" onAction="#goBackToLogInButton" style="-fx-border-radius: 30px; -fx-background-radius: 30px; -fx-background-color: #A3A1A8; -fx-border-color: #A3A1A8;" text="Go back to log in" textFill="WHITE">
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
             </Button>
-            <Button layoutX="27.0" layoutY="55.0" mnemonicParsing="false" onAction="#goBackToLogInButton" style="-fx-border-radius: 30px; -fx-background-radius: 30px; -fx-background-color: #A3A1A8; -fx-border-color: #A3A1A8;" text="Go back to log in" textFill="WHITE">
+            <Button onAction="#goBackToLogInButton" layoutX="27.0" layoutY="55.0" mnemonicParsing="false" style="-fx-border-radius: 30px; -fx-background-radius: 30px; -fx-background-color: #A3A1A8; -fx-border-color: #A3A1A8;" text="Go back to log in" textFill="WHITE">
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
@@ -79,7 +73,7 @@
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </padding>
                         </TextField>
-                        <TextField fx:id="telephoneNoField" promptText="Telephone number" GridPane.columnIndex="2" GridPane.rowIndex="5">
+                        <TextField fx:id="telephoneNo1Field" promptText="Telephone number 1" GridPane.columnIndex="2" GridPane.rowIndex="5">
                            <GridPane.margin>
                               <Insets left="10.0" right="10.0" />
                            </GridPane.margin>
