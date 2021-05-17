@@ -1,7 +1,7 @@
 package client.views.rate_feedback;
 
 import javafx.event.ActionEvent;
-import javafx.scene.control.Button;
+import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -9,10 +9,10 @@ import org.controlsfx.control.Rating;
 
 public class RateFeedbackController
 {
-  public Rating ratingStars;
-  public TextArea commentaryTextArea;
-  public Label usernameLabel;
-  public TextField searchField;
+  @FXML private Rating ratingStars;
+  @FXML private TextArea commentaryTextArea;
+  @FXML private Label usernameLabel;
+  @FXML private TextField searchField;
 
   public void searchButton(ActionEvent actionEvent)
   {

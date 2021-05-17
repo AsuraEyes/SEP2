@@ -8,8 +8,7 @@ import client.views.log_in.LogInController;
 import client.views.main_view.MainController;
 import client.views.menu.MenuController;
 import client.views.search_for_rental.Controller;
-import client.views.search_for_rental.SearchForRentalController;
-import client.views.view_rating.ViewRatingController;
+import client.views.view_member_profile.ViewMemberProfileController;
 import client.views.view_rental.ViewRentalController;
 import client.views.view_reported_member.ViewReportedMemberController;
 import client.views.view_reported_member_list.ViewReportedMemberListController;
@@ -174,8 +173,8 @@ public class ViewHandler
     FXMLLoader loader = new FXMLLoader();
     loader.setLocation(getClass().getResource("/client/views/view_member_profile/ViewMemberProfile.fxml"));
     Node content = loader.load();
-    //LogInController logInController = loader.getController();
-    //ogInController.init(this, viewModelFactory);
+    ViewMemberProfileController viewMemberProfileController = loader.getController();
+    viewMemberProfileController.init(this,viewModelFactory);
     return content;
   }
   public Node viewRating() throws IOException

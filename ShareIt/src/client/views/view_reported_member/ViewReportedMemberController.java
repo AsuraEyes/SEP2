@@ -4,14 +4,15 @@ import client.core.ViewHandler;
 import client.core.ViewModelFactory;
 import client.viewmodel.view_reported_member.ViewReportedMemberViewModel;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class ViewReportedMemberController {
-    private TextField searchField;
-    private Label reportedNameLabel;
-    private Label reporterNameLabel;
-    private Label commentaryLabel;
+    @FXML private TextField searchField;
+    @FXML private Label reportedNameLabel;
+    @FXML private Label reporterNameLabel;
+    @FXML private Label commentaryLabel;
 
     private ViewReportedMemberViewModel viewReportedMemberViewModel;
     private ViewHandler viewHandler;

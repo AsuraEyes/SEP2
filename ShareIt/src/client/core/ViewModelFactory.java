@@ -7,16 +7,20 @@ import client.viewmodel.create_account.CreateAccountViewModel;
 import client.viewmodel.log_in.LogInViewModel;
 import client.viewmodel.menu.MenuViewModel;
 import client.viewmodel.seatch_for_rental.SearchForRentalViewModel;
+import client.viewmodel.view_member_profile.ViewMemberProfileViewModel;
 import client.viewmodel.view_rating.ViewRatingViewModel;
 import client.viewmodel.view_rating_full.ViewRatingFullViewModel;
 import client.viewmodel.view_reported_member.ViewReportedMemberViewModel;
 import client.viewmodel.view_reported_member_list.ViewReportedMemberListViewModel;
 import client.viewmodel.welcome_page.WelcomePageViewModel;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 public class ViewModelFactory
 {
+  private ModelFactory modelFactory;
+
   private LogInViewModel logInViewModel;
   private ChatReceivedMessagesViewModel chatReceivedMessagesViewModel;
   private ChatWriteMessageViewModel chatWriteMessageViewModel;
@@ -29,16 +33,20 @@ public class ViewModelFactory
   private ViewReportedMemberListViewModel viewReportedMemberListViewModel;
   private WelcomePageViewModel welcomePageViewModel;
   private MenuViewModel menuViewModel;
+  private ViewMemberProfileViewModel viewMemberProfileViewModel;
 
-  public ViewModelFactory(){
+  public ViewModelFactory(ModelFactory modelFactory) throws IOException
+  {
+    this.modelFactory = modelFactory;
+    logInViewModel = new LogInViewModel(modelFactory.getShareItModel());
     chatReceivedMessagesViewModel = new ChatReceivedMessagesViewModel();
     chatWriteMessageViewModel = new ChatWriteMessageViewModel();
   }
-  public LogInViewModel getLogInViewModel()
+  public LogInViewModel getLogInViewModel() throws IOException
   {
     if(logInViewModel == null)
     {
-      logInViewModel = new LogInViewModel();
+      logInViewModel = new LogInViewModel(modelFactory.getShareItModel());
     }
     return logInViewModel;
   }
@@ -124,5 +132,14 @@ public class ViewModelFactory
       menuViewModel = new MenuViewModel();
     }
     return menuViewModel;
+  }
+
+  public ViewMemberProfileViewModel getViewMemberProfileViewModel()
+  {
+    if(viewMemberProfileViewModel == null)
+    {
+      viewMemberProfileViewModel = new ViewMemberProfileViewModel();
+    }
+    return viewMemberProfileViewModel;
   }
 }

@@ -4,21 +4,22 @@ import client.core.ViewHandler;
 import client.core.ViewModelFactory;
 import client.viewmodel.view_rating.ViewRatingViewModel;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class ViewRatingController {
-    private TextField searchField;
-    private Label userNameLabel;
-    private Label locationLabel;
-    private Label ratingLabel;
-    private Label addressLabel;
-    private Label contactLabel;
-    private Label otherInfoLabel;
+    @FXML private TextField searchField;
+    @FXML private Label userNameLabel;
+    @FXML private Label locationLabel;
+    @FXML private Label ratingLabel;
+    @FXML private Label addressLabel;
+    @FXML private Label contactLabel;
+    @FXML private Label otherInformationLabel;
 
-    private Label commenterNameLabel;
-    private Label commenterRateLabel;
-    private Label commentLabel;
+    @FXML private Label commenterNameLabel;
+    @FXML private Label commenterRateLabel;
+    @FXML private Label commentLabel;
 
     private ViewRatingViewModel viewRatingViewModel;
     private ViewHandler viewHandler;
@@ -32,7 +33,7 @@ public class ViewRatingController {
         ratingLabel.textProperty().bind(viewRatingViewModel.getRatingLabel());
         addressLabel.textProperty().bind(viewRatingViewModel.getAddressLabel());
         contactLabel.textProperty().bind(viewRatingViewModel.getContactLabel());
-        otherInfoLabel.textProperty().bind(viewRatingViewModel.getOtherInfoLabel());
+        otherInformationLabel.textProperty().bind(viewRatingViewModel.getOtherInfoLabel());
         commenterNameLabel.textProperty().bind(viewRatingViewModel.getCommenterNameLabel());
         commenterRateLabel.textProperty().bind(viewRatingViewModel.getCommenterRateLabel());
         commentLabel.textProperty().bind(viewRatingViewModel.getCommentLabel());

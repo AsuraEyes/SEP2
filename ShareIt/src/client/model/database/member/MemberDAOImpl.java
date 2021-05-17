@@ -1,6 +1,6 @@
 package client.model.database.member;
 
-import ground_classes.Member;
+import shared.transferobjects.Member;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -8,8 +8,9 @@ import java.util.List;
 
 public class MemberDAOImpl implements MemberDAO{
     private static MemberDAOImpl instance;
+    private String password;
 
-    public MemberDAOImpl()throws SQLException{
+    private MemberDAOImpl()throws SQLException{
         DriverManager.registerDriver(new org.postgresql.Driver());
     }
 
@@ -20,8 +21,12 @@ public class MemberDAOImpl implements MemberDAO{
         return instance;
     }
 
+    public void setPassword(String password){
+        this.password = password;
+    }
+
     private Connection getConnection() throws SQLException {
-        return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=share_it", "postgres", "SQLdatabaze");
+        return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", password);
     }
 
     @Override

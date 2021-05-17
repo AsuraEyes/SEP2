@@ -5,7 +5,7 @@ import client.core.ViewModelFactory;
 import client.viewmodel.create_account.CreateAccountViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -16,7 +16,6 @@ import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
 import org.controlsfx.control.textfield.CustomPasswordField;
 import org.controlsfx.validation.ValidationSupport;
-import org.controlsfx.validation.Validator;
 
 import java.sql.SQLException;
 
@@ -40,7 +39,7 @@ public class CreateAccountController {
     @FXML
     private TextField postalCodeField;
     @FXML
-    private ComboBox locationBox;
+    private ChoiceBox locationBox;
     @FXML
     private TextField emailField;
     @FXML
@@ -48,7 +47,7 @@ public class CreateAccountController {
     @FXML
     private TextField telephoneNo2Field;
     @FXML
-    public TextArea otherInfoField;
+    private TextArea otherInfoField;
 
     private CreateAccountViewModel createAccountViewModel;
     private ViewHandler viewHandler;
