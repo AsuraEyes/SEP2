@@ -102,11 +102,11 @@ CREATE TABLE administrator(
 DROP TABLE IF EXISTS warning;
 CREATE TABLE warning(
     text bla_bla_type NOT NULL,
-    time TIMESTAMP NOT NULL ,
-    administrator_from VARCHAR(100) NOT NULL ,
-    member_to INTEGER NOT NULL ,
+    time TIMESTAMP NOT NULL,
+    administrator_from VARCHAR(100) NOT NULL,
+    member_to INTEGER NOT NULL,
     PRIMARY KEY (administrator_from, member_to, time),
-    FOREIGN KEY (administrator_from) REFERENCES administrator(username) ON DELETE CASCADE ,
+    FOREIGN KEY (administrator_from) REFERENCES administrator(username) ON DELETE CASCADE,
     FOREIGN KEY (member_to) REFERENCES member(id) ON DELETE CASCADE
 );
 
