@@ -121,7 +121,7 @@ CREATE OR REPLACE FUNCTION upd_average_review()
     RETURNS TRIGGER
     LANGUAGE plpgsql
 AS
-    $$
+$$
     DECLARE calculated_review DECIMAL(2,1);
         BEGIN
         SELECT AVG(value)
@@ -135,7 +135,7 @@ AS
 
         RETURN NEW;
     END;
-    $$;
+$$;
 
 CREATE TRIGGER update_avg_review_trigger
     AFTER INSERT OR UPDATE
