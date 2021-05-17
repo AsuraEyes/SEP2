@@ -57,7 +57,6 @@ public class CreateAccountController {
     public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws SQLException, IOException {
         this.viewHandler = viewHandler;
         createAccountViewModel = viewModelFactory.getCreateAccountViewModel();
-        searchField.textProperty().bindBidirectional(createAccountViewModel.getSearchField());
         usernameField.textProperty().bindBidirectional(createAccountViewModel.getUsernameField());
         passwordField.textProperty().bindBidirectional(createAccountViewModel.getPasswordField());
         confirmPasswordField.textProperty().bindBidirectional(createAccountViewModel.getConfirmPasswordField());
@@ -83,10 +82,6 @@ public class CreateAccountController {
                 .title("Error - invalid input!")
                 .graphic(new Rectangle(300, 300, Color.RED)) // sets node to display
                 .hideAfter(Duration.seconds(3));
-    }
-
-    public void searchButton(ActionEvent actionEvent) {
-
     }
 
     public void goBackToLogInButton(ActionEvent actionEvent) {
