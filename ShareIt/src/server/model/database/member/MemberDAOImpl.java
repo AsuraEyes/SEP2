@@ -90,21 +90,7 @@ public class MemberDAOImpl implements MemberDAO{
         }
     }
 
-    @Override
-    public int getNextAvailableId() throws SQLException {
-        try(Connection connection = getConnection()){
-            PreparedStatement statement = connection.prepareStatement("SELECT nextval(pg_get_serial_sequence('share_it.member', 'id')) AS available_id;");
-            ResultSet resultSet = statement.executeQuery();
-            int nextAvailableId = 0;
-            if(resultSet.next()){
-                nextAvailableId =  resultSet.getInt("available_id");
-            }
-            else{
-                throw new SQLException("No keys generated");
-            }
-            return nextAvailableId;
-        }
-    }
+
 
     @Override
     public void update(Member member) throws SQLException {

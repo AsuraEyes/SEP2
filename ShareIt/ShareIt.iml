@@ -35,5 +35,6 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" scope="TEST" name="javafx" level="application" />
   </component>
 </module>
