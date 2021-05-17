@@ -61,7 +61,7 @@ public class AddRentalViewModel {
     public void onAddRentalButtonPressed(Object selectedState, Object selectedCategory, Member member) throws IOException {
         model.checkRentalData(nameField.getValue(), pictureLinkField.getValue(), descriptionField.getValue(), priceField.getValue(), otherInfoField.getValue(), (String) selectedState, member);
     }
-    /*public ObservableList<String> getStates(){
+    public ObservableList<String> getStates(){
         ArrayList<State> stateList = model.getStateList();
         ArrayList<String> stateListString = new ArrayList<>();
         for (int i = 0; i < stateList.size(); i++) {
@@ -69,9 +69,9 @@ public class AddRentalViewModel {
         }
         statesList = FXCollections.observableArrayList(stateListString);
         return statesList;
-    }*/
+    }
 
-    /*public ObservableList<String> getCategories(){
+    public ObservableList<String> getCategories(){
         ArrayList<Category> categoryList = model.getCategoryList();
         ArrayList<String> categoryListString = new ArrayList<>();
         for (int i = 0; i < categoryList.size(); i++) {
@@ -79,5 +79,5 @@ public class AddRentalViewModel {
         }
         categoriesList = FXCollections.observableArrayList(categoryListString);
         return categoriesList;
-    }*/
+    }
 }
