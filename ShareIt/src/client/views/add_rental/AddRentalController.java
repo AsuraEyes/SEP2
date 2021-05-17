@@ -29,8 +29,7 @@ import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.File;
 
-public class AddRentalController
-{
+public class AddRentalController {
 
   @FXML ImageView pictureView;
   @FXML private TextField searchField;
@@ -46,7 +45,6 @@ public class AddRentalController
   private ValidationSupport validationSupport;
   private AddRentalViewModel addRentalViewModel;
   private ViewHandler viewHandler;
-  private ValidationSupport validationSupport;
   private Notifications notifications;
 
   public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws SQLException, IOException
@@ -57,12 +55,12 @@ public class AddRentalController
     addRentalViewModel = viewModelFactory.getAddRentalViewModel();
     nameField.textProperty().bindBidirectional(addRentalViewModel.getNameField());
     descriptionField.textProperty().bind(addRentalViewModel.getDescriptionField());
-    stateBox.setItems(addRentalViewModel.getStates());
-    stateBox.getSelectionModel().selectFirst();
+    //stateBox.setItems(addRentalViewModel.getStates());
+    //stateBox.getSelectionModel().selectFirst();
     priceField.textProperty().bindBidirectional(addRentalViewModel.getPriceField());
     otherInfoField.textProperty().bind(addRentalViewModel.getOtherInfoField());
-    categoryBox.setItems(addRentalViewModel.getCategories());
-    categoryBox.getSelectionModel().selectFirst();
+    //categoryBox.setItems(addRentalViewModel.getCategories());
+    //categoryBox.getSelectionModel().selectFirst();
 
     notifications =  Notifications.create()
             .title("Error - invalid input!")
@@ -77,12 +75,10 @@ public class AddRentalController
   }
 
   public void addRentalButton(ActionEvent actionEvent) throws IOException {
-    boolean ok = true;
+    /*boolean ok = true;
     if(checkField(nameField) && checkField(descriptionField) && checkField(priceField) && checkArea(otherInfoField)){
       addRentalViewModel.onAddRentalButtonPressed(stateBox.getValue(), categoryBox.getValue(), member);
-    }
-  }
-
+    }*/
   }
 
   public void addPictureButton(ActionEvent actionEvent)
@@ -106,20 +102,19 @@ public class AddRentalController
     }
   }
 
-  public void onGoBack(ActionEvent actionEvent)
-  {
+  public void onGoBack(ActionEvent actionEvent) {}
 
-  private boolean checkField(TextField nameOfField){
-    if(nameOfField.textProperty().getValue() == null || nameOfField.textProperty().getValue().isBlank()){
-      notifications.owner(parent).text(nameOfField.getPromptText()+" cannot be empty").showError();
+  private boolean checkField (TextField nameOfField){
+    if (nameOfField.textProperty().getValue() == null || nameOfField.textProperty().getValue().isBlank()) {
+      notifications.owner(parent).text(nameOfField.getPromptText() + " cannot be empty").showError();
       return false;
     }
     return true;
   }
 
-  private boolean checkArea(TextArea nameArea){
-    if (nameArea.textProperty().getValue() == null || nameArea.textProperty().getValue().isBlank()){
-      notifications.owner(parent).text(nameArea.getPromptText()+" cannot be empty").showError();
+  private boolean checkArea (TextArea nameArea){
+    if (nameArea.textProperty().getValue() == null || nameArea.textProperty().getValue().isBlank()) {
+      notifications.owner(parent).text(nameArea.getPromptText() + " cannot be empty").showError();
       return false;
     }
     return true;
