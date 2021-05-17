@@ -1,41 +1,351 @@
 package client.viewmodel.create_account;
 
+import client.core.ClientFactory;
+import client.core.ModelFactory;
+import client.core.ViewHandler;
+import client.core.ViewModelFactory;
+import client.model.ShareItModel;
+import client.model.ShareItModelManager;
+import client.network.Client;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import shared.transferobjects.City;
+
+import java.beans.PropertyChangeListener;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class CreateAccountViewModelTest {
-//    private CreateUserVM vm;
-//
-//    @BeforeEach
-//    public void setup(){
-//        LoginModelBase model = new LoginModelInMemoryC();
-//        model.populateModelWithDummyUsers();
-//        vm = new CreateUserVM(model);
-//    }
-//
-//    @Test
-//    public void createValidUser(){
-//        //arrange
-//        StringProperty username = new SimpleStringProperty();
-//        StringProperty password = new SimpleStringProperty();
-//        StringProperty passwordAgain = new SimpleStringProperty();
-//        StringProperty result = new SimpleStringProperty();
-//        vm.usernameProperty().bindBidirectional(username);
-//        vm.passwordProperty().bindBidirectional(password);
-//        vm.passwordAgainProperty().bindBidirectional(passwordAgain);
-//        vm.createUserResultProperty().bindBidirectional(result);
-//
-//        //act
-//        username.setValue("OtherMaggie");
-//        password.setValue("12345678Az_");
-//        passwordAgain.setValue("12345678Az_");
-//        vm.attemptCreateUser();
-//
-//        //assert
-//        assertEquals("OK", result.getValue());
-//    }
+    private CreateAccountViewModel vm;
+
+    @BeforeEach
+    public void setup() throws IOException, SQLException {
+        ClientFactory clientFactory = new ClientFactory();
+        ShareItModel model = new ShareItModelManager(clientFactory.getClient());
+        vm = new CreateAccountViewModel(model);
+    }
+
+    @Test
+    public void createValidUser() throws IOException {
+        //arrange
+        StringProperty usernameField = new SimpleStringProperty();
+        StringProperty passwordField = new SimpleStringProperty();
+        StringProperty confirmPasswordField = new SimpleStringProperty();
+        StringProperty streetField = new SimpleStringProperty();
+        StringProperty streetNumberField = new SimpleStringProperty();
+        StringProperty floorField = new SimpleStringProperty();
+        StringProperty postalCodeField = new SimpleStringProperty();
+        StringProperty emailField = new SimpleStringProperty();
+        StringProperty telephoneNoField = new SimpleStringProperty();
+        StringProperty otherInfoField = new SimpleStringProperty();
+        vm.getUsernameField().bindBidirectional(usernameField);
+        vm.getPasswordField().bindBidirectional(passwordField);
+        vm.getConfirmPasswordField().bindBidirectional(confirmPasswordField);
+        vm.getStreetField().bindBidirectional(streetField);
+        vm.getStreetNumberField().bindBidirectional(streetNumberField);
+        vm.getFloorField().bindBidirectional(floorField);
+        vm.getPostalCodeField().bindBidirectional(postalCodeField);
+        vm.getEmailField().bindBidirectional(emailField);
+        vm.getTelephoneNoField().bindBidirectional(telephoneNoField);
+        vm.getOtherInfoField().bindBidirectional(otherInfoField);
+
+        usernameField.setValue("newUsername");
+        passwordField.setValue("password");
+        confirmPasswordField.setValue("password");
+        streetField.setValue("Sundvej");
+        streetNumberField.setValue("6B");
+        floorField.setValue("3");
+        postalCodeField.setValue("8700");
+        emailField.setValue("304125@viauc.dk");
+        telephoneNoField.setValue("");
+        otherInfoField.setValue("Other information");
+
+        String result = vm.onCreateButtonPressed("Horsens");
+
+        assertEquals("Adding successful", result);
+    }
+
+    @Test
+    public void notMatchingPasswords() throws IOException {
+        //arrange
+        StringProperty usernameField = new SimpleStringProperty();
+        StringProperty passwordField = new SimpleStringProperty();
+        StringProperty confirmPasswordField = new SimpleStringProperty();
+        StringProperty streetField = new SimpleStringProperty();
+        StringProperty streetNumberField = new SimpleStringProperty();
+        StringProperty floorField = new SimpleStringProperty();
+        StringProperty postalCodeField = new SimpleStringProperty();
+        StringProperty emailField = new SimpleStringProperty();
+        StringProperty telephoneNoField = new SimpleStringProperty();
+        StringProperty otherInfoField = new SimpleStringProperty();
+        vm.getUsernameField().bindBidirectional(usernameField);
+        vm.getPasswordField().bindBidirectional(passwordField);
+        vm.getConfirmPasswordField().bindBidirectional(confirmPasswordField);
+        vm.getStreetField().bindBidirectional(streetField);
+        vm.getStreetNumberField().bindBidirectional(streetNumberField);
+        vm.getFloorField().bindBidirectional(floorField);
+        vm.getPostalCodeField().bindBidirectional(postalCodeField);
+        vm.getEmailField().bindBidirectional(emailField);
+        vm.getTelephoneNoField().bindBidirectional(telephoneNoField);
+        vm.getOtherInfoField().bindBidirectional(otherInfoField);
+
+        usernameField.setValue("newUsername");
+        passwordField.setValue("password");
+        confirmPasswordField.setValue("password1");
+        streetField.setValue("Sundvej");
+        streetNumberField.setValue("6B");
+        floorField.setValue("3");
+        postalCodeField.setValue("8700");
+        emailField.setValue("304125@viauc.dk");
+        telephoneNoField.setValue("");
+        otherInfoField.setValue("Other information");
+
+        String result = vm.onCreateButtonPressed("Horsens");
+
+        assertEquals("Not matching passwords.", result);
+    }
+
+    @Test
+    public void notMatchingPasswordsCaseInsensitive() throws IOException {
+        //arrange
+        StringProperty usernameField = new SimpleStringProperty();
+        StringProperty passwordField = new SimpleStringProperty();
+        StringProperty confirmPasswordField = new SimpleStringProperty();
+        StringProperty streetField = new SimpleStringProperty();
+        StringProperty streetNumberField = new SimpleStringProperty();
+        StringProperty floorField = new SimpleStringProperty();
+        StringProperty postalCodeField = new SimpleStringProperty();
+        StringProperty emailField = new SimpleStringProperty();
+        StringProperty telephoneNoField = new SimpleStringProperty();
+        StringProperty otherInfoField = new SimpleStringProperty();
+        vm.getUsernameField().bindBidirectional(usernameField);
+        vm.getPasswordField().bindBidirectional(passwordField);
+        vm.getConfirmPasswordField().bindBidirectional(confirmPasswordField);
+        vm.getStreetField().bindBidirectional(streetField);
+        vm.getStreetNumberField().bindBidirectional(streetNumberField);
+        vm.getFloorField().bindBidirectional(floorField);
+        vm.getPostalCodeField().bindBidirectional(postalCodeField);
+        vm.getEmailField().bindBidirectional(emailField);
+        vm.getTelephoneNoField().bindBidirectional(telephoneNoField);
+        vm.getOtherInfoField().bindBidirectional(otherInfoField);
+
+        usernameField.setValue("newUsername");
+        passwordField.setValue("Password");
+        confirmPasswordField.setValue("password");
+        streetField.setValue("Sundvej");
+        streetNumberField.setValue("6B");
+        floorField.setValue("3");
+        postalCodeField.setValue("8700");
+        emailField.setValue("304125@viauc.dk");
+        telephoneNoField.setValue("");
+        otherInfoField.setValue("Other information");
+
+        String result = vm.onCreateButtonPressed("Horsens");
+
+        assertEquals("Not matching passwords.", result);
+    }
+
+    @Test
+    public void usernameTaken() throws IOException {
+        //arrange
+        StringProperty usernameField = new SimpleStringProperty();
+        StringProperty passwordField = new SimpleStringProperty();
+        StringProperty confirmPasswordField = new SimpleStringProperty();
+        StringProperty streetField = new SimpleStringProperty();
+        StringProperty streetNumberField = new SimpleStringProperty();
+        StringProperty floorField = new SimpleStringProperty();
+        StringProperty postalCodeField = new SimpleStringProperty();
+        StringProperty emailField = new SimpleStringProperty();
+        StringProperty telephoneNoField = new SimpleStringProperty();
+        StringProperty otherInfoField = new SimpleStringProperty();
+        vm.getUsernameField().bindBidirectional(usernameField);
+        vm.getPasswordField().bindBidirectional(passwordField);
+        vm.getConfirmPasswordField().bindBidirectional(confirmPasswordField);
+        vm.getStreetField().bindBidirectional(streetField);
+        vm.getStreetNumberField().bindBidirectional(streetNumberField);
+        vm.getFloorField().bindBidirectional(floorField);
+        vm.getPostalCodeField().bindBidirectional(postalCodeField);
+        vm.getEmailField().bindBidirectional(emailField);
+        vm.getTelephoneNoField().bindBidirectional(telephoneNoField);
+        vm.getOtherInfoField().bindBidirectional(otherInfoField);
+
+        usernameField.setValue("bob");
+        passwordField.setValue("SpongeBob");
+        confirmPasswordField.setValue("SpongeBob");
+        streetField.setValue("Sundvej");
+        streetNumberField.setValue("6B");
+        floorField.setValue("3");
+        postalCodeField.setValue("8700");
+        emailField.setValue("304125@viauc.dk");
+        telephoneNoField.setValue("");
+        otherInfoField.setValue("Other information");
+
+        String result = vm.onCreateButtonPressed("Horsens");
+
+        assertEquals("This username is already taken.", result);
+    }
+
+    @Test
+    public void zeroContactGiven() throws IOException {
+        StringProperty usernameField = new SimpleStringProperty();
+        StringProperty passwordField = new SimpleStringProperty();
+        StringProperty confirmPasswordField = new SimpleStringProperty();
+        StringProperty streetField = new SimpleStringProperty();
+        StringProperty streetNumberField = new SimpleStringProperty();
+        StringProperty floorField = new SimpleStringProperty();
+        StringProperty postalCodeField = new SimpleStringProperty();
+        StringProperty emailField = new SimpleStringProperty();
+        StringProperty telephoneNoField = new SimpleStringProperty();
+        StringProperty otherInfoField = new SimpleStringProperty();
+        vm.getUsernameField().bindBidirectional(usernameField);
+        vm.getPasswordField().bindBidirectional(passwordField);
+        vm.getConfirmPasswordField().bindBidirectional(confirmPasswordField);
+        vm.getStreetField().bindBidirectional(streetField);
+        vm.getStreetNumberField().bindBidirectional(streetNumberField);
+        vm.getFloorField().bindBidirectional(floorField);
+        vm.getPostalCodeField().bindBidirectional(postalCodeField);
+        vm.getEmailField().bindBidirectional(emailField);
+        vm.getTelephoneNoField().bindBidirectional(telephoneNoField);
+        vm.getOtherInfoField().bindBidirectional(otherInfoField);
+
+        usernameField.setValue("new_Bob420");
+        passwordField.setValue("SpongeBob<3");
+        confirmPasswordField.setValue("SpongeBob<3");
+        streetField.setValue("Sundvej");
+        streetNumberField.setValue("6B");
+        floorField.setValue("3");
+        postalCodeField.setValue("8700");
+        emailField.setValue("");
+        telephoneNoField.setValue("");
+        otherInfoField.setValue("Other information");
+
+        String result = vm.onCreateButtonPressed("Horsens");
+
+        assertEquals("At least one contact information has to be given.", result);
+    }
+
+    @Test
+    public void oneContactGivenEmail() throws IOException {
+        StringProperty usernameField = new SimpleStringProperty();
+        StringProperty passwordField = new SimpleStringProperty();
+        StringProperty confirmPasswordField = new SimpleStringProperty();
+        StringProperty streetField = new SimpleStringProperty();
+        StringProperty streetNumberField = new SimpleStringProperty();
+        StringProperty floorField = new SimpleStringProperty();
+        StringProperty postalCodeField = new SimpleStringProperty();
+        StringProperty emailField = new SimpleStringProperty();
+        StringProperty telephoneNoField = new SimpleStringProperty();
+        StringProperty otherInfoField = new SimpleStringProperty();
+        vm.getUsernameField().bindBidirectional(usernameField);
+        vm.getPasswordField().bindBidirectional(passwordField);
+        vm.getConfirmPasswordField().bindBidirectional(confirmPasswordField);
+        vm.getStreetField().bindBidirectional(streetField);
+        vm.getStreetNumberField().bindBidirectional(streetNumberField);
+        vm.getFloorField().bindBidirectional(floorField);
+        vm.getPostalCodeField().bindBidirectional(postalCodeField);
+        vm.getEmailField().bindBidirectional(emailField);
+        vm.getTelephoneNoField().bindBidirectional(telephoneNoField);
+        vm.getOtherInfoField().bindBidirectional(otherInfoField);
+
+        usernameField.setValue("new_Bob420");
+        passwordField.setValue("SpongeBob<3");
+        confirmPasswordField.setValue("SpongeBob<3");
+        streetField.setValue("Sundvej");
+        streetNumberField.setValue("6B");
+        floorField.setValue("3");
+        postalCodeField.setValue("8700");
+        emailField.setValue("valid.mail@gmail.com");
+        telephoneNoField.setValue("");
+        otherInfoField.setValue("Other information");
+
+        String result = vm.onCreateButtonPressed("Horsens");
+
+        assertEquals("Adding successful", result);
+    }
+
+    @Test
+    public void oneContactGivenTelephone() throws IOException {
+        StringProperty usernameField = new SimpleStringProperty();
+        StringProperty passwordField = new SimpleStringProperty();
+        StringProperty confirmPasswordField = new SimpleStringProperty();
+        StringProperty streetField = new SimpleStringProperty();
+        StringProperty streetNumberField = new SimpleStringProperty();
+        StringProperty floorField = new SimpleStringProperty();
+        StringProperty postalCodeField = new SimpleStringProperty();
+        StringProperty emailField = new SimpleStringProperty();
+        StringProperty telephoneNoField = new SimpleStringProperty();
+        StringProperty otherInfoField = new SimpleStringProperty();
+        vm.getUsernameField().bindBidirectional(usernameField);
+        vm.getPasswordField().bindBidirectional(passwordField);
+        vm.getConfirmPasswordField().bindBidirectional(confirmPasswordField);
+        vm.getStreetField().bindBidirectional(streetField);
+        vm.getStreetNumberField().bindBidirectional(streetNumberField);
+        vm.getFloorField().bindBidirectional(floorField);
+        vm.getPostalCodeField().bindBidirectional(postalCodeField);
+        vm.getEmailField().bindBidirectional(emailField);
+        vm.getTelephoneNoField().bindBidirectional(telephoneNoField);
+        vm.getOtherInfoField().bindBidirectional(otherInfoField);
+
+        usernameField.setValue("new_Bob420");
+        passwordField.setValue("SpongeBob<3");
+        confirmPasswordField.setValue("SpongeBob<3");
+        streetField.setValue("Sundvej");
+        streetNumberField.setValue("6B");
+        floorField.setValue("3");
+        postalCodeField.setValue("8700");
+        emailField.setValue("");
+        telephoneNoField.setValue("+45 82 69 42 08");
+        otherInfoField.setValue("Other information");
+
+        String result = vm.onCreateButtonPressed("Horsens");
+
+        assertEquals("Adding successful", result);
+    }
+
+    @Test
+    public void bothContactInformationGiven() throws IOException {
+        StringProperty usernameField = new SimpleStringProperty();
+        StringProperty passwordField = new SimpleStringProperty();
+        StringProperty confirmPasswordField = new SimpleStringProperty();
+        StringProperty streetField = new SimpleStringProperty();
+        StringProperty streetNumberField = new SimpleStringProperty();
+        StringProperty floorField = new SimpleStringProperty();
+        StringProperty postalCodeField = new SimpleStringProperty();
+        StringProperty emailField = new SimpleStringProperty();
+        StringProperty telephoneNoField = new SimpleStringProperty();
+        StringProperty otherInfoField = new SimpleStringProperty();
+        vm.getUsernameField().bindBidirectional(usernameField);
+        vm.getPasswordField().bindBidirectional(passwordField);
+        vm.getConfirmPasswordField().bindBidirectional(confirmPasswordField);
+        vm.getStreetField().bindBidirectional(streetField);
+        vm.getStreetNumberField().bindBidirectional(streetNumberField);
+        vm.getFloorField().bindBidirectional(floorField);
+        vm.getPostalCodeField().bindBidirectional(postalCodeField);
+        vm.getEmailField().bindBidirectional(emailField);
+        vm.getTelephoneNoField().bindBidirectional(telephoneNoField);
+        vm.getOtherInfoField().bindBidirectional(otherInfoField);
+
+        usernameField.setValue("new_Bob420");
+        passwordField.setValue("SpongeBob<3");
+        confirmPasswordField.setValue("SpongeBob<3");
+        streetField.setValue("Sundvej");
+        streetNumberField.setValue("6B");
+        floorField.setValue("3");
+        postalCodeField.setValue("8700");
+        emailField.setValue("valid.mail@gmail.com");
+        telephoneNoField.setValue("+45 82 69 42 08");
+        otherInfoField.setValue("Other information");
+
+        String result = vm.onCreateButtonPressed("Horsens");
+
+        assertEquals("Postal code has to be a number.", result);
+    }
+
 
 
 }
