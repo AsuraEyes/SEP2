@@ -68,6 +68,23 @@ public class MemberDAOImpl implements MemberDAO{
     }
 
     @Override
+    public boolean uniqueUsername(String username) throws SQLException {
+        try(Connection connection = getConnection()){
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM share_it.member WHERE username = ?");
+            statement.setString(1, username);
+            ResultSet resultSet = statement.executeQuery();
+            int numberOfResults = 0;
+            while (resultSet.next()){
+                numberOfResults++;
+            }
+            if(numberOfResults == 0){
+                return true;
+            }
+            return false;
+        }
+    }
+
+    @Override
     public void update(Member member) throws SQLException {
         try(Connection connection  = getConnection()){
             //for updating member information

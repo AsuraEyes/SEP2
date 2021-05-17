@@ -9,14 +9,20 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 import org.controlsfx.control.textfield.CustomPasswordField;
 import org.controlsfx.validation.ValidationSupport;
 import org.controlsfx.validation.Validator;
 
-import java.io.IOException;
 import java.sql.SQLException;
 
 public class CreateAccountController {
+    @FXML
+    private AnchorPane parent;
     @FXML
     private TextField searchField;
     @FXML
@@ -32,7 +38,7 @@ public class CreateAccountController {
     @FXML
     private TextField floorField;
     @FXML
-    private TextField apartmentNoField;
+    private TextField postalCodeField;
     @FXML
     private ComboBox locationBox;
     @FXML
@@ -47,11 +53,9 @@ public class CreateAccountController {
     private CreateAccountViewModel createAccountViewModel;
     private ViewHandler viewHandler;
     private ValidationSupport validationSupport;
+    private Notifications notifications;
 
     public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws SQLException {
-        validationSupport = new ValidationSupport();
-        validationSupport.registerValidator(usernameField, Validator.createEmptyValidator("Text is required"));
-
         this.viewHandler = viewHandler;
         createAccountViewModel = viewModelFactory.getCreateAccountViewModel();
         searchField.textProperty().bindBidirectional(createAccountViewModel.getSearchField());
@@ -61,12 +65,21 @@ public class CreateAccountController {
         streetField.textProperty().bindBidirectional(createAccountViewModel.getStreetField());
         streetNumberField.textProperty().bindBidirectional(createAccountViewModel.getStreetNumberField());
         floorField.textProperty().bindBidirectional(createAccountViewModel.getFloorField());
-        apartmentNoField.textProperty().bindBidirectional(createAccountViewModel.getApartmentNoField());
+        postalCodeField.textProperty().bindBidirectional(createAccountViewModel.getPostalCodeField());
         emailField.textProperty().bindBidirectional(createAccountViewModel.getEmailField());
         telephoneNo1Field.textProperty().bindBidirectional(createAccountViewModel.getTelephoneNo1Field());
         telephoneNo2Field.textProperty().bindBidirectional(createAccountViewModel.getTelephoneNo2Field());
         otherInfoField.textProperty().bindBidirectional(createAccountViewModel.getOtherInfoField());
 
+
+//        validationSupport = new ValidationSupport();
+//        validationSupport.setErrorDecorationEnabled(false);
+//        validationSupport.registerValidator(usernameField, Validator.createEmptyValidator("Username is required"));
+
+        notifications =  Notifications.create()
+                .title("Error - invalid input!")
+                .graphic(new Rectangle(300, 300, Color.RED)) // sets node to display
+                .hideAfter(Duration.seconds(3));
     }
 
     public void searchButton(ActionEvent actionEvent) {
@@ -77,13 +90,18 @@ public class CreateAccountController {
 
     }
 
-    public void createButton(ActionEvent actionEvent)
-        throws SQLException, IOException
-    {
-        if(!validationSupport.isInvalid())
-        {
+    public void createButton(ActionEvent actionEvent) throws SQLException {
+        boolean ok = true;
+        if(checkField(usernameField) && checkField(passwordField) && checkField(confirmPasswordField) && checkField(streetField) && checkField(streetNumberField) && checkField(postalCodeField)){
             createAccountViewModel.onCreateButtonPressed();
-            viewHandler.setView(viewHandler.menu(), viewHandler.logIn());
         }
+    }
+
+    private boolean checkField(TextField nameOfField){
+        if(nameOfField.textProperty().getValue() == null || nameOfField.textProperty().getValue().isBlank()){
+            notifications.owner(parent).text(nameOfField.getPromptText()+" cannot be empty").showError();
+            return false;
+        }
+        return true;
     }
 }
