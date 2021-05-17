@@ -20,8 +20,7 @@ public class CreateAccountViewModel {
     private final StringProperty floorField;
     private final StringProperty postalCodeField;
     private final StringProperty emailField;
-    private final StringProperty telephoneNo1Field;
-    private final StringProperty telephoneNo2Field;
+    private final StringProperty telephoneNoField;
     private final StringProperty otherInfoField;
 
     public CreateAccountViewModel() throws SQLException {
@@ -35,8 +34,7 @@ public class CreateAccountViewModel {
         floorField = new SimpleStringProperty();
         postalCodeField = new SimpleStringProperty();
         emailField = new SimpleStringProperty();
-        telephoneNo1Field = new SimpleStringProperty();
-        telephoneNo2Field = new SimpleStringProperty();
+        telephoneNoField = new SimpleStringProperty();
         otherInfoField = new SimpleStringProperty();
     }
 
@@ -67,17 +65,14 @@ public class CreateAccountViewModel {
     public StringProperty getEmailField(){
         return emailField;
     }
-    public StringProperty getTelephoneNo1Field(){
-        return telephoneNo1Field;
-    }
-    public StringProperty getTelephoneNo2Field(){
-        return telephoneNo2Field;
+    public StringProperty getTelephoneNoField(){
+        return telephoneNoField;
     }
     public StringProperty getOtherInfoField(){
         return otherInfoField;
     }
 
     public void onCreateButtonPressed(){
-        dataCheckMember.checkData(usernameField.getValue(), passwordField.getValue(), confirmPasswordField.getValue(), emailField.getValue(), otherInfoField.getValue(), telephoneNo1Field.getValue(), telephoneNo2Field.getValue(), streetField.getValue(), streetNumberField.getValue()+", "+floorField.getValue(), postalCodeField.getValue(),  "Horsens");
+        dataCheckMember.checkData(usernameField.getValue(), passwordField.getValue(), confirmPasswordField.getValue(), emailField.getValue(), telephoneNoField.getValue(), otherInfoField.getValue(), streetField.getValue(), streetNumberField.getValue()+", "+floorField.getValue(), postalCodeField.getValue(),  "Horsens");
     }
 }

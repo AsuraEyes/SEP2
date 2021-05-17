@@ -78,7 +78,7 @@
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </padding>
                         </TextField>
-                        <TextField fx:id="telephoneNo1Field" promptText="Telephone number 1" GridPane.columnIndex="2" GridPane.rowIndex="5">
+                        <TextField fx:id="telephoneNoField" promptText="Telephone number" GridPane.columnIndex="2" GridPane.rowIndex="5">
                            <GridPane.margin>
                               <Insets left="10.0" right="10.0" />
                            </GridPane.margin>
@@ -133,14 +133,7 @@
                               <Insets top="10.0" />
                            </GridPane.margin>
                         </Button>
-                        <TextField fx:id="telephoneNo2Field" promptText="Telephone number 2" GridPane.columnIndex="3" GridPane.rowIndex="5">
-                           <padding>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </padding>
-                           <GridPane.margin>
-                              <Insets left="10.0" right="10.0" />
-                           </GridPane.margin>
-                        </TextField>
+
                         <Label text="Create Account" textFill="WHITE" GridPane.columnIndex="1">
                            <font>
                               <Font name="Californian FB" size="24.0" />

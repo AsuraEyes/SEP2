@@ -44,9 +44,7 @@ public class CreateAccountController {
     @FXML
     private TextField emailField;
     @FXML
-    private TextField telephoneNo1Field;
-    @FXML
-    private TextField telephoneNo2Field;
+    private TextField telephoneNoField;
     @FXML
     public TextArea otherInfoField;
 
@@ -67,8 +65,7 @@ public class CreateAccountController {
         floorField.textProperty().bindBidirectional(createAccountViewModel.getFloorField());
         postalCodeField.textProperty().bindBidirectional(createAccountViewModel.getPostalCodeField());
         emailField.textProperty().bindBidirectional(createAccountViewModel.getEmailField());
-        telephoneNo1Field.textProperty().bindBidirectional(createAccountViewModel.getTelephoneNo1Field());
-        telephoneNo2Field.textProperty().bindBidirectional(createAccountViewModel.getTelephoneNo2Field());
+        telephoneNoField.textProperty().bindBidirectional(createAccountViewModel.getTelephoneNoField());
         otherInfoField.textProperty().bindBidirectional(createAccountViewModel.getOtherInfoField());
 
 

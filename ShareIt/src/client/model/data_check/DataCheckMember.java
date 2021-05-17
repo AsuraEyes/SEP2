@@ -15,21 +15,19 @@ public class DataCheckMember {
     private String password;
     private String passwordAgain;
     private String email;
-    private String phone1;
-    private String phone2;
+    private String phone;
     private String postalCode;
     private int postalCodeNb;
 
     public DataCheckMember() throws SQLException {
     }
 
-    public void checkData(String username, String password, String passwordAgain, String email, String otherInformation, String phone1, String phone2, String street, String streetNumber, String postalCode, String city) {
+    public void checkData(String username, String password, String passwordAgain, String email, String otherInformation, String phone, String street, String streetNumber, String postalCode, String city) {
         this.username = username;
         this.password = password;
         this.passwordAgain = passwordAgain;
         this.email = email;
-        this.phone1 = phone1;
-        this.phone2 = phone2;
+        this.phone = phone;
         this.postalCode = postalCode;
 
         if(matchingPasswords()){
@@ -37,7 +35,7 @@ public class DataCheckMember {
                 if(oneContactInformationGiven()){
                     if(postalCodeIsNumber()){
                         try{
-                            MemberDAOImpl.getInstance().create(username, password, email, otherInformation, street, streetNumber, postalCodeNb, city);
+                            MemberDAOImpl.getInstance().create(username, password, email, phone, otherInformation, street, streetNumber, postalCodeNb, city);
                             System.out.println("successful");
                         }
                         catch (SQLException e){
@@ -79,13 +77,8 @@ public class DataCheckMember {
     }
 
     private boolean oneContactInformationGiven(){
-        if(phone1 != null){
-            if(!(phone1.trim().equals("") && phone1.isBlank() && phone1.isEmpty())){
-                return true;
-            }
-        }
-        if(phone2 != null){
-            if(!(phone2.trim().equals("") || phone2.isBlank() || phone2.isEmpty())){
+        if(phone != null){
+            if(!(phone.trim().equals("") && phone.isBlank() && phone.isEmpty())){
                 return true;
             }
         }
