@@ -135,3 +135,6 @@ CREATE TRIGGER update_avg_review_trigger
     ON share_it.rating
     FOR EACH ROW
     EXECUTE FUNCTION upd_average_review();
+
+
+SELECT nextval(pg_get_serial_sequence('share_it.member', 'id')) AS available_id;
