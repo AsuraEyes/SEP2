@@ -3,15 +3,17 @@ package shared.transferobjects;
 public class Rental {
     private int id;
     private String name;
+    private String pictureLink;
     private String description;
     private int price;
     private String otherInformation;
     private String stateName;
     private Member member;
 
-    public Rental(int id, String name, String description, int price, String otherInformation, String stateName, Member member) {
+    public Rental(int id, String name, String pictureLink, String description, int price, String otherInformation, String stateName, Member member) {
         this.id = id;
         this.name = name;
+        this.pictureLink = pictureLink;
         this.description = description;
         this.price = price;
         this.otherInformation = otherInformation;
@@ -33,6 +35,14 @@ public class Rental {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getPictureLink() {
+        return pictureLink;
+    }
+
+    public void setPictureLink(String pictureLink) {
+        this.pictureLink = pictureLink;
     }
 
     public String getDescription() {

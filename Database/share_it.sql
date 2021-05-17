@@ -26,6 +26,7 @@ CREATE TABLE member(
     username VARCHAR (100) UNIQUE NOT NULL,
     password VARCHAR (100) NOT NULL,
     email_address VARCHAR (200),
+    phone_number VARCHAR (50),
     other_information bla_bla_type,
     address_street VARCHAR (100) NOT NULL,
     address_no VARCHAR(100) NOT NULL,
@@ -107,14 +108,6 @@ CREATE TABLE warning(
     PRIMARY KEY (administrator_from, member_to, time),
     FOREIGN KEY (administrator_from) REFERENCES administrator(username) ON DELETE CASCADE ,
     FOREIGN KEY (member_to) REFERENCES member(id) ON DELETE CASCADE
-);
-
-DROP TABLE IF EXISTS phone_no;
-CREATE TABLE phone_no(
-    number VARCHAR (50) NOT NULL ,
-    member_id INTEGER NOT NULL ,
-    PRIMARY KEY (number),
-    FOREIGN KEY (member_id) REFERENCES member(id) ON DELETE CASCADE
 );
 
 CREATE OR REPLACE FUNCTION upd_average_review()
