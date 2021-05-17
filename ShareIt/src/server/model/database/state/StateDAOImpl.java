@@ -1,4 +1,4 @@
-package client.model.database.state;
+package server.model.database.state;
 
 import shared.transferobjects.State;
 
