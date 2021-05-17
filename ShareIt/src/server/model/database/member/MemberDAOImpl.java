@@ -1,4 +1,4 @@
-package client.model.database.member;
+package server.model.database.member;
 
 import shared.transferobjects.Member;
 
