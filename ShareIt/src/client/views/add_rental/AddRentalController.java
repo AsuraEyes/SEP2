@@ -20,6 +20,7 @@ import org.controlsfx.control.Notifications;
 import org.controlsfx.control.tableview2.filter.filtereditor.SouthFilter;
 import org.controlsfx.validation.ValidationSupport;
 import org.controlsfx.validation.Validator;
+import shared.transferobjects.Category;
 import shared.transferobjects.Member;
 
 import java.io.IOException;
@@ -32,10 +33,12 @@ import java.io.File;
 public class AddRentalController {
 
   @FXML ImageView pictureView;
+  @FXML private CheckComboBox categoryComboBox;
+  @FXML private ChoiceBox stateChoiceBox;
   @FXML private TextField searchField;
   @FXML private AnchorPane parent;
-  @FXML private ChoiceBox categoryBox;
-  @FXML private ChoiceBox stateBox;
+  @FXML private ChoiceBox<String> categoryBox;
+  @FXML private ChoiceBox<String> stateBox;
   @FXML private TextField nameField;
   @FXML private TextField descriptionField;
   @FXML private TextField priceField;
@@ -54,11 +57,11 @@ public class AddRentalController {
     this.viewHandler = viewHandler;
     addRentalViewModel = viewModelFactory.getAddRentalViewModel();
     nameField.textProperty().bindBidirectional(addRentalViewModel.getNameField());
-    descriptionField.textProperty().bind(addRentalViewModel.getDescriptionField());
+    descriptionField.textProperty().bindBidirectional(addRentalViewModel.getDescriptionField());
     stateBox.setItems(addRentalViewModel.getStates());
     stateBox.getSelectionModel().selectFirst();
     priceField.textProperty().bindBidirectional(addRentalViewModel.getPriceField());
-    otherInfoField.textProperty().bind(addRentalViewModel.getOtherInfoField());
+    otherInfoField.textProperty().bindBidirectional(addRentalViewModel.getOtherInfoField());
     categoryBox.setItems(addRentalViewModel.getCategories());
     categoryBox.getSelectionModel().selectFirst();
 
@@ -76,7 +79,7 @@ public class AddRentalController {
 
   public void addRentalButton(ActionEvent actionEvent) throws IOException {
     boolean ok = true;
-    if(checkField(nameField) && checkField(descriptionField) && checkField(priceField) && checkArea(otherInfoField)){
+    if(checkField("Name", nameField) && checkField("Description",descriptionField) && checkField("Price", priceField)){
       addRentalViewModel.onAddRentalButtonPressed(stateBox.getValue(), categoryBox.getValue(), member);
     }
   }
@@ -102,11 +105,13 @@ public class AddRentalController {
     }
   }
 
-  public void onGoBack(ActionEvent actionEvent) {}
+  public void onGoBack(ActionEvent actionEvent) {
 
-  private boolean checkField (TextField nameOfField){
+  }
+
+  private boolean checkField (String message, TextField nameOfField){
     if (nameOfField.textProperty().getValue() == null || nameOfField.textProperty().getValue().isBlank()) {
-      notifications.owner(parent).text(nameOfField.getPromptText() + " cannot be empty").showError();
+      notifications.owner(parent).text(message + " cannot be empty").showError();
       return false;
     }
     return true;

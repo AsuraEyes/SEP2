@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class ChatReceivedMessagesController
 {
@@ -23,7 +24,7 @@ public class ChatReceivedMessagesController
     //searchField.textProperty().bindBidirectional(chatReceivedMessagesViewModel.getSearchField);
   }
 
-  public void searchButton(ActionEvent actionEvent) throws IOException
+  public void searchButton(ActionEvent actionEvent) throws IOException, SQLException
   {
     viewHandler.setView(viewHandler.menu(), viewHandler.searchForRental());
   }

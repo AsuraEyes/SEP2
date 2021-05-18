@@ -12,7 +12,6 @@ import shared.transferobjects.State;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -25,6 +24,7 @@ public class ServerModelImpl implements ServerModelManager
   public ServerModelImpl(){
     support = new PropertyChangeSupport(this);
     dataCheckMember = new DataCheckMember();
+    dataCheckRental = new DataCheckRental();
   }
 
   @Override public void addListener(String propertyName,
@@ -56,6 +56,13 @@ public class ServerModelImpl implements ServerModelManager
   @Override
   public void checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, Member member) {
     dataCheckRental.checkData(name, pictureLink, description, price, otherInformation, stateName, member);
+  }
+
+  @Override
+  public String checkSearch(String search)
+  {
+    String message = dataCheckRental.checkSearch(search);
+    return message;
   }
 
   @Override

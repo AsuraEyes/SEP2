@@ -82,6 +82,33 @@ public class RentalDAOImpl implements RentalDAO{
         }
     }
 
+    public List<Rental> readBySearch(String search) throws SQLException
+    {
+        try (Connection connection = getConnection())
+        {
+            PreparedStatement statement = connection.prepareStatement(
+                "SELECT * FROM share_it.rental WHERE name || description  LIKE ?;");
+            statement.setString(1, "%" + search + "%");
+            ResultSet resultSet = statement.executeQuery();
+            ArrayList<Rental> arrayListToReturn = new ArrayList<>();
+            while (resultSet.next())
+            {
+                int idOfSearchedRental = resultSet.getInt("id");
+                Rental rental = new Rental(idOfSearchedRental);
+                arrayListToReturn.add(rental);
+
+            }
+            //return array list
+            System.out.println(search);
+            for (Rental rental : arrayListToReturn)
+            {
+                System.out.println(rental + "aaa");
+            }
+            return arrayListToReturn;
+
+        }
+    }
+
     /*public static Rental createBook(ResultSet resultSet) throws SQLException {
         int id = resultSet.getInt("id");
         String name = resultSet.getString("name");
