@@ -36,8 +36,6 @@ public class MenuController
     menuViewModel = viewModelFactory.getMenuViewModel();
     usernameLabel.textProperty().bind(menuViewModel.getUsernameLabel());
 
-    if(StateManager.getUsertype().equals("Member"))
-
     if (menuViewModel.checkUserType().equals("Visitor"))
     {
       reviewsButton.setVisible(false);

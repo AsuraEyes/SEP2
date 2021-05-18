@@ -1,5 +1,6 @@
 package client.viewmodel.menu;
 
+import client.model.state.StateManager;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -9,11 +10,9 @@ public class MenuViewModel
   public MenuViewModel(){
     usernameLabel = new SimpleStringProperty();
   }
-
   public String checkUserType(){
-    return "Administrator";
+    return StateManager.getUsertype();
   }
-
   public StringProperty getUsernameLabel()
   {
     return usernameLabel;
