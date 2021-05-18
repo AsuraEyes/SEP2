@@ -33,11 +33,10 @@ import java.io.File;
 public class AddRentalController {
 
   @FXML ImageView pictureView;
-  @FXML private CheckComboBox categoryComboBox;
+  @FXML private CheckComboBox categoryBox;
   @FXML private ChoiceBox stateChoiceBox;
   @FXML private TextField searchField;
   @FXML private AnchorPane parent;
-  @FXML private ChoiceBox<String> categoryBox;
   @FXML private ChoiceBox<String> stateBox;
   @FXML private TextField nameField;
   @FXML private TextField descriptionField;
@@ -62,8 +61,7 @@ public class AddRentalController {
     stateBox.getSelectionModel().selectFirst();
     priceField.textProperty().bindBidirectional(addRentalViewModel.getPriceField());
     otherInfoField.textProperty().bindBidirectional(addRentalViewModel.getOtherInfoField());
-    categoryBox.setItems(addRentalViewModel.getCategories());
-    categoryBox.getSelectionModel().selectFirst();
+    categoryBox.getItems().addAll(addRentalViewModel.getCategories());
 
     notifications =  Notifications.create()
             .title("Error - invalid input!")
@@ -80,7 +78,7 @@ public class AddRentalController {
   public void addRentalButton(ActionEvent actionEvent) throws IOException {
     boolean ok = true;
     if(checkField("Name", nameField) && checkField("Description",descriptionField) && checkField("Price", priceField)){
-      addRentalViewModel.onAddRentalButtonPressed(stateBox.getValue(), categoryBox.getValue(), member);
+      addRentalViewModel.onAddRentalButtonPressed(stateBox.getValue(), categoryBox.getCheckModel().getCheckedItems(), member);
     }
   }
 

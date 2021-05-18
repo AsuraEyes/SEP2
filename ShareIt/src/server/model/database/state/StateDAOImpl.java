@@ -27,7 +27,7 @@ public class StateDAOImpl implements StateDAO
   }
 
   private Connection getConnection() throws SQLException {
-    return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "SQLdatabaze");
+    return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", password);
   }
 
   @Override public List<State> readState()
