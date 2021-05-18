@@ -2,6 +2,8 @@ package client.views.create_account;
 
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
+import client.model.state.MemberState;
+import client.model.state.StateManager;
 import client.viewmodel.create_account.CreateAccountViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -90,10 +92,10 @@ public class CreateAccountController {
             switch (message){
                 case "Adding successful":
                     notifications.owner(parent).text("Your account has been successfully created! You will be automatically directed to the welcome page in 5 seconds").title(message).showConfirm();
-
                     try {
                         Thread.sleep(5000);
-                    } catch (InterruptedException e) {
+                    }
+                    catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                     viewHandler.setView(viewHandler.menu(), viewHandler.welcomePage());
