@@ -140,35 +140,10 @@ public class RentalDAOImpl implements RentalDAO{
             return arrayListToReturn;
 
         }
+
     }
 
-    public List<Rental> readBySearchAndLocation(String search, String city) throws SQLException
-    {
-        try (Connection connection = getConnection())
-        {
-            PreparedStatement statement = connection.prepareStatement(
-                "SELECT * FROM share_it.rental, share_it.member WHERE name || description ILIKE ? AND share_it.member.address_city_name ILIKE ? AND share_it.rental.member_id = share_it.member.id;");
-            statement.setString(1, "%" + search + "%");
-            statement.setString(2, "%" + city + "%");
-            ResultSet resultSet = statement.executeQuery();
-            ArrayList<Rental> arrayListToReturn = new ArrayList<>();
-            while (resultSet.next())
-            {
-                int idOfSearchedRental = resultSet.getInt("id");
-                Rental rental = new Rental(idOfSearchedRental);
-                arrayListToReturn.add(rental);
 
-            }
-            //return array list
-            System.out.println(search);
-            for (Rental rental : arrayListToReturn)
-            {
-                System.out.println(rental);
-            }
-            return arrayListToReturn;
-
-        }
-    }
     public List<Rental> readBySearchAndFilter(String search, String city, ArrayList<String> categories) throws SQLException
     {
         try (Connection connection = getConnection())

@@ -69,6 +69,9 @@ public class SearchForRentalController {
         locationLabel.textProperty().bind(searchForRentalViewModel.getLocationLabel());
         priceLabel.textProperty().bind(searchForRentalViewModel.getPriceLabel());
         otherInfoLabel.textProperty().bind(searchForRentalViewModel.getOtherInfoLabel());*/
+      locationBox.setItems(searchForRentalViewModel.getLocations());
+      categoryCheckComboBox.getItems().addAll(searchForRentalViewModel.getCategories());
+
         notifications =  Notifications.create()
           .title("Error - invalid input!")
           .graphic(new Rectangle(300, 300, Color.RED)) // sets node to display
