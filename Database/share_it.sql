@@ -64,7 +64,7 @@ DROP TABLE IF EXISTS rental;
 CREATE TABLE rental(
     id SERIAL PRIMARY KEY ,
     name VARCHAR (200) NOT NULL,
-    picture_link bytea UNIQUE,
+    picture_link bytea,
     description bla_bla_type,
     price int NOT NULL NOT NULL,
     other_information bla_bla_type,
@@ -135,3 +135,6 @@ CREATE TRIGGER update_avg_review_trigger
     ON share_it.rating
     FOR EACH ROW
     EXECUTE FUNCTION upd_average_review();
+
+
+--SELECT nextval(pg_get_serial_sequence('share_it.member', 'id')) AS available_id;
