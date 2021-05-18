@@ -2,6 +2,10 @@ package client.network;
 
 import shared.networking.RMIServer;
 import shared.networking.RemoteObserver;
+import shared.transferobjects.Category;
+import shared.transferobjects.City;
+import shared.transferobjects.Member;
+import shared.transferobjects.State;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -11,6 +15,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 
 public class RMIClient implements Client, RemoteObserver
 {
@@ -37,6 +42,70 @@ public class RMIClient implements Client, RemoteObserver
     }
   }
 
+  @Override
+  public String checkMemberData(String username, String password, String confirmPassword, String email, String phone, String otherInformation, String street, String streetNo, String postalCode, String city) throws IOException {
+    try{
+      return server.checkMemberData(username, password, confirmPassword, email, phone, otherInformation, street, streetNo, postalCode, city);
+    }
+    catch (RemoteException e){
+      e.printStackTrace();
+      throw new RuntimeException("Could not contact server");
+    }
+  }
+
+  @Override
+  public String checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, Member member) throws IOException {
+    try {
+      return server.checkRentalData(name, pictureLink, description, price, otherInformation, stateName, member);
+    }
+    catch (RemoteException e){
+      e.printStackTrace();
+      throw new RuntimeException("Could not contact server");
+    }
+  }
+
+  @Override public String checkSearch(String search) throws IOException
+  {
+    try{
+    return server.checkSearch(search);
+  } catch (RemoteException e){
+      e.printStackTrace();
+      throw new RuntimeException("Could not contact server");
+    }}
+
+  @Override
+  public ArrayList<City> getCityList() {
+    try {
+      return server.getCityList();
+    }
+    catch (RemoteException e) {
+      e.printStackTrace();
+    }
+    return null;
+  }
+
+  @Override
+  public ArrayList<State> getStateList() {
+    try{
+      return server.getStateList();
+    }
+    catch (RemoteException e){
+      e.printStackTrace();
+    }
+    return  null;
+  }
+
+  @Override
+  public ArrayList<Category> getCategoryList() {
+    try{
+      return server.getCategoryList();
+    }
+    catch (RemoteException e){
+      e.printStackTrace();
+    }
+    return null;
+  }
+
   @Override public void addListener(String propertyName,
       PropertyChangeListener listener)
   {
@@ -55,8 +124,12 @@ public class RMIClient implements Client, RemoteObserver
       support.removePropertyChangeListener(listener);
   }
 
-  @Override public void update(Object object) throws RemoteException
+  @Override public void update(String propertyName, Object newValue) throws RemoteException
   {
+    if(propertyName.equals("dataValidation")){
+      support.firePropertyChange(propertyName, 0, newValue);
+    }
+
     /*if(object instanceof Message)
     {
       support.firePropertyChange("NewMessage", null, object);

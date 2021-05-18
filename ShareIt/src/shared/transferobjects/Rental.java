@@ -1,22 +1,29 @@
 package shared.transferobjects;
 
-public class Rental {
+import java.io.Serializable;
+
+public class Rental implements Serializable {
     private int id;
     private String name;
+    private String pictureLink;
     private String description;
     private int price;
     private String otherInformation;
     private String stateName;
     private Member member;
 
-    public Rental(int id, String name, String description, int price, String otherInformation, String stateName, Member member) {
+    public Rental(int id, String name, String pictureLink, String description, int price, String otherInformation, String stateName, Member member) {
         this.id = id;
         this.name = name;
+        this.pictureLink = pictureLink;
         this.description = description;
         this.price = price;
         this.otherInformation = otherInformation;
         this.stateName = stateName;
         this.member = member;
+    }
+    public Rental(int id){
+        this.id = id;
     }
 
     public int getId() {
@@ -33,6 +40,14 @@ public class Rental {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getPictureLink() {
+        return pictureLink;
+    }
+
+    public void setPictureLink(String pictureLink) {
+        this.pictureLink = pictureLink;
     }
 
     public String getDescription() {
@@ -73,5 +88,18 @@ public class Rental {
 
     public void setMember(Member member) {
         this.member = member;
+    }
+
+    @Override public String toString()
+    {
+        if(name==null){
+            return ""+id;
+        }
+
+        return "Rental{" + "id=" + id + ", name='" + name + '\''
+            + ", pictureLink='" + pictureLink + '\'' + ", description='"
+            + description + '\'' + ", price=" + price + ", otherInformation='"
+            + otherInformation + '\'' + ", stateName='" + stateName + '\''
+            + ", member=" + member + '}';
     }
 }

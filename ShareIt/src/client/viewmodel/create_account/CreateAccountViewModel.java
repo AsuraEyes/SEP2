@@ -1,17 +1,19 @@
 package client.viewmodel.create_account;
 
-import client.model.data_check.DataCheckMember;
-import client.model.database.member.MemberDAOImpl;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-import javafx.scene.layout.AnchorPane;
+import client.model.ShareItModel;
+import javafx.beans.property.*;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import shared.transferobjects.City;
 
-import java.lang.reflect.AnnotatedArrayType;
+import java.beans.PropertyChangeEvent;
+import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class CreateAccountViewModel {
-    private DataCheckMember dataCheckMember;
-    private final StringProperty searchField;
+    private ShareItModel model;
     private final StringProperty usernameField;
     private final StringProperty passwordField;
     private final StringProperty confirmPasswordField;
@@ -20,13 +22,12 @@ public class CreateAccountViewModel {
     private final StringProperty floorField;
     private final StringProperty postalCodeField;
     private final StringProperty emailField;
-    private final StringProperty telephoneNo1Field;
-    private final StringProperty telephoneNo2Field;
+    private final StringProperty telephoneNoField;
     private final StringProperty otherInfoField;
+    private ObservableList<String> locationsList;
 
-    public CreateAccountViewModel() throws SQLException {
-        dataCheckMember = new DataCheckMember();
-        searchField = new SimpleStringProperty();
+    public CreateAccountViewModel(ShareItModel model) throws SQLException {
+        this.model = model;
         usernameField = new SimpleStringProperty();
         passwordField = new SimpleStringProperty();
         confirmPasswordField = new SimpleStringProperty();
@@ -35,14 +36,11 @@ public class CreateAccountViewModel {
         floorField = new SimpleStringProperty();
         postalCodeField = new SimpleStringProperty();
         emailField = new SimpleStringProperty();
-        telephoneNo1Field = new SimpleStringProperty();
-        telephoneNo2Field = new SimpleStringProperty();
+        telephoneNoField = new SimpleStringProperty();
         otherInfoField = new SimpleStringProperty();
+        //model.addListener("dataValidation", this::onDataValidation);
     }
 
-    public StringProperty getSearchField(){
-        return searchField;
-    }
     public StringProperty getUsernameField(){
         return usernameField;
     }
@@ -67,17 +65,30 @@ public class CreateAccountViewModel {
     public StringProperty getEmailField(){
         return emailField;
     }
-    public StringProperty getTelephoneNo1Field(){
-        return telephoneNo1Field;
-    }
-    public StringProperty getTelephoneNo2Field(){
-        return telephoneNo2Field;
+    public StringProperty getTelephoneNoField(){
+        return telephoneNoField;
     }
     public StringProperty getOtherInfoField(){
         return otherInfoField;
     }
 
-    public void onCreateButtonPressed(){
-        dataCheckMember.checkData(usernameField.getValue(), passwordField.getValue(), confirmPasswordField.getValue(), emailField.getValue(), otherInfoField.getValue(), telephoneNo1Field.getValue(), telephoneNo2Field.getValue(), streetField.getValue(), streetNumberField.getValue()+", "+floorField.getValue(), postalCodeField.getValue(),  "Horsens");
+    public String onCreateButtonPressed(String selectedCity) throws IOException {
+        return model.checkMemberData(usernameField.getValue(), passwordField.getValue(), confirmPasswordField.getValue(), emailField.getValue(), telephoneNoField.getValue(), otherInfoField.getValue(), streetField.getValue(), streetNumberField.getValue()+", "+floorField.getValue(), postalCodeField.getValue(),  selectedCity);
     }
+
+    public ObservableList<String> getLocations(){
+        ArrayList<City> cityList = model.getCityList();
+        ArrayList<String> cityListString = new ArrayList<>();
+        for (int i = 0; i < cityList.size(); i++) {
+            cityListString.add(cityList.get(i).toString());
+        }
+        locationsList = FXCollections.observableArrayList(cityListString);
+        return locationsList;
+    }
+
+//    public void onDataValidation(PropertyChangeEvent evt){
+//        if(evt.getPropertyName().equals("success")){
+//
+//        }
+//    }
 }

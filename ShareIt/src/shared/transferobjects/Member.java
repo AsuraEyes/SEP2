@@ -1,13 +1,14 @@
 package shared.transferobjects;
 
-public class Member {
+import java.io.Serializable;
+
+public class Member implements Serializable {
     private int id;
     private String username;
     private String password;
     private String emailAddress;
     private String otherInformation;
-    private String phoneNo1;
-    private String phoneNo2;
+    private String phoneNo;
     private String addressStreet;
     private String addressNo;
     private int addressPostalCode;
@@ -15,20 +16,20 @@ public class Member {
     private float averageReview;
 
 
-    public Member(int id, String username, String password, String emailAddress, String otherInformation, String phoneNo1, String phoneNo2, String address_street, String address_no, int address_postal_code, String address_city) {
+    public Member(int id, String username, String password, String emailAddress,String phoneNo, String otherInformation, String address_street, String address_no, int address_postal_code, String address_city) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.emailAddress = emailAddress;
         this.otherInformation = otherInformation;
-        this.phoneNo1 = phoneNo1;
-        this.phoneNo2 = phoneNo2;
+        this.phoneNo = phoneNo;
         this.addressStreet = address_street;
         this.addressNo = address_no;
         this.addressPostalCode = address_postal_code;
         this.addressCity = address_city;
         averageReview = 0;
     }
+
     public int getId() {
         return id;
     }
@@ -70,20 +71,12 @@ public class Member {
         this.otherInformation = otherInformation;
     }
 
-    public String getPhoneNo1() {
-        return phoneNo1;
+    public String getPhoneNo() {
+        return phoneNo;
     }
 
-    public void setPhoneNo1(String phoneNo1) {
-        this.phoneNo1 = phoneNo1;
-    }
-
-    public String getPhoneNo2() {
-        return phoneNo2;
-    }
-
-    public void setPhoneNo2(String phoneNo2) {
-        this.phoneNo2 = phoneNo2;
+    public void setPhoneNo(String phoneNo) {
+        this.phoneNo = phoneNo;
     }
 
     public String getAddressStreet() {

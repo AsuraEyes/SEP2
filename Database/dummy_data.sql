@@ -26,21 +26,20 @@ INSERT INTO state VALUES ('Good');
 INSERT INTO state VALUES ('Fair');
 INSERT INTO state VALUES ('Poor');
 
-
-INSERT INTO member (username, password, email_address, other_information, address_street, address_no, address_postal_code, address_city_name)
-VALUES ('bob','strongpassword1234','bobbobbinsky@via.dk','retired janitor','Hulvej','19','8700','Horsens'),
-       ('HappyGarry1','qwerty123','imoutofblood@gmail.com','doing transactions only on odd mondays','Sankt Annæ Pl.','26','1250','Copenhagen'),
-       ('stillTommy','Tommy420','tommytommy@gmail.com','preferred meeting in populated areas','Skelagervej','83','9000','Aalborg'),
-       ('AlbertA','austriaisbestest','science@science.com','it would be nice if person that rent my belongs would be interested in science','Schleppegrellsgade','15','8000','Aarhus'),
-       ('notaserialkiller','killkill','notaserialkiller@darknet.org','there are no worries making trades with me as im not a serial killer','Skolegade','3B','7100','Vejle'),
-       ('bonelessbanana','potasiuuum','yelowskins@fruit.com','certified banana','Holkebjergvej','87B','5250','Odense'),
-       ('chesspawnplayer','checkmate123','magnuscarlsen@chess.com','moving only one step at a time','Svietorve','1','6000','Kolding'),
-       ('cleaner','zxzxzx123','mrclean@rengoring.dk','my rentals are always clean and in perfect stand','Hattemagervej','25','8920','Randers'),
-       ('bmwdriver','noblinkers123','noseatbelts@bmw.dk','please dont get scared of baseball bat in my car im a nice person','Københavnsvej','261','4000','Roskilde'),
-       ('destroyer','destruction1212','canceleverything@crash.com','most of my items are in poor state and i usually destroy things i rent','Gudenåvej','20','6710','Esbjerg'),
-       ('pizzamaker34','qweqwe23','myfavouritedishispizza@lidl.dk','all my thing i rent are pizza related','Grønnegade','27','8700','Horsens'),
-       ('progamerrr','steam221','warrior18@gamers.com','renting out my old computer gear :)','Hospitalsgade','11','8700','Horsens'),
-       ('saveallthemoney','blingbling1','karen@gmail.com','i created account here just to save money renting from others','Flintebakken','150','8700','Horsens');
+INSERT INTO member (username, password, email_address, phone_number, other_information, address_street, address_no, address_postal_code, address_city_name)
+VALUES ('bob','strongpassword1234','bobbobbinsky@via.dk', '26465768', 'retired janitor','Hulvej','19','8700','Horsens'),
+       ('HappyGarry1','qwerty123','imoutofblood@gmail.com', '+45 76849212', 'doing transactions only on odd mondays','Sankt Annæ Pl.','26','1250','Copenhagen'),
+       ('stillTommy','Tommy420','tommytommy@gmail.com',null,'preferred meeting in populated areas','Skelagervej','83','9000','Aalborg'),
+       ('AlbertA','austriaisbestest','science@science.com', '+420 265476563', 'it would be nice if person that rent my belongs would be interested in science','Schleppegrellsgade','15','8000','Aarhus'),
+       ('notaserialkiller','killkill','notaserialkiller@darknet.org','+48 512_113_543','there are no worries making trades with me as im not a serial killer','Skolegade','3B','7100','Vejle'),
+       ('bonelessbanana','potasiuuum','yelowskins@fruit.com',null, 'certified banana','Holkebjergvej','87B','5250','Odense'),
+       ('chesspawnplayer','checkmate123', null, '+48 564 354 43', 'moving only one step at a time','Svietorve','1','6000','Kolding'),
+       ('cleaner','zxzxzx123','mrclean@rengoring.dk', '00 45 23 44 56 70', 'my rentals are always clean and in perfect stand','Hattemagervej','25','8920','Randers'),
+       ('bmwdriver','noblinkers123','noseatbelts@bmw.dk','+49 345 675 643 93', 'please dont get scared of baseball bat in my car im a nice person','Københavnsvej','261','4000','Roskilde'),
+       ('destroyer','destruction1212','canceleverything@crash.com', '+31 12 33 24 35', 'most of my items are in poor state and i usually destroy things i rent','Gudenåvej','20','6710','Esbjerg'),
+       ('pizzamaker34','qweqwe23','myfavouritedishispizza@lidl.dk', '00 40 546235213', 'all my thing i rent are pizza related','Grønnegade','27','8700','Horsens'),
+       ('progamerrr','steam221','warrior18@gamers.com', '+45 21376942', 'renting out my old computer gear :)','Hospitalsgade','11','8700','Horsens'),
+       ('saveallthemoney','blingbling1','karen@gmail.com', '+45 34891032', 'i created account here just to save money renting from others','Flintebakken','150','8700','Horsens');
 
 INSERT INTO rating
 VALUES (5,'Amazing! I even got a coffee together with the tool i borrowed. I recommend!!!',1,2),
@@ -70,7 +69,7 @@ VALUES ('Donec ipsum velit, varius non egestas molestie, consectetur quis eros. 
        ('Sed ut vestibulum neque. Vivamus nec tempus ligula. Curabitur leo tortor, convallis at suscipit quis, pellentesque ut neque. Praesent a consectetur ligula. Maecenas condimentum enim ligula, non dictum est accumsan tincidunt. Aliquam ornare neque leo, vitae vulputate ipsum aliquet id. Vivamus feugiat, purus non maximus placerat, ex nisi lacinia neque, a fermentum velit arcu eget metus. Morbi ac sapien nisi. Ut ultrices elementum gravida. Aliquam pharetra turpis est, eget maximus est dictum in. In ut pharetra massa.',5,7),
        ('Vestibulum sit amet turpis non velit tincidunt consectetur. Cras tempus urna id sapien efficitur, in bibendum sem tincidunt. Proin viverra ultrices augue, in blandit tortor accumsan eget. Etiam non eros nec ante hendrerit accumsan non volutpat diam. Duis tempor ex in lorem placerat, sed venenatis nisi iaculis. Sed at erat eu lacus mattis tempor. Aenean ac libero mattis, aliquet leo quis, pharetra purus.',6,7);
 
-INSERT INTO rental(name, picture_link, description, price, otherinformation, state_name, member_id)
+INSERT INTO rental(name, picture_link, description, price, other_information, state_name, member_id)
 VALUES ('Super duper chisels', 'x','This chisels are really amazing but sometimes does not work', 20, 'Not available for rent on Fridays', 'Good', 1),
        ('Even better drill','y', 'This drill is even more amazing and always works', 40, '', 'Like New', 5),
        ('Fishing rod','<' ,'Good for beginners to try out, not suitable for advanced fishers', 100, '', 'Fair', 3),
@@ -88,19 +87,6 @@ VALUES (1, 'Tools'),
        (6, 'Musical instruments'),
        (7, 'Kitchenware'),
        (7, 'Tools');
-
-INSERT INTO phone_no
-VALUES ('26465768',1),
-       ('+45 76849212',2),
-       ('+45 21376942',4),
-       ('+45 34891032',5),
-       ('+420 265476563',6),
-       ('00 40 546235213',7),
-       ('+31 12 33 24 35',8),
-       ('+48 564 354 43',9),
-       ('+49 345 675 643 93',9),
-       ('+48 512_113_543',11),
-       ('00 45 23 44 56 70',12);
 
 INSERT INTO message
 VALUES ('Hi, is this product available', '2021-05-03 15:15:38', 7, 4),
@@ -123,3 +109,5 @@ VALUES ('This is a warning for your misconduct', '2021-05-03 15:15:38', 'adminis
 SELECT * FROM member;
 INSERT INTO rating
 VALUES (5, 'Good rating', 8, 5);
+
+SELECT * FROM share_it.city

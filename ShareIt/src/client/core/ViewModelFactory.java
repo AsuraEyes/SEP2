@@ -7,6 +7,7 @@ import client.viewmodel.create_account.CreateAccountViewModel;
 import client.viewmodel.log_in.LogInViewModel;
 import client.viewmodel.menu.MenuViewModel;
 import client.viewmodel.seatch_for_rental.SearchForRentalViewModel;
+import client.viewmodel.view_member_profile.ViewMemberProfileViewModel;
 import client.viewmodel.view_rating.ViewRatingViewModel;
 import client.viewmodel.view_rating_full.ViewRatingFullViewModel;
 import client.viewmodel.view_reported_member.ViewReportedMemberViewModel;
@@ -32,6 +33,7 @@ public class ViewModelFactory
   private ViewReportedMemberListViewModel viewReportedMemberListViewModel;
   private WelcomePageViewModel welcomePageViewModel;
   private MenuViewModel menuViewModel;
+  private ViewMemberProfileViewModel viewMemberProfileViewModel;
 
   public ViewModelFactory(ModelFactory modelFactory) throws IOException
   {
@@ -68,9 +70,9 @@ public class ViewModelFactory
     return chatWriteMessageViewModel;
   }
 
-  public AddRentalViewModel getAddRentalViewModel() {
+  public AddRentalViewModel getAddRentalViewModel() throws SQLException, IOException {
     if (addRentalViewModel == null){
-      addRentalViewModel = new AddRentalViewModel();
+      addRentalViewModel = new AddRentalViewModel(modelFactory.getShareItModel());
     }
     return addRentalViewModel;
   }
@@ -82,16 +84,16 @@ public class ViewModelFactory
     return welcomePageViewModel;
   }
 
-  public CreateAccountViewModel getCreateAccountViewModel() throws SQLException {
+  public CreateAccountViewModel getCreateAccountViewModel() throws SQLException, IOException {
     if (createAccountViewModel == null){
-      createAccountViewModel = new CreateAccountViewModel();
+      createAccountViewModel = new CreateAccountViewModel(modelFactory.getShareItModel());
     }
     return createAccountViewModel;
   }
 
-  public SearchForRentalViewModel getSearchForRentalViewModel() {
+  public SearchForRentalViewModel getSearchForRentalViewModel() throws SQLException, IOException {
     if (searchForRentalViewModel == null){
-      searchForRentalViewModel = new SearchForRentalViewModel();
+      searchForRentalViewModel = new SearchForRentalViewModel(modelFactory.getShareItModel());
     }
     return searchForRentalViewModel;
   }
@@ -124,11 +126,20 @@ public class ViewModelFactory
     return viewReportedMemberListViewModel;
   }
 
-  public MenuViewModel getMenuViewModel(){
+  public MenuViewModel getMenuViewModel() throws IOException {
     if(menuViewModel == null)
     {
-      menuViewModel = new MenuViewModel();
+      menuViewModel = new MenuViewModel(modelFactory.getShareItModel());
     }
     return menuViewModel;
+  }
+
+  public ViewMemberProfileViewModel getViewMemberProfileViewModel()
+  {
+    if(viewMemberProfileViewModel == null)
+    {
+      viewMemberProfileViewModel = new ViewMemberProfileViewModel();
+    }
+    return viewMemberProfileViewModel;
   }
 }
