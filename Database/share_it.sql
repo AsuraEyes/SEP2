@@ -63,7 +63,7 @@ DROP TABLE IF EXISTS rental;
 CREATE TABLE rental(
     id SERIAL PRIMARY KEY ,
     name VARCHAR (200) NOT NULL,
-    picture_link bla_bla_type UNIQUE,
+    picture_link bytea UNIQUE,
     description bla_bla_type,
     price int NOT NULL NOT NULL,
     otherInformation bla_bla_type,
