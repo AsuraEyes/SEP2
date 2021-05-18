@@ -20,7 +20,7 @@ public class RunServer
     RMIServer ss = new RMIServerImpl(new ServerModelImpl());
     String timothyPassword = "CoDex21";
     String maggiePassword = "SQLdatabaze";
-    String currentPassword = maggiePassword;
+    String currentPassword = timothyPassword;
     MemberDAOImpl.getInstance().setPassword(currentPassword);
     CityDAOImpl.getInstance().setPassword(currentPassword);
     RentalDAOImpl.getInstance().setPassword(currentPassword);
