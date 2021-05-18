@@ -6,6 +6,9 @@ import shared.transferobjects.Rental;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,9 +37,14 @@ public class RentalDAOImpl implements RentalDAO{
     }
 
     @Override
-    public Rental create(String name, String pictureLink, String description, int price, String otherInformation, String stateName, Member member) throws SQLException {
+    public Rental create(String name, String pictureLink, String description, int price, String otherInformation, String stateName, String username) throws SQLException {
         try(Connection connection = getConnection()){
-            File file = new File(pictureLink);
+            File file = null;
+            try {
+                file = new File(new URI(pictureLink));
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
             FileInputStream fis = null;
             try {
                 fis = new FileInputStream(file);
@@ -44,20 +52,32 @@ public class RentalDAOImpl implements RentalDAO{
                 e.printStackTrace();
             }
 
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO share_it.rental(name, picture_link, description, price, other_information, state_name, member_id) VALUES (?, ?, ?, ?, ?, ?, ?);", PreparedStatement.RETURN_GENERATED_KEYS);
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM share_it.member WHERE username = ?");
+            statement.setString(1, username);
+            ResultSet resultSet = statement.executeQuery();
+            int memberId = 0;
+            if(resultSet.next()){
+                memberId =  resultSet.getInt("id");
+            }
+            else{
+                throw new SQLException("No keys generated");
+            }
+
+
+            statement = connection.prepareStatement("INSERT INTO share_it.rental(name, picture_link, description, price, other_information, state_name, member_id) VALUES (?, ?, ?, ?, ?, ?, ?);", PreparedStatement.RETURN_GENERATED_KEYS);
             statement.setString(1, name);
             statement.setBinaryStream(2, fis, (int)file.length());
             statement.setString(3, description);
             statement.setInt(4, price);
             statement.setString(5, otherInformation);
             statement.setString(6, stateName);
-            statement.setInt(7, member.getId());
+            statement.setInt(7, memberId);
             statement.executeUpdate();
 
             //this gets the generated id of the member
             ResultSet generatedKeys = statement.getGeneratedKeys();
             if(generatedKeys.next()){
-                return new Rental(generatedKeys.getInt(1), name, pictureLink, description, price, otherInformation, stateName, member);
+                return new Rental(generatedKeys.getInt(1), name, pictureLink, description, price, otherInformation, stateName, memberId);
             }
             else{
                 throw new SQLException("No keys generated");
@@ -139,7 +159,7 @@ public class RentalDAOImpl implements RentalDAO{
             statement.setInt(4, rental.getPrice());
             statement.setString(5, rental.getOtherInformation());
             statement.setString(6, rental.getStateName());
-            statement.setInt(7, rental.getMember().getId());
+            statement.setInt(7, rental.getMemberId());
             statement.setInt(8, rental.getId());
             statement.executeUpdate();
         }

@@ -31,7 +31,7 @@ import java.util.Optional;
 
 public class AddRentalController {
 
-  @FXML ImageView pictureView;
+  @FXML private ImageView pictureView;
   @FXML private CheckComboBox categoryBox;
   @FXML private ChoiceBox stateChoiceBox;
   @FXML private TextField searchField;
@@ -41,7 +41,6 @@ public class AddRentalController {
   @FXML private TextField descriptionField;
   @FXML private TextField priceField;
   @FXML private TextArea otherInfoField;
-  private Member member;
 
   private ValidationSupport validationSupport;
   private AddRentalViewModel addRentalViewModel;
@@ -76,8 +75,8 @@ public class AddRentalController {
 
   public void addRentalButton(ActionEvent actionEvent) throws IOException {
     boolean ok = true;
-    if(checkField("Name", nameField) && checkField("Description",descriptionField) && checkField("Price", priceField)){
-      String message = addRentalViewModel.onAddRentalButtonPressed(stateBox.getValue(), categoryBox.getCheckModel().getCheckedItems(), member);
+    if(checkField("Name", nameField) && checkField("Description",descriptionField) && checkField("Price", priceField) && checkPicture(pictureView)){
+      String message = addRentalViewModel.onAddRentalButtonPressed(stateBox.getValue(), categoryBox.getCheckModel().getCheckedItems(), "file://"+pictureView.getImage().getUrl());
 
       switch (message){
         case "Adding successful":
@@ -117,6 +116,7 @@ public class AddRentalController {
       pictureView.setPreserveRatio(false);
       System.out.println(path);
       pictureView.setImage(new Image("file:///"+path));
+
     }
     else if(result == JFileChooser.CANCEL_OPTION){
       System.out.println("No DATA");
@@ -130,6 +130,14 @@ public class AddRentalController {
   private boolean checkField (String message, TextField nameOfField){
     if (nameOfField.textProperty().getValue() == null || nameOfField.textProperty().getValue().isBlank()) {
       notifications.owner(parent).text(message + " cannot be empty").showError();
+      return false;
+    }
+    return true;
+  }
+
+  private boolean checkPicture(ImageView imageView){
+    if(imageView.getImage() == null){
+      notifications.owner(parent).text("Picture has to be added").showError();
       return false;
     }
     return true;

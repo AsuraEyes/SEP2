@@ -14,15 +14,15 @@ public class DataCheckRental {
     private int priceNb;
     private String search;
 
-    public String checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, Member member) {
+    public String checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, String username) {
         this.name = name;
         this.pictureLink = pictureLink;
         this.description = description;
         this.price = price;
 
-        if (nameGiven() && pictureLinkGiven() && descriptionGiven() && priceIsNumber()){
+        if (nameGiven() && descriptionGiven() && priceIsNumber()){
             try {
-                RentalDAOImpl.getInstance().create(name, pictureLink, description, priceNb, otherInformation, stateName, member);
+                RentalDAOImpl.getInstance().create(name, pictureLink, description, priceNb, otherInformation, stateName, username);
                 return "Adding successful";
             }
             catch (SQLException e){
@@ -32,9 +32,6 @@ public class DataCheckRental {
         else{
             if(!nameGiven()){
                 return "Name cannot be empty";
-            }
-            if(!pictureLinkGiven()){
-                return "Picture link cannot be empty";
             }
             if(!descriptionGiven()){
                 return "Description cannot be empty";
@@ -49,15 +46,6 @@ public class DataCheckRental {
     private boolean nameGiven(){
         if (name != null){
             if (!(name.trim().equals("") && name.isBlank() && name.isEmpty())){
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private boolean pictureLinkGiven(){
-        if (pictureLink != null){
-            if (!(pictureLink.trim().equals("") && pictureLink.isBlank() && pictureLink.isEmpty())){
                 return true;
             }
         }

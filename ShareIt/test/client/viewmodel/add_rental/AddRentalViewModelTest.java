@@ -33,7 +33,6 @@ public class AddRentalViewModelTest
 
 
     vm.getNameField().bind(nameField);
-    vm.getPictureLinkField().bind(pictureLinkField);
     vm.getDescriptionField().bind(descriptionField);
     vm.getPriceField().bind(priceField);
     vm.getOtherInfoField().bind(otherInfoField);
