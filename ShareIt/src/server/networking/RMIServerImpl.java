@@ -1,12 +1,13 @@
 package server.networking;
 
-import server.model.data_check.DataCheckMember;
 import server.model.ServerModelManager;
-import server.model.database.city.CityDAOImpl;
 import shared.networking.RMIServer;
 import shared.networking.RemoteObserver;
+import client.model.state.StateManager;
+import shared.transferobjects.Category;
 import shared.transferobjects.City;
-
+import shared.transferobjects.Member;
+import shared.transferobjects.State;
 
 import java.beans.PropertyChangeListener;
 import java.rmi.AlreadyBoundException;
@@ -14,7 +15,6 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class RMIServerImpl implements RMIServer
@@ -65,7 +65,7 @@ public class RMIServerImpl implements RMIServer
     listener = evt ->{
       try
       {
-        client.update(evt.getNewValue());
+        client.update(evt.getPropertyName(), evt.getNewValue());
       }
       catch (RemoteException e)
       {
@@ -83,12 +83,34 @@ public class RMIServerImpl implements RMIServer
   }
 
   @Override
-  public void checkMemberData(String username, String password, String confirmPassword, String email, String phone, String otherInformation, String street, String streetNo, String postalCode, String city) throws RemoteException {
-    serverModelManager.checkData(username, password, confirmPassword, email, otherInformation, phone, street, streetNo, postalCode, city);
+  public String checkMemberData(String username, String password, String confirmPassword, String email, String phone, String otherInformation, String street, String streetNo, String postalCode, String city) throws RemoteException {
+    return serverModelManager.checkMemberData(username, password, confirmPassword, email, otherInformation, phone, street, streetNo, postalCode, city);
+  }
+
+  @Override
+  public String checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, Member member) throws RemoteException {
+    return serverModelManager.checkRentalData(name, pictureLink, description, price, otherInformation, stateName, member);
+  }
+
+  @Override
+  public String checkSearch(String search) throws RemoteException
+  {
+    return serverModelManager.checkSearch(search);
   }
 
   @Override
   public ArrayList<City> getCityList() {
     return serverModelManager.getCityList();
   }
+
+  @Override
+  public ArrayList<State> getStateList() throws RemoteException {
+    return serverModelManager.getStateList();
+  }
+
+  @Override
+  public ArrayList<Category> getCategoryList() throws RemoteException {
+    return serverModelManager.getCategoryList();
+  }
+
 }

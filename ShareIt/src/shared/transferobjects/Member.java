@@ -29,6 +29,7 @@ public class Member implements Serializable {
         this.addressCity = address_city;
         averageReview = 0;
     }
+
     public int getId() {
         return id;
     }

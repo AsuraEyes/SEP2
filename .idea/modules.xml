@@ -5,7 +5,6 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/SEP2.iml" filepath="$PROJECT_DIR$/.idea/SEP2.iml" />
       <module fileurl="file://$PROJECT_DIR$/ShareIt/ShareIt.iml" filepath="$PROJECT_DIR$/ShareIt/ShareIt.iml" />
       <module fileurl="file://$PROJECT_DIR$/ShareIt/ground_classes.iml" filepath="$PROJECT_DIR$/ShareIt/ground_classes.iml" />
-      <module fileurl="file://$PROJECT_DIR$/random/random.iml" filepath="$PROJECT_DIR$/random/random.iml" />
     </modules>
   </component>
 </project>

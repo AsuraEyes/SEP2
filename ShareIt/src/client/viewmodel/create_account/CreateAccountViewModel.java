@@ -7,13 +7,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import shared.transferobjects.City;
 
+import java.beans.PropertyChangeEvent;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class CreateAccountViewModel {
     private ShareItModel model;
-    private final StringProperty searchField;
     private final StringProperty usernameField;
     private final StringProperty passwordField;
     private final StringProperty confirmPasswordField;
@@ -24,12 +24,10 @@ public class CreateAccountViewModel {
     private final StringProperty emailField;
     private final StringProperty telephoneNoField;
     private final StringProperty otherInfoField;
-    private final ObservableValue locationBox;
     private ObservableList<String> locationsList;
 
     public CreateAccountViewModel(ShareItModel model) throws SQLException {
         this.model = model;
-        searchField = new SimpleStringProperty();
         usernameField = new SimpleStringProperty();
         passwordField = new SimpleStringProperty();
         confirmPasswordField = new SimpleStringProperty();
@@ -40,12 +38,9 @@ public class CreateAccountViewModel {
         emailField = new SimpleStringProperty();
         telephoneNoField = new SimpleStringProperty();
         otherInfoField = new SimpleStringProperty();
-        locationBox = new SimpleStringProperty();
+        //model.addListener("dataValidation", this::onDataValidation);
     }
 
-    public StringProperty getSearchField(){
-        return searchField;
-    }
     public StringProperty getUsernameField(){
         return usernameField;
     }
@@ -76,12 +71,9 @@ public class CreateAccountViewModel {
     public StringProperty getOtherInfoField(){
         return otherInfoField;
     }
-    public ObservableValue getLocationBox() {
-        return locationBox;
-    }
 
-    public void onCreateButtonPressed(String selectedCity) throws IOException {
-        model.checkMemberData(usernameField.getValue(), passwordField.getValue(), confirmPasswordField.getValue(), emailField.getValue(), telephoneNoField.getValue(), otherInfoField.getValue(), streetField.getValue(), streetNumberField.getValue()+", "+floorField.getValue(), postalCodeField.getValue(),  selectedCity);
+    public String onCreateButtonPressed(String selectedCity) throws IOException {
+        return model.checkMemberData(usernameField.getValue(), passwordField.getValue(), confirmPasswordField.getValue(), emailField.getValue(), telephoneNoField.getValue(), otherInfoField.getValue(), streetField.getValue(), streetNumberField.getValue()+", "+floorField.getValue(), postalCodeField.getValue(),  selectedCity);
     }
 
     public ObservableList<String> getLocations(){
@@ -93,4 +85,10 @@ public class CreateAccountViewModel {
         locationsList = FXCollections.observableArrayList(cityListString);
         return locationsList;
     }
+
+//    public void onDataValidation(PropertyChangeEvent evt){
+//        if(evt.getPropertyName().equals("success")){
+//
+//        }
+//    }
 }

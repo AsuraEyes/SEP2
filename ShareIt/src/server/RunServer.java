@@ -5,6 +5,7 @@ import server.model.database.category.CategoryDAOImpl;
 import server.model.database.city.CityDAOImpl;
 import server.model.database.member.MemberDAOImpl;
 import server.model.database.rental.RentalDAOImpl;
+import server.model.database.state.StateDAOImpl;
 import server.networking.RMIServerImpl;
 import shared.networking.RMIServer;
 
@@ -24,6 +25,7 @@ public class RunServer
     CityDAOImpl.getInstance().setPassword(currentPassword);
     RentalDAOImpl.getInstance().setPassword(currentPassword);
     CategoryDAOImpl.getInstance().setPassword(currentPassword);
+    StateDAOImpl.getInstance().setPassword(currentPassword);
     ss.startServer();
   }
 }

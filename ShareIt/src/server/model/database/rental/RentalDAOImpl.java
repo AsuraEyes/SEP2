@@ -44,7 +44,7 @@ public class RentalDAOImpl implements RentalDAO{
                 e.printStackTrace();
             }
 
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO share_it.rental(name, picture_link, description, price, otherinformation, state_name, member_id) VALUES (?, ?, ?, ?, ?, ?, ?);", PreparedStatement.RETURN_GENERATED_KEYS);
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO share_it.rental(name, picture_link, description, price, other_information, state_name, member_id) VALUES (?, ?, ?, ?, ?, ?, ?);", PreparedStatement.RETURN_GENERATED_KEYS);
             statement.setString(1, name);
             statement.setBinaryStream(2, fis, (int)file.length());
             statement.setString(3, description);
@@ -82,6 +82,33 @@ public class RentalDAOImpl implements RentalDAO{
         }
     }
 
+    public List<Rental> readBySearch(String search) throws SQLException
+    {
+        try (Connection connection = getConnection())
+        {
+            PreparedStatement statement = connection.prepareStatement(
+                "SELECT * FROM share_it.rental WHERE name || description  ILIKE ?;");
+            statement.setString(1, "%" + search + "%");
+            ResultSet resultSet = statement.executeQuery();
+            ArrayList<Rental> arrayListToReturn = new ArrayList<>();
+            while (resultSet.next())
+            {
+                int idOfSearchedRental = resultSet.getInt("id");
+                Rental rental = new Rental(idOfSearchedRental);
+                arrayListToReturn.add(rental);
+
+            }
+            //return array list
+            System.out.println(search);
+            for (Rental rental : arrayListToReturn)
+            {
+                System.out.println(rental);
+            }
+            return arrayListToReturn;
+
+        }
+    }
+
     /*public static Rental createBook(ResultSet resultSet) throws SQLException {
         int id = resultSet.getInt("id");
         String name = resultSet.getString("name");
@@ -105,7 +132,7 @@ public class RentalDAOImpl implements RentalDAO{
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
-            PreparedStatement statement = connection.prepareStatement("UPDATE share_it.rental SET name = ?, picture_link = ?, description = ?, price = ?, otherinformation = ?, state_name = ?, member_id = ? WHERE id = ?");
+            PreparedStatement statement = connection.prepareStatement("UPDATE share_it.rental SET name = ?, picture_link = ?, description = ?, price = ?, other_information = ?, state_name = ?, member_id = ? WHERE id = ?");
             statement.setString(1, rental.getName());
             statement.setBinaryStream(2, fis, (int)file.length());
             statement.setString(3, rental.getDescription());
@@ -124,6 +151,22 @@ public class RentalDAOImpl implements RentalDAO{
             PreparedStatement statement = connection.prepareStatement("DELETE FROM share_it.rental WHERE id = ?");
             statement.setInt(1, rental.getId());
             statement.executeUpdate();
+        }
+    }
+
+    @Override
+    public int getNextAvailableId() throws SQLException {
+        try(Connection connection = getConnection()){
+            PreparedStatement statement = connection.prepareStatement("SELECT nextval(pg_get_serial_sequence('share_it.rental', 'id')) AS available_id;");
+            ResultSet resultSet = statement.executeQuery();
+            int nextAvailableId = 0;
+            if(resultSet.next()){
+                nextAvailableId =  resultSet.getInt("available_id");
+            }
+            else{
+                throw new SQLException("No keys generated");
+            }
+            return nextAvailableId;
         }
     }
 }
