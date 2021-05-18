@@ -12,6 +12,8 @@ import shared.transferobjects.State;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class AddRentalViewModel {
     private ShareItModel model;
@@ -54,8 +56,9 @@ public class AddRentalViewModel {
 //        return categoryBox;
 //    }
 
-    public String onAddRentalButtonPressed(Object selectedState, Object selectedCategory, String pictureLink) throws IOException {
-        return model.checkRentalData(nameField.getValue(), pictureLink, descriptionField.getValue(), priceField.getValue(), otherInfoField.getValue(), (String) selectedState);
+    public String onAddRentalButtonPressed(Object selectedState, ObservableList<String> selectedCategory, String pictureLink) throws IOException {
+        ArrayList<String> selectedCategoriesList = new ArrayList<>(selectedCategory);
+        return model.checkRentalData(nameField.getValue(), pictureLink, descriptionField.getValue(), priceField.getValue(), otherInfoField.getValue(), (String) selectedState, selectedCategoriesList);
     }
     public ObservableList<String> getStates(){
         ArrayList<State> stateList = model.getStateList();

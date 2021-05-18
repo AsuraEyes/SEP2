@@ -1,6 +1,7 @@
 package shared.transferobjects;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Rental implements Serializable {
     private int id;
@@ -11,8 +12,11 @@ public class Rental implements Serializable {
     private String otherInformation;
     private String stateName;
     private int memberId;
+    private ArrayList<String> selectedCategories;
 
-    public Rental(int id, String name, String pictureLink, String description, int price, String otherInformation, String stateName, int memberId) {
+
+
+    public Rental(int id, String name, String pictureLink, String description, int price, String otherInformation, String stateName, int memberId, ArrayList<String> selectedCategories) {
         this.id = id;
         this.name = name;
         this.pictureLink = pictureLink;
@@ -21,6 +25,14 @@ public class Rental implements Serializable {
         this.otherInformation = otherInformation;
         this.stateName = stateName;
         this.memberId = memberId;
+        this.selectedCategories = selectedCategories;
+    }
+    public ArrayList<String> getSelectedCategories() {
+        return selectedCategories;
+    }
+
+    public void setSelectedCategories(ArrayList<String> selectedCategories) {
+        this.selectedCategories = selectedCategories;
     }
     public Rental(int id){
         this.id = id;

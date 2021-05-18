@@ -84,8 +84,8 @@ public class RMIServerImpl implements RMIServer
   }
 
   @Override
-  public String checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, String username) throws RemoteException {
-    return serverModelManager.checkRentalData(name, pictureLink, description, price, otherInformation, stateName, username);
+  public String checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, String username, ArrayList<String> selectedCategories) throws RemoteException {
+    return serverModelManager.checkRentalData(name, pictureLink, description, price, otherInformation, stateName, username, selectedCategories);
   }
 
   @Override

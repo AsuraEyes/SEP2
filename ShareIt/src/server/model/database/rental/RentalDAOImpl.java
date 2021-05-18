@@ -39,7 +39,7 @@ public class RentalDAOImpl implements RentalDAO{
     }
 
     @Override
-    public Rental create(String name, String pictureLink, String description, int price, String otherInformation, String stateName, String username) throws SQLException {
+    public Rental create(String name, String pictureLink, String description, int price, String otherInformation, String stateName, String username, ArrayList<String> selectedCategories) throws SQLException {
         try(Connection connection = getConnection()){
             File file = null;
             file = new File(pictureLink);
@@ -78,14 +78,23 @@ public class RentalDAOImpl implements RentalDAO{
             statement.setInt(7, memberId);
             statement.executeUpdate();
 
+            int rentalId = 0;
             //this gets the generated id of the member
             ResultSet generatedKeys = statement.getGeneratedKeys();
             if(generatedKeys.next()){
-                return new Rental(generatedKeys.getInt(1), name, pictureLink, description, price, otherInformation, stateName, memberId);
+                rentalId = generatedKeys.getInt(1);
             }
             else{
                 throw new SQLException("No keys generated");
             }
+
+            for (int i = 0; i < selectedCategories.size(); i++) {
+                statement = connection.prepareStatement("INSERT INTO share_it.rental_category(rental_id, category_name) VALUES (?, ?);", PreparedStatement.RETURN_GENERATED_KEYS);
+                statement.setInt(1, rentalId);
+                statement.setString(2, selectedCategories.get(i));
+                statement.executeUpdate();
+            }
+            return new Rental(rentalId, name, pictureLink, description, price, otherInformation, stateName, memberId, selectedCategories);
         }
     }
 
