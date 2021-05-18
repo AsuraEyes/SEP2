@@ -42,6 +42,8 @@ public class AddRentalController {
   @FXML private TextField priceField;
   @FXML private TextArea otherInfoField;
 
+  private String path;
+
   private ValidationSupport validationSupport;
   private AddRentalViewModel addRentalViewModel;
   private ViewHandler viewHandler;
@@ -76,7 +78,7 @@ public class AddRentalController {
   public void addRentalButton(ActionEvent actionEvent) throws IOException {
     boolean ok = true;
     if(checkField("Name", nameField) && checkField("Description",descriptionField) && checkField("Price", priceField) && checkPicture(pictureView)){
-      String message = addRentalViewModel.onAddRentalButtonPressed(stateBox.getValue(), categoryBox.getCheckModel().getCheckedItems(), "file://"+pictureView.getImage().getUrl());
+      String message = addRentalViewModel.onAddRentalButtonPressed(stateBox.getValue(), categoryBox.getCheckModel().getCheckedItems(), path);
 
       switch (message){
         case "Adding successful":
@@ -116,7 +118,7 @@ public class AddRentalController {
       pictureView.setPreserveRatio(false);
       System.out.println(path);
       pictureView.setImage(new Image("file:///"+path));
-
+      this.path = path;
     }
     else if(result == JFileChooser.CANCEL_OPTION){
       System.out.println("No DATA");
