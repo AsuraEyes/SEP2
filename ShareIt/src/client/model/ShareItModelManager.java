@@ -10,7 +10,6 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.IOException;
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public class ShareItModelManager implements ShareItModel
@@ -55,6 +54,11 @@ public class ShareItModelManager implements ShareItModel
   @Override
   public void checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, Member member) throws IOException {
     client.checkRentalData(name, pictureLink, description, price, otherInformation, stateName, member);
+  }
+
+  @Override public String checkSearch(String search) throws IOException
+  {
+    return client.checkSearch(search);
   }
 
   @Override

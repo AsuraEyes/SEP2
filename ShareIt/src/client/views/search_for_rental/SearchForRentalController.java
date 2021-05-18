@@ -7,8 +7,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import org.controlsfx.control.Notifications;
+
+import java.io.IOException;
+import java.sql.SQLException;
 
 public class SearchForRentalController {
+    private AnchorPane parent;
     @FXML private TextField searchField;
     @FXML private Label rentalNameLabel;
     private Label locationLabel;
@@ -17,9 +23,12 @@ public class SearchForRentalController {
 
     private SearchForRentalViewModel searchForRentalViewModel;
     private ViewHandler viewHandler;
+    private Notifications notifications;
 
-    public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory){
-        this.viewHandler = viewHandler;
+    public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws
+        SQLException, IOException
+    {
+       this.viewHandler = viewHandler;
         searchForRentalViewModel = viewModelFactory.getSearchForRentalViewModel();
         searchField.textProperty().bindBidirectional(searchForRentalViewModel.getSearchField());
         rentalNameLabel.textProperty().bind(searchForRentalViewModel.getRentalNameLabel());
@@ -42,5 +51,13 @@ public class SearchForRentalController {
 
     public void loadMoreRentals(ActionEvent actionEvent){
 
+    }
+
+    private boolean checkField(TextField nameOfField){
+        if(nameOfField.textProperty().getValue() == null || nameOfField.textProperty().getValue().isBlank()){
+            notifications.owner(parent).text(nameOfField.getPromptText()+" cannot be empty").showError();
+            return false;
+        }
+        return true;
     }
 }
