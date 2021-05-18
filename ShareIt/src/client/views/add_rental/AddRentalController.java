@@ -55,12 +55,12 @@ public class AddRentalController {
     addRentalViewModel = viewModelFactory.getAddRentalViewModel();
     nameField.textProperty().bindBidirectional(addRentalViewModel.getNameField());
     descriptionField.textProperty().bind(addRentalViewModel.getDescriptionField());
-    //stateBox.setItems(addRentalViewModel.getStates());
-    //stateBox.getSelectionModel().selectFirst();
+    stateBox.setItems(addRentalViewModel.getStates());
+    stateBox.getSelectionModel().selectFirst();
     priceField.textProperty().bindBidirectional(addRentalViewModel.getPriceField());
     otherInfoField.textProperty().bind(addRentalViewModel.getOtherInfoField());
-    //categoryBox.setItems(addRentalViewModel.getCategories());
-    //categoryBox.getSelectionModel().selectFirst();
+    categoryBox.setItems(addRentalViewModel.getCategories());
+    categoryBox.getSelectionModel().selectFirst();
 
     notifications =  Notifications.create()
             .title("Error - invalid input!")
@@ -75,10 +75,10 @@ public class AddRentalController {
   }
 
   public void addRentalButton(ActionEvent actionEvent) throws IOException {
-    /*boolean ok = true;
+    boolean ok = true;
     if(checkField(nameField) && checkField(descriptionField) && checkField(priceField) && checkArea(otherInfoField)){
       addRentalViewModel.onAddRentalButtonPressed(stateBox.getValue(), categoryBox.getValue(), member);
-    }*/
+    }
   }
 
   public void addPictureButton(ActionEvent actionEvent)

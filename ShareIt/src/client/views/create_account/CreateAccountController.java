@@ -25,8 +25,6 @@ public class CreateAccountController {
     @FXML
     private AnchorPane parent;
     @FXML
-    private TextField searchField;
-    @FXML
     private TextField usernameField;
     @FXML
     private PasswordField passwordField;
