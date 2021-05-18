@@ -1,14 +1,10 @@
 package server.model.database.rental;
 
-import shared.transferobjects.Member;
 import shared.transferobjects.Rental;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -119,6 +115,44 @@ public class RentalDAOImpl implements RentalDAO{
         {
             PreparedStatement statement = connection.prepareStatement(
                 "SELECT * FROM share_it.rental WHERE name || description  ILIKE ?;");
+            statement.setString(1, "%" + search + "%");
+            ResultSet resultSet = statement.executeQuery();
+            ArrayList<Rental> arrayListToReturn = new ArrayList<>();
+            while (resultSet.next())
+            {
+                int idOfSearchedRental = resultSet.getInt("id");
+                Rental rental = new Rental(idOfSearchedRental);
+                arrayListToReturn.add(rental);
+
+            }
+            //return array list
+            System.out.println(search);
+            for (Rental rental : arrayListToReturn)
+            {
+                System.out.println(rental);
+            }
+            return arrayListToReturn;
+
+        }
+    }
+
+    public List<Rental> readBySearchAndFilter(String search, String city, ArrayList<String> categories) throws SQLException
+    {
+        try (Connection connection = getConnection())
+        {
+            String addToStatement = "";
+            if(city != null){
+                addToStatement += " AND r.member_id = m.id AND m.address_city_name = "+city;
+            }
+            if(categories.size() > 1){
+                for (int i = 0; i < categories.size(); i++) {
+                    addToStatement += " AND r.id = rc.rental_id AND rc.category_name = "+categories.get(i);
+                }
+
+            }
+
+            PreparedStatement statement = connection.prepareStatement(
+                "SELECT * FROM share_it.rental AS r, share_it.member AS m, share_it.rental_category AS rc WHERE name || description  ILIKE ? "+addToStatement+";");
             statement.setString(1, "%" + search + "%");
             ResultSet resultSet = statement.executeQuery();
             ArrayList<Rental> arrayListToReturn = new ArrayList<>();

@@ -5,18 +5,23 @@ import client.core.ViewModelFactory;
 import client.viewmodel.seatch_for_rental.SearchForRentalViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
+import org.controlsfx.control.CheckComboBox;
 import org.controlsfx.control.Notifications;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class SearchForRentalController {
+    @FXML private CheckComboBox categoryCheckComboBox;
+    @FXML private ChoiceBox<String> locationBox;
     @FXML private AnchorPane parent;
     @FXML private TextField searchField;
     @FXML private Label rentalNameLabel;
@@ -39,6 +44,11 @@ public class SearchForRentalController {
         locationLabel.textProperty().bind(searchForRentalViewModel.getLocationLabel());
         priceLabel.textProperty().bind(searchForRentalViewModel.getPriceLabel());
         otherInfoLabel.textProperty().bind(searchForRentalViewModel.getOtherInfoLabel());*/
+
+      locationBox.setItems(searchForRentalViewModel.getLocations());
+      categoryCheckComboBox.getItems().addAll(searchForRentalViewModel.getCategories());
+
+
       notifications =  Notifications.create()
           .title("Error - invalid input!")
           .graphic(new Rectangle(300, 300, Color.RED)) // sets node to display
@@ -60,13 +70,19 @@ public class SearchForRentalController {
       }
 
 
-    public void filterLocationButton(ActionEvent actionEvent) {
-
+    public void filterButton(ActionEvent actionEvent) throws IOException {
+      if(checkField(searchField))
+      {
+        String message = searchForRentalViewModel.onFilterButtonPressed(locationBox.getValue(),categoryCheckComboBox.getCheckModel().getCheckedItems());
+        switch (message){
+          case "Adding successfull":
+            break;
+          default:
+            notifications.owner(parent).text(message).showError();
+        }
+      }
     }
 
-    public void filterCategoryButton(ActionEvent actionEvent) {
-
-    }
 
     public void loadMoreRentals(ActionEvent actionEvent){
 

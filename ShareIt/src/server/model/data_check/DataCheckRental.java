@@ -72,33 +72,5 @@ public class DataCheckRental {
         }
     }
 
-    public String checkSearch(String search)
-    {
-        this.search = search;
-        if(searchGiven()){
-            try
-            {
-                RentalDAOImpl.getInstance().readBySearch(search);
-                return "";
-            }
-            catch (SQLException e){
-                //
-            }}
-        else {
-            if(!searchGiven()){
-                return "";
-            }
-
-        }
-        return "Ooops, something went wrong!!";
-    }
-
-    private boolean searchGiven(){
-        if (search != null){
-            if (!(search.trim().equals("") && search.isBlank() && search.isEmpty())){
-                return true;
-            }
-        }
-        return false;
-    }
+   
 }

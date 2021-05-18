@@ -97,6 +97,10 @@ public class RMIServerImpl implements RMIServer
   {
     return serverModelManager.checkSearch(search);
   }
+  @Override public String checkSearchWithFilter(String search,String city, ArrayList<String> selectedCategories ) throws RemoteException
+  {
+    return serverModelManager.checkSearchWithFilter(search,city,selectedCategories);
+  }
 
   @Override
   public ArrayList<City> getCityList() {

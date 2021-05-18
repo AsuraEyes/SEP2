@@ -6,12 +6,14 @@ import shared.transferobjects.Member;
 import shared.transferobjects.State;
 import shared.util.Subject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public interface ServerModelManager extends Subject
 {
     String checkMemberData(String username, String password, String confirmPassword, String email, String otherInformation, String phone, String street, String streetNo, String postalCode, String city);
     String checkSearch(String search);
+    String checkSearchWithFilter(String search,String city,ArrayList<String> selectedCategories);
     String checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, String username, ArrayList<String> selectedCategories);
 
     ArrayList<City> getCityList();
@@ -20,4 +22,5 @@ public interface ServerModelManager extends Subject
 
     ArrayList<State> getStateList();
     ArrayList<Category> getCategoryList();
+
 }

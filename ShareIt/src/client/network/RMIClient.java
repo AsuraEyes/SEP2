@@ -55,7 +55,7 @@ public class RMIClient implements Client, RemoteObserver
   }
 
   @Override
-  public String checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, ArrayList<String> selectedCategories) throws IOException {
+  public String checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, String username, ArrayList<String> selectedCategories) throws IOException {
     try {
       return server.checkRentalData(name, pictureLink, description, price, otherInformation, stateName, StateManager.getInstance().getUsername(), selectedCategories);
     }
@@ -72,7 +72,18 @@ public class RMIClient implements Client, RemoteObserver
   } catch (RemoteException e){
       e.printStackTrace();
       throw new RuntimeException("Could not contact server");
-    }}
+    }
+  }
+  @Override public String checkSearchWithFilter(String search,String city,ArrayList<String> selectedCategories ) throws IOException
+  {
+    try
+    {
+      return server.checkSearchWithFilter(search,city,selectedCategories );
+    }catch (RemoteException e){
+      e.printStackTrace();
+      throw new RuntimeException("Could not contact server");
+    }
+  }
 
   @Override
   public ArrayList<City> getCityList() {
