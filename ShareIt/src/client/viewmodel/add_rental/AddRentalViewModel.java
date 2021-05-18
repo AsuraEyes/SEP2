@@ -58,8 +58,8 @@ public class AddRentalViewModel {
 //        return categoryBox;
 //    }
 
-    public void onAddRentalButtonPressed(Object selectedState, Object selectedCategory, Member member) throws IOException {
-        model.checkRentalData(nameField.getValue(), pictureLinkField.getValue(), descriptionField.getValue(), priceField.getValue(), otherInfoField.getValue(), (String) selectedState, member);
+    public String onAddRentalButtonPressed(Object selectedState, Object selectedCategory, Member member) throws IOException {
+        return model.checkRentalData(nameField.getValue(), pictureLinkField.getValue(), descriptionField.getValue(), priceField.getValue(), otherInfoField.getValue(), (String) selectedState, member);
     }
     public ObservableList<String> getStates(){
         ArrayList<State> stateList = model.getStateList();

@@ -54,8 +54,8 @@ public class ServerModelImpl implements ServerModelManager
   }
 
   @Override
-  public void checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, Member member) {
-    dataCheckRental.checkData(name, pictureLink, description, price, otherInformation, stateName, member);
+  public String checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, Member member) {
+    return dataCheckRental.checkRentalData(name, pictureLink, description, price, otherInformation, stateName, member);
   }
 
   @Override

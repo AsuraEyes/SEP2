@@ -5,15 +5,13 @@ import client.core.ViewModelFactory;
 import client.viewmodel.add_rental.AddRentalViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.controlsfx.control.CheckComboBox;
 import org.controlsfx.control.Notifications;
@@ -29,6 +27,7 @@ import java.sql.SQLException;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.File;
+import java.util.Optional;
 
 public class AddRentalController {
 
@@ -78,7 +77,28 @@ public class AddRentalController {
   public void addRentalButton(ActionEvent actionEvent) throws IOException {
     boolean ok = true;
     if(checkField("Name", nameField) && checkField("Description",descriptionField) && checkField("Price", priceField)){
-      addRentalViewModel.onAddRentalButtonPressed(stateBox.getValue(), categoryBox.getCheckModel().getCheckedItems(), member);
+      String message = addRentalViewModel.onAddRentalButtonPressed(stateBox.getValue(), categoryBox.getCheckModel().getCheckedItems(), member);
+
+      switch (message){
+        case "Adding successful":
+
+          Stage stage = (Stage) viewHandler.getStage().getScene().getWindow();
+          Alert alert = new Alert(Alert.AlertType.INFORMATION, "");
+          alert.setTitle("Confirmation");
+          alert.setHeaderText("New rental successfully created");
+          alert.initOwner(stage);
+          alert.getDialogPane().setContentText("Click ok to get to welcome page.");
+
+          Optional<ButtonType> result = alert.showAndWait();
+          if (result.get() == ButtonType.OK)
+          {
+            viewHandler.setView(viewHandler.menu(), viewHandler.welcomePage());
+          }
+          break;
+        default:
+          notifications.owner(parent).text(message).showError();
+      }
+
     }
   }
 

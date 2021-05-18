@@ -14,7 +14,7 @@ public class DataCheckRental {
     private int priceNb;
     private String search;
 
-    public void checkData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, Member member) {
+    public String checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, Member member) {
         this.name = name;
         this.pictureLink = pictureLink;
         this.description = description;
@@ -23,12 +23,27 @@ public class DataCheckRental {
         if (nameGiven() && pictureLinkGiven() && descriptionGiven() && priceIsNumber()){
             try {
                 RentalDAOImpl.getInstance().create(name, pictureLink, description, priceNb, otherInformation, stateName, member);
-
+                return "Adding successful";
             }
             catch (SQLException e){
-                //fgh
+                //
             }
         }
+        else{
+            if(!nameGiven()){
+                return "Name cannot be empty";
+            }
+            if(!pictureLinkGiven()){
+                return "Picture link cannot be empty";
+            }
+            if(!descriptionGiven()){
+                return "Description cannot be empty";
+            }
+            if(!priceIsNumber()){
+                return "Price is a not number";
+            }
+        }
+        return "Ooops, something went wrong!!";
     }
 
     private boolean nameGiven(){
@@ -37,7 +52,6 @@ public class DataCheckRental {
                 return true;
             }
         }
-        System.out.println("Name cannot be empty");
         return false;
     }
 
@@ -47,7 +61,6 @@ public class DataCheckRental {
                 return true;
             }
         }
-        System.out.println("Picture link cannot be empty");
         return false;
     }
 
@@ -57,7 +70,6 @@ public class DataCheckRental {
                 return true;
             }
         }
-        System.out.println("Description cannot be empty");
         return false;
     }
 
@@ -67,7 +79,6 @@ public class DataCheckRental {
             return true;
         }
         catch (NumberFormatException e){
-            System.out.println("price is a not number");
             return false;
         }
     }
@@ -99,7 +110,6 @@ public class DataCheckRental {
                 return true;
             }
         }
-        System.out.println("Search cannot be empty");
         return false;
     }
 }

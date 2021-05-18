@@ -59,8 +59,8 @@ public class ShareItModelManager implements ShareItModel
   }
 
   @Override
-  public void checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, Member member) throws IOException {
-    client.checkRentalData(name, pictureLink, description, price, otherInformation, stateName, member);
+  public String checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, Member member) throws IOException {
+    return client.checkRentalData(name, pictureLink, description, price, otherInformation, stateName, member);
   }
 
   @Override public String checkSearch(String search) throws IOException
