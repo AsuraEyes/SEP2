@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="parent" prefHeight="600.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.search_for_rental.Controller">
+<AnchorPane fx:id="parent" prefHeight="600.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.search_for_rental.SearchForRentalController">
    <children>
       <TextField fx:id="searchField" layoutX="543.0" layoutY="25.0" prefHeight="30.0" prefWidth="194.0" style="-fx-border-radius: 30px; -fx-background-radius: 30px;" text="Ex. Drill Makita">
          <padding>

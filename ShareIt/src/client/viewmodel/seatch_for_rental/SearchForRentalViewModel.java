@@ -19,7 +19,7 @@ public class SearchForRentalViewModel {
     public SearchForRentalViewModel(ShareItModel model) throws SQLException
     {
         this.model = model;
-        searchField = new SimpleStringProperty("drill");
+        searchField = new SimpleStringProperty();
         rentalNameLabel = new SimpleStringProperty();
         locationLabel = new SimpleStringProperty();
         priceLabel = new SimpleStringProperty();

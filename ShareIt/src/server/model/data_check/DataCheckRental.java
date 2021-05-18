@@ -23,6 +23,7 @@ public class DataCheckRental {
         if (nameGiven() && pictureLinkGiven() && descriptionGiven() && priceIsNumber()){
             try {
                 RentalDAOImpl.getInstance().create(name, pictureLink, description, priceNb, otherInformation, stateName, member);
+
             }
             catch (SQLException e){
                 //fgh
@@ -78,14 +79,14 @@ public class DataCheckRental {
             try
             {
                 RentalDAOImpl.getInstance().readBySearch(search);
-                return "dupa";
+                return "";
             }
             catch (SQLException e){
                 //
             }}
         else {
             if(!searchGiven()){
-                return "dupsztal";
+                return "";
             }
 
         }

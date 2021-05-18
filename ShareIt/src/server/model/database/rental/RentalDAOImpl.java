@@ -87,7 +87,7 @@ public class RentalDAOImpl implements RentalDAO{
         try (Connection connection = getConnection())
         {
             PreparedStatement statement = connection.prepareStatement(
-                "SELECT * FROM share_it.rental WHERE name || description  LIKE ?;");
+                "SELECT * FROM share_it.rental WHERE name || description  ILIKE ?;");
             statement.setString(1, "%" + search + "%");
             ResultSet resultSet = statement.executeQuery();
             ArrayList<Rental> arrayListToReturn = new ArrayList<>();
@@ -102,7 +102,7 @@ public class RentalDAOImpl implements RentalDAO{
             System.out.println(search);
             for (Rental rental : arrayListToReturn)
             {
-                System.out.println(rental + "aaa");
+                System.out.println(rental);
             }
             return arrayListToReturn;
 

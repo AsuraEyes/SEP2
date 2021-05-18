@@ -187,14 +187,6 @@ public class Controller
       String message = searchForRentalViewModel.onSearchButtonPressed();
       switch (message){
         case "Adding successful":
-          notifications.owner(parent).text("Your account has been successfully created! You will be automatically directed to the welcome page in 5 seconds").title(message).showConfirm();
-
-          try {
-            Thread.sleep(5000);
-          } catch (InterruptedException e) {
-            e.printStackTrace();
-          }
-          viewHandler.setView(viewHandler.menu(), viewHandler.welcomePage());
           break;
         default:
           notifications.owner(parent).text(message).showError();

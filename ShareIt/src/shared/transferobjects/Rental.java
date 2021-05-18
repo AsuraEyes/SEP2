@@ -89,4 +89,17 @@ public class Rental implements Serializable {
     public void setMember(Member member) {
         this.member = member;
     }
+
+    @Override public String toString()
+    {
+        if(name==null){
+            return ""+id;
+        }
+
+        return "Rental{" + "id=" + id + ", name='" + name + '\''
+            + ", pictureLink='" + pictureLink + '\'' + ", description='"
+            + description + '\'' + ", price=" + price + ", otherInformation='"
+            + otherInformation + '\'' + ", stateName='" + stateName + '\''
+            + ", member=" + member + '}';
+    }
 }
