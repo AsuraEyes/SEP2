@@ -20,5 +20,6 @@
     <orderEntry type="library" exported="" name="JavaFX" level="project" />
     <orderEntry type="library" exported="" name="postgresql-42.2.201" level="project" />
     <orderEntry type="library" name="JavaFX" level="application" />
+    <orderEntry type="library" name="MyArrayList-0.1" level="project" />
   </component>
 </module>
