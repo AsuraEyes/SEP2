@@ -55,9 +55,9 @@ public class RMIClient implements Client, RemoteObserver
   }
 
   @Override
-  public String checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName) throws IOException {
+  public String checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, ArrayList<String> selectedCategories) throws IOException {
     try {
-      return server.checkRentalData(name, pictureLink, description, price, otherInformation, stateName, StateManager.getInstance().getUsername());
+      return server.checkRentalData(name, pictureLink, description, price, otherInformation, stateName, StateManager.getInstance().getUsername(), selectedCategories);
     }
     catch (RemoteException e){
       e.printStackTrace();
