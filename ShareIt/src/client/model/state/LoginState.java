@@ -1,6 +1,6 @@
 package client.model.state;
 
-public interface LoginState {
+public interface LoginState{
     String getUsertype();
     String getUsername();
 }

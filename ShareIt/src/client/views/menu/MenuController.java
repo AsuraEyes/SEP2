@@ -2,7 +2,6 @@ package client.views.menu;
 
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
-import client.model.state.StateManager;
 import client.viewmodel.menu.MenuViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -30,8 +29,7 @@ public class MenuController
   private ViewHandler viewHandler;
   private MenuViewModel menuViewModel;
 
-  public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory)
-  {
+  public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws IOException {
     this.viewHandler = viewHandler;
     menuViewModel = viewModelFactory.getMenuViewModel();
     usernameLabel.textProperty().bind(menuViewModel.getUsernameLabel());

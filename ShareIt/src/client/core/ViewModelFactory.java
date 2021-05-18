@@ -126,10 +126,10 @@ public class ViewModelFactory
     return viewReportedMemberListViewModel;
   }
 
-  public MenuViewModel getMenuViewModel(){
+  public MenuViewModel getMenuViewModel() throws IOException {
     if(menuViewModel == null)
     {
-      menuViewModel = new MenuViewModel();
+      menuViewModel = new MenuViewModel(modelFactory.getShareItModel());
     }
     return menuViewModel;
   }

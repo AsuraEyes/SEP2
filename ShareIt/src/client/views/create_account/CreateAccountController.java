@@ -2,8 +2,6 @@ package client.views.create_account;
 
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
-import client.model.state.MemberState;
-import client.model.state.StateManager;
 import client.viewmodel.create_account.CreateAccountViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,11 +11,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import org.controlsfx.control.MaskerPane;
 import org.controlsfx.control.Notifications;
 import org.controlsfx.control.textfield.CustomPasswordField;
 import org.controlsfx.validation.ValidationSupport;
-import shared.transferobjects.City;
 
 import java.io.IOException;
 import java.sql.SQLException;

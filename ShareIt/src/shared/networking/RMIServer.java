@@ -30,4 +30,5 @@ public interface RMIServer extends Remote
   ArrayList<State> getStateList() throws RemoteException;
 
   ArrayList<Category> getCategoryList() throws RemoteException;
+
 }

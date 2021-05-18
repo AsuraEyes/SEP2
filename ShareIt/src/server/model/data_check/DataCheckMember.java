@@ -1,7 +1,5 @@
 package server.model.data_check;
 
-import client.model.state.MemberState;
-import client.model.state.StateManager;
 import server.model.database.member.MemberDAOImpl;
 import shared.transferobjects.Member;
 
@@ -34,8 +32,7 @@ public class DataCheckMember {
 
         if(matchingPasswords() && uniqueUsername() && oneContactInformationGiven() && postalCodeIsNumber()){
             try{
-                Member newMember = MemberDAOImpl.getInstance().create(username, password, email, phone, otherInformation, street, streetNumber, postalCodeNb, city);
-                StateManager.getInstance().setLoginState(new MemberState(newMember));
+                MemberDAOImpl.getInstance().create(username, password, email, phone, otherInformation, street, streetNumber, postalCodeNb, city);
                 return "Adding successful";
             }
             catch (SQLException e){

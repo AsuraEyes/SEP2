@@ -1,19 +1,19 @@
 package client.viewmodel.menu;
 
-import client.model.state.StateManager;
+import client.model.ShareItModel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class MenuViewModel
 {
+  private ShareItModel model;
   private StringProperty usernameLabel;
-  public MenuViewModel(){
+  public MenuViewModel(ShareItModel model){
     usernameLabel = new SimpleStringProperty();
+    this.model = model;
   }
   public String checkUserType(){
-    StateManager.getInstance();
-    System.out.println(StateManager.getInstance().getUsertype());
-    return StateManager.getInstance().getUsertype();
+    return model.checkUserType();
   }
   public StringProperty getUsernameLabel()
   {

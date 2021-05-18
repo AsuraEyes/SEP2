@@ -1,6 +1,8 @@
 package client.model.state;
 
-public class VisitorState implements LoginState{
+import java.io.Serializable;
+
+public class VisitorState implements LoginState, Serializable {
     private final String USERTYPE = "Visitor";
 
     public VisitorState(){

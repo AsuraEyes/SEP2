@@ -1,9 +1,9 @@
 package client.model.state;
 
-import server.model.database.member.MemberDAOImpl;
+import java.io.Serializable;
 
-public class StateManager {
-    private static LoginState currentState;
+public class StateManager implements Serializable {
+    private LoginState currentState;
     private static StateManager instance;
 
     private StateManager(){
@@ -17,13 +17,13 @@ public class StateManager {
         return instance;
     }
 
-    public static String getUsertype(){
+    public String getUsertype(){
         return currentState.getUsertype();
     }
-    public static String getUsername(){
+    public String getUsername(){
         return currentState.getUsername();
     }
-    public static void setLoginState(LoginState state){
+    public void setLoginState(LoginState state){
         currentState = state;
     }
 }

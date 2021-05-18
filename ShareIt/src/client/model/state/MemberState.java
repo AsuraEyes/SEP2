@@ -2,13 +2,15 @@ package client.model.state;
 
 import shared.transferobjects.Member;
 
-public class MemberState implements LoginState{
-    private final String USERTYPE = "Member";
-    private Member member;
+import java.io.Serializable;
 
-    public MemberState(Member member){
-        System.out.println("Changed to member "+member.getUsername());
-        this.member = member;
+public class MemberState implements LoginState, Serializable {
+    private final String USERTYPE = "Member";
+    private String username;
+
+    public MemberState(String username){
+        System.out.println("Changed to member "+username);
+        this.username = username;
     }
 
     @Override
@@ -19,6 +21,6 @@ public class MemberState implements LoginState{
 
     @Override
     public String getUsername() {
-        return member.getUsername();
+        return username;
     }
 }

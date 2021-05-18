@@ -37,7 +37,7 @@ public class ViewHandler
 
   public void start() throws Exception
   {
-    setView(menu(),addRental());
+    setView(menu(),createAccount());
   }
 
   public void setView(Node menu, Node content) throws IOException

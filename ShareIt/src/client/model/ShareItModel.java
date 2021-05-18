@@ -18,4 +18,6 @@ public interface ShareItModel extends Subject
     ArrayList<City> getCityList();
     ArrayList<State> getStateList();
     ArrayList<Category> getCategoryList();
+
+    String checkUserType();
 }

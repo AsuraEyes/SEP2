@@ -1,5 +1,7 @@
 package client.model;
 
+import client.model.state.MemberState;
+import client.model.state.StateManager;
 import client.network.Client;
 import shared.transferobjects.Category;
 import shared.transferobjects.City;
@@ -48,7 +50,12 @@ public class ShareItModelManager implements ShareItModel
 
   @Override
   public String checkMemberData(String username, String password, String confirmPassword, String email, String phone, String otherInformation, String street, String streetNo, String postalCode, String city) throws IOException {
-    return client.checkMemberData (username, password, confirmPassword, email, phone, otherInformation, street, streetNo, postalCode, city);
+    String messageToReturn = client.checkMemberData (username, password, confirmPassword, email, phone, otherInformation, street, streetNo, postalCode, city);
+    if(messageToReturn.equals("Adding successful")){
+      StateManager.getInstance().setLoginState(new MemberState(username));
+    }
+
+    return messageToReturn;
   }
 
   @Override
@@ -74,5 +81,10 @@ public class ShareItModelManager implements ShareItModel
   @Override
   public ArrayList<Category> getCategoryList() {
     return client.getCategoryList();
+  }
+
+  @Override
+  public String checkUserType() {
+    return StateManager.getInstance().getUsertype();
   }
 }

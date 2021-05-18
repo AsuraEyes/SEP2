@@ -3,6 +3,7 @@ package server.networking;
 import server.model.ServerModelManager;
 import shared.networking.RMIServer;
 import shared.networking.RemoteObserver;
+import client.model.state.StateManager;
 import shared.transferobjects.Category;
 import shared.transferobjects.City;
 import shared.transferobjects.Member;
@@ -83,7 +84,7 @@ public class RMIServerImpl implements RMIServer
 
   @Override
   public String checkMemberData(String username, String password, String confirmPassword, String email, String phone, String otherInformation, String street, String streetNo, String postalCode, String city) throws RemoteException {
-    return serverModelManager.checkData(username, password, confirmPassword, email, otherInformation, phone, street, streetNo, postalCode, city);
+    return serverModelManager.checkMemberData(username, password, confirmPassword, email, otherInformation, phone, street, streetNo, postalCode, city);
   }
 
   @Override
@@ -111,4 +112,5 @@ public class RMIServerImpl implements RMIServer
   public ArrayList<Category> getCategoryList() throws RemoteException {
     return serverModelManager.getCategoryList();
   }
+
 }
