@@ -13,4 +13,7 @@ public interface RentalDAO {
     void update(Rental rental) throws SQLException;
     void delete(Rental rental) throws SQLException;
     int getNextAvailableId() throws SQLException;
+
+    List<Rental> readRentals()
+        throws SQLException;
 }

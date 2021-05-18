@@ -1,9 +1,6 @@
 package server.model;
 
-import shared.transferobjects.Category;
-import shared.transferobjects.City;
-import shared.transferobjects.Member;
-import shared.transferobjects.State;
+import shared.transferobjects.*;
 import shared.util.Subject;
 
 import java.util.ArrayList;
@@ -20,4 +17,5 @@ public interface ServerModelManager extends Subject
 
     ArrayList<State> getStateList();
     ArrayList<Category> getCategoryList();
+    ArrayList<Rental> getRentalsList();
 }

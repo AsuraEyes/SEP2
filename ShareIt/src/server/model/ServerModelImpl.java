@@ -4,11 +4,9 @@ import server.model.data_check.DataCheckMember;
 import server.model.data_check.DataCheckRental;
 import server.model.database.category.CategoryDAOImpl;
 import server.model.database.city.CityDAOImpl;
+import server.model.database.rental.RentalDAOImpl;
 import server.model.database.state.StateDAOImpl;
-import shared.transferobjects.Category;
-import shared.transferobjects.City;
-import shared.transferobjects.Member;
-import shared.transferobjects.State;
+import shared.transferobjects.*;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -93,6 +91,19 @@ public class ServerModelImpl implements ServerModelManager
       return (ArrayList<Category>) CategoryDAOImpl.getInstance().readCategory();
     }
     catch (SQLException e){
+      e.printStackTrace();
+    }
+    return null;
+  }
+
+  @Override public ArrayList<Rental> getRentalsList()
+  {
+    try
+    {
+      return (ArrayList<Rental>) RentalDAOImpl.getInstance().readRentals();
+    }
+    catch (SQLException e)
+    {
       e.printStackTrace();
     }
     return null;

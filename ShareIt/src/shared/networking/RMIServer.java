@@ -1,9 +1,6 @@
 package shared.networking;
 
-import shared.transferobjects.Category;
-import shared.transferobjects.City;
-import shared.transferobjects.Member;
-import shared.transferobjects.State;
+import shared.transferobjects.*;
 
 import java.rmi.AlreadyBoundException;
 import java.rmi.Remote;
@@ -30,5 +27,6 @@ public interface RMIServer extends Remote
   ArrayList<State> getStateList() throws RemoteException;
 
   ArrayList<Category> getCategoryList() throws RemoteException;
+  ArrayList<Rental> getRentalsList() throws RemoteException;
 
 }

@@ -1,12 +1,10 @@
 package client.model;
 
-import shared.transferobjects.Category;
-import shared.transferobjects.City;
-import shared.transferobjects.Member;
-import shared.transferobjects.State;
+import shared.transferobjects.*;
 import shared.util.Subject;
 
 import java.io.IOException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public interface ShareItModel extends Subject
@@ -18,6 +16,7 @@ public interface ShareItModel extends Subject
     ArrayList<City> getCityList();
     ArrayList<State> getStateList();
     ArrayList<Category> getCategoryList();
+    ArrayList<Rental> getRentalsList() throws RemoteException;
 
     String checkUserType();
 }

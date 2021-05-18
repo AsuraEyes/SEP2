@@ -4,9 +4,12 @@ import client.model.ShareItModel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.input.MouseEvent;
+import shared.transferobjects.Rental;
 
 import java.io.IOException;
+import java.rmi.RemoteException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class SearchForRentalViewModel {
     private ShareItModel model;
@@ -82,5 +85,10 @@ public class SearchForRentalViewModel {
     public String onSearchButtonPressed() throws IOException
     {
         return model.checkSearch(searchField.getValue());
+    }
+
+    public ArrayList<Rental> getRentalsList() throws RemoteException
+    {
+        return model.getRentalsList();
     }
 }

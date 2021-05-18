@@ -1,14 +1,16 @@
 package server.model.database.rental;
 
+import org.postgresql.largeobject.LargeObject;
+import org.postgresql.largeobject.LargeObjectManager;
+import shared.transferobjects.Category;
 import shared.transferobjects.Member;
 import shared.transferobjects.Rental;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.file.Files;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -67,8 +69,8 @@ public class RentalDAOImpl implements RentalDAO{
 
             statement = connection.prepareStatement("INSERT INTO share_it.rental(name, picture_link, description, price, other_information, state_name, member_id) VALUES (?, ?, ?, ?, ?, ?, ?);", PreparedStatement.RETURN_GENERATED_KEYS);
             statement.setString(1, name);
-            //statement.setBinaryStream(2, fis, (int)file.length());
-            statement.setBinaryStream(2, fis);
+            statement.setBinaryStream(2, fis, (int)file.length());
+            //statement.setBinaryStream(2, fis);
             statement.setString(3, description);
             statement.setInt(4, price);
             statement.setString(5, otherInformation);
@@ -190,5 +192,49 @@ public class RentalDAOImpl implements RentalDAO{
             }
             return nextAvailableId;
         }
+    }
+    @Override public List<Rental> readRentals()
+        throws SQLException
+
+    {
+        try(Connection connection = getConnection()){
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM share_it.rental");
+            ResultSet resultSet = statement.executeQuery();
+            ArrayList<Rental> arrayListToReturn = new ArrayList<>();
+
+            int incrementer = 0;
+
+            while(resultSet.next()){
+                incrementer++;
+                int idOFMember = resultSet.getInt("member_id");
+                String filename = "image"+incrementer+".jpeg";
+                byte[] imgBytes = resultSet.getBytes(3);
+                Files.write(new File(filename).toPath(), imgBytes);
+
+                /*try (FileOutputStream fos = new FileOutputStream(filename)) {
+                    fos.write(imgBytes);
+                }
+                catch (IOException e)
+                {
+                    e.printStackTrace();
+                }*/
+                int idOfRental = resultSet.getInt("id");
+                int priceOfRental = resultSet.getInt("price");
+
+
+                arrayListToReturn.add(new Rental(idOfRental,"name", "file:" + filename, "description", priceOfRental, "other_information", "state_name", idOFMember));
+
+                //resultSet.close();
+
+                }
+            //statement.close();
+            //return array list
+            return arrayListToReturn;
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

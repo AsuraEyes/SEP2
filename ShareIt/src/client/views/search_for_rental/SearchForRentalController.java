@@ -7,17 +7,24 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
+import org.controlsfx.control.InfoOverlay;
 import org.controlsfx.control.Notifications;
 
 import java.io.IOException;
 import java.sql.SQLException;
 
 public class SearchForRentalController {
-    @FXML private AnchorPane parent;
+  @FXML private FlowPane flowPane;
+  @FXML private AnchorPane parent;
     @FXML private TextField searchField;
     @FXML private Label rentalNameLabel;
     private Label locationLabel;
@@ -32,14 +39,34 @@ public class SearchForRentalController {
         SQLException, IOException
     {
 
-       this.viewHandler = viewHandler;
-        searchForRentalViewModel = viewModelFactory.getSearchForRentalViewModel();
+      this.viewHandler = viewHandler;
+      searchForRentalViewModel = viewModelFactory.getSearchForRentalViewModel();
+
+      for (int i = 0; i < searchForRentalViewModel.getRentalsList().size(); i++)
+      {
+        Image image = new Image(searchForRentalViewModel.getRentalsList().get(i).getPictureLink(),200,200,false,false);
+        flowPane.setPrefWrapLength(5);
+        flowPane.getChildren().add(new StackPane(new InfoOverlay(new ImageView(image),searchForRentalViewModel.getRentalsList().get(i).toString())));
+        System.out.println(searchForRentalViewModel.getRentalsList().get(i).getPictureLink());
+        //flowPane.getChildren().get(i).setOnMouseClicked(searchForRentalViewModel::fireProperty);
+        flowPane.getChildren().get(i).addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
+          try
+          {
+            //getPicture(event.getTarget());
+            viewHandler.setView(viewHandler.menu(), viewHandler.viewRental());
+          }
+          catch (IOException e)
+          {
+            e.printStackTrace();
+          }
+        });
+      }
         searchField.textProperty().bindBidirectional(searchForRentalViewModel.getSearchField());
        /* rentalNameLabel.textProperty().bind(searchForRentalViewModel.getRentalNameLabel());
         locationLabel.textProperty().bind(searchForRentalViewModel.getLocationLabel());
         priceLabel.textProperty().bind(searchForRentalViewModel.getPriceLabel());
         otherInfoLabel.textProperty().bind(searchForRentalViewModel.getOtherInfoLabel());*/
-      notifications =  Notifications.create()
+        notifications =  Notifications.create()
           .title("Error - invalid input!")
           .graphic(new Rectangle(300, 300, Color.RED)) // sets node to display
           .hideAfter(Duration.seconds(3));
