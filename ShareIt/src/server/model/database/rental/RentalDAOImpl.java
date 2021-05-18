@@ -231,7 +231,7 @@ public class RentalDAOImpl implements RentalDAO{
                 int priceOfRental = resultSet.getInt("price");
 
 
-                arrayListToReturn.add(new Rental(idOfRental,"name", "file:" + filename, "description", priceOfRental, "other_information", "state_name", idOFMember));
+                arrayListToReturn.add(new Rental(idOfRental,"name", "file:" + filename, "description", priceOfRental, "other_information", "state_name", idOFMember,null));
 
                 //resultSet.close();
 

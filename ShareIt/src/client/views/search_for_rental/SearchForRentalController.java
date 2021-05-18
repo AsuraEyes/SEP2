@@ -44,8 +44,7 @@ public class SearchForRentalController {
 
       for (int i = 0; i < searchForRentalViewModel.getRentalsList().size(); i++)
       {
-        Image image = new Image(searchForRentalViewModel.getRentalsList().get(i).getPictureLink(),200,200,false,false);
-        flowPane.setPrefWrapLength(5);
+        Image image = new Image(searchForRentalViewModel.getRentalsList().get(i).getPictureLink(),220,220,false,false);
         flowPane.getChildren().add(new StackPane(new InfoOverlay(new ImageView(image),searchForRentalViewModel.getRentalsList().get(i).toString())));
         System.out.println(searchForRentalViewModel.getRentalsList().get(i).getPictureLink());
         //flowPane.getChildren().get(i).setOnMouseClicked(searchForRentalViewModel::fireProperty);
