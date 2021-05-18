@@ -26,7 +26,7 @@ public class DataCheckRental {
                 return "Adding successful";
             }
             catch (SQLException e){
-                //
+                e.printStackTrace();
             }
         }
         else{

@@ -40,17 +40,18 @@ public class RentalDAOImpl implements RentalDAO{
     public Rental create(String name, String pictureLink, String description, int price, String otherInformation, String stateName, String username) throws SQLException {
         try(Connection connection = getConnection()){
             File file = null;
-            try {
-                file = new File(new URI(pictureLink));
-            } catch (URISyntaxException e) {
-                e.printStackTrace();
-            }
+            file = new File(pictureLink);
             FileInputStream fis = null;
             try {
                 fis = new FileInputStream(file);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
+
+            //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            username = "bob";
+
+
 
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM share_it.member WHERE username = ?");
             statement.setString(1, username);
@@ -66,7 +67,8 @@ public class RentalDAOImpl implements RentalDAO{
 
             statement = connection.prepareStatement("INSERT INTO share_it.rental(name, picture_link, description, price, other_information, state_name, member_id) VALUES (?, ?, ?, ?, ?, ?, ?);", PreparedStatement.RETURN_GENERATED_KEYS);
             statement.setString(1, name);
-            statement.setBinaryStream(2, fis, (int)file.length());
+            //statement.setBinaryStream(2, fis, (int)file.length());
+            statement.setBinaryStream(2, fis);
             statement.setString(3, description);
             statement.setInt(4, price);
             statement.setString(5, otherInformation);
