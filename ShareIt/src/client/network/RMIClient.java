@@ -64,6 +64,15 @@ public class RMIClient implements Client, RemoteObserver
     }
   }
 
+  @Override public String checkSearch(String search) throws IOException
+  {
+    try{
+    return server.checkSearch(search);
+  } catch (RemoteException e){
+      e.printStackTrace();
+      throw new RuntimeException("Could not contact server");
+    }}
+
   @Override
   public ArrayList<City> getCityList() {
     try {

@@ -22,6 +22,9 @@ public class Rental implements Serializable {
         this.stateName = stateName;
         this.member = member;
     }
+    public Rental(int id){
+        this.id = id;
+    }
 
     public int getId() {
         return id;

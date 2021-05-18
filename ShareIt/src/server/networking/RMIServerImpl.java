@@ -1,8 +1,6 @@
 package server.networking;
 
-import server.model.data_check.DataCheckMember;
 import server.model.ServerModelManager;
-import server.model.database.city.CityDAOImpl;
 import shared.networking.RMIServer;
 import shared.networking.RemoteObserver;
 import shared.transferobjects.Category;
@@ -10,15 +8,12 @@ import shared.transferobjects.City;
 import shared.transferobjects.Member;
 import shared.transferobjects.State;
 
-
 import java.beans.PropertyChangeListener;
-import java.io.IOException;
 import java.rmi.AlreadyBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class RMIServerImpl implements RMIServer
@@ -94,6 +89,12 @@ public class RMIServerImpl implements RMIServer
   @Override
   public void checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, Member member) throws RemoteException {
     serverModelManager.checkRentalData(name, pictureLink, description, price, otherInformation, stateName, member);
+  }
+
+  @Override
+  public String checkSearch(String search) throws RemoteException
+  {
+    return serverModelManager.checkSearch(search);
   }
 
   @Override

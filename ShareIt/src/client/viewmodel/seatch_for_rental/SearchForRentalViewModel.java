@@ -1,21 +1,25 @@
 package client.viewmodel.seatch_for_rental;
 
-import client.views.search_for_rental.Picture;
-import com.sun.javafx.scene.control.LabeledText;
+import client.model.ShareItModel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
+import java.io.IOException;
+import java.sql.SQLException;
+
 public class SearchForRentalViewModel {
+    private ShareItModel model;
     private final StringProperty searchField;
     private final StringProperty rentalNameLabel;
     private final StringProperty locationLabel;
     private final StringProperty priceLabel;
     private final StringProperty otherInfoLabel;
 
-    public SearchForRentalViewModel(){
-        searchField = new SimpleStringProperty("Search");
+    public SearchForRentalViewModel(ShareItModel model) throws SQLException
+    {
+        this.model = model;
+        searchField = new SimpleStringProperty("drill");
         rentalNameLabel = new SimpleStringProperty();
         locationLabel = new SimpleStringProperty();
         priceLabel = new SimpleStringProperty();
@@ -74,4 +78,9 @@ public class SearchForRentalViewModel {
         }
         return null;
     }*/
+
+    public String onSearchButtonPressed() throws IOException
+    {
+        return model.checkSearch(searchField.getValue());
+    }
 }

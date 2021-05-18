@@ -12,6 +12,7 @@ public class DataCheckRental {
     private String description;
     private String price;
     private int priceNb;
+    private String search;
 
     public void checkData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, Member member) {
         this.name = name;
@@ -68,5 +69,36 @@ public class DataCheckRental {
             System.out.println("price is a not number");
             return false;
         }
+    }
+
+    public String checkSearch(String search)
+    {
+        this.search = search;
+        if(searchGiven()){
+            try
+            {
+                RentalDAOImpl.getInstance().readBySearch(search);
+                return "dupa";
+            }
+            catch (SQLException e){
+                //
+            }}
+        else {
+            if(!searchGiven()){
+                return "dupsztal";
+            }
+
+        }
+        return "Ooops, something went wrong!!";
+    }
+
+    private boolean searchGiven(){
+        if (search != null){
+            if (!(search.trim().equals("") && search.isBlank() && search.isEmpty())){
+                return true;
+            }
+        }
+        System.out.println("Search cannot be empty");
+        return false;
     }
 }
