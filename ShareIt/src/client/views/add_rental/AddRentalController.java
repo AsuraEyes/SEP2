@@ -114,12 +114,4 @@ public class AddRentalController {
     }
     return true;
   }
-
-  private boolean checkArea (TextArea nameArea){
-    if (nameArea.textProperty().getValue() == null || nameArea.textProperty().getValue().isBlank()) {
-      notifications.owner(parent).text(nameArea.getPromptText() + " cannot be empty").showError();
-      return false;
-    }
-    return true;
-  }
 }
