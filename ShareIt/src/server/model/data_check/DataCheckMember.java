@@ -35,7 +35,7 @@ public class DataCheckMember {
         if(matchingPasswords() && uniqueUsername() && oneContactInformationGiven() && postalCodeIsNumber()){
             try{
                 Member newMember = MemberDAOImpl.getInstance().create(username, password, email, phone, otherInformation, street, streetNumber, postalCodeNb, city);
-                StateManager.setLoginState(new MemberState(newMember));
+                StateManager.getInstance().setLoginState(new MemberState(newMember));
                 return "Adding successful";
             }
             catch (SQLException e){

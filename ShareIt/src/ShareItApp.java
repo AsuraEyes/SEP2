@@ -2,6 +2,7 @@ import client.core.ClientFactory;
 import client.core.ModelFactory;
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
+import client.model.state.StateManager;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -13,7 +14,6 @@ public class ShareItApp extends Application
     ModelFactory modelFactory = new ModelFactory(clientFactory);
     ViewModelFactory viewModelFactory = new ViewModelFactory(modelFactory);
     ViewHandler viewHandler = new ViewHandler(stage, viewModelFactory);
-
     viewHandler.start();
    }
 }

@@ -7,11 +7,13 @@ public class MemberState implements LoginState{
     private Member member;
 
     public MemberState(Member member){
+        System.out.println("Changed to member "+member.getUsername());
         this.member = member;
     }
 
     @Override
     public String getUsertype() {
+        System.out.println("asked for member");
         return USERTYPE;
     }
 

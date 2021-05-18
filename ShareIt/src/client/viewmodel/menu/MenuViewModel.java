@@ -11,7 +11,9 @@ public class MenuViewModel
     usernameLabel = new SimpleStringProperty();
   }
   public String checkUserType(){
-    return StateManager.getUsertype();
+    StateManager.getInstance();
+    System.out.println(StateManager.getInstance().getUsertype());
+    return StateManager.getInstance().getUsertype();
   }
   public StringProperty getUsernameLabel()
   {

@@ -9,6 +9,7 @@ public class AdministratorState implements LoginState{
     private Administrator administrator;
 
     public AdministratorState(Administrator administrator){
+        System.out.println("Chnaged to administrator "+administrator.getUsername());
         this.administrator = administrator;
     }
 

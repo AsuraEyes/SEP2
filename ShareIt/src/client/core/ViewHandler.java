@@ -37,7 +37,7 @@ public class ViewHandler
 
   public void start() throws Exception
   {
-    setView(menu(),createAccount());
+    setView(menu(),addRental());
   }
 
   public void setView(Node menu, Node content) throws IOException
@@ -157,8 +157,7 @@ public class ViewHandler
     //ogInController.init(this, viewModelFactory);
     return content;
   }
-  public Node searchForRental() throws IOException
-  {
+  public Node searchForRental() throws IOException, SQLException {
     FXMLLoader loader = new FXMLLoader();
     loader.setLocation(getClass().getResource("/client/views/search_for_rental/SearchForRentalv2.fxml"));
     Node content = loader.load();
