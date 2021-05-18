@@ -1,6 +1,8 @@
 package shared.transferobjects;
 
-public class State
+import java.io.Serializable;
+
+public class State implements Serializable
 {
   private String name;
 
@@ -16,5 +18,10 @@ public class State
   public void setName(String name)
   {
     this.name = name;
+  }
+
+  @Override public String toString()
+  {
+    return name;
   }
 }

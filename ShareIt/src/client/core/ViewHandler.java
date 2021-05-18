@@ -62,7 +62,7 @@ public class ViewHandler
     return menu;
   }
 
-  public Node addRental() throws IOException
+  public Node addRental() throws IOException, SQLException
   {
     FXMLLoader loader = new FXMLLoader();
     loader.setLocation(getClass().getResource("/client/views/add_rental/AddRental.fxml"));

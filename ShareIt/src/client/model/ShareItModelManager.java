@@ -1,7 +1,10 @@
 package client.model;
 
 import client.network.Client;
+import shared.transferobjects.Category;
 import shared.transferobjects.City;
+import shared.transferobjects.Member;
+import shared.transferobjects.State;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -50,7 +53,22 @@ public class ShareItModelManager implements ShareItModel
   }
 
   @Override
+  public void checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, Member member) throws IOException {
+    client.checkRentalData(name, pictureLink, description, price, otherInformation, stateName, member);
+  }
+
+  @Override
   public ArrayList<City> getCityList() {
     return client.getCityList();
+  }
+
+  @Override
+  public ArrayList<State> getStateList() {
+    return client.getStateList();
+  }
+
+  @Override
+  public ArrayList<Category> getCategoryList() {
+    return client.getCategoryList();
   }
 }

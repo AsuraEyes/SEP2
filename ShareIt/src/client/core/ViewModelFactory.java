@@ -70,9 +70,9 @@ public class ViewModelFactory
     return chatWriteMessageViewModel;
   }
 
-  public AddRentalViewModel getAddRentalViewModel() {
+  public AddRentalViewModel getAddRentalViewModel() throws SQLException, IOException {
     if (addRentalViewModel == null){
-      addRentalViewModel = new AddRentalViewModel();
+      addRentalViewModel = new AddRentalViewModel(modelFactory.getShareItModel());
     }
     return addRentalViewModel;
   }

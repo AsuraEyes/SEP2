@@ -1,11 +1,18 @@
 package server.model;
 
 import server.model.data_check.DataCheckMember;
+import server.model.data_check.DataCheckRental;
+import server.model.database.category.CategoryDAOImpl;
 import server.model.database.city.CityDAOImpl;
+import server.model.database.state.StateDAOImpl;
+import shared.transferobjects.Category;
 import shared.transferobjects.City;
+import shared.transferobjects.Member;
+import shared.transferobjects.State;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -13,6 +20,7 @@ public class ServerModelImpl implements ServerModelManager
 {
   private PropertyChangeSupport support;
   private DataCheckMember dataCheckMember;
+  private DataCheckRental dataCheckRental;
 
   public ServerModelImpl(){
     support = new PropertyChangeSupport(this);
@@ -46,11 +54,38 @@ public class ServerModelImpl implements ServerModelManager
   }
 
   @Override
+  public void checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, Member member) {
+    dataCheckRental.checkData(name, pictureLink, description, price, otherInformation, stateName, member);
+  }
+
+  @Override
   public ArrayList<City> getCityList() {
     try {
       return (ArrayList<City>) CityDAOImpl.getInstance().readCity();
     }
     catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return null;
+  }
+
+  @Override
+  public ArrayList<State> getStateList() {
+    try {
+      return (ArrayList<State>) StateDAOImpl.getInstance().readState();
+    }
+    catch (SQLException e){
+      e.printStackTrace();
+    }
+    return null;
+  }
+
+  @Override
+  public ArrayList<Category> getCategoryList() {
+    try {
+      return (ArrayList<Category>) CategoryDAOImpl.getInstance().readCategory();
+    }
+    catch (SQLException e){
       e.printStackTrace();
     }
     return null;
