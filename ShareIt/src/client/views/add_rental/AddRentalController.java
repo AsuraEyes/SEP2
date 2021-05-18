@@ -105,7 +105,9 @@ public class AddRentalController {
     }
   }
 
-  public void onGoBack(ActionEvent actionEvent) {}
+  public void onGoBack(ActionEvent actionEvent) {
+
+  }
 
   private boolean checkField (String message, TextField nameOfField){
     if (nameOfField.textProperty().getValue() == null || nameOfField.textProperty().getValue().isBlank()) {
