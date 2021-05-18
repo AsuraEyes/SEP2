@@ -1,5 +1,6 @@
 package client.network;
 
+import client.model.state.StateManager;
 import shared.networking.RMIServer;
 import shared.networking.RemoteObserver;
 import shared.transferobjects.Category;
@@ -54,9 +55,9 @@ public class RMIClient implements Client, RemoteObserver
   }
 
   @Override
-  public String checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, Member member) throws IOException {
+  public String checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName) throws IOException {
     try {
-      return server.checkRentalData(name, pictureLink, description, price, otherInformation, stateName, member);
+      return server.checkRentalData(name, pictureLink, description, price, otherInformation, stateName, StateManager.getInstance().getUsername());
     }
     catch (RemoteException e){
       e.printStackTrace();

@@ -16,7 +16,6 @@ import java.util.ArrayList;
 public class AddRentalViewModel {
     private ShareItModel model;
     private final StringProperty nameField;
-    private final StringProperty pictureLinkField;
     private final StringProperty descriptionField;
 //    private final ObservableValue<String> stateBox;
     private ObservableList<String> statesList;
@@ -25,10 +24,10 @@ public class AddRentalViewModel {
 //    private final ObservableValue<String> categoryBox;
     private ObservableList<String> categoriesList;
 
+
     public AddRentalViewModel(ShareItModel model){
         this.model = model;
         nameField = new SimpleStringProperty();
-        pictureLinkField = new SimpleStringProperty();
         descriptionField = new SimpleStringProperty();
 //        stateBox = new SimpleStringProperty();
         priceField = new SimpleStringProperty();
@@ -38,9 +37,6 @@ public class AddRentalViewModel {
 
     public StringProperty getNameField(){
         return nameField;
-    }
-    public StringProperty getPictureLinkField(){
-        return pictureLinkField;
     }
     public StringProperty getDescriptionField(){
         return descriptionField;
@@ -58,8 +54,8 @@ public class AddRentalViewModel {
 //        return categoryBox;
 //    }
 
-    public String onAddRentalButtonPressed(Object selectedState, Object selectedCategory, Member member) throws IOException {
-        return model.checkRentalData(nameField.getValue(), pictureLinkField.getValue(), descriptionField.getValue(), priceField.getValue(), otherInfoField.getValue(), (String) selectedState, member);
+    public String onAddRentalButtonPressed(Object selectedState, Object selectedCategory, String pictureLink) throws IOException {
+        return model.checkRentalData(nameField.getValue(), pictureLink, descriptionField.getValue(), priceField.getValue(), otherInfoField.getValue(), (String) selectedState);
     }
     public ObservableList<String> getStates(){
         ArrayList<State> stateList = model.getStateList();
