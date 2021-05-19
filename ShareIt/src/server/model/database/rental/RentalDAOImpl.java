@@ -188,11 +188,8 @@ public class RentalDAOImpl implements RentalDAO
       resultSet = statement.executeQuery();
       ArrayList<Rental> arrayListToReturn = new ArrayList<>();
 
-      int incrementer = 0;
-
       while (resultSet.next()) {
-        incrementer++;
-        String filename = "image" + incrementer + ".jpeg";
+        String filename = "image" + resultSet.getInt("id") + ".jpeg";
         byte[] imgBytes = resultSet.getBytes(3);
         Files.write(new File(filename).toPath(), imgBytes);
 
@@ -251,11 +248,8 @@ public class RentalDAOImpl implements RentalDAO
       ResultSet resultSet = statement.executeQuery();
       ArrayList<Rental> arrayListToReturn = new ArrayList<>();
 
-      int incrementer = 0;
-
       while (resultSet.next()) {
-        incrementer++;
-        String filename = "image" + incrementer + ".jpeg";
+        String filename = "image" + resultSet.getInt("id") + ".jpeg";
         byte[] imgBytes = resultSet.getBytes(3);
         Files.write(new File(filename).toPath(), imgBytes);
 
@@ -385,12 +379,9 @@ public class RentalDAOImpl implements RentalDAO
       ResultSet resultSet = statement.executeQuery();
       ArrayList<Rental> arrayListToReturn = new ArrayList<>();
 
-      int incrementer = 0;
-
       while (resultSet.next())
       {
-        incrementer++;
-        String filename = "image"+incrementer+".jpeg";
+        String filename = "image"+resultSet.getInt("id")+".jpeg";
         byte[] imgBytes = resultSet.getBytes(3);
         Files.write(new File(filename).toPath(), imgBytes);
 
