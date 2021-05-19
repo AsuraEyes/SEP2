@@ -29,31 +29,30 @@
                               <Font name="Californian FB" size="24.0" />
                            </font>
                         </Label>
-                        <Label prefHeight="144.0" prefWidth="470.0" text="Vivamus eget massa a neque mollis varius. Morbi vel diam tempus, elementum arcu sed, efficitur orci. Curabitur facilisis at elit in porta. Aenean pellentesque nulla tortor, at efficitur massa vehicula nec. Ut faucibus sodales metus at venenatis. Aliquam gravida, ante a iaculis laoreet, sapien sem rutrum nisi, a auctor mauris felis eu orci. Cras in sapien nec nibh egestas ultrices. Morbi non elementum sem, et laoreet purus. Duis eleifend posuere diam, et tristique purus tempus at. Maecenas ultricies tincidunt hendrerit.Curabitur euismod, nunc vitae molestie imperdiet, enim ligula malesuada neque, dapibus pharetra urna enim vitae purus. " textFill="WHITE" wrapText="true" />
-                        <Label text=" Morbi imperdiet volutpat arcu, ac finibus dui tincidunt a. Nunc sit amet est felis. Pellentesque eu pulvinar ex. Fusce nec dictum mi, ut luctus tellus. Praesent facilisis magna a quam fringilla varius. In ut nunc libero. Quisque aliquet, velit vitae gravida eleifend, nisl urna finibus enim, eu ultricies est odio sed magna. Ut bibendum nunc et nisl faucibus varius. Suspendisse molestie tempus arcu, vel euismod risus. Donec ut placerat quam, rutrum euismod enim. Donec et nisi ut elit volutpat mattis eget vitae" textFill="WHITE" wrapText="true" />
+                        <!--prefHeight="144.0" prefWidth="470.0"-->
+                        <Label  text="We are a company founded in August 2020. If you are a fan of saying Sharing is caring, then you are on a right place! The idea of this project is to give everybody the opportunity to offer things they own to others that might need them. This idea was inspired by Libraries of things, which are stone shops offering tools, boardgames, sport equipment and other things that are not used on a daily basis." textFill="WHITE" wrapText="true" />
                      </children>
                      <effect>
                         <ColorAdjust />
                      </effect>
                      <padding>
-                        <Insets bottom="20.0" left="160.0" right="160.0" top="20.0" />
+                        <Insets bottom="20.0" left="260.0" right="260.0" top="20.0" />
                      </padding>
                   </VBox>
                   <VBox layoutY="257.0" prefHeight="190.0" prefWidth="1280.0" style="-fx-border-color: #FF8C64; -fx-border-width: 3; -fx-background-color: #FF8C64;">
                      <children>
-                        <Label text="Something else about us" textFill="WHITE">
+                        <Label text="Quick guide" textFill="WHITE">
                            <font>
                               <Font name="Californian FB" size="24.0" />
                            </font>
                         </Label>
-                        <Label prefHeight="144.0" prefWidth="470.0" text="Vivamus eget massa a neque mollis varius. Morbi vel diam tempus, elementum arcu sed, efficitur orci. Curabitur facilisis at elit in porta. Aenean pellentesque nulla tortor, at efficitur massa vehicula nec. Ut faucibus sodales metus at venenatis. Aliquam gravida, ante a iaculis laoreet, sapien sem rutrum nisi, a auctor mauris felis eu orci. Cras in sapien nec nibh egestas ultrices. Morbi non elementum sem, et laoreet purus. Duis eleifend posuere diam, et tristique purus tempus at. Maecenas ultricies tincidunt hendrerit.Curabitur euismod, nunc vitae molestie imperdiet, enim ligula malesuada neque, dapibus pharetra urna enim vitae purus. " textFill="WHITE" wrapText="true" />
-                        <Label text=" Morbi imperdiet volutpat arcu, ac finibus dui tincidunt a. Nunc sit amet est felis. Pellentesque eu pulvinar ex. Fusce nec dictum mi, ut luctus tellus. Praesent facilisis magna a quam fringilla varius. In ut nunc libero. Quisque aliquet, velit vitae gravida eleifend, nisl urna finibus enim, eu ultricies est odio sed magna. Ut bibendum nunc et nisl faucibus varius. Suspendisse molestie tempus arcu, vel euismod risus. Donec ut placerat quam, rutrum euismod enim. Donec et nisi ut elit volutpat mattis eget vitae" textFill="WHITE" wrapText="true" />
+                        <Label text="Start by logging in. If you do not have a profile yet, create one! Write into search on the top of the page to search for a rental. You can always get back here by clicking on the logo in the left of the menu. If desired, filter for the results. Click on a chosen rental to see more information about them. " textFill="WHITE" wrapText="true" />
                      </children>
                      <effect>
                         <ColorAdjust />
                      </effect>
                      <padding>
-                        <Insets bottom="20.0" left="160.0" right="160.0" top="20.0" />
+                        <Insets bottom="20.0" left="260.0" right="260.0" top="20.0" />
                      </padding>
                   </VBox>
                </children>

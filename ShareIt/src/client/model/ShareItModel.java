@@ -19,7 +19,6 @@ public interface ShareItModel extends Subject
     ArrayList<State> getStateList();
     ArrayList<Category> getCategoryList();
     ArrayList<Rental> getRentalsList() throws RemoteException;
-
     String checkUserType();
     void getSelectedRental(Rental rental);
     Member getMemberById(int id) throws RemoteException;

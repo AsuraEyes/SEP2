@@ -105,7 +105,8 @@ public class ShareItModelManager implements ShareItModel
     return client.checkLogInCredentials(username, password);
   }
 
-  @Override public void getSelectedRental(Rental rental)
+  @Override
+  public void getSelectedRental(Rental rental)
   {
     support.firePropertyChange("selectedRental",1,rental);
   }
