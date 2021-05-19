@@ -1,10 +1,9 @@
 package client.model;
 
+import client.model.state.MemberState;
+import client.model.state.StateManager;
 import client.network.Client;
-import shared.transferobjects.Category;
-import shared.transferobjects.City;
-import shared.transferobjects.Member;
-import shared.transferobjects.State;
+import shared.transferobjects.*;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -49,12 +48,28 @@ public class ShareItModelManager implements ShareItModel
 
   @Override
   public String checkMemberData(String username, String password, String confirmPassword, String email, String phone, String otherInformation, String street, String streetNo, String postalCode, String city) throws IOException {
-    return client.checkMemberData (username, password, confirmPassword, email, phone, otherInformation, street, streetNo, postalCode, city);
+    String messageToReturn = client.checkMemberData (username, password, confirmPassword, email, phone, otherInformation, street, streetNo, postalCode, city);
+    if(messageToReturn.equals("Adding successful")){
+      StateManager.getInstance().setLoginState(new MemberState(username));
+    }
+
+    return messageToReturn;
   }
 
   @Override
-  public void checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, Member member) throws IOException {
-    client.checkRentalData(name, pictureLink, description, price, otherInformation, stateName, member);
+  public String checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, String username, ArrayList<String> selectedCategories) throws IOException {
+    return client.checkRentalData(name, pictureLink,  description,  price, otherInformation,  stateName,  username,  selectedCategories);
+  }
+
+
+  @Override public String checkSearchWithFilter(String search,String city, ArrayList<String> selectedCategories ) throws IOException
+  {
+    return client.checkSearchWithFilter(search,city, selectedCategories );
+  }
+
+  @Override public String checkSearch(String search) throws IOException
+  {
+    return client.checkSearch(search);
   }
 
   @Override
@@ -70,5 +85,15 @@ public class ShareItModelManager implements ShareItModel
   @Override
   public ArrayList<Category> getCategoryList() {
     return client.getCategoryList();
+  }
+
+  @Override public ArrayList<Rental> getRentalsList() throws RemoteException
+  {
+    return client.getRentalsList();
+  }
+
+  @Override
+  public String checkUserType() {
+    return StateManager.getInstance().getUsertype();
   }
 }

@@ -1,11 +1,16 @@
 package server.model.database.rental;
 
+import org.postgresql.largeobject.LargeObject;
+import org.postgresql.largeobject.LargeObjectManager;
+import shared.transferobjects.Category;
 import shared.transferobjects.Member;
 import shared.transferobjects.Rental;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.*;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Files;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,9 +39,10 @@ public class RentalDAOImpl implements RentalDAO{
     }
 
     @Override
-    public Rental create(String name, String pictureLink, String description, int price, String otherInformation, String stateName, Member member) throws SQLException {
+    public Rental create(String name, String pictureLink, String description, int price, String otherInformation, String stateName, String username, ArrayList<String> selectedCategories) throws SQLException {
         try(Connection connection = getConnection()){
-            File file = new File(pictureLink);
+            File file = null;
+            file = new File(pictureLink);
             FileInputStream fis = null;
             try {
                 fis = new FileInputStream(file);
@@ -44,24 +50,51 @@ public class RentalDAOImpl implements RentalDAO{
                 e.printStackTrace();
             }
 
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO share_it.rental(name, picture_link, description, price, other_information, state_name, member_id) VALUES (?, ?, ?, ?, ?, ?, ?);", PreparedStatement.RETURN_GENERATED_KEYS);
-            statement.setString(1, name);
-            statement.setBinaryStream(2, fis, (int)file.length());
-            statement.setString(3, description);
-            statement.setInt(4, price);
-            statement.setString(5, otherInformation);
-            statement.setString(6, stateName);
-            statement.setInt(7, member.getId());
-            statement.executeUpdate();
+            //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            username = "bob";
 
-            //this gets the generated id of the member
-            ResultSet generatedKeys = statement.getGeneratedKeys();
-            if(generatedKeys.next()){
-                return new Rental(generatedKeys.getInt(1), name, pictureLink, description, price, otherInformation, stateName, member);
+
+
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM share_it.member WHERE username = ?");
+            statement.setString(1, username);
+            ResultSet resultSet = statement.executeQuery();
+            int memberId = 0;
+            if(resultSet.next()){
+                memberId =  resultSet.getInt("id");
             }
             else{
                 throw new SQLException("No keys generated");
             }
+
+
+            statement = connection.prepareStatement("INSERT INTO share_it.rental(name, picture_link, description, price, other_information, state_name, member_id) VALUES (?, ?, ?, ?, ?, ?, ?);", PreparedStatement.RETURN_GENERATED_KEYS);
+            statement.setString(1, name);
+            statement.setBinaryStream(2, fis, (int)file.length());
+            //statement.setBinaryStream(2, fis);
+            statement.setString(3, description);
+            statement.setInt(4, price);
+            statement.setString(5, otherInformation);
+            statement.setString(6, stateName);
+            statement.setInt(7, memberId);
+            statement.executeUpdate();
+
+            int rentalId = 0;
+            //this gets the generated id of the member
+            ResultSet generatedKeys = statement.getGeneratedKeys();
+            if(generatedKeys.next()){
+                rentalId = generatedKeys.getInt(1);
+            }
+            else{
+                throw new SQLException("No keys generated");
+            }
+
+            for (int i = 0; i < selectedCategories.size(); i++) {
+                statement = connection.prepareStatement("INSERT INTO share_it.rental_category(rental_id, category_name) VALUES (?, ?);", PreparedStatement.RETURN_GENERATED_KEYS);
+                statement.setInt(1, rentalId);
+                statement.setString(2, selectedCategories.get(i));
+                statement.executeUpdate();
+            }
+            return new Rental(rentalId, name, pictureLink, description, price, otherInformation, stateName, memberId, selectedCategories);
         }
     }
 
@@ -79,6 +112,73 @@ public class RentalDAOImpl implements RentalDAO{
             }
             //return array list
             return arrayListToReturn;
+        }
+    }
+
+    public List<Rental> readBySearch(String search) throws SQLException
+    {
+        try (Connection connection = getConnection())
+        {
+            PreparedStatement statement = connection.prepareStatement(
+                "SELECT * FROM share_it.rental WHERE name || description  ILIKE ?;");
+            statement.setString(1, "%" + search + "%");
+            ResultSet resultSet = statement.executeQuery();
+            ArrayList<Rental> arrayListToReturn = new ArrayList<>();
+            while (resultSet.next())
+            {
+                int idOfSearchedRental = resultSet.getInt("id");
+                Rental rental = new Rental(idOfSearchedRental);
+                arrayListToReturn.add(rental);
+
+            }
+            //return array list
+            System.out.println(search);
+            for (Rental rental : arrayListToReturn)
+            {
+                System.out.println(rental);
+            }
+            return arrayListToReturn;
+
+        }
+
+    }
+
+
+    public List<Rental> readBySearchAndFilter(String search, String city, ArrayList<String> categories) throws SQLException
+    {
+        try (Connection connection = getConnection())
+        {
+            String addToStatement = "";
+            if(city != null){
+                addToStatement += " AND r.member_id = m.id AND m.address_city_name = "+city;
+            }
+            if(categories.size() > 1){
+                for (int i = 0; i < categories.size(); i++) {
+                    addToStatement += " AND r.id = rc.rental_id AND rc.category_name = "+categories.get(i);
+                }
+
+            }
+
+            PreparedStatement statement = connection.prepareStatement(
+                "SELECT * FROM share_it.rental AS r, share_it.member AS m, share_it.rental_category AS rc WHERE name || description  ILIKE ? "+addToStatement+";");
+            statement.setString(1, "%" + search + "%");
+            ResultSet resultSet = statement.executeQuery();
+            ArrayList<Rental> arrayListToReturn = new ArrayList<>();
+            while (resultSet.next())
+            {
+                int idOfSearchedRental = resultSet.getInt("id");
+                Rental rental = new Rental(idOfSearchedRental);
+                arrayListToReturn.add(rental);
+
+            }
+            //return array list
+            System.out.println(search);
+            for (Rental rental : arrayListToReturn)
+            {
+                System.out.println(rental);
+            }
+            return arrayListToReturn;
+
         }
     }
 
@@ -112,7 +212,7 @@ public class RentalDAOImpl implements RentalDAO{
             statement.setInt(4, rental.getPrice());
             statement.setString(5, rental.getOtherInformation());
             statement.setString(6, rental.getStateName());
-            statement.setInt(7, rental.getMember().getId());
+            statement.setInt(7, rental.getMemberId());
             statement.setInt(8, rental.getId());
             statement.executeUpdate();
         }
@@ -141,5 +241,49 @@ public class RentalDAOImpl implements RentalDAO{
             }
             return nextAvailableId;
         }
+    }
+    @Override public List<Rental> readRentals()
+        throws SQLException
+
+    {
+        try(Connection connection = getConnection()){
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM share_it.rental");
+            ResultSet resultSet = statement.executeQuery();
+            ArrayList<Rental> arrayListToReturn = new ArrayList<>();
+
+            int incrementer = 0;
+
+            while(resultSet.next()){
+                incrementer++;
+                int idOFMember = resultSet.getInt("member_id");
+                String filename = "image"+incrementer+".jpeg";
+                byte[] imgBytes = resultSet.getBytes(3);
+                Files.write(new File(filename).toPath(), imgBytes);
+
+                /*try (FileOutputStream fos = new FileOutputStream(filename)) {
+                    fos.write(imgBytes);
+                }
+                catch (IOException e)
+                {
+                    e.printStackTrace();
+                }*/
+                int idOfRental = resultSet.getInt("id");
+                int priceOfRental = resultSet.getInt("price");
+
+
+                arrayListToReturn.add(new Rental(idOfRental,"name", "file:" + filename, "description", priceOfRental, "other_information", "state_name", idOFMember,null));
+
+                //resultSet.close();
+
+                }
+            //statement.close();
+            //return array list
+            return arrayListToReturn;
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

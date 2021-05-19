@@ -5,6 +5,7 @@ import server.model.database.rental.RentalDAOImpl;
 import shared.transferobjects.Member;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class DataCheckRental {
     private String name;
@@ -12,21 +13,35 @@ public class DataCheckRental {
     private String description;
     private String price;
     private int priceNb;
+    private String search;
 
-    public void checkData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, Member member) {
+    public String checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, String username, ArrayList<String> selectedCategories) {
         this.name = name;
         this.pictureLink = pictureLink;
         this.description = description;
         this.price = price;
 
-        if (nameGiven() && pictureLinkGiven() && descriptionGiven() && priceIsNumber()){
+        if (nameGiven() && descriptionGiven() && priceIsNumber()){
             try {
-                RentalDAOImpl.getInstance().create(name, pictureLink, description, priceNb, otherInformation, stateName, member);
+                RentalDAOImpl.getInstance().create(name, pictureLink, description, priceNb, otherInformation, stateName, username, selectedCategories);
+                return "Adding successful";
             }
             catch (SQLException e){
-                //fgh
+                e.printStackTrace();
             }
         }
+        else{
+            if(!nameGiven()){
+                return "Name cannot be empty";
+            }
+            if(!descriptionGiven()){
+                return "Description cannot be empty";
+            }
+            if(!priceIsNumber()){
+                return "Price is a not number";
+            }
+        }
+        return "Ooops, something went wrong!!";
     }
 
     private boolean nameGiven(){
@@ -35,17 +50,6 @@ public class DataCheckRental {
                 return true;
             }
         }
-        System.out.println("Name cannot be empty");
-        return false;
-    }
-
-    private boolean pictureLinkGiven(){
-        if (pictureLink != null){
-            if (!(pictureLink.trim().equals("") && pictureLink.isBlank() && pictureLink.isEmpty())){
-                return true;
-            }
-        }
-        System.out.println("Picture link cannot be empty");
         return false;
     }
 
@@ -55,7 +59,6 @@ public class DataCheckRental {
                 return true;
             }
         }
-        System.out.println("Description cannot be empty");
         return false;
     }
 
@@ -65,8 +68,9 @@ public class DataCheckRental {
             return true;
         }
         catch (NumberFormatException e){
-            System.out.println("price is a not number");
             return false;
         }
     }
+
+   
 }

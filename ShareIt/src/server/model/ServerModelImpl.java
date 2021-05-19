@@ -2,17 +2,15 @@ package server.model;
 
 import server.model.data_check.DataCheckMember;
 import server.model.data_check.DataCheckRental;
+import server.model.data_check.DataCheckSearch;
 import server.model.database.category.CategoryDAOImpl;
 import server.model.database.city.CityDAOImpl;
+import server.model.database.rental.RentalDAOImpl;
 import server.model.database.state.StateDAOImpl;
-import shared.transferobjects.Category;
-import shared.transferobjects.City;
-import shared.transferobjects.Member;
-import shared.transferobjects.State;
+import shared.transferobjects.*;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -21,10 +19,13 @@ public class ServerModelImpl implements ServerModelManager
   private PropertyChangeSupport support;
   private DataCheckMember dataCheckMember;
   private DataCheckRental dataCheckRental;
+  private DataCheckSearch dataCheckSearch;
 
   public ServerModelImpl(){
     support = new PropertyChangeSupport(this);
     dataCheckMember = new DataCheckMember();
+    dataCheckRental = new DataCheckRental();
+    dataCheckSearch = new DataCheckSearch();
   }
 
   @Override public void addListener(String propertyName,
@@ -46,7 +47,7 @@ public class ServerModelImpl implements ServerModelManager
   }
 
   @Override
-  public String checkData(String username, String password, String confirmPassword, String email, String otherInformation, String phone, String street, String streetNo, String postalCode, String city) {
+  public String checkMemberData(String username, String password, String confirmPassword, String email, String otherInformation, String phone, String street, String streetNo, String postalCode, String city) {
     String message = dataCheckMember.checkData(username, password, confirmPassword, email, otherInformation, phone, street, streetNo, postalCode, city);
 
     //support.firePropertyChange("dataValidation", 0, message);
@@ -54,8 +55,21 @@ public class ServerModelImpl implements ServerModelManager
   }
 
   @Override
-  public void checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, Member member) {
-    dataCheckRental.checkData(name, pictureLink, description, price, otherInformation, stateName, member);
+  public String checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, String username, ArrayList<String> selectedCategories) {
+    return dataCheckRental.checkRentalData(name, pictureLink, description, price, otherInformation, stateName, username, selectedCategories);
+  }
+
+  @Override
+  public String checkSearch(String search)
+  {
+    String message = dataCheckSearch.checkSearch(search);
+    return message;
+  }
+
+  @Override public String checkSearchWithFilter(String search,String city,ArrayList<String> selectedCategories)
+  {
+    String message = dataCheckSearch.checkSearchWithFilter(search,city,selectedCategories);
+    return message;
   }
 
   @Override
@@ -86,6 +100,19 @@ public class ServerModelImpl implements ServerModelManager
       return (ArrayList<Category>) CategoryDAOImpl.getInstance().readCategory();
     }
     catch (SQLException e){
+      e.printStackTrace();
+    }
+    return null;
+  }
+
+  @Override public ArrayList<Rental> getRentalsList()
+  {
+    try
+    {
+      return (ArrayList<Rental>) RentalDAOImpl.getInstance().readRentals();
+    }
+    catch (SQLException e)
+    {
       e.printStackTrace();
     }
     return null;

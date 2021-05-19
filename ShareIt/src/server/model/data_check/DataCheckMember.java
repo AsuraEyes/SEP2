@@ -1,6 +1,7 @@
 package server.model.data_check;
 
 import server.model.database.member.MemberDAOImpl;
+import shared.transferobjects.Member;
 
 import java.sql.SQLException;
 

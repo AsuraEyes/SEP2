@@ -12,54 +12,56 @@ import shared.transferobjects.State;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class AddRentalViewModel {
     private ShareItModel model;
     private final StringProperty nameField;
-    private final StringProperty pictureLinkField;
     private final StringProperty descriptionField;
-    private final ObservableValue<String> stateBox;
+//    private final ObservableValue<String> stateBox;
     private ObservableList<String> statesList;
     private final StringProperty priceField;
     private final StringProperty otherInfoField;
-    private final ObservableValue<String> categoryBox;
+//    private final ObservableValue<String> categoryBox;
     private ObservableList<String> categoriesList;
+    private String username;
+    
+
 
     public AddRentalViewModel(ShareItModel model){
         this.model = model;
         nameField = new SimpleStringProperty();
-        pictureLinkField = new SimpleStringProperty();
         descriptionField = new SimpleStringProperty();
-        stateBox = new SimpleStringProperty();
+//        stateBox = new SimpleStringProperty();
         priceField = new SimpleStringProperty();
         otherInfoField = new SimpleStringProperty();
-        categoryBox = new SimpleStringProperty();
+//        categoryBox = new SimpleStringProperty();
     }
 
     public StringProperty getNameField(){
         return nameField;
     }
-    public StringProperty getPictureLinkField(){
-        return pictureLinkField;
-    }
     public StringProperty getDescriptionField(){
         return descriptionField;
     }
-    public ObservableValue<String> getStateBox(){
-        return stateBox;
-    }
+//    public ObservableValue<String> getStateBox(){
+//        return stateBox;
+//    }
     public StringProperty getPriceField(){
         return priceField;
     }
     public StringProperty getOtherInfoField(){
         return otherInfoField;
     }
-    public ObservableValue<String> getCategoryBox() {
-        return categoryBox;
-    }
+//    public ObservableValue<String> getCategoryBox() {
+//        return categoryBox;
+//    }
 
-    public void onAddRentalButtonPressed(Object selectedState, Object selectedCategory, Member member) throws IOException {
-        model.checkRentalData(nameField.getValue(), pictureLinkField.getValue(), descriptionField.getValue(), priceField.getValue(), otherInfoField.getValue(), (String) selectedState, member);
+    public String onAddRentalButtonPressed(Object selectedState, ObservableList<String> selectedCategory, String pictureLink) throws IOException {
+        ArrayList<String> selectedCategoriesList = new ArrayList<>(selectedCategory);
+
+        return model.checkRentalData(nameField.getValue(), pictureLink, descriptionField.getValue(), priceField.getValue(), otherInfoField.getValue(), (String) selectedState,username, selectedCategoriesList);
     }
     public ObservableList<String> getStates(){
         ArrayList<State> stateList = model.getStateList();

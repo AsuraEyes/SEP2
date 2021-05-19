@@ -1,11 +1,7 @@
 package shared.networking;
 
-import shared.transferobjects.Category;
-import shared.transferobjects.City;
-import shared.transferobjects.Member;
-import shared.transferobjects.State;
+import shared.transferobjects.*;
 
-import java.io.IOException;
 import java.rmi.AlreadyBoundException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -23,12 +19,16 @@ public interface RMIServer extends Remote
   void unregisterClient(RemoteObserver client) throws RemoteException;
 
   String checkMemberData(String username, String password, String confirmPassword, String email, String phone, String otherInformation, String street, String streetNo, String postalCode, String city) throws RemoteException;
-
-  void checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, Member member) throws RemoteException;
+  String checkSearch(String search) throws RemoteException;
+  String checkSearchWithFilter(String search,String city, ArrayList<String> selectedCategories)throws RemoteException;
+  String checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, String username, ArrayList<String> selectedCategories) throws RemoteException;
 
   ArrayList<City> getCityList() throws RemoteException;
 
   ArrayList<State> getStateList() throws RemoteException;
 
   ArrayList<Category> getCategoryList() throws RemoteException;
+  ArrayList<Rental> getRentalsList() throws RemoteException;
+
+
 }

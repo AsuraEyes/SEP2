@@ -91,9 +91,9 @@ public class ViewModelFactory
     return createAccountViewModel;
   }
 
-  public SearchForRentalViewModel getSearchForRentalViewModel() {
+  public SearchForRentalViewModel getSearchForRentalViewModel() throws SQLException, IOException {
     if (searchForRentalViewModel == null){
-      searchForRentalViewModel = new SearchForRentalViewModel();
+      searchForRentalViewModel = new SearchForRentalViewModel(modelFactory.getShareItModel());
     }
     return searchForRentalViewModel;
   }
@@ -126,10 +126,10 @@ public class ViewModelFactory
     return viewReportedMemberListViewModel;
   }
 
-  public MenuViewModel getMenuViewModel(){
+  public MenuViewModel getMenuViewModel() throws IOException {
     if(menuViewModel == null)
     {
-      menuViewModel = new MenuViewModel();
+      menuViewModel = new MenuViewModel(modelFactory.getShareItModel());
     }
     return menuViewModel;
   }

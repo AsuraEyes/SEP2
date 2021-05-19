@@ -5,6 +5,7 @@ import server.model.database.category.CategoryDAOImpl;
 import server.model.database.city.CityDAOImpl;
 import server.model.database.member.MemberDAOImpl;
 import server.model.database.rental.RentalDAOImpl;
+import server.model.database.state.StateDAOImpl;
 import server.networking.RMIServerImpl;
 import shared.networking.RMIServer;
 
@@ -19,11 +20,12 @@ public class RunServer
     RMIServer ss = new RMIServerImpl(new ServerModelImpl());
     String timothyPassword = "CoDex21";
     String maggiePassword = "SQLdatabaze";
-    String currentPassword = timothyPassword;
+    String currentPassword = "hehe2137";
     MemberDAOImpl.getInstance().setPassword(currentPassword);
     CityDAOImpl.getInstance().setPassword(currentPassword);
     RentalDAOImpl.getInstance().setPassword(currentPassword);
     CategoryDAOImpl.getInstance().setPassword(currentPassword);
+    StateDAOImpl.getInstance().setPassword(currentPassword);
     ss.startServer();
   }
 }

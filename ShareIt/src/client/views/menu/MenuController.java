@@ -29,8 +29,7 @@ public class MenuController
   private ViewHandler viewHandler;
   private MenuViewModel menuViewModel;
 
-  public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory)
-  {
+  public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws IOException {
     this.viewHandler = viewHandler;
     menuViewModel = viewModelFactory.getMenuViewModel();
     usernameLabel.textProperty().bind(menuViewModel.getUsernameLabel());

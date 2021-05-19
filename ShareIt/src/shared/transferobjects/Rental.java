@@ -1,6 +1,7 @@
 package shared.transferobjects;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Rental implements Serializable {
     private int id;
@@ -10,9 +11,12 @@ public class Rental implements Serializable {
     private int price;
     private String otherInformation;
     private String stateName;
-    private Member member;
+    private int memberId;
+    private ArrayList<String> selectedCategories;
 
-    public Rental(int id, String name, String pictureLink, String description, int price, String otherInformation, String stateName, Member member) {
+
+
+    public Rental(int id, String name, String pictureLink, String description, int price, String otherInformation, String stateName, int memberId, ArrayList<String> selectedCategories) {
         this.id = id;
         this.name = name;
         this.pictureLink = pictureLink;
@@ -20,7 +24,18 @@ public class Rental implements Serializable {
         this.price = price;
         this.otherInformation = otherInformation;
         this.stateName = stateName;
-        this.member = member;
+        this.memberId = memberId;
+        this.selectedCategories = selectedCategories;
+    }
+    public ArrayList<String> getSelectedCategories() {
+        return selectedCategories;
+    }
+
+    public void setSelectedCategories(ArrayList<String> selectedCategories) {
+        this.selectedCategories = selectedCategories;
+    }
+    public Rental(int id){
+        this.id = id;
     }
 
     public int getId() {
@@ -79,11 +94,24 @@ public class Rental implements Serializable {
         this.stateName = stateName;
     }
 
-    public Member getMember() {
-        return member;
+    public int getMemberId() {
+        return memberId;
     }
 
-    public void setMember(Member member) {
-        this.member = member;
+    public void setMemberId(int memberId) {
+        this.memberId = memberId;
+    }
+
+    @Override public String toString()
+    {
+        if(name==null){
+            return ""+id;
+        }
+
+        return "Rental{" + "id=" + id + ", name='" + name + '\''
+            + ", pictureLink='" + pictureLink + '\'' + ", description='"
+            + description + '\'' + ", price=" + price + ", otherInformation='"
+            + otherInformation + '\'' + ", stateName='" + stateName + '\''
+            + ", member id =" + memberId + '}';
     }
 }

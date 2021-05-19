@@ -13,7 +13,6 @@ public class ShareItApp extends Application
     ModelFactory modelFactory = new ModelFactory(clientFactory);
     ViewModelFactory viewModelFactory = new ViewModelFactory(modelFactory);
     ViewHandler viewHandler = new ViewHandler(stage, viewModelFactory);
-
     viewHandler.start();
    }
 }

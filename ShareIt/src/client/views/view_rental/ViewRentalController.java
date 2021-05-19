@@ -8,6 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class ViewRentalController
 {
@@ -36,7 +37,7 @@ public class ViewRentalController
   }
 
   public void goBackToSearchResultsButton(ActionEvent actionEvent)
-      throws IOException
+      throws IOException, SQLException
   {
     viewHandler.setView(viewHandler.menu(), viewHandler.searchForRental());
   }

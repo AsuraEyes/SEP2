@@ -7,7 +7,7 @@ import client.views.create_account.CreateAccountController;
 import client.views.log_in.LogInController;
 import client.views.main_view.MainController;
 import client.views.menu.MenuController;
-import client.views.search_for_rental.Controller;
+import client.views.search_for_rental.SearchForRentalController;
 import client.views.view_member_profile.ViewMemberProfileController;
 import client.views.view_rental.ViewRentalController;
 import client.views.view_reported_member.ViewReportedMemberController;
@@ -37,7 +37,7 @@ public class ViewHandler
 
   public void start() throws Exception
   {
-    setView(menu(),addRental());
+    setView(menu(),searchForRental());
   }
 
   public void setView(Node menu, Node content) throws IOException
@@ -157,12 +157,12 @@ public class ViewHandler
     //ogInController.init(this, viewModelFactory);
     return content;
   }
-  public Node searchForRental() throws IOException
+  public Node searchForRental() throws IOException, SQLException
   {
     FXMLLoader loader = new FXMLLoader();
-    loader.setLocation(getClass().getResource("/client/views/search_for_rental/SearchForRentalv2.fxml"));
+    loader.setLocation(getClass().getResource("/client/views/search_for_rental/SearchForRental.fxml"));
     Node content = loader.load();
-    Controller controller = loader.getController();
+    SearchForRentalController controller = loader.getController();
     controller.init(this,viewModelFactory);
     //SearchForRentalController searchForRentalController = loader.getController();
     //searchForRentalController.init(this, viewModelFactory);

@@ -4,31 +4,32 @@ import client.core.ViewHandler;
 import client.core.ViewModelFactory;
 import client.viewmodel.seatch_for_rental.SearchForRentalViewModel;
 import com.sun.javafx.scene.control.LabeledText;
-import javafx.animation.PathTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.util.Callback;
-import org.controlsfx.control.GridCell;
-import org.controlsfx.control.GridView;
+import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 import org.controlsfx.control.InfoOverlay;
+import org.controlsfx.control.Notifications;
 import org.controlsfx.control.PopOver;
-import org.controlsfx.control.cell.ColorGridCell;
-import org.controlsfx.control.cell.ImageGridCell;
-import org.controlsfx.validation.decoration.GraphicValidationDecoration;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Random;
 
 public class Controller
 {
+  @FXML private AnchorPane parent;
+  @FXML private TextField searchField;
   @FXML private FlowPane flowPane;
 
   //private GridCell<Image> image;
@@ -43,10 +44,11 @@ public class Controller
   //private Callback<GridView<Image>, GridCell<Image>> factory;
   private ViewHandler viewHandler;
   private SearchForRentalViewModel searchForRentalViewModel;
+  private Notifications notifications;
 
 
   public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory)
-      throws IOException
+      throws IOException, SQLException
   {
     searchForRentalViewModel = viewModelFactory.getSearchForRentalViewModel();
     this.viewHandler = viewHandler;
@@ -112,6 +114,11 @@ public class Controller
       list.add(new Color(r.nextDouble(), r.nextDouble(), r.nextDouble(), 1.0));
     }
     this.flowPane.getChildren().setAll(myGrid);*/
+    notifications =  Notifications.create()
+        .title("Error - invalid input!")
+        .graphic(new Rectangle(300, 300, Color.RED)) // sets node to display
+        .hideAfter(Duration.seconds(3));
+
   }
 
   public Picture getPicture(Object object)
@@ -173,5 +180,27 @@ public class Controller
     images.add(picture5.getImage());
     observableImages = FXCollections.observableArrayList(images);
   }
+
+ /* public void searchButton(ActionEvent actionEvent) throws IOException
+  {
+    if(checkField(searchField)){
+      String message = searchForRentalViewModel.onSearchButtonPressed();
+      switch (message){
+        case "Adding successful":
+          break;
+        default:
+          notifications.owner(parent).text(message).showError();
+      }
+    }
+    }
+
+
+  private boolean checkField(TextField nameOfField){
+    if(nameOfField.textProperty().getValue() == null || nameOfField.textProperty().getValue().isBlank()){
+      notifications.owner(parent).text(nameOfField.getPromptText()+" cannot be empty").showError();
+      return false;
+    }
+    return true;
+  }*/
 }
 

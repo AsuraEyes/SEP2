@@ -42,14 +42,14 @@ VALUES ('bob','strongpassword1234','bobbobbinsky@via.dk', '26465768', 'retired j
        ('saveallthemoney','blingbling1','karen@gmail.com', '+45 34891032', 'i created account here just to save money renting from others','Flintebakken','150','8700','Horsens');
 
 INSERT INTO rating
-VALUES (5,'Amazing! I even got a coffee together with the tool i borrowed. I recommend!!!',1,2),
-       (3,'If I could I would. Wether or not I should, I still would.',1,4),
+VALUES (5,'Amazing! I even got a coffee together with the tool i borrowed. I recommend!!!',12,2),
+       (3,'If I could I would. Wether or not I should, I still would.',12,4),
        (5,'I recommend the person. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ex nisi, tempus vel sem feugiat, mollis placerat dui. Maecenas elit orci, tincidunt sollicitudin consequat sed, elementum et massa. Donec lacinia sollicitudin felis, sed lobortis urna rutrum at. Donec dictum augue purus, sit amet ultricies erat mollis nec. Mauris egestas, lacus a lobortis feugiat, nunc sapien elementum metus, at posuere neque risus non lectus. Ut convallis turpis ante, eget convallis mi dapibus a. Sed magna mi, sagittis at dapibus ac, convallis sed leo.',2,3),
        (4,'',3,2),
        (5,'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi euismod massa a ex lobortis venenatis. Aenean rutrum enim ac lorem finibus, ut gravida nibh facilisis. Nam tortor lorem, rutrum eget tempor vel, luctus nec elit. Quisque pellentesque massa nulla, nec dapibus sem viverra ut. Maecenas a orci vel enim cursus volutpat ac at nisi. Vestibulum in suscipit arcu. Mauris scelerisque orci laoreet, dignissim ipsum nec, tempus massa. Maecenas orci dui, vestibulum ut nibh eu, viverra iaculis lectus. Morbi porttitor sem non sapien rhoncus, eget hendrerit dolor commodo. Nam in ligula a turpis auctor pretium ut a sem. Quisque tempus eleifend urna sit amet fermentum. Mauris bibendum lobortis efficitur. Mauris in scelerisque ex. Donec finibus efficitur nisi, in faucibus dui sagittis eu. Suspendisse quis enim eget tellus vulputate sagittis. Donec dictum vitae dui in faucibus.',5,6),
-       (4,'',5,1),
-       (1,'Never again.',5,7),
-       (5,'Awesome person, awesome service!',6,1),
+       (4,'',5,9),
+       (4,'Never again.',5,7),
+       (5,'Awesome person, awesome service!',6,10),
        (2,'Meh... ',6,3),
        (3,'',6,7),
        (5,'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque malesuada turpis nulla, ut egestas turpis blandit quis. Praesent consectetur ac sem id ornare. Praesent volutpat, sapien ac pretium placerat, enim purus laoreet metus, a finibus dui sapien vel nibh. Aliquam a lobortis ante. Donec accumsan lobortis orci, vel bibendum tortor auctor in. Donec ac nulla urna. Curabitur accumsan tempus nibh, eget scelerisque ex eleifend nec. Vestibulum mollis pharetra facilisis. Suspendisse gravida arcu id sodales pretium. Nam sit amet consectetur orci, nec interdum lectus. Maecenas et arcu nisl. In ut justo malesuada, interdum sapien et, maximus tellus. Nullam sed libero sapien. Sed sit amet accumsan urna, finibus bibendum nunc. Quisque cursus dignissim sem, et pretium odio rhoncus ac. Phasellus laoreet, mauris ut varius volutpat, augue magna tempus quam, eget molestie leo massa a odio.',7,2),

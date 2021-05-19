@@ -1,5 +1,6 @@
 package shared.transferobjects;
 
+import java.awt.*;
 import java.io.Serializable;
 
 public class Member implements Serializable {
@@ -29,6 +30,9 @@ public class Member implements Serializable {
         this.addressCity = address_city;
         averageReview = 0;
     }
+    
+    public Member(int id){this.id = id;}
+
     public int getId() {
         return id;
     }

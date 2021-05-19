@@ -5,27 +5,23 @@ import client.core.ViewModelFactory;
 import client.viewmodel.create_account.CreateAccountViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
 import org.controlsfx.control.textfield.CustomPasswordField;
 import org.controlsfx.validation.ValidationSupport;
-import shared.transferobjects.City;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Optional;
 
 public class CreateAccountController {
     @FXML
     private AnchorPane parent;
-    @FXML
-    private TextField searchField;
     @FXML
     private TextField usernameField;
     @FXML
@@ -91,14 +87,20 @@ public class CreateAccountController {
             String message = createAccountViewModel.onCreateButtonPressed(locationBox.getValue());
             switch (message){
                 case "Adding successful":
-                    notifications.owner(parent).text("Your account has been successfully created! You will be automatically directed to the welcome page in 5 seconds").title(message).showConfirm();
+                    //notifications.owner(parent).text("Your account has been successfully created! ").title(message).showConfirm();
 
-                    try {
-                        Thread.sleep(5000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+                    Stage stage = (Stage) viewHandler.getStage().getScene().getWindow();
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION, "");
+                    alert.setTitle("Confirmation");
+                    alert.setHeaderText("Account successfully created");
+                    alert.initOwner(stage);
+                    alert.getDialogPane().setContentText("Click ok to get to welcome page.");
+
+                    Optional<ButtonType> result = alert.showAndWait();
+                    if (result.get() == ButtonType.OK)
+                    {
+                        viewHandler.setView(viewHandler.menu(), viewHandler.welcomePage());
                     }
-                    viewHandler.setView(viewHandler.menu(), viewHandler.welcomePage());
                     break;
                 default:
                     notifications.owner(parent).text(message).showError();
