@@ -10,6 +10,7 @@ import client.viewmodel.seatch_for_rental.SearchForRentalViewModel;
 import client.viewmodel.view_member_profile.ViewMemberProfileViewModel;
 import client.viewmodel.view_rating.ViewRatingViewModel;
 import client.viewmodel.view_rating_full.ViewRatingFullViewModel;
+import client.viewmodel.view_rental.ViewRentalViewModel;
 import client.viewmodel.view_reported_member.ViewReportedMemberViewModel;
 import client.viewmodel.view_reported_member_list.ViewReportedMemberListViewModel;
 import client.viewmodel.welcome_page.WelcomePageViewModel;
@@ -34,6 +35,7 @@ public class ViewModelFactory
   private WelcomePageViewModel welcomePageViewModel;
   private MenuViewModel menuViewModel;
   private ViewMemberProfileViewModel viewMemberProfileViewModel;
+  private ViewRentalViewModel viewRentalViewModel;
 
   public ViewModelFactory(ModelFactory modelFactory) throws IOException
   {
@@ -140,5 +142,14 @@ public class ViewModelFactory
       viewMemberProfileViewModel = new ViewMemberProfileViewModel(modelFactory.getShareItModel());
     }
     return viewMemberProfileViewModel;
+  }
+
+  public ViewRentalViewModel getViewRentalViewModel() throws IOException
+  {
+    if(viewRentalViewModel == null)
+    {
+      viewRentalViewModel = new ViewRentalViewModel(modelFactory.getShareItModel());
+    }
+    return viewRentalViewModel;
   }
 }
