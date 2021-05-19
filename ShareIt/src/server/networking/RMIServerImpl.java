@@ -13,6 +13,7 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.util.List;
 
 public class RMIServerImpl implements RMIServer
 {
@@ -89,11 +90,11 @@ public class RMIServerImpl implements RMIServer
   }
 
   @Override
-  public String checkSearch(String search) throws RemoteException
+  public List<Rental> checkSearch(String search) throws RemoteException
   {
     return serverModelManager.checkSearch(search);
   }
-  @Override public String checkSearchWithFilter(String search,String city, ArrayList<String> selectedCategories ) throws RemoteException
+  @Override public List<Rental> checkSearchWithFilter(String search,String city, ArrayList<String> selectedCategories ) throws RemoteException
   {
     return serverModelManager.checkSearchWithFilter(search,city,selectedCategories);
   }

@@ -114,42 +114,113 @@ public class RentalDAOImpl implements RentalDAO
     }
   }
 
+  @Override
   public List<Rental> readBySearchAndFilter(String search, String city, ArrayList<String> categories) throws SQLException
   {
     try (Connection connection = getConnection())
     {
       String addToStatement = "";
       if(city != null){
-        addToStatement += " AND r.member_id = m.id AND m.address_city_name = "+city;
+        addToStatement += " AND r.member_id = m.id AND m.address_city_name = '"+city+"'";
       }
       if(categories.size() > 1){
         for (int i = 0; i < categories.size(); i++) {
-          addToStatement += " AND r.id = rc.rental_id AND rc.category_name = "+categories.get(i);
+          //first from the list
+          if(i == 0){
+            //more coming
+            if(categories.size() > 2){
+              addToStatement += " AND (r.id = rc.rental_id AND rc.category_name = '"+categories.get(i)+"'";
+            }
+            //only this one
+            else{
+              addToStatement += " AND r.id = rc.rental_id AND rc.category_name = '"+categories.get(i)+"'";
+            }
+          }
+          else if(i == categories.size()-1){
+            addToStatement += " OR r.id = rc.rental_id AND rc.category_name = '"+categories.get(i)+"')";
+          }
+          else{
+            addToStatement += " OR r.id = rc.rental_id AND rc.category_name = '"+categories.get(i)+"'";
+          }
         }
-
       }
 
+
       PreparedStatement statement = connection.prepareStatement(
-              "SELECT * FROM share_it.rental AS r, share_it.member AS m, share_it.rental_category AS rc WHERE name || description  ILIKE ? "+addToStatement+";");
-      statement.setString(1, "%" + search + "%");
+              "SELECT DISTINCT * FROM share_it.rental AS r, share_it.member AS m, share_it.rental_category AS rc WHERE name || description  ILIKE ? "+addToStatement+";");
+      if(search != null){
+        if(!search.equals("")){
+          statement.setString(1, "%" + search + "%");
+        }
+        else{
+          statement.setString(1, "%");
+        }
+      }
+      else{
+        statement.setString(1, "%");
+      }
+
+      System.out.println(statement);
       ResultSet resultSet = statement.executeQuery();
-      ArrayList<Rental> arrayListToReturn = new ArrayList<>();
+      ArrayList<Integer> listOfIds = new ArrayList<>();
       while (resultSet.next())
       {
         int idOfSearchedRental = resultSet.getInt("id");
-        Rental rental = new Rental(idOfSearchedRental);
-        arrayListToReturn.add(rental);
-
+        //Rental rental = new Rental(idOfSearchedRental);
+        if(!listOfIds.contains(idOfSearchedRental)){
+          listOfIds.add(idOfSearchedRental);
+        }
       }
+
+      System.out.println(listOfIds);
+
+      String sqlToAppend = "SELECT * FROM share_it.rental WHERE";
+      for (int i = 0; i < listOfIds.size(); i++) {
+        if(i == 0){
+          sqlToAppend += " id="+listOfIds.get(i);
+        }
+        else{
+          sqlToAppend += " OR id="+listOfIds.get(i);
+        }
+      }
+
+      statement = connection.prepareStatement(sqlToAppend);
+      resultSet = statement.executeQuery();
+      ArrayList<Rental> arrayListToReturn = new ArrayList<>();
+
+      int incrementer = 0;
+
+      while (resultSet.next()) {
+        incrementer++;
+        String filename = "image" + incrementer + ".jpeg";
+        byte[] imgBytes = resultSet.getBytes(3);
+        Files.write(new File(filename).toPath(), imgBytes);
+
+        int rentalId = resultSet.getInt("id");
+        String rentalName = resultSet.getString("name");
+        //picture link?
+        String rentalDescription = resultSet.getString("description");
+        int priceOfRental = resultSet.getInt("price");
+        String rentalOtherInformation = resultSet.getString("other_information");
+        String rentalState = resultSet.getString("state_name");
+        int memberId = resultSet.getInt("member_id");
+
+        arrayListToReturn.add(
+                new Rental(rentalId, rentalName, "file:" + filename, rentalDescription,
+                        priceOfRental, rentalOtherInformation, rentalState, memberId,
+                        null));
+      }
+      resultSet.close();
+      statement.close();
       //return array list
-      System.out.println(search);
-      for (Rental rental : arrayListToReturn)
-      {
-        System.out.println(rental);
-      }
       return arrayListToReturn;
-
     }
+    catch (IOException e) {
+      e.printStackTrace();
+    }
+    return null;
+
+
   }
 
   @Override public List<Rental> readByName(String name) throws SQLException
@@ -172,18 +243,49 @@ public class RentalDAOImpl implements RentalDAO
     }
   }
 
-  public List<Rental> readBySearch(String search) throws SQLException
-  {
-    try (Connection connection = getConnection())
-    {
+  public List<Rental> readBySearch(String search) throws SQLException {
+    try (Connection connection = getConnection()) {
       PreparedStatement statement = connection.prepareStatement(
-          "SELECT * FROM share_it.rental WHERE name || description  ILIKE ?;");
+              "SELECT * FROM share_it.rental WHERE name || description  ILIKE ?;");
       statement.setString(1, "%" + search + "%");
       ResultSet resultSet = statement.executeQuery();
       ArrayList<Rental> arrayListToReturn = new ArrayList<>();
+
+      int incrementer = 0;
+
+      while (resultSet.next()) {
+        incrementer++;
+        String filename = "image" + incrementer + ".jpeg";
+        byte[] imgBytes = resultSet.getBytes(3);
+        Files.write(new File(filename).toPath(), imgBytes);
+
+        int rentalId = resultSet.getInt("id");
+        String rentalName = resultSet.getString("name");
+        //picture link?
+        String rentalDescription = resultSet.getString("description");
+        int priceOfRental = resultSet.getInt("price");
+        String rentalOtherInformation = resultSet.getString("other_information");
+        String rentalState = resultSet.getString("state_name");
+        int memberId = resultSet.getInt("member_id");
+
+        arrayListToReturn.add(
+                new Rental(rentalId, rentalName, "file:" + filename, rentalDescription,
+                        priceOfRental, rentalOtherInformation, rentalState, memberId,
+                        null));
+      }
+      resultSet.close();
+      statement.close();
+      //return array list
+      return arrayListToReturn;
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    return null;
+      /*
       while (resultSet.next())
       {
         int idOfSearchedRental = resultSet.getInt("id");
+
         Rental rental = new Rental(idOfSearchedRental);
         arrayListToReturn.add(rental);
 
@@ -197,6 +299,8 @@ public class RentalDAOImpl implements RentalDAO
       return arrayListToReturn;
 
     }
+    */
+
   }
 
     /*public static Rental createBook(ResultSet resultSet) throws SQLException {
@@ -327,17 +431,19 @@ public class RentalDAOImpl implements RentalDAO
           }
         }*/
 
-        int idOFMember = resultSet.getInt("member_id");
-        int idOfRental = resultSet.getInt("id");
+        int rentalId = resultSet.getInt("id");
+        String rentalName = resultSet.getString("name");
+        //picture link?
+        String rentalDescription = resultSet.getString("description");
         int priceOfRental = resultSet.getInt("price");
+        String rentalOtherInformation = resultSet.getString("other_information");
+        String rentalState = resultSet.getString("state_name");
+        int memberId = resultSet.getInt("member_id");
 
         arrayListToReturn.add(
-            new Rental(idOfRental, "name", "file:" + filename, "description",
-                priceOfRental, "other_information", "state_name", idOFMember,
+            new Rental(rentalId, rentalName, "file:" + filename, rentalDescription,
+                priceOfRental, rentalOtherInformation, rentalState, memberId,
                 null));
-
-
-
       }
       resultSet.close();
       statement.close();
