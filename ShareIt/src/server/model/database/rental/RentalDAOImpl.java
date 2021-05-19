@@ -120,7 +120,7 @@ public class RentalDAOImpl implements RentalDAO
     try (Connection connection = getConnection())
     {
       String addToStatement = "";
-      if(city != null){
+      if(city != null && !city.equals("")){
         addToStatement += " AND r.member_id = m.id AND m.address_city_name = '"+city+"'";
       }
       if(categories.size() > 0){
