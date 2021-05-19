@@ -5,7 +5,11 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.StackPane;
+import org.controlsfx.control.InfoOverlay;
 import shared.transferobjects.Category;
 import shared.transferobjects.City;
 import shared.transferobjects.Rental;
@@ -56,15 +60,31 @@ public class SearchForRentalViewModel {
         return otherInfoLabel;
     }
 
-    public void fireProperty(){
 
-    }
-
-    public void fireProperty(MouseEvent event)
+    public void getRental(Object object) throws RemoteException
     {
-        //client.fireProperty
-    }
+       if(object instanceof StackPane){
+           StackPane stackPane = (StackPane) object;
+           if(stackPane.getChildren().get(0) instanceof InfoOverlay)
+           {
+               InfoOverlay infoOverlay = (InfoOverlay) stackPane.getChildren().get(0);
+               if(infoOverlay.getContent() instanceof ImageView)
+               {
+                   ImageView imageView = (ImageView) infoOverlay.getContent();
+                   for (int i = 0; i < getRentalsList().size(); i++)
+                   {
+                       //if (imageView.getImage().getUrl().equals(getRentalsList().get(i).getPictureLink()))
+                       if(imageView.getId().equals(String.valueOf(getRentalsList().get(i).getId())))
+                       {
+                           model.getSelectedRental(getRentalsList().get(i));
+                           break;
+                       }
 
+                   }
+               }
+           }
+       }
+    }
     /*public Picture getPicture(Object object){
         if(object instanceof ImageView)
         {

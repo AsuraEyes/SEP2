@@ -71,6 +71,7 @@ public class RMIServerImpl implements RMIServer
       }
     };
     serverModelManager.addListener("NewMessage", listener);
+    //serverModelManager.addListener("selectedRental", listener);
     //serverModelManager.addListener("NewUser", listener);
   }
 

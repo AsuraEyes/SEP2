@@ -20,6 +20,7 @@ public interface ShareItModel extends Subject
     ArrayList<Rental> getRentalsList() throws RemoteException;
 
     String checkUserType();
+    void getSelectedRental(Rental rental);
 
     String checkLogInCredentials(String username, String password) throws RemoteException;
 }

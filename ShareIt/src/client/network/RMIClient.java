@@ -5,6 +5,7 @@ import shared.networking.RMIServer;
 import shared.networking.RemoteObserver;
 import shared.transferobjects.*;
 
+import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.IOException;
@@ -148,6 +149,7 @@ public class RMIClient implements Client, RemoteObserver
   {
     if(propertyName.equals("dataValidation")){
       support.firePropertyChange(propertyName, 0, newValue);
+      support.firePropertyChange("selectedRental", 0, 0);
     }
 
     /*if(object instanceof Message)

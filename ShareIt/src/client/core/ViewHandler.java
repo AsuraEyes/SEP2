@@ -214,7 +214,7 @@ public class ViewHandler
     loader.setLocation(getClass().getResource("/client/views/view_rental/ViewRental.fxml"));
     Node content = loader.load();
     ViewRentalController viewRentalController = loader.getController();
-    viewRentalController.init(this);
+    viewRentalController.init(this,viewModelFactory);
     return content;
   }
   public Node viewReportedMember() throws IOException

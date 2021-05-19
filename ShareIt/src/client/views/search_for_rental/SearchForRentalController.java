@@ -110,6 +110,7 @@ public class SearchForRentalController {
           imageView.setPreserveRatio(true);
           imageView.setSmooth(true);
           imageView.setCache(true);
+          imageView.setId(String.valueOf(rentals.get(i).getId()));
           flowPane.getChildren().add(new StackPane(
               new InfoOverlay(imageView, rentals.get(i).toString())));
           System.out.println(rentals.get(i).getPictureLink());
@@ -118,8 +119,8 @@ public class SearchForRentalController {
               .addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
                 try
                 {
-                  //getPicture(event.getTarget());
                   viewHandler.setView(viewHandler.menu(), viewHandler.viewRental());
+                  searchForRentalViewModel.getRental(event.getSource());
                 }
                 catch (IOException e)
                 {

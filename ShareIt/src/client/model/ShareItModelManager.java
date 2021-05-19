@@ -22,6 +22,7 @@ public class ShareItModelManager implements ShareItModel
     this.client = client;
     client.startClient();
     support = new PropertyChangeSupport(this);
+    client.addListener("selectedRental", this::onDataValidation);
     client.addListener("dataValidation", this::onDataValidation);
   }
 
@@ -101,5 +102,10 @@ public class ShareItModelManager implements ShareItModel
   @Override
   public String checkLogInCredentials(String username, String password) throws RemoteException {
     return client.checkLogInCredentials(username, password);
+  }
+
+  @Override public void getSelectedRental(Rental rental)
+  {
+    support.firePropertyChange("selectedRental",1,rental);
   }
 }
