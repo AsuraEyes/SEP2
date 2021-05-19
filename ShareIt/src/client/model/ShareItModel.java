@@ -5,6 +5,7 @@ import shared.util.Subject;
 
 import java.io.IOException;
 import java.rmi.RemoteException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,8 +19,9 @@ public interface ShareItModel extends Subject
     ArrayList<State> getStateList();
     ArrayList<Category> getCategoryList();
     ArrayList<Rental> getRentalsList() throws RemoteException;
-
     String checkUserType();
     void getSelectedRental(Rental rental);
+    Member getMemberById(int id) throws RemoteException;
 
+    String checkLogInCredentials(String username, String password) throws RemoteException;
 }

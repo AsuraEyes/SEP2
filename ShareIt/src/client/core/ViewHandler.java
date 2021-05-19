@@ -13,6 +13,7 @@ import client.views.view_rental.ViewRentalController;
 import client.views.view_reported_member.ViewReportedMemberController;
 import client.views.view_reported_member_list.ViewReportedMemberListController;
 import client.views.welcome_page.WelcomePageController;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -37,7 +38,7 @@ public class ViewHandler
 
   public void start() throws Exception
   {
-    setView(menu(), searchForRental());
+    setView(menu(), welcomePage());
   }
 
   public void setView(Node menu, Node content) throws IOException
@@ -158,13 +159,24 @@ public class ViewHandler
     //ogInController.init(this, viewModelFactory);
     return content;
   }
-  public Node searchForRental() throws IOException, SQLException
+
+  public Node searchForRental(String search) throws IOException
   {
     FXMLLoader loader = new FXMLLoader();
     loader.setLocation(getClass().getResource("/client/views/search_for_rental/SearchForRental.fxml"));
     Node content = loader.load();
     SearchForRentalController controller = loader.getController();
-    controller.init(this,viewModelFactory);
+    if(search != null){
+      if(!search.isBlank()){
+        controller.init(this,viewModelFactory, search);
+      }
+      else{
+        controller.init(this,viewModelFactory);
+      }
+    }
+    else{
+      controller.init(this,viewModelFactory);
+    }
     //SearchForRentalController searchForRentalController = loader.getController();
     //searchForRentalController.init(this, viewModelFactory);
     return content;

@@ -1,6 +1,7 @@
 package server;
 
 import server.model.ServerModelImpl;
+import server.model.database.administrator.AdministratorDAOImpl;
 import server.model.database.category.CategoryDAOImpl;
 import server.model.database.city.CityDAOImpl;
 import server.model.database.member.MemberDAOImpl;
@@ -27,6 +28,7 @@ public class RunServer
     RentalDAOImpl.getInstance().setPassword(currentPassword);
     CategoryDAOImpl.getInstance().setPassword(currentPassword);
     StateDAOImpl.getInstance().setPassword(currentPassword);
+    AdministratorDAOImpl.getInstance().setPassword(currentPassword);
     ss.startServer();
   }
 }

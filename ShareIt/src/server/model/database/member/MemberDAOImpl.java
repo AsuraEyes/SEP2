@@ -1,5 +1,6 @@
 package server.model.database.member;
 
+import server.model.database.administrator.AdministratorDAOImpl;
 import shared.transferobjects.Member;
 
 import java.sql.*;
@@ -47,7 +48,7 @@ public class MemberDAOImpl implements MemberDAO{
             //this gets the generated id of the member
             ResultSet generatedKeys = statement.getGeneratedKeys();
             if(generatedKeys.next()){
-                return new Member(generatedKeys.getInt(1), username, password, emailAddress, phoneNumber, otherInformation, addressStreet, addressNo, addressPostalCode, addressCity);
+                return new Member(generatedKeys.getInt(1), username, password, emailAddress, phoneNumber, otherInformation, addressStreet, addressNo, addressPostalCode, addressCity, 0);
             }
             else{
                 throw new SQLException("No keys generated");
@@ -84,7 +85,9 @@ public class MemberDAOImpl implements MemberDAO{
                 numberOfResults++;
             }
             if(numberOfResults == 0){
-                return true;
+                if(AdministratorDAOImpl.getInstance().uniqueUsername(username)){
+                    return true;
+                }
             }
             return false;
         }
@@ -105,5 +108,47 @@ public class MemberDAOImpl implements MemberDAO{
     @Override
     public void delete(Member member) throws SQLException {
         //similar as update, delete by id of member I get in the constructor
+    }
+
+    @Override
+    public Member getMemberById(int id) throws SQLException{
+        try(Connection connection = getConnection()){
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM share_it.member WHERE id = ?");
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+
+            if(resultSet.next()){
+                return new Member(resultSet.getInt("id"), resultSet.getString("username"), resultSet.getString("password"), resultSet.getString("email_address"), resultSet.getString("phone_number"), resultSet.getString("other_information"), resultSet.getString("address_street"), resultSet.getString("address_no"), resultSet.getInt("address_postal_code"), resultSet.getString("address_city_name"),resultSet.getFloat("average_review"));
+            }
+            else{
+                throw new SQLException("No keys generated");
+            }
+        }
+    }
+
+    @Override
+    public String checkLogInCredentials(String username, String password) throws SQLException{
+        try(Connection connection = getConnection()){
+            System.out.println("username: " + username + ", password: " + password);
+            PreparedStatement statement = connection.prepareStatement("SELECT username FROM share_it.member WHERE username = ? AND password = ?");
+            statement.setString(1, username);
+            statement.setString(2, password);
+
+            ResultSet resultSet = statement.executeQuery();
+
+            if(resultSet.next()){
+                return resultSet.getString("username");
+            }
+            else{
+                String adminUsername = AdministratorDAOImpl.getInstance().checkLogInCredentials(username, password);
+                if(adminUsername != null){
+                    return adminUsername;
+                }
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

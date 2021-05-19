@@ -44,9 +44,8 @@ public class SearchForRentalController {
     private Notifications notifications;
 
     public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws
-        SQLException, IOException
+         IOException
     {
-
       this.viewHandler = viewHandler;
       searchForRentalViewModel = viewModelFactory.getSearchForRentalViewModel();
       displayRentals(searchForRentalViewModel.getRentalsList());
@@ -65,13 +64,30 @@ public class SearchForRentalController {
           .hideAfter(Duration.seconds(3));
     }
 
+  public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory, String search) throws
+          IOException
+  {
+    this.viewHandler = viewHandler;
+    searchForRentalViewModel = viewModelFactory.getSearchForRentalViewModel();
+    displayRentals(searchForRentalViewModel.getRentalsList());
+    searchField.textProperty().bindBidirectional(searchForRentalViewModel.getSearchField());
+    locationBox.setItems(searchForRentalViewModel.getLocations());
+    locationBox.getItems().add("");
+    categoryCheckComboBox.getItems().addAll(searchForRentalViewModel.getCategories());
+    searchField.textProperty().setValue(search);
+    notifications =  Notifications.create()
+            .title("Error - invalid input!")
+            .graphic(new Rectangle(300, 300, Color.RED)) // sets node to display
+            .hideAfter(Duration.seconds(3));
+    searchButton(new ActionEvent());
+  }
+
 
       public void searchButton(ActionEvent actionEvent) throws IOException
       {
           List<Rental> rentals = searchForRentalViewModel.onSearchButtonPressed();
           flowPane.getChildren().clear();
           displayRentals(rentals);
-
       }
 
 

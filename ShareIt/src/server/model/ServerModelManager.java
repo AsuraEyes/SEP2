@@ -3,6 +3,7 @@ package server.model;
 import shared.transferobjects.*;
 import shared.util.Subject;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,4 +20,7 @@ public interface ServerModelManager extends Subject
     ArrayList<State> getStateList();
     ArrayList<Category> getCategoryList();
     ArrayList<Rental> getRentalsList();
+    Member getMemberById(int id);
+
+    String checkLogInCredentials(String username, String password);
 }

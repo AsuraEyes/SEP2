@@ -79,21 +79,22 @@ public class ViewModelFactory
     return addRentalViewModel;
   }
 
-  public WelcomePageViewModel getWelcomePageViewModel() {
+  public WelcomePageViewModel getWelcomePageViewModel() throws IOException {
     if (welcomePageViewModel == null){
-      welcomePageViewModel = new WelcomePageViewModel();
+      //System.out.println(modelFactory.getShareItModel());
+      welcomePageViewModel = new WelcomePageViewModel(modelFactory.getShareItModel());
     }
     return welcomePageViewModel;
   }
 
-  public CreateAccountViewModel getCreateAccountViewModel() throws SQLException, IOException {
+  public CreateAccountViewModel getCreateAccountViewModel() throws IOException {
     if (createAccountViewModel == null){
       createAccountViewModel = new CreateAccountViewModel(modelFactory.getShareItModel());
     }
     return createAccountViewModel;
   }
 
-  public SearchForRentalViewModel getSearchForRentalViewModel() throws SQLException, IOException {
+  public SearchForRentalViewModel getSearchForRentalViewModel() throws IOException {
     if (searchForRentalViewModel == null){
       searchForRentalViewModel = new SearchForRentalViewModel(modelFactory.getShareItModel());
     }

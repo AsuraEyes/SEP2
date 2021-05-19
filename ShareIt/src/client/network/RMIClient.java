@@ -14,6 +14,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -120,6 +121,16 @@ public class RMIClient implements Client, RemoteObserver
   @Override public ArrayList<Rental> getRentalsList() throws RemoteException
   {
     return server.getRentalsList();
+  }
+
+  @Override public Member getMemberById(int id) throws RemoteException
+  {
+    return server.getMemberById(id);
+  }
+
+  @Override
+  public String checkLogInCredentials(String username, String password) throws RemoteException {
+    return server.checkLogInCredentials(username, password);
   }
 
   @Override public void addListener(String propertyName,
