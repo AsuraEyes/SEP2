@@ -14,6 +14,7 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.util.List;
 
 public class RMIClient implements Client, RemoteObserver
 {
@@ -62,7 +63,7 @@ public class RMIClient implements Client, RemoteObserver
     }
   }
 
-  @Override public String checkSearch(String search) throws IOException
+  @Override public List<Rental> checkSearch(String search) throws IOException
   {
     try{
     return server.checkSearch(search);
@@ -71,7 +72,7 @@ public class RMIClient implements Client, RemoteObserver
       throw new RuntimeException("Could not contact server");
     }
   }
-  @Override public String checkSearchWithFilter(String search,String city,ArrayList<String> selectedCategories ) throws IOException
+  @Override public List<Rental> checkSearchWithFilter(String search,String city,ArrayList<String> selectedCategories ) throws IOException
   {
     try
     {
