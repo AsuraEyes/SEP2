@@ -81,6 +81,7 @@ public class ViewModelFactory
 
   public WelcomePageViewModel getWelcomePageViewModel() throws IOException {
     if (welcomePageViewModel == null){
+      //System.out.println(modelFactory.getShareItModel());
       welcomePageViewModel = new WelcomePageViewModel(modelFactory.getShareItModel());
     }
     return welcomePageViewModel;
