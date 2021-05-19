@@ -10,6 +10,8 @@ import javafx.scene.image.Image;
 import shared.transferobjects.Rental;
 
 import java.beans.PropertyChangeEvent;
+import java.rmi.RemoteException;
+import java.sql.SQLException;
 
 public class ViewRentalViewModel
 {
@@ -62,6 +64,16 @@ public class ViewRentalViewModel
         if(rental.getSelectedCategories() !=null)
         {
           categoryOfRental.setValue(rental.getSelectedCategories().toString());
+        }
+        try
+        {
+          usernameOfRental.setValue(shareItModel.getMemberById(rental.getId()).getUsername());
+          locationOfRental.setValue(shareItModel.getMemberById(rental.getId()).getAddressCity());
+          ratingOfUserOfRental.setValue(String.valueOf(shareItModel.getMemberById(rental.getId()).getAverageReview()));
+        }
+        catch (RemoteException throwables)
+        {
+          throwables.printStackTrace();
         }
       }
     });

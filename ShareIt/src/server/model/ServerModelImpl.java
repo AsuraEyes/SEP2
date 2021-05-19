@@ -119,6 +119,19 @@ public class ServerModelImpl implements ServerModelManager
     return null;
   }
 
+  @Override public Member getMemberById(int id)
+  {
+    try
+    {
+      return MemberDAOImpl.getInstance().getMemberById(id);
+    }
+    catch (SQLException throwables)
+    {
+      throwables.printStackTrace();
+    }
+    return null;
+  }
+
   @Override
   public String checkLogInCredentials(String username, String password) {
     try{

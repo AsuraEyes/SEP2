@@ -118,7 +118,7 @@ public class MemberDAOImpl implements MemberDAO{
             ResultSet resultSet = statement.executeQuery();
 
             if(resultSet.next()){
-                return new Member(resultSet.getInt("id"), resultSet.getString("name"), resultSet.getString("password"), resultSet.getString("email_address"), resultSet.getString("phone_number"), resultSet.getString("other_information"), resultSet.getString("address_street"), resultSet.getString("address_no"), resultSet.getInt("address_postal_code"), resultSet.getString("address_city_name"),resultSet.getFloat("average_review"));
+                return new Member(resultSet.getInt("id"), resultSet.getString("username"), resultSet.getString("password"), resultSet.getString("email_address"), resultSet.getString("phone_number"), resultSet.getString("other_information"), resultSet.getString("address_street"), resultSet.getString("address_no"), resultSet.getInt("address_postal_code"), resultSet.getString("address_city_name"),resultSet.getFloat("average_review"));
             }
             else{
                 throw new SQLException("No keys generated");

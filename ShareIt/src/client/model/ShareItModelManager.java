@@ -10,6 +10,7 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.IOException;
 import java.rmi.RemoteException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -108,5 +109,10 @@ public class ShareItModelManager implements ShareItModel
   public void getSelectedRental(Rental rental)
   {
     support.firePropertyChange("selectedRental",1,rental);
+  }
+
+  @Override public Member getMemberById(int id) throws RemoteException
+  {
+    return client.getMemberById(id);
   }
 }
