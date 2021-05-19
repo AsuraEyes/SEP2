@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class SearchForRentalViewModel {
     private ShareItModel model;
@@ -107,12 +108,12 @@ public class SearchForRentalViewModel {
         return categoriesList;
     }
 
-    public String onSearchButtonPressed() throws IOException
+    public List<Rental> onSearchButtonPressed() throws IOException
     {
         return model.checkSearch(searchField.getValue());
     }
 
-    public String onFilterButtonPressed(String selectedCity,ObservableList<String> selectedCategory) throws IOException
+    public List<Rental> onFilterButtonPressed(String selectedCity,ObservableList<String> selectedCategory) throws IOException
     {
         ArrayList<String> selectedCategoriesList = new ArrayList<>(selectedCategory);
         return model.checkSearchWithFilter(searchField.getValue(),selectedCity, selectedCategoriesList);

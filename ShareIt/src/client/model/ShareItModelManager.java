@@ -11,6 +11,7 @@ import java.beans.PropertyChangeSupport;
 import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ShareItModelManager implements ShareItModel
 {
@@ -62,12 +63,12 @@ public class ShareItModelManager implements ShareItModel
   }
 
 
-  @Override public String checkSearchWithFilter(String search,String city, ArrayList<String> selectedCategories ) throws IOException
+  @Override public List<Rental> checkSearchWithFilter(String search,String city, ArrayList<String> selectedCategories ) throws IOException
   {
     return client.checkSearchWithFilter(search,city, selectedCategories );
   }
 
-  @Override public String checkSearch(String search) throws IOException
+  @Override public List<Rental> checkSearch(String search) throws IOException
   {
     return client.checkSearch(search);
   }

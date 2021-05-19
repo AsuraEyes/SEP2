@@ -13,6 +13,7 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ServerModelImpl implements ServerModelManager
 {
@@ -60,16 +61,15 @@ public class ServerModelImpl implements ServerModelManager
   }
 
   @Override
-  public String checkSearch(String search)
+  public List<Rental> checkSearch(String search)
   {
-    String message = dataCheckSearch.checkSearch(search);
-    return message;
+    List<Rental> list = dataCheckSearch.checkSearch(search);
+    return list;
   }
 
-  @Override public String checkSearchWithFilter(String search,String city,ArrayList<String> selectedCategories)
+  @Override public List<Rental> checkSearchWithFilter(String search,String city,ArrayList<String> selectedCategories)
   {
-    String message = dataCheckSearch.checkSearchWithFilter(search,city,selectedCategories);
-    return message;
+    return dataCheckSearch.checkSearchWithFilter(search,city,selectedCategories);
   }
 
   @Override

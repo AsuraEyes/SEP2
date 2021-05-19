@@ -20,12 +20,14 @@ import javafx.util.Duration;
 import org.controlsfx.control.CheckComboBox;
 import org.controlsfx.control.InfoOverlay;
 import org.controlsfx.control.Notifications;
+import shared.transferobjects.Rental;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 public class SearchForRentalController {
-   @FXML private CheckComboBox categoryCheckComboBox;
+   @FXML private CheckComboBox<String> categoryCheckComboBox;
    @FXML private ChoiceBox<String> locationBox;
   @FXML private FlowPane flowPane;
   @FXML private AnchorPane parent;
@@ -71,7 +73,7 @@ public class SearchForRentalController {
         otherInfoLabel.textProperty().bind(searchForRentalViewModel.getOtherInfoLabel());*/
       locationBox.setItems(searchForRentalViewModel.getLocations());
       categoryCheckComboBox.getItems().addAll(searchForRentalViewModel.getCategories());
-
+      searchField.textProperty().setValue("");
         notifications =  Notifications.create()
           .title("Error - invalid input!")
           .graphic(new Rectangle(300, 300, Color.RED)) // sets node to display
@@ -81,42 +83,49 @@ public class SearchForRentalController {
 
       public void searchButton(ActionEvent actionEvent) throws IOException
       {
-        if(checkField(searchField)){
-          String message = searchForRentalViewModel.onSearchButtonPressed();
-          switch (message){
-            case "Adding successful":
-              break;
-            default:
-              notifications.owner(parent).text(message).showError();
+          List<Rental> rentals = searchForRentalViewModel.onSearchButtonPressed();
+          flowPane.getChildren().clear();
+          for (int i = 0; i < rentals.size(); i++)
+          {
+            Image image = new Image(rentals.get(i).getPictureLink(),220,220,false,false);
+            flowPane.getChildren().add(new StackPane(new InfoOverlay(new ImageView(image), rentals.get(i).toString())));
+            System.out.println(searchForRentalViewModel.getRentalsList().get(i).getPictureLink());
+            flowPane.getChildren().get(i).addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
+              try
+              {
+                viewHandler.setView(viewHandler.menu(), viewHandler.viewRental());
+              }
+              catch (IOException e)
+              {
+                e.printStackTrace();
+              }
+            });
           }
-        }
+          locationBox.setItems(searchForRentalViewModel.getLocations());
+          categoryCheckComboBox.getItems().addAll(searchForRentalViewModel.getCategories());
       }
 
 
     public void filterButton(ActionEvent actionEvent) throws IOException {
-      if(checkField(searchField))
+      List<Rental> rentals = searchForRentalViewModel.onFilterButtonPressed(locationBox.getValue(), categoryCheckComboBox.getCheckModel().getCheckedItems());
+      flowPane.getChildren().clear();
+      for (int i = 0; i < rentals.size(); i++)
       {
-        String message = searchForRentalViewModel.onFilterButtonPressed(locationBox.getValue(), categoryCheckComboBox.getCheckModel().getCheckedItems());
-        switch (message){
-          case "Adding successfull":
-            break;
-          default:
-            notifications.owner(parent).text(message).showError();
-        }
+        Image image = new Image(rentals.get(i).getPictureLink(),220,220,false,false);
+        flowPane.getChildren().add(new StackPane(new InfoOverlay(new ImageView(image), rentals.get(i).toString())));
+        System.out.println(searchForRentalViewModel.getRentalsList().get(i).getPictureLink());
+        flowPane.getChildren().get(i).addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
+          try
+          {
+            viewHandler.setView(viewHandler.menu(), viewHandler.viewRental());
+          }
+          catch (IOException e)
+          {
+            e.printStackTrace();
+          }
+        });
       }
+      locationBox.setItems(searchForRentalViewModel.getLocations());
+      categoryCheckComboBox.getItems().addAll(searchForRentalViewModel.getCategories());
     }
-
-
-    public void loadMoreRentals(ActionEvent actionEvent){
-
-    }
-
-    private boolean checkField(TextField nameOfField){
-        if(nameOfField.textProperty().getValue() == null || nameOfField.textProperty().getValue().isBlank()){
-            notifications.owner(parent).text(nameOfField.getPromptText()+" cannot be empty").showError();
-            return false;
-        }
-        return true;
-    }
-
 }
