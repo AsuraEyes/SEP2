@@ -3,10 +3,7 @@ package client.network;
 import client.model.state.StateManager;
 import shared.networking.RMIServer;
 import shared.networking.RemoteObserver;
-import shared.transferobjects.Category;
-import shared.transferobjects.City;
-import shared.transferobjects.Member;
-import shared.transferobjects.State;
+import shared.transferobjects.*;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -55,9 +52,9 @@ public class RMIClient implements Client, RemoteObserver
   }
 
   @Override
-  public String checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName) throws IOException {
+  public String checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, String username, ArrayList<String> selectedCategories) throws IOException {
     try {
-      return server.checkRentalData(name, pictureLink, description, price, otherInformation, stateName, StateManager.getInstance().getUsername());
+      return server.checkRentalData(name, pictureLink, description, price, otherInformation, stateName, StateManager.getInstance().getUsername(), selectedCategories);
     }
     catch (RemoteException e){
       e.printStackTrace();
@@ -72,7 +69,18 @@ public class RMIClient implements Client, RemoteObserver
   } catch (RemoteException e){
       e.printStackTrace();
       throw new RuntimeException("Could not contact server");
-    }}
+    }
+  }
+  @Override public String checkSearchWithFilter(String search,String city,ArrayList<String> selectedCategories ) throws IOException
+  {
+    try
+    {
+      return server.checkSearchWithFilter(search,city,selectedCategories );
+    }catch (RemoteException e){
+      e.printStackTrace();
+      throw new RuntimeException("Could not contact server");
+    }
+  }
 
   @Override
   public ArrayList<City> getCityList() {
@@ -105,6 +113,11 @@ public class RMIClient implements Client, RemoteObserver
       e.printStackTrace();
     }
     return null;
+  }
+
+  @Override public ArrayList<Rental> getRentalsList() throws RemoteException
+  {
+    return server.getRentalsList();
   }
 
   @Override public void addListener(String propertyName,

@@ -153,15 +153,15 @@ public class Controller
   public void loadImages()
   {
     Picture picture1 = new Picture("chisels",
-        "woodwork bla blabla blablalbal la", "/Pictures/chisels.jpg");
+        "woodwork bla blabla blablalbal la", "//chisels.jpg");
     Picture picture2 = new Picture("hammer",
-        "woodwork bla blabla blablalbal la", "/Pictures/hammer.jpg");
+        "woodwork bla blabla blablalbal la", "//hammer.jpg");
     Picture picture3 = new Picture("swiss", "woodwork bla blabla blablalbal la",
-        "/Pictures/swiss.jpg");
+        "//swiss.jpg");
     Picture picture4 = new Picture("torque_wrench",
-        "woodwork bla blabla blablalbal la", "/Pictures/torque_wrench.jpg");
+        "woodwork bla blabla blablalbal la", "//torque_wrench.jpg");
     Picture picture5 = new Picture("wrenches",
-        "woodwork bla blabla blablalbal la", "/Pictures/wrenches.jpg");
+        "woodwork bla blabla blablalbal la", "//wrenches.jpg");
     pictures = new ArrayList<>();
     pictures.add(picture1);
     pictures.add(picture2);
@@ -181,7 +181,7 @@ public class Controller
     observableImages = FXCollections.observableArrayList(images);
   }
 
-  public void searchButton(ActionEvent actionEvent) throws IOException
+ /* public void searchButton(ActionEvent actionEvent) throws IOException
   {
     if(checkField(searchField)){
       String message = searchForRentalViewModel.onSearchButtonPressed();
@@ -201,6 +201,6 @@ public class Controller
       return false;
     }
     return true;
-  }
+  }*/
 }
 

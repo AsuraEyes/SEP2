@@ -4,10 +4,7 @@ import server.model.ServerModelManager;
 import shared.networking.RMIServer;
 import shared.networking.RemoteObserver;
 import client.model.state.StateManager;
-import shared.transferobjects.Category;
-import shared.transferobjects.City;
-import shared.transferobjects.Member;
-import shared.transferobjects.State;
+import shared.transferobjects.*;
 
 import java.beans.PropertyChangeListener;
 import java.rmi.AlreadyBoundException;
@@ -79,7 +76,6 @@ public class RMIServerImpl implements RMIServer
   @Override public void unregisterClient(RemoteObserver client)
       throws RemoteException
   {
-
   }
 
   @Override
@@ -88,14 +84,18 @@ public class RMIServerImpl implements RMIServer
   }
 
   @Override
-  public String checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, String username) throws RemoteException {
-    return serverModelManager.checkRentalData(name, pictureLink, description, price, otherInformation, stateName, username);
+  public String checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, String username, ArrayList<String> selectedCategories) throws RemoteException {
+    return serverModelManager.checkRentalData(name, pictureLink, description, price, otherInformation, stateName, username, selectedCategories);
   }
 
   @Override
   public String checkSearch(String search) throws RemoteException
   {
     return serverModelManager.checkSearch(search);
+  }
+  @Override public String checkSearchWithFilter(String search,String city, ArrayList<String> selectedCategories ) throws RemoteException
+  {
+    return serverModelManager.checkSearchWithFilter(search,city,selectedCategories);
   }
 
   @Override
@@ -111,6 +111,11 @@ public class RMIServerImpl implements RMIServer
   @Override
   public ArrayList<Category> getCategoryList() throws RemoteException {
     return serverModelManager.getCategoryList();
+  }
+
+  @Override public ArrayList<Rental> getRentalsList() throws RemoteException
+  {
+    return serverModelManager.getRentalsList();
   }
 
 }

@@ -3,15 +3,13 @@ package client.model;
 import client.model.state.MemberState;
 import client.model.state.StateManager;
 import client.network.Client;
-import shared.transferobjects.Category;
-import shared.transferobjects.City;
-import shared.transferobjects.Member;
-import shared.transferobjects.State;
+import shared.transferobjects.*;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.IOException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public class ShareItModelManager implements ShareItModel
@@ -59,8 +57,14 @@ public class ShareItModelManager implements ShareItModel
   }
 
   @Override
-  public String checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName) throws IOException {
-    return client.checkRentalData(name, pictureLink, description, price, otherInformation, stateName);
+  public String checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, String username, ArrayList<String> selectedCategories) throws IOException {
+    return client.checkRentalData(name, pictureLink,  description,  price, otherInformation,  stateName,  username,  selectedCategories);
+  }
+
+
+  @Override public String checkSearchWithFilter(String search,String city, ArrayList<String> selectedCategories ) throws IOException
+  {
+    return client.checkSearchWithFilter(search,city, selectedCategories );
   }
 
   @Override public String checkSearch(String search) throws IOException
@@ -81,6 +85,11 @@ public class ShareItModelManager implements ShareItModel
   @Override
   public ArrayList<Category> getCategoryList() {
     return client.getCategoryList();
+  }
+
+  @Override public ArrayList<Rental> getRentalsList() throws RemoteException
+  {
+    return client.getRentalsList();
   }
 
   @Override

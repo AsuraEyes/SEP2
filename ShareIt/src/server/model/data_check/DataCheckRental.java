@@ -5,6 +5,7 @@ import server.model.database.rental.RentalDAOImpl;
 import shared.transferobjects.Member;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class DataCheckRental {
     private String name;
@@ -14,7 +15,7 @@ public class DataCheckRental {
     private int priceNb;
     private String search;
 
-    public String checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, String username) {
+    public String checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, String username, ArrayList<String> selectedCategories) {
         this.name = name;
         this.pictureLink = pictureLink;
         this.description = description;
@@ -22,7 +23,7 @@ public class DataCheckRental {
 
         if (nameGiven() && descriptionGiven() && priceIsNumber()){
             try {
-                RentalDAOImpl.getInstance().create(name, pictureLink, description, priceNb, otherInformation, stateName, username);
+                RentalDAOImpl.getInstance().create(name, pictureLink, description, priceNb, otherInformation, stateName, username, selectedCategories);
                 return "Adding successful";
             }
             catch (SQLException e){
@@ -71,33 +72,5 @@ public class DataCheckRental {
         }
     }
 
-    public String checkSearch(String search)
-    {
-        this.search = search;
-        if(searchGiven()){
-            try
-            {
-                RentalDAOImpl.getInstance().readBySearch(search);
-                return "";
-            }
-            catch (SQLException e){
-                //
-            }}
-        else {
-            if(!searchGiven()){
-                return "";
-            }
-
-        }
-        return "Ooops, something went wrong!!";
-    }
-
-    private boolean searchGiven(){
-        if (search != null){
-            if (!(search.trim().equals("") && search.isBlank() && search.isEmpty())){
-                return true;
-            }
-        }
-        return false;
-    }
+   
 }

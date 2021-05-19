@@ -37,7 +37,7 @@ public class ViewHandler
 
   public void start() throws Exception
   {
-    setView(menu(),addRental());
+    setView(menu(),searchForRental());
   }
 
   public void setView(Node menu, Node content) throws IOException
@@ -49,6 +49,7 @@ public class ViewHandler
     main.getMainPane().getChildren().setAll(menu,content);
     scene.setRoot(main.getMainPane());
     stage.setScene(scene);
+    stage.setResizable(false);
     stage.show();
   }
 

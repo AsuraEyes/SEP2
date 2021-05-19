@@ -15,25 +15,19 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.controlsfx.control.CheckComboBox;
 import org.controlsfx.control.Notifications;
-import org.controlsfx.control.tableview2.filter.filtereditor.SouthFilter;
 import org.controlsfx.validation.ValidationSupport;
-import org.controlsfx.validation.Validator;
-import shared.transferobjects.Category;
-import shared.transferobjects.Member;
-
-import java.io.IOException;
-import java.sql.SQLException;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.File;
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Optional;
 
 public class AddRentalController {
 
   @FXML private ImageView pictureView;
   @FXML private CheckComboBox categoryBox;
-  @FXML private ChoiceBox stateChoiceBox;
   @FXML private TextField searchField;
   @FXML private AnchorPane parent;
   @FXML private ChoiceBox<String> stateBox;
