@@ -12,6 +12,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -118,6 +119,11 @@ public class RMIServerImpl implements RMIServer
   @Override public ArrayList<Rental> getRentalsList() throws RemoteException
   {
     return serverModelManager.getRentalsList();
+  }
+
+  @Override public Member getMemberById(int id) throws RemoteException
+  {
+    return serverModelManager.getMemberById(id);
   }
 
   @Override

@@ -5,6 +5,7 @@ import shared.transferobjects.*;
 import java.rmi.AlreadyBoundException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +31,8 @@ public interface RMIServer extends Remote
 
   ArrayList<Category> getCategoryList() throws RemoteException;
   ArrayList<Rental> getRentalsList() throws RemoteException;
+
+  Member getMemberById(int id) throws RemoteException;
 
 
     String checkLogInCredentials(String username, String password) throws RemoteException;
