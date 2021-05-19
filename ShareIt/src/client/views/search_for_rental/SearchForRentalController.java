@@ -23,7 +23,9 @@ import org.controlsfx.control.Notifications;
 import shared.transferobjects.Rental;
 
 import java.io.IOException;
+import java.rmi.RemoteException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class SearchForRentalController {
@@ -47,31 +49,7 @@ public class SearchForRentalController {
 
       this.viewHandler = viewHandler;
       searchForRentalViewModel = viewModelFactory.getSearchForRentalViewModel();
-
-      for (int i = 0; i < searchForRentalViewModel.getRentalsList().size(); i++)
-      {
-        Image image = new Image(searchForRentalViewModel.getRentalsList().get(i).getPictureLink());
-        ImageView imageView = new ImageView();
-        imageView.setImage(image);
-        imageView.setFitWidth(275);
-        imageView.setPreserveRatio(true);
-        imageView.setSmooth(true);
-        imageView.setCache(true);
-        flowPane.getChildren().add(new StackPane(new InfoOverlay(imageView,searchForRentalViewModel.getRentalsList().get(i).toString())));
-        System.out.println(searchForRentalViewModel.getRentalsList().get(i).getPictureLink());
-        //flowPane.getChildren().get(i).setOnMouseClicked(searchForRentalViewModel::fireProperty);
-        flowPane.getChildren().get(i).addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
-          try
-          {
-            //getPicture(event.getTarget());
-            viewHandler.setView(viewHandler.menu(), viewHandler.viewRental());
-          }
-          catch (IOException e)
-          {
-            e.printStackTrace();
-          }
-        });
-      }
+      displayRentals(searchForRentalViewModel.getRentalsList());
         searchField.textProperty().bindBidirectional(searchForRentalViewModel.getSearchField());
        /* rentalNameLabel.textProperty().bind(searchForRentalViewModel.getRentalNameLabel());
         locationLabel.textProperty().bind(searchForRentalViewModel.getLocationLabel());
@@ -91,38 +69,34 @@ public class SearchForRentalController {
       {
           List<Rental> rentals = searchForRentalViewModel.onSearchButtonPressed();
           flowPane.getChildren().clear();
-          for (int i = 0; i < rentals.size(); i++)
-          {
-            Image image = new Image(rentals.get(i).getPictureLink(),220,220,false,false);
-            flowPane.getChildren().add(new StackPane(new InfoOverlay(new ImageView(image), rentals.get(i).toString())));
-            System.out.println(searchForRentalViewModel.getRentalsList().get(i).getPictureLink());
-            flowPane.getChildren().get(i).addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
-              try
-              {
-                viewHandler.setView(viewHandler.menu(), viewHandler.viewRental());
-              }
-              catch (IOException e)
-              {
-                e.printStackTrace();
-              }
-            });
-          }
-          locationBox.setItems(searchForRentalViewModel.getLocations());
-          categoryCheckComboBox.getItems().addAll(searchForRentalViewModel.getCategories());
+          displayRentals(rentals);
       }
 
 
     public void filterButton(ActionEvent actionEvent) throws IOException {
+
       List<Rental> rentals = searchForRentalViewModel.onFilterButtonPressed(locationBox.getValue(), categoryCheckComboBox.getCheckModel().getCheckedItems());
       flowPane.getChildren().clear();
+      displayRentals(rentals);
+    }
+    public void displayRentals(List<Rental> rentals) throws RemoteException
+    {
       for (int i = 0; i < rentals.size(); i++)
       {
-        Image image = new Image(rentals.get(i).getPictureLink(),220,220,false,false);
-        flowPane.getChildren().add(new StackPane(new InfoOverlay(new ImageView(image), rentals.get(i).toString())));
-        System.out.println(searchForRentalViewModel.getRentalsList().get(i).getPictureLink());
+        Image image = new Image(rentals.get(i).getPictureLink());
+        ImageView imageView = new ImageView();
+        imageView.setImage(image);
+        imageView.setFitWidth(275);
+        imageView.setPreserveRatio(true);
+        imageView.setSmooth(true);
+        imageView.setCache(true);
+        flowPane.getChildren().add(new StackPane(new InfoOverlay(imageView,rentals.get(i).toString())));
+        System.out.println(rentals.get(i).getPictureLink());
+        //flowPane.getChildren().get(i).setOnMouseClicked(searchForRentalViewModel::fireProperty);
         flowPane.getChildren().get(i).addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
           try
           {
+            //getPicture(event.getTarget());
             viewHandler.setView(viewHandler.menu(), viewHandler.viewRental());
           }
           catch (IOException e)
@@ -131,7 +105,6 @@ public class SearchForRentalController {
           }
         });
       }
-      locationBox.setItems(searchForRentalViewModel.getLocations());
-      categoryCheckComboBox.getItems().addAll(searchForRentalViewModel.getCategories());
+
     }
 }
