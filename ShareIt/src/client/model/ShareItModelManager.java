@@ -69,7 +69,11 @@ public class ShareItModelManager implements ShareItModel
   {
     return client.checkSearchWithFilter(search,city, selectedCategories );
   }
-
+  @Override public String addFeedback(double starValue, String feedback, String username1, String username2) throws IOException
+  {
+    System.out.println(starValue);
+    return client.addFeedback(starValue, feedback,username1,username2 );
+  }
   @Override public List<Rental> checkSearch(String search) throws IOException
   {
     return client.checkSearch(search);
