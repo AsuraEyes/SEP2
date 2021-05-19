@@ -138,3 +138,6 @@ CREATE TRIGGER update_avg_review_trigger
 
 
 --SELECT nextval(pg_get_serial_sequence('share_it.member', 'id')) AS available_id;
+SELECT * FROM share_it.rental;
+
+SHOW data_directory;
