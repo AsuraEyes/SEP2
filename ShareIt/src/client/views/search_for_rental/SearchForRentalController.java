@@ -56,8 +56,9 @@ public class SearchForRentalController {
         priceLabel.textProperty().bind(searchForRentalViewModel.getPriceLabel());
         otherInfoLabel.textProperty().bind(searchForRentalViewModel.getOtherInfoLabel());*/
       locationBox.setItems(searchForRentalViewModel.getLocations());
+      locationBox.getItems().add("");
       categoryCheckComboBox.getItems().addAll(searchForRentalViewModel.getCategories());
-      searchField.textProperty().setValue("");
+      searchField.textProperty().setValue(null);
         notifications =  Notifications.create()
           .title("Error - invalid input!")
           .graphic(new Rectangle(300, 300, Color.RED)) // sets node to display
@@ -70,6 +71,7 @@ public class SearchForRentalController {
           List<Rental> rentals = searchForRentalViewModel.onSearchButtonPressed();
           flowPane.getChildren().clear();
           displayRentals(rentals);
+
       }
 
 
