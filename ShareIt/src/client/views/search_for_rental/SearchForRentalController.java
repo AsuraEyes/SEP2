@@ -81,30 +81,35 @@ public class SearchForRentalController {
     }
     public void displayRentals(List<Rental> rentals) throws RemoteException
     {
-      for (int i = 0; i < rentals.size(); i++)
+      if (rentals != null && !rentals.isEmpty())
       {
-        Image image = new Image(rentals.get(i).getPictureLink());
-        ImageView imageView = new ImageView();
-        imageView.setImage(image);
-        imageView.setFitWidth(275);
-        imageView.setPreserveRatio(true);
-        imageView.setSmooth(true);
-        imageView.setCache(true);
-        flowPane.getChildren().add(new StackPane(new InfoOverlay(imageView,rentals.get(i).toString())));
-        System.out.println(rentals.get(i).getPictureLink());
-        //flowPane.getChildren().get(i).setOnMouseClicked(searchForRentalViewModel::fireProperty);
-        flowPane.getChildren().get(i).addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
-          try
-          {
-            //getPicture(event.getTarget());
-            viewHandler.setView(viewHandler.menu(), viewHandler.viewRental());
-          }
-          catch (IOException e)
-          {
-            e.printStackTrace();
-          }
-        });
-      }
+        for (int i = 0; i < rentals.size(); i++)
+        {
+          Image image = new Image(rentals.get(i).getPictureLink());
+          ImageView imageView = new ImageView();
+          imageView.setImage(image);
+          imageView.setFitWidth(275);
+          imageView.setPreserveRatio(true);
+          imageView.setSmooth(true);
+          imageView.setCache(true);
+          flowPane.getChildren().add(new StackPane(
+              new InfoOverlay(imageView, rentals.get(i).toString())));
+          System.out.println(rentals.get(i).getPictureLink());
+          //flowPane.getChildren().get(i).setOnMouseClicked(searchForRentalViewModel::fireProperty);
+          flowPane.getChildren().get(i)
+              .addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
+                try
+                {
+                  //getPicture(event.getTarget());
+                  viewHandler.setView(viewHandler.menu(), viewHandler.viewRental());
+                }
+                catch (IOException e)
+                {
+                  e.printStackTrace();
+                }
+              });
+        }
 
+      }
     }
 }
