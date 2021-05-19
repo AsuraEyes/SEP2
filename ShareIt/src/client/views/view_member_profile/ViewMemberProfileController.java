@@ -5,11 +5,14 @@ import client.core.ViewModelFactory;
 import client.viewmodel.view_member_profile.ViewMemberProfileViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+
+import java.io.IOException;
 
 public class ViewMemberProfileController
 {
@@ -20,7 +23,11 @@ public class ViewMemberProfileController
   @FXML private Label addressLabel;
   @FXML private Label contactLabel;
   @FXML private Label otherInformationLabel;
-  
+  @FXML private Button deleteButton;
+  @FXML private Button rateButton;
+  @FXML private Button chatButton;
+  @FXML private Button reportButton;
+
   public VBox rentalVBox;
   public Label nameOfRentalLabel;
   public Label cityLabel;
@@ -30,7 +37,7 @@ public class ViewMemberProfileController
   private ViewMemberProfileViewModel viewMemberProfileViewModel;
   private ViewHandler viewHandler;
 
-  public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory){
+  public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws IOException {
     this.viewHandler = viewHandler;
     viewMemberProfileViewModel = viewModelFactory.getViewMemberProfileViewModel();
     searchField.textProperty().bindBidirectional(viewMemberProfileViewModel.getSearchField());
@@ -41,6 +48,23 @@ public class ViewMemberProfileController
     contactLabel.textProperty().bind(viewMemberProfileViewModel.getContactLabel());
     otherInformationLabel.textProperty().bind(viewMemberProfileViewModel.getOtherInformationLabel());
 
+
+    switch (viewMemberProfileViewModel.checkUserType()){
+      case "Visitor":
+        deleteButton.setVisible(false);
+        chatButton.setVisible(false);
+        reportButton.setVisible(false);
+        rateButton.setVisible(false);
+        break;
+      case "Member":
+        deleteButton.setVisible(false);
+        break;
+      case "Administrator":
+        reportButton.setVisible(false);
+        rateButton.setVisible(false);
+        chatButton.setText("Warning");
+        break;
+    }
   }
 
   public void searchButton(ActionEvent actionEvent)

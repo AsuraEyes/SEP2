@@ -134,11 +134,10 @@ public class ViewModelFactory
     return menuViewModel;
   }
 
-  public ViewMemberProfileViewModel getViewMemberProfileViewModel()
-  {
+  public ViewMemberProfileViewModel getViewMemberProfileViewModel() throws IOException {
     if(viewMemberProfileViewModel == null)
     {
-      viewMemberProfileViewModel = new ViewMemberProfileViewModel();
+      viewMemberProfileViewModel = new ViewMemberProfileViewModel(modelFactory.getShareItModel());
     }
     return viewMemberProfileViewModel;
   }

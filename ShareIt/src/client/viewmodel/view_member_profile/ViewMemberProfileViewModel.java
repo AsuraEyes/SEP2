@@ -1,10 +1,12 @@
 package client.viewmodel.view_member_profile;
 
+import client.model.ShareItModel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class ViewMemberProfileViewModel
 {
+  private ShareItModel model;
   private final SimpleStringProperty searchField;
   private final SimpleStringProperty usernameLabel;
   private final SimpleStringProperty locationLabel;
@@ -13,8 +15,9 @@ public class ViewMemberProfileViewModel
   private final SimpleStringProperty contactLabel;
   private final SimpleStringProperty otherInformationLabel;
 
-  public ViewMemberProfileViewModel()
+  public ViewMemberProfileViewModel(ShareItModel model)
   {
+    this.model = model;
     searchField = new SimpleStringProperty();
     usernameLabel = new SimpleStringProperty();
     locationLabel = new SimpleStringProperty();
@@ -57,6 +60,10 @@ public class ViewMemberProfileViewModel
   public StringProperty getOtherInformationLabel()
   {
     return otherInformationLabel;
+  }
+
+  public String checkUserType(){
+    return model.checkUserType();
   }
 
 }

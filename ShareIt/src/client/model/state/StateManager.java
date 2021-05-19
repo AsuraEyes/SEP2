@@ -1,5 +1,7 @@
 package client.model.state;
 
+import shared.transferobjects.Administrator;
+
 import java.io.Serializable;
 
 public class StateManager implements Serializable {
@@ -7,7 +9,7 @@ public class StateManager implements Serializable {
     private static StateManager instance;
 
     private StateManager(){
-        currentState = new VisitorState();
+        currentState = new AdministratorState(new Administrator("lk", "lskj"));
     }
 
     public static synchronized StateManager getInstance(){
