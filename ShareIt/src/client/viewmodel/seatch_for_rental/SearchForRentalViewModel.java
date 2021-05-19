@@ -3,7 +3,11 @@ package client.viewmodel.seatch_for_rental;
 import client.model.ShareItModel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.input.MouseEvent;
+import shared.transferobjects.Category;
+import shared.transferobjects.City;
 import shared.transferobjects.Rental;
 
 import java.io.IOException;
@@ -18,6 +22,8 @@ public class SearchForRentalViewModel {
     private final StringProperty locationLabel;
     private final StringProperty priceLabel;
     private final StringProperty otherInfoLabel;
+    private ObservableList<String> locationsList;
+    private ObservableList<String> categoriesList;
 
     public SearchForRentalViewModel(ShareItModel model) throws SQLException
     {
@@ -81,12 +87,36 @@ public class SearchForRentalViewModel {
         }
         return null;
     }*/
+    public ObservableList<String> getLocations(){
+        ArrayList<City> cityList = model.getCityList();
+        ArrayList<String> cityListString = new ArrayList<>();
+        for (int i = 0; i < cityList.size(); i++) {
+            cityListString.add(cityList.get(i).toString());
+        }
+        locationsList = FXCollections.observableArrayList(cityListString);
+        return locationsList;
+    }
+
+    public ObservableList<String> getCategories(){
+        ArrayList<Category> categoryList = model.getCategoryList();
+        ArrayList<String> categoryListString = new ArrayList<>();
+        for (int i = 0; i < categoryList.size(); i++) {
+            categoryListString.add(categoryList.get(i).toString());
+        }
+        categoriesList = FXCollections.observableArrayList(categoryListString);
+        return categoriesList;
+    }
 
     public String onSearchButtonPressed() throws IOException
     {
         return model.checkSearch(searchField.getValue());
     }
 
+    public String onFilterButtonPressed(String selectedCity,ObservableList<String> selectedCategory) throws IOException
+    {
+        ArrayList<String> selectedCategoriesList = new ArrayList<>(selectedCategory);
+        return model.checkSearchWithFilter(searchField.getValue(),selectedCity, selectedCategoriesList);
+    }
     public ArrayList<Rental> getRentalsList() throws RemoteException
     {
         return model.getRentalsList();

@@ -31,26 +31,6 @@ public class DataCheckSearch
     return "Ooops, something went wrong!!";
   }
 
-  public String checkSearchWithLocationFilter(String search, String city)
-  {
-    this.search = search;
-    if(searchGiven()){
-      try
-      {
-        RentalDAOImpl.getInstance().readBySearchAndLocation(search, city);
-        return "";
-      }
-      catch (SQLException e){
-        //
-      }
-    }
-    else {
-      if(!searchGiven()){
-        return "no";
-      }
-    }
-    return "Check database password";
-  }
   public String checkSearchWithFilter(String search,String city,ArrayList<String> selectedCategories )
   {
     this.search = search;
