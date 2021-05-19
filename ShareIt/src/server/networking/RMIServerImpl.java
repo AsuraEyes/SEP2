@@ -119,4 +119,9 @@ public class RMIServerImpl implements RMIServer
     return serverModelManager.getRentalsList();
   }
 
+  @Override
+  public String checkLogInCredentials(String username, String password) {
+    return serverModelManager.checkLogInCredentials(username, password);
+  }
+
 }

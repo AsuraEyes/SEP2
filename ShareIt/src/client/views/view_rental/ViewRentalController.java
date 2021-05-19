@@ -49,7 +49,7 @@ public class ViewRentalController
   public void goBackToSearchResultsButton(ActionEvent actionEvent)
       throws IOException, SQLException, InterruptedException
   {
-    viewHandler.setView(viewHandler.menu(), viewHandler.searchForRental());
+    viewHandler.setView(viewHandler.menu(), viewHandler.searchForRental(""));
   }
 
   public void seeMoreButton(ActionEvent actionEvent)

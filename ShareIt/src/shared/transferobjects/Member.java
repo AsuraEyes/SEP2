@@ -17,7 +17,7 @@ public class Member implements Serializable {
     private float averageReview;
 
 
-    public Member(int id, String username, String password, String emailAddress,String phoneNo, String otherInformation, String address_street, String address_no, int address_postal_code, String address_city) {
+    public Member(int id, String username, String password, String emailAddress,String phoneNo, String otherInformation, String address_street, String address_no, int address_postal_code, String address_city, float averageReview) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -28,7 +28,7 @@ public class Member implements Serializable {
         this.addressNo = address_no;
         this.addressPostalCode = address_postal_code;
         this.addressCity = address_city;
-        averageReview = 0;
+        this.averageReview = averageReview;
     }
     
     public Member(int id){this.id = id;}

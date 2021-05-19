@@ -5,6 +5,7 @@ import server.model.data_check.DataCheckRental;
 import server.model.data_check.DataCheckSearch;
 import server.model.database.category.CategoryDAOImpl;
 import server.model.database.city.CityDAOImpl;
+import server.model.database.member.MemberDAOImpl;
 import server.model.database.rental.RentalDAOImpl;
 import server.model.database.state.StateDAOImpl;
 import shared.transferobjects.*;
@@ -116,5 +117,16 @@ public class ServerModelImpl implements ServerModelManager
       e.printStackTrace();
     }
     return null;
+  }
+
+  @Override
+  public String checkLogInCredentials(String username, String password) {
+    try{
+      return MemberDAOImpl.getInstance().checkLogInCredentials(username, password);
+    }
+    catch (SQLException e) {
+      e.printStackTrace();
+      return null;
+    }
   }
 }

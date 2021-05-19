@@ -26,7 +26,7 @@ public class SearchForRentalViewModel {
     private ObservableList<String> locationsList;
     private ObservableList<String> categoriesList;
 
-    public SearchForRentalViewModel(ShareItModel model) throws SQLException
+    public SearchForRentalViewModel(ShareItModel model)
     {
         this.model = model;
         searchField = new SimpleStringProperty();

@@ -19,4 +19,6 @@ public interface ServerModelManager extends Subject
     ArrayList<State> getStateList();
     ArrayList<Category> getCategoryList();
     ArrayList<Rental> getRentalsList();
+
+    String checkLogInCredentials(String username, String password);
 }

@@ -21,4 +21,5 @@ public interface ShareItModel extends Subject
 
     String checkUserType();
 
+    String checkLogInCredentials(String username, String password) throws RemoteException;
 }

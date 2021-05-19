@@ -97,4 +97,9 @@ public class ShareItModelManager implements ShareItModel
   public String checkUserType() {
     return StateManager.getInstance().getUsertype();
   }
+
+  @Override
+  public String checkLogInCredentials(String username, String password) throws RemoteException {
+    return client.checkLogInCredentials(username, password);
+  }
 }

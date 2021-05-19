@@ -32,4 +32,5 @@ public interface RMIServer extends Remote
   ArrayList<Rental> getRentalsList() throws RemoteException;
 
 
+    String checkLogInCredentials(String username, String password) throws RemoteException;
 }

@@ -121,6 +121,11 @@ public class RMIClient implements Client, RemoteObserver
     return server.getRentalsList();
   }
 
+  @Override
+  public String checkLogInCredentials(String username, String password) throws RemoteException {
+    return server.checkLogInCredentials(username, password);
+  }
+
   @Override public void addListener(String propertyName,
       PropertyChangeListener listener)
   {
