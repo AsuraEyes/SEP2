@@ -7,6 +7,11 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import shared.transferobjects.Category;
+import shared.transferobjects.Member;
+import shared.transferobjects.State;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -32,6 +37,7 @@ public class AddRentalViewModelTest
     StringProperty otherInfoField = new SimpleStringProperty();
 
 
+
     vm.getNameField().bind(nameField);
     vm.getDescriptionField().bind(descriptionField);
     vm.getPriceField().bind(priceField);
@@ -43,9 +49,12 @@ public class AddRentalViewModelTest
     priceField.setValue("15");
     otherInfoField.setValue("otherinfo");
 
+    Member m = new Member(1);
 
 
 
+    /*String result = vm.onAddRentalButtonPressed(m);
+    assertEquals("Adding successful", result);*/
   }
 
 }

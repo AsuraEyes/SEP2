@@ -181,7 +181,7 @@ public class Controller
     observableImages = FXCollections.observableArrayList(images);
   }
 
-  public void searchButton(ActionEvent actionEvent) throws IOException
+ /* public void searchButton(ActionEvent actionEvent) throws IOException
   {
     if(checkField(searchField)){
       String message = searchForRentalViewModel.onSearchButtonPressed();
@@ -201,6 +201,6 @@ public class Controller
       return false;
     }
     return true;
-  }
+  }*/
 }
 
