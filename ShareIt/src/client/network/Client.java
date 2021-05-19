@@ -20,4 +20,6 @@ public interface Client extends Subject
   ArrayList<State> getStateList();
   ArrayList<Category> getCategoryList();
   ArrayList<Rental> getRentalsList() throws RemoteException;
+
+    String checkLogInCredentials(String username, String password) throws RemoteException;
 }

@@ -99,6 +99,11 @@ public class ShareItModelManager implements ShareItModel
     return StateManager.getInstance().getUsertype();
   }
 
+  @Override
+  public String checkLogInCredentials(String username, String password) throws RemoteException {
+    return client.checkLogInCredentials(username, password);
+  }
+
   @Override public void getSelectedRental(Rental rental)
   {
     support.firePropertyChange("selectedRental",1,rental);

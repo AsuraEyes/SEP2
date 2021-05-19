@@ -6,11 +6,11 @@ import java.io.Serializable;
 
 public class AdministratorState implements LoginState, Serializable {
     private final String USERTYPE = "Administrator";
-    private Administrator administrator;
+    private String username;
 
-    public AdministratorState(Administrator administrator){
-        System.out.println("Chnaged to administrator "+administrator.getUsername());
-        this.administrator = administrator;
+    public AdministratorState(String username){
+        System.out.println("Chnaged to administrator "+username);
+        this.username = username;
     }
 
     @Override
@@ -20,6 +20,6 @@ public class AdministratorState implements LoginState, Serializable {
 
     @Override
     public String getUsername() {
-        return administrator.getUsername();
+        return username;
     }
 }
