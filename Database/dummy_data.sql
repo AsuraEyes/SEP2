@@ -69,14 +69,14 @@ VALUES ('Donec ipsum velit, varius non egestas molestie, consectetur quis eros. 
        ('Sed ut vestibulum neque. Vivamus nec tempus ligula. Curabitur leo tortor, convallis at suscipit quis, pellentesque ut neque. Praesent a consectetur ligula. Maecenas condimentum enim ligula, non dictum est accumsan tincidunt. Aliquam ornare neque leo, vitae vulputate ipsum aliquet id. Vivamus feugiat, purus non maximus placerat, ex nisi lacinia neque, a fermentum velit arcu eget metus. Morbi ac sapien nisi. Ut ultrices elementum gravida. Aliquam pharetra turpis est, eget maximus est dictum in. In ut pharetra massa.',5,7),
        ('Vestibulum sit amet turpis non velit tincidunt consectetur. Cras tempus urna id sapien efficitur, in bibendum sem tincidunt. Proin viverra ultrices augue, in blandit tortor accumsan eget. Etiam non eros nec ante hendrerit accumsan non volutpat diam. Duis tempor ex in lorem placerat, sed venenatis nisi iaculis. Sed at erat eu lacus mattis tempor. Aenean ac libero mattis, aliquet leo quis, pharetra purus.',6,7);
 
-INSERT INTO rental(name, picture_link, description, price, other_information, state_name, member_id)
-VALUES ('Super duper chisels', 'x','This chisels are really amazing but sometimes does not work', 20, 'Not available for rent on Fridays', 'Good', 1),
-       ('Even better drill','y', 'This drill is even more amazing and always works', 40, '', 'Like New', 5),
-       ('Fishing rod','<' ,'Good for beginners to try out, not suitable for advanced fishers', 100, '', 'Fair', 3),
-       ('Gardening hose','z', '', 35, 'I would very much prefer if you would only use it for water', 'Fair',  4),
-       ('Monopoly', 'a','Great family fun for Friday evenings. Very fun!', 10, 'Not available at the weekend', 'Good', 5),
-       ('Electric guitar Gibson', 'ao','1989, vibrato not working, strings are set high', 200, '', 'Like New', 5),
-       ('Kitchen robot', 'q','Available with metal bowl and 3 hooks, 5 speeds, can also mince meat', 70, 'Missing simple hook', 'Good', 10);
+INSERT INTO rental(name,  picture_link, description, price, other_information, state_name, member_id)
+VALUES ('Super duper chisels',pg_read_binary_file('Pictures/chisels.jpg')::bytea, 'This chisels are really amazing but sometimes does not work', 20, 'Not available for rent on Fridays', 'Good', 1),
+       ('Even better drill',pg_read_binary_file('Pictures/drill.jpg')::bytea, 'This drill is even more amazing and always works', 40, '', 'Like New', 5),
+       ('Fishing rod',pg_read_binary_file('Pictures/fishing_rod.jpg')::bytea,'Good for beginners to try out, not suitable for advanced fishers', 100, '', 'Fair', 3),
+       ('Gardening hose',pg_read_binary_file('Pictures/gardening_hose.jpg')::bytea,'', 35, 'I would very much prefer if you would only use it for water', 'Fair',  4),
+       ('Monopoly',pg_read_binary_file('Pictures/monopoly.jpg')::bytea, 'Great family fun for Friday evenings. Very fun!', 10, 'Not available at the weekend', 'Good', 5),
+       ('Electric guitar Gibson',pg_read_binary_file('Pictures/electric_guitar.jpg')::bytea,'1989, vibrato not working, strings are set high', 200, '', 'Like New', 5),
+       ('Kitchen robot',pg_read_binary_file('Pictures/kitchen_robot.jpg')::bytea,'Available with metal bowl and 3 hooks, 5 speeds, can also mince meat', 70, 'Missing simple hook', 'Good', 10);
 
 INSERT INTO rental_category
 VALUES (1, 'Tools'),

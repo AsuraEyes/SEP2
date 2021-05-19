@@ -1,17 +1,26 @@
 package client.views.view_rental;
 
 import client.core.ViewHandler;
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
+import org.controlsfx.control.MaskerPane;
 
 import java.io.IOException;
 import java.sql.SQLException;
 
 public class ViewRentalController
 {
+
+
   @FXML private TextField searchField;
   
   @FXML private Label nameOfRentalLabel;
@@ -26,6 +35,7 @@ public class ViewRentalController
   @FXML private Label locationLabel;
   @FXML private Label ratingLabel;
 
+
   private ViewHandler viewHandler;
 
   public void init(ViewHandler viewHandler){
@@ -37,7 +47,7 @@ public class ViewRentalController
   }
 
   public void goBackToSearchResultsButton(ActionEvent actionEvent)
-      throws IOException, SQLException
+      throws IOException, SQLException, InterruptedException
   {
     viewHandler.setView(viewHandler.menu(), viewHandler.searchForRental());
   }

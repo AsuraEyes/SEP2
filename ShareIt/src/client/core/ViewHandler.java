@@ -49,6 +49,7 @@ public class ViewHandler
     main.getMainPane().getChildren().setAll(menu,content);
     scene.setRoot(main.getMainPane());
     stage.setScene(scene);
+    stage.setResizable(false);
     stage.show();
   }
 
