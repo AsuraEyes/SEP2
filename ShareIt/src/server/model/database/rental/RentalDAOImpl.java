@@ -123,24 +123,26 @@ public class RentalDAOImpl implements RentalDAO
       if(city != null){
         addToStatement += " AND r.member_id = m.id AND m.address_city_name = '"+city+"'";
       }
-      if(categories.size() > 1){
+      if(categories.size() > 0){
         for (int i = 0; i < categories.size(); i++) {
           //first from the list
           if(i == 0){
             //more coming
-            if(categories.size() > 2){
-              addToStatement += " AND (r.id = rc.rental_id AND rc.category_name = '"+categories.get(i)+"'";
+            if(categories.size() != 1){
+              addToStatement += " AND ((r.id = rc.rental_id AND rc.category_name = '"+categories.get(i)+"')";
             }
             //only this one
             else{
               addToStatement += " AND r.id = rc.rental_id AND rc.category_name = '"+categories.get(i)+"'";
             }
           }
+          //last one
           else if(i == categories.size()-1){
-            addToStatement += " OR r.id = rc.rental_id AND rc.category_name = '"+categories.get(i)+"')";
+            addToStatement += " OR (r.id = rc.rental_id AND rc.category_name = '"+categories.get(i)+"'))";
           }
+          //in the middle
           else{
-            addToStatement += " OR r.id = rc.rental_id AND rc.category_name = '"+categories.get(i)+"'";
+            addToStatement += " OR (r.id = rc.rental_id AND rc.category_name = '"+categories.get(i)+"')";
           }
         }
       }

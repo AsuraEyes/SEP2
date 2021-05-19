@@ -104,14 +104,6 @@ public class Rental implements Serializable {
 
     @Override public String toString()
     {
-        if(name==null){
-            return ""+id;
-        }
-
-        return "Rental{" + "id=" + id + ", name='" + name + '\''
-            + ", pictureLink='" + pictureLink + '\'' + ", description='"
-            + description + '\'' + ", price=" + price + ", otherInformation='"
-            + otherInformation + '\'' + ", stateName='" + stateName + '\''
-            + ", member id =" + memberId + '}';
+        return name+"\n\n"+description;
     }
 }
