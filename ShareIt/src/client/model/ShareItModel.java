@@ -21,5 +21,4 @@ public interface ShareItModel extends Subject
 
     String checkUserType();
     void getSelectedRental(Rental rental);
-
 }
