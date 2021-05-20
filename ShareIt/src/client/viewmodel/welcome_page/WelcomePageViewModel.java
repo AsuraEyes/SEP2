@@ -20,4 +20,8 @@ public class WelcomePageViewModel {
     public String getUserType(){
         return model.checkUserType();
     }
+
+    public void setSearchText(){
+        model.getSearchText(searchField.getValue());
+    }
 }

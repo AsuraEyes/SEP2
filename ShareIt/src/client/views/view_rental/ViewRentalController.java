@@ -53,7 +53,9 @@ public class ViewRentalController
     this.viewHandler = viewHandler;
 
     Bindings.bindBidirectional(this.imageView.imageProperty(), viewRentalViewModel.imagePropertyProperty());
-    imageView.setImage(picture);
+    Bindings.bindBidirectional(this.imageView.idProperty(), viewRentalViewModel.getImageIdMemberId());
+    //imageView.setImage(picture);
+
     nameOfRentalLabel.textProperty().bind(viewRentalViewModel.nameOfRentalProperty());
     descriptionLabel.textProperty().bind(viewRentalViewModel.descriptionOfRentalProperty());
     stateLabel.textProperty().bind(viewRentalViewModel.stateOfRentalProperty());
@@ -73,10 +75,12 @@ public class ViewRentalController
   public void goBackToSearchResultsButton(ActionEvent actionEvent)
       throws IOException, SQLException, InterruptedException
   {
-    viewHandler.setView(viewHandler.menu(), viewHandler.searchForRental(""));
+    viewHandler.setView(viewHandler.menu(), viewHandler.searchForRental());
   }
 
-  public void seeMoreButton(ActionEvent actionEvent)
+  public void seeMoreButton(ActionEvent actionEvent) throws IOException
   {
+    viewHandler.setView(viewHandler.menu(), viewHandler.viewMemberProfile());
+    viewRentalViewModel.getMemberById();
   }
 }
