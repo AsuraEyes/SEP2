@@ -88,8 +88,11 @@ public class MenuController
   }
 
     public void onReviewsButton (ActionEvent actionEvent) throws IOException {
-
-      viewHandler.setView(viewHandler.menu(), viewHandler.viewRatingFull());
+    if (menuViewModel.checkUserType().equals("Member")){
+      menuViewModel.setMemberUsername();
+      viewHandler.setView(viewHandler.menu(), viewHandler.manageAccount());
+    }
+    viewHandler.setView(viewHandler.menu(), viewHandler.viewRatingFull());
   }
 
     public void onReportedMembersButton (ActionEvent actionEvent)

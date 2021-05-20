@@ -1,11 +1,17 @@
 package client.views.manage_account;
 
+import client.core.ViewHandler;
+import client.core.ViewModelFactory;
+import client.viewmodel.manage_account.ManageAccountViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+
+import java.io.IOException;
+import java.sql.SQLException;
 
 public class ManageAccountController
 {
@@ -23,16 +29,28 @@ public class ManageAccountController
   @FXML private Label priceLabel;
   @FXML private ImageView ImageView;
 
+  private ViewHandler viewHandler;
+  ManageAccountViewModel manageAccountViewModel;
 
-  public void searchButton(ActionEvent actionEvent)
-  {
+  public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws IOException {
+    this.viewHandler = viewHandler;
+    manageAccountViewModel = viewModelFactory.getManageAccountViewModel();
+    usernameLabel.textProperty().bind(manageAccountViewModel.getUsernameLabel());
+    locationLabel.textProperty().bind(manageAccountViewModel.getLocationLabel());
+    ratingLabel.textProperty().bind(manageAccountViewModel.getRatingLabel());
+    addressLabel.textProperty().bind(manageAccountViewModel.getAddressLabel());
+    contactLabel.textProperty().bind(manageAccountViewModel.getContactLabel());
+    otherInformationLabel.textProperty().bind(manageAccountViewModel.getOtherInformationLabel());
+  }
+  public void searchButton(ActionEvent actionEvent) {
   }
 
-  public void changeInformationButton(ActionEvent actionEvent)
-  {
+  public void editOrDeleteInformationButton(ActionEvent actionEvent) throws IOException, SQLException {
+    manageAccountViewModel.setMemberUsername();
+    viewHandler.setView(viewHandler.menu(), viewHandler.editOrDeleteAccount());
   }
 
-  public void goBackToViewedRentalButton(ActionEvent actionEvent)
-  {
+  public void addRentalButton(ActionEvent actionEvent) throws SQLException, IOException {
+    viewHandler.setView(viewHandler.menu(), viewHandler.addRental());
   }
 }

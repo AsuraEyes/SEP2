@@ -116,8 +116,8 @@ public class AddRentalController {
     }
   }
 
-  public void onGoBack(ActionEvent actionEvent) {
-
+  public void onGoBack(ActionEvent actionEvent) throws IOException {
+    viewHandler.setView(viewHandler.menu(), viewHandler.manageAccount());
   }
 
   private boolean checkField (String message, TextField nameOfField){

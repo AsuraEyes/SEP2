@@ -7,6 +7,7 @@ import client.model.state.StateManager;
 import shared.transferobjects.*;
 
 import java.beans.PropertyChangeListener;
+import java.io.IOException;
 import java.rmi.AlreadyBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -84,6 +85,11 @@ public class RMIServerImpl implements RMIServer
   @Override
   public String checkMemberData(String username, String password, String confirmPassword, String email, String phone, String otherInformation, String street, String streetNo, String postalCode, String city) throws RemoteException {
     return serverModelManager.checkMemberData(username, password, confirmPassword, email, otherInformation, phone, street, streetNo, postalCode, city);
+  }
+
+  @Override
+  public String updateCheckMemberData(String username, String password, String confirmPassword, String email, String phone, String otherInformation, String street, String streetNo, String postalCode, String city) throws IOException {
+    return serverModelManager.updateCheckMemberData(username, password, confirmPassword, email, otherInformation, phone, street, streetNo, postalCode, city);
   }
 
   @Override
