@@ -16,6 +16,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Optional;
 
 public class MenuController
@@ -87,10 +88,11 @@ public class MenuController
     }
   }
 
-    public void onReviewsButton (ActionEvent actionEvent) throws IOException {
+    public void onReviewsButton (ActionEvent actionEvent) throws IOException, SQLException {
     if (menuViewModel.checkUserType().equals("Member")){
       viewHandler.setView(viewHandler.menu(), viewHandler.manageAccount());
     }
+
     else
     {
       viewHandler.setView(viewHandler.menu(), viewHandler.viewRatingFull());

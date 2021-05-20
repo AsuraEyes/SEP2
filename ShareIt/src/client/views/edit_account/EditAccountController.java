@@ -67,7 +67,6 @@ public class EditAccountController {
         emailField.textProperty().bindBidirectional(editAccountViewModel.getEmailField());
         telephoneNoField.textProperty().bindBidirectional(editAccountViewModel.getTelephoneNoField());
         otherInfoField.textProperty().bindBidirectional(editAccountViewModel.getOtherInfoField());
-
         editAccountViewModel.setProfile();
 
         locationBox.setItems(editAccountViewModel.getLocations());

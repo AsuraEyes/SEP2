@@ -87,8 +87,8 @@ public class EditAccountViewModel {
         locationsList = FXCollections.observableArrayList(cityListString);
         return locationsList;
     }
-    public void setProfile(){
 
+    public void setProfile(){
         Member member = shareItModel.getMemberByUsername(StateManager.getInstance()
             .getUsername());
         usernameField.setValue(member.getUsername());

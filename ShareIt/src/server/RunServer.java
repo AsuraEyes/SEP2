@@ -5,6 +5,7 @@ import server.model.database.administrator.AdministratorDAOImpl;
 import server.model.database.category.CategoryDAOImpl;
 import server.model.database.city.CityDAOImpl;
 import server.model.database.member.MemberDAOImpl;
+import server.model.database.rating.RatingDAOImpl;
 import server.model.database.rental.RentalDAOImpl;
 import server.model.database.state.StateDAOImpl;
 import server.networking.RMIServerImpl;
