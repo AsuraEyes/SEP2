@@ -6,6 +6,9 @@ import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import shared.transferobjects.Member;
+import shared.transferobjects.Rating;
+
+import java.util.ArrayList;
 
 public class ViewRatingViewModel {
     private ShareItModel model;
@@ -61,5 +64,9 @@ public class ViewRatingViewModel {
         contact.setValue(member.getPhoneNo() + "\n" + member.getEmailAddress());
         otherInformation.setValue(member.getOtherInformation());
         return model.getMemberUsername();
+    }
+
+    public ArrayList<Rating> getAllRatingsOnMember(String memberUsername) {
+        return model.getAllRatingsOnMember(memberUsername);
     }
 }

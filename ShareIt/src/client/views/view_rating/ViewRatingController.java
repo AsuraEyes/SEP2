@@ -7,8 +7,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import shared.transferobjects.Rating;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class ViewRatingController {
     @FXML private Label userNameLabel;
@@ -31,8 +33,7 @@ public class ViewRatingController {
         contactLabel.textProperty().bind(viewRatingViewModel.getContact());
         otherInformationLabel.textProperty().bind(viewRatingViewModel.getOtherInformation());
 
-        System.out.println("we get here");
-        viewRatingViewModel.getMemberUsername();
+        displayRatings(viewRatingViewModel.getAllRatingsOnMember(viewRatingViewModel.getMemberUsername()));
     }
 
     public void searchButton(ActionEvent actionEvent) {
@@ -44,6 +45,10 @@ public class ViewRatingController {
     }
 
     public void seeFullRating(ActionEvent actionEvent) {
+
+    }
+
+    public void displayRatings(ArrayList<Rating> ratings){
 
     }
 }

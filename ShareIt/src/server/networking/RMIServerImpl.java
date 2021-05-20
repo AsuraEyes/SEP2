@@ -154,4 +154,9 @@ public class RMIServerImpl implements RMIServer
     return serverModelManager.getMemberByUsername(memberUsername);
   }
 
+  @Override
+  public ArrayList<Rating> getAllRatingsOnMember(String memberUsername) {
+    return serverModelManager.getAllRatingsOnMember(memberUsername);
+  }
+
 }

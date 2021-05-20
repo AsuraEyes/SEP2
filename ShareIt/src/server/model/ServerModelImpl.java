@@ -7,6 +7,7 @@ import server.model.data_check.DataCheckSearch;
 import server.model.database.category.CategoryDAOImpl;
 import server.model.database.city.CityDAOImpl;
 import server.model.database.member.MemberDAOImpl;
+import server.model.database.rating.RatingDAOImpl;
 import server.model.database.rental.RentalDAOImpl;
 import server.model.database.state.StateDAOImpl;
 import shared.transferobjects.*;
@@ -182,4 +183,17 @@ public class ServerModelImpl implements ServerModelManager
       return null;
     }
   }
+
+  @Override
+  public ArrayList<Rating> getAllRatingsOnMember(String memberUsername) {
+    try{
+      return RatingDAOImpl.getInstance().getAllRatingsOnMember(memberUsername);
+    }
+    catch (SQLException e){
+      e.printStackTrace();
+    }
+    return null;
+  }
+
+
 }

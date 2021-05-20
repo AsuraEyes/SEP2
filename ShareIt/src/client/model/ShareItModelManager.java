@@ -169,4 +169,9 @@ public class ShareItModelManager implements ShareItModel
     searchText = text;
   }
 
+  @Override
+  public ArrayList<Rating> getAllRatingsOnMember(String memberUsername) {
+    return client.getAllRatingsOnMember(memberUsername);
+  }
+
 }

@@ -218,10 +218,10 @@ public class ViewHandler
   public Node viewRatingFull() throws IOException
   {
     FXMLLoader loader = new FXMLLoader();
-    loader.setLocation(getClass().getResource("/client/views/view_rating_full/ViewRatingFull.fxml"));
+    loader.setLocation(getClass().getResource("/client/views/view_rating/ViewRating.fxml"));
     Node content = loader.load();
-    //LogInController logInController = loader.getController();
-    //ogInController.init(this, viewModelFactory);
+    ViewRatingController viewRatingController = loader.getController();
+    viewRatingController.init(this, viewModelFactory);
     return content;
   }
   public Node viewRental() throws IOException
