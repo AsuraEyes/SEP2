@@ -48,20 +48,27 @@ public class SearchForRentalController
     locationBox.getItems().add("");
     categoryCheckComboBox.getItems()
         .addAll(searchForRentalViewModel.getCategories());
-
+    searchForRentalViewModel.setSearchField();
+    System.out.println("Controller: " + searchField.textProperty().getValue());
+    if(searchField.textProperty().getValue() != null)
+    {
+      displayRentals(searchForRentalViewModel.onSearchButtonPressed());
+    }
+    else
+    {
+      displayRentals(searchForRentalViewModel.getRentalsList());
+    }
+    }
 
     /*searchForRentalViewModel.loadObservableNodes();
     Bindings.bindContent(flowPane.getChildren(),
         searchForRentalViewModel.getNodeObservableList());*/
 
     //searchForRentalViewModel.setRentals(searchForRentalViewModel.onSearchButtonPressed());
-    displayRentals(searchForRentalViewModel.getRentalsList());
+
 
      // List<Rental> rentals = searchForRentalViewModel.onSearchButtonPressed();
       //flowPane.getChildren().clear();
-
-
-  }
 
   /*public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory, String search) throws
           IOException

@@ -50,15 +50,7 @@
       </library>
     </orderEntry>
     <orderEntry type="library" exported="" name="controlsfx-11.1.0" level="project" />
-    <orderEntry type="library" exported="" name="javafx" level="application" />
-    <orderEntry type="module-library" exported="">
-      <library>
-        <CLASSES>
-          <root url="jar://$USER_HOME$/Documents/Java/postgresql-42.2.20.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
+    <orderEntry type="library" exported="" name="postgresql-42.2.20" level="project" />
+    <orderEntry type="library" exported="" name="JavaFX" level="application" />
   </component>
 </module>

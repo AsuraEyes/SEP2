@@ -23,7 +23,7 @@ public interface ShareItModel extends Subject
     String checkUserType();
     void getSelectedRental(Rental rental);
     Member getMemberById(int id);
-    void getSearchText(String string);
+
 
     String checkLogInCredentials(String username, String password);
 
@@ -33,4 +33,6 @@ public interface ShareItModel extends Subject
     String getMemberUsername();
 
     Member getMemberByUsername(String memberUsername);
+    String getSearchText();
+    void setSearchText(String text);
 }

@@ -30,7 +30,8 @@ public class WelcomePageController {
     }
 
     public void searchButton(ActionEvent actionEvent) throws IOException {
-        viewHandler.setView(viewHandler.menu(), viewHandler.searchForRental());
         welcomePageViewModel.setSearchText();
+
+        viewHandler.setView(viewHandler.menu(), viewHandler.searchForRental());
     }
 }
