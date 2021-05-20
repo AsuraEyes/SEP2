@@ -18,6 +18,25 @@ public class ShareItModelManager implements ShareItModel
 {
   private PropertyChangeSupport support;
   private Client client;
+
+  @Override
+  public String getMemberUsername() {
+    return memberUsername;
+  }
+
+  @Override
+  public Member getMemberByUsername(String memberUsername) {
+    return client.getMemberByUsername(memberUsername);
+  }
+
+  @Override
+  public void setMemberUsername(String memberUsername) {
+    System.out.println("the one in model manager "+memberUsername);
+    this.memberUsername = memberUsername;
+  }
+
+  private String memberUsername;
+
   public ShareItModelManager(Client client) throws IOException
   {
     this.client = client;

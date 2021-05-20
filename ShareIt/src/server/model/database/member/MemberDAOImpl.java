@@ -134,7 +134,7 @@ public class MemberDAOImpl implements MemberDAO{
     @Override
     public int readIdByUsername(String username) throws SQLException{
         try(Connection connection = getConnection()){
-            System.out.println(username);
+            //username = "bob";
             PreparedStatement statement = connection.prepareStatement("SELECT id FROM share_it.member WHERE username = ?");
             statement.setString(1, username);
             ResultSet resultSet = statement.executeQuery();
@@ -172,5 +172,21 @@ public class MemberDAOImpl implements MemberDAO{
             e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    public Member getMemberByUsername(String username) throws SQLException{
+        try(Connection connection = getConnection()){
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM share_it.member WHERE username = ?");
+            statement.setString(1, username);
+            ResultSet resultSet = statement.executeQuery();
+
+            if(resultSet.next()){
+                return new Member(resultSet.getInt("id"), resultSet.getString("username"), resultSet.getString("password"), resultSet.getString("email_address"), resultSet.getString("phone_number"), resultSet.getString("other_information"), resultSet.getString("address_street"), resultSet.getString("address_no"), resultSet.getInt("address_postal_code"), resultSet.getString("address_city_name"),resultSet.getFloat("average_review"));
+            }
+            else{
+                throw new SQLException("No keys generated");
+            }
+        }
     }
 }

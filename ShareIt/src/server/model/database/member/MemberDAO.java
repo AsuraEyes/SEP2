@@ -14,4 +14,5 @@ public interface MemberDAO {
     void delete(String username) throws SQLException;
     Member getMemberById(int id) throws SQLException;
     String checkLogInCredentials(String username, String password) throws SQLException;
+    Member getMemberByUsername(String username) throws SQLException;
 }

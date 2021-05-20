@@ -26,4 +26,6 @@ public interface Client extends Subject
     String checkLogInCredentials(String username, String password);
 
   ArrayList<Rental> getRentalsOfMemberList(String username);
+
+    Member getMemberByUsername(String memberUsername);
 }

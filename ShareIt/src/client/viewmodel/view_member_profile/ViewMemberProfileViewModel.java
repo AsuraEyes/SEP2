@@ -29,6 +29,7 @@ public class ViewMemberProfileViewModel
   public ViewMemberProfileViewModel(ShareItModel model)
   {
     this.model = model;
+
     searchField = new SimpleStringProperty();
     usernameLabel = new SimpleStringProperty();
     locationLabel = new SimpleStringProperty();
@@ -45,13 +46,13 @@ public class ViewMemberProfileViewModel
       if(evt.getNewValue() instanceof Member)
       {
         Member member = (Member) evt.getNewValue();
-        usernameLabel.setValue(member.getUsername());
-        System.out.println("after: "+usernameLabel.getValue());
-        locationLabel.setValue(member.getAddressCity());
-        ratingLabel.setValue(String.valueOf(member.getAverageReview()));
-        addressLabel.setValue(member.getAddressStreet() + ", " + member.getAddressNo());
-        contactLabel.setValue(member.getPhoneNo() + "\n" + member.getEmailAddress());
-        otherInformationLabel.setValue(member.getOtherInformation());
+        //usernameLabel.setValue(member.getUsername());
+//        System.out.println("after: "+usernameLabel.getValue());
+//        locationLabel.setValue(member.getAddressCity());
+//        ratingLabel.setValue(String.valueOf(member.getAverageReview()));
+//        addressLabel.setValue(member.getAddressStreet() + ", " + member.getAddressNo());
+//        contactLabel.setValue(member.getPhoneNo() + "\n" + member.getEmailAddress());
+//        otherInformationLabel.setValue(member.getOtherInformation());
       }
       });
   }
@@ -95,10 +96,10 @@ public class ViewMemberProfileViewModel
     return model.checkUserType();
   }
 
-  public ArrayList<Rental> getRentalsOfMemberList() throws RemoteException
+  public ArrayList<Rental> getRentalsOfMemberList(String username) throws RemoteException
   {
     System.out.println(usernameLabel.getValue());
-    return model.getRentalsOfMemberList(usernameLabel.getValue());
+    return model.getRentalsOfMemberList(username);
   }
 
   public void getRental(Object object) throws RemoteException
@@ -111,16 +112,28 @@ public class ViewMemberProfileViewModel
         if(infoOverlay.getContent() instanceof ImageView)
         {
           ImageView imageView = (ImageView) infoOverlay.getContent();
-          for (int i = 0; i < getRentalsOfMemberList().size(); i++)
+          for (int i = 0; i < getRentalsOfMemberList(usernameLabel.getValue()).size(); i++)
           {
-            if(imageView.getId().equals(String.valueOf(getRentalsOfMemberList().get(i).getId())))
+            if(imageView.getId().equals(String.valueOf(getRentalsOfMemberList(usernameLabel.getValue()).get(i).getId())))
             {
-              model.getSelectedRental(getRentalsOfMemberList().get(i));
+              model.getSelectedRental(getRentalsOfMemberList(usernameLabel.getValue()).get(i));
               break;
             }
           }
         }
       }
     }
+  }
+
+  public String getMemberUsername(){
+     usernameLabel.setValue(model.getMemberUsername());
+    System.out.println("Get member username view member VM : "+model.getMemberUsername());
+    Member member = model.getMemberByUsername(model.getMemberUsername());
+    locationLabel.setValue(member.getAddressCity());
+    ratingLabel.setValue(String.valueOf(member.getAverageReview()));
+    addressLabel.setValue(member.getAddressStreet() + ", " + member.getAddressNo());
+    contactLabel.setValue(member.getPhoneNo() + "\n" + member.getEmailAddress());
+    otherInformationLabel.setValue(member.getOtherInformation());
+    return model.getMemberUsername();
   }
 }

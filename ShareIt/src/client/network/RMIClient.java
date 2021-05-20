@@ -172,6 +172,16 @@ public class RMIClient implements Client, RemoteObserver
     return null;
   }
 
+  @Override
+  public Member getMemberByUsername(String memberUsername) {
+    try{
+      return server.getMemberByUsername(memberUsername);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return null;
+  }
+
   @Override public void addListener(String propertyName,
       PropertyChangeListener listener)
   {
