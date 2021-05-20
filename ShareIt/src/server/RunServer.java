@@ -29,6 +29,7 @@ public class RunServer
     CategoryDAOImpl.getInstance().setPassword(currentPassword);
     StateDAOImpl.getInstance().setPassword(currentPassword);
     AdministratorDAOImpl.getInstance().setPassword(currentPassword);
+    RatingDAOImpl.getInstance().setPassword(currentPassword);
     ss.startServer();
   }
 }

@@ -29,4 +29,6 @@ public interface Client extends Subject
   ArrayList<Rental> getRentalsOfMemberList(String username);
 
     Member getMemberByUsername(String memberUsername);
+
+    ArrayList<Rating> getAllRatingsOnMember(String memberUsername);
 }

@@ -36,4 +36,6 @@ public interface ShareItModel extends Subject
     Member getMemberByUsername(String memberUsername);
     String getSearchText();
     void setSearchText(String text);
+
+    ArrayList<Rating> getAllRatingsOnMember(String memberUsername);
 }

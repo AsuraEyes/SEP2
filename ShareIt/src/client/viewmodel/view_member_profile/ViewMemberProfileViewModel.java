@@ -126,7 +126,6 @@ public class ViewMemberProfileViewModel
   public String getMemberUsername(){
     usernameLabel.setValue(model.getMemberUsername());
     Member member = model.getMemberByUsername(model.getMemberUsername());
-
     locationLabel.setValue(member.getAddressCity());
     ratingLabel.setValue(String.valueOf(member.getAverageReview()));
     addressLabel.setValue(member.getAddressStreet() + ", " + member.getAddressNo());
@@ -134,8 +133,7 @@ public class ViewMemberProfileViewModel
     otherInformationLabel.setValue(member.getOtherInformation());
     return model.getMemberUsername();
   }
-  public void setMemberUsername(){
-    System.out.println("viewmemberprofvm"+usernameLabel.getValue());
+  public void setMemberUsername() {
     model.setMemberUsername(usernameLabel.getValue());
   }
 }

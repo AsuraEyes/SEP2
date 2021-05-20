@@ -42,4 +42,6 @@ public interface RMIServer extends Remote
   ArrayList<Rental> getRentalsOfMemberList(String username) throws RemoteException;
 
     Member getMemberByUsername(String memberUsername) throws RemoteException;
+
+    ArrayList<Rating> getAllRatingsOnMember(String memberUsername) throws RemoteException;
 }
