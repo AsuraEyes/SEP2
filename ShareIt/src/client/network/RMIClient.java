@@ -5,6 +5,7 @@ import shared.networking.RMIServer;
 import shared.networking.RemoteObserver;
 import shared.transferobjects.*;
 
+import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.IOException;
@@ -13,6 +14,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +32,7 @@ public class RMIClient implements Client, RemoteObserver
     try
     {
       UnicastRemoteObject.exportObject(this,0);
-      Registry registry = LocateRegistry.getRegistry("localhost", 1099);
+      Registry registry = LocateRegistry.getRegistry("localhost", 1199);
       server = (RMIServer) registry.lookup("ShareIt");
       server.registerClient(this);
       System.out.println("Client Connected");
@@ -56,6 +58,19 @@ public class RMIClient implements Client, RemoteObserver
   public String checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, String username, ArrayList<String> selectedCategories) throws IOException {
     try {
       return server.checkRentalData(name, pictureLink, description, price, otherInformation, stateName, StateManager.getInstance().getUsername(), selectedCategories);
+    }
+    catch (RemoteException e){
+      e.printStackTrace();
+      throw new RuntimeException("Could not contact server");
+    }
+  }
+
+  @Override public String addFeedback(double starValue, String feedback, String username1, String username2) throws IOException
+  {
+    try
+    {
+
+      return server.addFeedback(starValue, feedback, username1, username2);
     }
     catch (RemoteException e){
       e.printStackTrace();
@@ -121,6 +136,16 @@ public class RMIClient implements Client, RemoteObserver
     return server.getRentalsList();
   }
 
+  @Override public Member getMemberById(int id) throws RemoteException
+  {
+    return server.getMemberById(id);
+  }
+
+  @Override
+  public String checkLogInCredentials(String username, String password) throws RemoteException {
+    return server.checkLogInCredentials(username, password);
+  }
+
   @Override public void addListener(String propertyName,
       PropertyChangeListener listener)
   {
@@ -143,6 +168,7 @@ public class RMIClient implements Client, RemoteObserver
   {
     if(propertyName.equals("dataValidation")){
       support.firePropertyChange(propertyName, 0, newValue);
+      support.firePropertyChange("selectedRental", 0, 0);
     }
 
     /*if(object instanceof Message)

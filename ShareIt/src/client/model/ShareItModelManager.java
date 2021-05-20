@@ -10,6 +10,7 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.IOException;
 import java.rmi.RemoteException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +23,7 @@ public class ShareItModelManager implements ShareItModel
     this.client = client;
     client.startClient();
     support = new PropertyChangeSupport(this);
+    //client.addListener("selectedRental", this::onDataValidation);
     client.addListener("dataValidation", this::onDataValidation);
   }
 
@@ -67,7 +69,11 @@ public class ShareItModelManager implements ShareItModel
   {
     return client.checkSearchWithFilter(search,city, selectedCategories );
   }
-
+  @Override public String addFeedback(double starValue, String feedback, String username1, String username2) throws IOException
+  {
+    System.out.println(starValue);
+    return client.addFeedback(starValue, feedback,username1,username2 );
+  }
   @Override public List<Rental> checkSearch(String search) throws IOException
   {
     return client.checkSearch(search);
@@ -96,5 +102,28 @@ public class ShareItModelManager implements ShareItModel
   @Override
   public String checkUserType() {
     return StateManager.getInstance().getUsertype();
+  }
+
+  @Override
+  public String checkLogInCredentials(String username, String password) throws RemoteException {
+    return client.checkLogInCredentials(username, password);
+  }
+
+  @Override
+  public void getSelectedRental(Rental rental)
+  {
+    support.firePropertyChange("selectedRental",1,rental);
+  }
+
+  @Override public Member getMemberById(int id) throws RemoteException
+  {
+    Member member = client.getMemberById(id);
+    support.firePropertyChange("getMember",1,member);
+    return member;
+  }
+
+  @Override public void getSearchText(String string)
+  {
+    support.firePropertyChange("searchText",1,string);
   }
 }

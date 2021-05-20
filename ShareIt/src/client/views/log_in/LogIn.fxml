@@ -14,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.textfield.CustomPasswordField?>
 
-<ScrollPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.log_in.LogInController">
+<ScrollPane fx:id="parent" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.log_in.LogInController">
    <content>
       <AnchorPane prefHeight="600.0" prefWidth="1280.0">
          <children>

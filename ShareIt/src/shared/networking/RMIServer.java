@@ -5,6 +5,7 @@ import shared.transferobjects.*;
 import java.rmi.AlreadyBoundException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +24,7 @@ public interface RMIServer extends Remote
   List<Rental> checkSearch(String search) throws RemoteException;
   List<Rental> checkSearchWithFilter(String search,String city, ArrayList<String> selectedCategories)throws RemoteException;
   String checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, String username, ArrayList<String> selectedCategories) throws RemoteException;
-
+  String addFeedback(double starValue,String feedback, String username1, String username2 ) throws RemoteException;
   ArrayList<City> getCityList() throws RemoteException;
 
   ArrayList<State> getStateList() throws RemoteException;
@@ -31,5 +32,8 @@ public interface RMIServer extends Remote
   ArrayList<Category> getCategoryList() throws RemoteException;
   ArrayList<Rental> getRentalsList() throws RemoteException;
 
+  Member getMemberById(int id) throws RemoteException;
 
+
+    String checkLogInCredentials(String username, String password) throws RemoteException;
 }

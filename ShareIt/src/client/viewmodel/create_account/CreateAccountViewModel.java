@@ -26,7 +26,7 @@ public class CreateAccountViewModel {
     private final StringProperty otherInfoField;
     private ObservableList<String> locationsList;
 
-    public CreateAccountViewModel(ShareItModel model) throws SQLException {
+    public CreateAccountViewModel(ShareItModel model){
         this.model = model;
         usernameField = new SimpleStringProperty();
         passwordField = new SimpleStringProperty();

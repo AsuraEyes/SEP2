@@ -1,6 +1,7 @@
 package server;
 
 import server.model.ServerModelImpl;
+import server.model.database.administrator.AdministratorDAOImpl;
 import server.model.database.category.CategoryDAOImpl;
 import server.model.database.city.CityDAOImpl;
 import server.model.database.member.MemberDAOImpl;
@@ -21,12 +22,13 @@ public class RunServer
     String timothyPassword = "CoDex21";
     String maggiePassword = "SQLdatabaze";
     String bartoszPassword = "hehe2137";
-    String currentPassword = maggiePassword;
+    String currentPassword = timothyPassword;
     MemberDAOImpl.getInstance().setPassword(currentPassword);
     CityDAOImpl.getInstance().setPassword(currentPassword);
     RentalDAOImpl.getInstance().setPassword(currentPassword);
     CategoryDAOImpl.getInstance().setPassword(currentPassword);
     StateDAOImpl.getInstance().setPassword(currentPassword);
+    AdministratorDAOImpl.getInstance().setPassword(currentPassword);
     ss.startServer();
   }
 }

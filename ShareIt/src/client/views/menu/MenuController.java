@@ -2,6 +2,8 @@ package client.views.menu;
 
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
+import client.model.state.StateManager;
+import client.model.state.VisitorState;
 import client.viewmodel.menu.MenuViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -74,6 +76,7 @@ public class MenuController
       Optional<ButtonType> result = alert.showAndWait();
       if (result.get() == ButtonType.OK)
       {
+        StateManager.getInstance().setLoginState(new VisitorState());
         viewHandler.setView(viewHandler.menu(), viewHandler.welcomePage());
       }
     }

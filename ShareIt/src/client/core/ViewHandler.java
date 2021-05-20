@@ -7,12 +7,14 @@ import client.views.create_account.CreateAccountController;
 import client.views.log_in.LogInController;
 import client.views.main_view.MainController;
 import client.views.menu.MenuController;
+import client.views.report_member.ReportMemberController;
 import client.views.search_for_rental.SearchForRentalController;
 import client.views.view_member_profile.ViewMemberProfileController;
 import client.views.view_rental.ViewRentalController;
 import client.views.view_reported_member.ViewReportedMemberController;
 import client.views.view_reported_member_list.ViewReportedMemberListController;
 import client.views.welcome_page.WelcomePageController;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -21,6 +23,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.concurrent.TimeUnit;
 
 public class ViewHandler
 {
@@ -37,7 +40,7 @@ public class ViewHandler
 
   public void start() throws Exception
   {
-    setView(menu(),searchForRental());
+    setView(menu(), welcomePage());
   }
 
   public void setView(Node menu, Node content) throws IOException
@@ -145,8 +148,8 @@ public class ViewHandler
     FXMLLoader loader = new FXMLLoader();
     loader.setLocation(getClass().getResource("/client/views/report_member/ReportMember.fxml"));
     Node content = loader.load();
-    //LogInController logInController = loader.getController();
-    //ogInController.init(this, viewModelFactory);
+    ReportMemberController reportMemberController = loader.getController();
+    reportMemberController.init(this, viewModelFactory);
     return content;
   }
   public Node searchForMember() throws IOException
@@ -158,15 +161,26 @@ public class ViewHandler
     //ogInController.init(this, viewModelFactory);
     return content;
   }
-  public Node searchForRental() throws IOException, SQLException
+
+  public Node searchForRental() throws IOException
   {
     FXMLLoader loader = new FXMLLoader();
     loader.setLocation(getClass().getResource("/client/views/search_for_rental/SearchForRental.fxml"));
     Node content = loader.load();
-    SearchForRentalController controller = loader.getController();
-    controller.init(this,viewModelFactory);
-    //SearchForRentalController searchForRentalController = loader.getController();
-    //searchForRentalController.init(this, viewModelFactory);
+    /*SearchForRentalController controller = loader.getController();
+    if(search != null){
+      if(!search.isBlank()){
+        controller.init(this,viewModelFactory, search);
+      }
+      else{
+
+      }
+    }
+    else{
+      controller.init(this,viewModelFactory);
+    }*/
+    SearchForRentalController searchForRentalController = loader.getController();
+    searchForRentalController.init(this, viewModelFactory);
     return content;
   }
   public Node viewMemberProfile() throws IOException
@@ -202,7 +216,7 @@ public class ViewHandler
     loader.setLocation(getClass().getResource("/client/views/view_rental/ViewRental.fxml"));
     Node content = loader.load();
     ViewRentalController viewRentalController = loader.getController();
-    viewRentalController.init(this);
+    viewRentalController.init(this,viewModelFactory);
     return content;
   }
   public Node viewReportedMember() throws IOException

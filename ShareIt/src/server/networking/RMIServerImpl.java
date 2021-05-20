@@ -12,6 +12,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +27,7 @@ public class RMIServerImpl implements RMIServer
 
   public void startServer() throws RemoteException, AlreadyBoundException
   {
-    Registry registry = LocateRegistry.createRegistry(1099);
+    Registry registry = LocateRegistry.createRegistry(1199);
     registry.bind("ShareIt", this);
   }
 
@@ -71,6 +72,7 @@ public class RMIServerImpl implements RMIServer
       }
     };
     serverModelManager.addListener("NewMessage", listener);
+    //serverModelManager.addListener("selectedRental", listener);
     //serverModelManager.addListener("NewUser", listener);
   }
 
@@ -87,6 +89,13 @@ public class RMIServerImpl implements RMIServer
   @Override
   public String checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, String username, ArrayList<String> selectedCategories) throws RemoteException {
     return serverModelManager.checkRentalData(name, pictureLink, description, price, otherInformation, stateName, username, selectedCategories);
+  }
+
+  @Override public String addFeedback(double starValue, String feedback, String username1, String username2)
+      throws RemoteException
+  {
+    System.out.println(starValue);
+    return serverModelManager.addFeedback(starValue, feedback, username1, username2);
   }
 
   @Override
@@ -117,6 +126,16 @@ public class RMIServerImpl implements RMIServer
   @Override public ArrayList<Rental> getRentalsList() throws RemoteException
   {
     return serverModelManager.getRentalsList();
+  }
+
+  @Override public Member getMemberById(int id) throws RemoteException
+  {
+    return serverModelManager.getMemberById(id);
+  }
+
+  @Override
+  public String checkLogInCredentials(String username, String password) {
+    return serverModelManager.checkLogInCredentials(username, password);
   }
 
 }
