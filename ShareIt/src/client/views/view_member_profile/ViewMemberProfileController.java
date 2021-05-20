@@ -97,7 +97,7 @@ public class ViewMemberProfileController
     alert.setTitle("Delete account");
     alert.setHeaderText("Are you sure?");
     alert.initOwner(stage);
-    alert.getDialogPane().setContentText("Are you sure you want to permanent delete your account?");
+    alert.getDialogPane().setContentText("Are you sure you want to permanent delete this account?");
 
     Optional<ButtonType> result = alert.showAndWait();
     if (result.get() == ButtonType.OK) {
@@ -112,17 +112,11 @@ public class ViewMemberProfileController
     viewHandler.setView(viewHandler.menu(), viewHandler.viewRental());
   }
 
-  public void loadMoreRentalButton(ActionEvent actionEvent)
-  {
+  public void viewRatingButton(ActionEvent actionEvent) throws IOException {
+    viewMemberProfileViewModel.setMemberUsername();
+    viewHandler.setView(viewHandler.menu(), viewHandler.viewRating());
   }
 
-  public void viewRatingButton(ActionEvent actionEvent)
-  {
-  }
-
-  public void rentalVBoxClicked(MouseEvent mouseEvent)
-  {
-  }
   public void displayRentals(List<Rental> rentals) throws RemoteException
   {
     if (rentals != null && !rentals.isEmpty())

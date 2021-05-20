@@ -24,7 +24,6 @@ public class ViewMemberProfileViewModel
   private final SimpleStringProperty addressLabel;
   private final SimpleStringProperty contactLabel;
   private final SimpleStringProperty otherInformationLabel;
-  private Member member;
 
   public ViewMemberProfileViewModel(ShareItModel model)
   {
@@ -135,5 +134,9 @@ public class ViewMemberProfileViewModel
     contactLabel.setValue(member.getPhoneNo() + "\n" + member.getEmailAddress());
     otherInformationLabel.setValue(member.getOtherInformation());
     return model.getMemberUsername();
+  }
+
+  public void setMemberUsername() {
+    model.setMemberUsername(usernameLabel.getValue());
   }
 }

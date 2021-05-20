@@ -13,6 +13,7 @@ import client.viewmodel.rate_feedback.RateFeedbackViewModel;
 import client.viewmodel.report_member.ReportMemberViewModel;
 import client.viewmodel.seatch_for_rental.SearchForRentalViewModel;
 import client.viewmodel.view_member_profile.ViewMemberProfileViewModel;
+import client.viewmodel.view_rating.ViewRatingViewModel;
 import client.viewmodel.view_rating_full.ViewRatingFullViewModel;
 import client.viewmodel.view_rental.ViewRentalViewModel;
 import client.viewmodel.view_reported_member.ViewReportedMemberViewModel;
@@ -33,6 +34,7 @@ public class ViewModelFactory
   private CreateAccountViewModel createAccountViewModel;
   private SearchForRentalViewModel searchForRentalViewModel;
   private ViewRatingFullViewModel viewRatingFullViewModel;
+  private ViewRatingViewModel viewRatingViewModel;
   private ViewReportedMemberViewModel viewReportedMemberViewModel;
   private ViewReportedMemberListViewModel viewReportedMemberListViewModel;
   private WelcomePageViewModel welcomePageViewModel;
@@ -114,6 +116,13 @@ public class ViewModelFactory
       viewRatingFullViewModel = new ViewRatingFullViewModel();
     }
     return viewRatingFullViewModel;
+  }
+
+  public ViewRatingViewModel getViewRatingViewModel() throws IOException {
+    if (viewRatingViewModel == null){
+      viewRatingViewModel = new ViewRatingViewModel(modelFactory.getShareItModel());
+    }
+    return viewRatingViewModel;
   }
 
   public ViewReportedMemberViewModel getViewReportedMemberViewModel() {
