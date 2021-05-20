@@ -92,7 +92,10 @@ public class MenuController
       menuViewModel.setMemberUsername();
       viewHandler.setView(viewHandler.menu(), viewHandler.manageAccount());
     }
-    viewHandler.setView(viewHandler.menu(), viewHandler.viewRatingFull());
+    else
+    {
+      viewHandler.setView(viewHandler.menu(), viewHandler.viewRatingFull());
+    }
   }
 
     public void onReportedMembersButton (ActionEvent actionEvent)

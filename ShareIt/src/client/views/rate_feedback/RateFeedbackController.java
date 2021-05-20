@@ -27,6 +27,7 @@ public class RateFeedbackController
     this.viewHandler = viewHandler;
     rateFeedbackViewModel = viewModelFactory.getRateFeedbackViewModel();
     commentaryTextArea.textProperty().bindBidirectional(rateFeedbackViewModel.getCommentaryTextArea());
+    usernameLabel.textProperty().bind(rateFeedbackViewModel.getUsernameLabel());
   }
 
   public void submitButton(ActionEvent actionEvent) throws IOException

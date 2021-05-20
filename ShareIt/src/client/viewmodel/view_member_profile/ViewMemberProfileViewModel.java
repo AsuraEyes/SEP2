@@ -28,7 +28,6 @@ public class ViewMemberProfileViewModel
   public ViewMemberProfileViewModel(ShareItModel model)
   {
     this.model = model;
-
     searchField = new SimpleStringProperty();
     usernameLabel = new SimpleStringProperty();
     locationLabel = new SimpleStringProperty();
@@ -127,11 +126,15 @@ public class ViewMemberProfileViewModel
   public String getMemberUsername(){
     usernameLabel.setValue(model.getMemberUsername());
     Member member = model.getMemberByUsername(model.getMemberUsername());
+
     locationLabel.setValue(member.getAddressCity());
     ratingLabel.setValue(String.valueOf(member.getAverageReview()));
     addressLabel.setValue(member.getAddressStreet() + ", " + member.getAddressNo());
     contactLabel.setValue(member.getPhoneNo() + "\n" + member.getEmailAddress());
     otherInformationLabel.setValue(member.getOtherInformation());
     return model.getMemberUsername();
+  }
+  public void setMemberUsername(){
+    model.setMemberUsername(usernameLabel.getValue());
   }
 }
