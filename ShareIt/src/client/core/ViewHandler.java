@@ -23,6 +23,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.concurrent.TimeUnit;
 
 public class ViewHandler
 {
@@ -161,25 +162,25 @@ public class ViewHandler
     return content;
   }
 
-  public Node searchForRental(String search) throws IOException
+  public Node searchForRental() throws IOException
   {
     FXMLLoader loader = new FXMLLoader();
     loader.setLocation(getClass().getResource("/client/views/search_for_rental/SearchForRental.fxml"));
     Node content = loader.load();
-    SearchForRentalController controller = loader.getController();
+    /*SearchForRentalController controller = loader.getController();
     if(search != null){
       if(!search.isBlank()){
         controller.init(this,viewModelFactory, search);
       }
       else{
-        controller.init(this,viewModelFactory);
+
       }
     }
     else{
       controller.init(this,viewModelFactory);
-    }
-    //SearchForRentalController searchForRentalController = loader.getController();
-    //searchForRentalController.init(this, viewModelFactory);
+    }*/
+    SearchForRentalController searchForRentalController = loader.getController();
+    searchForRentalController.init(this, viewModelFactory);
     return content;
   }
   public Node viewMemberProfile() throws IOException

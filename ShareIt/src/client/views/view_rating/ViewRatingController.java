@@ -26,17 +26,17 @@ public class ViewRatingController {
 
     public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory){
         this.viewHandler = viewHandler;
-        viewRatingViewModel = viewModelFactory.getViewRatingViewModel();
-        searchField.textProperty().bindBidirectional(viewRatingViewModel.getSearchField());
-        userNameLabel.textProperty().bind(viewRatingViewModel.getUserNameLabel());
-        locationLabel.textProperty().bind(viewRatingViewModel.getLocationLabel());
-        ratingLabel.textProperty().bind(viewRatingViewModel.getRatingLabel());
-        addressLabel.textProperty().bind(viewRatingViewModel.getAddressLabel());
-        contactLabel.textProperty().bind(viewRatingViewModel.getContactLabel());
-        otherInformationLabel.textProperty().bind(viewRatingViewModel.getOtherInfoLabel());
-        commenterNameLabel.textProperty().bind(viewRatingViewModel.getCommenterNameLabel());
-        commenterRateLabel.textProperty().bind(viewRatingViewModel.getCommenterRateLabel());
-        commentLabel.textProperty().bind(viewRatingViewModel.getCommentLabel());
+//        viewRatingViewModel = viewModelFactory.getViewRatingViewModel();
+//        searchField.textProperty().bindBidirectional(viewRatingViewModel.getSearchField());
+//        userNameLabel.textProperty().bind(viewRatingViewModel.getUserNameLabel());
+//        locationLabel.textProperty().bind(viewRatingViewModel.getLocationLabel());
+//        ratingLabel.textProperty().bind(viewRatingViewModel.getRatingLabel());
+//        addressLabel.textProperty().bind(viewRatingViewModel.getAddressLabel());
+//        contactLabel.textProperty().bind(viewRatingViewModel.getContactLabel());
+//        otherInformationLabel.textProperty().bind(viewRatingViewModel.getOtherInfoLabel());
+//        commenterNameLabel.textProperty().bind(viewRatingViewModel.getCommenterNameLabel());
+//        commenterRateLabel.textProperty().bind(viewRatingViewModel.getCommenterRateLabel());
+//        commentLabel.textProperty().bind(viewRatingViewModel.getCommentLabel());
     }
 
     public void searchButton(ActionEvent actionEvent) {

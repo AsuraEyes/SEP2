@@ -32,7 +32,7 @@ public class RMIClient implements Client, RemoteObserver
     try
     {
       UnicastRemoteObject.exportObject(this,0);
-      Registry registry = LocateRegistry.getRegistry("localhost", 1099);
+      Registry registry = LocateRegistry.getRegistry("localhost", 1199);
       server = (RMIServer) registry.lookup("ShareIt");
       server.registerClient(this);
       System.out.println("Client Connected");
@@ -78,7 +78,7 @@ public class RMIClient implements Client, RemoteObserver
     }
   }
 
-  @Override public String checkSearch(String search) throws IOException
+  @Override public List<Rental> checkSearch(String search) throws IOException
   {
     try{
     return server.checkSearch(search);

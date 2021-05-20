@@ -13,6 +13,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class ViewMemberProfileController
 {
@@ -67,29 +68,48 @@ public class ViewMemberProfileController
     }
   }
 
-  public void searchButton(ActionEvent actionEvent)
-  {
+  public void searchButton(ActionEvent actionEvent) {
 
   }
 
-  public void reportButton(ActionEvent actionEvent)
-  {
+  public void reportButton(ActionEvent actionEvent) {
   }
 
-  public void chatButton(ActionEvent actionEvent)
-  {
+  public void chatButton(ActionEvent actionEvent) {
   }
 
-  public void rateButton(ActionEvent actionEvent)
-  {
+  public void rateButton(ActionEvent actionEvent) {
   }
-  
-  public void deleteButton(ActionEvent actionEvent)
-  {
+
+  public void deleteButton(ActionEvent actionEvent) throws SQLException, IOException {
+//    Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "");
+//    alert.setTitle("Delete account");
+//    alert.setHeaderText("Are you sure?");
+//    alert.getDialogPane().setContentText("Are you sure you want to permanent delete your account?");
+//
+//    Optional<ButtonType> result = alert.showAndWait();
+//    if (result.get() == ButtonType.OK) {
+//      Member member = new Member();
+//      MemberDAOImpl.getInstance().delete(member);
+//
+//      Stage stage = (Stage) viewHandler.getStage().getScene().getWindow();
+//      alert = new Alert(Alert.AlertType.INFORMATION, "");
+//      alert.setTitle("Confirmation");
+//      alert.setHeaderText("New rental successfully created");
+//      alert.initOwner(stage);
+//      alert.getDialogPane().setContentText("Click ok to get to welcome page.");
+//
+//      Optional<ButtonType> result2 = alert.showAndWait();
+//      if (result2.get() == ButtonType.OK) {
+//        viewHandler.setView(viewHandler.menu(), viewHandler.welcomePage());
+//      }
+//    }
   }
   
   public void goBackToViewedRentalButton(ActionEvent actionEvent)
+      throws IOException
   {
+    viewHandler.setView(viewHandler.menu(), viewHandler.viewRental());
   }
 
   public void loadMoreRentalButton(ActionEvent actionEvent)

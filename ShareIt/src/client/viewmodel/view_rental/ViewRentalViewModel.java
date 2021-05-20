@@ -7,6 +7,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import shared.transferobjects.Rental;
 
 import java.beans.PropertyChangeEvent;
@@ -26,11 +27,13 @@ public class ViewRentalViewModel
   private StringProperty usernameOfRental;
   private StringProperty locationOfRental;
   private StringProperty ratingOfUserOfRental;
+  private StringProperty imageIdMemberId;
   private ObjectProperty<Image> imageProperty;
 
   public ViewRentalViewModel(ShareItModel shareItModel){
     this.shareItModel = shareItModel;
     imageProperty = new SimpleObjectProperty<>();
+    imageIdMemberId = new SimpleStringProperty();
     nameOfRental = new SimpleStringProperty();
     descriptionOfRental = new SimpleStringProperty();
     stateOfRental = new SimpleStringProperty();
@@ -41,12 +44,12 @@ public class ViewRentalViewModel
     locationOfRental = new SimpleStringProperty();
     ratingOfUserOfRental = new SimpleStringProperty();
 
+
     shareItModel.addListener("selectedRental",this::selectedRental);
   }
 
   private void selectedRental(PropertyChangeEvent evt)
   {
-    System.out.println(evt.getNewValue().toString());
     Platform.runLater(() -> {
 
       if (evt.getNewValue() instanceof Rental)
@@ -61,15 +64,16 @@ public class ViewRentalViewModel
         {
           otherInformationOfRental.setValue(rental.getOtherInformation());
         }
-        if(rental.getSelectedCategories() !=null)
+        if(rental.getSelectedCategories() != null)
         {
           categoryOfRental.setValue(rental.getSelectedCategories().toString());
         }
         try
         {
-          usernameOfRental.setValue(shareItModel.getMemberById(rental.getId()).getUsername());
-          locationOfRental.setValue(shareItModel.getMemberById(rental.getId()).getAddressCity());
-          ratingOfUserOfRental.setValue(String.valueOf(shareItModel.getMemberById(rental.getId()).getAverageReview()));
+          imageIdMemberId.setValue(String.valueOf(rental.getMemberId()));
+          usernameOfRental.setValue(shareItModel.getMemberById(rental.getMemberId()).getUsername());
+          locationOfRental.setValue(shareItModel.getMemberById(rental.getMemberId()).getAddressCity());
+          ratingOfUserOfRental.setValue(String.valueOf(shareItModel.getMemberById(rental.getMemberId()).getAverageReview()));
         }
         catch (RemoteException throwables)
         {
@@ -128,5 +132,13 @@ public class ViewRentalViewModel
   public ObjectProperty<Image> imagePropertyProperty()
   {
     return imageProperty;
+  }
+
+  public void getMemberById() throws RemoteException
+  {
+    shareItModel.getMemberById(Integer.parseInt(imageIdMemberId.getValue()));
+  }
+  public StringProperty getImageIdMemberId(){
+    return imageIdMemberId;
   }
 }
