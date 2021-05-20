@@ -6,6 +6,7 @@ import client.views.chat_received_messages.ChatReceivedMessagesController;
 import client.views.chat_write_message.ChatWriteMessageController;
 import client.views.create_account.CreateAccountController;
 import client.views.edit_account.EditAccountController;
+import client.views.edit_rental.EditRentalController;
 import client.views.log_in.LogInController;
 import client.views.main_view.MainController;
 import client.views.manage_account.ManageAccountController;
@@ -147,6 +148,15 @@ public class ViewHandler
     Node content = loader.load();
     //LogInController logInController = loader.getController();
     //ogInController.init(this, viewModelFactory);
+    return content;
+  }
+
+  public Node editRental() throws IOException, SQLException {
+    FXMLLoader loader = new FXMLLoader();
+    loader.setLocation(getClass().getResource("/client/views/edit_rental/EditRental.fxml"));
+    Node content = loader.load();
+    EditRentalController editRentalController = loader.getController();
+    editRentalController.init(this, viewModelFactory);
     return content;
   }
   public Node rateFeedback() throws IOException

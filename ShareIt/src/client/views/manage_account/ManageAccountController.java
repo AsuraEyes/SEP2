@@ -7,11 +7,19 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import org.controlsfx.control.InfoOverlay;
+import shared.transferobjects.Rental;
 
 import java.io.IOException;
+import java.rmi.RemoteException;
 import java.sql.SQLException;
+import java.util.List;
 
 public class ManageAccountController
 {
@@ -28,9 +36,10 @@ public class ManageAccountController
   @FXML private Label cityLabel;
   @FXML private Label priceLabel;
   @FXML private ImageView ImageView;
+  @FXML private FlowPane flowPane;
 
   private ViewHandler viewHandler;
-  ManageAccountViewModel manageAccountViewModel;
+  private ManageAccountViewModel manageAccountViewModel;
 
   public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws IOException {
     this.viewHandler = viewHandler;
@@ -42,7 +51,9 @@ public class ManageAccountController
     contactLabel.textProperty().bind(manageAccountViewModel.getContactLabel());
     otherInformationLabel.textProperty().bind(manageAccountViewModel.getOtherInformationLabel());
     manageAccountViewModel.setProfile();
+    displayRentals(manageAccountViewModel.getRentalsOfMemberList());
   }
+
   public void searchButton(ActionEvent actionEvent) {
   }
 
@@ -52,5 +63,34 @@ public class ManageAccountController
 
   public void addRentalButton(ActionEvent actionEvent) throws SQLException, IOException {
     viewHandler.setView(viewHandler.menu(), viewHandler.addRental());
+  }
+
+  public void displayRentals(List<Rental> rentals) throws RemoteException {
+    if (rentals != null && !rentals.isEmpty())
+    {
+      for (int i = 0; i < rentals.size(); i++)
+      {
+        Image image = new Image(rentals.get(i).getPictureLink());
+        ImageView imageView = new ImageView();
+        imageView.setImage(image);
+        imageView.setFitWidth(275);
+        imageView.setPreserveRatio(true);
+        imageView.setSmooth(true);
+        imageView.setCache(true);
+        imageView.setId(String.valueOf(rentals.get(i).getId()));
+        flowPane.getChildren().add(new StackPane(new InfoOverlay(imageView, rentals.get(i).toString())));
+        System.out.println(rentals.get(i).getPictureLink());
+        flowPane.getChildren().get(i)
+                .addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
+                  try {
+                    viewHandler.setView(viewHandler.menu(), viewHandler.manageRentals());
+                    manageAccountViewModel.getRental(event.getSource());
+                  }
+                  catch (IOException e) {
+                    e.printStackTrace();
+                  }
+                });
+      }
+    }
   }
 }

@@ -67,7 +67,7 @@ public class DataCheckMember {
         if(matchingPasswords() && uniqueUsername() && oneContactInformationGiven() && postalCodeIsNumber()){
             try{
                 MemberDAOImpl.getInstance().update(username, password, email, phone, otherInformation, street, streetNumber, postalCodeNb, city);
-                return "Adding successful";
+                return "Edit successful";
             }
             catch (SQLException e){
                 //

@@ -39,8 +39,8 @@ public class ManageRentalsController {
   {
   }
 
-  public void changeButton(ActionEvent actionEvent)
-  {
+  public void changeButton(ActionEvent actionEvent) throws SQLException, IOException {
+    viewHandler.setView(viewHandler.menu(), viewHandler.editRental());
   }
 
   public void deleteButton(ActionEvent actionEvent) throws SQLException, IOException {
@@ -69,7 +69,7 @@ public class ManageRentalsController {
 //    }
   }
 
-  public void goBackToProfileOverviewButton(ActionEvent actionEvent) {
-
+  public void goBackToProfileOverviewButton(ActionEvent actionEvent) throws IOException {
+    viewHandler.setView(viewHandler.menu(), viewHandler.manageAccount());
   }
 }

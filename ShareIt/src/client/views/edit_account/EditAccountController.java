@@ -57,7 +57,7 @@ public class EditAccountController {
         this.viewHandler = viewHandler;
         editAccountViewModel = viewModelFactory.getEditAccountViewModel();
         //Bindings.bindBidirectional(usernameField.getPromptText()., editAccountViewModel.getUsernameField());
-        usernameField.textProperty().bindBidirectional(editAccountViewModel.getUsernameField());
+        usernameField.textProperty().bind(editAccountViewModel.getUsernameField());
         passwordField.textProperty().bindBidirectional(editAccountViewModel.getPasswordField());
         confirmPasswordField.textProperty().bindBidirectional(editAccountViewModel.getConfirmPasswordField());
         streetField.textProperty().bindBidirectional(editAccountViewModel.getStreetField());
@@ -86,7 +86,7 @@ public class EditAccountController {
         if(checkField(usernameField) && checkField(passwordField) && checkField(confirmPasswordField) && checkField(streetField) && checkField(streetNumberField) && checkField(postalCodeField)){
             String message = editAccountViewModel.onEditButtonPressed(locationBox.getValue());
             switch (message){
-                case "Adding successful":
+                case "Edit successful":
                     //notifications.owner(parent).text("Your account has been successfully created! ").title(message).showConfirm();
 
                     Stage stage = (Stage) viewHandler.getStage().getScene().getWindow();
@@ -104,6 +104,7 @@ public class EditAccountController {
                     break;
                 default:
                     notifications.owner(parent).text(message).showError();
+                    System.out.println(notifications.toString());
             }
         }
     }
@@ -116,26 +117,14 @@ public class EditAccountController {
 
     Optional<ButtonType> result = alert.showAndWait();
     if (result.get() == ButtonType.OK) {
-      MemberDAOImpl.getInstance().delete(usernameField.getText());
-
-      Stage stage = (Stage) viewHandler.getStage().getScene().getWindow();
-      alert = new Alert(Alert.AlertType.INFORMATION, "");
-      alert.setTitle("Confirmation");
-      alert.setHeaderText("New rental successfully created");
-      alert.initOwner(stage);
-      alert.getDialogPane().setContentText("Click ok to get to welcome page.");
-
-      Optional<ButtonType> result2 = alert.showAndWait();
-      if (result2.get() == ButtonType.OK)
-      {
-        viewHandler.setView(viewHandler.menu(), viewHandler.welcomePage());
-      }
+        editAccountViewModel.deleteAccount();
     }
   }
 
     private boolean checkField(TextField nameOfField){
         if(nameOfField.textProperty().getValue() == null || nameOfField.textProperty().getValue().isBlank()){
             notifications.owner(parent).text(nameOfField.getPromptText()+" cannot be empty").showError();
+            System.out.println(notifications);
             return false;
         }
         return true;

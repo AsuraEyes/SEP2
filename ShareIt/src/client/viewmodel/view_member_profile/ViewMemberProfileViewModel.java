@@ -133,6 +133,7 @@ public class ViewMemberProfileViewModel
     otherInformationLabel.setValue(member.getOtherInformation());
     return model.getMemberUsername();
   }
+
   public void setMemberUsername() {
     model.setMemberUsername(usernameLabel.getValue());
   }

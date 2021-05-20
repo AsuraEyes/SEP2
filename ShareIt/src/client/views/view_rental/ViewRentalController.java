@@ -75,6 +75,7 @@ public class ViewRentalController
   public void goBackToSearchResultsButton(ActionEvent actionEvent)
       throws IOException, SQLException, InterruptedException
   {
+    System.out.println("ho");
     viewHandler.setView(viewHandler.menu(), viewHandler.searchForRental());
   }
 
