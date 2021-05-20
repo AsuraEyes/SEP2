@@ -65,6 +65,11 @@ public class ServerModelImpl implements ServerModelManager
   }
 
   @Override
+  public List<Rental> checkSearchWithFilter(String search, String city, ArrayList<String> selectedCategories) {
+    return dataCheckSearch.checkSearchWithFilter(search, city, selectedCategories);
+  }
+
+  @Override
   public List<Rental> checkSearch(String search)
   {
     List<Rental> list = dataCheckSearch.checkSearch(search);
