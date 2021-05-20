@@ -2,6 +2,7 @@ package client.views.view_rating;
 
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
+import client.viewmodel.view_rating.ViewRatingViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -20,11 +21,11 @@ public class ViewRatingController {
     @FXML private Label commenterRateLabel;
     @FXML private Label commentLabel;
 
-//    private ViewRatingViewModel viewRatingViewModel;
+    private ViewRatingViewModel viewRatingViewModel;
     private ViewHandler viewHandler;
 
-//    public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory){
-//        this.viewHandler = viewHandler;
+    public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory){
+        this.viewHandler = viewHandler;
 //        viewRatingViewModel = viewModelFactory.getViewRatingViewModel();
 //        searchField.textProperty().bindBidirectional(viewRatingViewModel.getSearchField());
 //        userNameLabel.textProperty().bind(viewRatingViewModel.getUserNameLabel());
@@ -36,7 +37,7 @@ public class ViewRatingController {
 //        commenterNameLabel.textProperty().bind(viewRatingViewModel.getCommenterNameLabel());
 //        commenterRateLabel.textProperty().bind(viewRatingViewModel.getCommenterRateLabel());
 //        commentLabel.textProperty().bind(viewRatingViewModel.getCommentLabel());
-//    }
+    }
 
     public void searchButton(ActionEvent actionEvent) {
 

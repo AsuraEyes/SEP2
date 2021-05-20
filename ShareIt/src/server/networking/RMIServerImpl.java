@@ -27,7 +27,7 @@ public class RMIServerImpl implements RMIServer
 
   public void startServer() throws RemoteException, AlreadyBoundException
   {
-    Registry registry = LocateRegistry.createRegistry(1099);
+    Registry registry = LocateRegistry.createRegistry(1199);
     registry.bind("ShareIt", this);
   }
 
