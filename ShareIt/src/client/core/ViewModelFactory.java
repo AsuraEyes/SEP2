@@ -7,6 +7,7 @@ import client.viewmodel.create_account.CreateAccountViewModel;
 import client.viewmodel.log_in.LogInViewModel;
 import client.viewmodel.menu.MenuViewModel;
 import client.viewmodel.rate_feedback.RateFeedbackViewModel;
+import client.viewmodel.report_member.ReportMemberViewModel;
 import client.viewmodel.seatch_for_rental.SearchForRentalViewModel;
 import client.viewmodel.view_member_profile.ViewMemberProfileViewModel;
 import client.viewmodel.view_rating.ViewRatingViewModel;
@@ -38,6 +39,7 @@ public class ViewModelFactory
   private ViewMemberProfileViewModel viewMemberProfileViewModel;
   private ViewRentalViewModel viewRentalViewModel;
   private RateFeedbackViewModel rateFeedbackViewModel;
+  private ReportMemberViewModel reportMemberViewModel;
 
   public ViewModelFactory(ModelFactory modelFactory) throws IOException
   {
@@ -155,6 +157,16 @@ public class ViewModelFactory
     }
     return viewRentalViewModel;
   }
+
+  public ReportMemberViewModel getReportMemberViewModel() throws IOException
+  {
+    if(reportMemberViewModel == null)
+    {
+      reportMemberViewModel = new ReportMemberViewModel(modelFactory.getShareItModel());
+    }
+    return reportMemberViewModel;
+  }
+
   public RateFeedbackViewModel getRateFeedbackViewModel() throws SQLException, IOException
   {
     if (rateFeedbackViewModel == null)
