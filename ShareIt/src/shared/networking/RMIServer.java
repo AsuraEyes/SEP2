@@ -38,4 +38,6 @@ public interface RMIServer extends Remote
     String checkLogInCredentials(String username, String password) throws RemoteException;
 
   ArrayList<Rental> getRentalsOfMemberList(String username) throws RemoteException;
+
+    Member getMemberByUsername(String memberUsername) throws RemoteException;
 }

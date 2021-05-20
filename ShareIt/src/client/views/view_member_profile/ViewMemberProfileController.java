@@ -58,7 +58,7 @@ public class ViewMemberProfileController
     contactLabel.textProperty().bind(viewMemberProfileViewModel.getContactLabel());
     otherInformationLabel.textProperty().bind(viewMemberProfileViewModel.getOtherInformationLabel());
 
-    displayRentals(viewMemberProfileViewModel.getRentalsOfMemberList());
+    displayRentals(viewMemberProfileViewModel.getRentalsOfMemberList(viewMemberProfileViewModel.getMemberUsername()));
 
     switch (viewMemberProfileViewModel.checkUserType()){
       case "Visitor":

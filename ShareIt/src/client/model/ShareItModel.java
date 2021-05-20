@@ -28,4 +28,9 @@ public interface ShareItModel extends Subject
     String checkLogInCredentials(String username, String password);
 
     ArrayList<Rental> getRentalsOfMemberList(String username);
+
+    void setMemberUsername(String memberUsername);
+    String getMemberUsername();
+
+    Member getMemberByUsername(String memberUsername);
 }

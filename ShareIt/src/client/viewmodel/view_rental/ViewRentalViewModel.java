@@ -134,4 +134,8 @@ public class ViewRentalViewModel
   public StringProperty getImageIdMemberId(){
     return imageIdMemberId;
   }
+
+  public void setMemberUsername(){
+    shareItModel.setMemberUsername(usernameOfRental.getValue());
+  }
 }

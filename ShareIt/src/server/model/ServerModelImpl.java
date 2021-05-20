@@ -163,4 +163,15 @@ public class ServerModelImpl implements ServerModelManager
       return null;
     }
   }
+
+  @Override
+  public Member getMemberByUsername(String memberUsername) {
+    try{
+      return MemberDAOImpl.getInstance().getMemberByUsername(memberUsername);
+    }
+    catch (SQLException e){
+      e.printStackTrace();
+      return null;
+    }
+  }
 }

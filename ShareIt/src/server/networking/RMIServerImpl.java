@@ -143,4 +143,9 @@ public class RMIServerImpl implements RMIServer
     return serverModelManager.getRentalsOfMemberList(username);
   }
 
+  @Override
+  public Member getMemberByUsername(String memberUsername) {
+    return serverModelManager.getMemberByUsername(memberUsername);
+  }
+
 }
