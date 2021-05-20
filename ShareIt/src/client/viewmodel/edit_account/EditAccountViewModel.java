@@ -6,12 +6,13 @@ import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import shared.transferobjects.City;
+import shared.transferobjects.Member;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class EditAccountViewModel {
-    private ShareItModel model;
+    private ShareItModel shareItModel;
     private final StringProperty usernameField;
     private final StringProperty passwordField;
     private final StringProperty confirmPasswordField;
@@ -25,7 +26,7 @@ public class EditAccountViewModel {
     private ObservableList<String> locationsList;
 
     public EditAccountViewModel(ShareItModel model) {
-        this.model = model;
+        shareItModel = model;
         usernameField = new SimpleStringProperty();
         passwordField = new SimpleStringProperty();
         confirmPasswordField = new SimpleStringProperty();
@@ -36,6 +37,20 @@ public class EditAccountViewModel {
         emailField = new SimpleStringProperty();
         telephoneNoField = new SimpleStringProperty();
         otherInfoField = new SimpleStringProperty();
+    }
+
+    public String getMemberUsername(){
+        usernameField.setValue(shareItModel.getMemberUsername());
+        Member member = shareItModel.getMemberByUsername(shareItModel.getMemberUsername());
+        passwordField.setValue(member.getPassword());
+        confirmPasswordField.setValue(member.getPassword());
+        streetField.setValue(member.getAddressStreet());
+        streetNumberField.setValue(member.getAddressNo());
+        postalCodeField.setValue(String.valueOf(member.getAddressPostalCode()));
+        emailField.setValue(member.getEmailAddress());
+        telephoneNoField.setValue(member.getPhoneNo());
+        otherInfoField.setValue(member.getOtherInformation());
+        return shareItModel.getMemberUsername();
     }
 
     public StringProperty getUsernameField(){
@@ -70,11 +85,13 @@ public class EditAccountViewModel {
     }
 
     public String onEditButtonPressed(String selectedCity) throws IOException {
-        return model.checkMemberData(usernameField.getValue(), passwordField.getValue(), confirmPasswordField.getValue(), emailField.getValue(), telephoneNoField.getValue(), otherInfoField.getValue(), streetField.getValue(), streetNumberField.getValue()+", "+floorField.getValue(), postalCodeField.getValue(),  selectedCity);
+        return shareItModel.updateCheckMemberData(usernameField.getValue(), passwordField.getValue(), confirmPasswordField.getValue(),
+                emailField.getValue(), telephoneNoField.getValue(), otherInfoField.getValue(), streetField.getValue(),
+                streetNumberField.getValue()+", "+floorField.getValue(), postalCodeField.getValue(),  selectedCity);
     }
 
     public ObservableList<String> getLocations(){
-        ArrayList<City> cityList = model.getCityList();
+        ArrayList<City> cityList = shareItModel.getCityList();
         ArrayList<String> cityListString = new ArrayList<>();
         for (int i = 0; i < cityList.size(); i++) {
             cityListString.add(cityList.get(i).toString());

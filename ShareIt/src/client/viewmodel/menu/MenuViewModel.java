@@ -19,4 +19,7 @@ public class MenuViewModel
   {
     return usernameLabel;
   }
+  public void setMemberUsername(){
+    model.setMemberUsername(usernameLabel.getValue());
+  }
 }

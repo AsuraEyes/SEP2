@@ -95,18 +95,7 @@ public class ViewMemberProfileController
   }
 
   public void deleteButton(ActionEvent actionEvent) throws SQLException, IOException {
-    Stage stage = (Stage) viewHandler.getStage().getScene().getWindow();
-    Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "");
-    alert.setTitle("Delete account");
-    alert.setHeaderText("Are you sure?");
-    alert.initOwner(stage);
-    alert.getDialogPane().setContentText("Are you sure you want to permanent delete your account?");
 
-    Optional<ButtonType> result = alert.showAndWait();
-    if (result.get() == ButtonType.OK) {
-      viewHandler.setView(viewHandler.menu(), viewHandler.welcomePage());
-      MemberDAOImpl.getInstance().delete(String.valueOf(viewMemberProfileViewModel.getUsernameLabel()));
-    }
   }
   
   public void goBackToViewedRentalButton(ActionEvent actionEvent)
