@@ -19,4 +19,6 @@ public interface RentalDAO {
 
     List<Rental> readRentals()
         throws SQLException;
+
+    ArrayList<Rental> getRentalsOfMemberList(String username);
 }

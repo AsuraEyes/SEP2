@@ -134,6 +134,7 @@ public class MemberDAOImpl implements MemberDAO{
     @Override
     public int readIdByUsername(String username) throws SQLException{
         try(Connection connection = getConnection()){
+            System.out.println(username);
             PreparedStatement statement = connection.prepareStatement("SELECT id FROM share_it.member WHERE username = ?");
             statement.setString(1, username);
             ResultSet resultSet = statement.executeQuery();
