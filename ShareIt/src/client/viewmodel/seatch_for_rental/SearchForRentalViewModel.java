@@ -50,16 +50,28 @@ public class SearchForRentalViewModel {
     private void searchText(PropertyChangeEvent evt)
     {
         Platform.runLater(()-> {
-            searchField.setValue(evt.getNewValue().toString());
-            try
-            {
-                onSearchButtonPressed();
+            if(evt.getNewValue() == null){
+                searchField.setValue("");
+                try
+                {
+                    onSearchButtonPressed();
+                }
+                catch (IOException e)
+                {
+                    e.printStackTrace();
+                }
             }
-            catch (IOException e)
-            {
-                e.printStackTrace();
+            else{
+                searchField.setValue(evt.getNewValue().toString());
+                try
+                {
+                    onSearchButtonPressed();
+                }
+                catch (IOException e)
+                {
+                    e.printStackTrace();
+                }
             }
-
         });
     }
 

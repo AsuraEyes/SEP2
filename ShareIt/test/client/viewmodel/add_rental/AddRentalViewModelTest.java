@@ -51,10 +51,7 @@ public class AddRentalViewModelTest
 
     Member m = new Member(1);
 
-
-
     /*String result = vm.onAddRentalButtonPressed(m);
     assertEquals("Adding successful", result);*/
   }
-
 }

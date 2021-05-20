@@ -94,7 +94,7 @@ public class ShareItModelManager implements ShareItModel
     return client.getCategoryList();
   }
 
-  @Override public ArrayList<Rental> getRentalsList() throws RemoteException
+  @Override public ArrayList<Rental> getRentalsList()
   {
     return client.getRentalsList();
   }
@@ -105,8 +105,13 @@ public class ShareItModelManager implements ShareItModel
   }
 
   @Override
-  public String checkLogInCredentials(String username, String password) throws RemoteException {
+  public String checkLogInCredentials(String username, String password){
     return client.checkLogInCredentials(username, password);
+  }
+
+  @Override
+  public ArrayList<Rental> getRentalsOfMemberList(String username) {
+    return client.getRentalsOfMemberList(username);
   }
 
   @Override
@@ -115,7 +120,7 @@ public class ShareItModelManager implements ShareItModel
     support.firePropertyChange("selectedRental",1,rental);
   }
 
-  @Override public Member getMemberById(int id) throws RemoteException
+  @Override public Member getMemberById(int id)
   {
     Member member = client.getMemberById(id);
     support.firePropertyChange("getMember",1,member);

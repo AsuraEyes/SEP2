@@ -4,9 +4,15 @@ import client.model.ShareItModel;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
+import org.controlsfx.control.InfoOverlay;
 import shared.transferobjects.Member;
+import shared.transferobjects.Rental;
 
 import java.beans.PropertyChangeEvent;
+import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 public class ViewMemberProfileViewModel
 {
@@ -39,12 +45,12 @@ public class ViewMemberProfileViewModel
       {
         Member member = (Member) evt.getNewValue();
         usernameLabel.setValue(member.getUsername());
+        System.out.println("after: "+usernameLabel.getValue());
         locationLabel.setValue(member.getAddressCity());
         ratingLabel.setValue(String.valueOf(member.getAverageReview()));
         addressLabel.setValue(member.getAddressStreet() + ", " + member.getAddressNo());
         contactLabel.setValue(member.getPhoneNo() + "\n" + member.getEmailAddress());
         otherInformationLabel.setValue(member.getOtherInformation());
-
       }
       });
   }
@@ -88,4 +94,32 @@ public class ViewMemberProfileViewModel
     return model.checkUserType();
   }
 
+  public ArrayList<Rental> getRentalsOfMemberList() throws RemoteException
+  {
+    System.out.println(usernameLabel.getValue());
+    return model.getRentalsOfMemberList(usernameLabel.getValue());
+  }
+
+  public void getRental(Object object) throws RemoteException
+  {
+    if(object instanceof StackPane){
+      StackPane stackPane = (StackPane) object;
+      if(stackPane.getChildren().get(0) instanceof InfoOverlay)
+      {
+        InfoOverlay infoOverlay = (InfoOverlay) stackPane.getChildren().get(0);
+        if(infoOverlay.getContent() instanceof ImageView)
+        {
+          ImageView imageView = (ImageView) infoOverlay.getContent();
+          for (int i = 0; i < getRentalsOfMemberList().size(); i++)
+          {
+            if(imageView.getId().equals(String.valueOf(getRentalsOfMemberList().get(i).getId())))
+            {
+              model.getSelectedRental(getRentalsOfMemberList().get(i));
+              break;
+            }
+          }
+        }
+      }
+    }
+  }
 }
