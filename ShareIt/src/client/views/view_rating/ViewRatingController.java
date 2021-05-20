@@ -7,6 +7,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import org.controlsfx.control.InfoOverlay;
 import shared.transferobjects.Rating;
 
 import java.io.IOException;
@@ -19,6 +26,7 @@ public class ViewRatingController {
     @FXML private Label addressLabel;
     @FXML private Label contactLabel;
     @FXML private Label otherInformationLabel;
+    @FXML private VBox vBox;
 
     private ViewRatingViewModel viewRatingViewModel;
     private ViewHandler viewHandler;
@@ -49,6 +57,13 @@ public class ViewRatingController {
     }
 
     public void displayRatings(ArrayList<Rating> ratings){
-
+        if (ratings != null && !ratings.isEmpty())
+        {
+            for (int i = 0; i < ratings.size(); i++)
+            {
+                System.out.println("Value: "+ratings.get(i).getRating());
+                vBox.getChildren().add(new VBox(new Label("Value: "+Double.toString(ratings.get(i).getRating())), new Label("Commentary: \n"+ratings.get(i).getCommentary())));
+            }
+        }
     }
 }
