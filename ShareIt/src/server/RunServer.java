@@ -22,7 +22,7 @@ public class RunServer
     String timothyPassword = "CoDex21";
     String maggiePassword = "SQLdatabaze";
     String bartoszPassword = "hehe2137";
-    String currentPassword = timothyPassword;
+    String currentPassword = bartoszPassword;
     MemberDAOImpl.getInstance().setPassword(currentPassword);
     CityDAOImpl.getInstance().setPassword(currentPassword);
     RentalDAOImpl.getInstance().setPassword(currentPassword);

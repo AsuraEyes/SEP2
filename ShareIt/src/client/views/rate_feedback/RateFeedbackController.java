@@ -22,12 +22,14 @@ public class RateFeedbackController
   private RateFeedbackViewModel rateFeedbackViewModel;
   private ViewHandler viewHandler;
 
-  public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws SQLException, IOException
+  public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws  IOException
   {
     this.viewHandler = viewHandler;
     rateFeedbackViewModel = viewModelFactory.getRateFeedbackViewModel();
     commentaryTextArea.textProperty().bindBidirectional(rateFeedbackViewModel.getCommentaryTextArea());
     usernameLabel.textProperty().bind(rateFeedbackViewModel.getUsernameLabel());
+    System.out.println("here");
+    rateFeedbackViewModel.getMemberUsername();
   }
 
   public void submitButton(ActionEvent actionEvent) throws IOException

@@ -44,6 +44,7 @@ public class RatingDAOImpl implements RatingDAO
       int memberId1 = MemberDAOImpl.getInstance().readIdByUsername(username1);
       int memberId2 = MemberDAOImpl.getInstance().readIdByUsername(username2);
 
+      System.out.println("member from: "+username1+" member to: "+username2);
 
       System.out.println(starValue);
       PreparedStatement statement = connection.prepareStatement("INSERT INTO share_it.rating(value, commentary,member_from, member_to) VALUES (?, ?, ?, ?);");
@@ -51,6 +52,8 @@ public class RatingDAOImpl implements RatingDAO
       statement.setString(2, feedback);
       statement.setInt(3,memberId1);
       statement.setInt(4,memberId2);
+
+      System.out.println(statement);
       statement.executeUpdate();
 
       return new Rating(starValue,feedback,memberId1,memberId2);

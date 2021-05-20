@@ -135,6 +135,7 @@ public class ViewMemberProfileViewModel
     return model.getMemberUsername();
   }
   public void setMemberUsername(){
+    System.out.println("viewmemberprofvm"+usernameLabel.getValue());
     model.setMemberUsername(usernameLabel.getValue());
   }
 }
