@@ -1,6 +1,7 @@
 package client.viewmodel.rate_feedback;
 
 import client.model.ShareItModel;
+import client.model.state.StateManager;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -37,7 +38,8 @@ public class RateFeedbackViewModel
   public String onSubmitButtonPressed(double starValue) throws IOException
   {
 
-    return model.addFeedback(starValue,commentaryTextArea.getValue(),username1,getMemberUsername());
+    return model.addFeedback(starValue,commentaryTextArea.getValue(),
+        StateManager.getInstance().getUsername(),getMemberUsername());
   }
 
   public String getMemberUsername()
