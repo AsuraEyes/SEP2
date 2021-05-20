@@ -40,8 +40,6 @@ public class RatingDAOImpl implements RatingDAO
   @Override public Rating create(double starValue, String feedback, String username1, String username2) throws SQLException
   {
     try(Connection connection = getConnection()){
-    username1 = "bob";
-    username2 = "bmwdriver";
 
       int memberId1 = MemberDAOImpl.getInstance().readIdByUsername(username1);
       int memberId2 = MemberDAOImpl.getInstance().readIdByUsername(username2);

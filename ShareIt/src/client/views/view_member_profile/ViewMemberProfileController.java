@@ -88,7 +88,10 @@ public class ViewMemberProfileController
   public void chatButton(ActionEvent actionEvent) {
   }
 
-  public void rateButton(ActionEvent actionEvent) {
+  public void rateButton(ActionEvent actionEvent) throws IOException {
+    viewMemberProfileViewModel.setMemberUsername();
+    viewHandler.setView(viewHandler.menu(),viewHandler.rateFeedback());
+
   }
 
   public void deleteButton(ActionEvent actionEvent) throws SQLException, IOException {
