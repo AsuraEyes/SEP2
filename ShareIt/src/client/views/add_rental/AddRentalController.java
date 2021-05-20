@@ -15,7 +15,6 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.controlsfx.control.CheckComboBox;
 import org.controlsfx.control.Notifications;
-import org.controlsfx.validation.ValidationSupport;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -38,13 +37,11 @@ public class AddRentalController {
 
   private String path;
 
-  private ValidationSupport validationSupport;
   private AddRentalViewModel addRentalViewModel;
   private ViewHandler viewHandler;
   private Notifications notifications;
 
-  public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws SQLException, IOException
-  {
+  public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws SQLException, IOException {
 
     addRentalViewModel = viewModelFactory.getAddRentalViewModel();
     this.viewHandler = viewHandler;

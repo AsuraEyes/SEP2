@@ -4,13 +4,15 @@ import client.viewmodel.add_rental.AddRentalViewModel;
 import client.viewmodel.chat_received_messages.ChatReceivedMessagesViewModel;
 import client.viewmodel.chat_write_message.ChatWriteMessageViewModel;
 import client.viewmodel.create_account.CreateAccountViewModel;
+import client.viewmodel.edit_account.EditAccountViewModel;
+import client.viewmodel.edit_rental.EditRentalViewModel;
 import client.viewmodel.log_in.LogInViewModel;
+import client.viewmodel.manage_rentals.ManageRentalsViewModel;
 import client.viewmodel.menu.MenuViewModel;
 import client.viewmodel.rate_feedback.RateFeedbackViewModel;
 import client.viewmodel.report_member.ReportMemberViewModel;
 import client.viewmodel.seatch_for_rental.SearchForRentalViewModel;
 import client.viewmodel.view_member_profile.ViewMemberProfileViewModel;
-import client.viewmodel.view_rating.ViewRatingViewModel;
 import client.viewmodel.view_rating_full.ViewRatingFullViewModel;
 import client.viewmodel.view_rental.ViewRentalViewModel;
 import client.viewmodel.view_reported_member.ViewReportedMemberViewModel;
@@ -30,7 +32,6 @@ public class ViewModelFactory
   private AddRentalViewModel addRentalViewModel;
   private CreateAccountViewModel createAccountViewModel;
   private SearchForRentalViewModel searchForRentalViewModel;
-  private ViewRatingViewModel viewRatingViewModel;
   private ViewRatingFullViewModel viewRatingFullViewModel;
   private ViewReportedMemberViewModel viewReportedMemberViewModel;
   private ViewReportedMemberListViewModel viewReportedMemberListViewModel;
@@ -38,6 +39,9 @@ public class ViewModelFactory
   private MenuViewModel menuViewModel;
   private ViewMemberProfileViewModel viewMemberProfileViewModel;
   private ViewRentalViewModel viewRentalViewModel;
+  private EditRentalViewModel editRentalViewModel;
+  private ManageRentalsViewModel manageRentalsViewModel;
+  private EditAccountViewModel editAccountViewModel;
   private RateFeedbackViewModel rateFeedbackViewModel;
   private ReportMemberViewModel reportMemberViewModel;
 
@@ -76,7 +80,7 @@ public class ViewModelFactory
     return chatWriteMessageViewModel;
   }
 
-  public AddRentalViewModel getAddRentalViewModel() throws SQLException, IOException {
+  public AddRentalViewModel getAddRentalViewModel() throws IOException {
     if (addRentalViewModel == null){
       addRentalViewModel = new AddRentalViewModel(modelFactory.getShareItModel());
     }
@@ -103,13 +107,6 @@ public class ViewModelFactory
       searchForRentalViewModel = new SearchForRentalViewModel(modelFactory.getShareItModel());
     }
     return searchForRentalViewModel;
-  }
-
-  public ViewRatingViewModel getViewRatingViewModel(){
-    if (viewRatingViewModel == null){
-      viewRatingViewModel = new ViewRatingViewModel();
-    }
-    return viewRatingViewModel;
   }
 
   public ViewRatingFullViewModel getViewRatingFullViewModel() {
@@ -174,5 +171,26 @@ public class ViewModelFactory
       rateFeedbackViewModel = new RateFeedbackViewModel(modelFactory.getShareItModel());
     }
     return rateFeedbackViewModel;
+  }
+
+  public EditRentalViewModel getEditRentalViewModel() throws IOException {
+    if (editRentalViewModel == null){
+      editRentalViewModel = new EditRentalViewModel(modelFactory.getShareItModel());
+    }
+    return editRentalViewModel;
+  }
+
+  public ManageRentalsViewModel getManageRentalsViewModel() throws IOException {
+    if (manageRentalsViewModel == null){
+      manageRentalsViewModel = new ManageRentalsViewModel(modelFactory.getShareItModel());
+    }
+    return manageRentalsViewModel;
+  }
+
+  public EditAccountViewModel getEditAccountViewModel() throws IOException {
+    if (editAccountViewModel == null){
+      editAccountViewModel = new EditAccountViewModel(modelFactory.getShareItModel());
+    }
+    return editAccountViewModel;
   }
 }
