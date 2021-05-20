@@ -112,7 +112,7 @@ public class MemberDAOImpl implements MemberDAO{
 
         }
     }
-    @Override
+    /*@Override
     public void update(Member member) throws SQLException {
         try(Connection connection  = getConnection()){
             //for updating member information
@@ -137,9 +137,9 @@ public class MemberDAOImpl implements MemberDAO{
             }
             else{
                 throw new SQLException("No keys generated");
-            }*/
+            }
         }
-    }
+    }*/
 
     @Override
     public void delete(String username) throws SQLException {

@@ -46,4 +46,8 @@ public class ViewRatingFullController {
     public void goBackToUserPage(ActionEvent actionEvent) {
 
     }
+
+  public void goBackToUserRatings(ActionEvent actionEvent)
+  {
+  }
 }

@@ -1,6 +1,7 @@
 package client.viewmodel.manage_account;
 
 import client.model.ShareItModel;
+import client.model.state.StateManager;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import shared.transferobjects.Member;
@@ -24,19 +25,17 @@ public class ManageAccountViewModel {
         otherInformationLabel = new SimpleStringProperty();
     }
 
-    public String getMemberUsername(){
-        usernameLabel.setValue(shareItModel.getMemberUsername());
-        System.out.println("Get member username view member VM : "+shareItModel.getMemberUsername());
-        Member member = shareItModel.getMemberByUsername(shareItModel.getMemberUsername());
+    public void setProfile(){
+
+        Member member = shareItModel.getMemberByUsername(StateManager.getInstance()
+            .getUsername());
+        usernameLabel.setValue(member.getUsername());
         locationLabel.setValue(member.getAddressCity());
         ratingLabel.setValue(String.valueOf(member.getAverageReview()));
         addressLabel.setValue(member.getAddressStreet() + ", " + member.getAddressNo());
         contactLabel.setValue(member.getPhoneNo() + "\n" + member.getEmailAddress());
         otherInformationLabel.setValue(member.getOtherInformation());
-        return shareItModel.getMemberUsername();
-    }
-    public void setMemberUsername(){
-        shareItModel.setMemberUsername(usernameLabel.getValue());
+        //return shareItModel.getMemberUsername();
     }
 
     public StringProperty getUsernameLabel()

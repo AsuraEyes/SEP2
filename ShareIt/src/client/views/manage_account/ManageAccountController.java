@@ -41,12 +41,12 @@ public class ManageAccountController
     addressLabel.textProperty().bind(manageAccountViewModel.getAddressLabel());
     contactLabel.textProperty().bind(manageAccountViewModel.getContactLabel());
     otherInformationLabel.textProperty().bind(manageAccountViewModel.getOtherInformationLabel());
+    manageAccountViewModel.setProfile();
   }
   public void searchButton(ActionEvent actionEvent) {
   }
 
   public void editOrDeleteInformationButton(ActionEvent actionEvent) throws IOException, SQLException {
-    manageAccountViewModel.setMemberUsername();
     viewHandler.setView(viewHandler.menu(), viewHandler.editOrDeleteAccount());
   }
 

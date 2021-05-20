@@ -1,6 +1,7 @@
 package client.viewmodel.edit_account;
 
 import client.model.ShareItModel;
+import client.model.state.StateManager;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
@@ -39,19 +40,6 @@ public class EditAccountViewModel {
         otherInfoField = new SimpleStringProperty();
     }
 
-    public String getMemberUsername(){
-        usernameField.setValue(shareItModel.getMemberUsername());
-        Member member = shareItModel.getMemberByUsername(shareItModel.getMemberUsername());
-        passwordField.setValue(member.getPassword());
-        confirmPasswordField.setValue(member.getPassword());
-        streetField.setValue(member.getAddressStreet());
-        streetNumberField.setValue(member.getAddressNo());
-        postalCodeField.setValue(String.valueOf(member.getAddressPostalCode()));
-        emailField.setValue(member.getEmailAddress());
-        telephoneNoField.setValue(member.getPhoneNo());
-        otherInfoField.setValue(member.getOtherInformation());
-        return shareItModel.getMemberUsername();
-    }
 
     public StringProperty getUsernameField(){
         return usernameField;
@@ -98,5 +86,20 @@ public class EditAccountViewModel {
         }
         locationsList = FXCollections.observableArrayList(cityListString);
         return locationsList;
+    }
+    public void setProfile(){
+
+        Member member = shareItModel.getMemberByUsername(StateManager.getInstance()
+            .getUsername());
+        usernameField.setValue(member.getUsername());
+        //locationsList.setValue(member.getAddressCity());
+        passwordField.setValue(member.getPassword());
+        confirmPasswordField.setValue(member.getPassword());
+        streetField.setValue(member.getAddressStreet());
+        streetNumberField.setValue(member.getAddressNo());
+        postalCodeField.setValue(String.valueOf(member.getAddressPostalCode()));
+        emailField.setValue(member.getEmailAddress());
+        telephoneNoField.setValue(member.getPhoneNo());
+        otherInfoField.setValue(member.getOtherInformation());
     }
 }

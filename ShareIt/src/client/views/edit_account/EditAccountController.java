@@ -3,6 +3,7 @@ package client.views.edit_account;
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
 import client.viewmodel.edit_account.EditAccountViewModel;
+import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -54,6 +55,7 @@ public class EditAccountController {
     public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws SQLException, IOException {
         this.viewHandler = viewHandler;
         editAccountViewModel = viewModelFactory.getEditAccountViewModel();
+        //Bindings.bindBidirectional(usernameField.getPromptText()., editAccountViewModel.getUsernameField());
         usernameField.textProperty().bindBidirectional(editAccountViewModel.getUsernameField());
         passwordField.textProperty().bindBidirectional(editAccountViewModel.getPasswordField());
         confirmPasswordField.textProperty().bindBidirectional(editAccountViewModel.getConfirmPasswordField());
@@ -65,8 +67,9 @@ public class EditAccountController {
         telephoneNoField.textProperty().bindBidirectional(editAccountViewModel.getTelephoneNoField());
         otherInfoField.textProperty().bindBidirectional(editAccountViewModel.getOtherInfoField());
 
+        editAccountViewModel.setProfile();
+
         locationBox.setItems(editAccountViewModel.getLocations());
-        locationBox.getSelectionModel().selectFirst();
 
       notifications =  Notifications.create()
                 .title("Error - invalid input!")
