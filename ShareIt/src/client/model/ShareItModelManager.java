@@ -18,6 +18,8 @@ public class ShareItModelManager implements ShareItModel
 {
   private PropertyChangeSupport support;
   private Client client;
+  private String memberUsername;
+  private String searchText;
 
   @Override
   public String getMemberUsername() {
@@ -35,7 +37,7 @@ public class ShareItModelManager implements ShareItModel
     this.memberUsername = memberUsername;
   }
 
-  private String memberUsername;
+
 
   public ShareItModelManager(Client client) throws IOException
   {
@@ -146,8 +148,15 @@ public class ShareItModelManager implements ShareItModel
     return member;
   }
 
-  @Override public void getSearchText(String string)
+  @Override public String getSearchText()
   {
-    support.firePropertyChange("searchText",1,string);
+    System.out.println("Model: " + searchText);
+    return searchText;
   }
+
+  @Override public void setSearchText(String text)
+  {
+    searchText = text;
+  }
+
 }
