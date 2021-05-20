@@ -26,6 +26,6 @@ public class ChatReceivedMessagesController
 
   public void searchButton(ActionEvent actionEvent) throws IOException, SQLException
   {
-    viewHandler.setView(viewHandler.menu(), viewHandler.searchForRental(searchField.textProperty().getValue()));
+    viewHandler.setView(viewHandler.menu(), viewHandler.searchForRental());
   }
 }

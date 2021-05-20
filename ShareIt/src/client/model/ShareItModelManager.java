@@ -23,7 +23,7 @@ public class ShareItModelManager implements ShareItModel
     this.client = client;
     client.startClient();
     support = new PropertyChangeSupport(this);
-    client.addListener("selectedRental", this::onDataValidation);
+    //client.addListener("selectedRental", this::onDataValidation);
     client.addListener("dataValidation", this::onDataValidation);
   }
 
@@ -113,6 +113,13 @@ public class ShareItModelManager implements ShareItModel
 
   @Override public Member getMemberById(int id) throws RemoteException
   {
-    return client.getMemberById(id);
+    Member member = client.getMemberById(id);
+    support.firePropertyChange("getMember",1,member);
+    return member;
+  }
+
+  @Override public void getSearchText(String string)
+  {
+    support.firePropertyChange("searchText",1,string);
   }
 }

@@ -89,7 +89,9 @@ public class ViewMemberProfileController
   }
   
   public void goBackToViewedRentalButton(ActionEvent actionEvent)
+      throws IOException
   {
+    viewHandler.setView(viewHandler.menu(), viewHandler.viewRental());
   }
 
   public void loadMoreRentalButton(ActionEvent actionEvent)

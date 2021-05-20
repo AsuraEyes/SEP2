@@ -1,8 +1,12 @@
 package client.viewmodel.view_member_profile;
 
 import client.model.ShareItModel;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import shared.transferobjects.Member;
+
+import java.beans.PropertyChangeEvent;
 
 public class ViewMemberProfileViewModel
 {
@@ -25,6 +29,24 @@ public class ViewMemberProfileViewModel
     addressLabel = new SimpleStringProperty();
     contactLabel = new SimpleStringProperty();
     otherInformationLabel = new SimpleStringProperty();
+    model.addListener("getMember", this::getMember);
+  }
+
+  private void getMember(PropertyChangeEvent evt)
+  {
+    Platform.runLater(() -> {
+      if(evt.getNewValue() instanceof Member)
+      {
+        Member member = (Member) evt.getNewValue();
+        usernameLabel.setValue(member.getUsername());
+        locationLabel.setValue(member.getAddressCity());
+        ratingLabel.setValue(String.valueOf(member.getAverageReview()));
+        addressLabel.setValue(member.getAddressStreet() + ", " + member.getAddressNo());
+        contactLabel.setValue(member.getPhoneNo() + "\n" + member.getEmailAddress());
+        otherInformationLabel.setValue(member.getOtherInformation());
+
+      }
+      });
   }
 
   public StringProperty getSearchField()
