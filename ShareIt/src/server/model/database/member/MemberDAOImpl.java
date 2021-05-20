@@ -94,7 +94,6 @@ public class MemberDAOImpl implements MemberDAO{
     }
 
 
-
     @Override
     public void update(Member member) throws SQLException {
         try(Connection connection  = getConnection()){
