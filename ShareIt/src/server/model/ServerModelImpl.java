@@ -1,6 +1,7 @@
 package server.model;
 
 import server.model.data_check.DataCheckMember;
+import server.model.data_check.DataCheckRating;
 import server.model.data_check.DataCheckRental;
 import server.model.data_check.DataCheckSearch;
 import server.model.database.category.CategoryDAOImpl;
@@ -22,12 +23,14 @@ public class ServerModelImpl implements ServerModelManager
   private DataCheckMember dataCheckMember;
   private DataCheckRental dataCheckRental;
   private DataCheckSearch dataCheckSearch;
+  private DataCheckRating dataCheckRating;
 
   public ServerModelImpl(){
     support = new PropertyChangeSupport(this);
     dataCheckMember = new DataCheckMember();
     dataCheckRental = new DataCheckRental();
     dataCheckSearch = new DataCheckSearch();
+    dataCheckRating = new DataCheckRating();
   }
 
   @Override public void addListener(String propertyName,
@@ -68,9 +71,11 @@ public class ServerModelImpl implements ServerModelManager
     return list;
   }
 
-  @Override public List<Rental> checkSearchWithFilter(String search,String city,ArrayList<String> selectedCategories)
+  @Override public String addFeedback(double starValue, String feedback, String username1, String username2)
   {
-    return dataCheckSearch.checkSearchWithFilter(search,city,selectedCategories);
+
+    String message = dataCheckRating.addFeedback(starValue, feedback, username1, username2);
+    return message;
   }
 
   @Override

@@ -91,6 +91,13 @@ public class RMIServerImpl implements RMIServer
     return serverModelManager.checkRentalData(name, pictureLink, description, price, otherInformation, stateName, username, selectedCategories);
   }
 
+  @Override public String addFeedback(double starValue, String feedback, String username1, String username2)
+      throws RemoteException
+  {
+    System.out.println(starValue);
+    return serverModelManager.addFeedback(starValue, feedback, username1, username2);
+  }
+
   @Override
   public List<Rental> checkSearch(String search) throws RemoteException
   {

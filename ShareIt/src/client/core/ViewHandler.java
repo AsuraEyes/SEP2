@@ -7,6 +7,7 @@ import client.views.create_account.CreateAccountController;
 import client.views.log_in.LogInController;
 import client.views.main_view.MainController;
 import client.views.menu.MenuController;
+import client.views.report_member.ReportMemberController;
 import client.views.search_for_rental.SearchForRentalController;
 import client.views.view_member_profile.ViewMemberProfileController;
 import client.views.view_rental.ViewRentalController;
@@ -147,8 +148,8 @@ public class ViewHandler
     FXMLLoader loader = new FXMLLoader();
     loader.setLocation(getClass().getResource("/client/views/report_member/ReportMember.fxml"));
     Node content = loader.load();
-    //LogInController logInController = loader.getController();
-    //ogInController.init(this, viewModelFactory);
+    ReportMemberController reportMemberController = loader.getController();
+    reportMemberController.init(this, viewModelFactory);
     return content;
   }
   public Node searchForMember() throws IOException
