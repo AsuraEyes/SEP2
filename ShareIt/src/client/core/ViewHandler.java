@@ -10,6 +10,7 @@ import client.views.log_in.LogInController;
 import client.views.main_view.MainController;
 import client.views.manage_account.ManageAccountController;
 import client.views.menu.MenuController;
+import client.views.rate_feedback.RateFeedbackController;
 import client.views.report_member.ReportMemberController;
 import client.views.search_for_rental.SearchForRentalController;
 import client.views.view_member_profile.ViewMemberProfileController;
@@ -152,8 +153,8 @@ public class ViewHandler
     FXMLLoader loader = new FXMLLoader();
     loader.setLocation(getClass().getResource("/client/views/rate_feedback/RateFeedback.fxml"));
     Node content = loader.load();
-    //LogInController logInController = loader.getController();
-    //ogInController.init(this, viewModelFactory);
+    RateFeedbackController rateFeedbackController = loader.getController();
+    rateFeedbackController.init(this, viewModelFactory);
     return content;
   }
   public Node reportMember() throws IOException

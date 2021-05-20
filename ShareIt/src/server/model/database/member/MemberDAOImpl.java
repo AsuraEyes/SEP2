@@ -174,7 +174,7 @@ public class MemberDAOImpl implements MemberDAO{
             PreparedStatement statement = connection.prepareStatement("SELECT id FROM share_it.member WHERE username = ?");
             statement.setString(1, username);
             ResultSet resultSet = statement.executeQuery();
-
+            System.out.println("username "+username);
             if(resultSet.next()){
                 return (resultSet.getInt("id"));
             }

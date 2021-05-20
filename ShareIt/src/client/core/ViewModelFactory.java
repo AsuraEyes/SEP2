@@ -166,7 +166,7 @@ public class ViewModelFactory
     return reportMemberViewModel;
   }
 
-  public RateFeedbackViewModel getRateFeedbackViewModel() throws SQLException, IOException
+  public RateFeedbackViewModel getRateFeedbackViewModel() throws  IOException
   {
     if (rateFeedbackViewModel == null)
     {

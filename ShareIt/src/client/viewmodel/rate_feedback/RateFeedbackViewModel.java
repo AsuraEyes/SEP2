@@ -16,10 +16,9 @@ public class RateFeedbackViewModel
   private final ShareItModel model;
   private final StringProperty commentaryTextArea;
   private final SimpleStringProperty usernameLabel;
-  private String username1;
-  private String username2;
 
-  public RateFeedbackViewModel(ShareItModel model) throws SQLException
+
+  public RateFeedbackViewModel(ShareItModel model)
   {
     this.model = model;
     commentaryTextArea = new SimpleStringProperty();
@@ -45,7 +44,7 @@ public class RateFeedbackViewModel
   public String getMemberUsername()
   {
     usernameLabel.setValue(model.getMemberUsername());
-    System.out.println("Get member username view member VM : " + model.getMemberUsername());
+    System.out.println("this issmthmber VM : " + model.getMemberUsername());
     return model.getMemberUsername();
   }
   public void setMemberUsername(){
