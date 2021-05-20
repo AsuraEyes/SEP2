@@ -9,6 +9,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
 import org.controlsfx.control.textfield.CustomPasswordField;
@@ -16,6 +17,7 @@ import org.controlsfx.validation.ValidationSupport;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Optional;
 
 public class EditAccountController {
     @FXML
@@ -72,35 +74,39 @@ public class EditAccountController {
                 .hideAfter(Duration.seconds(3));
 
     }
-    public void goBackToProfile(ActionEvent actionEvent) throws IOException {
-//        viewHandler.setView(viewHandler.menu(), viewHandler.);
+    public void goBackToProfile(ActionEvent actionEvent) throws IOException, SQLException {
+        viewHandler.setView(viewHandler.menu(), viewHandler.manageAccount());
     }
 
     public void editButton(ActionEvent actionEvent) throws IOException {
-//        boolean ok = true;
-//        if(checkField(usernameField) && checkField(passwordField) && checkField(confirmPasswordField) && checkField(streetField) && checkField(streetNumberField) && checkField(postalCodeField)){
-//            String message = editAccountViewModel.onEditButtonPressed(locationBox.getValue());
-//            switch (message){
-//                case "Adding successful":
-//                    //notifications.owner(parent).text("Your account has been successfully created! ").title(message).showConfirm();
-//
-//                    Stage stage = (Stage) viewHandler.getStage().getScene().getWindow();
-//                    Alert alert = new Alert(Alert.AlertType.INFORMATION, "");
-//                    alert.setTitle("Confirmation");
-//                    alert.setHeaderText("Account successfully edited");
-//                    alert.initOwner(stage);
-//                    alert.getDialogPane().setContentText("Click ok to return to your profile.");
-//
-//                    Optional<ButtonType> result = alert.showAndWait();
-//                    if (result.get() == ButtonType.OK)
-//                    {
-//                        viewHandler.setView(viewHandler.menu(), viewHandler.welcomePage());
-//                    }
-//                    break;
-//                default:
-//                    notifications.owner(parent).text(message).showError();
-//            }
-//        }
+        boolean ok = true;
+        if(checkField(usernameField) && checkField(passwordField) && checkField(confirmPasswordField) && checkField(streetField) && checkField(streetNumberField) && checkField(postalCodeField)){
+            String message = editAccountViewModel.onEditButtonPressed(locationBox.getValue());
+            switch (message){
+                case "Adding successful":
+                    //notifications.owner(parent).text("Your account has been successfully created! ").title(message).showConfirm();
+
+                    Stage stage = (Stage) viewHandler.getStage().getScene().getWindow();
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION, "");
+                    alert.setTitle("Confirmation");
+                    alert.setHeaderText("Account successfully edited");
+                    alert.initOwner(stage);
+                    alert.getDialogPane().setContentText("Click ok to return to your profile.");
+
+                    Optional<ButtonType> result = alert.showAndWait();
+                    if (result.get() == ButtonType.OK)
+                    {
+                        viewHandler.setView(viewHandler.menu(), viewHandler.welcomePage());
+                    }
+                    break;
+                default:
+                    notifications.owner(parent).text(message).showError();
+            }
+        }
+    }
+
+    public void deleteButton(ActionEvent actionEvent) throws IOException {
+
     }
 
     private boolean checkField(TextField nameOfField){

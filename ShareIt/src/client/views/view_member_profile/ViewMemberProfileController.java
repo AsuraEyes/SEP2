@@ -99,11 +99,6 @@ public class ViewMemberProfileController
     alert.initOwner(stage);
     alert.getDialogPane().setContentText("Are you sure you want to permanent delete this account?");
 
-    Optional<ButtonType> result = alert.showAndWait();
-    if (result.get() == ButtonType.OK) {
-      viewHandler.setView(viewHandler.menu(), viewHandler.welcomePage());
-      MemberDAOImpl.getInstance().delete(String.valueOf(viewMemberProfileViewModel.getUsernameLabel()));
-    }
   }
   
   public void goBackToViewedRentalButton(ActionEvent actionEvent)

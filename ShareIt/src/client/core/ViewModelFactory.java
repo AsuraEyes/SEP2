@@ -7,6 +7,7 @@ import client.viewmodel.create_account.CreateAccountViewModel;
 import client.viewmodel.edit_account.EditAccountViewModel;
 import client.viewmodel.edit_rental.EditRentalViewModel;
 import client.viewmodel.log_in.LogInViewModel;
+import client.viewmodel.manage_account.ManageAccountViewModel;
 import client.viewmodel.manage_rentals.ManageRentalsViewModel;
 import client.viewmodel.menu.MenuViewModel;
 import client.viewmodel.rate_feedback.RateFeedbackViewModel;
@@ -46,6 +47,7 @@ public class ViewModelFactory
   private EditAccountViewModel editAccountViewModel;
   private RateFeedbackViewModel rateFeedbackViewModel;
   private ReportMemberViewModel reportMemberViewModel;
+  private ManageAccountViewModel manageAccountViewModel;
 
   public ViewModelFactory(ModelFactory modelFactory) throws IOException
   {
@@ -201,5 +203,12 @@ public class ViewModelFactory
       editAccountViewModel = new EditAccountViewModel(modelFactory.getShareItModel());
     }
     return editAccountViewModel;
+  }
+
+  public ManageAccountViewModel getManageAccountViewModel() throws IOException {
+    if (manageAccountViewModel == null){
+      manageAccountViewModel = new ManageAccountViewModel(modelFactory.getShareItModel());
+    }
+    return manageAccountViewModel;
   }
 }
