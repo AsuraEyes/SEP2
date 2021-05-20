@@ -18,6 +18,7 @@ public class ViewMemberProfileViewModel
   private final SimpleStringProperty addressLabel;
   private final SimpleStringProperty contactLabel;
   private final SimpleStringProperty otherInformationLabel;
+  private Member member;
 
   public ViewMemberProfileViewModel(ShareItModel model)
   {

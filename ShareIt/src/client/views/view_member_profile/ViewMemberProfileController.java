@@ -5,15 +5,17 @@ import client.core.ViewModelFactory;
 import client.viewmodel.view_member_profile.ViewMemberProfileViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import server.model.database.member.MemberDAOImpl;
+import shared.transferobjects.Member;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Optional;
 
 public class ViewMemberProfileController
 {
@@ -82,28 +84,18 @@ public class ViewMemberProfileController
   }
 
   public void deleteButton(ActionEvent actionEvent) throws SQLException, IOException {
-//    Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "");
-//    alert.setTitle("Delete account");
-//    alert.setHeaderText("Are you sure?");
-//    alert.getDialogPane().setContentText("Are you sure you want to permanent delete your account?");
-//
-//    Optional<ButtonType> result = alert.showAndWait();
-//    if (result.get() == ButtonType.OK) {
-//      Member member = new Member();
-//      MemberDAOImpl.getInstance().delete(member);
-//
-//      Stage stage = (Stage) viewHandler.getStage().getScene().getWindow();
-//      alert = new Alert(Alert.AlertType.INFORMATION, "");
-//      alert.setTitle("Confirmation");
-//      alert.setHeaderText("New rental successfully created");
-//      alert.initOwner(stage);
-//      alert.getDialogPane().setContentText("Click ok to get to welcome page.");
-//
-//      Optional<ButtonType> result2 = alert.showAndWait();
-//      if (result2.get() == ButtonType.OK) {
-//        viewHandler.setView(viewHandler.menu(), viewHandler.welcomePage());
-//      }
-//    }
+    Stage stage = (Stage) viewHandler.getStage().getScene().getWindow();
+    Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "");
+    alert.setTitle("Delete account");
+    alert.setHeaderText("Are you sure?");
+    alert.initOwner(stage);
+    alert.getDialogPane().setContentText("Are you sure you want to permanent delete your account?");
+
+    Optional<ButtonType> result = alert.showAndWait();
+    if (result.get() == ButtonType.OK) {
+      viewHandler.setView(viewHandler.menu(), viewHandler.welcomePage());
+      MemberDAOImpl.getInstance().delete(String.valueOf(viewMemberProfileViewModel.getUsernameLabel()));
+    }
   }
   
   public void goBackToViewedRentalButton(ActionEvent actionEvent)

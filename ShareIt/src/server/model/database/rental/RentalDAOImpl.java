@@ -340,8 +340,7 @@ public class RentalDAOImpl implements RentalDAO
     }
   }
 
-  @Override public void delete(Rental rental) throws SQLException
-  {
+  @Override public void delete(Rental rental) throws SQLException {
     try (Connection connection = getConnection())
     {
       PreparedStatement statement = connection

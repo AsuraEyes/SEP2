@@ -106,8 +106,13 @@ public class MemberDAOImpl implements MemberDAO{
     }
 
     @Override
-    public void delete(Member member) throws SQLException {
-        //similar as update, delete by id of member I get in the constructor
+    public void delete(String username) throws SQLException {
+        try (Connection connection = getConnection()) {
+            PreparedStatement statement = connection
+                    .prepareStatement("DELETE FROM share_it.member WHERE username = ?");
+            statement.setString(1, username);
+            statement.executeUpdate();
+        }
     }
 
     @Override
