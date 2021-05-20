@@ -101,7 +101,26 @@ public class MemberDAOImpl implements MemberDAO{
             //for updating member information
             //SET all except for primary key
             //WHERE member.get primary key = member.primary key
-            //PreparedStatement statement = connection.prepareStatement("UPDATE share_it.member SET ")
+
+            PreparedStatement statement = connection.prepareStatement("UPDATE share_it.member SET username = ?, password = ?, email_address = ?, phone_number = ?, other_information = ?, address_street = ?, address_no = ?, address_postal_code = ?, address_city_name = ? WHERE member.getId = )");
+            statement.setString(1, member.getUsername());
+            statement.setString(2, member.getPassword());
+            statement.setString(3, member.getEmailAddress());
+            statement.setString(4, member.getPhoneNo());
+            statement.setString(5, member.getOtherInformation());
+            statement.setString(6, member.getAddressStreet());
+            statement.setString(7, member.getAddressNo());
+            statement.setInt(8, member.getAddressPostalCode());
+            statement.setString(9, member.getAddressCity());
+            statement.executeUpdate();
+
+            /*ResultSet generatedKeys = statement.getGeneratedKeys();
+            if(generatedKeys.next()){
+                return new Member(generatedKeys.getInt(1), username, password, emailAddress, phoneNumber, otherInformation, addressStreet, addressNo, addressPostalCode, addressCity, 0);
+            }
+            else{
+                throw new SQLException("No keys generated");
+            }*/
         }
     }
 

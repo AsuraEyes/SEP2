@@ -88,7 +88,8 @@ public class MenuController
   }
 
     public void onReviewsButton (ActionEvent actionEvent) throws IOException {
-    viewHandler.setView(viewHandler.menu(), viewHandler.viewRatingFull());
+
+      viewHandler.setView(viewHandler.menu(), viewHandler.viewRatingFull());
   }
 
     public void onReportedMembersButton (ActionEvent actionEvent)
