@@ -15,7 +15,6 @@ public class WelcomePageController {
     @FXML private TextField searchField;
 
     private WelcomePageViewModel welcomePageViewModel;
-    private SearchForRentalViewModel searchForRentalViewModel;
     private ViewHandler viewHandler;
 
     public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws IOException {
