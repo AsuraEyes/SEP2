@@ -77,9 +77,6 @@ public class DataCheckMember {
             if(!matchingPasswords()){
                 return "Not matching passwords.";
             }
-            if(!uniqueUsername()){
-                return "This username is already taken.";
-            }
             if(!oneContactInformationGiven()){
                 return "At least one contact information has to be given.";
             }
