@@ -5,6 +5,7 @@ import client.model.ShareItModel;
 import client.model.ShareItModelManager;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.ObservableList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import shared.transferobjects.Category;
@@ -15,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class AddRentalViewModelTest
 {
@@ -50,8 +52,12 @@ public class AddRentalViewModelTest
     otherInfoField.setValue("otherinfo");
 
     Member m = new Member(1);
-
-
+    State s = new State("New");
+    ArrayList<String> selectedCategoriesList = new ArrayList<>();
+    selectedCategoriesList.add("Tools");
+    String pictureLink = "qwe";
+    String result = vm.onAddRentalButtonPressed((Object)s,(ObservableList)selectedCategoriesList, pictureLink);
+    assertEquals("", result);
 
     /*String result = vm.onAddRentalButtonPressed(m);
     assertEquals("Adding successful", result);*/
