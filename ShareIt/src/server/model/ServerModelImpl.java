@@ -13,6 +13,7 @@ import shared.transferobjects.*;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +22,7 @@ public class ServerModelImpl implements ServerModelManager
 {
   private PropertyChangeSupport support;
   private DataCheckMember dataCheckMember;
+  private DataCheckMember updateDataCheckMember;
   private DataCheckRental dataCheckRental;
   private DataCheckSearch dataCheckSearch;
   private DataCheckRating dataCheckRating;
@@ -56,6 +58,12 @@ public class ServerModelImpl implements ServerModelManager
     String message = dataCheckMember.checkData(username, password, confirmPassword, email, otherInformation, phone, street, streetNo, postalCode, city);
 
     //support.firePropertyChange("dataValidation", 0, message);
+    return message;
+  }
+
+  @Override
+  public String updateCheckMemberData(String username, String password, String confirmPassword, String email, String phone, String otherInformation, String street, String streetNo, String postalCode, String city) throws IOException {
+    String message = dataCheckMember.updateCheckData(username, password, confirmPassword, email, otherInformation, phone, street, streetNo, postalCode, city);
     return message;
   }
 

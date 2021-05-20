@@ -95,12 +95,19 @@ public class MemberDAOImpl implements MemberDAO{
 
 
     @Override
-    public void update(Member member) throws SQLException {
+    public void update(String username, String password, String emailAddress, String phoneNumber, String otherInformation, String addressStreet, String addressNo, int addressPostalCode, String addressCity) throws SQLException {
         try(Connection connection  = getConnection()){
-            //for updating member information
-            //SET all except for primary key
-            //WHERE member.get primary key = member.primary key
-            //PreparedStatement statement = connection.prepareStatement("UPDATE share_it.member SET ")
+            PreparedStatement statement = connection.prepareStatement("UPDATE share_it.member SET username = ?, password = ?, email_address = ?, phone_number = ?, other_information = ?, address_street = ?, address_no = ?, address_postal_code = ?, address_city_name = ? WHERE id = ?");
+            statement.setString(1, username);
+            statement.setString(2, password);
+            statement.setString(3, emailAddress);
+            statement.setString(4, phoneNumber);
+            statement.setString(5, otherInformation);
+            statement.setString(6, addressStreet);
+            statement.setString(7, addressNo);
+            statement.setInt(8, addressPostalCode);
+            statement.setString(9, addressCity);
+            statement.executeUpdate();
         }
     }
 

@@ -35,11 +35,22 @@ public class ManageAccountController
   public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws IOException {
     this.viewHandler = viewHandler;
     manageAccountViewModel = viewModelFactory.getManageAccountViewModel();
+    usernameLabel.textProperty().bind(manageAccountViewModel.getUsernameLabel());
+    locationLabel.textProperty().bind(manageAccountViewModel.getLocationLabel());
+    ratingLabel.textProperty().bind(manageAccountViewModel.getRatingLabel());
+    addressLabel.textProperty().bind(manageAccountViewModel.getAddressLabel());
+    contactLabel.textProperty().bind(manageAccountViewModel.getContactLabel());
+    otherInformationLabel.textProperty().bind(manageAccountViewModel.getOtherInformationLabel());
   }
   public void searchButton(ActionEvent actionEvent) {
   }
 
   public void editOrDeleteInformationButton(ActionEvent actionEvent) throws IOException, SQLException {
+    manageAccountViewModel.setMemberUsername();
     viewHandler.setView(viewHandler.menu(), viewHandler.editOrDeleteAccount());
+  }
+
+  public void addRentalButton(ActionEvent actionEvent) throws SQLException, IOException {
+    viewHandler.setView(viewHandler.menu(), viewHandler.addRental());
   }
 }
