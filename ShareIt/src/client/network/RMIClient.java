@@ -65,7 +65,20 @@ public class RMIClient implements Client, RemoteObserver
     }
   }
 
-  @Override public List<Rental> checkSearch(String search) throws IOException
+  @Override public String addFeedback(double starValue, String feedback, String username1, String username2) throws IOException
+  {
+    try
+    {
+
+      return server.addFeedback(starValue, feedback, username1, username2);
+    }
+    catch (RemoteException e){
+      e.printStackTrace();
+      throw new RuntimeException("Could not contact server");
+    }
+  }
+
+  @Override public String checkSearch(String search) throws IOException
   {
     try{
     return server.checkSearch(search);
