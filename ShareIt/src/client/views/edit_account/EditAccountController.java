@@ -15,6 +15,7 @@ import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
 import org.controlsfx.control.textfield.CustomPasswordField;
 import org.controlsfx.validation.ValidationSupport;
+import server.model.database.member.MemberDAOImpl;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -108,9 +109,30 @@ public class EditAccountController {
         }
     }
 
-    public void deleteButton(ActionEvent actionEvent) throws IOException {
+    public void deleteButton(ActionEvent actionEvent) throws SQLException, IOException {
+    Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "");
+    alert.setTitle("Delete account");
+    alert.setHeaderText("Are you sure?");
+    alert.getDialogPane().setContentText("Are you sure you want to permanent delete your account?");
 
+    Optional<ButtonType> result = alert.showAndWait();
+    if (result.get() == ButtonType.OK) {
+      MemberDAOImpl.getInstance().delete(usernameField.getText());
+
+      Stage stage = (Stage) viewHandler.getStage().getScene().getWindow();
+      alert = new Alert(Alert.AlertType.INFORMATION, "");
+      alert.setTitle("Confirmation");
+      alert.setHeaderText("New rental successfully created");
+      alert.initOwner(stage);
+      alert.getDialogPane().setContentText("Click ok to get to welcome page.");
+
+      Optional<ButtonType> result2 = alert.showAndWait();
+      if (result2.get() == ButtonType.OK)
+      {
+        viewHandler.setView(viewHandler.menu(), viewHandler.welcomePage());
+      }
     }
+  }
 
     private boolean checkField(TextField nameOfField){
         if(nameOfField.textProperty().getValue() == null || nameOfField.textProperty().getValue().isBlank()){
