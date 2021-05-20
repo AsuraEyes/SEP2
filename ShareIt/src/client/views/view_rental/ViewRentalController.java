@@ -52,8 +52,6 @@ public class ViewRentalController
     viewRentalViewModel = viewModelFactory.getViewRentalViewModel();
     this.viewHandler = viewHandler;
 
-
-
     Bindings.bindBidirectional(this.imageView.imageProperty(), viewRentalViewModel.imagePropertyProperty());
     imageView.setImage(picture);
     nameOfRentalLabel.textProperty().bind(viewRentalViewModel.nameOfRentalProperty());
@@ -65,8 +63,6 @@ public class ViewRentalController
     usernameLabel.textProperty().bind(viewRentalViewModel.usernameOfRentalProperty());
     locationLabel.textProperty().bind(viewRentalViewModel.locationOfRentalProperty());
     ratingLabel.textProperty().bind(viewRentalViewModel.ratingOfUserOfRentalProperty());
-
-
   }
 
   public void searchButton(ActionEvent actionEvent)
