@@ -138,4 +138,14 @@ public class RMIServerImpl implements RMIServer
     return serverModelManager.checkLogInCredentials(username, password);
   }
 
+  @Override
+  public ArrayList<Rental> getRentalsOfMemberList(String username) throws RemoteException {
+    return serverModelManager.getRentalsOfMemberList(username);
+  }
+
+  @Override
+  public Member getMemberByUsername(String memberUsername) {
+    return serverModelManager.getMemberByUsername(memberUsername);
+  }
+
 }

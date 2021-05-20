@@ -131,19 +131,55 @@ public class RMIClient implements Client, RemoteObserver
     return null;
   }
 
-  @Override public ArrayList<Rental> getRentalsList() throws RemoteException
+  @Override public ArrayList<Rental> getRentalsList()
   {
-    return server.getRentalsList();
+    try {
+      return server.getRentalsList();
+    } catch (RemoteException e) {
+      e.printStackTrace();
+    }
+    return null;
   }
 
-  @Override public Member getMemberById(int id) throws RemoteException
+  @Override public Member getMemberById(int id)
   {
-    return server.getMemberById(id);
+    try {
+      return server.getMemberById(id);
+    } catch (RemoteException e) {
+      e.printStackTrace();
+    }
+    return null;
   }
 
   @Override
-  public String checkLogInCredentials(String username, String password) throws RemoteException {
-    return server.checkLogInCredentials(username, password);
+  public String checkLogInCredentials(String username, String password){
+    try {
+      return server.checkLogInCredentials(username, password);
+    } catch (RemoteException e) {
+      e.printStackTrace();
+    }
+    return null;
+  }
+
+  @Override
+  public ArrayList<Rental> getRentalsOfMemberList(String username) {
+    try{
+      return server.getRentalsOfMemberList(username);
+    }
+    catch (RemoteException e){
+      e.printStackTrace();
+    }
+    return null;
+  }
+
+  @Override
+  public Member getMemberByUsername(String memberUsername) {
+    try{
+      return server.getMemberByUsername(memberUsername);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return null;
   }
 
   @Override public void addListener(String propertyName,

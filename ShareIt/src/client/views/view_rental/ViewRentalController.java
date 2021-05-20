@@ -80,7 +80,8 @@ public class ViewRentalController
 
   public void seeMoreButton(ActionEvent actionEvent) throws IOException
   {
+    viewRentalViewModel.setMemberUsername();
     viewHandler.setView(viewHandler.menu(), viewHandler.viewMemberProfile());
-    viewRentalViewModel.getMemberById();
+    //viewRentalViewModel.getMemberById();
   }
 }

@@ -44,7 +44,8 @@ public class MenuController
     }
     else if (menuViewModel.checkUserType().equals("Member"))
     {
-      reviewsButton.setVisible(false);
+      reviewsButton.setVisible(true);
+      reviewsButton.setText("View my profile");
       reportedMembersButton.setVisible(false);
       chatButton.setVisible(true);
       logInOutLabel.setText("Log out");

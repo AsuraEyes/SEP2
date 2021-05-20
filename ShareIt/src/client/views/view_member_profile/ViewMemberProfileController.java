@@ -5,15 +5,27 @@ import client.core.ViewModelFactory;
 import client.viewmodel.view_member_profile.ViewMemberProfileViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import server.model.database.member.MemberDAOImpl;
+import shared.transferobjects.Member;
+import org.controlsfx.control.InfoOverlay;
+import shared.transferobjects.Rental;
 
 import java.io.IOException;
+import java.rmi.RemoteException;
 import java.sql.SQLException;
+import java.util.Optional;
+import java.util.List;
 
 public class ViewMemberProfileController
 {
@@ -28,11 +40,8 @@ public class ViewMemberProfileController
   @FXML private Button rateButton;
   @FXML private Button chatButton;
   @FXML private Button reportButton;
+  @FXML private FlowPane flowPane;
 
-  public VBox rentalVBox;
-  public Label nameOfRentalLabel;
-  public Label cityLabel;
-  public Label priceLabel;
   public ImageView ImageView;
 
   private ViewMemberProfileViewModel viewMemberProfileViewModel;
@@ -49,6 +58,7 @@ public class ViewMemberProfileController
     contactLabel.textProperty().bind(viewMemberProfileViewModel.getContactLabel());
     otherInformationLabel.textProperty().bind(viewMemberProfileViewModel.getOtherInformationLabel());
 
+    displayRentals(viewMemberProfileViewModel.getRentalsOfMemberList(viewMemberProfileViewModel.getMemberUsername()));
 
     switch (viewMemberProfileViewModel.checkUserType()){
       case "Visitor":
@@ -82,28 +92,18 @@ public class ViewMemberProfileController
   }
 
   public void deleteButton(ActionEvent actionEvent) throws SQLException, IOException {
-//    Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "");
-//    alert.setTitle("Delete account");
-//    alert.setHeaderText("Are you sure?");
-//    alert.getDialogPane().setContentText("Are you sure you want to permanent delete your account?");
-//
-//    Optional<ButtonType> result = alert.showAndWait();
-//    if (result.get() == ButtonType.OK) {
-//      Member member = new Member();
-//      MemberDAOImpl.getInstance().delete(member);
-//
-//      Stage stage = (Stage) viewHandler.getStage().getScene().getWindow();
-//      alert = new Alert(Alert.AlertType.INFORMATION, "");
-//      alert.setTitle("Confirmation");
-//      alert.setHeaderText("New rental successfully created");
-//      alert.initOwner(stage);
-//      alert.getDialogPane().setContentText("Click ok to get to welcome page.");
-//
-//      Optional<ButtonType> result2 = alert.showAndWait();
-//      if (result2.get() == ButtonType.OK) {
-//        viewHandler.setView(viewHandler.menu(), viewHandler.welcomePage());
-//      }
-//    }
+    Stage stage = (Stage) viewHandler.getStage().getScene().getWindow();
+    Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "");
+    alert.setTitle("Delete account");
+    alert.setHeaderText("Are you sure?");
+    alert.initOwner(stage);
+    alert.getDialogPane().setContentText("Are you sure you want to permanent delete your account?");
+
+    Optional<ButtonType> result = alert.showAndWait();
+    if (result.get() == ButtonType.OK) {
+      viewHandler.setView(viewHandler.menu(), viewHandler.welcomePage());
+      MemberDAOImpl.getInstance().delete(String.valueOf(viewMemberProfileViewModel.getUsernameLabel()));
+    }
   }
   
   public void goBackToViewedRentalButton(ActionEvent actionEvent)
@@ -122,5 +122,36 @@ public class ViewMemberProfileController
 
   public void rentalVBoxClicked(MouseEvent mouseEvent)
   {
+  }
+  public void displayRentals(List<Rental> rentals) throws RemoteException
+  {
+    if (rentals != null && !rentals.isEmpty())
+    {
+      for (int i = 0; i < rentals.size(); i++)
+      {
+        Image image = new Image(rentals.get(i).getPictureLink());
+        ImageView imageView = new ImageView();
+        imageView.setImage(image);
+        imageView.setFitWidth(275);
+        imageView.setPreserveRatio(true);
+        imageView.setSmooth(true);
+        imageView.setCache(true);
+        imageView.setId(String.valueOf(rentals.get(i).getId()));
+        flowPane.getChildren().add(new StackPane(new InfoOverlay(imageView, rentals.get(i).toString())));
+        System.out.println(rentals.get(i).getPictureLink());
+        flowPane.getChildren().get(i)
+                .addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
+                  try
+                  {
+                    viewHandler.setView(viewHandler.menu(), viewHandler.viewRental());
+                    viewMemberProfileViewModel.getRental(event.getSource());
+                  }
+                  catch (IOException e)
+                  {
+                    e.printStackTrace();
+                  }
+                });
+      }
+    }
   }
 }

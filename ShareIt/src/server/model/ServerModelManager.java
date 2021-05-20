@@ -24,4 +24,8 @@ public interface ServerModelManager extends Subject
     Member getMemberById(int id);
 
     String checkLogInCredentials(String username, String password);
+
+    ArrayList<Rental> getRentalsOfMemberList(String username);
+
+    Member getMemberByUsername(String memberUsername);
 }

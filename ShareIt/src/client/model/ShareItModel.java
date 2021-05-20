@@ -19,11 +19,18 @@ public interface ShareItModel extends Subject
     ArrayList<City> getCityList();
     ArrayList<State> getStateList();
     ArrayList<Category> getCategoryList();
-    ArrayList<Rental> getRentalsList() throws RemoteException;
+    ArrayList<Rental> getRentalsList();
     String checkUserType();
     void getSelectedRental(Rental rental);
-    Member getMemberById(int id) throws RemoteException;
+    Member getMemberById(int id);
     void getSearchText(String string);
 
-    String checkLogInCredentials(String username, String password) throws RemoteException;
+    String checkLogInCredentials(String username, String password);
+
+    ArrayList<Rental> getRentalsOfMemberList(String username);
+
+    void setMemberUsername(String memberUsername);
+    String getMemberUsername();
+
+    Member getMemberByUsername(String memberUsername);
 }

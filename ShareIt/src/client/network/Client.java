@@ -20,8 +20,12 @@ public interface Client extends Subject
   ArrayList<City> getCityList();
   ArrayList<State> getStateList();
   ArrayList<Category> getCategoryList();
-  ArrayList<Rental> getRentalsList() throws RemoteException;
-  Member getMemberById(int id) throws RemoteException;
+  ArrayList<Rental> getRentalsList();
+  Member getMemberById(int id);
 
-    String checkLogInCredentials(String username, String password) throws RemoteException;
+    String checkLogInCredentials(String username, String password);
+
+  ArrayList<Rental> getRentalsOfMemberList(String username);
+
+    Member getMemberByUsername(String memberUsername);
 }

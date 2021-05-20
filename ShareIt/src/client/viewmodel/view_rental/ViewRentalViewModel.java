@@ -68,17 +68,10 @@ public class ViewRentalViewModel
         {
           categoryOfRental.setValue(rental.getSelectedCategories().toString());
         }
-        try
-        {
-          imageIdMemberId.setValue(String.valueOf(rental.getMemberId()));
-          usernameOfRental.setValue(shareItModel.getMemberById(rental.getMemberId()).getUsername());
-          locationOfRental.setValue(shareItModel.getMemberById(rental.getMemberId()).getAddressCity());
-          ratingOfUserOfRental.setValue(String.valueOf(shareItModel.getMemberById(rental.getMemberId()).getAverageReview()));
-        }
-        catch (RemoteException throwables)
-        {
-          throwables.printStackTrace();
-        }
+        imageIdMemberId.setValue(String.valueOf(rental.getMemberId()));
+        usernameOfRental.setValue(shareItModel.getMemberById(rental.getMemberId()).getUsername());
+        locationOfRental.setValue(shareItModel.getMemberById(rental.getMemberId()).getAddressCity());
+        ratingOfUserOfRental.setValue(String.valueOf(shareItModel.getMemberById(rental.getMemberId()).getAverageReview()));
       }
     });
   }
@@ -134,11 +127,15 @@ public class ViewRentalViewModel
     return imageProperty;
   }
 
-  public void getMemberById() throws RemoteException
+  public void getMemberById()
   {
     shareItModel.getMemberById(Integer.parseInt(imageIdMemberId.getValue()));
   }
   public StringProperty getImageIdMemberId(){
     return imageIdMemberId;
+  }
+
+  public void setMemberUsername(){
+    shareItModel.setMemberUsername(usernameOfRental.getValue());
   }
 }

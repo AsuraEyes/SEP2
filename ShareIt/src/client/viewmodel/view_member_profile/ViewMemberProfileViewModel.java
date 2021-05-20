@@ -4,9 +4,15 @@ import client.model.ShareItModel;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
+import org.controlsfx.control.InfoOverlay;
 import shared.transferobjects.Member;
+import shared.transferobjects.Rental;
 
 import java.beans.PropertyChangeEvent;
+import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 public class ViewMemberProfileViewModel
 {
@@ -18,10 +24,12 @@ public class ViewMemberProfileViewModel
   private final SimpleStringProperty addressLabel;
   private final SimpleStringProperty contactLabel;
   private final SimpleStringProperty otherInformationLabel;
+  private Member member;
 
   public ViewMemberProfileViewModel(ShareItModel model)
   {
     this.model = model;
+
     searchField = new SimpleStringProperty();
     usernameLabel = new SimpleStringProperty();
     locationLabel = new SimpleStringProperty();
@@ -38,13 +46,13 @@ public class ViewMemberProfileViewModel
       if(evt.getNewValue() instanceof Member)
       {
         Member member = (Member) evt.getNewValue();
-        usernameLabel.setValue(member.getUsername());
-        locationLabel.setValue(member.getAddressCity());
-        ratingLabel.setValue(String.valueOf(member.getAverageReview()));
-        addressLabel.setValue(member.getAddressStreet() + ", " + member.getAddressNo());
-        contactLabel.setValue(member.getPhoneNo() + "\n" + member.getEmailAddress());
-        otherInformationLabel.setValue(member.getOtherInformation());
-
+        //usernameLabel.setValue(member.getUsername());
+//        System.out.println("after: "+usernameLabel.getValue());
+//        locationLabel.setValue(member.getAddressCity());
+//        ratingLabel.setValue(String.valueOf(member.getAverageReview()));
+//        addressLabel.setValue(member.getAddressStreet() + ", " + member.getAddressNo());
+//        contactLabel.setValue(member.getPhoneNo() + "\n" + member.getEmailAddress());
+//        otherInformationLabel.setValue(member.getOtherInformation());
       }
       });
   }
@@ -88,4 +96,44 @@ public class ViewMemberProfileViewModel
     return model.checkUserType();
   }
 
+  public ArrayList<Rental> getRentalsOfMemberList(String username) throws RemoteException
+  {
+    System.out.println(usernameLabel.getValue());
+    return model.getRentalsOfMemberList(username);
+  }
+
+  public void getRental(Object object) throws RemoteException
+  {
+    if(object instanceof StackPane){
+      StackPane stackPane = (StackPane) object;
+      if(stackPane.getChildren().get(0) instanceof InfoOverlay)
+      {
+        InfoOverlay infoOverlay = (InfoOverlay) stackPane.getChildren().get(0);
+        if(infoOverlay.getContent() instanceof ImageView)
+        {
+          ImageView imageView = (ImageView) infoOverlay.getContent();
+          for (int i = 0; i < getRentalsOfMemberList(usernameLabel.getValue()).size(); i++)
+          {
+            if(imageView.getId().equals(String.valueOf(getRentalsOfMemberList(usernameLabel.getValue()).get(i).getId())))
+            {
+              model.getSelectedRental(getRentalsOfMemberList(usernameLabel.getValue()).get(i));
+              break;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  public String getMemberUsername(){
+     usernameLabel.setValue(model.getMemberUsername());
+    System.out.println("Get member username view member VM : "+model.getMemberUsername());
+    Member member = model.getMemberByUsername(model.getMemberUsername());
+    locationLabel.setValue(member.getAddressCity());
+    ratingLabel.setValue(String.valueOf(member.getAverageReview()));
+    addressLabel.setValue(member.getAddressStreet() + ", " + member.getAddressNo());
+    contactLabel.setValue(member.getPhoneNo() + "\n" + member.getEmailAddress());
+    otherInformationLabel.setValue(member.getOtherInformation());
+    return model.getMemberUsername();
+  }
 }

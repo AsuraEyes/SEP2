@@ -11,7 +11,8 @@ public interface MemberDAO {
     boolean uniqueUsername(String username) throws SQLException;
     int readIdByUsername(String username) throws SQLException;
     void update(Member member) throws SQLException;
-    void delete(Member member) throws SQLException;
+    void delete(String username) throws SQLException;
     Member getMemberById(int id) throws SQLException;
     String checkLogInCredentials(String username, String password) throws SQLException;
+    Member getMemberByUsername(String username) throws SQLException;
 }
