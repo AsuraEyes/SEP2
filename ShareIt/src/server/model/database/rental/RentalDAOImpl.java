@@ -1,5 +1,6 @@
 package server.model.database.rental;
 
+import client.model.state.StateManager;
 import server.model.database.member.MemberDAOImpl;
 import shared.transferobjects.Rental;
 
@@ -42,8 +43,7 @@ public class RentalDAOImpl implements RentalDAO
   }
 
   @Override public Rental create(String name, String pictureLink,
-      String description, int price, String otherInformation, String stateName,
-      String username, ArrayList<String> selectedCategories) throws SQLException
+      String description, int price, String otherInformation, String stateName, ArrayList<String> selectedCategories) throws SQLException
   {
     try (Connection connection = getConnection())
     {
@@ -59,12 +59,9 @@ public class RentalDAOImpl implements RentalDAO
         e.printStackTrace();
       }
 
-      //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-      username = "bob";
-
       PreparedStatement statement = connection
           .prepareStatement("SELECT * FROM share_it.member WHERE username = ?");
-      statement.setString(1, username);
+      statement.setString(1, StateManager.getInstance().getUsername());
       ResultSet resultSet = statement.executeQuery();
       int memberId = 0;
       if (resultSet.next())

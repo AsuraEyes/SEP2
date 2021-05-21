@@ -22,6 +22,7 @@ public interface ShareItModel extends Subject
     ArrayList<Category> getCategoryList();
     ArrayList<Rental> getRentalsList();
     String checkUserType();
+    String getLoggedInUsername();
     void getSelectedRental(Rental rental);
     Member getMemberById(int id);
 

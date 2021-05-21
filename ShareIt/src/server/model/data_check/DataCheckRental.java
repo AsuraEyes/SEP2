@@ -15,7 +15,7 @@ public class DataCheckRental {
     private int priceNb;
     private String search;
 
-    public String checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, String username, ArrayList<String> selectedCategories) {
+    public String checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, ArrayList<String> selectedCategories) {
         this.name = name;
         this.pictureLink = pictureLink;
         this.description = description;
@@ -23,7 +23,7 @@ public class DataCheckRental {
 
         if (nameGiven() && descriptionGiven() && priceIsNumber()){
             try {
-                RentalDAOImpl.getInstance().create(name, pictureLink, description, priceNb, otherInformation, stateName, username, selectedCategories);
+                RentalDAOImpl.getInstance().create(name, pictureLink, description, priceNb, otherInformation, stateName, selectedCategories);
                 return "Adding successful";
             }
             catch (SQLException e){
