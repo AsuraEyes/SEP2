@@ -93,4 +93,9 @@ public class ManageAccountController
       }
     }
   }
+
+  public void viewRating() throws IOException {
+    manageAccountViewModel.setMember();
+    viewHandler.setView(viewHandler.menu(), viewHandler.viewRating());
+  }
 }

@@ -96,4 +96,8 @@ public class ManageAccountViewModel {
     {
         return otherInformationLabel;
     }
+
+    public void setMember() {
+        shareItModel.setMemberUsername(usernameLabel.getValue());
+    }
 }
