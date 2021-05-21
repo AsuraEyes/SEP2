@@ -50,7 +50,7 @@ public class RateFeedbackController
       {
         commentaryTextArea.clear();
         ratingStars.setRating(0);
-        viewHandler.setView(viewHandler.menu(), viewHandler.welcomePage());
+        viewHandler.setView(viewHandler.menu(), viewHandler.viewMemberProfile());
       }
 
     //rateFeedbackViewModel.onSubmitButtonPressed();
