@@ -4,6 +4,7 @@ import client.core.ViewHandler;
 import client.core.ViewModelFactory;
 import client.viewmodel.edit_rental.EditRentalViewModel;
 
+import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -49,7 +50,10 @@ public class EditRentalController {
     public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws SQLException, IOException {
         this.viewHandler = viewHandler;
         editRentalViewModel = viewModelFactory.getEditRentalViewModel();
-        imageView.setImage(picture);
+
+        Bindings.bindBidirectional(this.imageView.imageProperty(), editRentalViewModel.imagePropertyProperty());
+        Bindings.bindBidirectional(this.imageView.idProperty(), editRentalViewModel.getImageIdMemberId());
+
         nameField.textProperty().bindBidirectional(editRentalViewModel.getNameField());
         descriptionField.textProperty().bindBidirectional(editRentalViewModel.getDescriptionField());
         stateBox.setItems(editRentalViewModel.getStates());

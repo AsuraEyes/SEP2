@@ -60,8 +60,8 @@ public class ManageRentalsViewModel {
     }
 
     public boolean deleteRental() {
-        boolean deleteSuccessFull = shareItModel.deleteRental(rental);
-        return deleteSuccessFull;
+        System.out.println(rental);
+        return shareItModel.deleteRental(rental);
     }
 
     public StringProperty nameOfRentalProperty()

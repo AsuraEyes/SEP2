@@ -340,6 +340,7 @@ public class RentalDAOImpl implements RentalDAO
   @Override public boolean delete(Rental rental) throws SQLException {
     try (Connection connection = getConnection())
     {
+      System.out.println(rental);
       PreparedStatement statement = connection
           .prepareStatement("DELETE FROM share_it.rental WHERE id = ?");
       statement.setInt(1, rental.getId());
