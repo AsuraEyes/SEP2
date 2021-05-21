@@ -206,5 +206,16 @@ public class ServerModelImpl implements ServerModelManager
     return false;
   }
 
+  @Override
+  public boolean deleteRental(Rental rental) {
+    try {
+      return RentalDAOImpl.getInstance().delete(rental);
+    }
+    catch (SQLException e){
+      e.printStackTrace();
+    }
+    return false;
+  }
+
 
 }

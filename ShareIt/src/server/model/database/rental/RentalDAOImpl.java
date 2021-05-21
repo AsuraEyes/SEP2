@@ -6,7 +6,6 @@ import shared.transferobjects.Rental;
 
 import java.io.*;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -338,13 +337,14 @@ public class RentalDAOImpl implements RentalDAO
     }
   }
 
-  @Override public void delete(Rental rental) throws SQLException {
+  @Override public boolean delete(Rental rental) throws SQLException {
     try (Connection connection = getConnection())
     {
       PreparedStatement statement = connection
           .prepareStatement("DELETE FROM share_it.rental WHERE id = ?");
       statement.setInt(1, rental.getId());
       statement.executeUpdate();
+      return true;
     }
   }
 

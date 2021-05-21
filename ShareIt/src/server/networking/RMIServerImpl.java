@@ -164,4 +164,9 @@ public class RMIServerImpl implements RMIServer
     return serverModelManager.deleteMember(member);
   }
 
+  @Override
+  public boolean deleteRental(Rental rental) throws RemoteException {
+    return serverModelManager.deleteRental(rental);
+  }
+
 }

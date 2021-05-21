@@ -34,4 +34,6 @@ public interface ServerModelManager extends Subject
     ArrayList<Rating> getAllRatingsOnMember(String memberUsername);
 
     boolean deleteMember(Member member);
+
+    boolean deleteRental(Rental rental);
 }

@@ -1,6 +1,5 @@
 package server.model.database.rental;
 
-import shared.transferobjects.Member;
 import shared.transferobjects.Rental;
 
 import java.sql.SQLException;
@@ -14,7 +13,7 @@ public interface RentalDAO {
     List<Rental> readBySearchAndFilter(String search, String city, ArrayList<String> categories) throws SQLException;
 
     void update(Rental rental) throws SQLException;
-    void delete(Rental rental) throws SQLException;
+    boolean delete(Rental rental) throws SQLException;
     int getNextAvailableId() throws SQLException;
 
     List<Rental> readRentals()

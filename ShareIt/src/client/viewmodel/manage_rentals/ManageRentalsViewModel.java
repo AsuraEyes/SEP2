@@ -1,8 +1,11 @@
 package client.viewmodel.manage_rentals;
 
 import client.model.ShareItModel;
+import client.model.state.StateManager;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import shared.transferobjects.Member;
+import shared.transferobjects.Rental;
 
 public class ManageRentalsViewModel {
     private ShareItModel shareItModel;
@@ -53,4 +56,10 @@ public class ManageRentalsViewModel {
     {
         return categoryOfRental;
     }
+
+//    public boolean deleteRental() {
+//        Rental rental = new Rental();
+//        boolean deleteSuccessFull = shareItModel.deleteRental(rental);
+//        return deleteSuccessFull;
+//    }
 }

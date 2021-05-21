@@ -215,6 +215,17 @@ public class RMIClient implements Client, RemoteObserver
     return false;
   }
 
+  @Override
+  public boolean deleteRental(Rental rental) {
+    try {
+      return server.deleteRental(rental);
+    }
+    catch (Exception e){
+      e.printStackTrace();
+    }
+    return false;
+  }
+
   @Override public void addListener(String propertyName,
       PropertyChangeListener listener)
   {

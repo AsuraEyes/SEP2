@@ -41,4 +41,6 @@ public interface ShareItModel extends Subject
     ArrayList<Rating> getAllRatingsOnMember(String memberUsername);
 
     boolean deleteMember(Member member);
+
+    boolean deleteRental(Rental rental);
 }
