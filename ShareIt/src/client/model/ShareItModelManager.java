@@ -184,9 +184,13 @@ public class ShareItModelManager implements ShareItModel
     return client.deleteMember(member);
   }
 
-  @Override
-  public boolean deleteRental(Rental rental) {
-    return client.deleteRental(rental);
+  @Override public Rating getRating(String fromUsername, String toUsername)
+  {
+    return client.getRating(fromUsername, toUsername);
   }
 
+  @Override public void updateRating(Rating rating)
+  {
+    client.updateRating(rating);
+  }
 }

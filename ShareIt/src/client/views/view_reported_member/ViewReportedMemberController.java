@@ -26,7 +26,5 @@ public class ViewReportedMemberController {
         commentaryLabel.textProperty().bind(viewReportedMemberViewModel.getCommentaryLabel());
     }
 
-    public void searchButton(ActionEvent actionEvent) {
 
-    }
 }

@@ -23,8 +23,5 @@ public class ViewReportedMemberListController {private TextField searchField;
         reporterNameLabel.textProperty().bind(viewReportedMemberListViewModel.getReporterNameLabel());
     }
 
-    public void searchButton(ActionEvent actionEvent) {
-
-    }
 
 }
