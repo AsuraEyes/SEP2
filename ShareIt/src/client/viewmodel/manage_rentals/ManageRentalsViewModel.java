@@ -1,8 +1,17 @@
 package client.viewmodel.manage_rentals;
 
 import client.model.ShareItModel;
+import client.model.state.StateManager;
+import javafx.application.Platform;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.scene.image.Image;
+import shared.transferobjects.Member;
+import shared.transferobjects.Rental;
+
+import java.beans.PropertyChangeEvent;
 
 public class ManageRentalsViewModel {
     private ShareItModel shareItModel;
@@ -13,6 +22,7 @@ public class ManageRentalsViewModel {
     private StringProperty priceOfRental;
     private StringProperty otherInformationOfRental;
     private StringProperty categoryOfRental;
+    private Rental rental;
 
     public ManageRentalsViewModel(ShareItModel shareItModel){
         this.shareItModel = shareItModel;
@@ -22,6 +32,36 @@ public class ManageRentalsViewModel {
         priceOfRental = new SimpleStringProperty();
         otherInformationOfRental = new SimpleStringProperty();
         categoryOfRental = new SimpleStringProperty();
+
+        shareItModel.addListener("selectedRental",this::selectedRental);
+    }
+
+    private void selectedRental(PropertyChangeEvent evt)
+    {
+        Platform.runLater(() -> {
+
+            if (evt.getNewValue() instanceof Rental)
+            {
+                rental = (Rental) evt.getNewValue();
+                nameOfRental.setValue(rental.getName());
+                descriptionOfRental.setValue(rental.getDescription());
+                stateOfRental.setValue(rental.getStateName());
+                priceOfRental.setValue(String.valueOf(rental.getPrice()));
+                if(rental.getOtherInformation() !=null)
+                {
+                    otherInformationOfRental.setValue(rental.getOtherInformation());
+                }
+                if(rental.getSelectedCategories() != null)
+                {
+                    categoryOfRental.setValue(rental.getSelectedCategories().toString());
+                }
+            }
+        });
+    }
+
+    public boolean deleteRental() {
+        System.out.println(rental);
+        return shareItModel.deleteRental(rental);
     }
 
     public StringProperty nameOfRentalProperty()
@@ -53,4 +93,5 @@ public class ManageRentalsViewModel {
     {
         return categoryOfRental;
     }
+
 }
