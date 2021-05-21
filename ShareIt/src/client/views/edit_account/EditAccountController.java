@@ -3,7 +3,6 @@ package client.views.edit_account;
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
 import client.viewmodel.edit_account.EditAccountViewModel;
-import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -14,8 +13,6 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
 import org.controlsfx.control.textfield.CustomPasswordField;
-import org.controlsfx.validation.ValidationSupport;
-import server.model.database.member.MemberDAOImpl;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -49,7 +46,6 @@ public class EditAccountController {
 
     private EditAccountViewModel editAccountViewModel;
     private ViewHandler viewHandler;
-    private ValidationSupport validationSupport;
     private Notifications notifications;
 
 
@@ -87,8 +83,7 @@ public class EditAccountController {
             String message = editAccountViewModel.onEditButtonPressed(locationBox.getValue());
             switch (message){
                 case "Edit successful":
-                    //notifications.owner(parent).text("Your account has been successfully created! ").title(message).showConfirm();
-
+                    notifications.owner(parent).text("Your account has been successfully edit! ").title(message).showConfirm();
                     Stage stage = (Stage) viewHandler.getStage().getScene().getWindow();
                     Alert alert = new Alert(Alert.AlertType.INFORMATION, "");
                     alert.setTitle("Confirmation");
@@ -99,12 +94,11 @@ public class EditAccountController {
                     Optional<ButtonType> result = alert.showAndWait();
                     if (result.get() == ButtonType.OK)
                     {
-                        viewHandler.setView(viewHandler.menu(), viewHandler.welcomePage());
+                        viewHandler.setView(viewHandler.menu(), viewHandler.manageAccount());
                     }
                     break;
                 default:
                     notifications.owner(parent).text(message).showError();
-                    System.out.println(notifications.toString());
             }
         }
     }
@@ -138,7 +132,6 @@ public class EditAccountController {
     private boolean checkField(TextField nameOfField){
         if(nameOfField.textProperty().getValue() == null || nameOfField.textProperty().getValue().isBlank()){
             notifications.owner(parent).text(nameOfField.getPromptText()+" cannot be empty").showError();
-            System.out.println(notifications);
             return false;
         }
         return true;
