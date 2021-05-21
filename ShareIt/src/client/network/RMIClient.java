@@ -204,6 +204,17 @@ public class RMIClient implements Client, RemoteObserver
     return null;
   }
 
+  @Override
+  public boolean deleteMember(Member member) {
+    try{
+      return server.deleteMember(member);
+    }
+    catch (Exception e){
+      e.printStackTrace();
+    }
+    return false;
+  }
+
   @Override public void addListener(String propertyName,
       PropertyChangeListener listener)
   {
@@ -238,4 +249,6 @@ public class RMIClient implements Client, RemoteObserver
       support.firePropertyChange("NewUser", null, object);
     }*/
   }
+
+
 }

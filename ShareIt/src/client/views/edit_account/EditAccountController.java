@@ -117,7 +117,21 @@ public class EditAccountController {
 
     Optional<ButtonType> result = alert.showAndWait();
     if (result.get() == ButtonType.OK) {
-        editAccountViewModel.deleteAccount();
+        boolean success = editAccountViewModel.deleteAccount();
+        if(success){
+            Stage stage = (Stage) viewHandler.getStage().getScene().getWindow();
+            alert = new Alert(Alert.AlertType.INFORMATION, "");
+            alert.setTitle("Confirmation");
+            alert.setHeaderText("Account successfully deleted");
+            alert.initOwner(stage);
+            alert.getDialogPane().setContentText("Click ok to get to welcome page.");
+
+            result = alert.showAndWait();
+            if (result.get() == ButtonType.OK)
+            {
+                viewHandler.setView(viewHandler.menu(), viewHandler.welcomePage());
+            }
+        }
     }
   }
 

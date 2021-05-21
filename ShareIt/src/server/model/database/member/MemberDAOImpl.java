@@ -15,7 +15,7 @@ public class MemberDAOImpl implements MemberDAO{
         DriverManager.registerDriver(new org.postgresql.Driver());
     }
 
-    public static synchronized MemberDAOImpl getInstance() throws SQLException{
+    public static synchronized MemberDAOImpl getInstance() throws SQLException {
         if(instance == null){
             instance = new MemberDAOImpl();
         }
@@ -27,7 +27,8 @@ public class MemberDAOImpl implements MemberDAO{
     }
 
     private Connection getConnection() throws SQLException {
-        return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", password);
+        System.out.println("password: "+password);
+        return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "SQLdatabaze");
     }
 
     @Override
@@ -142,12 +143,13 @@ public class MemberDAOImpl implements MemberDAO{
     }*/
 
     @Override
-    public void delete(Member member) throws SQLException {
+    public boolean delete(Member member) throws SQLException {
         try (Connection connection = getConnection()) {
             PreparedStatement statement = connection
                     .prepareStatement("DELETE FROM share_it.member WHERE id = ?");
             statement.setInt(1, member.getId());
             statement.executeUpdate();
+            return true;
         }
     }
 

@@ -23,14 +23,14 @@ public class RunServer
     String timothyPassword = "CoDex21";
     String maggiePassword = "SQLdatabaze";
     String bartoszPassword = "hehe2137";
-    String currentPassword = timothyPassword;
-    MemberDAOImpl.getInstance().setPassword(currentPassword);
+    String currentPassword = maggiePassword;
     CityDAOImpl.getInstance().setPassword(currentPassword);
     RentalDAOImpl.getInstance().setPassword(currentPassword);
     CategoryDAOImpl.getInstance().setPassword(currentPassword);
     StateDAOImpl.getInstance().setPassword(currentPassword);
     AdministratorDAOImpl.getInstance().setPassword(currentPassword);
     RatingDAOImpl.getInstance().setPassword(currentPassword);
+    MemberDAOImpl.getInstance().setPassword(currentPassword);
     ss.startServer();
   }
 }

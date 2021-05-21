@@ -38,4 +38,6 @@ public interface ShareItModel extends Subject
     void setSearchText(String text);
 
     ArrayList<Rating> getAllRatingsOnMember(String memberUsername);
+
+    boolean deleteMember(Member member);
 }

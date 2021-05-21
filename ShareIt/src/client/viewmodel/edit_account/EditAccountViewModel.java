@@ -110,10 +110,13 @@ public class EditAccountViewModel {
         otherInfoField.setValue(member.getOtherInformation());
     }
     
-    public void deleteAccount() throws SQLException, IOException {
+    public boolean deleteAccount(){
         Member member = shareItModel.getMemberByUsername(StateManager.getInstance()
                 .getUsername());
-        MemberDAOImpl.getInstance().delete(member);
-        StateManager.getInstance().setLoginState(new VisitorState());
+        boolean deleteSuccessful = shareItModel.deleteMember(member);
+        if(deleteSuccessful){
+            StateManager.getInstance().setLoginState(new VisitorState());
+        }
+        return deleteSuccessful;
     }
 }

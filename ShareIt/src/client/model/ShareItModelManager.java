@@ -174,4 +174,9 @@ public class ShareItModelManager implements ShareItModel
     return client.getAllRatingsOnMember(memberUsername);
   }
 
+  @Override
+  public boolean deleteMember(Member member) {
+    return client.deleteMember(member);
+  }
+
 }

@@ -195,5 +195,16 @@ public class ServerModelImpl implements ServerModelManager
     return null;
   }
 
+  @Override
+  public boolean deleteMember(Member member) {
+    try{
+      return MemberDAOImpl.getInstance().delete(member);
+    }
+    catch (SQLException e){
+      e.printStackTrace();
+    }
+    return false;
+  }
+
 
 }

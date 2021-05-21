@@ -146,8 +146,8 @@ public class ViewHandler
     FXMLLoader loader = new FXMLLoader();
     loader.setLocation(getClass().getResource("/client/views/manage_rentals/ManageRentals.fxml"));
     Node content = loader.load();
-    //LogInController logInController = loader.getController();
-    //ogInController.init(this, viewModelFactory);
+    ManageAccountController manageAccountController = loader.getController();
+    manageAccountController.init(this, viewModelFactory);
     return content;
   }
 
