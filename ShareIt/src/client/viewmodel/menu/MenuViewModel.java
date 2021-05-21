@@ -20,6 +20,8 @@ public class MenuViewModel
     else if(userType.equals("Administrator")){
       usernameLabel.setValue("Administrator: "+model.getLoggedInUsername());
     }
+    else
+      usernameLabel.setValue("");
     return userType;
   }
   public String getUsernameLoggedIn(){

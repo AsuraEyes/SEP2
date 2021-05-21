@@ -4,15 +4,19 @@ import client.model.ShareItModel;
 import client.model.state.StateManager;
 import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.image.Image;
 import shared.transferobjects.Category;
+import shared.transferobjects.Rating;
 import shared.transferobjects.Rental;
 import shared.transferobjects.State;
 
+import javax.swing.*;
 import java.beans.PropertyChangeEvent;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -28,7 +32,7 @@ public class EditRentalViewModel {
     private ObservableList<String> categoriesList;
     private StringProperty imageIdMemberId;
     private ObjectProperty<Image> imageProperty;
-    private final String username = StateManager.getInstance().getUsername();
+
 
     public EditRentalViewModel(ShareItModel shareItModel) {
         this.shareItModel = shareItModel;
@@ -36,7 +40,10 @@ public class EditRentalViewModel {
         descriptionField = new SimpleStringProperty();
         priceField = new SimpleStringProperty();
         otherInfoField = new SimpleStringProperty();
+        imageProperty = new SimpleObjectProperty<>();
+        shareItModel.addListener("selectedRental",this::selectedRental);
     }
+
 
     private void selectedRental(PropertyChangeEvent evt)
     {
@@ -48,11 +55,12 @@ public class EditRentalViewModel {
                 descriptionField.setValue(rental.getDescription());
                 priceField.setValue(String.valueOf(rental.getPrice()));
                 imageProperty.setValue(new Image(rental.getPictureLink()));
+
                 if(rental.getOtherInformation() != null)
                 {
                     otherInfoField.setValue(rental.getOtherInformation());
                 }
-                imageIdMemberId.setValue(String.valueOf(rental.getMemberId()));
+                //imageIdMemberId.setValue(String.valueOf(rental.getMemberId()));
             }
         });
     }
@@ -80,7 +88,8 @@ public class EditRentalViewModel {
 
     public String onEditRentalButtonPressed(Object selectedState, ObservableList<String> selectedCategory, String pictureLink) throws IOException {
         ArrayList<String> selectedCategoriesList = new ArrayList<>(selectedCategory);
-        return shareItModel.checkRentalData(nameField.getValue(), pictureLink, descriptionField.getValue(), priceField.getValue(), otherInfoField.getValue(), (String) selectedState, username, selectedCategoriesList);
+        return shareItModel.checkRentalData(nameField.getValue(), pictureLink, descriptionField.getValue(), priceField.getValue(), otherInfoField.getValue(), (String) selectedState
+            ,selectedCategoriesList);
     }
 
     public ObservableList<String> getStates(){
@@ -101,5 +110,8 @@ public class EditRentalViewModel {
         }
         categoriesList = FXCollections.observableArrayList(categoryListString);
         return categoriesList;
+    }
+    public String getSelectedState(){
+        return shareItModel.getSelectedRental().getStateName();
     }
 }

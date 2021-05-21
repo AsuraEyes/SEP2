@@ -114,7 +114,7 @@ public class ViewMemberProfileViewModel
           {
             if(imageView.getId().equals(String.valueOf(getRentalsOfMemberList(usernameLabel.getValue()).get(i).getId())))
             {
-              model.getSelectedRental(getRentalsOfMemberList(usernameLabel.getValue()).get(i));
+              model.sendSelectedRental(getRentalsOfMemberList(usernameLabel.getValue()).get(i));
               break;
             }
           }

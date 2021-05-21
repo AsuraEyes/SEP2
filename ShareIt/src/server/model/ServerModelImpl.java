@@ -71,7 +71,7 @@ public class ServerModelImpl implements ServerModelManager
 
   @Override
   public String checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, String username, ArrayList<String> selectedCategories) {
-    return dataCheckRental.checkRentalData(name, pictureLink, description, price, otherInformation, stateName, selectedCategories);
+    return dataCheckRental.checkRentalData(name, pictureLink, description, price, otherInformation, stateName, username, selectedCategories);
   }
 
   @Override
@@ -230,5 +230,18 @@ public class ServerModelImpl implements ServerModelManager
     {
       throwables.printStackTrace();
     }
+  }
+
+  @Override public boolean deleteRental(Rental rental)
+  {
+    try
+    {
+      return RentalDAOImpl.getInstance().delete(rental);
+    }
+    catch (SQLException throwables)
+    {
+      throwables.printStackTrace();
+    }
+    return false;
   }
 }

@@ -42,7 +42,7 @@ public class RentalDAOImpl implements RentalDAO
   }
 
   @Override public Rental create(String name, String pictureLink,
-      String description, int price, String otherInformation, String stateName, ArrayList<String> selectedCategories) throws SQLException
+      String description, int price, String otherInformation, String stateName, String username, ArrayList<String> selectedCategories) throws SQLException
   {
     try (Connection connection = getConnection())
     {
@@ -57,7 +57,7 @@ public class RentalDAOImpl implements RentalDAO
       {
         e.printStackTrace();
       }
-      String username = StateManager.getInstance().getUsername();
+
       PreparedStatement statement = connection
           .prepareStatement("SELECT * FROM share_it.member WHERE username = ?");
       statement.setString(1, username);
@@ -340,7 +340,7 @@ public class RentalDAOImpl implements RentalDAO
   @Override public boolean delete(Rental rental) throws SQLException {
     try (Connection connection = getConnection())
     {
-      System.out.println(rental);
+      System.out.println("Databaseeeeeee: " + rental);
       PreparedStatement statement = connection
           .prepareStatement("DELETE FROM share_it.rental WHERE id = ?");
       statement.setInt(1, rental.getId());

@@ -160,7 +160,7 @@ public class RMIServerImpl implements RMIServer
   }
 
   @Override
-  public boolean deleteMember(Member member) throws RemoteException {
+  public boolean deleteMember(Member member){
     return serverModelManager.deleteMember(member);
   }
 
@@ -173,6 +173,11 @@ public class RMIServerImpl implements RMIServer
   @Override public void updateRating(Rating rating)
   {
     serverModelManager.updateRating(rating);
+  }
+
+  @Override public boolean deleteRental(Rental rental)
+  {
+    return serverModelManager.deleteRental(rental);
   }
 
 }

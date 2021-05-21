@@ -44,6 +44,7 @@ public class MenuController
       reviewsButton.setVisible(false);
       reportedMembersButton.setVisible(false);
       chatButton.setVisible(false);
+
     }
     else if (userType.equals("Member"))
     {

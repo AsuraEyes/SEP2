@@ -151,7 +151,7 @@ public class ViewHandler
     return content;
   }
 
-  public Node editRental() throws IOException, SQLException {
+  public Node editRental() throws IOException{
     FXMLLoader loader = new FXMLLoader();
     loader.setLocation(getClass().getResource("/client/views/edit_rental/EditRental.fxml"));
     Node content = loader.load();

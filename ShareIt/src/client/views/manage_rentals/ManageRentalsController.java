@@ -41,30 +41,28 @@ public class ManageRentalsController {
     categoryLabel.textProperty().bind(manageRentalsViewModel.categoryOfRentalProperty());
   }
 
-  public void searchButton(ActionEvent actionEvent)
-  {
-  }
-
-  public void changeButton(ActionEvent actionEvent) throws SQLException, IOException {
+  public void changeButton(ActionEvent actionEvent) throws IOException {
     viewHandler.setView(viewHandler.menu(), viewHandler.editRental());
+    manageRentalsViewModel.getSelectedRental();
   }
 
-  public void deleteButton(ActionEvent actionEvent) throws SQLException, IOException {
+  public void deleteButton(ActionEvent actionEvent) throws IOException {
     Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "");
     alert.setTitle("Delete rental");
     alert.setHeaderText("Are you sure?");
     alert.getDialogPane().setContentText("Are you sure you want to permanent delete this rental?");
 
     Optional<ButtonType> result = alert.showAndWait();
-    if (result.get() == ButtonType.YES) {
+    if (result.get() == ButtonType.OK) {
       boolean success = manageRentalsViewModel.deleteRental();
+      System.out.println("Controller delete" + success);
       if (success) {
         Stage stage = (Stage) viewHandler.getStage().getScene().getWindow();
         alert = new Alert(Alert.AlertType.INFORMATION, "");
         alert.setTitle("Confirmation");
-        alert.setHeaderText("New rental successfully created");
+        alert.setHeaderText("Rental successfully deleted");
         alert.initOwner(stage);
-        alert.getDialogPane().setContentText("Click ok to get to welcome page.");
+        alert.getDialogPane().setContentText("Click ok to get to your profile.");
 
         Optional<ButtonType> result2 = alert.showAndWait();
         if (result2.get() == ButtonType.OK) {

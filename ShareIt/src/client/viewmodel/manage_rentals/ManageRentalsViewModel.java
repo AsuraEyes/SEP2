@@ -22,7 +22,6 @@ public class ManageRentalsViewModel {
     private StringProperty priceOfRental;
     private StringProperty otherInformationOfRental;
     private StringProperty categoryOfRental;
-    private Rental rental;
 
     public ManageRentalsViewModel(ShareItModel shareItModel){
         this.shareItModel = shareItModel;
@@ -42,7 +41,9 @@ public class ManageRentalsViewModel {
 
             if (evt.getNewValue() instanceof Rental)
             {
-                rental = (Rental) evt.getNewValue();
+
+                Rental rental = (Rental) evt.getNewValue();
+                shareItModel.setSelectedRental(rental);
                 nameOfRental.setValue(rental.getName());
                 descriptionOfRental.setValue(rental.getDescription());
                 stateOfRental.setValue(rental.getStateName());
@@ -60,8 +61,7 @@ public class ManageRentalsViewModel {
     }
 
     public boolean deleteRental() {
-        System.out.println(rental);
-        return shareItModel.deleteRental(rental);
+        return shareItModel.deleteRental(shareItModel.getSelectedRental());
     }
 
     public StringProperty nameOfRentalProperty()
@@ -93,5 +93,11 @@ public class ManageRentalsViewModel {
     {
         return categoryOfRental;
     }
+    public void getSelectedRental(){
+        //Rental rental = new Rental()
+
+        shareItModel.sendSelectedRental(shareItModel.getSelectedRental());
+    }
+
 
 }

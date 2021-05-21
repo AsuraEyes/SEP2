@@ -20,6 +20,7 @@ public class ShareItModelManager implements ShareItModel
   private Client client;
   private String memberUsername;
   private String searchText;
+  private Rental rental;
 
   @Override
   public String getMemberUsername() {
@@ -91,8 +92,8 @@ public class ShareItModelManager implements ShareItModel
   }
 
   @Override
-  public String checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, String username, ArrayList<String> selectedCategories) throws IOException {
-    return client.checkRentalData(name, pictureLink,  description,  price, otherInformation,  stateName,  username,  selectedCategories);
+  public String checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, ArrayList<String> selectedCategories) throws IOException {
+    return client.checkRentalData(name, pictureLink,  description,  price, otherInformation,  stateName, getLoggedInUsername(), selectedCategories);
   }
 
 
@@ -151,7 +152,7 @@ public class ShareItModelManager implements ShareItModel
   }
 
   @Override
-  public void getSelectedRental(Rental rental)
+  public void sendSelectedRental(Rental rental)
   {
     support.firePropertyChange("selectedRental",1,rental);
   }
@@ -192,5 +193,20 @@ public class ShareItModelManager implements ShareItModel
   @Override public void updateRating(Rating rating)
   {
     client.updateRating(rating);
+  }
+
+  @Override public boolean deleteRental(Rental rental)
+  {
+    return client.deleteRental(rental);
+  }
+
+  @Override public void setSelectedRental(Rental rental)
+  {
+    this.rental = rental;
+  }
+
+  @Override public Rental getSelectedRental()
+  {
+    return rental;
   }
 }

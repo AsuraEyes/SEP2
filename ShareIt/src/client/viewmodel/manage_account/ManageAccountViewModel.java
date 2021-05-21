@@ -58,7 +58,7 @@ public class ManageAccountViewModel {
                     ImageView imageView = (ImageView) infoOverlay.getContent();
                     for (int i = 0; i < getRentalsOfMemberList().size(); i++) {
                         if(imageView.getId().equals(String.valueOf(getRentalsOfMemberList().get(i).getId()))) {
-                            shareItModel.getSelectedRental(getRentalsOfMemberList().get(i));
+                            shareItModel.sendSelectedRental(getRentalsOfMemberList().get(i));
                             break;
                         }
                     }

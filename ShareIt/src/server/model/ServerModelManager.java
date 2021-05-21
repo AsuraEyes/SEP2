@@ -36,4 +36,5 @@ public interface ServerModelManager extends Subject
     Rating getRating(String fromUsername, String toUsername);
 
     void updateRating(Rating rating);
+    boolean deleteRental(Rental rental);
 }

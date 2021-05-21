@@ -49,4 +49,5 @@ public interface RMIServer extends Remote
 
   Rating getRating(String fromUsername, String toUsername) throws RemoteException;
   void updateRating(Rating rating) throws RemoteException;
+  boolean deleteRental(Rental rental) throws RemoteException;
 }
