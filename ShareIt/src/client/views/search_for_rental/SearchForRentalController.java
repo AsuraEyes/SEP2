@@ -21,6 +21,7 @@ import shared.transferobjects.Rental;
 
 import java.io.IOException;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -33,6 +34,7 @@ public class SearchForRentalController
   @FXML private FlowPane flowPane;
   @FXML private AnchorPane parent;
   @FXML private TextField searchField;
+  //private ArrayList<ImageView> imageViewArrayList;
 
   private SearchForRentalViewModel searchForRentalViewModel;
   private ViewHandler viewHandler;
