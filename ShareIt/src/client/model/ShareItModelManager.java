@@ -18,6 +18,27 @@ public class ShareItModelManager implements ShareItModel
 {
   private PropertyChangeSupport support;
   private Client client;
+  private String memberUsername;
+  private String searchText;
+
+  @Override
+  public String getMemberUsername() {
+    return memberUsername;
+  }
+
+  @Override
+  public Member getMemberByUsername(String memberUsername) {
+    return client.getMemberByUsername(memberUsername);
+  }
+
+  @Override
+  public void setMemberUsername(String memberUsername) {
+    System.out.println("the one in model manager "+memberUsername);
+    this.memberUsername = memberUsername;
+  }
+
+
+
   public ShareItModelManager(Client client) throws IOException
   {
     this.client = client;
@@ -60,6 +81,16 @@ public class ShareItModelManager implements ShareItModel
   }
 
   @Override
+  public String updateCheckMemberData(String username, String password, String confirmPassword, String email, String phone, String otherInformation, String street, String streetNo, String postalCode, String city) throws IOException {
+    String messageToReturn = client.updateCheckMemberData (username, password, confirmPassword, email, phone, otherInformation, street, streetNo, postalCode, city);
+    if(messageToReturn.equals("Adding successful")){
+      StateManager.getInstance().setLoginState(new MemberState(username));
+    }
+
+    return messageToReturn;
+  }
+
+  @Override
   public String checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, String username, ArrayList<String> selectedCategories) throws IOException {
     return client.checkRentalData(name, pictureLink,  description,  price, otherInformation,  stateName,  username,  selectedCategories);
   }
@@ -94,7 +125,7 @@ public class ShareItModelManager implements ShareItModel
     return client.getCategoryList();
   }
 
-  @Override public ArrayList<Rental> getRentalsList() throws RemoteException
+  @Override public ArrayList<Rental> getRentalsList()
   {
     return client.getRentalsList();
   }
@@ -105,8 +136,13 @@ public class ShareItModelManager implements ShareItModel
   }
 
   @Override
-  public String checkLogInCredentials(String username, String password) throws RemoteException {
+  public String checkLogInCredentials(String username, String password){
     return client.checkLogInCredentials(username, password);
+  }
+
+  @Override
+  public ArrayList<Rental> getRentalsOfMemberList(String username) {
+    return client.getRentalsOfMemberList(username);
   }
 
   @Override
@@ -115,15 +151,32 @@ public class ShareItModelManager implements ShareItModel
     support.firePropertyChange("selectedRental",1,rental);
   }
 
-  @Override public Member getMemberById(int id) throws RemoteException
+  @Override public Member getMemberById(int id)
   {
     Member member = client.getMemberById(id);
     support.firePropertyChange("getMember",1,member);
     return member;
   }
 
-  @Override public void getSearchText(String string)
+  @Override public String getSearchText()
   {
-    support.firePropertyChange("searchText",1,string);
+    System.out.println("Model: " + searchText);
+    return searchText;
   }
+
+  @Override public void setSearchText(String text)
+  {
+    searchText = text;
+  }
+
+  @Override
+  public ArrayList<Rating> getAllRatingsOnMember(String memberUsername) {
+    return client.getAllRatingsOnMember(memberUsername);
+  }
+
+  @Override
+  public boolean deleteMember(Member member) {
+    return client.deleteMember(member);
+  }
+
 }

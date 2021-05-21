@@ -15,7 +15,7 @@ public class MemberDAOImpl implements MemberDAO{
         DriverManager.registerDriver(new org.postgresql.Driver());
     }
 
-    public static synchronized MemberDAOImpl getInstance() throws SQLException{
+    public static synchronized MemberDAOImpl getInstance() throws SQLException {
         if(instance == null){
             instance = new MemberDAOImpl();
         }
@@ -27,7 +27,8 @@ public class MemberDAOImpl implements MemberDAO{
     }
 
     private Connection getConnection() throws SQLException {
-        return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", password);
+        System.out.println("password: "+password);
+        return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "SQLdatabaze");
     }
 
     @Override
@@ -94,24 +95,61 @@ public class MemberDAOImpl implements MemberDAO{
     }
 
 
-
     @Override
+    public void update(String username, String password, String emailAddress, String phoneNumber, String otherInformation, String addressStreet, String addressNo, int addressPostalCode, String addressCity) throws SQLException {
+        try(Connection connection  = getConnection()){
+            PreparedStatement statement = connection.prepareStatement("UPDATE share_it.member SET password = ?, email_address = ?, phone_number = ?, other_information = ?, address_street = ?, address_no = ?, address_postal_code = ?, address_city_name = ? WHERE username = ?");
+            statement.setString(1, password);
+            statement.setString(2, emailAddress);
+            statement.setString(3, phoneNumber);
+            statement.setString(4, otherInformation);
+            statement.setString(5, addressStreet);
+            statement.setString(6, addressNo);
+            statement.setInt(7, addressPostalCode);
+            statement.setString(8, addressCity);
+            statement.setString(9, username);
+            statement.executeUpdate();
+
+
+        }
+    }
+    /*@Override
     public void update(Member member) throws SQLException {
         try(Connection connection  = getConnection()){
             //for updating member information
             //SET all except for primary key
             //WHERE member.get primary key = member.primary key
-            //PreparedStatement statement = connection.prepareStatement("UPDATE share_it.member SET ")
+
+            PreparedStatement statement = connection.prepareStatement("UPDATE share_it.member SET username = ?, password = ?, email_address = ?, phone_number = ?, other_information = ?, address_street = ?, address_no = ?, address_postal_code = ?, address_city_name = ? WHERE member.getId = )");
+            statement.setString(1, member.getUsername());
+            statement.setString(2, member.getPassword());
+            statement.setString(3, member.getEmailAddress());
+            statement.setString(4, member.getPhoneNo());
+            statement.setString(5, member.getOtherInformation());
+            statement.setString(6, member.getAddressStreet());
+            statement.setString(7, member.getAddressNo());
+            statement.setInt(8, member.getAddressPostalCode());
+            statement.setString(9, member.getAddressCity());
+            statement.executeUpdate();
+
+            /*ResultSet generatedKeys = statement.getGeneratedKeys();
+            if(generatedKeys.next()){
+                return new Member(generatedKeys.getInt(1), username, password, emailAddress, phoneNumber, otherInformation, addressStreet, addressNo, addressPostalCode, addressCity, 0);
+            }
+            else{
+                throw new SQLException("No keys generated");
+            }
         }
-    }
+    }*/
 
     @Override
-    public void delete(String username) throws SQLException {
+    public boolean delete(Member member) throws SQLException {
         try (Connection connection = getConnection()) {
             PreparedStatement statement = connection
-                    .prepareStatement("DELETE FROM share_it.member WHERE username = ?");
-            statement.setString(1, username);
+                    .prepareStatement("DELETE FROM share_it.member WHERE id = ?");
+            statement.setInt(1, member.getId());
             statement.executeUpdate();
+            return true;
         }
     }
 
@@ -134,10 +172,11 @@ public class MemberDAOImpl implements MemberDAO{
     @Override
     public int readIdByUsername(String username) throws SQLException{
         try(Connection connection = getConnection()){
+            //username = "bob";
             PreparedStatement statement = connection.prepareStatement("SELECT id FROM share_it.member WHERE username = ?");
             statement.setString(1, username);
             ResultSet resultSet = statement.executeQuery();
-
+            System.out.println("username "+username);
             if(resultSet.next()){
                 return (resultSet.getInt("id"));
             }
@@ -171,5 +210,21 @@ public class MemberDAOImpl implements MemberDAO{
             e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    public Member getMemberByUsername(String username) throws SQLException{
+        try(Connection connection = getConnection()){
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM share_it.member WHERE username = ?");
+            statement.setString(1, username);
+            ResultSet resultSet = statement.executeQuery();
+
+            if(resultSet.next()){
+                return new Member(resultSet.getInt("id"), resultSet.getString("username"), resultSet.getString("password"), resultSet.getString("email_address"), resultSet.getString("phone_number"), resultSet.getString("other_information"), resultSet.getString("address_street"), resultSet.getString("address_no"), resultSet.getInt("address_postal_code"), resultSet.getString("address_city_name"),resultSet.getFloat("average_review"));
+            }
+            else{
+                throw new SQLException("No keys generated");
+            }
+        }
     }
 }

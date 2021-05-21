@@ -12,6 +12,7 @@ import java.util.List;
 public interface ShareItModel extends Subject
 {
     String checkMemberData(String username, String password, String confirmPassword, String email, String phone, String otherInformation, String street, String streetNo, String postalCode,  String city) throws IOException;
+    String updateCheckMemberData(String username, String password, String confirmPassword, String email, String phone, String otherInformation, String street, String streetNo, String postalCode,  String city) throws IOException;
     List<Rental> checkSearch(String search)throws IOException;
     String checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, String username, ArrayList<String> selectedCategories) throws IOException;
     List<Rental> checkSearchWithFilter(String search,String city, ArrayList<String> selectedCategories)throws IOException;
@@ -19,11 +20,24 @@ public interface ShareItModel extends Subject
     ArrayList<City> getCityList();
     ArrayList<State> getStateList();
     ArrayList<Category> getCategoryList();
-    ArrayList<Rental> getRentalsList() throws RemoteException;
+    ArrayList<Rental> getRentalsList();
     String checkUserType();
     void getSelectedRental(Rental rental);
-    Member getMemberById(int id) throws RemoteException;
-    void getSearchText(String string);
+    Member getMemberById(int id);
 
-    String checkLogInCredentials(String username, String password) throws RemoteException;
+
+    String checkLogInCredentials(String username, String password);
+
+    ArrayList<Rental> getRentalsOfMemberList(String username);
+
+    void setMemberUsername(String memberUsername);
+    String getMemberUsername();
+
+    Member getMemberByUsername(String memberUsername);
+    String getSearchText();
+    void setSearchText(String text);
+
+    ArrayList<Rating> getAllRatingsOnMember(String memberUsername);
+
+    boolean deleteMember(Member member);
 }

@@ -56,6 +56,37 @@ public class DataCheckMember {
         return "Ooops, something went wrong!!";
     }
 
+    public String updateCheckData(String username, String password, String passwordAgain, String email, String otherInformation, String phone, String street, String streetNumber, String postalCode, String city) {
+        this.username = username;
+        this.password = password;
+        this.passwordAgain = passwordAgain;
+        this.email = email;
+        this.phone = phone;
+        this.postalCode = postalCode;
+
+        if(matchingPasswords() && uniqueUsername() && oneContactInformationGiven() && postalCodeIsNumber()){
+            try{
+                MemberDAOImpl.getInstance().update(username, password, email, phone, otherInformation, street, streetNumber, postalCodeNb, city);
+                return "Edit successful";
+            }
+            catch (SQLException e){
+                //
+            }
+        }
+        else{
+            if(!matchingPasswords()){
+                return "Not matching passwords.";
+            }
+            if(!oneContactInformationGiven()){
+                return "At least one contact information has to be given.";
+            }
+            if(!postalCodeIsNumber()){
+                return "Postal code has to be a number.";
+            }
+        }
+        return "Ooops, something went wrong!!";
+    }
+
     private boolean matchingPasswords(){
         if(password.equals(passwordAgain)){
             return true;

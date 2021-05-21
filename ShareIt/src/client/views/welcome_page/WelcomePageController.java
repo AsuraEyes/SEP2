@@ -15,7 +15,6 @@ public class WelcomePageController {
     @FXML private TextField searchField;
 
     private WelcomePageViewModel welcomePageViewModel;
-    private SearchForRentalViewModel searchForRentalViewModel;
     private ViewHandler viewHandler;
 
     public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws IOException {
@@ -30,7 +29,8 @@ public class WelcomePageController {
     }
 
     public void searchButton(ActionEvent actionEvent) throws IOException {
-        viewHandler.setView(viewHandler.menu(), viewHandler.searchForRental());
         welcomePageViewModel.setSearchText();
+
+        viewHandler.setView(viewHandler.menu(), viewHandler.searchForRental());
     }
 }

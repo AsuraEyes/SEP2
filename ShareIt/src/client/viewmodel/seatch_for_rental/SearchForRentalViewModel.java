@@ -44,24 +44,36 @@ public class SearchForRentalViewModel {
         locationLabel = new SimpleStringProperty();
         priceLabel = new SimpleStringProperty();
         otherInfoLabel = new SimpleStringProperty();
-        model.addListener("searchText", this::searchText);
+       // model.addListener("searchText", this::searchText);
     }
 
-    private void searchText(PropertyChangeEvent evt)
+    /*private void searchText(PropertyChangeEvent evt)
     {
         Platform.runLater(()-> {
-            searchField.setValue(evt.getNewValue().toString());
-            try
-            {
-                onSearchButtonPressed();
+            if(evt.getNewValue() == null){
+                searchField.setValue("");
+                try
+                {
+                    onSearchButtonPressed();
+                }
+                catch (IOException e)
+                {
+                    e.printStackTrace();
+                }
             }
-            catch (IOException e)
-            {
-                e.printStackTrace();
+            else{
+                searchField.setValue(evt.getNewValue().toString());
+                try
+                {
+                    onSearchButtonPressed();
+                }
+                catch (IOException e)
+                {
+                    e.printStackTrace();
+                }
             }
-
         });
-    }
+    }*/
 
     public StringProperty getSearchField(){
         return searchField;
@@ -140,6 +152,12 @@ public class SearchForRentalViewModel {
     public ArrayList<Rental> getRentalsList() throws RemoteException
     {
         return model.getRentalsList();
+    }
+
+    public void setSearchField(){
+
+        searchField.setValue(model.getSearchText());
+        System.out.println("View model: " + searchField.getValue());
     }
     /*public void setRentals(List<Rental> rentals)
     {

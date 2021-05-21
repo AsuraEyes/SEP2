@@ -55,6 +55,17 @@ public class RMIClient implements Client, RemoteObserver
   }
 
   @Override
+  public String updateCheckMemberData(String username, String password, String confirmPassword, String email, String phone, String otherInformation, String street, String streetNo, String postalCode, String city) throws IOException {
+    try{
+      return server.updateCheckMemberData(username, password, confirmPassword, email, phone, otherInformation, street, streetNo, postalCode, city);
+    }
+    catch (RemoteException e){
+      e.printStackTrace();
+      throw new RuntimeException("Could not contact server");
+    }
+  }
+
+  @Override
   public String checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, String username, ArrayList<String> selectedCategories) throws IOException {
     try {
       return server.checkRentalData(name, pictureLink, description, price, otherInformation, stateName, StateManager.getInstance().getUsername(), selectedCategories);
@@ -131,19 +142,77 @@ public class RMIClient implements Client, RemoteObserver
     return null;
   }
 
-  @Override public ArrayList<Rental> getRentalsList() throws RemoteException
+  @Override public ArrayList<Rental> getRentalsList()
   {
-    return server.getRentalsList();
+    try {
+      return server.getRentalsList();
+    } catch (RemoteException e) {
+      e.printStackTrace();
+    }
+    return null;
   }
 
-  @Override public Member getMemberById(int id) throws RemoteException
+  @Override public Member getMemberById(int id)
   {
-    return server.getMemberById(id);
+    try {
+      return server.getMemberById(id);
+    } catch (RemoteException e) {
+      e.printStackTrace();
+    }
+    return null;
   }
 
   @Override
-  public String checkLogInCredentials(String username, String password) throws RemoteException {
-    return server.checkLogInCredentials(username, password);
+  public String checkLogInCredentials(String username, String password){
+    try {
+      return server.checkLogInCredentials(username, password);
+    } catch (RemoteException e) {
+      e.printStackTrace();
+    }
+    return null;
+  }
+
+  @Override
+  public ArrayList<Rental> getRentalsOfMemberList(String username) {
+    try{
+      return server.getRentalsOfMemberList(username);
+    }
+    catch (RemoteException e){
+      e.printStackTrace();
+    }
+    return null;
+  }
+
+  @Override
+  public Member getMemberByUsername(String memberUsername) {
+    try{
+      return server.getMemberByUsername(memberUsername);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return null;
+  }
+
+  @Override
+  public ArrayList<Rating> getAllRatingsOnMember(String memberUsername) {
+    try{
+      return server.getAllRatingsOnMember(memberUsername);
+    }
+    catch (Exception e){
+      e.printStackTrace();
+    }
+    return null;
+  }
+
+  @Override
+  public boolean deleteMember(Member member) {
+    try{
+      return server.deleteMember(member);
+    }
+    catch (Exception e){
+      e.printStackTrace();
+    }
+    return false;
   }
 
   @Override public void addListener(String propertyName,
@@ -180,4 +249,6 @@ public class RMIClient implements Client, RemoteObserver
       support.firePropertyChange("NewUser", null, object);
     }*/
   }
+
+
 }

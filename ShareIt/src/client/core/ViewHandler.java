@@ -1,15 +1,21 @@
 package client.core;
 
+import client.viewmodel.manage_account.ManageAccountViewModel;
 import client.views.add_rental.AddRentalController;
 import client.views.chat_received_messages.ChatReceivedMessagesController;
 import client.views.chat_write_message.ChatWriteMessageController;
 import client.views.create_account.CreateAccountController;
+import client.views.edit_account.EditAccountController;
+import client.views.edit_rental.EditRentalController;
 import client.views.log_in.LogInController;
 import client.views.main_view.MainController;
+import client.views.manage_account.ManageAccountController;
 import client.views.menu.MenuController;
+import client.views.rate_feedback.RateFeedbackController;
 import client.views.report_member.ReportMemberController;
 import client.views.search_for_rental.SearchForRentalController;
 import client.views.view_member_profile.ViewMemberProfileController;
+import client.views.view_rating.ViewRatingController;
 import client.views.view_rental.ViewRentalController;
 import client.views.view_reported_member.ViewReportedMemberController;
 import client.views.view_reported_member_list.ViewReportedMemberListController;
@@ -121,17 +127,36 @@ public class ViewHandler
     FXMLLoader loader = new FXMLLoader();
     loader.setLocation(getClass().getResource("/client/views/manage_account/ManageAccount.fxml"));
     Node content = loader.load();
-    //LogInController logInController = loader.getController();
-    //ogInController.init(this, viewModelFactory);
+    ManageAccountController manageAccountController = loader.getController();
+    manageAccountController.init(this, viewModelFactory);
     return content;
   }
+
+  public Node editOrDeleteAccount() throws IOException, SQLException {
+    FXMLLoader loader = new FXMLLoader();
+    loader.setLocation(getClass().getResource("/client/views/edit_account/EditAccount.fxml"));
+    Node content = loader.load();
+    EditAccountController editAccountController = loader.getController();
+    editAccountController.init(this, viewModelFactory);
+    return content;
+  }
+
   public Node manageRentals() throws IOException
   {
     FXMLLoader loader = new FXMLLoader();
     loader.setLocation(getClass().getResource("/client/views/manage_rentals/ManageRentals.fxml"));
     Node content = loader.load();
-    //LogInController logInController = loader.getController();
-    //ogInController.init(this, viewModelFactory);
+    ManageAccountController manageAccountController = loader.getController();
+    manageAccountController.init(this, viewModelFactory);
+    return content;
+  }
+
+  public Node editRental() throws IOException, SQLException {
+    FXMLLoader loader = new FXMLLoader();
+    loader.setLocation(getClass().getResource("/client/views/edit_rental/EditRental.fxml"));
+    Node content = loader.load();
+    EditRentalController editRentalController = loader.getController();
+    editRentalController.init(this, viewModelFactory);
     return content;
   }
   public Node rateFeedback() throws IOException
@@ -139,8 +164,8 @@ public class ViewHandler
     FXMLLoader loader = new FXMLLoader();
     loader.setLocation(getClass().getResource("/client/views/rate_feedback/RateFeedback.fxml"));
     Node content = loader.load();
-    //LogInController logInController = loader.getController();
-    //ogInController.init(this, viewModelFactory);
+    RateFeedbackController rateFeedbackController = loader.getController();
+    rateFeedbackController.init(this, viewModelFactory);
     return content;
   }
   public Node reportMember() throws IOException
@@ -197,17 +222,17 @@ public class ViewHandler
     FXMLLoader loader = new FXMLLoader();
     loader.setLocation(getClass().getResource("/client/views/view_rating/ViewRating.fxml"));
     Node content = loader.load();
-    //LogInController logInController = loader.getController();
-    //ogInController.init(this, viewModelFactory);
+    ViewRatingController viewRatingController = loader.getController();
+    viewRatingController.init(this, viewModelFactory);
     return content;
   }
   public Node viewRatingFull() throws IOException
   {
     FXMLLoader loader = new FXMLLoader();
-    loader.setLocation(getClass().getResource("/client/views/view_rating_full/ViewRatingFull.fxml"));
+    loader.setLocation(getClass().getResource("/client/views/view_rating/ViewRating.fxml"));
     Node content = loader.load();
-    //LogInController logInController = loader.getController();
-    //ogInController.init(this, viewModelFactory);
+    ViewRatingController viewRatingController = loader.getController();
+    viewRatingController.init(this, viewModelFactory);
     return content;
   }
   public Node viewRental() throws IOException

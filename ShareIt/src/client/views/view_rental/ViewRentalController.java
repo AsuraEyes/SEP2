@@ -75,12 +75,14 @@ public class ViewRentalController
   public void goBackToSearchResultsButton(ActionEvent actionEvent)
       throws IOException, SQLException, InterruptedException
   {
+    System.out.println("ho");
     viewHandler.setView(viewHandler.menu(), viewHandler.searchForRental());
   }
 
   public void seeMoreButton(ActionEvent actionEvent) throws IOException
   {
+    viewRentalViewModel.setMemberUsername();
     viewHandler.setView(viewHandler.menu(), viewHandler.viewMemberProfile());
-    viewRentalViewModel.getMemberById();
+    //viewRentalViewModel.getMemberById();
   }
 }

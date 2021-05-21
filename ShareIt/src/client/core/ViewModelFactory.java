@@ -7,12 +7,14 @@ import client.viewmodel.create_account.CreateAccountViewModel;
 import client.viewmodel.edit_account.EditAccountViewModel;
 import client.viewmodel.edit_rental.EditRentalViewModel;
 import client.viewmodel.log_in.LogInViewModel;
+import client.viewmodel.manage_account.ManageAccountViewModel;
 import client.viewmodel.manage_rentals.ManageRentalsViewModel;
 import client.viewmodel.menu.MenuViewModel;
 import client.viewmodel.rate_feedback.RateFeedbackViewModel;
 import client.viewmodel.report_member.ReportMemberViewModel;
 import client.viewmodel.seatch_for_rental.SearchForRentalViewModel;
 import client.viewmodel.view_member_profile.ViewMemberProfileViewModel;
+import client.viewmodel.view_rating.ViewRatingViewModel;
 import client.viewmodel.view_rating_full.ViewRatingFullViewModel;
 import client.viewmodel.view_rental.ViewRentalViewModel;
 import client.viewmodel.view_reported_member.ViewReportedMemberViewModel;
@@ -33,6 +35,7 @@ public class ViewModelFactory
   private CreateAccountViewModel createAccountViewModel;
   private SearchForRentalViewModel searchForRentalViewModel;
   private ViewRatingFullViewModel viewRatingFullViewModel;
+  private ViewRatingViewModel viewRatingViewModel;
   private ViewReportedMemberViewModel viewReportedMemberViewModel;
   private ViewReportedMemberListViewModel viewReportedMemberListViewModel;
   private WelcomePageViewModel welcomePageViewModel;
@@ -44,6 +47,7 @@ public class ViewModelFactory
   private EditAccountViewModel editAccountViewModel;
   private RateFeedbackViewModel rateFeedbackViewModel;
   private ReportMemberViewModel reportMemberViewModel;
+  private ManageAccountViewModel manageAccountViewModel;
 
   public ViewModelFactory(ModelFactory modelFactory) throws IOException
   {
@@ -116,6 +120,13 @@ public class ViewModelFactory
     return viewRatingFullViewModel;
   }
 
+  public ViewRatingViewModel getViewRatingViewModel() throws IOException {
+    if (viewRatingViewModel == null){
+      viewRatingViewModel = new ViewRatingViewModel(modelFactory.getShareItModel());
+    }
+    return viewRatingViewModel;
+  }
+
   public ViewReportedMemberViewModel getViewReportedMemberViewModel() {
     if (viewReportedMemberViewModel == null){
       viewReportedMemberViewModel = new ViewReportedMemberViewModel();
@@ -164,7 +175,7 @@ public class ViewModelFactory
     return reportMemberViewModel;
   }
 
-  public RateFeedbackViewModel getRateFeedbackViewModel() throws SQLException, IOException
+  public RateFeedbackViewModel getRateFeedbackViewModel() throws  IOException
   {
     if (rateFeedbackViewModel == null)
     {
@@ -192,5 +203,12 @@ public class ViewModelFactory
       editAccountViewModel = new EditAccountViewModel(modelFactory.getShareItModel());
     }
     return editAccountViewModel;
+  }
+
+  public ManageAccountViewModel getManageAccountViewModel() throws IOException {
+    if (manageAccountViewModel == null){
+      manageAccountViewModel = new ManageAccountViewModel(modelFactory.getShareItModel());
+    }
+    return manageAccountViewModel;
   }
 }

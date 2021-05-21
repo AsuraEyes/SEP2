@@ -2,6 +2,7 @@ package shared.networking;
 
 import shared.transferobjects.*;
 
+import java.io.IOException;
 import java.rmi.AlreadyBoundException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -21,6 +22,7 @@ public interface RMIServer extends Remote
   void unregisterClient(RemoteObserver client) throws RemoteException;
 
   String checkMemberData(String username, String password, String confirmPassword, String email, String phone, String otherInformation, String street, String streetNo, String postalCode, String city) throws RemoteException;
+  String updateCheckMemberData(String username, String password, String confirmPassword, String email, String phone, String otherInformation, String street, String streetNo, String postalCode,  String city) throws IOException;
   List<Rental> checkSearch(String search) throws RemoteException;
   List<Rental> checkSearchWithFilter(String search,String city, ArrayList<String> selectedCategories)throws RemoteException;
   String checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, String username, ArrayList<String> selectedCategories) throws RemoteException;
@@ -36,4 +38,12 @@ public interface RMIServer extends Remote
 
 
     String checkLogInCredentials(String username, String password) throws RemoteException;
+
+  ArrayList<Rental> getRentalsOfMemberList(String username) throws RemoteException;
+
+    Member getMemberByUsername(String memberUsername) throws RemoteException;
+
+    ArrayList<Rating> getAllRatingsOnMember(String memberUsername) throws RemoteException;
+
+    boolean deleteMember(Member member) throws RemoteException;
 }

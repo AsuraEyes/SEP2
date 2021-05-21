@@ -1,5 +1,6 @@
 package server.model.database.rental;
 
+import server.model.database.member.MemberDAOImpl;
 import shared.transferobjects.Rental;
 
 import java.io.*;
@@ -444,6 +445,44 @@ public class RentalDAOImpl implements RentalDAO
     }
     catch (IOException e)
     {
+      e.printStackTrace();
+    }
+    return null;
+  }
+
+  @Override
+  public ArrayList<Rental> getRentalsOfMemberList(String username) {
+    try (Connection connection = getConnection())
+    {
+      int member_id = MemberDAOImpl.getInstance().readIdByUsername(username);
+      PreparedStatement statement = connection
+              .prepareStatement("SELECT * FROM share_it.rental WHERE rental.member_id = ?");
+      statement.setInt(1, member_id);
+      ResultSet resultSet = statement.executeQuery();
+      ArrayList<Rental> arrayListToReturn = new ArrayList<>();
+      while (resultSet.next())
+      {
+        String filename = "image" + resultSet.getInt("id") + ".jpeg";
+        byte[] imgBytes = resultSet.getBytes(3);
+        Files.write(new File(filename).toPath(), imgBytes);
+
+        int rentalId = resultSet.getInt("id");
+        String rentalName = resultSet.getString("name");
+        //picture link?
+        String rentalDescription = resultSet.getString("description");
+        int priceOfRental = resultSet.getInt("price");
+        String rentalOtherInformation = resultSet.getString("other_information");
+        String rentalState = resultSet.getString("state_name");
+        int memberId = resultSet.getInt("member_id");
+
+        arrayListToReturn.add(
+                new Rental(rentalId, rentalName, "file:" + filename, rentalDescription,
+                        priceOfRental, rentalOtherInformation, rentalState, memberId,
+                        null));
+      }
+      //return array list
+      return arrayListToReturn;
+    } catch (SQLException | IOException e) {
       e.printStackTrace();
     }
     return null;

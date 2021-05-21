@@ -7,12 +7,14 @@ import server.model.data_check.DataCheckSearch;
 import server.model.database.category.CategoryDAOImpl;
 import server.model.database.city.CityDAOImpl;
 import server.model.database.member.MemberDAOImpl;
+import server.model.database.rating.RatingDAOImpl;
 import server.model.database.rental.RentalDAOImpl;
 import server.model.database.state.StateDAOImpl;
 import shared.transferobjects.*;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +23,7 @@ public class ServerModelImpl implements ServerModelManager
 {
   private PropertyChangeSupport support;
   private DataCheckMember dataCheckMember;
+  private DataCheckMember updateDataCheckMember;
   private DataCheckRental dataCheckRental;
   private DataCheckSearch dataCheckSearch;
   private DataCheckRating dataCheckRating;
@@ -56,6 +59,12 @@ public class ServerModelImpl implements ServerModelManager
     String message = dataCheckMember.checkData(username, password, confirmPassword, email, otherInformation, phone, street, streetNo, postalCode, city);
 
     //support.firePropertyChange("dataValidation", 0, message);
+    return message;
+  }
+
+  @Override
+  public String updateCheckMemberData(String username, String password, String confirmPassword, String email, String phone, String otherInformation, String street, String streetNo, String postalCode, String city) throws IOException {
+    String message = dataCheckMember.updateCheckData(username, password, confirmPassword, email, otherInformation, phone, street, streetNo, postalCode, city);
     return message;
   }
 
@@ -152,4 +161,50 @@ public class ServerModelImpl implements ServerModelManager
       return null;
     }
   }
+
+  @Override
+  public ArrayList<Rental> getRentalsOfMemberList(String username) {
+    try{
+      return RentalDAOImpl.getInstance().getRentalsOfMemberList(username);
+    }
+    catch (SQLException e) {
+      e.printStackTrace();
+      return null;
+    }
+  }
+
+  @Override
+  public Member getMemberByUsername(String memberUsername) {
+    try{
+      return MemberDAOImpl.getInstance().getMemberByUsername(memberUsername);
+    }
+    catch (SQLException e){
+      e.printStackTrace();
+      return null;
+    }
+  }
+
+  @Override
+  public ArrayList<Rating> getAllRatingsOnMember(String memberUsername) {
+    try{
+      return RatingDAOImpl.getInstance().getAllRatingsOnMember(memberUsername);
+    }
+    catch (SQLException e){
+      e.printStackTrace();
+    }
+    return null;
+  }
+
+  @Override
+  public boolean deleteMember(Member member) {
+    try{
+      return MemberDAOImpl.getInstance().delete(member);
+    }
+    catch (SQLException e){
+      e.printStackTrace();
+    }
+    return false;
+  }
+
+
 }

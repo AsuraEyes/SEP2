@@ -1,17 +1,26 @@
 package client.viewmodel.edit_account;
 
+import client.core.ViewHandler;
 import client.model.ShareItModel;
+import client.model.state.StateManager;
+import client.model.state.VisitorState;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import server.model.database.member.MemberDAOImpl;
 import shared.transferobjects.City;
+import shared.transferobjects.Member;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class EditAccountViewModel {
-    private ShareItModel model;
+    private ShareItModel shareItModel;
     private final StringProperty usernameField;
     private final StringProperty passwordField;
     private final StringProperty confirmPasswordField;
@@ -25,7 +34,7 @@ public class EditAccountViewModel {
     private ObservableList<String> locationsList;
 
     public EditAccountViewModel(ShareItModel model) {
-        this.model = model;
+        shareItModel = model;
         usernameField = new SimpleStringProperty();
         passwordField = new SimpleStringProperty();
         confirmPasswordField = new SimpleStringProperty();
@@ -37,6 +46,7 @@ public class EditAccountViewModel {
         telephoneNoField = new SimpleStringProperty();
         otherInfoField = new SimpleStringProperty();
     }
+
 
     public StringProperty getUsernameField(){
         return usernameField;
@@ -70,16 +80,43 @@ public class EditAccountViewModel {
     }
 
     public String onEditButtonPressed(String selectedCity) throws IOException {
-        return model.checkMemberData(usernameField.getValue(), passwordField.getValue(), confirmPasswordField.getValue(), emailField.getValue(), telephoneNoField.getValue(), otherInfoField.getValue(), streetField.getValue(), streetNumberField.getValue()+", "+floorField.getValue(), postalCodeField.getValue(),  selectedCity);
+        return shareItModel.updateCheckMemberData(usernameField.getValue(), passwordField.getValue(), confirmPasswordField.getValue(),
+                emailField.getValue(), telephoneNoField.getValue(), otherInfoField.getValue(), streetField.getValue(),
+                streetNumberField.getValue()+", "+floorField.getValue(), postalCodeField.getValue(),  selectedCity);
     }
 
     public ObservableList<String> getLocations(){
-        ArrayList<City> cityList = model.getCityList();
+        ArrayList<City> cityList = shareItModel.getCityList();
         ArrayList<String> cityListString = new ArrayList<>();
         for (int i = 0; i < cityList.size(); i++) {
             cityListString.add(cityList.get(i).toString());
         }
         locationsList = FXCollections.observableArrayList(cityListString);
         return locationsList;
+    }
+
+    public void setProfile(){
+        Member member = shareItModel.getMemberByUsername(StateManager.getInstance()
+            .getUsername());
+        usernameField.setValue(member.getUsername());
+        //locationsList.setValue(member.getAddressCity());
+        passwordField.setValue(member.getPassword());
+        confirmPasswordField.setValue(member.getPassword());
+        streetField.setValue(member.getAddressStreet());
+        streetNumberField.setValue(member.getAddressNo());
+        postalCodeField.setValue(String.valueOf(member.getAddressPostalCode()));
+        emailField.setValue(member.getEmailAddress());
+        telephoneNoField.setValue(member.getPhoneNo());
+        otherInfoField.setValue(member.getOtherInformation());
+    }
+    
+    public boolean deleteAccount(){
+        Member member = shareItModel.getMemberByUsername(StateManager.getInstance()
+                .getUsername());
+        boolean deleteSuccessful = shareItModel.deleteMember(member);
+        if(deleteSuccessful){
+            StateManager.getInstance().setLoginState(new VisitorState());
+        }
+        return deleteSuccessful;
     }
 }

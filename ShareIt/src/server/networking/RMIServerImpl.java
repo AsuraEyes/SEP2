@@ -7,6 +7,7 @@ import client.model.state.StateManager;
 import shared.transferobjects.*;
 
 import java.beans.PropertyChangeListener;
+import java.io.IOException;
 import java.rmi.AlreadyBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -87,6 +88,11 @@ public class RMIServerImpl implements RMIServer
   }
 
   @Override
+  public String updateCheckMemberData(String username, String password, String confirmPassword, String email, String phone, String otherInformation, String street, String streetNo, String postalCode, String city) throws IOException {
+    return serverModelManager.updateCheckMemberData(username, password, confirmPassword, email, otherInformation, phone, street, streetNo, postalCode, city);
+  }
+
+  @Override
   public String checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, String username, ArrayList<String> selectedCategories) throws RemoteException {
     return serverModelManager.checkRentalData(name, pictureLink, description, price, otherInformation, stateName, username, selectedCategories);
   }
@@ -136,6 +142,26 @@ public class RMIServerImpl implements RMIServer
   @Override
   public String checkLogInCredentials(String username, String password) {
     return serverModelManager.checkLogInCredentials(username, password);
+  }
+
+  @Override
+  public ArrayList<Rental> getRentalsOfMemberList(String username) throws RemoteException {
+    return serverModelManager.getRentalsOfMemberList(username);
+  }
+
+  @Override
+  public Member getMemberByUsername(String memberUsername) {
+    return serverModelManager.getMemberByUsername(memberUsername);
+  }
+
+  @Override
+  public ArrayList<Rating> getAllRatingsOnMember(String memberUsername) {
+    return serverModelManager.getAllRatingsOnMember(memberUsername);
+  }
+
+  @Override
+  public boolean deleteMember(Member member) throws RemoteException {
+    return serverModelManager.deleteMember(member);
   }
 
 }

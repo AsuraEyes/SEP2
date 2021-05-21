@@ -16,6 +16,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Optional;
 
 public class MenuController
@@ -44,7 +45,8 @@ public class MenuController
     }
     else if (menuViewModel.checkUserType().equals("Member"))
     {
-      reviewsButton.setVisible(false);
+      reviewsButton.setVisible(true);
+      reviewsButton.setText("View my profile");
       reportedMembersButton.setVisible(false);
       chatButton.setVisible(true);
       logInOutLabel.setText("Log out");
@@ -86,8 +88,15 @@ public class MenuController
     }
   }
 
-    public void onReviewsButton (ActionEvent actionEvent) throws IOException {
-    viewHandler.setView(viewHandler.menu(), viewHandler.viewRatingFull());
+    public void onReviewsButton (ActionEvent actionEvent) throws IOException, SQLException {
+    if (menuViewModel.checkUserType().equals("Member")){
+      viewHandler.setView(viewHandler.menu(), viewHandler.manageAccount());
+    }
+
+    else
+    {
+      viewHandler.setView(viewHandler.menu(), viewHandler.viewRatingFull());
+    }
   }
 
     public void onReportedMembersButton (ActionEvent actionEvent)
