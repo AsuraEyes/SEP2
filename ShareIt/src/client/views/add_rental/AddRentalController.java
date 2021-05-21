@@ -94,10 +94,9 @@ public class AddRentalController {
     }
   }
 
-  public void addPictureButton(ActionEvent actionEvent)
-  {
+  public void addPictureButton(ActionEvent actionEvent) {
     JFileChooser fileChooser = new JFileChooser();
-    fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+    fileChooser.setCurrentDirectory(new File(System.getProperty("os.name")));
     FileNameExtensionFilter filter = new FileNameExtensionFilter("*.IMAGE", "jpg", "gif", "png");
     fileChooser.addChoosableFileFilter(filter);
     int result = fileChooser.showSaveDialog(null);

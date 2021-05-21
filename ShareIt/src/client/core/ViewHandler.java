@@ -9,6 +9,7 @@ import client.views.edit_rental.EditRentalController;
 import client.views.log_in.LogInController;
 import client.views.main_view.MainController;
 import client.views.manage_account.ManageAccountController;
+import client.views.manage_rentals.ManageRentalsController;
 import client.views.menu.MenuController;
 import client.views.rate_feedback.RateFeedbackController;
 import client.views.report_member.ReportMemberController;
@@ -145,8 +146,8 @@ public class ViewHandler
     FXMLLoader loader = new FXMLLoader();
     loader.setLocation(getClass().getResource("/client/views/manage_rentals/ManageRentals.fxml"));
     Node content = loader.load();
-    ManageAccountController manageAccountController = loader.getController();
-    manageAccountController.init(this, viewModelFactory);
+    ManageRentalsController manageRentalsController = loader.getController();
+    manageRentalsController.init(this, viewModelFactory);
     return content;
   }
 

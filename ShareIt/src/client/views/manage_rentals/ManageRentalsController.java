@@ -57,20 +57,19 @@ public class ManageRentalsController {
 
     Optional<ButtonType> result = alert.showAndWait();
     if (result.get() == ButtonType.YES) {
-//      Rental rental = ;
-//      boolean success = manageRentalsViewModel.deleteRental();
+      boolean success = manageRentalsViewModel.deleteRental();
+      if (success) {
+        Stage stage = (Stage) viewHandler.getStage().getScene().getWindow();
+        alert = new Alert(Alert.AlertType.INFORMATION, "");
+        alert.setTitle("Confirmation");
+        alert.setHeaderText("New rental successfully created");
+        alert.initOwner(stage);
+        alert.getDialogPane().setContentText("Click ok to get to welcome page.");
 
-      Stage stage = (Stage) viewHandler.getStage().getScene().getWindow();
-      alert = new Alert(Alert.AlertType.INFORMATION, "");
-      alert.setTitle("Confirmation");
-      alert.setHeaderText("New rental successfully created");
-      alert.initOwner(stage);
-      alert.getDialogPane().setContentText("Click ok to get to welcome page.");
-
-      Optional<ButtonType> result2 = alert.showAndWait();
-      if (result2.get() == ButtonType.OK)
-      {
-        viewHandler.setView(viewHandler.menu(), viewHandler.viewMemberProfile());
+        Optional<ButtonType> result2 = alert.showAndWait();
+        if (result2.get() == ButtonType.OK) {
+          viewHandler.setView(viewHandler.menu(), viewHandler.manageAccount());
+        }
       }
     }
   }
