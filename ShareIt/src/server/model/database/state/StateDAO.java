@@ -7,5 +7,10 @@ import java.util.List;
 
 public interface StateDAO
 {
+  /**
+   * Reads all cities from database
+   * @return returns all state names in a arraylist
+   * @throws SQLException
+   */
   List<State> readState() throws SQLException;
 }
