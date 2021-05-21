@@ -7,20 +7,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface RentalDAO {
-    Rental create(String name, String pictureLink, String description, int price, String otherInformation, String stateName, String username, ArrayList<String> selectedCategories) throws SQLException;
     /**
      * Creates new rental by putting data provided by user into database
      * @param name name of the rental input by user while creating new rental offer
-     * @param pictureLink
+     * @param pictureLink the picture link of the rental
      * @param description description of the rental input by user while creating new rental offer
      * @param price price of the rental input by user while creating new rental offer
      * @param otherInformation other information of the rental input by user while creating new rental offer
      * @param stateName state of the rental chosen from the list of possible states by user while creating new rental offer
+     * @param username username of the member who owns the rental
      * @param selectedCategories categories of the rental chosen from the list of possible categories by user while creating new rental offer
      * @return returns new object of Rental with data which was provided by user while creating new rental offer
      * @throws SQLException
      */
-    Rental create(String name, String pictureLink, String description, int price, String otherInformation, String stateName, ArrayList<String> selectedCategories) throws SQLException;
+    Rental create(String name, String pictureLink, String description, int price, String otherInformation, String stateName, String username, ArrayList<String> selectedCategories) throws SQLException;
+
+
     /**
      *
      * @param name
@@ -54,8 +56,9 @@ public interface RentalDAO {
      * Deletes rental from the database
      * @param rental rental object that will be deleted
      * @throws SQLException
+     * @return
      */
-    void delete(Rental rental) throws SQLException;
+    boolean delete(Rental rental) throws SQLException;
     /**
      *
      * @return

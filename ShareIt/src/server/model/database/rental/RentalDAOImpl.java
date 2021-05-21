@@ -6,7 +6,6 @@ import shared.transferobjects.Rental;
 
 import java.io.*;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -382,6 +381,7 @@ public class RentalDAOImpl implements RentalDAO
    * Deletes rental from database by connecting to the database and deleting matched object's id with existing member
    * @param rental rental object that will be deleted
    * @throws SQLException
+   * @return
    */
   @Override public boolean delete(Rental rental) throws SQLException {
     try (Connection connection = getConnection())
