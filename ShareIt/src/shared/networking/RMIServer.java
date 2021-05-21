@@ -46,4 +46,7 @@ public interface RMIServer extends Remote
     ArrayList<Rating> getAllRatingsOnMember(String memberUsername) throws RemoteException;
 
     boolean deleteMember(Member member) throws RemoteException;
+
+  Rating getRating(String fromUsername, String toUsername) throws RemoteException;
+  void updateRating(Rating rating) throws RemoteException;
 }

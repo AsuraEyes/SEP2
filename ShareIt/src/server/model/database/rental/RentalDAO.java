@@ -21,4 +21,5 @@ public interface RentalDAO {
         throws SQLException;
 
     ArrayList<Rental> getRentalsOfMemberList(String username);
+
 }
