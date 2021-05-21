@@ -11,7 +11,10 @@ public class CityDAOImpl implements CityDAO
 {
   private static CityDAOImpl instance;
   private String password;
-
+  /**
+   * Class that implements methods from its interface and provides access to a database(City in this case)
+   *
+   */
   private CityDAOImpl()throws SQLException{
     DriverManager.registerDriver(new org.postgresql.Driver());
   }
@@ -32,6 +35,11 @@ public class CityDAOImpl implements CityDAO
     return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=share_it", "postgres", password);
   }
 
+  /**
+   * Reads all cities from database by connecting to the database and get all table contents
+   * @return returns all city names in a arraylist
+   * @throws SQLException
+   */
   @Override public List<City> readCity() throws SQLException
   {
     try(Connection connection = getConnection()){

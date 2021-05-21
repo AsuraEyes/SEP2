@@ -5,6 +5,9 @@ import shared.transferobjects.Member;
 
 import java.sql.SQLException;
 
+/**
+ * Class that checks data before running an instance(Member data in this case)
+ */
 public class DataCheckMember {
 
     //does not check for length of ANY of the given Strings

@@ -5,7 +5,10 @@ import shared.transferobjects.City;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Class that implements methods from its interface and provides access to a database(Administrator in this case)
+ *
+ */
 
 public class AdministratorDAOImpl implements AdministratorDAO
 {
@@ -32,6 +35,12 @@ public class AdministratorDAOImpl implements AdministratorDAO
     return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=share_it", "postgres", password);
   }
 
+  /**
+   * Checks if the username is unique(not in database)(specifically for administrator) by connecting to the database and try to match given username with existing ones
+   * @param username username that has to be checked for being unique
+   * @return returns username if the data matches from given username and password
+   * @throws SQLException
+   */
   @Override
   public boolean uniqueUsername(String username) throws SQLException {
     try(Connection connection = getConnection()){
@@ -49,6 +58,12 @@ public class AdministratorDAOImpl implements AdministratorDAO
     }
   }
 
+  /**
+   * Checks to whom given username and password belongs to(specifically for administrator) by connecting to the database and matching given data with existing data
+   * @param username username that has to be checked
+   * @param password password that has to be checked
+   * @return returns username if the data matches from given username and password
+   */
   @Override
   public String checkLogInCredentials(String username, String password) {
     try(Connection connection = getConnection()){
