@@ -136,6 +136,11 @@ public class ShareItModelManager implements ShareItModel
   }
 
   @Override
+  public String getLoggedInUsername(){
+    return StateManager.getInstance().getUsername();
+  }
+
+  @Override
   public String checkLogInCredentials(String username, String password){
     return client.checkLogInCredentials(username, password);
   }

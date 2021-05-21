@@ -37,13 +37,15 @@ public class MenuController
     menuViewModel = viewModelFactory.getMenuViewModel();
     usernameLabel.textProperty().bind(menuViewModel.getUsernameLabel());
 
-    if (menuViewModel.checkUserType().equals("Visitor"))
+    String userType = menuViewModel.checkUserType();
+
+    if (userType.equals("Visitor"))
     {
       reviewsButton.setVisible(false);
       reportedMembersButton.setVisible(false);
       chatButton.setVisible(false);
     }
-    else if (menuViewModel.checkUserType().equals("Member"))
+    else if (userType.equals("Member"))
     {
       reviewsButton.setVisible(true);
       reviewsButton.setText("View my profile");
@@ -51,7 +53,7 @@ public class MenuController
       chatButton.setVisible(true);
       logInOutLabel.setText("Log out");
     }
-    else if (menuViewModel.checkUserType().equals("Administrator"))
+    else if (userType.equals("Administrator"))
     {
       reviewsButton.setVisible(true);
       reportedMembersButton.setVisible(true);

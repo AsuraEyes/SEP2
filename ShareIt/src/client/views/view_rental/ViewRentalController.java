@@ -2,6 +2,7 @@ package client.views.view_rental;
 
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
+import client.model.state.StateManager;
 import client.viewmodel.view_rental.ViewRentalViewModel;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
@@ -78,7 +79,14 @@ public class ViewRentalController
   public void seeMoreButton(ActionEvent actionEvent) throws IOException
   {
     viewRentalViewModel.setMemberUsername();
-    viewHandler.setView(viewHandler.menu(), viewHandler.viewMemberProfile());
+    //if member's profile I want to see is mine, send me to view my profile
+    if(viewRentalViewModel.usernameOfRentalProperty().getValue().equals(StateManager.getInstance().getUsername())){
+      viewHandler.setView(viewHandler.menu(), viewHandler.manageAccount());
+    }
+    else{
+      viewHandler.setView(viewHandler.menu(), viewHandler.viewMemberProfile());
+    }
+
     //viewRentalViewModel.getMemberById();
   }
 }
