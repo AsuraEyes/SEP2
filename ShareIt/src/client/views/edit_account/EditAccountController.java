@@ -83,7 +83,7 @@ public class EditAccountController {
             String message = editAccountViewModel.onEditButtonPressed(locationBox.getValue());
             switch (message){
                 case "Edit successful":
-                    notifications.owner(parent).text("Your account has been successfully edit! ").title(message).showConfirm();
+                    notifications.owner(parent).text("Your account has been successfully edited! ").title(message).showConfirm();
                     Stage stage = (Stage) viewHandler.getStage().getScene().getWindow();
                     Alert alert = new Alert(Alert.AlertType.INFORMATION, "");
                     alert.setTitle("Confirmation");

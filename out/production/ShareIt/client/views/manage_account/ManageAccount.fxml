@@ -63,7 +63,7 @@
                   </AnchorPane>
                </children>
             </VBox>
-            <Button layoutX="1150.0" layoutY="25.0" mnemonicParsing="false" style="-fx-border-radius: 30px; -fx-background-radius: 30px; -fx-background-color: #A3A1A8; -fx-border-color: #A3A1A8;" text="View ratings" textFill="WHITE">
+            <Button onAction="#viewRating" layoutX="1150.0" layoutY="25.0" mnemonicParsing="false" style="-fx-border-radius: 30px; -fx-background-radius: 30px; -fx-background-color: #A3A1A8; -fx-border-color: #A3A1A8;" text="View ratings" textFill="WHITE">
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
