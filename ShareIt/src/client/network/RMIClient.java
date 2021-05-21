@@ -215,6 +215,31 @@ public class RMIClient implements Client, RemoteObserver
     return false;
   }
 
+  @Override public Rating getRating(String fromUsername, String toUsername)
+  {
+    try
+    {
+      return server.getRating(fromUsername, toUsername);
+    }
+    catch (RemoteException e)
+    {
+      e.printStackTrace();
+    }
+    return null;
+  }
+
+  @Override public void updateRating(Rating rating)
+  {
+    try
+    {
+      server.updateRating(rating);
+    }
+    catch (RemoteException e)
+    {
+      e.printStackTrace();
+    }
+  }
+
   @Override public void addListener(String propertyName,
       PropertyChangeListener listener)
   {
@@ -249,6 +274,4 @@ public class RMIClient implements Client, RemoteObserver
       support.firePropertyChange("NewUser", null, object);
     }*/
   }
-
-
 }

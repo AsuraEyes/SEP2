@@ -17,8 +17,6 @@ public interface ServerModelManager extends Subject
     List<Rental> checkSearchWithFilter(String search, String city, ArrayList<String> selectedCategories);
     String addFeedback(double starValue, String feedback, String username1, String username2);
   ArrayList<City> getCityList();
-  /*void sendMessage(Message msg);
-  String getMessages();*/
 
     ArrayList<State> getStateList();
     ArrayList<Category> getCategoryList();
@@ -34,4 +32,8 @@ public interface ServerModelManager extends Subject
     ArrayList<Rating> getAllRatingsOnMember(String memberUsername);
 
     boolean deleteMember(Member member);
+
+    Rating getRating(String fromUsername, String toUsername);
+
+    void updateRating(Rating rating);
 }

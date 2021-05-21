@@ -19,7 +19,7 @@ public class DataCheckRating
       try
       {
         RatingDAOImpl.getInstance().create(starValue, feedback, username1, username2);
-        return "";
+        return "Added";
       }
       catch (SQLException e){
         //

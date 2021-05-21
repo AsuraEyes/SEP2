@@ -83,7 +83,7 @@ public class ShareItModelManager implements ShareItModel
   @Override
   public String updateCheckMemberData(String username, String password, String confirmPassword, String email, String phone, String otherInformation, String street, String streetNo, String postalCode, String city) throws IOException {
     String messageToReturn = client.updateCheckMemberData (username, password, confirmPassword, email, phone, otherInformation, street, streetNo, postalCode, city);
-    if(messageToReturn.equals("Adding successful")){
+    if(messageToReturn.equals("Edit successful")){
       StateManager.getInstance().setLoginState(new MemberState(username));
     }
 
@@ -184,4 +184,13 @@ public class ShareItModelManager implements ShareItModel
     return client.deleteMember(member);
   }
 
+  @Override public Rating getRating(String fromUsername, String toUsername)
+  {
+    return client.getRating(fromUsername, toUsername);
+  }
+
+  @Override public void updateRating(Rating rating)
+  {
+    client.updateRating(rating);
+  }
 }

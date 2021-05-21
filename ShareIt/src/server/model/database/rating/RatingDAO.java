@@ -9,4 +9,6 @@ public interface RatingDAO
 {
   Rating create(double starValue, String feedback, String username1, String username2)throws SQLException;
   List<Rating> getAllRatingsOnMember(String username) throws SQLException;
+  Rating getRating(String fromUsername, String toUsername) throws SQLException;
+  void updateRating(Rating rating);
 }

@@ -80,7 +80,7 @@ public class EditAccountViewModel {
     }
 
     public String onEditButtonPressed(String selectedCity) throws IOException {
-        return shareItModel.updateCheckMemberData(usernameField.getValue(), passwordField.getValue(), confirmPasswordField.getValue(),
+        return shareItModel.updateCheckMemberData(StateManager.getInstance().getUsername(), passwordField.getValue(), confirmPasswordField.getValue(),
                 emailField.getValue(), telephoneNoField.getValue(), otherInfoField.getValue(), streetField.getValue(),
                 streetNumberField.getValue()+", "+floorField.getValue(), postalCodeField.getValue(),  selectedCity);
     }

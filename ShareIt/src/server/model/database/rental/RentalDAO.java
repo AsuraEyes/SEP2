@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface RentalDAO {
-    Rental create(String name, String pictureLink, String description, int price, String otherInformation, String stateName, String username, ArrayList<String> selectedCategories) throws SQLException;
+    Rental create(String name, String pictureLink, String description, int price, String otherInformation, String stateName, ArrayList<String> selectedCategories) throws SQLException;
     List<Rental> readByName(String name) throws SQLException;
     List<Rental> readBySearch(String search) throws SQLException;
     List<Rental> readBySearchAndFilter(String search, String city, ArrayList<String> categories) throws SQLException;
@@ -21,4 +21,5 @@ public interface RentalDAO {
         throws SQLException;
 
     ArrayList<Rental> getRentalsOfMemberList(String username);
+
 }

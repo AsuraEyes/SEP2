@@ -7,6 +7,7 @@ import server.model.data_check.DataCheckSearch;
 import server.model.database.category.CategoryDAOImpl;
 import server.model.database.city.CityDAOImpl;
 import server.model.database.member.MemberDAOImpl;
+import server.model.database.rating.RatingDAO;
 import server.model.database.rating.RatingDAOImpl;
 import server.model.database.rental.RentalDAOImpl;
 import server.model.database.state.StateDAOImpl;
@@ -70,7 +71,7 @@ public class ServerModelImpl implements ServerModelManager
 
   @Override
   public String checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, String username, ArrayList<String> selectedCategories) {
-    return dataCheckRental.checkRentalData(name, pictureLink, description, price, otherInformation, stateName, username, selectedCategories);
+    return dataCheckRental.checkRentalData(name, pictureLink, description, price, otherInformation, stateName, selectedCategories);
   }
 
   @Override
@@ -206,5 +207,28 @@ public class ServerModelImpl implements ServerModelManager
     return false;
   }
 
+  @Override public Rating getRating(String fromUsername, String toUsername)
+  {
+    try
+    {
+      return RatingDAOImpl.getInstance().getRating(fromUsername, toUsername);
+    }
+    catch (SQLException throwables)
+    {
+      throwables.printStackTrace();
+    }
+    return null;
+  }
 
+  @Override public void updateRating(Rating rating)
+  {
+    try
+    {
+      RatingDAOImpl.getInstance().updateRating(rating);
+    }
+    catch (SQLException throwables)
+    {
+      throwables.printStackTrace();
+    }
+  }
 }
