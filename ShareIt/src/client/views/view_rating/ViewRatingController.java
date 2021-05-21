@@ -5,14 +5,17 @@ import client.core.ViewModelFactory;
 import client.viewmodel.view_rating.ViewRatingViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import org.controlsfx.control.InfoOverlay;
 import shared.transferobjects.Rating;
 
@@ -61,8 +64,19 @@ public class ViewRatingController {
         {
             for (int i = 0; i < ratings.size(); i++)
             {
-                System.out.println("Value: "+ratings.get(i).getRating());
-                vBox.getChildren().add(new VBox(new Label("Value: "+Double.toString(ratings.get(i).getRating())), new Label("Commentary: \n"+ratings.get(i).getCommentary())));
+                VBox ratingBox = new VBox();
+                Label ratingLabel = new Label("Rating: " + ratings.get(i).getRating());
+                ratingLabel.setFont(Font.font ("Californian FB", 24));
+                ratingLabel.setTextFill(Color.WHITE);
+                Text commentary = new Text("Commentary: \n" + ratings.get(i).getCommentary());
+                commentary.setFill(Color.WHITE);
+                TextFlow textFlow = new TextFlow();
+                textFlow.getChildren().addAll(commentary);
+                ratingBox.getChildren().addAll(ratingLabel,textFlow);
+                ratingBox.setSpacing(10);
+                ratingBox.setPadding(new Insets(20,160,20,160));
+                ratingBox.setStyle("-fx-border-color: #FF8C64; -fx-border-width: 3; -fx-background-color: #FF8C64;");
+                vBox.getChildren().add(ratingBox);
             }
         }
     }
