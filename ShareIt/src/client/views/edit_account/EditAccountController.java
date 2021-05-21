@@ -113,7 +113,7 @@ public class EditAccountController {
     Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "");
     alert.setTitle("Delete account");
     alert.setHeaderText("Are you sure?");
-    alert.getDialogPane().setContentText("Are you sure you want to permanent delete your account?");
+    alert.getDialogPane().setContentText("Are you sure you want to permanently delete your account?");
 
     Optional<ButtonType> result = alert.showAndWait();
     if (result.get() == ButtonType.OK) {
