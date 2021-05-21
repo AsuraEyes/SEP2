@@ -6,7 +6,6 @@ import shared.transferobjects.Rental;
 
 import java.io.*;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -58,10 +57,10 @@ public class RentalDAOImpl implements RentalDAO
       {
         e.printStackTrace();
       }
-
+      String username = StateManager.getInstance().getUsername();
       PreparedStatement statement = connection
           .prepareStatement("SELECT * FROM share_it.member WHERE username = ?");
-      statement.setString(1, StateManager.getInstance().getUsername());
+      statement.setString(1, username);
       ResultSet resultSet = statement.executeQuery();
       int memberId = 0;
       if (resultSet.next())
@@ -338,13 +337,15 @@ public class RentalDAOImpl implements RentalDAO
     }
   }
 
-  @Override public void delete(Rental rental) throws SQLException {
+  @Override public boolean delete(Rental rental) throws SQLException {
     try (Connection connection = getConnection())
     {
+      System.out.println(rental);
       PreparedStatement statement = connection
           .prepareStatement("DELETE FROM share_it.rental WHERE id = ?");
       statement.setInt(1, rental.getId());
       statement.executeUpdate();
+      return true;
     }
   }
 

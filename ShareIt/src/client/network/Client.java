@@ -35,4 +35,5 @@ public interface Client extends Subject
   boolean deleteMember(Member member);
   Rating getRating(String fromUsername, String toUsername);
   void updateRating(Rating rating);
+  boolean deleteRental(Rental rental);
 }
