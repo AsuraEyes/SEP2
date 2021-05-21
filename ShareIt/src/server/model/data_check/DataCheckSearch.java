@@ -7,7 +7,9 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Class that checks data before running an instance(Search data in this case)
+ */
 public class DataCheckSearch
 {
   private String search;

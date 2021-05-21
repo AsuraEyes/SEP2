@@ -4,7 +4,9 @@ import server.model.database.rating.RatingDAOImpl;
 import server.model.database.rental.RentalDAOImpl;
 
 import java.sql.SQLException;
-
+/**
+ * Class that checks data before running an instance(Rating data in this case)
+ */
 public class DataCheckRating
 {
   private double starValue;
