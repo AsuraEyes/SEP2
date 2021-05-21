@@ -1,6 +1,5 @@
 package client.core;
 
-import client.viewmodel.manage_account.ManageAccountViewModel;
 import client.views.add_rental.AddRentalController;
 import client.views.chat_received_messages.ChatReceivedMessagesController;
 import client.views.chat_write_message.ChatWriteMessageController;

@@ -28,7 +28,7 @@ public class MemberDAOImpl implements MemberDAO{
 
     private Connection getConnection() throws SQLException {
         System.out.println("password: "+password);
-        return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "SQLdatabaze");
+        return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", password);
     }
 
     @Override

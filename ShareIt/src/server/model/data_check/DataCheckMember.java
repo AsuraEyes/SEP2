@@ -64,7 +64,7 @@ public class DataCheckMember {
         this.phone = phone;
         this.postalCode = postalCode;
 
-        if(matchingPasswords() && uniqueUsername() && oneContactInformationGiven() && postalCodeIsNumber()){
+        if(matchingPasswords() && oneContactInformationGiven() && postalCodeIsNumber()){
             try{
                 MemberDAOImpl.getInstance().update(username, password, email, phone, otherInformation, street, streetNumber, postalCodeNb, city);
                 return "Edit successful";
