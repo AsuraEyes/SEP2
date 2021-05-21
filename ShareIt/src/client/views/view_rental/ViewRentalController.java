@@ -68,10 +68,6 @@ public class ViewRentalController
     ratingLabel.textProperty().bind(viewRentalViewModel.ratingOfUserOfRentalProperty());
   }
 
-  public void searchButton(ActionEvent actionEvent)
-  {
-
-  }
 
   public void goBackToSearchResultsButton(ActionEvent actionEvent)
       throws IOException, SQLException, InterruptedException
