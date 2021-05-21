@@ -11,6 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.image.Image;
+import org.controlsfx.control.IndexedCheckModel;
 import shared.transferobjects.Category;
 import shared.transferobjects.Rating;
 import shared.transferobjects.Rental;
@@ -113,5 +114,9 @@ public class EditRentalViewModel {
     }
     public String getSelectedState(){
         return shareItModel.getSelectedRental().getStateName();
+    }
+    public ArrayList<String> getCheckedCategories(){
+        System.out.println(shareItModel.getSelectedRental().getSelectedCategories());
+        return shareItModel.getSelectedRental().getSelectedCategories();
     }
 }

@@ -207,6 +207,7 @@ public class ShareItModelManager implements ShareItModel
 
   @Override public Rental getSelectedRental()
   {
+    System.out.println(rental.getSelectedCategories());
     return rental;
   }
 }

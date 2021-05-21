@@ -27,6 +27,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Optional;
 
 public class EditRentalController {
@@ -62,6 +63,9 @@ public class EditRentalController {
         priceField.textProperty().bindBidirectional(editRentalViewModel.getPriceField());
         otherInfoField.textProperty().bindBidirectional(editRentalViewModel.getOtherInfoField());
         categoryBox.getItems().addAll(editRentalViewModel.getCategories());
+        categoryBox.setShowCheckedCount(true);
+
+        checkCategories();
 
         notifications =  Notifications.create()
                 .title("Error - invalid input!")
@@ -144,5 +148,20 @@ public class EditRentalController {
             return false;
         }
         return true;
+    }
+
+    private void checkCategories(){
+        ArrayList<String> checkedCategories = editRentalViewModel.getCheckedCategories();
+        for (int i = 0; i < checkedCategories.size(); i++)
+        {
+            for (int j = 0; j < categoryBox.getItems().size(); j++)
+            {
+                if(checkedCategories.get(i).equals(categoryBox.getItems().get(j)))
+                {
+                    categoryBox.getCheckModel().check(j);
+                }
+            }
+        }
+
     }
 }
