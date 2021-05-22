@@ -45,8 +45,8 @@ public class ManageAccountViewModel {
     }
 
     public ArrayList<Rental> getRentalsOfMemberList() throws RemoteException {
-        System.out.println(usernameLabel.getValue());
-        return shareItModel.getRentalsOfMemberList(StateManager.getInstance().getUsername());
+        System.out.println("This is the username i am looking for: "+shareItModel.getMemberUsername());
+        return shareItModel.getRentalsOfMemberList(shareItModel.getLoggedInUsername());
     }
 
     public void getRental(Object object) throws RemoteException {

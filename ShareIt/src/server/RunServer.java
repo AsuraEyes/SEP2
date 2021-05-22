@@ -7,6 +7,8 @@ import server.model.database.city.CityDAOImpl;
 import server.model.database.member.MemberDAOImpl;
 import server.model.database.rating.RatingDAOImpl;
 import server.model.database.rental.RentalDAOImpl;
+import server.model.database.rental_category.RentalCategoryDAO;
+import server.model.database.rental_category.RentalCategoryDAOImpl;
 import server.model.database.state.StateDAOImpl;
 import server.networking.RMIServerImpl;
 import shared.networking.RMIServer;
@@ -23,7 +25,7 @@ public class RunServer
     String timothyPassword = "CoDex21";
     String maggiePassword = "SQLdatabaze";
     String bartoszPassword = "hehe2137";
-    String currentPassword = timothyPassword;
+    String currentPassword = maggiePassword;
     CityDAOImpl.getInstance().setPassword(currentPassword);
     RentalDAOImpl.getInstance().setPassword(currentPassword);
     CategoryDAOImpl.getInstance().setPassword(currentPassword);
@@ -31,6 +33,7 @@ public class RunServer
     AdministratorDAOImpl.getInstance().setPassword(currentPassword);
     RatingDAOImpl.getInstance().setPassword(currentPassword);
     MemberDAOImpl.getInstance().setPassword(currentPassword);
+    RentalCategoryDAOImpl.getInstance().setPassword(currentPassword);
     ss.startServer();
   }
 }

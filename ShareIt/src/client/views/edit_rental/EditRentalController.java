@@ -152,6 +152,7 @@ public class EditRentalController {
 
     private void checkCategories(){
         ArrayList<String> checkedCategories = editRentalViewModel.getCheckedCategories();
+        System.out.println(checkedCategories);
         for (int i = 0; i < checkedCategories.size(); i++)
         {
             for (int j = 0; j < categoryBox.getItems().size(); j++)

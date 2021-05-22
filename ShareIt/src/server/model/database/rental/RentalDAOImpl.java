@@ -2,6 +2,7 @@ package server.model.database.rental;
 
 import client.model.state.StateManager;
 import server.model.database.member.MemberDAOImpl;
+import server.model.database.rental_category.RentalCategoryDAOImpl;
 import shared.transferobjects.Rental;
 
 import java.io.*;
@@ -227,7 +228,7 @@ public class RentalDAOImpl implements RentalDAO
         arrayListToReturn.add(
                 new Rental(rentalId, rentalName, "file:" + filename, rentalDescription,
                         priceOfRental, rentalOtherInformation, rentalState, memberId,
-                        null));
+                        RentalCategoryDAOImpl.getInstance().getSelectedCategoriesOnRental(rentalId)));
       }
       resultSet.close();
       statement.close();
@@ -299,7 +300,7 @@ public class RentalDAOImpl implements RentalDAO
         arrayListToReturn.add(
                 new Rental(rentalId, rentalName, "file:" + filename, rentalDescription,
                         priceOfRental, rentalOtherInformation, rentalState, memberId,
-                        null));
+                        RentalCategoryDAOImpl.getInstance().getSelectedCategoriesOnRental(rentalId)));
       }
       resultSet.close();
       statement.close();
@@ -498,7 +499,7 @@ public class RentalDAOImpl implements RentalDAO
         arrayListToReturn.add(
             new Rental(rentalId, rentalName, "file:" + filename, rentalDescription,
                 priceOfRental, rentalOtherInformation, rentalState, memberId,
-                null));
+                RentalCategoryDAOImpl.getInstance().getSelectedCategoriesOnRental(rentalId)));
       }
       resultSet.close();
       statement.close();
@@ -542,10 +543,11 @@ public class RentalDAOImpl implements RentalDAO
         String rentalState = resultSet.getString("state_name");
         int memberId = resultSet.getInt("member_id");
 
+
         arrayListToReturn.add(
                 new Rental(rentalId, rentalName, "file:" + filename, rentalDescription,
                         priceOfRental, rentalOtherInformation, rentalState, memberId,
-                        null));
+                        RentalCategoryDAOImpl.getInstance().getSelectedCategoriesOnRental(rentalId)));
       }
       //return array list
       return arrayListToReturn;
