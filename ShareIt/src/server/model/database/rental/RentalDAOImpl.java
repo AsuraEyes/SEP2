@@ -346,14 +346,14 @@ public class RentalDAOImpl implements RentalDAO
 
   /**
    * Updates rental object by connecting to a database then updating data provided by user to the database
-   * @param rental rental data that was changed
+   * @param name Name of rental that was changed
    * @throws SQLException
    */
-  @Override public void update(Rental rental) throws SQLException
+  @Override public void update(String name, String pictureLink, String description, int price, String otherInformation, String stateName, int rentalId, ArrayList<String> selectedCategories) throws SQLException
   {
     try (Connection connection = getConnection())
     {
-      File file = new File(rental.getPictureLink());
+      File file = new File(pictureLink);
       FileInputStream fis = null;
       try
       {
@@ -364,16 +364,24 @@ public class RentalDAOImpl implements RentalDAO
         e.printStackTrace();
       }
       PreparedStatement statement = connection.prepareStatement(
-          "UPDATE share_it.rental SET name = ?, picture_link = ?, description = ?, price = ?, other_information = ?, state_name = ?, member_id = ? WHERE id = ?");
-      statement.setString(1, rental.getName());
+          "UPDATE share_it.rental SET name = ?, picture_link = ?, description = ?, price = ?, other_information = ?, state_name = ? WHERE id = ?");
+      statement.setString(1, name);
       statement.setBinaryStream(2, fis, (int) file.length());
-      statement.setString(3, rental.getDescription());
-      statement.setInt(4, rental.getPrice());
-      statement.setString(5, rental.getOtherInformation());
-      statement.setString(6, rental.getStateName());
-      statement.setInt(7, rental.getMemberId());
-      statement.setInt(8, rental.getId());
+      statement.setString(3, description);
+      statement.setInt(4, price);
+      statement.setString(5, otherInformation);
+      statement.setString(6, stateName);
+      statement.setInt(7, rentalId);
       statement.executeUpdate();
+
+      for (int i = 0; i < selectedCategories.size(); i++)
+      {
+        statement = connection.prepareStatement(
+                "UPDATE  share_it.rental_category SET category_name = ? WHERE rental_id = ?");
+        statement.setString(1, selectedCategories.get(i));
+        statement.setInt(2, rentalId);
+        statement.executeUpdate();
+      }
     }
   }
 

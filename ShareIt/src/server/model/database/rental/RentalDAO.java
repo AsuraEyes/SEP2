@@ -51,7 +51,7 @@ public interface RentalDAO {
      * @param rental rental data that was changed
      * @throws SQLException
      */
-    void update(Rental rental) throws SQLException;
+    void update(String name, String pictureLink, String description, int price, String otherInformation, String stateName, int rentalId, ArrayList<String> selectedCategories) throws SQLException;
     /**
      * Deletes rental from the database
      * @param rental rental object that will be deleted

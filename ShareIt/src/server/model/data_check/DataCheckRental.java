@@ -46,6 +46,35 @@ public class DataCheckRental {
         return "Ooops, something went wrong!!";
     }
 
+    public String updateCheckRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, int rentalId, ArrayList<String> selectedCategories) {
+        this.name = name;
+        this.pictureLink = pictureLink;
+        this.description = description;
+        this.price = price;
+
+        if (nameGiven() && descriptionGiven() && priceIsNumber()){
+            try {
+                RentalDAOImpl.getInstance().update(name, pictureLink, description, priceNb, otherInformation, stateName, rentalId, selectedCategories);
+                return "Adding successful";
+            }
+            catch (SQLException e){
+                e.printStackTrace();
+            }
+        }
+        else{
+            if(!nameGiven()){
+                return "Name cannot be empty";
+            }
+            if(!descriptionGiven()){
+                return "Description cannot be empty";
+            }
+            if(!priceIsNumber()){
+                return "Price is a not number";
+            }
+        }
+        return "Ooops, something went wrong!!";
+    }
+
     private boolean nameGiven(){
         if (name != null){
             if (!(name.trim().equals("") && name.isBlank() && name.isEmpty())){
@@ -73,6 +102,4 @@ public class DataCheckRental {
             return false;
         }
     }
-
-   
 }

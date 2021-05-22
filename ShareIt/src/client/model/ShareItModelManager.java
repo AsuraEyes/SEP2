@@ -96,6 +96,11 @@ public class ShareItModelManager implements ShareItModel
     return client.checkRentalData(name, pictureLink,  description,  price, otherInformation,  stateName, getLoggedInUsername(), selectedCategories);
   }
 
+  @Override
+  public String updateCheckRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, ArrayList<String> selectedCategories) throws IOException {
+    return client.updateCheckRentalData(name, pictureLink,  description,  price, otherInformation,  stateName, getSelectedRental().getId(), selectedCategories);
+  }
+
 
   @Override public List<Rental> checkSearchWithFilter(String search,String city, ArrayList<String> selectedCategories ) throws IOException
   {

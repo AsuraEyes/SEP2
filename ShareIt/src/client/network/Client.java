@@ -4,8 +4,6 @@ package client.network;
 import shared.transferobjects.*;
 import shared.util.Subject;
 import java.io.IOException;
-import java.rmi.RemoteException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +15,7 @@ public interface Client extends Subject
   List<Rental> checkSearch(String search) throws IOException;
   List<Rental> checkSearchWithFilter(String search,String city,ArrayList<String> selectedCategories) throws IOException;
   String checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, String username, ArrayList<String> selectedCategories) throws IOException;
+  String updateCheckRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, int rentalId, ArrayList<String> selectedCategories) throws IOException;
   String addFeedback(double starRating, String feedback, String username1, String username2) throws IOException;
   ArrayList<City> getCityList();
   ArrayList<State> getStateList();
@@ -36,4 +35,5 @@ public interface Client extends Subject
   Rating getRating(String fromUsername, String toUsername);
   void updateRating(Rating rating);
   boolean deleteRental(Rental rental);
+
 }
