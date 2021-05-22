@@ -89,8 +89,8 @@ public class EditRentalViewModel {
 
     public String onEditRentalButtonPressed(Object selectedState, ObservableList<String> selectedCategory, String pictureLink) throws IOException {
         ArrayList<String> selectedCategoriesList = new ArrayList<>(selectedCategory);
-        return shareItModel.checkRentalData(nameField.getValue(), pictureLink, descriptionField.getValue(), priceField.getValue(), otherInfoField.getValue(), (String) selectedState
-            ,selectedCategoriesList);
+        return shareItModel.updateCheckRentalData(nameField.getValue(), pictureLink, descriptionField.getValue(), priceField.getValue(), otherInfoField.getValue(), (String) selectedState
+            , selectedCategoriesList);
     }
 
     public ObservableList<String> getStates(){
