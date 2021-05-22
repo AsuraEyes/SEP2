@@ -75,7 +75,7 @@ public class RentalDAOImpl implements RentalDAO
 
       PreparedStatement statement = connection
           .prepareStatement("SELECT * FROM share_it.member WHERE username = ?");
-      statement.setString(1, StateManager.getInstance().getUsername());
+      statement.setString(1,username);
       ResultSet resultSet = statement.executeQuery();
       int memberId = 0;
       if (resultSet.next())

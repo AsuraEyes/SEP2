@@ -4,6 +4,7 @@ import client.core.ViewHandler;
 import client.core.ViewModelFactory;
 import client.viewmodel.seatch_for_rental.SearchForRentalViewModel;
 import javafx.application.Platform;
+import javafx.beans.binding.Binding;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -51,6 +52,7 @@ public class SearchForRentalController
     categoryCheckComboBox.getItems()
         .addAll(searchForRentalViewModel.getCategories());
     searchForRentalViewModel.setSearchField();
+
     System.out.println("Controller: " + searchField.textProperty().getValue());
     if(searchField.textProperty().getValue() != null)
     {
