@@ -108,6 +108,6 @@ VALUES ('This is a warning for your misconduct', '2021-05-03 15:15:38', 'adminis
 
 SELECT * FROM member;
 INSERT INTO rating
-VALUES (5, 'Good rating', 8, 5);
+VALUES (5.0, 'Good rating', 8, 5);
 
 SELECT * FROM share_it.city

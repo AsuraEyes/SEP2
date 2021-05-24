@@ -1,25 +1,25 @@
 package server.model.data_check;
 
-import server.model.database.rating.RatingDAOImpl;
+import server.model.database.report.ReportDAOImpl;
 
 import java.sql.SQLException;
 /**
- * Class that checks data before running an instance(Rating data in this case)
+ * Class that checks data before running an instance(Report data in this case)
  */
-public class DataCheckRating
+public class DataCheckReport
 {
-  private double starValue;
+
   private String feedback;
 
-  public String addFeedback(double starValue, String feedback, String username1, String username2){
+  public String addReport(String feedback, String username1, String username2){
     this.feedback = feedback;
-    this.starValue = starValue;
+
 
     if(FeedbackGiven())
     {
       try
       {
-        RatingDAOImpl.getInstance().create(starValue, feedback, username1, username2);
+        ReportDAOImpl.getInstance().create(feedback, username1, username2);
         return "Added";
       }
       catch (SQLException e){
@@ -28,7 +28,7 @@ public class DataCheckRating
     }
 
     return "Ooops, something went wrong!!";
-    }
+  }
 
 
 
@@ -38,6 +38,6 @@ public class DataCheckRating
         return true;
       }
     }
-    return true;
+    return false;
   }
 }

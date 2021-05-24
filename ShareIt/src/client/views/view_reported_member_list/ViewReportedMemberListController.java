@@ -18,7 +18,6 @@ public class ViewReportedMemberListController {private TextField searchField;
     public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory){
         this.viewHandler = viewHandler;
         viewReportedMemberListViewModel = viewModelFactory.getViewReportedMemberListViewModel();
-        searchField.textProperty().bindBidirectional(viewReportedMemberListViewModel.getSearchField());
         reportedNameLabel.textProperty().bind(viewReportedMemberListViewModel.getReportedNameLabel());
         reporterNameLabel.textProperty().bind(viewReportedMemberListViewModel.getReporterNameLabel());
     }

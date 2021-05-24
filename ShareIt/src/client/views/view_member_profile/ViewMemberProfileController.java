@@ -82,10 +82,13 @@ public class ViewMemberProfileController
 
   }
 
-  public void reportButton(ActionEvent actionEvent) {
+  public void reportButton(ActionEvent actionEvent) throws IOException {
+    viewMemberProfileViewModel.setMemberUsername();
+    viewHandler.setView(viewHandler.menu(),viewHandler.reportMember());
   }
 
-  public void chatButton(ActionEvent actionEvent) {
+  public void chatButton(ActionEvent actionEvent){
+
   }
 
   public void rateButton(ActionEvent actionEvent) throws IOException {
@@ -94,13 +97,30 @@ public class ViewMemberProfileController
 
   }
 
-  public void deleteButton(ActionEvent actionEvent) throws SQLException, IOException {
-    Stage stage = (Stage) viewHandler.getStage().getScene().getWindow();
+  public void deleteButton(ActionEvent actionEvent) throws IOException {
     Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "");
     alert.setTitle("Delete account");
     alert.setHeaderText("Are you sure?");
-    alert.initOwner(stage);
-    alert.getDialogPane().setContentText("Are you sure you want to permanent delete this account?");
+    alert.getDialogPane().setContentText("Are you sure you want to permanently delete your account?");
+
+    Optional<ButtonType> result = alert.showAndWait();
+    if (result.get() == ButtonType.OK) {
+      boolean success = viewMemberProfileViewModel.deleteAccount();
+      if(success){
+        Stage stage = (Stage) viewHandler.getStage().getScene().getWindow();
+        alert = new Alert(Alert.AlertType.INFORMATION, "");
+        alert.setTitle("Confirmation");
+        alert.setHeaderText("Account successfully deleted");
+        alert.initOwner(stage);
+        alert.getDialogPane().setContentText("Click ok to return to reported members.");
+
+        result = alert.showAndWait();
+        if (result.get() == ButtonType.OK)
+        {
+          viewHandler.setView(viewHandler.menu(), viewHandler.viewReportedMemberList());
+        }
+      }
+    }
 
   }
   
