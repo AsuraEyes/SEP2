@@ -38,4 +38,8 @@ public interface ServerModelManager extends Subject
     void updateRating(Rating rating);
     boolean deleteRental(Rental rental);
 
+  ArrayList<Message> getAllReceivedMessages(int loggedUserId);
+  ArrayList<Message> getMessagesFromUser(int loggedUserId, int fromUserid);
+  void sendMessage(Message message);
+
 }

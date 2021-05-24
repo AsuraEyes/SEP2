@@ -45,8 +45,13 @@ public class ShareItModelManager implements ShareItModel
     this.client = client;
     client.startClient();
     support = new PropertyChangeSupport(this);
-    //client.addListener("selectedRental", this::onDataValidation);
+    client.addListener("newMessage", this::onNewMessage);
     client.addListener("dataValidation", this::onDataValidation);
+  }
+
+  private void onNewMessage(PropertyChangeEvent evt)
+  {
+    support.firePropertyChange(evt);
   }
 
   public void onDataValidation(PropertyChangeEvent evt){
@@ -214,5 +219,22 @@ public class ShareItModelManager implements ShareItModel
   {
     System.out.println(rental.getSelectedCategories());
     return rental;
+  }
+
+  @Override public ArrayList<Message> getAllReceivedMessages(String loggedUsername)
+  {
+    getMemberByUsername(loggedUsername);
+    return client.getAllReceivedMessages(getMemberByUsername(loggedUsername).getId());
+  }
+
+  @Override public ArrayList<Message> getMessagesFromUser(int loggedUserId,
+      int fromUserid)
+  {
+    return client.getMessagesFromUser(loggedUserId, fromUserid);
+  }
+
+  @Override public void sendMessage(Message message)
+  {
+    client.sendMessage(message);
   }
 }

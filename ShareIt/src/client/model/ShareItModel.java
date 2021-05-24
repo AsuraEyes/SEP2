@@ -48,4 +48,8 @@ public interface ShareItModel extends Subject
     void setSelectedRental(Rental rental);
     Rental getSelectedRental();
 
+    ArrayList<Message> getAllReceivedMessages(String loggedUsername);
+    ArrayList<Message> getMessagesFromUser(int loggedUserId, int fromUserid);
+    void sendMessage(Message message);
+
 }

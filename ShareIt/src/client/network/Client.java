@@ -35,5 +35,8 @@ public interface Client extends Subject
   Rating getRating(String fromUsername, String toUsername);
   void updateRating(Rating rating);
   boolean deleteRental(Rental rental);
+  ArrayList<Message> getAllReceivedMessages(int loggedUserId);
+  ArrayList<Message> getMessagesFromUser(int loggedUserId, int fromUserid);
+  void sendMessage(Message message);
 
 }

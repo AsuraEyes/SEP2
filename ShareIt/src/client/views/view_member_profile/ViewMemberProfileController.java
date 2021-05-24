@@ -85,7 +85,10 @@ public class ViewMemberProfileController
   public void reportButton(ActionEvent actionEvent) {
   }
 
-  public void chatButton(ActionEvent actionEvent) {
+  public void chatButton(ActionEvent actionEvent) throws IOException
+  {
+    viewHandler.setView(viewHandler.menu(), viewHandler.chatWrite());
+    viewMemberProfileViewModel.setMemberUsername();
   }
 
   public void rateButton(ActionEvent actionEvent) throws IOException {

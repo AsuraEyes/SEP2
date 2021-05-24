@@ -53,8 +53,10 @@ public class ViewModelFactory
   {
     this.modelFactory = modelFactory;
     logInViewModel = new LogInViewModel(modelFactory.getShareItModel());
-    chatReceivedMessagesViewModel = new ChatReceivedMessagesViewModel();
-    chatWriteMessageViewModel = new ChatWriteMessageViewModel();
+    chatReceivedMessagesViewModel = new ChatReceivedMessagesViewModel(
+        modelFactory.getShareItModel());
+    chatWriteMessageViewModel = new ChatWriteMessageViewModel(
+        modelFactory.getShareItModel());
   }
   public LogInViewModel getLogInViewModel() throws IOException
   {
@@ -66,20 +68,24 @@ public class ViewModelFactory
   }
 
   public ChatReceivedMessagesViewModel getChatReceivedMessagesViewModel()
+      throws IOException
   {
     if(chatReceivedMessagesViewModel == null)
     {
-      chatReceivedMessagesViewModel = new ChatReceivedMessagesViewModel();
+      chatReceivedMessagesViewModel = new ChatReceivedMessagesViewModel(
+          modelFactory.getShareItModel());
     }
     return chatReceivedMessagesViewModel;
   }
 
 
   public ChatWriteMessageViewModel getChatWriteMessagesViewModel()
+      throws IOException
   {
     if(chatWriteMessageViewModel == null)
     {
-      chatWriteMessageViewModel = new ChatWriteMessageViewModel();
+      chatWriteMessageViewModel = new ChatWriteMessageViewModel(
+          modelFactory.getShareItModel());
     }
     return chatWriteMessageViewModel;
   }

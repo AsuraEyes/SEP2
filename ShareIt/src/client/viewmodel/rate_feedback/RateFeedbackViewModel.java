@@ -34,10 +34,12 @@ public class RateFeedbackViewModel
   public StringProperty getCommentaryTextArea(){
     return commentaryTextArea;
   }
+
   public StringProperty getUsernameLabel()
   {
     return usernameLabel;
   }
+
   public DoubleProperty getRatingProperty(){ return ratingProperty;}
 
 

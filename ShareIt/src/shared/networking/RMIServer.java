@@ -51,4 +51,8 @@ public interface RMIServer extends Remote
   void updateRating(Rating rating) throws RemoteException;
   boolean deleteRental(Rental rental) throws RemoteException;
 
+  ArrayList<Message> getAllReceivedMessages(int loggedUserId) throws RemoteException;
+  ArrayList<Message> getMessagesFromUser(int loggedUserId, int fromUserid) throws RemoteException;
+  void sendMessage(Message message) throws  RemoteException;
+
 }

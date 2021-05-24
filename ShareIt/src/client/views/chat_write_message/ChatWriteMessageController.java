@@ -23,13 +23,17 @@ public class ChatWriteMessageController
   private ViewHandler viewHandler;
   private ChatWriteMessageViewModel chatWriteMessageViewModel;
 
-  public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory){
+  public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory)
+      throws IOException
+  {
     this.viewHandler = viewHandler;
+    textChatArea.clear();
     chatWriteMessageViewModel = viewModelFactory.getChatWriteMessagesViewModel();
-    //toUsernameLabel.textProperty().bind(chatWriteMessageViewModel.getUsername());
-    //textChatArea.textProperty().bindBidirectional(chatWriteMessageViewModel.getMessages());
-    //chatWriteMessageViewModel.loadLogs();
-
+    toUsernameLabel.textProperty().bind(chatWriteMessageViewModel.getUsername());
+    inputTextChatField.textProperty().bindBidirectional(chatWriteMessageViewModel.getInputTextChat());
+    chatWriteMessageViewModel.getMember();
+    textChatArea.textProperty().bind(chatWriteMessageViewModel.getMessages());
+    chatWriteMessageViewModel.loadLogs();
   }
 
   public void onGoBack(ActionEvent actionEvent) throws IOException
@@ -39,6 +43,7 @@ public class ChatWriteMessageController
 
   public void onSend(ActionEvent actionEvent)
   {
-
+    chatWriteMessageViewModel.sendMessage();
+    inputTextChatField.clear();
   }
 }
