@@ -36,4 +36,7 @@ public interface Client extends Subject
   void updateRating(Rating rating);
   boolean deleteRental(Rental rental);
 
+    List<Member> checkSearchForMember(String value);
+
+    List<Member> getMembersList();
 }

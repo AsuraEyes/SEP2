@@ -48,4 +48,7 @@ public interface ShareItModel extends Subject
     void setSelectedRental(Rental rental);
     Rental getSelectedRental();
 
+    List<Member> checkSearchForMember(String value);
+
+    List<Member> getMembersList();
 }

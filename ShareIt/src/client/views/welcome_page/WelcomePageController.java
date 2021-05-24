@@ -2,7 +2,6 @@ package client.views.welcome_page;
 
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
-import client.viewmodel.seatch_for_rental.SearchForRentalViewModel;
 import client.viewmodel.welcome_page.WelcomePageViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -30,7 +29,11 @@ public class WelcomePageController {
 
     public void searchButton(ActionEvent actionEvent) throws IOException {
         welcomePageViewModel.setSearchText();
-
-        viewHandler.setView(viewHandler.menu(), viewHandler.searchForRental());
+        if(welcomePageViewModel.getUserType().equals("Administrator")){
+            viewHandler.setView(viewHandler.menu(), viewHandler.searchForMember());
+        }
+        else{
+            viewHandler.setView(viewHandler.menu(), viewHandler.searchForRental());
+        }
     }
 }

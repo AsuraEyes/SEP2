@@ -3,12 +3,10 @@ package client.views.report_member;
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
 import client.viewmodel.report_member.ReportMemberViewModel;
-import client.viewmodel.seatch_for_rental.SearchForRentalViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 
 import java.io.IOException;
 

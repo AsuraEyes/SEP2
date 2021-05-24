@@ -51,4 +51,7 @@ public interface RMIServer extends Remote
   void updateRating(Rating rating) throws RemoteException;
   boolean deleteRental(Rental rental) throws RemoteException;
 
+    List<Member> checkSearchForMember(String value) throws RemoteException;
+
+    List<Member> getMembersList() throws RemoteException;
 }

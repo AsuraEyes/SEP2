@@ -183,4 +183,14 @@ public class RMIServerImpl implements RMIServer
     return serverModelManager.deleteRental(rental);
   }
 
+  @Override
+  public List<Member> checkSearchForMember(String value) throws RemoteException {
+    return serverModelManager.checkSearchForMember(value);
+  }
+
+  @Override
+  public List<Member> getMembersList() {
+    return serverModelManager.getMembersList();
+  }
+
 }

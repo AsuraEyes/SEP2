@@ -234,6 +234,28 @@ public class RMIClient implements Client, RemoteObserver
     return false;
   }
 
+  @Override
+  public List<Member> checkSearchForMember(String value) {
+    try{
+      return server.checkSearchForMember(value);
+    }
+    catch (Exception e){
+      e.printStackTrace();
+    }
+    return null;
+  }
+
+  @Override
+  public List<Member> getMembersList() {
+    try{
+      return server.getMembersList();
+    }
+    catch (Exception e){
+      e.printStackTrace();
+    }
+    return null;
+  }
+
   @Override public Rating getRating(String fromUsername, String toUsername)
   {
     try

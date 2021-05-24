@@ -248,4 +248,26 @@ public class ServerModelImpl implements ServerModelManager
     }
     return false;
   }
+
+  @Override
+  public List<Member> checkSearchForMember(String value) {
+    try{
+      return MemberDAOImpl.getInstance().readByUsername(value);
+    }
+    catch (SQLException throwables){
+      throwables.printStackTrace();
+    }
+    return null;
+  }
+
+  @Override
+  public List<Member> getMembersList() {
+    try{
+      return MemberDAOImpl.getInstance().readMembers();
+    }
+    catch (SQLException e){
+      e.printStackTrace();
+    }
+    return null;
+  }
 }

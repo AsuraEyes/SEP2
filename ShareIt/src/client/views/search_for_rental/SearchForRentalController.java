@@ -2,10 +2,7 @@ package client.views.search_for_rental;
 
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
-import client.viewmodel.seatch_for_rental.SearchForRentalViewModel;
-import javafx.application.Platform;
-import javafx.beans.binding.Binding;
-import javafx.beans.binding.Bindings;
+import client.viewmodel.search_for_rental.SearchForRentalViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
@@ -22,11 +19,7 @@ import shared.transferobjects.Rental;
 
 import java.io.IOException;
 import java.rmi.RemoteException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 public class SearchForRentalController
 {
@@ -62,7 +55,7 @@ public class SearchForRentalController
     {
       displayRentals(searchForRentalViewModel.getRentalsList());
     }
-    }
+  }
 
     /*searchForRentalViewModel.loadObservableNodes();
     Bindings.bindContent(flowPane.getChildren(),
@@ -110,7 +103,7 @@ public class SearchForRentalController
     displayRentals(rentals);
   }
 
-  public void displayRentals(List<Rental> rentals) throws RemoteException
+  public void displayRentals(List<Rental> rentals)
   {
       if (rentals != null && !rentals.isEmpty())
       {

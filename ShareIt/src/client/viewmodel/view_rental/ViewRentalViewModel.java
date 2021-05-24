@@ -138,4 +138,8 @@ public class ViewRentalViewModel
   public void setMemberUsername(){
     shareItModel.setMemberUsername(usernameOfRental.getValue());
   }
+
+  public String getUserType(){
+    return shareItModel.checkUserType();
+  }
 }

@@ -29,7 +29,6 @@ import java.util.List;
 
 public class ViewMemberProfileController
 {
-  @FXML private TextField searchField;
   @FXML private Label usernameLabel;
   @FXML private Label locationLabel;
   @FXML private Label ratingLabel;
@@ -40,6 +39,7 @@ public class ViewMemberProfileController
   @FXML private Button rateButton;
   @FXML private Button chatButton;
   @FXML private Button reportButton;
+  @FXML private Button goBackToViewedRentalButton;
   @FXML private FlowPane flowPane;
 
   public ImageView ImageView;
@@ -50,7 +50,6 @@ public class ViewMemberProfileController
   public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws IOException {
     this.viewHandler = viewHandler;
     viewMemberProfileViewModel = viewModelFactory.getViewMemberProfileViewModel();
-    searchField.textProperty().bindBidirectional(viewMemberProfileViewModel.getSearchField());
     usernameLabel.textProperty().bind(viewMemberProfileViewModel.getUsernameLabel());
     locationLabel.textProperty().bind(viewMemberProfileViewModel.getLocationLabel());
     ratingLabel.textProperty().bind(viewMemberProfileViewModel.getRatingLabel());
@@ -74,6 +73,7 @@ public class ViewMemberProfileController
         reportButton.setVisible(false);
         rateButton.setVisible(false);
         chatButton.setText("Warning");
+        goBackToViewedRentalButton.setText("Go back to search results");
         break;
     }
   }
@@ -107,7 +107,13 @@ public class ViewMemberProfileController
   public void goBackToViewedRentalButton(ActionEvent actionEvent)
       throws IOException
   {
-    viewHandler.setView(viewHandler.menu(), viewHandler.viewRental());
+    if(viewMemberProfileViewModel.checkUserType().equals("Administrator")){
+      viewHandler.setView(viewHandler.menu(), viewHandler.searchForMember());
+    }
+    else{
+      viewHandler.setView(viewHandler.menu(), viewHandler.viewRental());
+    }
+
   }
 
   public void viewRatingButton(ActionEvent actionEvent) throws IOException {

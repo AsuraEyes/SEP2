@@ -215,4 +215,14 @@ public class ShareItModelManager implements ShareItModel
     System.out.println(rental.getSelectedCategories());
     return rental;
   }
+
+  @Override
+  public List<Member> checkSearchForMember(String value) {
+    return client.checkSearchForMember(value);
+  }
+
+  @Override
+  public List<Member> getMembersList() {
+    return client.getMembersList();
+  }
 }
