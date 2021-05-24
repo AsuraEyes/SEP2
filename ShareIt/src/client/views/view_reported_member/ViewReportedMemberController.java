@@ -9,7 +9,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class ViewReportedMemberController {
-    @FXML private TextField searchField;
     @FXML private Label reportedNameLabel;
     @FXML private Label reporterNameLabel;
     @FXML private Label commentaryLabel;
@@ -20,7 +19,6 @@ public class ViewReportedMemberController {
     public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory){
         this.viewHandler = viewHandler;
         viewReportedMemberViewModel = viewModelFactory.getViewReportedMemberViewModel();
-        searchField.textProperty().bindBidirectional(viewReportedMemberViewModel.getSearchField());
         reportedNameLabel.textProperty().bind(viewReportedMemberViewModel.getReportedNameLabel());
         reporterNameLabel.textProperty().bind(viewReportedMemberViewModel.getReporterNameLabel());
         commentaryLabel.textProperty().bind(viewReportedMemberViewModel.getCommentaryLabel());

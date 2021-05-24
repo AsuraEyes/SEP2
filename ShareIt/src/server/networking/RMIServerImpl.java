@@ -107,6 +107,12 @@ public class RMIServerImpl implements RMIServer
     return serverModelManager.addFeedback(starValue, feedback, username1, username2);
   }
 
+  @Override public String addReport(String feedback, String username1,
+      String username2) throws RemoteException
+  {
+    return serverModelManager.addReport(feedback, username1, username2);
+  }
+
   @Override
   public List<Rental> checkSearch(String search) throws RemoteException
   {
@@ -173,9 +179,20 @@ public class RMIServerImpl implements RMIServer
     return serverModelManager.getRating(fromUsername, toUsername);
   }
 
+  @Override public Report getReport(String fromUsername, String toUsername)
+      throws RemoteException
+  {
+    return serverModelManager.getReport(fromUsername,toUsername);
+  }
+
   @Override public void updateRating(Rating rating)
   {
     serverModelManager.updateRating(rating);
+  }
+
+  @Override public void updateReport(Report report) throws RemoteException
+  {
+    serverModelManager.updateReport(report);
   }
 
   @Override public boolean deleteRental(Rental rental)

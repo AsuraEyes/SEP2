@@ -111,6 +111,13 @@ public class ShareItModelManager implements ShareItModel
     System.out.println(starValue);
     return client.addFeedback(starValue, feedback,username1,username2 );
   }
+
+  @Override public String addReport(String feedback, String username1,
+      String username2) throws IOException
+  {
+    return client.addReport(feedback,username1,username2);
+  }
+
   @Override public List<Rental> checkSearch(String search) throws IOException
   {
     return client.checkSearch(search);
@@ -195,9 +202,19 @@ public class ShareItModelManager implements ShareItModel
     return client.getRating(fromUsername, toUsername);
   }
 
+  @Override public Report getReport(String fromUsername, String toUsername)
+  {
+    return client.getReport(fromUsername, toUsername);
+  }
+
   @Override public void updateRating(Rating rating)
   {
     client.updateRating(rating);
+  }
+
+  @Override public void updateReport(Report report)
+  {
+    client.updateReport(report);
   }
 
   @Override public boolean deleteRental(Rental rental)

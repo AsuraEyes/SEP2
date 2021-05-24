@@ -82,10 +82,13 @@ public class ViewMemberProfileController
 
   }
 
-  public void reportButton(ActionEvent actionEvent) {
+  public void reportButton(ActionEvent actionEvent) throws IOException {
+    viewMemberProfileViewModel.setMemberUsername();
+    viewHandler.setView(viewHandler.menu(),viewHandler.reportMember());
   }
 
-  public void chatButton(ActionEvent actionEvent) {
+  public void chatButton(ActionEvent actionEvent){
+
   }
 
   public void rateButton(ActionEvent actionEvent) throws IOException {
