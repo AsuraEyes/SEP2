@@ -42,4 +42,6 @@ public interface Client extends Subject
     List<Member> checkSearchForMember(String value);
 
     List<Member> getMembersList();
+    List<Report> getReportList();
+
 }

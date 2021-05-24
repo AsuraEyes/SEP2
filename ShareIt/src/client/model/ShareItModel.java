@@ -54,4 +54,9 @@ public interface ShareItModel extends Subject
     List<Member> checkSearchForMember(String value);
 
     List<Member> getMembersList();
+    List<Report> getReportList();
+    void setUsernames(String reporterNameLabel, String reportedNameLabel);
+    String getReporterPerson();
+    String getReportedPerson();
+
 }

@@ -302,4 +302,17 @@ public class ServerModelImpl implements ServerModelManager
     }
     return null;
   }
+
+  @Override public List<Report> getReportList()
+  {
+    try{
+      return ReportDAOImpl.getInstance().readReports();
+    }
+    catch (SQLException e){
+      e.printStackTrace();
+    }
+    return null;
+  }
+
+
 }

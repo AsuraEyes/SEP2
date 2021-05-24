@@ -270,6 +270,19 @@ public class RMIClient implements Client, RemoteObserver
     return null;
   }
 
+  @Override
+  public List<Report> getReportList()
+  {
+    try{
+      return server.getReportList();
+    }
+    catch (Exception e){
+      e.printStackTrace();
+    }
+    return null;
+  }
+
+
   @Override public Rating getRating(String fromUsername, String toUsername)
   {
     try

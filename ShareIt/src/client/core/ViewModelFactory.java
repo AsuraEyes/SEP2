@@ -126,16 +126,16 @@ public class ViewModelFactory
     return viewRatingViewModel;
   }
 
-  public ViewReportedMemberViewModel getViewReportedMemberViewModel() {
+  public ViewReportedMemberViewModel getViewReportedMemberViewModel() throws IOException {
     if (viewReportedMemberViewModel == null){
-      viewReportedMemberViewModel = new ViewReportedMemberViewModel();
+      viewReportedMemberViewModel = new ViewReportedMemberViewModel(modelFactory.getShareItModel());
     }
     return viewReportedMemberViewModel;
   }
 
-  public ViewReportedMemberListViewModel getViewReportedMemberListViewModel() {
+  public ViewReportedMemberListViewModel getViewReportedMemberListViewModel() throws IOException {
     if (viewReportedMemberListViewModel == null){
-      viewReportedMemberListViewModel = new ViewReportedMemberListViewModel();
+      viewReportedMemberListViewModel = new ViewReportedMemberListViewModel(modelFactory.getShareItModel());
     }
     return viewReportedMemberListViewModel;
   }

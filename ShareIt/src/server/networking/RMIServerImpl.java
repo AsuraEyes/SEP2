@@ -210,4 +210,12 @@ public class RMIServerImpl implements RMIServer
     return serverModelManager.getMembersList();
   }
 
+  @Override
+  public List<Report> getReportList()
+  {
+    return serverModelManager.getReportList();
+  }
+
+
+
 }

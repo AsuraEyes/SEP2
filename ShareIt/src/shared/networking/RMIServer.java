@@ -57,4 +57,6 @@ public interface RMIServer extends Remote
     List<Member> checkSearchForMember(String value) throws RemoteException;
 
     List<Member> getMembersList() throws RemoteException;
+    List<Report> getReportList() throws RemoteException;
+
 }

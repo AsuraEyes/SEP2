@@ -8,21 +8,30 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
+import java.io.IOException;
+
 public class ViewReportedMemberController {
-    @FXML private Label reportedNameLabel;
-    @FXML private Label reporterNameLabel;
-    @FXML private Label commentaryLabel;
+    @FXML private Label reportedMemberField;
+    @FXML private Label reportedByField;
+    @FXML private Label commentField;
 
     private ViewReportedMemberViewModel viewReportedMemberViewModel;
     private ViewHandler viewHandler;
 
-    public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory){
+    public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws IOException{
         this.viewHandler = viewHandler;
         viewReportedMemberViewModel = viewModelFactory.getViewReportedMemberViewModel();
-        reportedNameLabel.textProperty().bind(viewReportedMemberViewModel.getReportedNameLabel());
-        reporterNameLabel.textProperty().bind(viewReportedMemberViewModel.getReporterNameLabel());
-        commentaryLabel.textProperty().bind(viewReportedMemberViewModel.getCommentaryLabel());
+        reportedMemberField.textProperty().bind(viewReportedMemberViewModel.getReportedNameLabel());
+        reportedByField.textProperty().bind(viewReportedMemberViewModel.getReporterNameLabel());
+        commentField.textProperty().bind(viewReportedMemberViewModel.getCommentaryLabel());
+        viewReportedMemberViewModel.getReportedPerson();
+        viewReportedMemberViewModel.getReporterPerson();
+        viewReportedMemberViewModel.getComment();
     }
 
-
+    public void goBackToReportedMembers(ActionEvent actionEvent) throws
+        IOException
+    {
+        viewHandler.setView(viewHandler.menu(), viewHandler.viewReportedMemberList());
+    }
 }

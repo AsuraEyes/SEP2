@@ -103,7 +103,7 @@ public class MenuController
   }
 
     public void onReportedMembersButton (ActionEvent actionEvent)
-      throws IOException {
+      throws IOException,  SQLException {
     viewHandler
         .setView(viewHandler.menu(), viewHandler.viewReportedMemberList());
   }

@@ -21,10 +21,22 @@ public class ShareItModelManager implements ShareItModel
   private String memberUsername;
   private String searchText;
   private Rental rental;
+  private String reporterPerson;
+  private String reportedPerson;
 
   @Override
   public String getMemberUsername() {
     return memberUsername;
+  }
+
+  public String getReporterPerson()
+  {
+    return reporterPerson;
+  }
+
+  public String getReportedPerson()
+  {
+    return reportedPerson;
   }
 
   @Override
@@ -38,7 +50,12 @@ public class ShareItModelManager implements ShareItModel
     this.memberUsername = memberUsername;
   }
 
-
+  @Override public void setUsernames(String reporterNameLabel,
+      String reportedNameLabel)
+  {
+    reporterPerson = reporterNameLabel;
+    reportedPerson = reportedNameLabel;
+  }
 
   public ShareItModelManager(Client client) throws IOException
   {
@@ -242,4 +259,8 @@ public class ShareItModelManager implements ShareItModel
   public List<Member> getMembersList() {
     return client.getMembersList();
   }
+
+  @Override
+  public List<Report> getReportList() { return client.getReportList(); }
+
 }
