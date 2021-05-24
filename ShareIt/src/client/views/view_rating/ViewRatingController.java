@@ -52,7 +52,13 @@ public class ViewRatingController {
     }
 
     public void goBackToUserPage(ActionEvent actionEvent) throws IOException {
-        viewHandler.setView(viewHandler.menu(), viewHandler.viewMemberProfile());
+        if(userNameLabel.textProperty().getValue().equals(viewRatingViewModel.getUserType())){
+            viewHandler.setView(viewHandler.menu(), viewHandler.manageAccount());
+        }
+        else{
+            viewHandler.setView(viewHandler.menu(), viewHandler.viewMemberProfile());
+        }
+
     }
 
     public void seeFullRating(ActionEvent actionEvent) {
