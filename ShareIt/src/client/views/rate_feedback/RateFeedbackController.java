@@ -31,10 +31,9 @@ public class RateFeedbackController
     commentaryTextArea.textProperty().bindBidirectional(rateFeedbackViewModel.getCommentaryTextArea());
     usernameLabel.textProperty().bind(rateFeedbackViewModel.getUsernameLabel());
     ratingStars.ratingProperty().bindBidirectional(rateFeedbackViewModel.getRatingProperty());
-    System.out.println("here");
+    commentaryTextArea.clear();
+    ratingStars.setRating(0);
     rateFeedbackViewModel.getMemberUsername();
-    rateFeedbackViewModel.getRating();
-
 
   }
 
@@ -48,10 +47,11 @@ public class RateFeedbackController
       Optional<ButtonType> result = alert.showAndWait();
       if (result.get() == ButtonType.OK)
       {
-        commentaryTextArea.clear();
-        ratingStars.setRating(0);
+
         viewHandler.setView(viewHandler.menu(), viewHandler.viewMemberProfile());
+
       }
+
 
     //rateFeedbackViewModel.onSubmitButtonPressed();
 

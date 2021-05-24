@@ -46,15 +46,14 @@ public class RateFeedbackViewModel
   {
     usernameLabel.setValue(model.getMemberUsername());
     System.out.println("this issmthmber VM : " + model.getMemberUsername());
+    getRating();
     return model.getMemberUsername();
   }
-  public void setMemberUsername(){
-    model.setMemberUsername(usernameLabel.getValue());
-  }
+
   public void getRating()
   {
-    Rating rating = model.getRating(StateManager.getInstance().getUsername(),
-        getMemberUsername());
+    Rating rating = model.getRating(model.getLoggedInUsername(),
+        model.getMemberUsername());
     if(rating != null)
     {
       ratingProperty.setValue(rating.getRating());
@@ -62,7 +61,7 @@ public class RateFeedbackViewModel
     }
   }
   public void updateFeedback(){
-    int memberFromId = model.getMemberByUsername(StateManager.getInstance().getUsername())
+    int memberFromId = model.getMemberByUsername(model.getLoggedInUsername())
         .getId();
     int memberToId = model.getMemberByUsername(model.getMemberUsername()).getId();
     Rating rating = new Rating(ratingProperty.getValue(),
@@ -72,7 +71,7 @@ public class RateFeedbackViewModel
   public String addFeedback() throws IOException
   {
     return model.addFeedback(ratingProperty.getValue(),commentaryTextArea.getValue(),
-        StateManager.getInstance().getUsername(),getMemberUsername());
+        model.getLoggedInUsername(), getMemberUsername());
   }
   public String onSubmitButtonPressed() throws IOException
   {
