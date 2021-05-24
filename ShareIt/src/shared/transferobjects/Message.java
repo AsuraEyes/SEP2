@@ -80,7 +80,7 @@ public class Message implements Serializable
   }
 
   public String toString(){
-    DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+    DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
     String strDate = dateFormat.format(timeStamp);
     return strDate + " " +  ": " + memberFrom + ": " + text;
   }
