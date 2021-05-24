@@ -102,7 +102,7 @@ public class EditAccountController {
         }
     }
 
-    public void deleteButton(ActionEvent actionEvent) throws SQLException, IOException {
+    public void deleteButton(ActionEvent actionEvent) throws IOException {
     Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "");
     alert.setTitle("Delete account");
     alert.setHeaderText("Are you sure?");
