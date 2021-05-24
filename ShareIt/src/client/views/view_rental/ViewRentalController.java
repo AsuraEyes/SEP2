@@ -36,6 +36,7 @@ public class ViewRentalController
   @FXML private Label otherInformationLabel;
   @FXML private Label categoriesLabel;
   @FXML private ImageView imageView;
+  @FXML private Button goBackButton;
   private Image picture;
   
   @FXML private Label usernameLabel;
@@ -66,14 +67,23 @@ public class ViewRentalController
     usernameLabel.textProperty().bind(viewRentalViewModel.usernameOfRentalProperty());
     locationLabel.textProperty().bind(viewRentalViewModel.locationOfRentalProperty());
     ratingLabel.textProperty().bind(viewRentalViewModel.ratingOfUserOfRentalProperty());
+
+    if(viewRentalViewModel.getUserType().equals("Administrator")){
+      goBackButton.setText("Go back to member page");
+    }
   }
 
 
   public void goBackToSearchResultsButton(ActionEvent actionEvent)
-      throws IOException, SQLException, InterruptedException
+      throws IOException
   {
-    System.out.println("ho");
-    viewHandler.setView(viewHandler.menu(), viewHandler.searchForRental());
+    if(viewRentalViewModel.getUserType().equals("Administrator")){
+      viewHandler.setView(viewHandler.menu(), viewHandler.viewMemberProfile());
+    }
+    else{
+      viewHandler.setView(viewHandler.menu(), viewHandler.searchForRental());
+    }
+
   }
 
   public void seeMoreButton(ActionEvent actionEvent) throws IOException

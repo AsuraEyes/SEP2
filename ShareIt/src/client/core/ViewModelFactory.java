@@ -12,17 +12,16 @@ import client.viewmodel.manage_rentals.ManageRentalsViewModel;
 import client.viewmodel.menu.MenuViewModel;
 import client.viewmodel.rate_feedback.RateFeedbackViewModel;
 import client.viewmodel.report_member.ReportMemberViewModel;
-import client.viewmodel.seatch_for_rental.SearchForRentalViewModel;
+import client.viewmodel.search_for_member.SearchForMemberViewModel;
+import client.viewmodel.search_for_rental.SearchForRentalViewModel;
 import client.viewmodel.view_member_profile.ViewMemberProfileViewModel;
 import client.viewmodel.view_rating.ViewRatingViewModel;
-import client.viewmodel.view_rating_full.ViewRatingFullViewModel;
 import client.viewmodel.view_rental.ViewRentalViewModel;
 import client.viewmodel.view_reported_member.ViewReportedMemberViewModel;
 import client.viewmodel.view_reported_member_list.ViewReportedMemberListViewModel;
 import client.viewmodel.welcome_page.WelcomePageViewModel;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 public class ViewModelFactory
 {
@@ -34,7 +33,7 @@ public class ViewModelFactory
   private AddRentalViewModel addRentalViewModel;
   private CreateAccountViewModel createAccountViewModel;
   private SearchForRentalViewModel searchForRentalViewModel;
-  private ViewRatingFullViewModel viewRatingFullViewModel;
+  private SearchForMemberViewModel searchForMemberViewModel;
   private ViewRatingViewModel viewRatingViewModel;
   private ViewReportedMemberViewModel viewReportedMemberViewModel;
   private ViewReportedMemberListViewModel viewReportedMemberListViewModel;
@@ -119,11 +118,11 @@ public class ViewModelFactory
     return searchForRentalViewModel;
   }
 
-  public ViewRatingFullViewModel getViewRatingFullViewModel() {
-    if (viewRatingFullViewModel == null){
-      viewRatingFullViewModel = new ViewRatingFullViewModel();
+  public SearchForMemberViewModel getSearchForMemberViewModel() throws IOException {
+    if (searchForMemberViewModel == null){
+      searchForMemberViewModel = new SearchForMemberViewModel(modelFactory.getShareItModel());
     }
-    return viewRatingFullViewModel;
+    return searchForMemberViewModel;
   }
 
   public ViewRatingViewModel getViewRatingViewModel() throws IOException {

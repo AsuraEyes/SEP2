@@ -97,6 +97,20 @@ public class RMIClient implements Client, RemoteObserver
     }
   }
 
+  @Override public String addReport(String feedback, String username1,
+      String username2) throws IOException
+  {
+    try
+    {
+
+      return server.addReport(feedback, username1, username2);
+    }
+    catch (RemoteException e){
+      e.printStackTrace();
+      throw new RuntimeException("Could not contact server");
+    }
+  }
+
   @Override public List<Rental> checkSearch(String search) throws IOException
   {
     try{
@@ -273,6 +287,28 @@ public class RMIClient implements Client, RemoteObserver
     }
   }
 
+  @Override
+  public List<Member> checkSearchForMember(String value) {
+    try{
+      return server.checkSearchForMember(value);
+    }
+    catch (Exception e){
+      e.printStackTrace();
+    }
+    return null;
+  }
+
+  @Override
+  public List<Member> getMembersList() {
+    try{
+      return server.getMembersList();
+    }
+    catch (Exception e){
+      e.printStackTrace();
+    }
+    return null;
+  }
+
   @Override public Rating getRating(String fromUsername, String toUsername)
   {
     try
@@ -286,11 +322,36 @@ public class RMIClient implements Client, RemoteObserver
     return null;
   }
 
+  @Override public Report getReport(String fromUsername, String toUsername)
+  {
+    try
+    {
+      return server.getReport(fromUsername, toUsername);
+    }
+    catch (RemoteException e)
+    {
+      e.printStackTrace();
+    }
+    return null;
+  }
+
   @Override public void updateRating(Rating rating)
   {
     try
     {
       server.updateRating(rating);
+    }
+    catch (RemoteException e)
+    {
+      e.printStackTrace();
+    }
+  }
+
+  @Override public void updateReport(Report report)
+  {
+    try
+    {
+      server.updateReport(report);
     }
     catch (RemoteException e)
     {

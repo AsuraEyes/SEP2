@@ -1,7 +1,6 @@
 package server.model.data_check;
 
 import server.model.database.rating.RatingDAOImpl;
-import server.model.database.rental.RentalDAOImpl;
 
 import java.sql.SQLException;
 /**

@@ -13,6 +13,7 @@ import client.views.manage_rentals.ManageRentalsController;
 import client.views.menu.MenuController;
 import client.views.rate_feedback.RateFeedbackController;
 import client.views.report_member.ReportMemberController;
+import client.views.search_for_member.SearchForMemberController;
 import client.views.search_for_rental.SearchForRentalController;
 import client.views.view_member_profile.ViewMemberProfileController;
 import client.views.view_rating.ViewRatingController;
@@ -182,8 +183,8 @@ public class ViewHandler
     FXMLLoader loader = new FXMLLoader();
     loader.setLocation(getClass().getResource("/client/views/search_for_member/SearchForMember.fxml"));
     Node content = loader.load();
-    //LogInController logInController = loader.getController();
-    //ogInController.init(this, viewModelFactory);
+    SearchForMemberController searchForMemberController = loader.getController();
+    searchForMemberController.init(this, viewModelFactory);
     return content;
   }
 

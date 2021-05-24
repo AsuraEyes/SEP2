@@ -17,6 +17,7 @@ public interface Client extends Subject
   String checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, String username, ArrayList<String> selectedCategories) throws IOException;
   String updateCheckRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, int rentalId, ArrayList<String> selectedCategories) throws IOException;
   String addFeedback(double starRating, String feedback, String username1, String username2) throws IOException;
+  String addReport(String feedback, String username1, String username2) throws IOException;
   ArrayList<City> getCityList();
   ArrayList<State> getStateList();
   ArrayList<Category> getCategoryList();
@@ -33,10 +34,15 @@ public interface Client extends Subject
 
   boolean deleteMember(Member member);
   Rating getRating(String fromUsername, String toUsername);
+  Report getReport(String fromUsername, String toUsername);
   void updateRating(Rating rating);
+  void updateReport(Report report);
   boolean deleteRental(Rental rental);
   ArrayList<Message> getAllReceivedMessages(int loggedUserId);
   ArrayList<Message> getMessagesFromUser(int loggedUserId, int fromUserid);
   void sendMessage(Message message);
 
+    List<Member> checkSearchForMember(String value);
+
+    List<Member> getMembersList();
 }

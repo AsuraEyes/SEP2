@@ -1,15 +1,13 @@
 package server.model;
 
-import server.model.data_check.DataCheckMember;
-import server.model.data_check.DataCheckRating;
-import server.model.data_check.DataCheckRental;
-import server.model.data_check.DataCheckSearch;
+import server.model.data_check.*;
 import server.model.database.category.CategoryDAOImpl;
 import server.model.database.chat.ChatDAOImpl;
 import server.model.database.city.CityDAOImpl;
 import server.model.database.member.MemberDAOImpl;
 import server.model.database.rating.RatingDAOImpl;
 import server.model.database.rental.RentalDAOImpl;
+import server.model.database.report.ReportDAOImpl;
 import server.model.database.state.StateDAOImpl;
 import shared.transferobjects.*;
 
@@ -28,6 +26,7 @@ public class ServerModelImpl implements ServerModelManager
   private DataCheckRental dataCheckRental;
   private DataCheckSearch dataCheckSearch;
   private DataCheckRating dataCheckRating;
+  private DataCheckReport dataCheckReport;
 
   public ServerModelImpl(){
     support = new PropertyChangeSupport(this);
@@ -35,6 +34,7 @@ public class ServerModelImpl implements ServerModelManager
     dataCheckRental = new DataCheckRental();
     dataCheckSearch = new DataCheckSearch();
     dataCheckRating = new DataCheckRating();
+    dataCheckReport = new DataCheckReport();
   }
 
   @Override public void addListener(String propertyName,
@@ -95,6 +95,13 @@ public class ServerModelImpl implements ServerModelManager
   {
 
     String message = dataCheckRating.addFeedback(starValue, feedback, username1, username2);
+    return message;
+  }
+
+  @Override public String addReport(String feedback, String username1,
+      String username2)
+  {
+    String message = dataCheckReport.addReport(feedback,username1,username2);
     return message;
   }
 
@@ -225,11 +232,36 @@ public class ServerModelImpl implements ServerModelManager
     return null;
   }
 
+  @Override public Report getReport(String fromUsername, String toUsername)
+  {
+    try
+    {
+      return ReportDAOImpl.getInstance().getReport(fromUsername, toUsername);
+    }
+    catch (SQLException throwables)
+    {
+      throwables.printStackTrace();
+    }
+    return null;
+  }
+
   @Override public void updateRating(Rating rating)
   {
     try
     {
       RatingDAOImpl.getInstance().updateRating(rating);
+    }
+    catch (SQLException throwables)
+    {
+      throwables.printStackTrace();
+    }
+  }
+
+  @Override public void updateReport(Report report)
+  {
+    try
+    {
+      ReportDAOImpl.getInstance().updateReport(report);
     }
     catch (SQLException throwables)
     {
@@ -248,6 +280,28 @@ public class ServerModelImpl implements ServerModelManager
       throwables.printStackTrace();
     }
     return false;
+  }
+
+  @Override
+  public List<Member> checkSearchForMember(String value) {
+    try{
+      return MemberDAOImpl.getInstance().readByUsername(value);
+    }
+    catch (SQLException throwables){
+      throwables.printStackTrace();
+    }
+    return null;
+  }
+
+  @Override
+  public List<Member> getMembersList() {
+    try{
+      return MemberDAOImpl.getInstance().readMembers();
+    }
+    catch (SQLException e){
+      e.printStackTrace();
+    }
+    return null;
   }
 
   @Override public ArrayList<Message> getAllReceivedMessages(int loggedUserId)

@@ -83,17 +83,23 @@ public class MemberDAOImpl implements MemberDAO{
     @Override
     public List<Member> readByUsername(String username) throws SQLException {
         try(Connection connection = getConnection()){
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM share_it.member WHERE username LIKE ?");
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM share_it.member WHERE username ILIKE ?");
             statement.setString(1, "%"+username+"%");
             ResultSet resultSet = statement.executeQuery();
             ArrayList<Member> arrayListToReturn = new ArrayList<>();
-            //correct this when doing search
             while (resultSet.next()){
-                int idOfSearchedMember = resultSet.getInt("id");
-                //get the member with this id or create it getting all the information
-                // and add him to the array list
+                arrayListToReturn.add(new Member(resultSet.getInt("id"),
+                        resultSet.getString("username"),
+                        resultSet.getString("password"),
+                        resultSet.getString("email_address"),
+                        resultSet.getString("phone_number"),
+                        resultSet.getString("other_information"),
+                        resultSet.getString("address_street"),
+                        resultSet.getString("address_no"),
+                        resultSet.getInt("address_postal_code"),
+                        resultSet.getString("address_city_name"),
+                        resultSet.getFloat("average_review")));
             }
-            //return array list
             return arrayListToReturn;
         }
     }
@@ -307,4 +313,29 @@ public class MemberDAOImpl implements MemberDAO{
             }
         }
     }
+
+    @Override
+    public List<Member> readMembers() throws SQLException {
+        try(Connection connection = getConnection()){
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM share_it.member");
+            ResultSet resultSet = statement.executeQuery();
+            List<Member> listToReturn = new ArrayList<>();
+            while(resultSet.next()){
+                listToReturn.add(new Member(resultSet.getInt("id"),
+                        resultSet.getString("username"),
+                        resultSet.getString("password"),
+                        resultSet.getString("email_address"),
+                        resultSet.getString("phone_number"),
+                        resultSet.getString("other_information"),
+                        resultSet.getString("address_street"),
+                        resultSet.getString("address_no"),
+                        resultSet.getInt("address_postal_code"),
+                        resultSet.getString("address_city_name"),
+                        resultSet.getFloat("average_review")));
+            }
+            return listToReturn;
+        }
+    }
+
+
 }
