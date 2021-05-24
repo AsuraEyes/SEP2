@@ -46,4 +46,8 @@ public interface ServerModelManager extends Subject
     List<Member> getMembersList();
     List<Report> getReportList();
 
+  ArrayList<Message> getAllReceivedMessages(int loggedUserId);
+  ArrayList<Message> getMessagesFromUser(int loggedUserId, int fromUserid);
+  void sendMessage(Message message);
+
 }

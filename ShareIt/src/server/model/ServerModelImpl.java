@@ -2,6 +2,7 @@ package server.model;
 
 import server.model.data_check.*;
 import server.model.database.category.CategoryDAOImpl;
+import server.model.database.chat.ChatDAOImpl;
 import server.model.database.city.CityDAOImpl;
 import server.model.database.member.MemberDAOImpl;
 import server.model.database.rating.RatingDAOImpl;
@@ -315,4 +316,43 @@ public class ServerModelImpl implements ServerModelManager
   }
 
 
+
+  @Override public ArrayList<Message> getAllReceivedMessages(int loggedUserId)
+  {
+    try
+    {
+      return ChatDAOImpl.getInstance().getAllReceivedMessages(loggedUserId);
+    }
+    catch (SQLException throwables)
+    {
+      throwables.printStackTrace();
+    }
+    return null;
+  }
+
+  @Override public ArrayList<Message> getMessagesFromUser(int loggedUserId,
+      int fromUserid)
+  {
+    try
+    {
+      return ChatDAOImpl.getInstance().getMessagesFromUser(loggedUserId, fromUserid);
+    }
+    catch (SQLException throwables)
+    {
+      throwables.printStackTrace();
+    }
+    return null;
+  }
+
+  @Override public void sendMessage(Message message)
+  {
+    try
+    {
+      support.firePropertyChange("newMessage", 0, ChatDAOImpl.getInstance().sendMessage(message));
+    }
+    catch (SQLException throwables)
+    {
+      throwables.printStackTrace();
+    }
+  }
 }

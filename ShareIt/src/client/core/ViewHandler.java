@@ -100,7 +100,7 @@ public class ViewHandler
     loader.setLocation(getClass().getResource("/client/views/chat_write_message/ChatWriteMessage.fxml"));
     Node content = loader.load();
     ChatWriteMessageController chatWriteMessageController = loader.getController();
-    //chatWriteMessageController.init();
+    chatWriteMessageController.init(this,viewModelFactory);
     return content;
   }
 

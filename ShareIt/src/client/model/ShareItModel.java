@@ -59,4 +59,8 @@ public interface ShareItModel extends Subject
     String getReporterPerson();
     String getReportedPerson();
 
+    ArrayList<Message> getAllReceivedMessages(String loggedUsername);
+    ArrayList<Message> getMessagesFromUser(int loggedUserId, int fromUserid);
+    void sendMessage(Message message);
+
 }
