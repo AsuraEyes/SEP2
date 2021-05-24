@@ -131,10 +131,7 @@ public class RatingDAOImpl implements RatingDAO
         return new Rating(resultSet.getDouble("value"), resultSet.getString("commentary"),
             fromId, toId);
       }
-      else
-      {
-        throw new SQLException("No keys generated");
-      }
+      return null;
     }
   }
 
