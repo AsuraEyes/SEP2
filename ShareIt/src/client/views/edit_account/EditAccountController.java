@@ -32,8 +32,6 @@ public class EditAccountController {
     @FXML
     private TextField streetNumberField;
     @FXML
-    private TextField floorField;
-    @FXML
     private TextField postalCodeField;
     @FXML
     private ChoiceBox<String> locationBox;
@@ -58,14 +56,15 @@ public class EditAccountController {
         confirmPasswordField.textProperty().bindBidirectional(editAccountViewModel.getConfirmPasswordField());
         streetField.textProperty().bindBidirectional(editAccountViewModel.getStreetField());
         streetNumberField.textProperty().bindBidirectional(editAccountViewModel.getStreetNumberField());
-        floorField.textProperty().bindBidirectional(editAccountViewModel.getFloorField());
         postalCodeField.textProperty().bindBidirectional(editAccountViewModel.getPostalCodeField());
         emailField.textProperty().bindBidirectional(editAccountViewModel.getEmailField());
         telephoneNoField.textProperty().bindBidirectional(editAccountViewModel.getTelephoneNoField());
         otherInfoField.textProperty().bindBidirectional(editAccountViewModel.getOtherInfoField());
         editAccountViewModel.setProfile();
 
+
         locationBox.setItems(editAccountViewModel.getLocations());
+        locationBox.setValue(editAccountViewModel.getSelectedLocation());
 
       notifications =  Notifications.create()
                 .title("Error - invalid input!")

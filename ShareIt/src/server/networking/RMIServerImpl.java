@@ -87,7 +87,7 @@ public class RMIServerImpl implements RMIServer
 
   @Override
   public String updateCheckMemberData(String username, String password, String confirmPassword, String email, String phone, String otherInformation, String street, String streetNo, String postalCode, String city) throws IOException {
-    return serverModelManager.updateCheckMemberData(username, password, confirmPassword, email, otherInformation, phone, street, streetNo, postalCode, city);
+    return serverModelManager.updateCheckMemberData(username, password, confirmPassword, email, phone, otherInformation, street, streetNo, postalCode, city);
   }
 
   @Override

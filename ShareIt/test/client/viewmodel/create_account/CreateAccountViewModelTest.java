@@ -39,7 +39,6 @@ class CreateAccountViewModelTest {
         StringProperty confirmPasswordField = new SimpleStringProperty();
         StringProperty streetField = new SimpleStringProperty();
         StringProperty streetNumberField = new SimpleStringProperty();
-        StringProperty floorField = new SimpleStringProperty();
         StringProperty postalCodeField = new SimpleStringProperty();
         StringProperty emailField = new SimpleStringProperty();
         StringProperty telephoneNoField = new SimpleStringProperty();
@@ -51,7 +50,6 @@ class CreateAccountViewModelTest {
         vm.getConfirmPasswordField().bind(confirmPasswordField);
         vm.getStreetField().bind(streetField);
         vm.getStreetNumberField().bind(streetNumberField);
-        vm.getFloorField().bind(floorField);
         vm.getPostalCodeField().bind(postalCodeField);
         vm.getEmailField().bind(emailField);
         vm.getTelephoneNoField().bind(telephoneNoField);
@@ -62,7 +60,6 @@ class CreateAccountViewModelTest {
         confirmPasswordField.setValue("password");
         streetField.setValue("Sundvej");
         streetNumberField.setValue("6B");
-        floorField.setValue("3");
         postalCodeField.setValue("8700");
         emailField.setValue("304125@viauc.dk");
         telephoneNoField.setValue("");
@@ -81,7 +78,6 @@ class CreateAccountViewModelTest {
         StringProperty confirmPasswordField = new SimpleStringProperty();
         StringProperty streetField = new SimpleStringProperty();
         StringProperty streetNumberField = new SimpleStringProperty();
-        StringProperty floorField = new SimpleStringProperty();
         StringProperty postalCodeField = new SimpleStringProperty();
         StringProperty emailField = new SimpleStringProperty();
         StringProperty telephoneNoField = new SimpleStringProperty();
@@ -91,7 +87,6 @@ class CreateAccountViewModelTest {
         vm.getConfirmPasswordField().bindBidirectional(confirmPasswordField);
         vm.getStreetField().bindBidirectional(streetField);
         vm.getStreetNumberField().bindBidirectional(streetNumberField);
-        vm.getFloorField().bindBidirectional(floorField);
         vm.getPostalCodeField().bindBidirectional(postalCodeField);
         vm.getEmailField().bindBidirectional(emailField);
         vm.getTelephoneNoField().bindBidirectional(telephoneNoField);
@@ -102,7 +97,6 @@ class CreateAccountViewModelTest {
         confirmPasswordField.setValue("password1");
         streetField.setValue("Sundvej");
         streetNumberField.setValue("6B");
-        floorField.setValue("3");
         postalCodeField.setValue("8700");
         emailField.setValue("304125@viauc.dk");
         telephoneNoField.setValue("");
@@ -121,7 +115,6 @@ class CreateAccountViewModelTest {
         StringProperty confirmPasswordField = new SimpleStringProperty();
         StringProperty streetField = new SimpleStringProperty();
         StringProperty streetNumberField = new SimpleStringProperty();
-        StringProperty floorField = new SimpleStringProperty();
         StringProperty postalCodeField = new SimpleStringProperty();
         StringProperty emailField = new SimpleStringProperty();
         StringProperty telephoneNoField = new SimpleStringProperty();
@@ -131,7 +124,6 @@ class CreateAccountViewModelTest {
         vm.getConfirmPasswordField().bindBidirectional(confirmPasswordField);
         vm.getStreetField().bindBidirectional(streetField);
         vm.getStreetNumberField().bindBidirectional(streetNumberField);
-        vm.getFloorField().bindBidirectional(floorField);
         vm.getPostalCodeField().bindBidirectional(postalCodeField);
         vm.getEmailField().bindBidirectional(emailField);
         vm.getTelephoneNoField().bindBidirectional(telephoneNoField);
@@ -142,7 +134,6 @@ class CreateAccountViewModelTest {
         confirmPasswordField.setValue("password");
         streetField.setValue("Sundvej");
         streetNumberField.setValue("6B");
-        floorField.setValue("3");
         postalCodeField.setValue("8700");
         emailField.setValue("304125@viauc.dk");
         telephoneNoField.setValue("");
@@ -161,7 +152,6 @@ class CreateAccountViewModelTest {
         StringProperty confirmPasswordField = new SimpleStringProperty();
         StringProperty streetField = new SimpleStringProperty();
         StringProperty streetNumberField = new SimpleStringProperty();
-        StringProperty floorField = new SimpleStringProperty();
         StringProperty postalCodeField = new SimpleStringProperty();
         StringProperty emailField = new SimpleStringProperty();
         StringProperty telephoneNoField = new SimpleStringProperty();
@@ -171,7 +161,6 @@ class CreateAccountViewModelTest {
         vm.getConfirmPasswordField().bindBidirectional(confirmPasswordField);
         vm.getStreetField().bindBidirectional(streetField);
         vm.getStreetNumberField().bindBidirectional(streetNumberField);
-        vm.getFloorField().bindBidirectional(floorField);
         vm.getPostalCodeField().bindBidirectional(postalCodeField);
         vm.getEmailField().bindBidirectional(emailField);
         vm.getTelephoneNoField().bindBidirectional(telephoneNoField);
@@ -182,7 +171,6 @@ class CreateAccountViewModelTest {
         confirmPasswordField.setValue("SpongeBob");
         streetField.setValue("Sundvej");
         streetNumberField.setValue("6B");
-        floorField.setValue("3");
         postalCodeField.setValue("8700");
         emailField.setValue("304125@viauc.dk");
         telephoneNoField.setValue("");
@@ -200,7 +188,6 @@ class CreateAccountViewModelTest {
         StringProperty confirmPasswordField = new SimpleStringProperty();
         StringProperty streetField = new SimpleStringProperty();
         StringProperty streetNumberField = new SimpleStringProperty();
-        StringProperty floorField = new SimpleStringProperty();
         StringProperty postalCodeField = new SimpleStringProperty();
         StringProperty emailField = new SimpleStringProperty();
         StringProperty telephoneNoField = new SimpleStringProperty();
@@ -210,7 +197,6 @@ class CreateAccountViewModelTest {
         vm.getConfirmPasswordField().bindBidirectional(confirmPasswordField);
         vm.getStreetField().bindBidirectional(streetField);
         vm.getStreetNumberField().bindBidirectional(streetNumberField);
-        vm.getFloorField().bindBidirectional(floorField);
         vm.getPostalCodeField().bindBidirectional(postalCodeField);
         vm.getEmailField().bindBidirectional(emailField);
         vm.getTelephoneNoField().bindBidirectional(telephoneNoField);
@@ -221,7 +207,6 @@ class CreateAccountViewModelTest {
         confirmPasswordField.setValue("SpongeBob<3");
         streetField.setValue("Sundvej");
         streetNumberField.setValue("6B");
-        floorField.setValue("3");
         postalCodeField.setValue("8700");
         emailField.setValue("");
         telephoneNoField.setValue("");
@@ -239,7 +224,6 @@ class CreateAccountViewModelTest {
         StringProperty confirmPasswordField = new SimpleStringProperty();
         StringProperty streetField = new SimpleStringProperty();
         StringProperty streetNumberField = new SimpleStringProperty();
-        StringProperty floorField = new SimpleStringProperty();
         StringProperty postalCodeField = new SimpleStringProperty();
         StringProperty emailField = new SimpleStringProperty();
         StringProperty telephoneNoField = new SimpleStringProperty();
@@ -249,7 +233,6 @@ class CreateAccountViewModelTest {
         vm.getConfirmPasswordField().bindBidirectional(confirmPasswordField);
         vm.getStreetField().bindBidirectional(streetField);
         vm.getStreetNumberField().bindBidirectional(streetNumberField);
-        vm.getFloorField().bindBidirectional(floorField);
         vm.getPostalCodeField().bindBidirectional(postalCodeField);
         vm.getEmailField().bindBidirectional(emailField);
         vm.getTelephoneNoField().bindBidirectional(telephoneNoField);
@@ -260,7 +243,6 @@ class CreateAccountViewModelTest {
         confirmPasswordField.setValue("SpongeBob<3");
         streetField.setValue("Sundvej");
         streetNumberField.setValue("6B");
-        floorField.setValue("3");
         postalCodeField.setValue("8700");
         emailField.setValue("valid.mail@gmail.com");
         telephoneNoField.setValue("");
@@ -278,7 +260,6 @@ class CreateAccountViewModelTest {
         StringProperty confirmPasswordField = new SimpleStringProperty();
         StringProperty streetField = new SimpleStringProperty();
         StringProperty streetNumberField = new SimpleStringProperty();
-        StringProperty floorField = new SimpleStringProperty();
         StringProperty postalCodeField = new SimpleStringProperty();
         StringProperty emailField = new SimpleStringProperty();
         StringProperty telephoneNoField = new SimpleStringProperty();
@@ -288,7 +269,6 @@ class CreateAccountViewModelTest {
         vm.getConfirmPasswordField().bindBidirectional(confirmPasswordField);
         vm.getStreetField().bindBidirectional(streetField);
         vm.getStreetNumberField().bindBidirectional(streetNumberField);
-        vm.getFloorField().bindBidirectional(floorField);
         vm.getPostalCodeField().bindBidirectional(postalCodeField);
         vm.getEmailField().bindBidirectional(emailField);
         vm.getTelephoneNoField().bindBidirectional(telephoneNoField);
@@ -299,7 +279,6 @@ class CreateAccountViewModelTest {
         confirmPasswordField.setValue("SpongeBob<3");
         streetField.setValue("Sundvej");
         streetNumberField.setValue("6B");
-        floorField.setValue("3");
         postalCodeField.setValue("8700");
         emailField.setValue("");
         telephoneNoField.setValue("+45 82 69 42 08");
@@ -317,7 +296,6 @@ class CreateAccountViewModelTest {
         StringProperty confirmPasswordField = new SimpleStringProperty();
         StringProperty streetField = new SimpleStringProperty();
         StringProperty streetNumberField = new SimpleStringProperty();
-        StringProperty floorField = new SimpleStringProperty();
         StringProperty postalCodeField = new SimpleStringProperty();
         StringProperty emailField = new SimpleStringProperty();
         StringProperty telephoneNoField = new SimpleStringProperty();
@@ -327,7 +305,6 @@ class CreateAccountViewModelTest {
         vm.getConfirmPasswordField().bindBidirectional(confirmPasswordField);
         vm.getStreetField().bindBidirectional(streetField);
         vm.getStreetNumberField().bindBidirectional(streetNumberField);
-        vm.getFloorField().bindBidirectional(floorField);
         vm.getPostalCodeField().bindBidirectional(postalCodeField);
         vm.getEmailField().bindBidirectional(emailField);
         vm.getTelephoneNoField().bindBidirectional(telephoneNoField);
@@ -338,7 +315,6 @@ class CreateAccountViewModelTest {
         confirmPasswordField.setValue("SpongeBob<3");
         streetField.setValue("Sundvej");
         streetNumberField.setValue("6B");
-        floorField.setValue("3");
         postalCodeField.setValue("8700");
         emailField.setValue("valid.mail@gmail.com");
         telephoneNoField.setValue("+45 82 69 42 08");
@@ -356,7 +332,6 @@ class CreateAccountViewModelTest {
         StringProperty confirmPasswordField = new SimpleStringProperty();
         StringProperty streetField = new SimpleStringProperty();
         StringProperty streetNumberField = new SimpleStringProperty();
-        StringProperty floorField = new SimpleStringProperty();
         StringProperty postalCodeField = new SimpleStringProperty();
         StringProperty emailField = new SimpleStringProperty();
         StringProperty telephoneNoField = new SimpleStringProperty();
@@ -366,7 +341,6 @@ class CreateAccountViewModelTest {
         vm.getConfirmPasswordField().bindBidirectional(confirmPasswordField);
         vm.getStreetField().bindBidirectional(streetField);
         vm.getStreetNumberField().bindBidirectional(streetNumberField);
-        vm.getFloorField().bindBidirectional(floorField);
         vm.getPostalCodeField().bindBidirectional(postalCodeField);
         vm.getEmailField().bindBidirectional(emailField);
         vm.getTelephoneNoField().bindBidirectional(telephoneNoField);
@@ -377,7 +351,6 @@ class CreateAccountViewModelTest {
         confirmPasswordField.setValue("SpongeBob<3");
         streetField.setValue("Sundvej");
         streetNumberField.setValue("6B");
-        floorField.setValue("3");
         postalCodeField.setValue("87Troll00");
         emailField.setValue("valid.mail@gmail.com");
         telephoneNoField.setValue("+45 82 69 42 08");

@@ -139,6 +139,15 @@ public class MemberDAOImpl implements MemberDAO{
     @Override
     public void update(String username, String password, String emailAddress, String phoneNumber, String otherInformation, String addressStreet, String addressNo, int addressPostalCode, String addressCity) throws SQLException {
         try(Connection connection  = getConnection()){
+            System.out.println("In the member DAO: username: "+username);
+            System.out.println("In the member DAO: password: "+password);
+            System.out.println("In the member DAO: email address: "+ emailAddress);
+            System.out.println("In the member DAO: phone number: "+phoneNumber);
+            System.out.println("In the member DAO: other info: "+otherInformation);
+            System.out.println("In the member DAO: address street: "+addressStreet);
+            System.out.println("In the member DAO: address no: "+addressNo);
+            System.out.println("In the member DAO: postal code: "+addressPostalCode);
+            System.out.println("In the member DAO: city: "+addressCity);
             PreparedStatement statement = connection.prepareStatement("UPDATE share_it.member SET password = ?, email_address = ?, phone_number = ?, other_information = ?, address_street = ?, address_no = ?, address_postal_code = ?, address_city_name = ? WHERE username = ?");
             statement.setString(1, password);
             statement.setString(2, emailAddress);
@@ -150,8 +159,6 @@ public class MemberDAOImpl implements MemberDAO{
             statement.setString(8, addressCity);
             statement.setString(9, username);
             statement.executeUpdate();
-
-
         }
     }
     /*@Override
@@ -231,7 +238,7 @@ public class MemberDAOImpl implements MemberDAO{
     @Override
     public int readIdByUsername(String username) throws SQLException{
         try(Connection connection = getConnection()){
-            //username = "bob";
+            System.out.println("sldkfjsdlkfjs "+username);
             PreparedStatement statement = connection.prepareStatement("SELECT id FROM share_it.member WHERE username = ?");
             statement.setString(1, username);
             ResultSet resultSet = statement.executeQuery();

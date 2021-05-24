@@ -68,15 +68,17 @@ public class DataCheckMember {
         this.postalCode = postalCode;
 
         if(matchingPasswords() && oneContactInformationGiven() && postalCodeIsNumber()){
+            System.out.println("we just got here");
             try{
                 MemberDAOImpl.getInstance().update(username, password, email, phone, otherInformation, street, streetNumber, postalCodeNb, city);
                 return "Edit successful";
             }
             catch (SQLException e){
-                //
+                e.printStackTrace();
             }
         }
         else{
+            System.out.println("we got only here");
             if(!matchingPasswords()){
                 return "Not matching passwords.";
             }
