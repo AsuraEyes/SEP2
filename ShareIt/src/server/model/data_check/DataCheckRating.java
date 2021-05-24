@@ -1,10 +1,11 @@
 package server.model.data_check;
 
 import server.model.database.rating.RatingDAOImpl;
-import server.model.database.rental.RentalDAOImpl;
 
 import java.sql.SQLException;
-
+/**
+ * Class that checks data before running an instance(Rating data in this case)
+ */
 public class DataCheckRating
 {
   private double starValue;
@@ -19,7 +20,7 @@ public class DataCheckRating
       try
       {
         RatingDAOImpl.getInstance().create(starValue, feedback, username1, username2);
-        return "";
+        return "Added";
       }
       catch (SQLException e){
         //

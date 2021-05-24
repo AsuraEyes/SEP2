@@ -2,17 +2,19 @@ package client.views.rate_feedback;
 
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
+import client.model.state.StateManager;
+import client.model.state.VisitorState;
 import client.viewmodel.create_account.CreateAccountViewModel;
 import client.viewmodel.rate_feedback.RateFeedbackViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.stage.Stage;
 import org.controlsfx.control.Rating;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Optional;
 
 public class RateFeedbackController
 {
@@ -28,19 +30,37 @@ public class RateFeedbackController
     rateFeedbackViewModel = viewModelFactory.getRateFeedbackViewModel();
     commentaryTextArea.textProperty().bindBidirectional(rateFeedbackViewModel.getCommentaryTextArea());
     usernameLabel.textProperty().bind(rateFeedbackViewModel.getUsernameLabel());
-    System.out.println("here");
+    ratingStars.ratingProperty().bindBidirectional(rateFeedbackViewModel.getRatingProperty());
+    commentaryTextArea.clear();
+    ratingStars.setRating(0);
     rateFeedbackViewModel.getMemberUsername();
+
   }
 
   public void submitButton(ActionEvent actionEvent) throws IOException
   {
-    String message = rateFeedbackViewModel.onSubmitButtonPressed(ratingStars.getRating());
+      Stage stage = (Stage) viewHandler.getStage().getScene().getWindow();
+      Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "");
+      alert.initOwner(stage);
+      alert.getDialogPane().setContentText("The feedback was " + rateFeedbackViewModel.onSubmitButtonPressed() + " successfully!");
 
+      Optional<ButtonType> result = alert.showAndWait();
+      if (result.get() == ButtonType.OK)
+      {
+
+        viewHandler.setView(viewHandler.menu(), viewHandler.viewMemberProfile());
+
+      }
+
+
+    //rateFeedbackViewModel.onSubmitButtonPressed();
+
+    //viewHandler.setView(viewHandler.menu(), viewHandler.viewMemberProfile());
   }
 
   public void goBackToUsersPageButton(ActionEvent actionEvent)
+      throws IOException
   {
+    viewHandler.setView(viewHandler.menu(), viewHandler.viewMemberProfile());
   }
-
-
 }

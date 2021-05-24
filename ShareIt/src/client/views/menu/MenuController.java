@@ -22,7 +22,6 @@ import java.util.Optional;
 public class MenuController
 {
   @FXML private AnchorPane anchorPane;
-  @FXML private Button reviewsButton;
   @FXML private Button reportedMembersButton;
   @FXML private Button chatButton;
   @FXML private Label logoLabel;
@@ -37,23 +36,23 @@ public class MenuController
     menuViewModel = viewModelFactory.getMenuViewModel();
     usernameLabel.textProperty().bind(menuViewModel.getUsernameLabel());
 
-    if (menuViewModel.checkUserType().equals("Visitor"))
+    String userType = menuViewModel.checkUserType();
+
+    if (userType.equals("Visitor"))
     {
-      reviewsButton.setVisible(false);
       reportedMembersButton.setVisible(false);
       chatButton.setVisible(false);
+
     }
-    else if (menuViewModel.checkUserType().equals("Member"))
+    else if (userType.equals("Member"))
     {
-      reviewsButton.setVisible(true);
-      reviewsButton.setText("View my profile");
-      reportedMembersButton.setVisible(false);
+      reportedMembersButton.setVisible(true);
+      reportedMembersButton.setText("Manage account");
       chatButton.setVisible(true);
       logInOutLabel.setText("Log out");
     }
-    else if (menuViewModel.checkUserType().equals("Administrator"))
+    else if (userType.equals("Administrator"))
     {
-      reviewsButton.setVisible(true);
       reportedMembersButton.setVisible(true);
       chatButton.setVisible(true);
       logInOutLabel.setText("Log out");
@@ -101,8 +100,13 @@ public class MenuController
 
     public void onReportedMembersButton (ActionEvent actionEvent)
       throws IOException {
-    viewHandler
-        .setView(viewHandler.menu(), viewHandler.viewReportedMemberList());
+      if (menuViewModel.checkUserType().equals("Member")){
+        viewHandler.setView(viewHandler.menu(), viewHandler.manageAccount());
+      }
+      else {
+        viewHandler
+                .setView(viewHandler.menu(), viewHandler.viewReportedMemberList());
+      }
   }
 
     public void onChatButton (ActionEvent actionEvent) throws IOException {

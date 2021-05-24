@@ -61,7 +61,7 @@ public class AddRentalViewModel {
     public String onAddRentalButtonPressed(Object selectedState, ObservableList<String> selectedCategory, String pictureLink) throws IOException {
         ArrayList<String> selectedCategoriesList = new ArrayList<>(selectedCategory);
 
-        return model.checkRentalData(nameField.getValue(), pictureLink, descriptionField.getValue(), priceField.getValue(), otherInfoField.getValue(), (String) selectedState,username, selectedCategoriesList);
+        return model.checkRentalData(nameField.getValue(), pictureLink, descriptionField.getValue(), priceField.getValue(), otherInfoField.getValue(), (String) selectedState, selectedCategoriesList);
     }
     public ObservableList<String> getStates(){
         ArrayList<State> stateList = model.getStateList();

@@ -69,4 +69,8 @@ public class ViewRatingViewModel {
     public ArrayList<Rating> getAllRatingsOnMember(String memberUsername) {
         return model.getAllRatingsOnMember(memberUsername);
     }
+
+    public String getUserType(){
+        return model.getLoggedInUsername();
+    }
 }

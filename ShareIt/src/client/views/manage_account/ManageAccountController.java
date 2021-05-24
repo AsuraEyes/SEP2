@@ -79,7 +79,6 @@ public class ManageAccountController
         imageView.setCache(true);
         imageView.setId(String.valueOf(rentals.get(i).getId()));
         flowPane.getChildren().add(new StackPane(new InfoOverlay(imageView, rentals.get(i).toString())));
-        System.out.println(rentals.get(i).getPictureLink());
         flowPane.getChildren().get(i)
                 .addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
                   try {
@@ -92,5 +91,10 @@ public class ManageAccountController
                 });
       }
     }
+  }
+
+  public void viewRating() throws IOException {
+    manageAccountViewModel.setMember();
+    viewHandler.setView(viewHandler.menu(), viewHandler.viewRating());
   }
 }

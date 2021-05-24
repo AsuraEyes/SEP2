@@ -1,6 +1,8 @@
 package client.viewmodel.view_member_profile;
 
 import client.model.ShareItModel;
+import client.model.state.StateManager;
+import client.model.state.VisitorState;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -114,7 +116,7 @@ public class ViewMemberProfileViewModel
           {
             if(imageView.getId().equals(String.valueOf(getRentalsOfMemberList(usernameLabel.getValue()).get(i).getId())))
             {
-              model.getSelectedRental(getRentalsOfMemberList(usernameLabel.getValue()).get(i));
+              model.sendSelectedRental(getRentalsOfMemberList(usernameLabel.getValue()).get(i));
               break;
             }
           }
@@ -136,5 +138,11 @@ public class ViewMemberProfileViewModel
 
   public void setMemberUsername() {
     model.setMemberUsername(usernameLabel.getValue());
+  }
+
+  public boolean deleteAccount(){
+    Member member = model.getMemberByUsername(StateManager.getInstance()
+            .getUsername());
+    return model.deleteMember(member);
   }
 }

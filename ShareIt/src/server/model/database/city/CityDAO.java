@@ -6,6 +6,10 @@ import java.util.List;
 
 public interface CityDAO
 {
+  /**
+   * Reads all cities from database
+    * @return returns all city names in a arraylist
+   * @throws SQLException
+   */
   List<City> readCity() throws SQLException;
-
 }

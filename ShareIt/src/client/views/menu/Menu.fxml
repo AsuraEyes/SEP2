@@ -20,11 +20,6 @@
                </padding>
             </Label>
             <Label fx:id="usernameLabel" layoutX="1097.0" layoutY="125.0" text="Logged in as: username" />
-            <Button fx:id="reviewsButton" layoutX="591.0" layoutY="75.0" mnemonicParsing="false" onAction="#onReviewsButton" style="-fx-background-color: #A3A1A8;" text="Reviews" textFill="#fff587">
-               <font>
-                  <Font name="Californian FB" size="20.0" />
-               </font>
-            </Button>
             <Button fx:id="reportedMembersButton" layoutX="735.0" layoutY="76.0" mnemonicParsing="false" onAction="#onReportedMembersButton" style="-fx-background-color: #A3A1A8;" text="Reported members" textFill="#fff587">
                <font>
                   <Font name="Californian FB" size="20.0" />

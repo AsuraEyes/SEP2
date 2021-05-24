@@ -45,8 +45,8 @@ public class ManageAccountViewModel {
     }
 
     public ArrayList<Rental> getRentalsOfMemberList() throws RemoteException {
-        System.out.println(usernameLabel.getValue());
-        return shareItModel.getRentalsOfMemberList(StateManager.getInstance().getUsername());
+        System.out.println("This is the username i am looking for: "+shareItModel.getMemberUsername());
+        return shareItModel.getRentalsOfMemberList(shareItModel.getLoggedInUsername());
     }
 
     public void getRental(Object object) throws RemoteException {
@@ -58,7 +58,7 @@ public class ManageAccountViewModel {
                     ImageView imageView = (ImageView) infoOverlay.getContent();
                     for (int i = 0; i < getRentalsOfMemberList().size(); i++) {
                         if(imageView.getId().equals(String.valueOf(getRentalsOfMemberList().get(i).getId()))) {
-                            shareItModel.getSelectedRental(getRentalsOfMemberList().get(i));
+                            shareItModel.sendSelectedRental(getRentalsOfMemberList().get(i));
                             break;
                         }
                     }
@@ -95,5 +95,9 @@ public class ManageAccountViewModel {
     public StringProperty getOtherInformationLabel()
     {
         return otherInformationLabel;
+    }
+
+    public void setMember() {
+        shareItModel.setMemberUsername(usernameLabel.getValue());
     }
 }

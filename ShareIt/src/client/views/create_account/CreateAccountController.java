@@ -33,8 +33,6 @@ public class CreateAccountController {
     @FXML
     private TextField streetNumberField;
     @FXML
-    private TextField floorField;
-    @FXML
     private TextField postalCodeField;
     @FXML
     private ChoiceBox<String> locationBox;
@@ -58,7 +56,6 @@ public class CreateAccountController {
         confirmPasswordField.textProperty().bindBidirectional(createAccountViewModel.getConfirmPasswordField());
         streetField.textProperty().bindBidirectional(createAccountViewModel.getStreetField());
         streetNumberField.textProperty().bindBidirectional(createAccountViewModel.getStreetNumberField());
-        floorField.textProperty().bindBidirectional(createAccountViewModel.getFloorField());
         postalCodeField.textProperty().bindBidirectional(createAccountViewModel.getPostalCodeField());
         emailField.textProperty().bindBidirectional(createAccountViewModel.getEmailField());
         telephoneNoField.textProperty().bindBidirectional(createAccountViewModel.getTelephoneNoField());

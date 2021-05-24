@@ -5,6 +5,9 @@ import shared.transferobjects.Member;
 
 import java.sql.SQLException;
 
+/**
+ * Class that checks data before running an instance(Member data in this case)
+ */
 public class DataCheckMember {
 
     //does not check for length of ANY of the given Strings
@@ -64,16 +67,18 @@ public class DataCheckMember {
         this.phone = phone;
         this.postalCode = postalCode;
 
-        if(matchingPasswords() && uniqueUsername() && oneContactInformationGiven() && postalCodeIsNumber()){
+        if(matchingPasswords() && oneContactInformationGiven() && postalCodeIsNumber()){
+            System.out.println("we just got here");
             try{
                 MemberDAOImpl.getInstance().update(username, password, email, phone, otherInformation, street, streetNumber, postalCodeNb, city);
                 return "Edit successful";
             }
             catch (SQLException e){
-                //
+                e.printStackTrace();
             }
         }
         else{
+            System.out.println("we got only here");
             if(!matchingPasswords()){
                 return "Not matching passwords.";
             }

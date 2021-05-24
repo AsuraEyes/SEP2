@@ -6,7 +6,9 @@ import shared.transferobjects.Member;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-
+/**
+ * Class that checks data before running an instance(Rental data in this case)
+ */
 public class DataCheckRental {
     private String name;
     private String pictureLink;
@@ -15,7 +17,7 @@ public class DataCheckRental {
     private int priceNb;
     private String search;
 
-    public String checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, String username, ArrayList<String> selectedCategories) {
+    public String checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, String username,ArrayList<String> selectedCategories) {
         this.name = name;
         this.pictureLink = pictureLink;
         this.description = description;
@@ -24,6 +26,35 @@ public class DataCheckRental {
         if (nameGiven() && descriptionGiven() && priceIsNumber()){
             try {
                 RentalDAOImpl.getInstance().create(name, pictureLink, description, priceNb, otherInformation, stateName, username, selectedCategories);
+                return "Adding successful";
+            }
+            catch (SQLException e){
+                e.printStackTrace();
+            }
+        }
+        else{
+            if(!nameGiven()){
+                return "Name cannot be empty";
+            }
+            if(!descriptionGiven()){
+                return "Description cannot be empty";
+            }
+            if(!priceIsNumber()){
+                return "Price is a not number";
+            }
+        }
+        return "Ooops, something went wrong!!";
+    }
+
+    public String updateCheckRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, int rentalId, ArrayList<String> selectedCategories) {
+        this.name = name;
+        this.pictureLink = pictureLink;
+        this.description = description;
+        this.price = price;
+
+        if (nameGiven() && descriptionGiven() && priceIsNumber()){
+            try {
+                RentalDAOImpl.getInstance().update(name, pictureLink, description, priceNb, otherInformation, stateName, rentalId, selectedCategories);
                 return "Adding successful";
             }
             catch (SQLException e){
@@ -71,6 +102,4 @@ public class DataCheckRental {
             return false;
         }
     }
-
-   
 }

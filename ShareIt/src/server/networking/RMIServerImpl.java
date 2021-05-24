@@ -3,7 +3,6 @@ package server.networking;
 import server.model.ServerModelManager;
 import shared.networking.RMIServer;
 import shared.networking.RemoteObserver;
-import client.model.state.StateManager;
 import shared.transferobjects.*;
 
 import java.beans.PropertyChangeListener;
@@ -13,7 +12,6 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -89,7 +87,7 @@ public class RMIServerImpl implements RMIServer
 
   @Override
   public String updateCheckMemberData(String username, String password, String confirmPassword, String email, String phone, String otherInformation, String street, String streetNo, String postalCode, String city) throws IOException {
-    return serverModelManager.updateCheckMemberData(username, password, confirmPassword, email, otherInformation, phone, street, streetNo, postalCode, city);
+    return serverModelManager.updateCheckMemberData(username, password, confirmPassword, email, phone, otherInformation, street, streetNo, postalCode, city);
   }
 
   @Override
@@ -97,11 +95,22 @@ public class RMIServerImpl implements RMIServer
     return serverModelManager.checkRentalData(name, pictureLink, description, price, otherInformation, stateName, username, selectedCategories);
   }
 
+  @Override
+  public String updateCheckRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, int rentalId, ArrayList<String> selectedCategories) throws RemoteException {
+    return serverModelManager.updateCheckRentalData(name, pictureLink, description, price, otherInformation, stateName, rentalId, selectedCategories);
+  }
+
   @Override public String addFeedback(double starValue, String feedback, String username1, String username2)
       throws RemoteException
   {
     System.out.println(starValue);
     return serverModelManager.addFeedback(starValue, feedback, username1, username2);
+  }
+
+  @Override public String addReport(String feedback, String username1,
+      String username2) throws RemoteException
+  {
+    return serverModelManager.addReport(feedback, username1, username2);
   }
 
   @Override
@@ -160,8 +169,45 @@ public class RMIServerImpl implements RMIServer
   }
 
   @Override
-  public boolean deleteMember(Member member) throws RemoteException {
+  public boolean deleteMember(Member member){
     return serverModelManager.deleteMember(member);
+  }
+
+  @Override public Rating getRating(String fromUsername, String toUsername)
+      throws RemoteException
+  {
+    return serverModelManager.getRating(fromUsername, toUsername);
+  }
+
+  @Override public Report getReport(String fromUsername, String toUsername)
+      throws RemoteException
+  {
+    return serverModelManager.getReport(fromUsername,toUsername);
+  }
+
+  @Override public void updateRating(Rating rating)
+  {
+    serverModelManager.updateRating(rating);
+  }
+
+  @Override public void updateReport(Report report) throws RemoteException
+  {
+    serverModelManager.updateReport(report);
+  }
+
+  @Override public boolean deleteRental(Rental rental)
+  {
+    return serverModelManager.deleteRental(rental);
+  }
+
+  @Override
+  public List<Member> checkSearchForMember(String value) throws RemoteException {
+    return serverModelManager.checkSearchForMember(value);
+  }
+
+  @Override
+  public List<Member> getMembersList() {
+    return serverModelManager.getMembersList();
   }
 
 }

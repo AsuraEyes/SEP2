@@ -20,6 +20,7 @@ public class ShareItModelManager implements ShareItModel
   private Client client;
   private String memberUsername;
   private String searchText;
+  private Rental rental;
 
   @Override
   public String getMemberUsername() {
@@ -83,7 +84,7 @@ public class ShareItModelManager implements ShareItModel
   @Override
   public String updateCheckMemberData(String username, String password, String confirmPassword, String email, String phone, String otherInformation, String street, String streetNo, String postalCode, String city) throws IOException {
     String messageToReturn = client.updateCheckMemberData (username, password, confirmPassword, email, phone, otherInformation, street, streetNo, postalCode, city);
-    if(messageToReturn.equals("Adding successful")){
+    if(messageToReturn.equals("Edit successful")){
       StateManager.getInstance().setLoginState(new MemberState(username));
     }
 
@@ -91,8 +92,13 @@ public class ShareItModelManager implements ShareItModel
   }
 
   @Override
-  public String checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, String username, ArrayList<String> selectedCategories) throws IOException {
-    return client.checkRentalData(name, pictureLink,  description,  price, otherInformation,  stateName,  username,  selectedCategories);
+  public String checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, ArrayList<String> selectedCategories) throws IOException {
+    return client.checkRentalData(name, pictureLink,  description,  price, otherInformation,  stateName, getLoggedInUsername(), selectedCategories);
+  }
+
+  @Override
+  public String updateCheckRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, ArrayList<String> selectedCategories) throws IOException {
+    return client.updateCheckRentalData(name, pictureLink,  description,  price, otherInformation,  stateName, getSelectedRental().getId(), selectedCategories);
   }
 
 
@@ -105,6 +111,13 @@ public class ShareItModelManager implements ShareItModel
     System.out.println(starValue);
     return client.addFeedback(starValue, feedback,username1,username2 );
   }
+
+  @Override public String addReport(String feedback, String username1,
+      String username2) throws IOException
+  {
+    return client.addReport(feedback,username1,username2);
+  }
+
   @Override public List<Rental> checkSearch(String search) throws IOException
   {
     return client.checkSearch(search);
@@ -136,6 +149,11 @@ public class ShareItModelManager implements ShareItModel
   }
 
   @Override
+  public String getLoggedInUsername(){
+    return StateManager.getInstance().getUsername();
+  }
+
+  @Override
   public String checkLogInCredentials(String username, String password){
     return client.checkLogInCredentials(username, password);
   }
@@ -146,7 +164,7 @@ public class ShareItModelManager implements ShareItModel
   }
 
   @Override
-  public void getSelectedRental(Rental rental)
+  public void sendSelectedRental(Rental rental)
   {
     support.firePropertyChange("selectedRental",1,rental);
   }
@@ -179,4 +197,49 @@ public class ShareItModelManager implements ShareItModel
     return client.deleteMember(member);
   }
 
+  @Override public Rating getRating(String fromUsername, String toUsername)
+  {
+    return client.getRating(fromUsername, toUsername);
+  }
+
+  @Override public Report getReport(String fromUsername, String toUsername)
+  {
+    return client.getReport(fromUsername, toUsername);
+  }
+
+  @Override public void updateRating(Rating rating)
+  {
+    client.updateRating(rating);
+  }
+
+  @Override public void updateReport(Report report)
+  {
+    client.updateReport(report);
+  }
+
+  @Override public boolean deleteRental(Rental rental)
+  {
+    return client.deleteRental(rental);
+  }
+
+  @Override public void setSelectedRental(Rental rental)
+  {
+    this.rental = rental;
+  }
+
+  @Override public Rental getSelectedRental()
+  {
+    System.out.println(rental.getSelectedCategories());
+    return rental;
+  }
+
+  @Override
+  public List<Member> checkSearchForMember(String value) {
+    return client.checkSearchForMember(value);
+  }
+
+  @Override
+  public List<Member> getMembersList() {
+    return client.getMembersList();
+  }
 }

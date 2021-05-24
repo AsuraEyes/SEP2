@@ -26,7 +26,6 @@ public class EditAccountViewModel {
     private final StringProperty confirmPasswordField;
     private final StringProperty streetField;
     private final StringProperty streetNumberField;
-    private final StringProperty floorField;
     private final StringProperty postalCodeField;
     private final StringProperty emailField;
     private final StringProperty telephoneNoField;
@@ -40,7 +39,6 @@ public class EditAccountViewModel {
         confirmPasswordField = new SimpleStringProperty();
         streetField = new SimpleStringProperty();
         streetNumberField = new SimpleStringProperty();
-        floorField = new SimpleStringProperty();
         postalCodeField = new SimpleStringProperty();
         emailField = new SimpleStringProperty();
         telephoneNoField = new SimpleStringProperty();
@@ -63,9 +61,6 @@ public class EditAccountViewModel {
     public StringProperty getStreetNumberField(){
         return streetNumberField;
     }
-    public StringProperty getFloorField(){
-        return floorField;
-    }
     public StringProperty getPostalCodeField(){
         return postalCodeField;
     }
@@ -80,9 +75,9 @@ public class EditAccountViewModel {
     }
 
     public String onEditButtonPressed(String selectedCity) throws IOException {
-        return shareItModel.updateCheckMemberData(usernameField.getValue(), passwordField.getValue(), confirmPasswordField.getValue(),
+        return shareItModel.updateCheckMemberData(StateManager.getInstance().getUsername(), passwordField.getValue(), confirmPasswordField.getValue(),
                 emailField.getValue(), telephoneNoField.getValue(), otherInfoField.getValue(), streetField.getValue(),
-                streetNumberField.getValue()+", "+floorField.getValue(), postalCodeField.getValue(),  selectedCity);
+                streetNumberField.getValue(), postalCodeField.getValue(),  selectedCity);
     }
 
     public ObservableList<String> getLocations(){
@@ -118,5 +113,9 @@ public class EditAccountViewModel {
             StateManager.getInstance().setLoginState(new VisitorState());
         }
         return deleteSuccessful;
+    }
+
+    public String getSelectedLocation() {
+        return shareItModel.getMemberByUsername(usernameField.getValue()).getAddressCity();
     }
 }

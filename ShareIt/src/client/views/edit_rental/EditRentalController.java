@@ -4,6 +4,7 @@ import client.core.ViewHandler;
 import client.core.ViewModelFactory;
 import client.viewmodel.edit_rental.EditRentalViewModel;
 
+import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -18,6 +19,7 @@ import javafx.util.Duration;
 import org.controlsfx.control.CheckComboBox;
 import org.controlsfx.control.Notifications;
 import org.controlsfx.validation.ValidationSupport;
+import shared.transferobjects.Category;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -25,12 +27,13 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Optional;
 
 public class EditRentalController {
     @FXML private ImageView imageView;
     private Image picture;
-    @FXML private CheckComboBox categoryBox;
+    @FXML private CheckComboBox<String> categoryBox;
     @FXML private TextField searchField;
     @FXML private AnchorPane parent;
     @FXML private ChoiceBox<String> stateBox;
@@ -41,22 +44,28 @@ public class EditRentalController {
 
     private String path;
 
-    private ValidationSupport validationSupport;
     private EditRentalViewModel editRentalViewModel;
     private ViewHandler viewHandler;
     private Notifications notifications;
 
-    public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws SQLException, IOException {
+    public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws IOException {
         this.viewHandler = viewHandler;
         editRentalViewModel = viewModelFactory.getEditRentalViewModel();
-        imageView.setImage(picture);
+
+        Bindings.bindBidirectional(imageView.imageProperty(), editRentalViewModel.imagePropertyProperty());
+        //Bindings.bindBidirectional(imageView.idProperty(), editRentalViewModel.getImageIdMemberId());
+
         nameField.textProperty().bindBidirectional(editRentalViewModel.getNameField());
         descriptionField.textProperty().bindBidirectional(editRentalViewModel.getDescriptionField());
         stateBox.setItems(editRentalViewModel.getStates());
-        stateBox.getSelectionModel().selectFirst();
+        stateBox.setValue(editRentalViewModel.getSelectedState());
+        //stateBox.getSelectionModel().selectFirst();
         priceField.textProperty().bindBidirectional(editRentalViewModel.getPriceField());
         otherInfoField.textProperty().bindBidirectional(editRentalViewModel.getOtherInfoField());
         categoryBox.getItems().addAll(editRentalViewModel.getCategories());
+        categoryBox.setShowCheckedCount(true);
+
+        checkCategories();
 
         notifications =  Notifications.create()
                 .title("Error - invalid input!")
@@ -73,7 +82,7 @@ public class EditRentalController {
     public void editButton(ActionEvent actionEvent) throws IOException {
         boolean ok = true;
         if(checkField("Name", nameField) && checkField("Description",descriptionField) && checkField("Price", priceField) && checkPicture(imageView)){
-            String message = editRentalViewModel.onEditRentalButtonPressed(stateBox.getValue(), categoryBox.getCheckModel().getCheckedItems(), path);
+            String message = editRentalViewModel.onEditRentalButtonPressed(stateBox.getValue(), categoryBox.getCheckModel().getCheckedItems(), imageView.getImage().getUrl());
 
             switch (message){
                 case "Edit successful":
@@ -120,8 +129,9 @@ public class EditRentalController {
         }
     }
 
-    public void onGoBack(ActionEvent actionEvent) {
-
+    public void onGoBack(ActionEvent actionEvent) throws IOException
+    {
+        viewHandler.setView(viewHandler.menu(),viewHandler.manageRentals());
     }
 
     private boolean checkField (String message, TextField nameOfField){
@@ -138,5 +148,21 @@ public class EditRentalController {
             return false;
         }
         return true;
+    }
+
+    private void checkCategories(){
+        ArrayList<String> checkedCategories = editRentalViewModel.getCheckedCategories();
+        System.out.println(checkedCategories);
+        for (int i = 0; i < checkedCategories.size(); i++)
+        {
+            for (int j = 0; j < categoryBox.getItems().size(); j++)
+            {
+                if(checkedCategories.get(i).equals(categoryBox.getItems().get(j)))
+                {
+                    categoryBox.getCheckModel().check(j);
+                }
+            }
+        }
+
     }
 }

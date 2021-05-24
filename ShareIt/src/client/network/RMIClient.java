@@ -1,11 +1,9 @@
 package client.network;
 
-import client.model.state.StateManager;
 import shared.networking.RMIServer;
 import shared.networking.RemoteObserver;
 import shared.transferobjects.*;
 
-import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.IOException;
@@ -14,7 +12,6 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,7 +65,18 @@ public class RMIClient implements Client, RemoteObserver
   @Override
   public String checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, String username, ArrayList<String> selectedCategories) throws IOException {
     try {
-      return server.checkRentalData(name, pictureLink, description, price, otherInformation, stateName, StateManager.getInstance().getUsername(), selectedCategories);
+      return server.checkRentalData(name, pictureLink, description, price, otherInformation, stateName, username, selectedCategories);
+    }
+    catch (RemoteException e){
+      e.printStackTrace();
+      throw new RuntimeException("Could not contact server");
+    }
+  }
+
+  @Override
+  public String updateCheckRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, int rentalId, ArrayList<String> selectedCategories) throws IOException {
+    try {
+      return server.updateCheckRentalData(name, pictureLink, description, price, otherInformation, stateName, rentalId, selectedCategories);
     }
     catch (RemoteException e){
       e.printStackTrace();
@@ -82,6 +90,20 @@ public class RMIClient implements Client, RemoteObserver
     {
 
       return server.addFeedback(starValue, feedback, username1, username2);
+    }
+    catch (RemoteException e){
+      e.printStackTrace();
+      throw new RuntimeException("Could not contact server");
+    }
+  }
+
+  @Override public String addReport(String feedback, String username1,
+      String username2) throws IOException
+  {
+    try
+    {
+
+      return server.addReport(feedback, username1, username2);
     }
     catch (RemoteException e){
       e.printStackTrace();
@@ -215,6 +237,89 @@ public class RMIClient implements Client, RemoteObserver
     return false;
   }
 
+  @Override
+  public boolean deleteRental(Rental rental) {
+    try {
+      return server.deleteRental(rental);
+    }
+    catch (Exception e){
+      e.printStackTrace();
+    }
+    return false;
+  }
+
+  @Override
+  public List<Member> checkSearchForMember(String value) {
+    try{
+      return server.checkSearchForMember(value);
+    }
+    catch (Exception e){
+      e.printStackTrace();
+    }
+    return null;
+  }
+
+  @Override
+  public List<Member> getMembersList() {
+    try{
+      return server.getMembersList();
+    }
+    catch (Exception e){
+      e.printStackTrace();
+    }
+    return null;
+  }
+
+  @Override public Rating getRating(String fromUsername, String toUsername)
+  {
+    try
+    {
+      return server.getRating(fromUsername, toUsername);
+    }
+    catch (RemoteException e)
+    {
+      e.printStackTrace();
+    }
+    return null;
+  }
+
+  @Override public Report getReport(String fromUsername, String toUsername)
+  {
+    try
+    {
+      return server.getReport(fromUsername, toUsername);
+    }
+    catch (RemoteException e)
+    {
+      e.printStackTrace();
+    }
+    return null;
+  }
+
+  @Override public void updateRating(Rating rating)
+  {
+    try
+    {
+      server.updateRating(rating);
+    }
+    catch (RemoteException e)
+    {
+      e.printStackTrace();
+    }
+  }
+
+  @Override public void updateReport(Report report)
+  {
+    try
+    {
+      server.updateReport(report);
+    }
+    catch (RemoteException e)
+    {
+      e.printStackTrace();
+    }
+  }
+
   @Override public void addListener(String propertyName,
       PropertyChangeListener listener)
   {
@@ -249,6 +354,4 @@ public class RMIClient implements Client, RemoteObserver
       support.firePropertyChange("NewUser", null, object);
     }*/
   }
-
-
 }

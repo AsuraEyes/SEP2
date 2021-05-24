@@ -2,6 +2,7 @@ package client.views.view_rental;
 
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
+import client.model.state.StateManager;
 import client.viewmodel.view_rental.ViewRentalViewModel;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
@@ -35,6 +36,7 @@ public class ViewRentalController
   @FXML private Label otherInformationLabel;
   @FXML private Label categoriesLabel;
   @FXML private ImageView imageView;
+  @FXML private Button goBackButton;
   private Image picture;
   
   @FXML private Label usernameLabel;
@@ -65,24 +67,36 @@ public class ViewRentalController
     usernameLabel.textProperty().bind(viewRentalViewModel.usernameOfRentalProperty());
     locationLabel.textProperty().bind(viewRentalViewModel.locationOfRentalProperty());
     ratingLabel.textProperty().bind(viewRentalViewModel.ratingOfUserOfRentalProperty());
+
+    if(viewRentalViewModel.getUserType().equals("Administrator")){
+      goBackButton.setText("Go back to member page");
+    }
   }
 
-  public void searchButton(ActionEvent actionEvent)
-  {
-
-  }
 
   public void goBackToSearchResultsButton(ActionEvent actionEvent)
-      throws IOException, SQLException, InterruptedException
+      throws IOException
   {
-    System.out.println("ho");
-    viewHandler.setView(viewHandler.menu(), viewHandler.searchForRental());
+    if(viewRentalViewModel.getUserType().equals("Administrator")){
+      viewHandler.setView(viewHandler.menu(), viewHandler.viewMemberProfile());
+    }
+    else{
+      viewHandler.setView(viewHandler.menu(), viewHandler.searchForRental());
+    }
+
   }
 
   public void seeMoreButton(ActionEvent actionEvent) throws IOException
   {
     viewRentalViewModel.setMemberUsername();
-    viewHandler.setView(viewHandler.menu(), viewHandler.viewMemberProfile());
+    //if member's profile I want to see is mine, send me to view my profile
+    if(viewRentalViewModel.usernameOfRentalProperty().getValue().equals(StateManager.getInstance().getUsername())){
+      viewHandler.setView(viewHandler.menu(), viewHandler.manageAccount());
+    }
+    else{
+      viewHandler.setView(viewHandler.menu(), viewHandler.viewMemberProfile());
+    }
+
     //viewRentalViewModel.getMemberById();
   }
 }
