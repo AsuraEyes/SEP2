@@ -43,19 +43,19 @@ public class ViewReportedMemberListController {
             for (int i = 0; i < reports.size(); i++)
             {
                 VBox reportBox = new VBox();
-                Label reportedNameLabel = new Label(viewReportedMemberListViewModel.getMemberById(reports.get(i).getMemberTo()).getUsername());
+                Label reportedNameLabel = new Label(viewReportedMemberListViewModel.getMemberById(reports.get(i).getMemberTo()).getUsername()+"\n");
                 reportedNameLabel.setFont(Font.font ("Californian FB", 24));
                 reportedNameLabel.setTextFill(Color.WHITE);
                 Label reporterNameLabel = new Label(viewReportedMemberListViewModel.getMemberById(reports.get(i).getMemberFrom()).getUsername());
-                reporterNameLabel.setFont(Font.font ("Californian FB", 24));
+                reporterNameLabel.setFont(Font.font ("Californian FB", 18));
                 reporterNameLabel.setTextFill(Color.WHITE);
                 TextFlow textFlow = new TextFlow();
                 textFlow.getChildren().addAll(reportedNameLabel,reporterNameLabel);
                 reportBox.getChildren().addAll(textFlow);
-                reportBox.setSpacing(10);
-                reportBox.setPadding(new Insets(20,160,20,160));
-                reportBox.setStyle("-fx-border-color: #FF665A; -fx-border-width: 3; -fx-background-color:#7D6B7D;");
-                vBox.getChildren().add(reportBox);
+                vBox.setSpacing(10);
+                vBox.setPadding(new Insets(20,160,20,160));
+                vBox.setStyle("-fx-border-color: #FF665A; -fx-border-width: 3; -fx-background-color:#7D6B7D;");
+                vBox.getChildren().addAll(reportedNameLabel, reporterNameLabel);
 
                 vBox.getChildren().get(i)
                     .addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
