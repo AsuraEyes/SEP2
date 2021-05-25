@@ -58,6 +58,7 @@ public class SendWarningViewModel {
         model.sendWarning(warning);
     }
     public void loadLogs() {
+        warnings.setValue("Warning for this guy");
         int idTo = model.getMemberByUsername(model.getMemberUsername()).getId();
         ArrayList<Warning> listOfWarnings = model.getWarnings("administrator", idTo);
         if(listOfWarnings != null){

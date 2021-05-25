@@ -422,6 +422,10 @@ public class RMIClient implements Client, RemoteObserver
     {
       support.firePropertyChange("newMessage", 0, newValue);
     }
+    if(propertyName.equals("newWarning"))
+    {
+      support.firePropertyChange("newWarning", 0, newValue);
+    }
     /*
     else if (object instanceof UserName)
     {
