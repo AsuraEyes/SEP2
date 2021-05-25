@@ -1,5 +1,6 @@
 package server.model.database.administrator;
 
+import shared.transferobjects.Administrator;
 import shared.transferobjects.City;
 
 import java.sql.*;

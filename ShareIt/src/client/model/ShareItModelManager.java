@@ -283,6 +283,11 @@ public class ShareItModelManager implements ShareItModel
   }
 
   @Override
+  public void sendWarning(Warning warning) {
+    client.sendWarning(warning);
+  }
+
+  @Override
   public List<Member> checkSearchForMember(String value) {
     return client.checkSearchForMember(value);
   }

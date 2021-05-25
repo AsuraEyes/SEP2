@@ -217,6 +217,11 @@ public class RMIServerImpl implements RMIServer
   }
 
   @Override
+  public void sendWarning(Warning warning) {
+    serverModelManager.sendWarning(warning);
+  }
+
+  @Override
   public List<Member> checkSearchForMember(String value) throws RemoteException {
     return serverModelManager.checkSearchForMember(value);
   }

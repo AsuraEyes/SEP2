@@ -14,6 +14,7 @@ import client.viewmodel.rate_feedback.RateFeedbackViewModel;
 import client.viewmodel.report_member.ReportMemberViewModel;
 import client.viewmodel.search_for_member.SearchForMemberViewModel;
 import client.viewmodel.search_for_rental.SearchForRentalViewModel;
+import client.viewmodel.send_warning.SendWarningViewModel;
 import client.viewmodel.view_member_profile.ViewMemberProfileViewModel;
 import client.viewmodel.view_rating.ViewRatingViewModel;
 import client.viewmodel.view_rental.ViewRentalViewModel;
@@ -47,6 +48,7 @@ public class ViewModelFactory
   private RateFeedbackViewModel rateFeedbackViewModel;
   private ReportMemberViewModel reportMemberViewModel;
   private ManageAccountViewModel manageAccountViewModel;
+  private SendWarningViewModel sendWarningViewModel;
 
   public ViewModelFactory(ModelFactory modelFactory) throws IOException
   {
@@ -215,5 +217,12 @@ public class ViewModelFactory
       manageAccountViewModel = new ManageAccountViewModel(modelFactory.getShareItModel());
     }
     return manageAccountViewModel;
+  }
+
+  public SendWarningViewModel getSendWarningViewModel() throws IOException {
+    if (sendWarningViewModel == null){
+      sendWarningViewModel = new SendWarningViewModel(modelFactory.getShareItModel());
+    }
+    return sendWarningViewModel;
   }
 }

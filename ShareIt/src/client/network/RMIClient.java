@@ -288,6 +288,16 @@ public class RMIClient implements Client, RemoteObserver
   }
 
   @Override
+  public void sendWarning(Warning warning) {
+    try{
+      server.sendWarning(warning);
+    }
+    catch (RemoteException e){
+      e.printStackTrace();
+    }
+  }
+
+  @Override
   public List<Member> checkSearchForMember(String value) {
     try{
       return server.checkSearchForMember(value);
