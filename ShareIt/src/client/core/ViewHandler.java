@@ -22,7 +22,6 @@ import client.views.view_rental.ViewRentalController;
 import client.views.view_reported_member.ViewReportedMemberController;
 import client.views.view_reported_member_list.ViewReportedMemberListController;
 import client.views.welcome_page.WelcomePageController;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -31,7 +30,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.concurrent.TimeUnit;
 
 public class ViewHandler
 {
@@ -88,7 +86,7 @@ public class ViewHandler
   public Node chatReceived() throws IOException
   {
     FXMLLoader loader = new FXMLLoader();
-    loader.setLocation(getClass().getResource("/client/views/chat_received_messages/ChatRecievedMessages.fxml"));
+    loader.setLocation(getClass().getResource("/client/views/chat_received_messages/ChatReceivedMessages.fxml"));
     Node content = loader.load();
     ChatReceivedMessagesController chatReceivedMessagesController = loader.getController();
     chatReceivedMessagesController.init(this, viewModelFactory);

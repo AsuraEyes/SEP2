@@ -55,6 +55,7 @@ public interface ShareItModel extends Subject
 
     List<Member> getMembersList();
     ArrayList<Message> getAllReceivedMessages();
+    ArrayList<Warning> getAllWarnings();
     List<Report> getReportList();
     void setUsernames(String reporterNameLabel, String reportedNameLabel);
     String getReporterPerson();
@@ -67,8 +68,10 @@ public interface ShareItModel extends Subject
     ArrayList<Warning> getWarnings(String administrator, int idTo);
     void sendMessage(Message message);
     void setAllReceivedMessages(String loggedUsername);
+    void setAllReceivedWarnings();
 
     void sendWarning(Warning warning);
+
 
 
 }

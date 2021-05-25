@@ -113,6 +113,7 @@ public class MenuController
 
     public void onChatButton (ActionEvent actionEvent) throws IOException {
     menuViewModel.loadAllReceivedMessages();
+    menuViewModel.loadAllWarnings();
     viewHandler.setView(viewHandler.menu(), viewHandler.chatReceived());
   }
   }

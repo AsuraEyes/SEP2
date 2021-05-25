@@ -25,7 +25,8 @@ import java.util.ArrayList;
 public class ChatReceivedMessagesController
 {
   @FXML
-  private VBox vBox;
+  private VBox vBoxRight;
+  @FXML private VBox vBoxLeft;
 
   private ViewHandler viewHandler;
   private ChatReceivedMessagesViewModel chatReceivedMessagesViewModel;
@@ -36,12 +37,9 @@ public class ChatReceivedMessagesController
     this.viewHandler = viewHandler;
     chatReceivedMessagesViewModel = viewModelFactory.getChatReceivedMessagesViewModel();
     displayMessages();
+    displayWarnings();
   }
 
-  public void searchButton(ActionEvent actionEvent) throws IOException, SQLException
-  {
-    viewHandler.setView(viewHandler.menu(), viewHandler.searchForRental());
-  }
   public void displayMessages(){
 
     if (chatReceivedMessagesViewModel.getAllReceivedMessages() != null && !chatReceivedMessagesViewModel.getAllReceivedMessages().isEmpty())
@@ -60,9 +58,9 @@ public class ChatReceivedMessagesController
         messageBox.setSpacing(10);
         messageBox.setPadding(new Insets(20,160,20,160));
         message.setStyle("-fx-border-color: #FF8C64; -fx-border-width: 3; -fx-background-color: #FF8C64;");
-        vBox.getChildren().add(messageBox);
+        vBoxRight.getChildren().add(messageBox);
 
-        vBox.getChildren().get(i)
+        vBoxRight.getChildren().get(i)
             .addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
               try
               {
@@ -74,6 +72,39 @@ public class ChatReceivedMessagesController
                 e.printStackTrace();
               }
             });
+      }
+    }
+  }
+
+  public void displayWarnings(){
+    if (chatReceivedMessagesViewModel.getAllReceivedWarnings() != null && !chatReceivedMessagesViewModel.getAllReceivedWarnings().isEmpty()) {
+      for (int i = 0; i < chatReceivedMessagesViewModel.getAllReceivedWarnings().size(); i++) {
+        VBox messageBox = new VBox();
+        Label usernameLabel = new Label(chatReceivedMessagesViewModel.getAllReceivedWarnings().get(i).getAdministratorFrom());
+        usernameLabel.setFont(Font.font ("Californian FB", 24));
+        usernameLabel.setTextFill(Color.WHITE);
+        Text warning = new Text("Received on: "  + chatReceivedMessagesViewModel.getAllReceivedWarnings().get(i).getTimeStamp() + "\n" + chatReceivedMessagesViewModel.getAllReceivedWarnings().get(i).getText());
+        warning.setFill(Color.WHITE);
+        TextFlow textFlow = new TextFlow();
+        textFlow.getChildren().addAll(warning);
+        messageBox.getChildren().addAll(usernameLabel,textFlow);
+        messageBox.setSpacing(10);
+        messageBox.setPadding(new Insets(20,160,20,160));
+        warning.setStyle("-fx-border-color: #FF8C64; -fx-border-width: 3; -fx-background-color: #FF8C64;");
+        vBoxLeft.getChildren().add(messageBox);
+
+        vBoxLeft.getChildren().get(i)
+                .addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
+                  try
+                  {
+                    chatReceivedMessagesViewModel.getUsername(event.getSource());
+                    viewHandler.setView(viewHandler.menu(), viewHandler.sendWarning());
+                  }
+                  catch (IOException e)
+                  {
+                    e.printStackTrace();
+                  }
+                });
       }
     }
   }

@@ -23,6 +23,7 @@ public class ShareItModelManager implements ShareItModel
   private Rental rental;
   private ArrayList<Message> allReceivedMessages;
   private ArrayList<Rental> allRentals;
+  private ArrayList<Warning> allWarnings;
   private String reporterPerson;
   private String reportedPerson;
 
@@ -79,6 +80,7 @@ public class ShareItModelManager implements ShareItModel
     client.addListener("newMessage", this::onNewMessage);
     client.addListener("dataValidation", this::onDataValidation);
     allReceivedMessages = new ArrayList<>();
+    allWarnings = new ArrayList<>();
   }
 
   private void onNewMessage(PropertyChangeEvent evt)
@@ -276,6 +278,11 @@ public class ShareItModelManager implements ShareItModel
     return allReceivedMessages;
   }
 
+  @Override
+  public ArrayList<Warning> getAllWarnings() {
+    return allWarnings;
+  }
+
   @Override public ArrayList<Message> getMessagesFromUser(int loggedUserId,
       int fromUserid)
   {
@@ -307,6 +314,11 @@ public class ShareItModelManager implements ShareItModel
       allReceivedMessages.add(new Message(databaseMessages.get(i).getTimeStamp(), getMemberById(databaseMessages.get(i).getMemberFrom()).getUsername(),databaseMessages.get(i).getText()));
     }*/
     allReceivedMessages = client.getAllReceivedMessages(getMemberByUsername(loggedUsername).getId());
+  }
+
+  @Override
+  public void setAllReceivedWarnings() {
+    allWarnings = client.getWarnings("administrator", getMemberByUsername(getLoggedInUsername()).getId());
   }
 
   @Override

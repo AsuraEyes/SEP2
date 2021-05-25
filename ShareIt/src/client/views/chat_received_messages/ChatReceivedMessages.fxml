@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.chat_received_messages.ChatReceivedMessagesController">
+<ScrollPane xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.chat_received_messages.ChatReceivedMessagesController">
    <content>
       <AnchorPane prefHeight="600.0" prefWidth="1280.0">
          <children>
@@ -21,11 +21,13 @@
                      <font>
                         <Font name="Californian FB" size="24.0" />
                      </font>
-                     <VBox.margin>
-                        <Insets bottom="30.0" />
-                     </VBox.margin>
                   </Label>
-                  <VBox fx:id="vBox" prefHeight="200.0" prefWidth="100.0" />
+                  <HBox>
+                     <children>
+                        <VBox fx:id="vBoxRight" />
+                        <VBox fx:id="vBoxLeft" />
+                     </children>
+                  </HBox>
                </children>
             </VBox>
          </children>

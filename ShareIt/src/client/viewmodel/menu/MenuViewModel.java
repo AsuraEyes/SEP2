@@ -37,4 +37,8 @@ public class MenuViewModel
   public void loadAllReceivedMessages(){
     model.setAllReceivedMessages(model.getLoggedInUsername());
   }
+
+    public void loadAllWarnings() {
+    model.setAllReceivedWarnings();
+    }
 }
