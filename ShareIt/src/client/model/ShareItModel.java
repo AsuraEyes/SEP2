@@ -64,8 +64,11 @@ public interface ShareItModel extends Subject
 
 //    ArrayList<Message> getAllReceivedMessages(String loggedUsername);
     ArrayList<Message> getMessagesFromUser(int loggedUserId, int fromUserid);
+    ArrayList<Warning> getWarnings(String administrator, int idTo);
     void sendMessage(Message message);
     void setAllReceivedMessages(String loggedUsername);
 
     void sendWarning(Warning warning);
+
+
 }

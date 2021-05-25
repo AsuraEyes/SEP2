@@ -346,6 +346,19 @@ public class ServerModelImpl implements ServerModelManager
     return null;
   }
 
+  @Override
+  public ArrayList<Warning> getWarnings(String administrator, int idTo) {
+    try
+    {
+      return WarningDAOImpl.getInstance().getWarnings(administrator, idTo);
+    }
+    catch (SQLException e)
+    {
+      e.printStackTrace();
+    }
+    return null;
+  }
+
   @Override public void sendMessage(Message message)
   {
     try

@@ -24,39 +24,49 @@ public class SendWarningViewModel {
         username = new SimpleStringProperty();
         warnings = new SimpleStringProperty();
         inputTextChat = new SimpleStringProperty();
+        model.addListener("newWarning", this::onNewWarning);
+    }
+
+    private void onNewWarning(PropertyChangeEvent evt) {
+        Platform.runLater(() ->{
+            Warning warning = (Warning) evt.getNewValue();
+            warnings.setValue(warnings.getValue() + "\n" + evt.getNewValue().toString());
+        });
     }
 
     public StringProperty getUsername(){
         return username;
     }
-//    public void getMember(){
-//        username.setValue(model.getMemberUsername());
-//        System.out.println("Chat write View model" + username.getValue());
-//    }
-    public StringProperty getMessages()
-    {
+    public StringProperty getWarnings() {
         return warnings;
     }
-    public void loadLogs() {
-//        ArrayList<Warning> listOfWarnings = model.getMessagesFromUser(model.getMemberByUsername(model.getLoggedInUsername()).getId(), model.getMemberByUsername(
-//                model.getMemberUsername()).getId());
-//        for (int i = 0; i < listOfWarnings.size(); i++)
-//        {
-//            warnings.setValue(warnings.getValue() + "\n" + listOfWarnings.get(i).toString());
-//        }
-    }
+
     public StringProperty getInputTextChat()
     {
         return inputTextChat;
     }
+
     public ObservableList<Warning> getListOfWarnings() {
         return listOfWarnings;
     }
+
     public void sendWarning(){
         String administratorFrom = "administrator";
         int idTo = model.getMemberByUsername(model.getMemberUsername()).getId();
         Date timeStamp = Calendar.getInstance().getTime();
         Warning warning = new Warning(administratorFrom, idTo, inputTextChat.getValue(), timeStamp);
         model.sendWarning(warning);
+    }
+    public void loadLogs() {
+        int idTo = model.getMemberByUsername(model.getMemberUsername()).getId();
+        ArrayList<Warning> listOfWarnings = model.getWarnings("administrator", idTo);
+        if(listOfWarnings != null){
+            for (int i = 0; i < listOfWarnings.size(); i++) {
+                warnings.setValue(warnings.getValue() + "\n" + listOfWarnings.get(i).toString());
+            }
+        }
+    }
+    public void getMember(){
+        username.setValue(model.getMemberUsername());
     }
 }

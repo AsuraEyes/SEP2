@@ -59,6 +59,8 @@ public interface RMIServer extends Remote
     List<Member> getMembersList() throws RemoteException;
   ArrayList<Message> getAllReceivedMessages(int loggedUserId) throws RemoteException;
   ArrayList<Message> getMessagesFromUser(int loggedUserId, int fromUserid) throws RemoteException;
+  ArrayList<Warning> getWarnings(String administrator, int idTo) throws RemoteException;
+
   void sendMessage(Message message) throws RemoteException;
   void sendWarning(Warning warning) throws RemoteException;
 

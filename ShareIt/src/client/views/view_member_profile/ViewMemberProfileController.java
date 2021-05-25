@@ -76,7 +76,7 @@ public class ViewMemberProfileController
       case "Administrator":
         reportButton.setVisible(false);
         rateButton.setVisible(false);
-        chatButton.setText("Warning");
+        chatButton.setText("Warn");
         goBackToViewedRentalButton.setText("Go back to search results");
         break;
     }

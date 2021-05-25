@@ -25,9 +25,9 @@ public class SendWarningController {
         sendWarningViewModel = viewModelFactory.getSendWarningViewModel();
         toUsernameLabel.textProperty().bind(sendWarningViewModel.getUsername());
         inputTextChatField.textProperty().bindBidirectional(sendWarningViewModel.getInputTextChat());
-//        sendWarningViewModel.getMember();
-       textChatArea.textProperty().bind(sendWarningViewModel.getMessages());
-//        sendWarningViewModel.loadLogs();
+        sendWarningViewModel.getMember();
+        textChatArea.textProperty().bind(sendWarningViewModel.getWarnings());
+        sendWarningViewModel.loadLogs();
     }
 
     public void onGoBack(ActionEvent actionEvent) throws IOException {

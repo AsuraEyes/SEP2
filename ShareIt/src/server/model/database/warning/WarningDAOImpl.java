@@ -1,10 +1,11 @@
 package server.model.database.warning;
 
-import shared.transferobjects.Message;
 import shared.transferobjects.Warning;
 
 import java.sql.*;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Date;
 
 public class WarningDAOImpl implements WarningDAO {
     private static WarningDAOImpl instance;
@@ -28,6 +29,31 @@ public class WarningDAOImpl implements WarningDAO {
     private Connection getConnection() throws SQLException {
         System.out.println("password: " + password);
         return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", password);
+    }
+
+    @Override
+    public ArrayList<Warning> getWarnings(String administrator, int memberTo) {
+        try (Connection connection = getConnection()) {
+            PreparedStatement statement = connection.prepareStatement("SELECT time, text FROM share_it.warning WHERE administrator_from = ? AND member_to = ? ORDER BY time");
+            statement.setString(1, administrator);
+            statement.setInt(2, memberTo);
+            ResultSet resultSet = statement.executeQuery();
+            ArrayList<Warning> arrayListToReturn = new ArrayList<>();
+
+            while (resultSet.next()){
+                String text = resultSet.getString("text");
+                Date date = resultSet.getTimestamp("time");
+
+                arrayListToReturn.add(new Warning(administrator, memberTo, text, date));
+            }
+            resultSet.close();
+            statement.close();
+            return arrayListToReturn;
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override

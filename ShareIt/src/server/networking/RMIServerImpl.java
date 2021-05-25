@@ -211,6 +211,11 @@ public class RMIServerImpl implements RMIServer
     return serverModelManager.getMessagesFromUser(loggedUserId, fromUserid);
   }
 
+  @Override
+  public ArrayList<Warning> getWarnings(String administrator, int idTo) throws RemoteException {
+    return serverModelManager.getWarnings(administrator, idTo);
+  }
+
   @Override public void sendMessage(Message message)
   {
     serverModelManager.sendMessage(message);

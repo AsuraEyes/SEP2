@@ -275,6 +275,17 @@ public class RMIClient implements Client, RemoteObserver
     return null;
   }
 
+  @Override
+  public ArrayList<Warning> getWarnings(String administrator, int idTo) {
+    try {
+      return server.getWarnings(administrator, idTo);
+    }
+    catch (RemoteException e) {
+      e.printStackTrace();
+    }
+    return null;
+  }
+
   @Override public void sendMessage(Message message)
   {
     try

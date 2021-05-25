@@ -40,6 +40,9 @@ public interface Client extends Subject
   boolean deleteRental(Rental rental);
   ArrayList<Message> getAllReceivedMessages(int loggedUserId);
   ArrayList<Message> getMessagesFromUser(int loggedUserId, int fromUserid);
+  ArrayList<Warning> getWarnings(String administrator, int idTo);
+
+
   void sendMessage(Message message);
   void sendWarning(Warning warning);
 

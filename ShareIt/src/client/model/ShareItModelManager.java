@@ -282,6 +282,11 @@ public class ShareItModelManager implements ShareItModel
     return client.getMessagesFromUser(loggedUserId, fromUserid);
   }
 
+  @Override
+  public ArrayList<Warning> getWarnings(String administrator, int idTo) {
+    return client.getWarnings(administrator, idTo);
+  }
+
   @Override public void sendMessage(Message message)
   {
     client.sendMessage(message);
