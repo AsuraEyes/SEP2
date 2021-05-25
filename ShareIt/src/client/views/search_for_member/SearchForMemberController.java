@@ -77,7 +77,7 @@ public class SearchForMemberController
         ratingBox.getChildren().addAll(ratingLabel,rating);
         ratingBox.setSpacing(10);
         ratingBox.setPadding(new Insets(20,160,20,160));
-        ratingBox.setStyle("-fx-border-color: #FF8C64; -fx-border-width: 3; -fx-background-color: #FF8C64;");
+        ratingBox.setStyle("-fx-background-color: #FF8C64;");
         vBox.getChildren().add(ratingBox);
         vBox.getChildren().get(i)
                 .addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {

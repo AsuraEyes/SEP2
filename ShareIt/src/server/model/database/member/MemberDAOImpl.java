@@ -232,6 +232,7 @@ public class MemberDAOImpl implements MemberDAO{
             else{
                 throw new SQLException("No keys generated");
             }
+
         }
     }
 

@@ -1,6 +1,8 @@
 package shared.transferobjects;
 
-public class Report
+import java.io.Serializable;
+
+public class Report implements Serializable
 {
   private String commentary;
   private int memberFrom;

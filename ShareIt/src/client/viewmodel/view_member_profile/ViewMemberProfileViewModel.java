@@ -127,6 +127,7 @@ public class ViewMemberProfileViewModel
 
   public String getMemberUsername(){
     usernameLabel.setValue(model.getMemberUsername());
+    System.out.println("View member profile username: "+usernameLabel.getValue());
     Member member = model.getMemberByUsername(model.getMemberUsername());
     locationLabel.setValue(member.getAddressCity());
     ratingLabel.setValue(String.valueOf(member.getAverageReview()));

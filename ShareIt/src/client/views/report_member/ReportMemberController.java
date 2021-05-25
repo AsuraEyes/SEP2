@@ -50,5 +50,6 @@ public class ReportMemberController
 
   public void goBackToUserPageButton(ActionEvent actionEvent)
   {
+
   }
 }

@@ -248,6 +248,55 @@ public class RMIClient implements Client, RemoteObserver
     return false;
   }
 
+  @Override public ArrayList<Message> getAllReceivedMessages(int loggedUserId)
+  {
+    try
+    {
+      return server.getAllReceivedMessages(loggedUserId);
+    }
+    catch (RemoteException e)
+    {
+      e.printStackTrace();
+    }
+    return null;
+  }
+
+  @Override public ArrayList<Message> getMessagesFromUser(int loggedUserId,
+      int fromUserid)
+  {
+    try
+    {
+      return server.getMessagesFromUser(loggedUserId, fromUserid);
+    }
+    catch (RemoteException e)
+    {
+      e.printStackTrace();
+    }
+    return null;
+  }
+
+  @Override public void sendMessage(Message message)
+  {
+    try
+    {
+      server.sendMessage(message);
+    }
+    catch (RemoteException e)
+    {
+      e.printStackTrace();
+    }
+  }
+
+  @Override
+  public void sendWarning(Warning warning) {
+    try{
+      server.sendWarning(warning);
+    }
+    catch (RemoteException e){
+      e.printStackTrace();
+    }
+  }
+
   @Override
   public List<Member> checkSearchForMember(String value) {
     try{
@@ -269,6 +318,19 @@ public class RMIClient implements Client, RemoteObserver
     }
     return null;
   }
+
+  @Override
+  public List<Report> getReportList()
+  {
+    try{
+      return server.getReportList();
+    }
+    catch (Exception e){
+      e.printStackTrace();
+    }
+    return null;
+  }
+
 
   @Override public Rating getRating(String fromUsername, String toUsername)
   {
@@ -345,10 +407,11 @@ public class RMIClient implements Client, RemoteObserver
       support.firePropertyChange("selectedRental", 0, 0);
     }
 
-    /*if(object instanceof Message)
+    if(propertyName.equals("newMessage"))
     {
-      support.firePropertyChange("NewMessage", null, object);
+      support.firePropertyChange("newMessage", 0, newValue);
     }
+    /*
     else if (object instanceof UserName)
     {
       support.firePropertyChange("NewUser", null, object);

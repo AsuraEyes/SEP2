@@ -2,12 +2,14 @@ package server.model;
 
 import server.model.data_check.*;
 import server.model.database.category.CategoryDAOImpl;
+import server.model.database.message.MessageDAOImpl;
 import server.model.database.city.CityDAOImpl;
 import server.model.database.member.MemberDAOImpl;
 import server.model.database.rating.RatingDAOImpl;
 import server.model.database.rental.RentalDAOImpl;
 import server.model.database.report.ReportDAOImpl;
 import server.model.database.state.StateDAOImpl;
+import server.model.database.warning.WarningDAOImpl;
 import shared.transferobjects.*;
 
 import java.beans.PropertyChangeListener;
@@ -301,5 +303,66 @@ public class ServerModelImpl implements ServerModelManager
       e.printStackTrace();
     }
     return null;
+  }
+
+  @Override public List<Report> getReportList()
+  {
+    try{
+      return ReportDAOImpl.getInstance().readReports();
+    }
+    catch (SQLException e){
+      e.printStackTrace();
+    }
+    return null;
+  }
+
+
+
+  @Override public ArrayList<Message> getAllReceivedMessages(int loggedUserId)
+  {
+    try
+    {
+      return MessageDAOImpl.getInstance().getAllReceivedMessages(loggedUserId);
+    }
+    catch (SQLException throwables)
+    {
+      throwables.printStackTrace();
+    }
+    return null;
+  }
+
+  @Override public ArrayList<Message> getMessagesFromUser(int loggedUserId,
+      int fromUserid)
+  {
+    try
+    {
+      return MessageDAOImpl
+          .getInstance().getMessagesFromUser(loggedUserId, fromUserid);
+    }
+    catch (SQLException throwables)
+    {
+      throwables.printStackTrace();
+    }
+    return null;
+  }
+
+  @Override public void sendMessage(Message message)
+  {
+    try
+    {
+      support.firePropertyChange("newMessage", 0, MessageDAOImpl.getInstance().sendMessage(message));
+    }
+    catch (SQLException throwables)
+    {
+      throwables.printStackTrace();
+    }
+  }
+  @Override public void sendWarning(Warning warning){
+    try {
+      support.firePropertyChange("newWarning", 0, WarningDAOImpl.getInstance().sendWarning(warning));
+    }
+    catch (SQLException e){
+      e.printStackTrace();
+    }
   }
 }

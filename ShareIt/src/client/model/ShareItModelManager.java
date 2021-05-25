@@ -21,10 +21,35 @@ public class ShareItModelManager implements ShareItModel
   private String memberUsername;
   private String searchText;
   private Rental rental;
+  private ArrayList<Message> allReceivedMessages;
+  private String reporterPerson;
+  private String reportedPerson;
 
   @Override
   public String getMemberUsername() {
+    System.out.println("Getting in model manager: "+memberUsername);
     return memberUsername;
+  }
+
+  public String getReporterPerson()
+  {
+    return reporterPerson;
+  }
+
+  public String getReportedPerson()
+  {
+    return reportedPerson;
+  }
+
+  @Override
+  public void setReporterUsername(String reporterUsername) {
+    memberUsername = reporterUsername;
+  }
+
+  @Override
+  public void setReportedUsername(String reportedUsername) {
+    memberUsername = reportedUsername;
+    System.out.println("Setting in model manager: "+memberUsername);
   }
 
   @Override
@@ -38,15 +63,26 @@ public class ShareItModelManager implements ShareItModel
     this.memberUsername = memberUsername;
   }
 
-
+  @Override public void setUsernames(String reporterNameLabel,
+      String reportedNameLabel)
+  {
+    reporterPerson = reporterNameLabel;
+    reportedPerson = reportedNameLabel;
+  }
 
   public ShareItModelManager(Client client) throws IOException
   {
     this.client = client;
     client.startClient();
     support = new PropertyChangeSupport(this);
-    //client.addListener("selectedRental", this::onDataValidation);
+    client.addListener("newMessage", this::onNewMessage);
     client.addListener("dataValidation", this::onDataValidation);
+    allReceivedMessages = new ArrayList<>();
+  }
+
+  private void onNewMessage(PropertyChangeEvent evt)
+  {
+    support.firePropertyChange(evt);
   }
 
   public void onDataValidation(PropertyChangeEvent evt){
@@ -233,6 +269,40 @@ public class ShareItModelManager implements ShareItModel
     return rental;
   }
 
+  @Override public ArrayList<Message> getAllReceivedMessages()
+  {
+    //return client.getAllReceivedMessages(getMemberByUsername(getLoggedInUsername()).getId());
+    return allReceivedMessages;
+  }
+
+  @Override public ArrayList<Message> getMessagesFromUser(int loggedUserId,
+      int fromUserid)
+  {
+    return client.getMessagesFromUser(loggedUserId, fromUserid);
+  }
+
+  @Override public void sendMessage(Message message)
+  {
+    client.sendMessage(message);
+  }
+
+  @Override
+  public void sendWarning(Warning warning) {
+    client.sendWarning(warning);
+  }
+
+  @Override public void setAllReceivedMessages(String loggedUsername)
+  {
+/*
+    allReceivedMessages.clear();
+    ArrayList<Message> databaseMessages = client.getAllReceivedMessages(getMemberByUsername(loggedUsername).getId());
+    for (int i = 0 ; i < databaseMessages.size(); i++)
+    {
+      allReceivedMessages.add(new Message(databaseMessages.get(i).getTimeStamp(), getMemberById(databaseMessages.get(i).getMemberFrom()).getUsername(),databaseMessages.get(i).getText()));
+    }*/
+    allReceivedMessages = client.getAllReceivedMessages(getMemberByUsername(loggedUsername).getId());
+  }
+
   @Override
   public List<Member> checkSearchForMember(String value) {
     return client.checkSearchForMember(value);
@@ -242,4 +312,8 @@ public class ShareItModelManager implements ShareItModel
   public List<Member> getMembersList() {
     return client.getMembersList();
   }
+
+  @Override
+  public List<Report> getReportList() { return client.getReportList(); }
+
 }

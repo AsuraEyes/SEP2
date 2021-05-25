@@ -34,4 +34,7 @@ public class MenuViewModel
   public void setMemberUsername(){
     model.setMemberUsername(usernameLabel.getValue());
   }
+  public void loadAllReceivedMessages(){
+    model.setAllReceivedMessages(model.getLoggedInUsername());
+  }
 }

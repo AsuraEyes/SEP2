@@ -15,6 +15,7 @@ import client.views.rate_feedback.RateFeedbackController;
 import client.views.report_member.ReportMemberController;
 import client.views.search_for_member.SearchForMemberController;
 import client.views.search_for_rental.SearchForRentalController;
+import client.views.send_warning.SendWarningController;
 import client.views.view_member_profile.ViewMemberProfileController;
 import client.views.view_rating.ViewRatingController;
 import client.views.view_rental.ViewRentalController;
@@ -38,7 +39,7 @@ public class ViewHandler
   private final Scene scene;
   private final ViewModelFactory viewModelFactory;
 
-  public ViewHandler(Stage stage, ViewModelFactory viewModelFactory)
+    public ViewHandler(Stage stage, ViewModelFactory viewModelFactory)
   {
     this.viewModelFactory = viewModelFactory;
     this.stage = stage;
@@ -100,7 +101,16 @@ public class ViewHandler
     loader.setLocation(getClass().getResource("/client/views/chat_write_message/ChatWriteMessage.fxml"));
     Node content = loader.load();
     ChatWriteMessageController chatWriteMessageController = loader.getController();
-    //chatWriteMessageController.init();
+    chatWriteMessageController.init(this, viewModelFactory);
+    return content;
+  }
+
+  public Node sendWarning() throws IOException {
+    FXMLLoader loader = new FXMLLoader();
+    loader.setLocation(getClass().getResource("/client/views/send_warning/SendWarning.fxml"));
+    Node content = loader.load();
+    SendWarningController sendWarningController = loader.getController();
+    sendWarningController.init(this, viewModelFactory);
     return content;
   }
 

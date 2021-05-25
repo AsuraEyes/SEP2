@@ -1,10 +1,13 @@
 package server.model.database.report;
 
 import server.model.database.member.MemberDAOImpl;
+import shared.transferobjects.Member;
 import shared.transferobjects.Rating;
 import shared.transferobjects.Report;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ReportDAOImpl implements ReportDAO
 {
@@ -97,5 +100,22 @@ public class ReportDAOImpl implements ReportDAO
     {
       throwables.printStackTrace();
     }
+  }
+
+  public List<Report> readReports() throws SQLException
+  {
+    try(Connection connection = getConnection()){
+    PreparedStatement statement = connection.prepareStatement("SELECT * FROM share_it.report");
+    ResultSet resultSet = statement.executeQuery();
+    List<Report> listToReturn = new ArrayList<>();
+    while(resultSet.next()){
+      listToReturn.add(new Report(
+          resultSet.getString("commentary"),
+          resultSet.getInt("member_from"),
+          resultSet.getInt("member_to"))
+      );
+    }
+    return listToReturn;
+  }
   }
 }

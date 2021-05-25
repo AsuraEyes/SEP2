@@ -47,7 +47,9 @@ public class ViewMemberProfileController
   private ViewMemberProfileViewModel viewMemberProfileViewModel;
   private ViewHandler viewHandler;
 
-  public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws IOException {
+  public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory)
+      throws IOException
+  {
     this.viewHandler = viewHandler;
     viewMemberProfileViewModel = viewModelFactory.getViewMemberProfileViewModel();
     usernameLabel.textProperty().bind(viewMemberProfileViewModel.getUsernameLabel());
@@ -57,9 +59,11 @@ public class ViewMemberProfileController
     contactLabel.textProperty().bind(viewMemberProfileViewModel.getContactLabel());
     otherInformationLabel.textProperty().bind(viewMemberProfileViewModel.getOtherInformationLabel());
 
-    displayRentals(viewMemberProfileViewModel.getRentalsOfMemberList(viewMemberProfileViewModel.getMemberUsername()));
+    displayRentals(viewMemberProfileViewModel.getRentalsOfMemberList(
+        viewMemberProfileViewModel.getMemberUsername()));
 
-    switch (viewMemberProfileViewModel.checkUserType()){
+    switch (viewMemberProfileViewModel.checkUserType())
+    {
       case "Visitor":
         deleteButton.setVisible(false);
         chatButton.setVisible(false);
@@ -78,35 +82,47 @@ public class ViewMemberProfileController
     }
   }
 
-  public void searchButton(ActionEvent actionEvent) {
+  public void searchButton(ActionEvent actionEvent)
+  {
 
   }
 
-  public void reportButton(ActionEvent actionEvent) throws IOException {
+  public void reportButton(ActionEvent actionEvent) throws IOException
+  {
     viewMemberProfileViewModel.setMemberUsername();
-    viewHandler.setView(viewHandler.menu(),viewHandler.reportMember());
+    viewHandler.setView(viewHandler.menu(), viewHandler.reportMember());
   }
 
-  public void chatButton(ActionEvent actionEvent){
-
+    public void chatButton (ActionEvent actionEvent) throws IOException {
+    if (viewMemberProfileViewModel.checkUserType().equals("Administrator")){
+      viewHandler.setView(viewHandler.menu(), viewHandler.sendWarning());
+      viewMemberProfileViewModel.setMemberUsername();
+    }
+    else {
+      viewHandler.setView(viewHandler.menu(), viewHandler.chatWrite());
+      viewMemberProfileViewModel.setMemberUsername();
+    }
   }
 
-  public void rateButton(ActionEvent actionEvent) throws IOException {
+    public void rateButton (ActionEvent actionEvent) throws IOException {
     viewMemberProfileViewModel.setMemberUsername();
-    viewHandler.setView(viewHandler.menu(),viewHandler.rateFeedback());
+    viewHandler.setView(viewHandler.menu(), viewHandler.rateFeedback());
 
   }
 
-  public void deleteButton(ActionEvent actionEvent) throws IOException {
+    public void deleteButton (ActionEvent actionEvent) throws IOException {
     Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "");
     alert.setTitle("Delete account");
     alert.setHeaderText("Are you sure?");
-    alert.getDialogPane().setContentText("Are you sure you want to permanently delete your account?");
+    alert.getDialogPane().setContentText(
+        "Are you sure you want to permanently delete your account?");
 
     Optional<ButtonType> result = alert.showAndWait();
-    if (result.get() == ButtonType.OK) {
+    if (result.get() == ButtonType.OK)
+    {
       boolean success = viewMemberProfileViewModel.deleteAccount();
-      if(success){
+      if (success)
+      {
         Stage stage = (Stage) viewHandler.getStage().getScene().getWindow();
         alert = new Alert(Alert.AlertType.INFORMATION, "");
         alert.setTitle("Confirmation");
@@ -123,53 +139,54 @@ public class ViewMemberProfileController
     }
 
   }
-  
-  public void goBackToViewedRentalButton(ActionEvent actionEvent)
-      throws IOException
-  {
-    if(viewMemberProfileViewModel.checkUserType().equals("Administrator")){
+
+    public void goBackToViewedRentalButton (ActionEvent actionEvent)
+      throws IOException {
+    if (viewMemberProfileViewModel.checkUserType().equals("Administrator"))
+    {
       viewHandler.setView(viewHandler.menu(), viewHandler.searchForMember());
     }
-    else{
+    else
+    {
       viewHandler.setView(viewHandler.menu(), viewHandler.viewRental());
     }
 
   }
 
-  public void viewRatingButton(ActionEvent actionEvent) throws IOException {
+    public void viewRatingButton (ActionEvent actionEvent) throws IOException {
     viewMemberProfileViewModel.setMemberUsername();
     viewHandler.setView(viewHandler.menu(), viewHandler.viewRating());
   }
 
-  public void displayRentals(List<Rental> rentals) throws RemoteException
-  {
-    if (rentals != null && !rentals.isEmpty())
+    public void displayRentals (List < Rental > rentals) throws RemoteException
     {
-      for (int i = 0; i < rentals.size(); i++)
+      if (rentals != null && !rentals.isEmpty())
       {
-        Image image = new Image(rentals.get(i).getPictureLink());
-        ImageView imageView = new ImageView();
-        imageView.setImage(image);
-        imageView.setFitWidth(275);
-        imageView.setPreserveRatio(true);
-        imageView.setSmooth(true);
-        imageView.setCache(true);
-        imageView.setId(String.valueOf(rentals.get(i).getId()));
-        flowPane.getChildren().add(new StackPane(new InfoOverlay(imageView, rentals.get(i).toString())));
-        System.out.println(rentals.get(i).getPictureLink());
-        flowPane.getChildren().get(i)
-                .addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
-                  try
-                  {
-                    viewHandler.setView(viewHandler.menu(), viewHandler.viewRental());
-                    viewMemberProfileViewModel.getRental(event.getSource());
-                  }
-                  catch (IOException e)
-                  {
-                    e.printStackTrace();
-                  }
-                });
+        for (int i = 0; i < rentals.size(); i++)
+        {
+          Image image = new Image(rentals.get(i).getPictureLink());
+          ImageView imageView = new ImageView();
+          imageView.setImage(image);
+          imageView.setFitWidth(275);
+          imageView.setPreserveRatio(true);
+          imageView.setSmooth(true);
+          imageView.setCache(true);
+          imageView.setId(String.valueOf(rentals.get(i).getId()));
+          flowPane.getChildren().add(new StackPane(new InfoOverlay(imageView, rentals.get(i).toString())));
+          System.out.println(rentals.get(i).getPictureLink());
+          flowPane.getChildren().get(i)
+              .addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
+                try
+                {
+                  viewHandler.setView(viewHandler.menu(), viewHandler.viewRental());
+                  viewMemberProfileViewModel.getRental(event.getSource());
+                }
+                catch (IOException e)
+                {
+                  e.printStackTrace();
+                }
+              });
+        }
       }
     }
-  }
 }

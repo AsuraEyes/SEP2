@@ -70,7 +70,7 @@ public class RMIServerImpl implements RMIServer
         e.printStackTrace();
       }
     };
-    serverModelManager.addListener("NewMessage", listener);
+    serverModelManager.addListener("newMessage", listener);
     //serverModelManager.addListener("selectedRental", listener);
     //serverModelManager.addListener("NewUser", listener);
   }
@@ -200,6 +200,27 @@ public class RMIServerImpl implements RMIServer
     return serverModelManager.deleteRental(rental);
   }
 
+  @Override public ArrayList<Message> getAllReceivedMessages(int loggedUserId)
+  {
+    return serverModelManager.getAllReceivedMessages(loggedUserId);
+  }
+
+  @Override public ArrayList<Message> getMessagesFromUser(int loggedUserId,
+      int fromUserid) throws RemoteException
+  {
+    return serverModelManager.getMessagesFromUser(loggedUserId, fromUserid);
+  }
+
+  @Override public void sendMessage(Message message)
+  {
+    serverModelManager.sendMessage(message);
+  }
+
+  @Override
+  public void sendWarning(Warning warning) {
+    serverModelManager.sendWarning(warning);
+  }
+
   @Override
   public List<Member> checkSearchForMember(String value) throws RemoteException {
     return serverModelManager.checkSearchForMember(value);
@@ -209,5 +230,13 @@ public class RMIServerImpl implements RMIServer
   public List<Member> getMembersList() {
     return serverModelManager.getMembersList();
   }
+
+  @Override
+  public List<Report> getReportList()
+  {
+    return serverModelManager.getReportList();
+  }
+
+
 
 }

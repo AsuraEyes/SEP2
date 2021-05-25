@@ -14,6 +14,7 @@ import client.viewmodel.rate_feedback.RateFeedbackViewModel;
 import client.viewmodel.report_member.ReportMemberViewModel;
 import client.viewmodel.search_for_member.SearchForMemberViewModel;
 import client.viewmodel.search_for_rental.SearchForRentalViewModel;
+import client.viewmodel.send_warning.SendWarningViewModel;
 import client.viewmodel.view_member_profile.ViewMemberProfileViewModel;
 import client.viewmodel.view_rating.ViewRatingViewModel;
 import client.viewmodel.view_rental.ViewRentalViewModel;
@@ -47,13 +48,16 @@ public class ViewModelFactory
   private RateFeedbackViewModel rateFeedbackViewModel;
   private ReportMemberViewModel reportMemberViewModel;
   private ManageAccountViewModel manageAccountViewModel;
+  private SendWarningViewModel sendWarningViewModel;
 
   public ViewModelFactory(ModelFactory modelFactory) throws IOException
   {
     this.modelFactory = modelFactory;
     logInViewModel = new LogInViewModel(modelFactory.getShareItModel());
-    chatReceivedMessagesViewModel = new ChatReceivedMessagesViewModel();
-    chatWriteMessageViewModel = new ChatWriteMessageViewModel();
+    chatReceivedMessagesViewModel = new ChatReceivedMessagesViewModel(
+        modelFactory.getShareItModel());
+    chatWriteMessageViewModel = new ChatWriteMessageViewModel(
+        modelFactory.getShareItModel());
   }
   public LogInViewModel getLogInViewModel() throws IOException
   {
@@ -65,20 +69,24 @@ public class ViewModelFactory
   }
 
   public ChatReceivedMessagesViewModel getChatReceivedMessagesViewModel()
+      throws IOException
   {
     if(chatReceivedMessagesViewModel == null)
     {
-      chatReceivedMessagesViewModel = new ChatReceivedMessagesViewModel();
+      chatReceivedMessagesViewModel = new ChatReceivedMessagesViewModel(
+          modelFactory.getShareItModel());
     }
     return chatReceivedMessagesViewModel;
   }
 
 
   public ChatWriteMessageViewModel getChatWriteMessagesViewModel()
+      throws IOException
   {
     if(chatWriteMessageViewModel == null)
     {
-      chatWriteMessageViewModel = new ChatWriteMessageViewModel();
+      chatWriteMessageViewModel = new ChatWriteMessageViewModel(
+          modelFactory.getShareItModel());
     }
     return chatWriteMessageViewModel;
   }
@@ -126,16 +134,16 @@ public class ViewModelFactory
     return viewRatingViewModel;
   }
 
-  public ViewReportedMemberViewModel getViewReportedMemberViewModel() {
+  public ViewReportedMemberViewModel getViewReportedMemberViewModel() throws IOException {
     if (viewReportedMemberViewModel == null){
-      viewReportedMemberViewModel = new ViewReportedMemberViewModel();
+      viewReportedMemberViewModel = new ViewReportedMemberViewModel(modelFactory.getShareItModel());
     }
     return viewReportedMemberViewModel;
   }
 
-  public ViewReportedMemberListViewModel getViewReportedMemberListViewModel() {
+  public ViewReportedMemberListViewModel getViewReportedMemberListViewModel() throws IOException {
     if (viewReportedMemberListViewModel == null){
-      viewReportedMemberListViewModel = new ViewReportedMemberListViewModel();
+      viewReportedMemberListViewModel = new ViewReportedMemberListViewModel(modelFactory.getShareItModel());
     }
     return viewReportedMemberListViewModel;
   }
@@ -209,5 +217,12 @@ public class ViewModelFactory
       manageAccountViewModel = new ManageAccountViewModel(modelFactory.getShareItModel());
     }
     return manageAccountViewModel;
+  }
+
+  public SendWarningViewModel getSendWarningViewModel() throws IOException {
+    if (sendWarningViewModel == null){
+      sendWarningViewModel = new SendWarningViewModel(modelFactory.getShareItModel());
+    }
+    return sendWarningViewModel;
   }
 }
