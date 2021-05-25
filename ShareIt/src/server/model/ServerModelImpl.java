@@ -9,6 +9,7 @@ import server.model.database.rating.RatingDAOImpl;
 import server.model.database.rental.RentalDAOImpl;
 import server.model.database.report.ReportDAOImpl;
 import server.model.database.state.StateDAOImpl;
+import server.model.database.warning.WarningDAOImpl;
 import shared.transferobjects.*;
 
 import java.beans.PropertyChangeListener;
@@ -304,6 +305,19 @@ public class ServerModelImpl implements ServerModelManager
     return null;
   }
 
+  @Override public List<Report> getReportList()
+  {
+    try{
+      return ReportDAOImpl.getInstance().readReports();
+    }
+    catch (SQLException e){
+      e.printStackTrace();
+    }
+    return null;
+  }
+
+
+
   @Override public ArrayList<Message> getAllReceivedMessages(int loggedUserId)
   {
     try
@@ -341,6 +355,14 @@ public class ServerModelImpl implements ServerModelManager
     catch (SQLException throwables)
     {
       throwables.printStackTrace();
+    }
+  }
+  @Override public void sendWarning(Warning warning){
+    try {
+      support.firePropertyChange("newWarning", 0, WarningDAOImpl.getInstance().sendWarning(warning));
+    }
+    catch (SQLException e){
+      e.printStackTrace();
     }
   }
 }

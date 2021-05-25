@@ -22,10 +22,34 @@ public class ShareItModelManager implements ShareItModel
   private String searchText;
   private Rental rental;
   private ArrayList<Message> allReceivedMessages;
+  private String reporterPerson;
+  private String reportedPerson;
 
   @Override
   public String getMemberUsername() {
+    System.out.println("Getting in model manager: "+memberUsername);
     return memberUsername;
+  }
+
+  public String getReporterPerson()
+  {
+    return reporterPerson;
+  }
+
+  public String getReportedPerson()
+  {
+    return reportedPerson;
+  }
+
+  @Override
+  public void setReporterUsername(String reporterUsername) {
+    memberUsername = reporterUsername;
+  }
+
+  @Override
+  public void setReportedUsername(String reportedUsername) {
+    memberUsername = reportedUsername;
+    System.out.println("Setting in model manager: "+memberUsername);
   }
 
   @Override
@@ -39,7 +63,12 @@ public class ShareItModelManager implements ShareItModel
     this.memberUsername = memberUsername;
   }
 
-
+  @Override public void setUsernames(String reporterNameLabel,
+      String reportedNameLabel)
+  {
+    reporterPerson = reporterNameLabel;
+    reportedPerson = reportedNameLabel;
+  }
 
   public ShareItModelManager(Client client) throws IOException
   {
@@ -257,6 +286,11 @@ public class ShareItModelManager implements ShareItModel
     client.sendMessage(message);
   }
 
+  @Override
+  public void sendWarning(Warning warning) {
+    client.sendWarning(warning);
+  }
+
   @Override public void setAllReceivedMessages(String loggedUsername)
   {
 /*
@@ -278,4 +312,8 @@ public class ShareItModelManager implements ShareItModel
   public List<Member> getMembersList() {
     return client.getMembersList();
   }
+
+  @Override
+  public List<Report> getReportList() { return client.getReportList(); }
+
 }

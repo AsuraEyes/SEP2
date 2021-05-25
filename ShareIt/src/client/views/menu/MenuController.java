@@ -99,7 +99,9 @@ public class MenuController
   }
 
     public void onReportedMembersButton (ActionEvent actionEvent)
-      throws IOException {
+      throws IOException,  SQLException {
+    viewHandler.setView(viewHandler.menu(), viewHandler.viewReportedMemberList());
+       {
       if (menuViewModel.checkUserType().equals("Member")){
         viewHandler.setView(viewHandler.menu(), viewHandler.manageAccount());
       }
@@ -107,7 +109,7 @@ public class MenuController
         viewHandler
                 .setView(viewHandler.menu(), viewHandler.viewReportedMemberList());
       }
-  }
+  }}
 
     public void onChatButton (ActionEvent actionEvent) throws IOException {
     menuViewModel.loadAllReceivedMessages();

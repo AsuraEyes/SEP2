@@ -41,8 +41,12 @@ public interface Client extends Subject
   ArrayList<Message> getAllReceivedMessages(int loggedUserId);
   ArrayList<Message> getMessagesFromUser(int loggedUserId, int fromUserid);
   void sendMessage(Message message);
+  void sendWarning(Warning warning);
 
     List<Member> checkSearchForMember(String value);
 
     List<Member> getMembersList();
+    List<Report> getReportList();
+
+
 }

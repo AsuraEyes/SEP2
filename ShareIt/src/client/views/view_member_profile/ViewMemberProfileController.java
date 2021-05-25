@@ -94,8 +94,14 @@ public class ViewMemberProfileController
   }
 
     public void chatButton (ActionEvent actionEvent) throws IOException {
-    viewHandler.setView(viewHandler.menu(), viewHandler.chatWrite());
-    viewMemberProfileViewModel.setMemberUsername();
+    if (viewMemberProfileViewModel.checkUserType().equals("Administrator")){
+      viewHandler.setView(viewHandler.menu(), viewHandler.sendWarning());
+      viewMemberProfileViewModel.setMemberUsername();
+    }
+    else {
+      viewHandler.setView(viewHandler.menu(), viewHandler.chatWrite());
+      viewMemberProfileViewModel.setMemberUsername();
+    }
   }
 
     public void rateButton (ActionEvent actionEvent) throws IOException {

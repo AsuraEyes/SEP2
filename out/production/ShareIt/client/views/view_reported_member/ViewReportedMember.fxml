@@ -22,7 +22,7 @@
                         <Insets bottom="30.0" />
                      </VBox.margin>
                   </Label>
-                  <Label fx:id="reportedMemberField" text="Reported member: username" textFill="WHITE">
+                  <Label fx:id="reportedMemberField" onMouseClicked="#reportedMemberClickedOn" text="Reported member: username" textFill="WHITE">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -30,7 +30,7 @@
                         <Insets />
                      </VBox.margin>
                   </Label>
-                  <Label fx:id="reportedByField" text="Reported by: username" textFill="WHITE" wrapText="true">
+                  <Label fx:id="reportedByField" onMouseClicked="#reporterMemberClickedOn" text="Reported by: username" textFill="WHITE" wrapText="true">
                      <padding>
                         <Insets bottom="10.0" top="10.0" />
                      </padding>

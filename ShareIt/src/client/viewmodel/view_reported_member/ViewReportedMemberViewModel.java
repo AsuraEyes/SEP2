@@ -1,7 +1,10 @@
 package client.viewmodel.view_reported_member;
 
+import client.model.ShareItModel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import shared.transferobjects.Rating;
+import shared.transferobjects.Report;
 
 public class ViewReportedMemberViewModel {
 
@@ -9,7 +12,10 @@ public class ViewReportedMemberViewModel {
     private final StringProperty reporterNameLabel;
     private final StringProperty commentaryLabel;
 
-    public ViewReportedMemberViewModel(){
+    private ShareItModel model;
+
+    public ViewReportedMemberViewModel(ShareItModel model){
+        this.model = model;
         reportedNameLabel = new SimpleStringProperty();
         reporterNameLabel = new SimpleStringProperty();
         commentaryLabel = new SimpleStringProperty();
@@ -27,5 +33,33 @@ public class ViewReportedMemberViewModel {
 
     public StringProperty getCommentaryLabel(){
         return commentaryLabel;
+    }
+
+    public String getReporterPerson(){
+        reporterNameLabel.setValue(model.getReporterPerson());
+        return model.getReporterPerson();
+    }
+    public String getReportedPerson(){
+        reportedNameLabel.setValue(model.getReportedPerson());
+        return model.getReportedPerson();
+    }
+    public void getComment()
+    {
+        Report report = model.getReport(getReporterPerson(),getReportedPerson());
+        if(report != null)
+        {
+            commentaryLabel.setValue(report.getCommentary());
+        }
+    }
+
+    public void setReportedNameLabel()
+    {
+        System.out.println("Here: "+reportedNameLabel.getValue());
+        model.setReportedUsername(reportedNameLabel.getValue());
+    }
+
+    public void setReporterNameLabel()
+    {
+        model.setReporterUsername(reporterNameLabel.getValue());
     }
 }
