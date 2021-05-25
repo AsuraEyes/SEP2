@@ -78,7 +78,13 @@ public class ShareItModelManager implements ShareItModel
     support = new PropertyChangeSupport(this);
     client.addListener("newMessage", this::onNewMessage);
     client.addListener("dataValidation", this::onDataValidation);
+    client.addListener("newWarning", this::onNewWarning);
     allReceivedMessages = new ArrayList<>();
+  }
+
+  private void onNewWarning(PropertyChangeEvent evt)
+  {
+    support.firePropertyChange(evt);
   }
 
   private void onNewMessage(PropertyChangeEvent evt)
