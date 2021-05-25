@@ -26,17 +26,17 @@ public class SendWarningController {
         toUsernameLabel.textProperty().bind(sendWarningViewModel.getUsername());
         inputTextChatField.textProperty().bindBidirectional(sendWarningViewModel.getInputTextChat());
 //        sendWarningViewModel.getMember();
-//        textChatArea.textProperty().bind(sendWarningViewModel.getMessages());
+       textChatArea.textProperty().bind(sendWarningViewModel.getMessages());
 //        sendWarningViewModel.loadLogs();
     }
 
     public void onGoBack(ActionEvent actionEvent) throws IOException {
-//        textChatArea.clear();
-//        viewHandler.setView(viewHandler.menu(), viewHandler.chatReceived());
+        textChatArea.clear();
+        viewHandler.setView(viewHandler.menu(), viewHandler.viewMemberProfile());
     }
 
     public void onSend(ActionEvent actionEvent) {
-//        chatWriteMessageViewModel.sendMessage();
-//        inputTextChatField.clear();
+        sendWarningViewModel.sendWarning();
+        inputTextChatField.clear();
     }
 }

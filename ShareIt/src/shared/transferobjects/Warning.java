@@ -1,10 +1,12 @@
 package shared.transferobjects;
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Warning {
+public class Warning implements Serializable
+{
     private String administratorFrom;
     private int memberTo;
     private String text;
