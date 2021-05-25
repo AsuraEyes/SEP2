@@ -54,6 +54,7 @@ public class ViewReportedMemberViewModel {
 
     public void setReportedNameLabel()
     {
+        System.out.println("Here: "+reportedNameLabel.getValue());
         model.setReportedUsername(reportedNameLabel.getValue());
     }
 

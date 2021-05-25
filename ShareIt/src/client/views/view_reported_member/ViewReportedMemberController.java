@@ -40,6 +40,7 @@ public class ViewReportedMemberController {
     {
         viewReportedMemberViewModel.setReporterNameLabel();
         viewHandler.setView(viewHandler.menu(),viewHandler.viewMemberProfile());
+
     }
 
     public void reportedMemberClickedOn(MouseEvent mouseEvent) throws IOException

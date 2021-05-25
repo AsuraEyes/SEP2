@@ -26,6 +26,7 @@ public class ShareItModelManager implements ShareItModel
 
   @Override
   public String getMemberUsername() {
+    System.out.println("Getting in model manager: "+memberUsername);
     return memberUsername;
   }
 
@@ -47,6 +48,7 @@ public class ShareItModelManager implements ShareItModel
   @Override
   public void setReportedUsername(String reportedUsername) {
     memberUsername = reportedUsername;
+    System.out.println("Setting in model manager: "+memberUsername);
   }
 
   @Override
