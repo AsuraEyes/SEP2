@@ -2,6 +2,7 @@ package server.model.database.message;
 
 import org.controlsfx.control.tableview2.filter.filtereditor.SouthFilter;
 import server.model.database.member.MemberDAOImpl;
+import shared.transferobjects.Member;
 import shared.transferobjects.Message;
 
 import java.sql.*;
@@ -39,9 +40,11 @@ public class MessageDAOImpl implements MessageDAO
   {
     try (Connection connection = getConnection())
     {
-      PreparedStatement statement = connection
-          .prepareStatement("SELECT time, username, text FROM share_it.message, share_it.member WHERE member_from = member.id AND member_to = ? ORDER BY time desc");
+      //.prepareStatement("SELECT time, username, text FROM share_it.message, share_it.member WHERE member_from = member.id AND member_to = ? ORDER BY time desc");
+      System.out.println("Logged in user id: "+loggedUserId);
+      PreparedStatement statement = connection.prepareStatement("SELECT * FROM share_it.message WHERE member_to = ? AND time IN (SELECT MAX(time) FROM share_it.message WHERE member_to = ? GROUP BY member_from) ORDER BY time DESC ;");
       statement.setInt(1, loggedUserId);
+      statement.setInt(2, loggedUserId);
       ResultSet resultSet = statement.executeQuery();
       ArrayList<Message> arrayListToReturn = new ArrayList<>();
 
@@ -49,12 +52,13 @@ public class MessageDAOImpl implements MessageDAO
       {
         String text = resultSet.getString("text");
         Date d2 = resultSet.getTimestamp("time");
-        // int fromUserId = resultSet.getInt("member_from");
-        String username = resultSet.getString("username");
+        int fromUserId = resultSet.getInt("member_from");
+        //String username = resultSet.getString("username");
+        Member member = MemberDAOImpl.getInstance().getMemberById(fromUserId);
 
 
         //arrayListToReturn.add(new Message(fromUserId, loggedUserId, text, d2));
-        arrayListToReturn.add(new Message(d2, username, text));
+        arrayListToReturn.add(new Message(d2, member.getUsername(), text));
       }
 /*
       while (resultSet.next())
@@ -100,6 +104,8 @@ public class MessageDAOImpl implements MessageDAO
           message.getMemberFrom()).getUsername(), message.getText());
       returnMessage.setMemberFrom(message.getMemberFrom());
       returnMessage.setMemberTo(message.getMemberTo());
+      System.out.println("In the DAO: "+returnMessage);
+      System.out.println("IN the DAO the first one: "+message);
       return returnMessage;
 
       /*ResultSet generatedKeys = statement.getGeneratedKeys();

@@ -143,3 +143,8 @@ SELECT * FROM share_it.rental, share_it.category, share_it.rental_category WHERE
 SELECT * FROM share_it.rental;
 
 SHOW data_directory;
+
+
+SELECT time, username, text FROM share_it.message, share_it.member WHERE member_to = member.id ORDER BY time desc;
+
+SELECT time, username, text FROM share_it.message, share_it.member WHERE member_to = member.id AND (member_to = 4 AND  member_from = 8)

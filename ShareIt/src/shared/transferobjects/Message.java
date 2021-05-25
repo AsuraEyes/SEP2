@@ -81,7 +81,11 @@ public class Message implements Serializable
 
   public String toString(){
     DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
-    String strDate = dateFormat.format(timeStamp);
-    return usernameFrom + ": " + strDate + " : " + text;
+    if(timeStamp != null){
+      String strDate = dateFormat.format(timeStamp);
+      return usernameFrom + ": " + strDate + " : " + text;
+    }
+    return usernameFrom + ": "+text;
+
   }
 }

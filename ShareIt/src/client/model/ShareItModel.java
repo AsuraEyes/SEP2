@@ -62,7 +62,7 @@ public interface ShareItModel extends Subject
     void setReporterUsername(String reporterUsername);
     void setReportedUsername(String reportedUsername);
 
-    ArrayList<Message> getAllReceivedMessages(String loggedUsername);
+//    ArrayList<Message> getAllReceivedMessages(String loggedUsername);
     ArrayList<Message> getMessagesFromUser(int loggedUserId, int fromUserid);
     void sendMessage(Message message);
     void setAllReceivedMessages(String loggedUsername);
