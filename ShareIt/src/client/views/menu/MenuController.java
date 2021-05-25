@@ -2,6 +2,8 @@ package client.views.menu;
 
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
+import client.model.state.StateManager;
+import client.model.state.VisitorState;
 import client.viewmodel.menu.MenuViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,12 +16,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Optional;
 
 public class MenuController
 {
   @FXML private AnchorPane anchorPane;
-  @FXML private Button reviewsButton;
   @FXML private Button reportedMembersButton;
   @FXML private Button chatButton;
   @FXML private Label logoLabel;
@@ -34,22 +36,23 @@ public class MenuController
     menuViewModel = viewModelFactory.getMenuViewModel();
     usernameLabel.textProperty().bind(menuViewModel.getUsernameLabel());
 
-    if (menuViewModel.checkUserType().equals("Visitor"))
+    String userType = menuViewModel.checkUserType();
+
+    if (userType.equals("Visitor"))
     {
-      reviewsButton.setVisible(false);
       reportedMembersButton.setVisible(false);
       chatButton.setVisible(false);
+
     }
-    else if (menuViewModel.checkUserType().equals("Member"))
+    else if (userType.equals("Member"))
     {
-      reviewsButton.setVisible(false);
-      reportedMembersButton.setVisible(false);
+      reportedMembersButton.setVisible(true);
+      reportedMembersButton.setText("Manage account");
       chatButton.setVisible(true);
       logInOutLabel.setText("Log out");
     }
-    else if (menuViewModel.checkUserType().equals("Administrator"))
+    else if (userType.equals("Administrator"))
     {
-      reviewsButton.setVisible(true);
       reportedMembersButton.setVisible(true);
       chatButton.setVisible(true);
       logInOutLabel.setText("Log out");
@@ -74,6 +77,7 @@ public class MenuController
       Optional<ButtonType> result = alert.showAndWait();
       if (result.get() == ButtonType.OK)
       {
+        StateManager.getInstance().setLoginState(new VisitorState());
         viewHandler.setView(viewHandler.menu(), viewHandler.welcomePage());
       }
     }
@@ -83,17 +87,32 @@ public class MenuController
     }
   }
 
-    public void onReviewsButton (ActionEvent actionEvent) throws IOException {
-    viewHandler.setView(viewHandler.menu(), viewHandler.viewRatingFull());
+    public void onReviewsButton (ActionEvent actionEvent) throws IOException, SQLException {
+    if (menuViewModel.checkUserType().equals("Member")){
+      viewHandler.setView(viewHandler.menu(), viewHandler.manageAccount());
+    }
+
+    else
+    {
+      viewHandler.setView(viewHandler.menu(), viewHandler.viewRatingFull());
+    }
   }
 
     public void onReportedMembersButton (ActionEvent actionEvent)
-      throws IOException {
-    viewHandler
-        .setView(viewHandler.menu(), viewHandler.viewReportedMemberList());
-  }
+      throws IOException,  SQLException {
+    viewHandler.setView(viewHandler.menu(), viewHandler.viewReportedMemberList());
+       {
+      if (menuViewModel.checkUserType().equals("Member")){
+        viewHandler.setView(viewHandler.menu(), viewHandler.manageAccount());
+      }
+      else {
+        viewHandler
+                .setView(viewHandler.menu(), viewHandler.viewReportedMemberList());
+      }
+  }}
 
     public void onChatButton (ActionEvent actionEvent) throws IOException {
+    menuViewModel.loadAllReceivedMessages();
     viewHandler.setView(viewHandler.menu(), viewHandler.chatReceived());
   }
   }

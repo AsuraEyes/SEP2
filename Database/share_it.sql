@@ -40,7 +40,7 @@ CREATE TABLE member(
 
 DROP TABLE IF EXISTS rating;
 CREATE TABLE rating(
-    value int CHECK ( value > 0 AND value < 6 ) NOT NULL,
+    value FLOAT CHECK ( value > 0 AND value < 6 ) NOT NULL,
     commentary bla_bla_type,
     member_from INTEGER NOT NULL,
     member_to INTEGER NOT NULL,
@@ -138,6 +138,8 @@ CREATE TRIGGER update_avg_review_trigger
 
 
 --SELECT nextval(pg_get_serial_sequence('share_it.member', 'id')) AS available_id;
+
+SELECT * FROM share_it.rental, share_it.category, share_it.rental_category WHERE share_it.rental.name || share_it.rental.description ILIKE '%bowl%' AND share_it.category.name ILIKE 'tools' AND share_it.rental_category.rental_id = share_it.rental.id AND share_it.rental_category.category_name = share_it.category.name;
 SELECT * FROM share_it.rental;
 
 SHOW data_directory;

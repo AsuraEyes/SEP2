@@ -5,26 +5,73 @@ import client.core.ViewModelFactory;
 import client.viewmodel.view_reported_member_list.ViewReportedMemberListViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
+import server.model.database.member.MemberDAOImpl;
+import shared.transferobjects.Member;
+import shared.transferobjects.Report;
 
-public class ViewReportedMemberListController {private TextField searchField;
-    @FXML private Label reportedNameLabel;
-    @FXML private Label reporterNameLabel;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.List;
+
+public class ViewReportedMemberListController {
+    @FXML private VBox vBox;
 
     private ViewReportedMemberListViewModel viewReportedMemberListViewModel;
     private ViewHandler viewHandler;
 
-    public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory){
+    public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory)
+        throws IOException
+    {
         this.viewHandler = viewHandler;
         viewReportedMemberListViewModel = viewModelFactory.getViewReportedMemberListViewModel();
-        searchField.textProperty().bindBidirectional(viewReportedMemberListViewModel.getSearchField());
-        reportedNameLabel.textProperty().bind(viewReportedMemberListViewModel.getReportedNameLabel());
-        reporterNameLabel.textProperty().bind(viewReportedMemberListViewModel.getReporterNameLabel());
+        displayReports(viewReportedMemberListViewModel.getReportList()) ;
     }
 
-    public void searchButton(ActionEvent actionEvent) {
+    public void displayReports(List<Report> reports)
+    {
+        if (reports != null && !reports.isEmpty())
+        {
+            for (int i = 0; i < reports.size(); i++)
+            {
+                VBox reportBox = new VBox();
+                Label reportedNameLabel = new Label(viewReportedMemberListViewModel.getMemberById(reports.get(i).getMemberTo()).getUsername());
+                reportedNameLabel.setFont(Font.font ("Californian FB", 24));
+                reportedNameLabel.setTextFill(Color.WHITE);
+                Label reporterNameLabel = new Label(viewReportedMemberListViewModel.getMemberById(reports.get(i).getMemberFrom()).getUsername());
+                reporterNameLabel.setFont(Font.font ("Californian FB", 16));
+                reporterNameLabel.setTextFill(Color.WHITE);
+                VBox littleVBox = new VBox();
+                littleVBox.getChildren().addAll(reportedNameLabel,reporterNameLabel);
 
+                vBox.setSpacing(35);
+                littleVBox.setPadding(new Insets(30,160,30,160));
+                littleVBox.setStyle("-fx-background-color:#7D6B7D");
+
+                vBox.getChildren().addAll(littleVBox);
+
+                vBox.getChildren().get(i)
+                    .addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
+                        try
+                        {
+                            viewReportedMemberListViewModel.setUsernames(reporterNameLabel.getText(), reportedNameLabel.getText());
+                            viewHandler.setView(viewHandler.menu(), viewHandler.viewReportedMember());
+                        }
+                        catch (IOException e)
+                        {
+                            e.printStackTrace();
+                        }
+                    });
+            }
+        }
     }
 
 }

@@ -1,71 +1,76 @@
 package client.viewmodel.view_rating;
 
+import client.model.ShareItModel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import shared.transferobjects.Member;
+import shared.transferobjects.Rating;
+
+import java.util.ArrayList;
 
 public class ViewRatingViewModel {
-    private final StringProperty searchField;
-    private final StringProperty userNameLabel;
-    private final StringProperty locationLabel;
-    private final StringProperty ratingLabel;
-    private final StringProperty addressLabel;
-    private final StringProperty contactLabel;
-    private final StringProperty otherInfoLabel;
+    private ShareItModel model;
+    private StringProperty username;
+    private StringProperty location;
+    private StringProperty rating;
+    private StringProperty address;
+    private StringProperty contact;
+    private StringProperty otherInformation;
 
-    private final StringProperty commenterNameLabel;
-    private final StringProperty commenterRateLabel;
-    private final StringProperty commentLabel;
-
-    public ViewRatingViewModel() {
-        searchField = new SimpleStringProperty("Search");
-        userNameLabel = new SimpleStringProperty();
-        locationLabel = new SimpleStringProperty();
-        ratingLabel = new SimpleStringProperty();
-        addressLabel = new SimpleStringProperty();
-        contactLabel = new SimpleStringProperty();
-        otherInfoLabel = new SimpleStringProperty();
-        commenterNameLabel = new SimpleStringProperty();
-        commenterRateLabel = new SimpleStringProperty();
-        commentLabel = new SimpleStringProperty();
+    public ViewRatingViewModel(ShareItModel model){
+        this.model = model;
+        username = new SimpleStringProperty();
+        location = new SimpleStringProperty();
+        rating = new SimpleStringProperty();
+        address = new SimpleStringProperty();
+        contact = new SimpleStringProperty();
+        otherInformation = new SimpleStringProperty();
     }
 
-    public StringProperty getSearchField(){
-        return searchField;
+
+    public StringProperty getUsername() {
+        return username;
     }
 
-    public StringProperty getUserNameLabel(){
-        return userNameLabel;
+    public StringProperty getLocation() {
+        return location;
     }
 
-    public StringProperty getLocationLabel(){
-        return locationLabel;
+    public StringProperty getRating() {
+        return rating;
     }
 
-    public StringProperty getRatingLabel(){
-        return ratingLabel;
+    public StringProperty getAddress() {
+        return address;
     }
 
-    public StringProperty getAddressLabel(){
-        return addressLabel;
+    public StringProperty getContact() {
+        return contact;
     }
 
-    public StringProperty getContactLabel(){
-        return contactLabel;
+    public StringProperty getOtherInformation() {
+        return otherInformation;
     }
 
-    public StringProperty getOtherInfoLabel(){
-        return otherInfoLabel;
+    public String getMemberUsername(){
+        username.setValue(model.getMemberUsername());
+        System.out.println("Get member username view rating VM : "+model.getMemberUsername());
+        Member member = model.getMemberByUsername(model.getMemberUsername());
+        location.setValue(member.getAddressCity());
+        rating.setValue(String.valueOf(member.getAverageReview()));
+        address.setValue(member.getAddressStreet() + ", " + member.getAddressNo());
+        contact.setValue(member.getPhoneNo() + "\n" + member.getEmailAddress());
+        otherInformation.setValue(member.getOtherInformation());
+        return model.getMemberUsername();
     }
 
-    public StringProperty getCommenterNameLabel(){
-        return commenterNameLabel;
+    public ArrayList<Rating> getAllRatingsOnMember(String memberUsername) {
+        return model.getAllRatingsOnMember(memberUsername);
     }
 
-    public StringProperty getCommenterRateLabel(){
-        return commenterRateLabel;
-    }
-
-    public StringProperty getCommentLabel(){
-        return commentLabel;
+    public String getUserType(){
+        return model.getLoggedInUsername();
     }
 }

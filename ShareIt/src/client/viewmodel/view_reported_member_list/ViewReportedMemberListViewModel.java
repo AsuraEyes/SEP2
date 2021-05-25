@@ -1,28 +1,36 @@
 package client.viewmodel.view_reported_member_list;
 
+import client.model.ShareItModel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.scene.control.Label;
+import shared.transferobjects.Member;
+import shared.transferobjects.Report;
+
+import java.util.List;
 
 public class ViewReportedMemberListViewModel {
-    private final StringProperty searchField;
-    private final StringProperty reportedNameLabel;
-    private final StringProperty reporterNameLabel;
 
-    public ViewReportedMemberListViewModel(){
-        searchField = new SimpleStringProperty("Search");
-        reportedNameLabel = new SimpleStringProperty();
-        reporterNameLabel = new SimpleStringProperty();
+    private ShareItModel model;
+
+
+
+    public ViewReportedMemberListViewModel(ShareItModel model){
+        this.model = model;
+
     }
 
-    public StringProperty getSearchField(){
-        return searchField;
+   public Member getMemberById(int id)
+    {
+       return model.getMemberById(id);
     }
 
-    public StringProperty getReportedNameLabel(){
-        return reportedNameLabel;
+    public List<Report> getReportList() {
+        return model.getReportList();
     }
 
-    public StringProperty getReporterNameLabel(){
-        return reporterNameLabel;
+    public void setUsernames(String reporterNameLabel, String reportedNameLabel)
+    {
+      model.setUsernames(reporterNameLabel, reportedNameLabel);
     }
 }

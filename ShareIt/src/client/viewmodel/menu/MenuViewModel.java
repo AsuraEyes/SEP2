@@ -13,10 +13,28 @@ public class MenuViewModel
     this.model = model;
   }
   public String checkUserType(){
-    return model.checkUserType();
+    String userType = model.checkUserType();
+    if(userType.equals("Member")){
+      usernameLabel.setValue("Logged in as: "+model.getLoggedInUsername());
+    }
+    else if(userType.equals("Administrator")){
+      usernameLabel.setValue("Administrator: "+model.getLoggedInUsername());
+    }
+    else
+      usernameLabel.setValue("");
+    return userType;
+  }
+  public String getUsernameLoggedIn(){
+    return model.getLoggedInUsername();
   }
   public StringProperty getUsernameLabel()
   {
     return usernameLabel;
+  }
+  public void setMemberUsername(){
+    model.setMemberUsername(usernameLabel.getValue());
+  }
+  public void loadAllReceivedMessages(){
+    model.setAllReceivedMessages(model.getLoggedInUsername());
   }
 }

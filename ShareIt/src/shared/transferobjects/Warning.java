@@ -1,0 +1,57 @@
+package shared.transferobjects;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class Warning {
+    private String administratorFrom;
+    private int memberTo;
+    private String text;
+    private Date timeStamp;
+
+    public Warning(String administratorFrom, int memberTo, String text, Date timeStamp) {
+        this.administratorFrom = administratorFrom;
+        this.memberTo = memberTo;
+        this.text = text;
+        this.timeStamp = timeStamp;
+    }
+
+    public String getAdministratorFrom() {
+        return administratorFrom;
+    }
+
+    public void setAdministratorFrom(String administratorFrom) {
+        this.administratorFrom = administratorFrom;
+    }
+
+    public int getMemberTo() {
+        return memberTo;
+    }
+
+    public void setMemberTo(int memberTo) {
+        this.memberTo = memberTo;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public Date getTimeStamp() {
+        return timeStamp;
+    }
+
+    public void setTimeStamp(Date timeStamp) {
+        this.timeStamp = timeStamp;
+    }
+
+    public String toString(){
+        DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
+        String strDate = dateFormat.format(timeStamp);
+        return strDate + " " +  ": " + administratorFrom + ": " + text;
+    }
+}

@@ -1,23 +1,26 @@
 package server.model.data_check;
 
 import server.model.database.rental.RentalDAOImpl;
+import shared.transferobjects.Rental;
 
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
+import java.util.List;
+/**
+ * Class that checks data before running an instance(Search data in this case)
+ */
 public class DataCheckSearch
 {
   private String search;
 
-  public String checkSearch(String search)
+  public List<Rental> checkSearch(String search)
   {
     this.search = search;
     if(searchGiven()){
       try
       {
-        RentalDAOImpl.getInstance().readBySearch(search);
-        return "";
+        return RentalDAOImpl.getInstance().readBySearch(search);
       }
       catch (SQLException e){
         //
@@ -25,33 +28,30 @@ public class DataCheckSearch
     }
     else {
       if(!searchGiven()){
-        return "";
+        try{
+          return RentalDAOImpl.getInstance().readRentals();
+        }
+        catch (SQLException e){
+
+        }
       }
     }
-    return "Ooops, something went wrong!!";
+    return null;
   }
 
-  public String checkSearchWithFilter(String search,String city,ArrayList<String> selectedCategories )
+  public List<Rental> checkSearchWithFilter(String search,String city,ArrayList<String> selectedCategories )
   {
     this.search = search;
-    if(searchGiven())
-    {
       try
       {
-        RentalDAOImpl.getInstance().readBySearchAndFilter(search,city,selectedCategories );
-        return "";
+        return RentalDAOImpl.getInstance().readBySearchAndFilter(search,city,selectedCategories);
       }
       catch (SQLException e)
       {
         //
       }
-    }
-      else {
-        if(!searchGiven()){
-          return "no";
-        }
-      }
-      return "Check database password";
+    System.out.println("here");
+      return null;
     }
 
   private boolean searchGiven(){

@@ -5,7 +5,10 @@ import shared.transferobjects.State;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Class that implements methods from its interface and provides access to a database(State in this case)
+ *
+ */
 public class StateDAOImpl implements StateDAO
 {
   private static StateDAOImpl instance;
@@ -30,6 +33,11 @@ public class StateDAOImpl implements StateDAO
     return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", password);
   }
 
+  /**
+   * Reads all states from database by connecting to the database and get all table contents
+   * @return returns all state names in a arraylist
+   * @throws SQLException
+   */
   @Override public List<State> readState()
       throws SQLException
   {

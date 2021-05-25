@@ -15,7 +15,6 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.controlsfx.control.CheckComboBox;
 import org.controlsfx.control.Notifications;
-import org.controlsfx.validation.ValidationSupport;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -38,13 +37,11 @@ public class AddRentalController {
 
   private String path;
 
-  private ValidationSupport validationSupport;
   private AddRentalViewModel addRentalViewModel;
   private ViewHandler viewHandler;
   private Notifications notifications;
 
-  public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws SQLException, IOException
-  {
+  public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws SQLException, IOException {
 
     addRentalViewModel = viewModelFactory.getAddRentalViewModel();
     this.viewHandler = viewHandler;
@@ -97,10 +94,9 @@ public class AddRentalController {
     }
   }
 
-  public void addPictureButton(ActionEvent actionEvent)
-  {
+  public void addPictureButton(ActionEvent actionEvent) {
     JFileChooser fileChooser = new JFileChooser();
-    fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+    fileChooser.setCurrentDirectory(new File(System.getProperty("os.name")));
     FileNameExtensionFilter filter = new FileNameExtensionFilter("*.IMAGE", "jpg", "gif", "png");
     fileChooser.addChoosableFileFilter(filter);
     int result = fileChooser.showSaveDialog(null);
@@ -119,8 +115,8 @@ public class AddRentalController {
     }
   }
 
-  public void onGoBack(ActionEvent actionEvent) {
-
+  public void onGoBack(ActionEvent actionEvent) throws IOException {
+    viewHandler.setView(viewHandler.menu(), viewHandler.manageAccount());
   }
 
   private boolean checkField (String message, TextField nameOfField){

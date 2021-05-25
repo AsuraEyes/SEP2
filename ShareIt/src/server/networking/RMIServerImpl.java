@@ -3,16 +3,17 @@ package server.networking;
 import server.model.ServerModelManager;
 import shared.networking.RMIServer;
 import shared.networking.RemoteObserver;
-import client.model.state.StateManager;
 import shared.transferobjects.*;
 
 import java.beans.PropertyChangeListener;
+import java.io.IOException;
 import java.rmi.AlreadyBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.util.List;
 
 public class RMIServerImpl implements RMIServer
 {
@@ -25,7 +26,7 @@ public class RMIServerImpl implements RMIServer
 
   public void startServer() throws RemoteException, AlreadyBoundException
   {
-    Registry registry = LocateRegistry.createRegistry(1099);
+    Registry registry = LocateRegistry.createRegistry(1199);
     registry.bind("ShareIt", this);
   }
 
@@ -69,7 +70,8 @@ public class RMIServerImpl implements RMIServer
         e.printStackTrace();
       }
     };
-    serverModelManager.addListener("NewMessage", listener);
+    serverModelManager.addListener("newMessage", listener);
+    //serverModelManager.addListener("selectedRental", listener);
     //serverModelManager.addListener("NewUser", listener);
   }
 
@@ -84,16 +86,39 @@ public class RMIServerImpl implements RMIServer
   }
 
   @Override
+  public String updateCheckMemberData(String username, String password, String confirmPassword, String email, String phone, String otherInformation, String street, String streetNo, String postalCode, String city) throws IOException {
+    return serverModelManager.updateCheckMemberData(username, password, confirmPassword, email, phone, otherInformation, street, streetNo, postalCode, city);
+  }
+
+  @Override
   public String checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, String username, ArrayList<String> selectedCategories) throws RemoteException {
     return serverModelManager.checkRentalData(name, pictureLink, description, price, otherInformation, stateName, username, selectedCategories);
   }
 
   @Override
-  public String checkSearch(String search) throws RemoteException
+  public String updateCheckRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, int rentalId, ArrayList<String> selectedCategories) throws RemoteException {
+    return serverModelManager.updateCheckRentalData(name, pictureLink, description, price, otherInformation, stateName, rentalId, selectedCategories);
+  }
+
+  @Override public String addFeedback(double starValue, String feedback, String username1, String username2)
+      throws RemoteException
+  {
+    System.out.println(starValue);
+    return serverModelManager.addFeedback(starValue, feedback, username1, username2);
+  }
+
+  @Override public String addReport(String feedback, String username1,
+      String username2) throws RemoteException
+  {
+    return serverModelManager.addReport(feedback, username1, username2);
+  }
+
+  @Override
+  public List<Rental> checkSearch(String search) throws RemoteException
   {
     return serverModelManager.checkSearch(search);
   }
-  @Override public String checkSearchWithFilter(String search,String city, ArrayList<String> selectedCategories ) throws RemoteException
+  @Override public List<Rental> checkSearchWithFilter(String search,String city, ArrayList<String> selectedCategories ) throws RemoteException
   {
     return serverModelManager.checkSearchWithFilter(search,city,selectedCategories);
   }
@@ -117,5 +142,101 @@ public class RMIServerImpl implements RMIServer
   {
     return serverModelManager.getRentalsList();
   }
+
+  @Override public Member getMemberById(int id) throws RemoteException
+  {
+    return serverModelManager.getMemberById(id);
+  }
+
+  @Override
+  public String checkLogInCredentials(String username, String password) {
+    return serverModelManager.checkLogInCredentials(username, password);
+  }
+
+  @Override
+  public ArrayList<Rental> getRentalsOfMemberList(String username) throws RemoteException {
+    return serverModelManager.getRentalsOfMemberList(username);
+  }
+
+  @Override
+  public Member getMemberByUsername(String memberUsername) {
+    return serverModelManager.getMemberByUsername(memberUsername);
+  }
+
+  @Override
+  public ArrayList<Rating> getAllRatingsOnMember(String memberUsername) {
+    return serverModelManager.getAllRatingsOnMember(memberUsername);
+  }
+
+  @Override
+  public boolean deleteMember(Member member){
+    return serverModelManager.deleteMember(member);
+  }
+
+  @Override public Rating getRating(String fromUsername, String toUsername)
+      throws RemoteException
+  {
+    return serverModelManager.getRating(fromUsername, toUsername);
+  }
+
+  @Override public Report getReport(String fromUsername, String toUsername)
+      throws RemoteException
+  {
+    return serverModelManager.getReport(fromUsername,toUsername);
+  }
+
+  @Override public void updateRating(Rating rating)
+  {
+    serverModelManager.updateRating(rating);
+  }
+
+  @Override public void updateReport(Report report) throws RemoteException
+  {
+    serverModelManager.updateReport(report);
+  }
+
+  @Override public boolean deleteRental(Rental rental)
+  {
+    return serverModelManager.deleteRental(rental);
+  }
+
+  @Override public ArrayList<Message> getAllReceivedMessages(int loggedUserId)
+  {
+    return serverModelManager.getAllReceivedMessages(loggedUserId);
+  }
+
+  @Override public ArrayList<Message> getMessagesFromUser(int loggedUserId,
+      int fromUserid) throws RemoteException
+  {
+    return serverModelManager.getMessagesFromUser(loggedUserId, fromUserid);
+  }
+
+  @Override public void sendMessage(Message message)
+  {
+    serverModelManager.sendMessage(message);
+  }
+
+  @Override
+  public void sendWarning(Warning warning) {
+    serverModelManager.sendWarning(warning);
+  }
+
+  @Override
+  public List<Member> checkSearchForMember(String value) throws RemoteException {
+    return serverModelManager.checkSearchForMember(value);
+  }
+
+  @Override
+  public List<Member> getMembersList() {
+    return serverModelManager.getMembersList();
+  }
+
+  @Override
+  public List<Report> getReportList()
+  {
+    return serverModelManager.getReportList();
+  }
+
+
 
 }

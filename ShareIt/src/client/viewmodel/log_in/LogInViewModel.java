@@ -4,18 +4,23 @@ import client.model.ShareItModel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+import java.rmi.RemoteException;
+
 public class LogInViewModel
 {
+  ShareItModel model;
   private final StringProperty userName;
   private final StringProperty errorLabel;
   private final StringProperty searchField;
   private final StringProperty passwordField;
 
   public LogInViewModel(ShareItModel shareItModel){
-    userName = new SimpleStringProperty("Username");
+    this.model = shareItModel;
+    userName = new SimpleStringProperty();
     errorLabel = new SimpleStringProperty();
-    searchField = new SimpleStringProperty("Search");
-    passwordField = new SimpleStringProperty("Password");
+    searchField = new SimpleStringProperty();
+    passwordField = new SimpleStringProperty();
+
   }
 
   public StringProperty getErrorLabel()
@@ -36,5 +41,9 @@ public class LogInViewModel
   public StringProperty getPasswordField()
   {
     return passwordField;
+  }
+
+  public String onLogInButton() throws RemoteException {
+    return model.checkLogInCredentials(userName.getValue(), passwordField.getValue());
   }
 }
