@@ -51,4 +51,14 @@ public class ViewReportedMemberViewModel {
             commentaryLabel.setValue(report.getCommentary());
         }
     }
+
+    public void setReportedNameLabel()
+    {
+        model.setReportedUsername(reportedNameLabel.getValue());
+    }
+
+    public void setReporterNameLabel()
+    {
+        model.setReporterUsername(reporterNameLabel.getValue());
+    }
 }

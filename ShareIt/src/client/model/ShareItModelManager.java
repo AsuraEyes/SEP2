@@ -40,6 +40,16 @@ public class ShareItModelManager implements ShareItModel
   }
 
   @Override
+  public void setReporterUsername(String reporterUsername) {
+    memberUsername = reporterUsername;
+  }
+
+  @Override
+  public void setReportedUsername(String reportedUsername) {
+    memberUsername = reportedUsername;
+  }
+
+  @Override
   public Member getMemberByUsername(String memberUsername) {
     return client.getMemberByUsername(memberUsername);
   }

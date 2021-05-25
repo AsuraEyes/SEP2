@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 
@@ -33,5 +34,17 @@ public class ViewReportedMemberController {
         IOException
     {
         viewHandler.setView(viewHandler.menu(), viewHandler.viewReportedMemberList());
+    }
+
+    public void reporterMemberClickedOn(MouseEvent mouseEvent) throws IOException
+    {
+        viewReportedMemberViewModel.setReporterNameLabel();
+        viewHandler.setView(viewHandler.menu(),viewHandler.viewMemberProfile());
+    }
+
+    public void reportedMemberClickedOn(MouseEvent mouseEvent) throws IOException
+    {
+        viewReportedMemberViewModel.setReportedNameLabel();
+        viewHandler.setView(viewHandler.menu(),viewHandler.viewMemberProfile());
     }
 }

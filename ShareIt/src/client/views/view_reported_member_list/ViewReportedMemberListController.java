@@ -54,7 +54,7 @@ public class ViewReportedMemberListController {
                 reportBox.getChildren().addAll(textFlow);
                 reportBox.setSpacing(10);
                 reportBox.setPadding(new Insets(20,160,20,160));
-                reportBox.setStyle("-fx-border-color: #FF8C64; -fx-border-width: 3; -fx-background-color:  #7D6B7D;");
+                reportBox.setStyle("-fx-border-color: #FF665A; -fx-border-width: 3; -fx-background-color:#7D6B7D;");
                 vBox.getChildren().add(reportBox);
 
                 vBox.getChildren().get(i)
