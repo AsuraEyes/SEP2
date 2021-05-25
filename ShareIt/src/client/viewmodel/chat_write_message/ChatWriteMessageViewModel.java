@@ -35,11 +35,15 @@ public class ChatWriteMessageViewModel
   {
     Platform.runLater(() ->{
       Message message = (Message) evt.getNewValue();
-      /*if(message.getMemberFrom() == model.getMemberByUsername(model.getLoggedInUsername()).getId() && message.getMemberTo() == model.getMemberByUsername(
+      if(message.getMemberFrom() == model.getMemberByUsername(model.getLoggedInUsername()).getId() || message.getMemberFrom() == model.getMemberByUsername(
           model.getMemberUsername()).getId())
-      {*/
-        messages.setValue(messages.getValue() + "\n" + evt.getNewValue().toString());
-
+      {
+        if(message.getMemberTo() == model.getMemberByUsername(model.getLoggedInUsername()).getId() || message.getMemberTo() == model.getMemberByUsername(
+            model.getMemberUsername()).getId())
+        {
+          messages.setValue(messages.getValue() + "\n" + evt.getNewValue().toString());
+        }
+      }
     });
   }
 
@@ -58,6 +62,7 @@ public class ChatWriteMessageViewModel
   }
   public void loadLogs()
   {
+    messages.setValue("Welcome to chat!");
     ArrayList<Message> listOfMessages = model.getMessagesFromUser(model.getMemberByUsername(model.getLoggedInUsername()).getId(), model.getMemberByUsername(
         model.getMemberUsername()).getId());
     for (int i = 0; i < listOfMessages.size(); i++)
@@ -76,15 +81,17 @@ public class ChatWriteMessageViewModel
   }
 
   public void sendMessage(){
+    //String text = inputTextChat.getValue();
+    //inputTextChat.setValue(model.getLoggedInUsername() + ": " + text);
     int idFrom = model.getMemberByUsername(model.getLoggedInUsername()).getId();
     int idTo = model.getMemberByUsername(model.getMemberUsername()).getId();
-    Date timeStamp = Calendar
-        .getInstance().getTime();
-
-    Message message = new Message(idFrom, idTo, inputTextChat.getValue(), timeStamp);
+    Message message = new Message(idFrom, idTo, inputTextChat.getValue(), null);
 
     //messages.setValue(messages.getValue() + "\n" + timeStamp +": "+ inputTextChat.getValue());
     model.sendMessage(message);
+  }
+  public void loadAllReceivedMessages(){
+    model.setAllReceivedMessages(model.getLoggedInUsername());
   }
 
 }

@@ -39,6 +39,7 @@ public class ChatWriteMessageController
   public void onGoBack(ActionEvent actionEvent) throws IOException
   {
     textChatArea.clear();
+    chatWriteMessageViewModel.loadAllReceivedMessages();
     viewHandler.setView(viewHandler.menu(), viewHandler.chatReceived());
   }
 

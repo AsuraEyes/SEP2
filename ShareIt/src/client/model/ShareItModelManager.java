@@ -21,6 +21,7 @@ public class ShareItModelManager implements ShareItModel
   private String memberUsername;
   private String searchText;
   private Rental rental;
+  private ArrayList<Message> allReceivedMessages;
 
   @Override
   public String getMemberUsername() {
@@ -47,6 +48,7 @@ public class ShareItModelManager implements ShareItModel
     support = new PropertyChangeSupport(this);
     client.addListener("newMessage", this::onNewMessage);
     client.addListener("dataValidation", this::onDataValidation);
+    allReceivedMessages = new ArrayList<>();
   }
 
   private void onNewMessage(PropertyChangeEvent evt)
@@ -238,10 +240,10 @@ public class ShareItModelManager implements ShareItModel
     return rental;
   }
 
-  @Override public ArrayList<Message> getAllReceivedMessages(String loggedUsername)
+  @Override public ArrayList<Message> getAllReceivedMessages()
   {
-    getMemberByUsername(loggedUsername);
-    return client.getAllReceivedMessages(getMemberByUsername(loggedUsername).getId());
+    //return client.getAllReceivedMessages(getMemberByUsername(getLoggedInUsername()).getId());
+    return allReceivedMessages;
   }
 
   @Override public ArrayList<Message> getMessagesFromUser(int loggedUserId,
@@ -253,6 +255,18 @@ public class ShareItModelManager implements ShareItModel
   @Override public void sendMessage(Message message)
   {
     client.sendMessage(message);
+  }
+
+  @Override public void setAllReceivedMessages(String loggedUsername)
+  {
+/*
+    allReceivedMessages.clear();
+    ArrayList<Message> databaseMessages = client.getAllReceivedMessages(getMemberByUsername(loggedUsername).getId());
+    for (int i = 0 ; i < databaseMessages.size(); i++)
+    {
+      allReceivedMessages.add(new Message(databaseMessages.get(i).getTimeStamp(), getMemberById(databaseMessages.get(i).getMemberFrom()).getUsername(),databaseMessages.get(i).getText()));
+    }*/
+    allReceivedMessages = client.getAllReceivedMessages(getMemberByUsername(loggedUsername).getId());
   }
 
   @Override

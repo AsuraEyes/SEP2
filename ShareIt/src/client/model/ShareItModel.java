@@ -54,8 +54,9 @@ public interface ShareItModel extends Subject
     List<Member> checkSearchForMember(String value);
 
     List<Member> getMembersList();
-    ArrayList<Message> getAllReceivedMessages(String loggedUsername);
+    ArrayList<Message> getAllReceivedMessages();
     ArrayList<Message> getMessagesFromUser(int loggedUserId, int fromUserid);
     void sendMessage(Message message);
+    void setAllReceivedMessages(String loggedUsername);
 
 }

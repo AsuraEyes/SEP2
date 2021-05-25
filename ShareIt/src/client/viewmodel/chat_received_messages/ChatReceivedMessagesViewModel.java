@@ -20,19 +20,12 @@ public class ChatReceivedMessagesViewModel
 
   public ArrayList<Message> getAllReceivedMessages(){
 
-    ArrayList<Message> databaseMessages = model.getAllReceivedMessages(model.getLoggedInUsername());
-    ArrayList<Message> messages = new ArrayList<>();
-    for (int i = 0; i < databaseMessages.size(); i++)
-    {
-      messages.add(new Message(databaseMessages.get(i).getTimeStamp(), model.getMemberById(databaseMessages.get(i).getMemberFrom()).getUsername(),databaseMessages.get(i).getText()));
-    }
-    return messages;
+    return model.getAllReceivedMessages();
   }
   public void getUsername(Object object) throws RemoteException
   {
     if(object instanceof VBox){
        VBox vBox = (VBox) object;
-
       if(vBox.getChildren().get(0) instanceof Label)
       {
         Label label = (Label) vBox.getChildren().get(0);
