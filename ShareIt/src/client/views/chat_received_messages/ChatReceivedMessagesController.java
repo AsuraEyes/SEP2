@@ -78,8 +78,4 @@ public class ChatReceivedMessagesController
     }
   }
 
-  public void onGoBack(ActionEvent actionEvent) throws IOException
-  {
-    viewHandler.setView(viewHandler.menu(), viewHandler.viewMemberProfile());
-  }
 }

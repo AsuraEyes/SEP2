@@ -65,10 +65,13 @@ public class ChatWriteMessageViewModel
     messages.setValue("Welcome to chat!");
     ArrayList<Message> listOfMessages = model.getMessagesFromUser(model.getMemberByUsername(model.getLoggedInUsername()).getId(), model.getMemberByUsername(
         model.getMemberUsername()).getId());
-    for (int i = 0; i < listOfMessages.size(); i++)
-    {
-      messages.setValue(messages.getValue() + "\n" + listOfMessages.get(i).toString());
+    if(listOfMessages != null){
+      for (int i = 0; i < listOfMessages.size(); i++)
+      {
+        messages.setValue(messages.getValue() + "\n" + listOfMessages.get(i).toString());
+      }
     }
+
   }
 
   public StringProperty getInputTextChat()
