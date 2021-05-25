@@ -70,7 +70,7 @@ VALUES ('Donec ipsum velit, varius non egestas molestie, consectetur quis eros. 
        ('Vestibulum sit amet turpis non velit tincidunt consectetur. Cras tempus urna id sapien efficitur, in bibendum sem tincidunt. Proin viverra ultrices augue, in blandit tortor accumsan eget. Etiam non eros nec ante hendrerit accumsan non volutpat diam. Duis tempor ex in lorem placerat, sed venenatis nisi iaculis. Sed at erat eu lacus mattis tempor. Aenean ac libero mattis, aliquet leo quis, pharetra purus.',6,7);
 
 INSERT INTO rental(name,  picture_link, description, price, other_information, state_name, member_id)
-VALUES ('Super duper chisels',pg_read_binary_file('Pictures/chisels.jpg')::bytea, 'This chisels are really amazing but sometimes does not work', 20, 'Not available for rent on Fridays', 'Good', 1),
+VALUES ('Super duper chisels',pg_read_binary_file('Pictures/chisels.jpg')::bytea, 'This chisels are really amazing but sometimes does not work. This chisels are really amazing but sometimes does not work. This chisels are really amazing but sometimes does not work. This chisels are really amazing but sometimes does not work. This chisels are really amazing but sometimes does not work. This chisels are really amazing but sometimes does not work. ', 20, 'Not available for rent on Fridays', 'Good', 1),
        ('Even better drill',pg_read_binary_file('Pictures/drill.jpg')::bytea, 'This drill is even more amazing and always works', 40, '', 'Like New', 5),
        ('Fishing rod',pg_read_binary_file('Pictures/fishing_rod.jpg')::bytea,'Good for beginners to try out, not suitable for advanced fishers', 100, '', 'Fair', 3),
        ('Gardening hose',pg_read_binary_file('Pictures/gardening_hose.jpg')::bytea,'', 35, 'I would very much prefer if you would only use it for water', 'Fair',  4),
@@ -110,4 +110,8 @@ SELECT * FROM member;
 INSERT INTO rating
 VALUES (5.0, 'Good rating', 8, 5);
 
-SELECT * FROM share_it.city
+SELECT * FROM share_it.city;
+
+SELECT * FROM message WHERE member_to = 1 AND time IN (SELECT MAX(time) FROM message WHERE member_to = 1 GROUP BY member_from) ORDER BY time DESC ;
+
+
