@@ -155,9 +155,11 @@ public class MessageDAOImpl implements MessageDAO
       /*PreparedStatement statement = connection
           .prepareStatement("SELECT * FROM share_it.message WHERE member_to = ? AND member_from = ?");*/
       PreparedStatement statement = connection
-          .prepareStatement("SELECT time, username, text FROM share_it.message, share_it.member WHERE member_from = member.id AND member_to = ? AND  member_from = ? ");
+          .prepareStatement("SELECT time, text, username FROM share_it.message, share_it.member WHERE ((member_from = ? AND member_to = ?)OR(member_from = ? AND member_to = ?))AND (member.id = message.member_from) ORDER BY time;");
       statement.setInt(1, loggedUserId);
       statement.setInt(2, fromUserid);
+      statement.setInt(3, fromUserid);
+      statement.setInt(4, loggedUserId);
       ResultSet resultSet = statement.executeQuery();
       ArrayList<Message> arrayListToReturn = new ArrayList<>();
 

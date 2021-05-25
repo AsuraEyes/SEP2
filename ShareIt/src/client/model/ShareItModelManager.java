@@ -22,6 +22,7 @@ public class ShareItModelManager implements ShareItModel
   private String searchText;
   private Rental rental;
   private ArrayList<Message> allReceivedMessages;
+  private ArrayList<Rental> allRentals;
   private String reporterPerson;
   private String reportedPerson;
 

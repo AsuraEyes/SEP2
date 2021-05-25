@@ -93,7 +93,7 @@ public class SearchForRentalViewModel {
         ArrayList<String> selectedCategoriesList = new ArrayList<>(selectedCategory);
         return model.checkSearchWithFilter(searchField.getValue(),selectedCity, selectedCategoriesList);
     }
-    public ArrayList<Rental> getRentalsList() throws RemoteException
+    public ArrayList<Rental> getRentalsList()
     {
         return model.getRentalsList();
     }
