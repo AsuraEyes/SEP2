@@ -63,6 +63,7 @@ public class MessageDAOImpl implements MessageDAO
   }
 
   @Override public Message sendMessage(Message message) {
+
     try (Connection connection = getConnection()) {
       PreparedStatement statement = connection.prepareStatement(
           "INSERT INTO share_it.message(text, time, member_from, member_to) VALUES (?, ?, ?, ?);",

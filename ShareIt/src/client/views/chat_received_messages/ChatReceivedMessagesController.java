@@ -44,7 +44,7 @@ public class ChatReceivedMessagesController
         textFlow.getChildren().addAll(message);
         messageBox.getChildren().addAll(usernameLabel,textFlow);
         messageBox.setSpacing(10);
-        messageBox.setPadding(new Insets(20,160,20,160));
+        messageBox.setPadding(new Insets(20,20,20,20));
         message.setStyle("-fx-border-color: #FF8C64; -fx-border-width: 3; -fx-background-color: #FF8C64;");
         vBoxRight.getChildren().add(messageBox);
 
@@ -77,22 +77,10 @@ public class ChatReceivedMessagesController
         textFlow.getChildren().addAll(warning);
         messageBox.getChildren().addAll(usernameLabel,textFlow);
         messageBox.setSpacing(10);
-        messageBox.setPadding(new Insets(20,160,20,160));
+        messageBox.setPadding(new Insets(20,20,20,20));
+        messageBox.setStyle("-fx-background-color:#7D6B7D");
         warning.setStyle("-fx-border-color: #FF8C64; -fx-border-width: 3; -fx-background-color: #FF8C64;");
         vBoxLeft.getChildren().add(messageBox);
-
-        vBoxLeft.getChildren().get(i)
-                .addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
-                  try
-                  {
-                    chatReceivedMessagesViewModel.getUsername(event.getSource());
-                    viewHandler.setView(viewHandler.menu(), viewHandler.sendWarning());
-                  }
-                  catch (IOException e)
-                  {
-                    e.printStackTrace();
-                  }
-                });
       }
     }
   }

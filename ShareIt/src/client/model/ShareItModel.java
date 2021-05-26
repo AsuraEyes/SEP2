@@ -66,9 +66,5 @@ public interface ShareItModel extends Subject
     void sendMessage(Message message);
     void setAllReceivedMessages(String loggedUsername);
     void setAllReceivedWarnings();
-
     void sendWarning(Warning warning);
-
-
-
 }

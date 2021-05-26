@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.chat_received_messages.ChatReceivedMessagesController">
+<ScrollPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.chat_received_messages.ChatReceivedMessagesController">
    <content>
       <AnchorPane prefHeight="600.0" prefWidth="1280.0">
          <children>
@@ -17,15 +17,28 @@
                   <Insets bottom="20.0" left="160.0" right="160.0" top="20.0" />
                </padding>
                <children>
-                  <Label text="Recieved messages" textFill="WHITE">
-                     <font>
-                        <Font name="Californian FB" size="24.0" />
-                     </font>
-                  </Label>
                   <HBox>
                      <children>
-                        <VBox fx:id="vBoxRight" />
-                        <VBox fx:id="vBoxLeft" />
+                        <VBox prefHeight="200.0" prefWidth="550.0">
+                           <children>
+                              <Label text="Received messages" textFill="WHITE">
+                                 <font>
+                                    <Font name="Californian FB" size="24.0" />
+                                 </font>
+                              </Label>
+                              <VBox fx:id="vBoxRight" />
+                           </children>
+                        </VBox>
+                        <VBox prefWidth="479.0">
+                           <children>
+                              <Label text="Received warnings" textFill="#010101">
+                                 <font>
+                                    <Font name="Californian FB" size="24.0" />
+                                 </font>
+                              </Label>
+                              <VBox fx:id="vBoxLeft" />
+                           </children>
+                        </VBox>
                      </children>
                   </HBox>
                </children>
