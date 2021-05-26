@@ -87,9 +87,12 @@ public class EditRentalViewModel {
     }
 
 
-    public String onEditRentalButtonPressed(Object selectedState, ObservableList<String> selectedCategory, String pictureLink) throws IOException {
+    public String onEditRentalButtonPressed(Object selectedState, ObservableList<String> selectedCategory) throws IOException {
         ArrayList<String> selectedCategoriesList = new ArrayList<>(selectedCategory);
-        return shareItModel.updateCheckRentalData(nameField.getValue(), pictureLink, descriptionField.getValue(), priceField.getValue(), otherInfoField.getValue(), (String) selectedState
+        String path = imageProperty.get().getUrl();
+        path = path.replaceAll("file:","");
+
+        return shareItModel.updateCheckRentalData(nameField.getValue(), path, descriptionField.getValue(), priceField.getValue(), otherInfoField.getValue(), (String) selectedState
             , selectedCategoriesList);
     }
 
@@ -116,7 +119,6 @@ public class EditRentalViewModel {
         return shareItModel.getSelectedRental().getStateName();
     }
     public ArrayList<String> getCheckedCategories(){
-        System.out.println(shareItModel.getSelectedRental().getSelectedCategories());
         return shareItModel.getSelectedRental().getSelectedCategories();
     }
 }

@@ -55,7 +55,7 @@ public class DataCheckRental {
         if (nameGiven() && descriptionGiven() && priceIsNumber()){
             try {
                 RentalDAOImpl.getInstance().update(name, pictureLink, description, priceNb, otherInformation, stateName, rentalId, selectedCategories);
-                return "Adding successful";
+                return "Edit successful";
             }
             catch (SQLException e){
                 e.printStackTrace();

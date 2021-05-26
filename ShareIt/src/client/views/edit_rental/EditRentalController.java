@@ -42,8 +42,6 @@ public class EditRentalController {
     @FXML private TextField priceField;
     @FXML private TextArea otherInfoField;
 
-    private String path;
-
     private EditRentalViewModel editRentalViewModel;
     private ViewHandler viewHandler;
     private Notifications notifications;
@@ -53,17 +51,17 @@ public class EditRentalController {
         editRentalViewModel = viewModelFactory.getEditRentalViewModel();
 
         Bindings.bindBidirectional(imageView.imageProperty(), editRentalViewModel.imagePropertyProperty());
-        //Bindings.bindBidirectional(imageView.idProperty(), editRentalViewModel.getImageIdMemberId());
 
         nameField.textProperty().bindBidirectional(editRentalViewModel.getNameField());
         descriptionField.textProperty().bindBidirectional(editRentalViewModel.getDescriptionField());
         stateBox.setItems(editRentalViewModel.getStates());
         stateBox.setValue(editRentalViewModel.getSelectedState());
-        //stateBox.getSelectionModel().selectFirst();
         priceField.textProperty().bindBidirectional(editRentalViewModel.getPriceField());
         otherInfoField.textProperty().bindBidirectional(editRentalViewModel.getOtherInfoField());
         categoryBox.getItems().addAll(editRentalViewModel.getCategories());
         categoryBox.setShowCheckedCount(true);
+
+
 
         checkCategories();
 
@@ -82,26 +80,29 @@ public class EditRentalController {
     public void editButton(ActionEvent actionEvent) throws IOException {
         boolean ok = true;
         if(checkField("Name", nameField) && checkField("Description",descriptionField) && checkField("Price", priceField) && checkPicture(imageView)){
-            String message = editRentalViewModel.onEditRentalButtonPressed(stateBox.getValue(), categoryBox.getCheckModel().getCheckedItems(), imageView.getImage().getUrl());
+            String message = editRentalViewModel.onEditRentalButtonPressed(stateBox.getValue(), categoryBox.getCheckModel().getCheckedItems());
 
-            switch (message){
-                case "Edit successful":
+            if ("Edit successful".equals(message))
+            {
+                Stage stage = (Stage) viewHandler.getStage().getScene()
+                    .getWindow();
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "");
+                alert.setTitle("Confirmation");
+                alert.setHeaderText("Rental successfully edited");
+                alert.initOwner(stage);
+                alert.getDialogPane()
+                    .setContentText("Click ok to return rental.");
 
-                    Stage stage = (Stage) viewHandler.getStage().getScene().getWindow();
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION, "");
-                    alert.setTitle("Confirmation");
-                    alert.setHeaderText("Rental successfully edited");
-                    alert.initOwner(stage);
-                    alert.getDialogPane().setContentText("Click ok to return rental.");
-
-                    Optional<ButtonType> result = alert.showAndWait();
-                    if (result.get() == ButtonType.OK)
-                    {
-                        viewHandler.setView(viewHandler.menu(), viewHandler.manageRentals());
-                    }
-                    break;
-                default:
-                    notifications.owner(parent).text(message).showError();
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.get() == ButtonType.OK)
+                {
+                    viewHandler.setView(viewHandler.menu(),
+                        viewHandler.manageRentals());
+                }
+            }
+            else
+            {
+                notifications.owner(parent).text(message).showError();
             }
 
         }
@@ -120,12 +121,7 @@ public class EditRentalController {
             imageView.setFitHeight(220);
             imageView.setFitWidth(170);
             imageView.setPreserveRatio(false);
-            System.out.println(path);
             imageView.setImage(new Image("file:///"+path));
-            this.path = path;
-        }
-        else if(result == JFileChooser.CANCEL_OPTION){
-            System.out.println("No DATA");
         }
     }
 

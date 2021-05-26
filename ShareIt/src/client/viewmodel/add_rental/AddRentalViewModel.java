@@ -1,11 +1,14 @@
 package client.viewmodel.add_rental;
 
 import client.model.ShareItModel;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.image.Image;
 import shared.transferobjects.Category;
 import shared.transferobjects.Member;
 import shared.transferobjects.State;
@@ -25,6 +28,7 @@ public class AddRentalViewModel {
     private final StringProperty otherInfoField;
 //    private final ObservableValue<String> categoryBox;
     private ObservableList<String> categoriesList;
+    private ObjectProperty<Image> imageProperty;
     private String username;
     
 
@@ -36,6 +40,7 @@ public class AddRentalViewModel {
 //        stateBox = new SimpleStringProperty();
         priceField = new SimpleStringProperty();
         otherInfoField = new SimpleStringProperty();
+        imageProperty = new SimpleObjectProperty<>();
 //        categoryBox = new SimpleStringProperty();
     }
 
@@ -51,6 +56,10 @@ public class AddRentalViewModel {
     public StringProperty getPriceField(){
         return priceField;
     }
+    public ObjectProperty<Image> imagePropertyProperty()
+    {
+        return imageProperty;
+    }
     public StringProperty getOtherInfoField(){
         return otherInfoField;
     }
@@ -58,10 +67,13 @@ public class AddRentalViewModel {
 //        return categoryBox;
 //    }
 
-    public String onAddRentalButtonPressed(Object selectedState, ObservableList<String> selectedCategory, String pictureLink) throws IOException {
+    public String onAddRentalButtonPressed(Object selectedState, ObservableList<String> selectedCategory) throws IOException {
         ArrayList<String> selectedCategoriesList = new ArrayList<>(selectedCategory);
 
-        return model.checkRentalData(nameField.getValue(), pictureLink, descriptionField.getValue(), priceField.getValue(), otherInfoField.getValue(), (String) selectedState, selectedCategoriesList);
+        String path = imageProperty.get().getUrl();
+        path = path.replaceAll("file:","");
+
+        return model.checkRentalData(nameField.getValue(), path, descriptionField.getValue(), priceField.getValue(), otherInfoField.getValue(), (String) selectedState, selectedCategoriesList);
     }
     public ObservableList<String> getStates(){
         ArrayList<State> stateList = model.getStateList();

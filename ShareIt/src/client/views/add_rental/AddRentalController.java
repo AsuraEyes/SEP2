@@ -3,6 +3,7 @@ package client.views.add_rental;
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
 import client.viewmodel.add_rental.AddRentalViewModel;
+import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -35,8 +36,6 @@ public class AddRentalController {
   @FXML private TextField priceField;
   @FXML private TextArea otherInfoField;
 
-  private String path;
-
   private AddRentalViewModel addRentalViewModel;
   private ViewHandler viewHandler;
   private Notifications notifications;
@@ -53,6 +52,7 @@ public class AddRentalController {
     priceField.textProperty().bindBidirectional(addRentalViewModel.getPriceField());
     otherInfoField.textProperty().bindBidirectional(addRentalViewModel.getOtherInfoField());
     categoryBox.getItems().addAll(addRentalViewModel.getCategories());
+    Bindings.bindBidirectional(pictureView.imageProperty(), addRentalViewModel.imagePropertyProperty());
 
     notifications =  Notifications.create()
             .title("Error - invalid input!")
@@ -69,7 +69,7 @@ public class AddRentalController {
   public void addRentalButton(ActionEvent actionEvent) throws IOException {
     boolean ok = true;
     if(checkField("Name", nameField) && checkField("Description",descriptionField) && checkField("Price", priceField) && checkPicture(pictureView)){
-      String message = addRentalViewModel.onAddRentalButtonPressed(stateBox.getValue(), categoryBox.getCheckModel().getCheckedItems(), path);
+      String message = addRentalViewModel.onAddRentalButtonPressed(stateBox.getValue(), categoryBox.getCheckModel().getCheckedItems());
 
       switch (message){
         case "Adding successful":
@@ -106,12 +106,7 @@ public class AddRentalController {
       pictureView.setFitHeight(220);
       pictureView.setFitWidth(170);
       pictureView.setPreserveRatio(false);
-      System.out.println(path);
       pictureView.setImage(new Image("file:///"+path));
-      this.path = path;
-    }
-    else if(result == JFileChooser.CANCEL_OPTION){
-      System.out.println("No DATA");
     }
   }
 
