@@ -401,15 +401,6 @@ public class RMIClient implements Client, RemoteObserver
       support.addPropertyChangeListener(listener);
   }
 
-  @Override public void removeListener(String propertyName,
-      PropertyChangeListener listener)
-  {
-    if(propertyName != null)
-      support.removePropertyChangeListener(propertyName, listener);
-    else
-      support.removePropertyChangeListener(listener);
-  }
-
   @Override public void update(String propertyName, Object newValue) throws RemoteException
   {
     if(propertyName.equals("dataValidation")){

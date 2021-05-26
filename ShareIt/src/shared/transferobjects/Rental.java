@@ -98,10 +98,6 @@ public class Rental implements Serializable {
         return memberId;
     }
 
-    public void setMemberId(int memberId) {
-        this.memberId = memberId;
-    }
-
     @Override public String toString()
     {
         return name+"\n\n"+description;

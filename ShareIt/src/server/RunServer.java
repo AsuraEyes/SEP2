@@ -8,7 +8,6 @@ import server.model.database.member.MemberDAOImpl;
 import server.model.database.message.MessageDAOImpl;
 import server.model.database.rating.RatingDAOImpl;
 import server.model.database.rental.RentalDAOImpl;
-import server.model.database.rental_category.RentalCategoryDAO;
 import server.model.database.rental_category.RentalCategoryDAOImpl;
 import server.model.database.report.ReportDAOImpl;
 import server.model.database.state.StateDAOImpl;

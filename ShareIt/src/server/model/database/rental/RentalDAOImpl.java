@@ -157,7 +157,6 @@ public class RentalDAOImpl implements RentalDAO
         }
       }
 
-
       PreparedStatement statement = connection.prepareStatement(
               "SELECT DISTINCT * FROM share_it.rental AS r, share_it.member AS m, share_it.rental_category AS rc WHERE name || description  ILIKE ? "+addToStatement+";");
       if(search != null){
@@ -172,7 +171,6 @@ public class RentalDAOImpl implements RentalDAO
         statement.setString(1, "%");
       }
 
-      System.out.println(statement);
       ResultSet resultSet = statement.executeQuery();
       ArrayList<Integer> listOfIds = new ArrayList<>();
       while (resultSet.next())
@@ -183,8 +181,6 @@ public class RentalDAOImpl implements RentalDAO
         }
       }
 
-      System.out.println(listOfIds);
-
       String sqlToAppend = "SELECT * FROM share_it.rental WHERE";
       for (int i = 0; i < listOfIds.size(); i++) {
         if(i == 0){
@@ -194,7 +190,6 @@ public class RentalDAOImpl implements RentalDAO
           sqlToAppend += " OR id="+listOfIds.get(i);
         }
       }
-
       statement = connection.prepareStatement(sqlToAppend);
       resultSet = statement.executeQuery();
       ArrayList<Rental> arrayListToReturn = new ArrayList<>();

@@ -3,27 +3,23 @@ package shared.transferobjects;
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
-public class Message implements Serializable
-{
+public class Message implements Serializable {
   private int memberFrom;
   private String usernameFrom;
   private int memberTo;
   private String text;
   private Date timeStamp;
 
-  public Message(int memberFrom, int memberTo, String text, Date timeStamp)
-  {
+  public Message(int memberFrom, int memberTo, String text, Date timeStamp) {
     this.memberFrom = memberFrom;
     this.memberTo = memberTo;
     this.text = text;
     this.timeStamp = timeStamp;
   }
 
-  public Message(Date timeStamp, String usernameFrom, String text)
-  {
+  public Message(Date timeStamp, String usernameFrom, String text) {
    this.timeStamp = timeStamp;
    this.usernameFrom = usernameFrom;
    this.text = text;
@@ -32,11 +28,6 @@ public class Message implements Serializable
   public String getUsernameFrom()
   {
     return usernameFrom;
-  }
-
-  public void setUsernameFrom(String usernameFrom)
-  {
-    this.usernameFrom = usernameFrom;
   }
 
   public int getMemberFrom()
@@ -72,11 +63,6 @@ public class Message implements Serializable
   public Date getTimeStamp()
   {
     return timeStamp;
-  }
-
-  public void setTimeStamp(Date timeStamp)
-  {
-    this.timeStamp = timeStamp;
   }
 
   public String toString(){
