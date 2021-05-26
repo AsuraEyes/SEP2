@@ -3,24 +3,17 @@ package client.views.chat_received_messages;
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
 import client.viewmodel.chat_received_messages.ChatReceivedMessagesViewModel;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
-import shared.transferobjects.Message;
-import shared.transferobjects.Rating;
 
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.ArrayList;
 
 public class ChatReceivedMessagesController
 {
@@ -31,9 +24,7 @@ public class ChatReceivedMessagesController
   private ViewHandler viewHandler;
   private ChatReceivedMessagesViewModel chatReceivedMessagesViewModel;
 
-  public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory)
-      throws IOException
-  {
+  public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws IOException {
     this.viewHandler = viewHandler;
     chatReceivedMessagesViewModel = viewModelFactory.getChatReceivedMessagesViewModel();
     displayMessages();
@@ -41,11 +32,8 @@ public class ChatReceivedMessagesController
   }
 
   public void displayMessages(){
-
-    if (chatReceivedMessagesViewModel.getAllReceivedMessages() != null && !chatReceivedMessagesViewModel.getAllReceivedMessages().isEmpty())
-    {
-      for (int i = 0; i < chatReceivedMessagesViewModel.getAllReceivedMessages().size(); i++)
-      {
+    if (chatReceivedMessagesViewModel.getAllReceivedMessages() != null && !chatReceivedMessagesViewModel.getAllReceivedMessages().isEmpty()) {
+      for (int i = 0; i < chatReceivedMessagesViewModel.getAllReceivedMessages().size(); i++) {
         VBox messageBox = new VBox();
         Label usernameLabel = new Label(chatReceivedMessagesViewModel.getAllReceivedMessages().get(i).getUsernameFrom());
         usernameLabel.setFont(Font.font ("Californian FB", 24));

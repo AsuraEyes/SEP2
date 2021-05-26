@@ -2,7 +2,6 @@ package server.model.data_check;
 
 
 import server.model.database.rental.RentalDAOImpl;
-import shared.transferobjects.Member;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -11,15 +10,12 @@ import java.util.ArrayList;
  */
 public class DataCheckRental {
     private String name;
-    private String pictureLink;
     private String description;
     private String price;
     private int priceNb;
-    private String search;
 
     public String checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, String username,ArrayList<String> selectedCategories) {
         this.name = name;
-        this.pictureLink = pictureLink;
         this.description = description;
         this.price = price;
 
@@ -48,7 +44,6 @@ public class DataCheckRental {
 
     public String updateCheckRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, int rentalId, ArrayList<String> selectedCategories) {
         this.name = name;
-        this.pictureLink = pictureLink;
         this.description = description;
         this.price = price;
 

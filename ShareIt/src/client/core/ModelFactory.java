@@ -5,8 +5,7 @@ import client.model.ShareItModelManager;
 
 import java.io.IOException;
 
-public class ModelFactory
-{
+public class ModelFactory {
   private ClientFactory clientFactory;
   private ShareItModel shareItModel;
 
@@ -14,8 +13,7 @@ public class ModelFactory
     this.clientFactory = clientFactory;
   }
 
-  public ShareItModel getShareItModel() throws IOException
-  {
+  public ShareItModel getShareItModel() throws IOException {
     if(shareItModel == null)
     {
       shareItModel = new ShareItModelManager(clientFactory.getClient());

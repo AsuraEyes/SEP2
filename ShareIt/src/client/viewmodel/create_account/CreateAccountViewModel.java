@@ -1,15 +1,13 @@
 package client.viewmodel.create_account;
 
 import client.model.ShareItModel;
-import javafx.beans.property.*;
-import javafx.beans.value.ObservableValue;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import shared.transferobjects.City;
 
-import java.beans.PropertyChangeEvent;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class CreateAccountViewModel {
@@ -36,7 +34,6 @@ public class CreateAccountViewModel {
         emailField = new SimpleStringProperty();
         telephoneNoField = new SimpleStringProperty();
         otherInfoField = new SimpleStringProperty();
-        //model.addListener("dataValidation", this::onDataValidation);
     }
 
     public StringProperty getUsernameField(){
@@ -80,10 +77,4 @@ public class CreateAccountViewModel {
         locationsList = FXCollections.observableArrayList(cityListString);
         return locationsList;
     }
-
-//    public void onDataValidation(PropertyChangeEvent evt){
-//        if(evt.getPropertyName().equals("success")){
-//
-//        }
-//    }
 }

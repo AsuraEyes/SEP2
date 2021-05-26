@@ -1,7 +1,5 @@
 package client.model.state;
 
-import shared.transferobjects.Administrator;
-
 import java.io.Serializable;
 
 public class AdministratorState implements LoginState, Serializable {
@@ -9,7 +7,6 @@ public class AdministratorState implements LoginState, Serializable {
     private String username;
 
     public AdministratorState(String username){
-        System.out.println("Chnaged to administrator "+username);
         this.username = username;
     }
 

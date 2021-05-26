@@ -4,8 +4,6 @@ import shared.transferobjects.*;
 import shared.util.Subject;
 
 import java.io.IOException;
-import java.rmi.RemoteException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,7 +61,6 @@ public interface ShareItModel extends Subject
     void setReporterUsername(String reporterUsername);
     void setReportedUsername(String reportedUsername);
 
-//    ArrayList<Message> getAllReceivedMessages(String loggedUsername);
     ArrayList<Message> getMessagesFromUser(int loggedUserId, int fromUserid);
     ArrayList<Warning> getWarnings(String administrator, int idTo);
     void sendMessage(Message message);

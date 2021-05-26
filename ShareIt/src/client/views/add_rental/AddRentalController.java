@@ -3,7 +3,6 @@ package client.views.add_rental;
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
 import client.viewmodel.add_rental.AddRentalViewModel;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -27,7 +26,6 @@ public class AddRentalController {
 
   @FXML private ImageView pictureView;
   @FXML private CheckComboBox categoryBox;
-  @FXML private TextField searchField;
   @FXML private AnchorPane parent;
   @FXML private ChoiceBox<String> stateBox;
   @FXML private TextField nameField;
@@ -56,17 +54,15 @@ public class AddRentalController {
 
     notifications =  Notifications.create()
             .title("Error - invalid input!")
-            .graphic(new Rectangle(300, 300, Color.RED)) // sets node to display
+            .graphic(new Rectangle(300, 300, Color.RED))
             .hideAfter(Duration.seconds(3));
   }
 
-  public void searchButton(ActionEvent actionEvent)
-  {
-    notifications.owner(parent).text("Search field cannot be empty")
-        .showError();
+  public void searchButton() {
+    notifications.owner(parent).text("Search field cannot be empty").showError();
   }
 
-  public void addRentalButton(ActionEvent actionEvent) throws IOException {
+  public void addRentalButton() throws IOException {
     boolean ok = true;
     if(checkField("Name", nameField) && checkField("Description",descriptionField) && checkField("Price", priceField) && checkPicture(pictureView)){
       String message = addRentalViewModel.onAddRentalButtonPressed(stateBox.getValue(), categoryBox.getCheckModel().getCheckedItems(), path);
@@ -94,7 +90,7 @@ public class AddRentalController {
     }
   }
 
-  public void addPictureButton(ActionEvent actionEvent) {
+  public void addPictureButton() {
     JFileChooser fileChooser = new JFileChooser();
     fileChooser.setCurrentDirectory(new File(System.getProperty("os.name")));
     FileNameExtensionFilter filter = new FileNameExtensionFilter("*.IMAGE", "jpg", "gif", "png");
@@ -106,16 +102,12 @@ public class AddRentalController {
       pictureView.setFitHeight(220);
       pictureView.setFitWidth(170);
       pictureView.setPreserveRatio(false);
-      System.out.println(path);
       pictureView.setImage(new Image("file:///"+path));
       this.path = path;
     }
-    else if(result == JFileChooser.CANCEL_OPTION){
-      System.out.println("No DATA");
-    }
   }
 
-  public void onGoBack(ActionEvent actionEvent) throws IOException {
+  public void onGoBack() throws IOException {
     viewHandler.setView(viewHandler.menu(), viewHandler.manageAccount());
   }
 

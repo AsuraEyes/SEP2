@@ -1,7 +1,6 @@
 package server.model.data_check;
 
 import server.model.database.member.MemberDAOImpl;
-import shared.transferobjects.Member;
 
 import java.sql.SQLException;
 
@@ -21,10 +20,6 @@ public class DataCheckMember {
     private String postalCode;
     private int postalCodeNb;
 
-    public DataCheckMember(){
-
-    }
-
     public String checkData(String username, String password, String passwordAgain, String email, String otherInformation, String phone, String street, String streetNumber, String postalCode, String city) {
         this.username = username;
         this.password = password;
@@ -39,7 +34,7 @@ public class DataCheckMember {
                 return "Adding successful";
             }
             catch (SQLException e){
-                //
+                e.printStackTrace();
             }
         }
         else{
@@ -68,7 +63,6 @@ public class DataCheckMember {
         this.postalCode = postalCode;
 
         if(matchingPasswords() && oneContactInformationGiven() && postalCodeIsNumber()){
-            System.out.println("we just got here");
             try{
                 MemberDAOImpl.getInstance().update(username, password, email, phone, otherInformation, street, streetNumber, postalCodeNb, city);
                 return "Edit successful";
@@ -78,7 +72,6 @@ public class DataCheckMember {
             }
         }
         else{
-            System.out.println("we got only here");
             if(!matchingPasswords()){
                 return "Not matching passwords.";
             }
@@ -96,7 +89,6 @@ public class DataCheckMember {
         if(password.equals(passwordAgain)){
             return true;
         }
-        System.out.println("password not matching");
         return false;
     }
 
@@ -105,9 +97,8 @@ public class DataCheckMember {
             return MemberDAOImpl.getInstance().uniqueUsername(username);
         }
         catch (SQLException e){
-            System.out.println("database issue (probably forgot to change password ;) )");
+            e.printStackTrace();
         }
-        System.out.println("Username not unique");
         return false;
     }
 
@@ -120,7 +111,6 @@ public class DataCheckMember {
         if(email != null){
             return !(email.trim().equals("") || email.isBlank() || email.isEmpty());
         }
-        System.out.println("no contact");
         return false;
     }
 
@@ -130,7 +120,6 @@ public class DataCheckMember {
             return true;
         }
         catch (NumberFormatException e){
-            System.out.println("postal code not number");
             return false;
         }
     }

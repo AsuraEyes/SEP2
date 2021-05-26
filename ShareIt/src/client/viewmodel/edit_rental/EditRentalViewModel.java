@@ -1,7 +1,6 @@
 package client.viewmodel.edit_rental;
 
 import client.model.ShareItModel;
-import client.model.state.StateManager;
 import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -9,15 +8,11 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.image.Image;
-import org.controlsfx.control.IndexedCheckModel;
 import shared.transferobjects.Category;
-import shared.transferobjects.Rating;
 import shared.transferobjects.Rental;
 import shared.transferobjects.State;
 
-import javax.swing.*;
 import java.beans.PropertyChangeEvent;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -31,7 +26,6 @@ public class EditRentalViewModel {
     private final StringProperty priceField;
     private final StringProperty otherInfoField;
     private ObservableList<String> categoriesList;
-    private StringProperty imageIdMemberId;
     private ObjectProperty<Image> imageProperty;
 
 
@@ -57,11 +51,9 @@ public class EditRentalViewModel {
                 priceField.setValue(String.valueOf(rental.getPrice()));
                 imageProperty.setValue(new Image(rental.getPictureLink()));
 
-                if(rental.getOtherInformation() != null)
-                {
+                if(rental.getOtherInformation() != null) {
                     otherInfoField.setValue(rental.getOtherInformation());
                 }
-                //imageIdMemberId.setValue(String.valueOf(rental.getMemberId()));
             }
         });
     }
@@ -81,9 +73,6 @@ public class EditRentalViewModel {
     }
     public StringProperty getOtherInfoField(){
         return otherInfoField;
-    }
-    public StringProperty getImageIdMemberId(){
-        return imageIdMemberId;
     }
 
 
@@ -116,7 +105,6 @@ public class EditRentalViewModel {
         return shareItModel.getSelectedRental().getStateName();
     }
     public ArrayList<String> getCheckedCategories(){
-        System.out.println(shareItModel.getSelectedRental().getSelectedCategories());
         return shareItModel.getSelectedRental().getSelectedCategories();
     }
 }

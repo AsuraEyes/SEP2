@@ -3,39 +3,27 @@ package client.views.manage_account;
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
 import client.viewmodel.manage_account.ManageAccountViewModel;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import org.controlsfx.control.InfoOverlay;
 import shared.transferobjects.Rental;
 
 import java.io.IOException;
-import java.rmi.RemoteException;
 import java.sql.SQLException;
 import java.util.List;
 
-public class ManageAccountController
-{
-  @FXML private TextField searchField;
+public class ManageAccountController {
   @FXML private Label usernameLabel;
   @FXML private Label locationLabel;
   @FXML private Label ratingLabel;
   @FXML private Label addressLabel;
   @FXML private Label contactLabel;
   @FXML private Label otherInformationLabel;
-  //rest for rental box
-  @FXML private VBox RentalVBox;
-  @FXML private Label nameOfRentalLabel;
-  @FXML private Label cityLabel;
-  @FXML private Label priceLabel;
-  @FXML private ImageView ImageView;
   @FXML private FlowPane flowPane;
 
   private ViewHandler viewHandler;
@@ -54,18 +42,15 @@ public class ManageAccountController
     displayRentals(manageAccountViewModel.getRentalsOfMemberList());
   }
 
-  public void searchButton(ActionEvent actionEvent) {
-  }
-
-  public void editOrDeleteInformationButton(ActionEvent actionEvent) throws IOException, SQLException {
+  public void editOrDeleteInformationButton() throws IOException, SQLException {
     viewHandler.setView(viewHandler.menu(), viewHandler.editOrDeleteAccount());
   }
 
-  public void addRentalButton(ActionEvent actionEvent) throws SQLException, IOException {
+  public void addRentalButton() throws SQLException, IOException {
     viewHandler.setView(viewHandler.menu(), viewHandler.addRental());
   }
 
-  public void displayRentals(List<Rental> rentals) throws RemoteException {
+  public void displayRentals(List<Rental> rentals) {
     if (rentals != null && !rentals.isEmpty())
     {
       for (int i = 0; i < rentals.size(); i++)

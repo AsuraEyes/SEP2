@@ -32,7 +32,6 @@ public class RMIClient implements Client, RemoteObserver
       Registry registry = LocateRegistry.getRegistry("localhost", 1199);
       server = (RMIServer) registry.lookup("ShareIt");
       server.registerClient(this);
-      System.out.println("Client Connected");
     }
     catch (RemoteException | NotBoundException e)
     {
@@ -426,10 +425,5 @@ public class RMIClient implements Client, RemoteObserver
     {
       support.firePropertyChange("newWarning", 0, newValue);
     }
-    /*
-    else if (object instanceof UserName)
-    {
-      support.firePropertyChange("NewUser", null, object);
-    }*/
   }
 }

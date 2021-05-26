@@ -3,7 +3,6 @@ package client.views.edit_account;
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
 import client.viewmodel.edit_account.EditAccountViewModel;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
@@ -50,7 +49,6 @@ public class EditAccountController {
     public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws SQLException, IOException {
         this.viewHandler = viewHandler;
         editAccountViewModel = viewModelFactory.getEditAccountViewModel();
-        //Bindings.bindBidirectional(usernameField.getPromptText()., editAccountViewModel.getUsernameField());
         usernameField.textProperty().bind(editAccountViewModel.getUsernameField());
         passwordField.textProperty().bindBidirectional(editAccountViewModel.getPasswordField());
         confirmPasswordField.textProperty().bindBidirectional(editAccountViewModel.getConfirmPasswordField());
@@ -68,16 +66,15 @@ public class EditAccountController {
 
       notifications =  Notifications.create()
                 .title("Error - invalid input!")
-                .graphic(new Rectangle(300, 300, Color.RED)) // sets node to display
+                .graphic(new Rectangle(300, 300, Color.RED))
                 .hideAfter(Duration.seconds(3));
 
     }
-    public void goBackToProfile(ActionEvent actionEvent) throws IOException, SQLException {
+    public void goBackToProfile() throws IOException {
         viewHandler.setView(viewHandler.menu(), viewHandler.manageAccount());
     }
 
-    public void editButton(ActionEvent actionEvent) throws IOException {
-        boolean ok = true;
+    public void editButton() throws IOException {
         if(checkField(usernameField) && checkField(passwordField) && checkField(confirmPasswordField) && checkField(streetField) && checkField(streetNumberField) && checkField(postalCodeField)){
             String message = editAccountViewModel.onEditButtonPressed(locationBox.getValue());
             switch (message){
@@ -102,7 +99,7 @@ public class EditAccountController {
         }
     }
 
-    public void deleteButton(ActionEvent actionEvent) throws IOException {
+    public void deleteButton() throws IOException {
     Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "");
     alert.setTitle("Delete account");
     alert.setHeaderText("Are you sure?");
@@ -120,8 +117,7 @@ public class EditAccountController {
             alert.getDialogPane().setContentText("Click ok to get to welcome page.");
 
             result = alert.showAndWait();
-            if (result.get() == ButtonType.OK)
-            {
+            if (result.get() == ButtonType.OK) {
                 viewHandler.setView(viewHandler.menu(), viewHandler.welcomePage());
             }
         }

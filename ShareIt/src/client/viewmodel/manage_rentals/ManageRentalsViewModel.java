@@ -35,12 +35,10 @@ public class ManageRentalsViewModel {
         shareItModel.addListener("selectedRental",this::selectedRental);
     }
 
-    private void selectedRental(PropertyChangeEvent evt)
-    {
+    private void selectedRental(PropertyChangeEvent evt) {
         Platform.runLater(() -> {
 
-            if (evt.getNewValue() instanceof Rental)
-            {
+            if (evt.getNewValue() instanceof Rental) {
 
                 Rental rental = (Rental) evt.getNewValue();
                 shareItModel.setSelectedRental(rental);
@@ -94,8 +92,6 @@ public class ManageRentalsViewModel {
         return categoryOfRental;
     }
     public void getSelectedRental(){
-        //Rental rental = new Rental()
-
         shareItModel.sendSelectedRental(shareItModel.getSelectedRental());
     }
 

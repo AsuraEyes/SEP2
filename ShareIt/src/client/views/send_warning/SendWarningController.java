@@ -3,7 +3,6 @@ package client.views.send_warning;
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
 import client.viewmodel.send_warning.SendWarningViewModel;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -30,12 +29,12 @@ public class SendWarningController {
         sendWarningViewModel.loadLogs();
     }
 
-    public void onGoBack(ActionEvent actionEvent) throws IOException {
+    public void onGoBack() throws IOException {
         textChatArea.clear();
         viewHandler.setView(viewHandler.menu(), viewHandler.viewMemberProfile());
     }
 
-    public void onSend(ActionEvent actionEvent) {
+    public void onSend() {
         sendWarningViewModel.sendWarning();
         inputTextChatField.clear();
     }

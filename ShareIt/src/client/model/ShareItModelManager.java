@@ -9,8 +9,6 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.IOException;
-import java.rmi.RemoteException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,14 +20,12 @@ public class ShareItModelManager implements ShareItModel
   private String searchText;
   private Rental rental;
   private ArrayList<Message> allReceivedMessages;
-  private ArrayList<Rental> allRentals;
   private ArrayList<Warning> allWarnings;
   private String reporterPerson;
   private String reportedPerson;
 
   @Override
   public String getMemberUsername() {
-    System.out.println("Getting in model manager: "+memberUsername);
     return memberUsername;
   }
 
@@ -51,7 +47,6 @@ public class ShareItModelManager implements ShareItModel
   @Override
   public void setReportedUsername(String reportedUsername) {
     memberUsername = reportedUsername;
-    System.out.println("Setting in model manager: "+memberUsername);
   }
 
   @Override
@@ -61,7 +56,6 @@ public class ShareItModelManager implements ShareItModel
 
   @Override
   public void setMemberUsername(String memberUsername) {
-    System.out.println("the one in model manager "+memberUsername);
     this.memberUsername = memberUsername;
   }
 
@@ -147,24 +141,19 @@ public class ShareItModelManager implements ShareItModel
   }
 
 
-  @Override public List<Rental> checkSearchWithFilter(String search,String city, ArrayList<String> selectedCategories ) throws IOException
-  {
+  @Override public List<Rental> checkSearchWithFilter(String search,String city, ArrayList<String> selectedCategories ) throws IOException {
     return client.checkSearchWithFilter(search,city, selectedCategories );
   }
-  @Override public String addFeedback(double starValue, String feedback, String username1, String username2) throws IOException
-  {
-    System.out.println(starValue);
+
+  @Override public String addFeedback(double starValue, String feedback, String username1, String username2) throws IOException {
     return client.addFeedback(starValue, feedback,username1,username2 );
   }
 
-  @Override public String addReport(String feedback, String username1,
-      String username2) throws IOException
-  {
+  @Override public String addReport(String feedback, String username1, String username2) throws IOException {
     return client.addReport(feedback,username1,username2);
   }
 
-  @Override public List<Rental> checkSearch(String search) throws IOException
-  {
+  @Override public List<Rental> checkSearch(String search) throws IOException {
     return client.checkSearch(search);
   }
 
@@ -214,16 +203,13 @@ public class ShareItModelManager implements ShareItModel
     support.firePropertyChange("selectedRental",1,rental);
   }
 
-  @Override public Member getMemberById(int id)
-  {
+  @Override public Member getMemberById(int id) {
     Member member = client.getMemberById(id);
     support.firePropertyChange("getMember",1,member);
     return member;
   }
 
-  @Override public String getSearchText()
-  {
-    System.out.println("Model: " + searchText);
+  @Override public String getSearchText() {
     return searchText;
   }
 
@@ -242,13 +228,11 @@ public class ShareItModelManager implements ShareItModel
     return client.deleteMember(member);
   }
 
-  @Override public Rating getRating(String fromUsername, String toUsername)
-  {
+  @Override public Rating getRating(String fromUsername, String toUsername) {
     return client.getRating(fromUsername, toUsername);
   }
 
-  @Override public Report getReport(String fromUsername, String toUsername)
-  {
+  @Override public Report getReport(String fromUsername, String toUsername) {
     return client.getReport(fromUsername, toUsername);
   }
 
@@ -272,15 +256,11 @@ public class ShareItModelManager implements ShareItModel
     this.rental = rental;
   }
 
-  @Override public Rental getSelectedRental()
-  {
-    System.out.println(rental.getSelectedCategories());
+  @Override public Rental getSelectedRental() {
     return rental;
   }
 
-  @Override public ArrayList<Message> getAllReceivedMessages()
-  {
-    //return client.getAllReceivedMessages(getMemberByUsername(getLoggedInUsername()).getId());
+  @Override public ArrayList<Message> getAllReceivedMessages() {
     return allReceivedMessages;
   }
 
@@ -310,15 +290,7 @@ public class ShareItModelManager implements ShareItModel
     client.sendWarning(warning);
   }
 
-  @Override public void setAllReceivedMessages(String loggedUsername)
-  {
-/*
-    allReceivedMessages.clear();
-    ArrayList<Message> databaseMessages = client.getAllReceivedMessages(getMemberByUsername(loggedUsername).getId());
-    for (int i = 0 ; i < databaseMessages.size(); i++)
-    {
-      allReceivedMessages.add(new Message(databaseMessages.get(i).getTimeStamp(), getMemberById(databaseMessages.get(i).getMemberFrom()).getUsername(),databaseMessages.get(i).getText()));
-    }*/
+  @Override public void setAllReceivedMessages(String loggedUsername) {
     allReceivedMessages = client.getAllReceivedMessages(getMemberByUsername(loggedUsername).getId());
   }
 

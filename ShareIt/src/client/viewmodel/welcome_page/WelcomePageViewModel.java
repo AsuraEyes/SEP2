@@ -22,7 +22,6 @@ public class WelcomePageViewModel {
     }
 
     public void setSearchText(){
-        System.out.println(searchField.getValue());
         model.setSearchText(searchField.getValue());
     }
 }

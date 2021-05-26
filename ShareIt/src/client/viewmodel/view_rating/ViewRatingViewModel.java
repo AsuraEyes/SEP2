@@ -3,8 +3,6 @@ package client.viewmodel.view_rating;
 import client.model.ShareItModel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import shared.transferobjects.Member;
 import shared.transferobjects.Rating;
 
@@ -56,7 +54,6 @@ public class ViewRatingViewModel {
 
     public String getMemberUsername(){
         username.setValue(model.getMemberUsername());
-        System.out.println("Get member username view rating VM : "+model.getMemberUsername());
         Member member = model.getMemberByUsername(model.getMemberUsername());
         location.setValue(member.getAddressCity());
         rating.setValue(String.valueOf(member.getAverageReview()));

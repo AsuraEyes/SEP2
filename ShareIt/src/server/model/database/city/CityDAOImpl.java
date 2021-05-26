@@ -31,7 +31,6 @@ public class CityDAOImpl implements CityDAO
   }
 
   private Connection getConnection() throws SQLException {
-    System.out.println(password);
     return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=share_it", "postgres", password);
   }
 
@@ -49,7 +48,6 @@ public class CityDAOImpl implements CityDAO
       while(resultSet.next()){
         arrayListToReturn.add(new City(resultSet.getString("name")));
       }
-      //return array list
       return arrayListToReturn;
     }
   }}

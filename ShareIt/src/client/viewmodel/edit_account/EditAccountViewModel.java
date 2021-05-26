@@ -1,6 +1,5 @@
 package client.viewmodel.edit_account;
 
-import client.core.ViewHandler;
 import client.model.ShareItModel;
 import client.model.state.StateManager;
 import client.model.state.VisitorState;
@@ -8,16 +7,11 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import server.model.database.member.MemberDAOImpl;
 import shared.transferobjects.City;
 import shared.transferobjects.Member;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Optional;
 
 public class EditAccountViewModel {
     private ShareItModel shareItModel;
@@ -94,7 +88,6 @@ public class EditAccountViewModel {
         Member member = shareItModel.getMemberByUsername(StateManager.getInstance()
             .getUsername());
         usernameField.setValue(member.getUsername());
-        //locationsList.setValue(member.getAddressCity());
         passwordField.setValue(member.getPassword());
         confirmPasswordField.setValue(member.getPassword());
         streetField.setValue(member.getAddressStreet());

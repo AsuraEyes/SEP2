@@ -3,11 +3,8 @@ package client.views.view_reported_member;
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
 import client.viewmodel.view_reported_member.ViewReportedMemberViewModel;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 
@@ -30,21 +27,16 @@ public class ViewReportedMemberController {
         viewReportedMemberViewModel.getComment();
     }
 
-    public void goBackToReportedMembers(ActionEvent actionEvent) throws
-        IOException
-    {
+    public void goBackToReportedMembers() throws IOException {
         viewHandler.setView(viewHandler.menu(), viewHandler.viewReportedMemberList());
     }
 
-    public void reporterMemberClickedOn(MouseEvent mouseEvent) throws IOException
-    {
+    public void reporterMemberClickedOn() throws IOException {
         viewReportedMemberViewModel.setReporterNameLabel();
         viewHandler.setView(viewHandler.menu(),viewHandler.viewMemberProfile());
-
     }
 
-    public void reportedMemberClickedOn(MouseEvent mouseEvent) throws IOException
-    {
+    public void reportedMemberClickedOn() throws IOException {
         viewReportedMemberViewModel.setReportedNameLabel();
         viewHandler.setView(viewHandler.menu(),viewHandler.viewMemberProfile());
     }

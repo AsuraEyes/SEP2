@@ -1,7 +1,6 @@
 package client.viewmodel.manage_account;
 
 import client.model.ShareItModel;
-import client.model.state.StateManager;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.image.ImageView;
@@ -33,19 +32,16 @@ public class ManageAccountViewModel {
     }
 
     public void setProfile(){
-        Member member = shareItModel.getMemberByUsername(StateManager.getInstance()
-            .getUsername());
+        Member member = shareItModel.getMemberByUsername(shareItModel.getLoggedInUsername());
         usernameLabel.setValue(member.getUsername());
         locationLabel.setValue(member.getAddressCity());
         ratingLabel.setValue(String.valueOf(member.getAverageReview()));
         addressLabel.setValue(member.getAddressStreet() + ", " + member.getAddressNo());
         contactLabel.setValue(member.getPhoneNo() + "\n" + member.getEmailAddress());
         otherInformationLabel.setValue(member.getOtherInformation());
-        System.out.println(usernameLabel.getValue());
     }
 
     public ArrayList<Rental> getRentalsOfMemberList() throws RemoteException {
-        System.out.println("This is the username i am looking for: "+shareItModel.getMemberUsername());
         return shareItModel.getRentalsOfMemberList(shareItModel.getLoggedInUsername());
     }
 

@@ -30,8 +30,6 @@ public class DataCheckReport
     return "Ooops, something went wrong!!";
   }
 
-
-
   private boolean FeedbackGiven(){
     if (feedback != null){
       if (!(feedback.trim().equals("") && feedback.isBlank() && feedback.isEmpty())){

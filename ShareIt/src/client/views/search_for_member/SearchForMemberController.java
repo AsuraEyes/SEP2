@@ -3,27 +3,18 @@ package client.views.search_for_member;
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
 import client.viewmodel.search_for_member.SearchForMemberViewModel;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextFlow;
-import org.controlsfx.control.InfoOverlay;
 import shared.transferobjects.Member;
-import shared.transferobjects.Rental;
 
 import java.io.IOException;
-import java.rmi.RemoteException;
 import java.util.List;
 
 public class SearchForMemberController
@@ -44,7 +35,6 @@ public class SearchForMemberController
 
     searchForMemberViewModel.setSearchField();
 
-    System.out.println("Controller: " + searchField.textProperty().getValue());
     if(searchField.textProperty().getValue() != null)
     {
       displayMembers(searchForMemberViewModel.onSearchButtonPressed());
@@ -55,7 +45,7 @@ public class SearchForMemberController
     }
   }
 
-  public void searchButton(ActionEvent actionEvent)
+  public void searchButton()
   {
     List<Member> members = searchForMemberViewModel.onSearchButtonPressed();
     vBox.getChildren().clear();
@@ -81,8 +71,7 @@ public class SearchForMemberController
         vBox.getChildren().add(ratingBox);
         vBox.getChildren().get(i)
                 .addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
-                  try
-                  {
+                  try {
                     searchForMemberViewModel.setMemberUsername(event.getSource());
                     viewHandler.setView(viewHandler.menu(), viewHandler.viewMemberProfile());
                   }

@@ -8,29 +8,22 @@ import java.sql.SQLException;
  */
 public class DataCheckRating
 {
-  private double starValue;
   private String feedback;
 
   public String addFeedback(double starValue, String feedback, String username1, String username2){
     this.feedback = feedback;
-    this.starValue = starValue;
 
-    if(FeedbackGiven())
-    {
-      try
-      {
+    if(FeedbackGiven()) {
+      try {
         RatingDAOImpl.getInstance().create(starValue, feedback, username1, username2);
         return "Added";
       }
       catch (SQLException e){
-        //
+        e.printStackTrace();
       }
     }
-
     return "Ooops, something went wrong!!";
     }
-
-
 
   private boolean FeedbackGiven(){
     if (feedback != null){

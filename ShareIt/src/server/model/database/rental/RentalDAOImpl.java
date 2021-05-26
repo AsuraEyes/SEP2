@@ -1,6 +1,5 @@
 package server.model.database.rental;
 
-import client.model.state.StateManager;
 import server.model.database.member.MemberDAOImpl;
 import server.model.database.rental_category.RentalCategoryDAOImpl;
 import shared.transferobjects.Rental;
@@ -38,11 +37,8 @@ public class RentalDAOImpl implements RentalDAO
     this.password = password;
   }
 
-  private Connection getConnection() throws SQLException
-  {
-    return DriverManager
-        .getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres",
-            password);
+  private Connection getConnection() throws SQLException {
+    return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", password);
   }
 
   /**
@@ -93,7 +89,6 @@ public class RentalDAOImpl implements RentalDAO
           PreparedStatement.RETURN_GENERATED_KEYS);
       statement.setString(1, name);
       statement.setBinaryStream(2, fis, (int) file.length());
-      //statement.setBinaryStream(2, fis);
       statement.setString(3, description);
       statement.setInt(4, price);
       statement.setString(5, otherInformation);
@@ -101,8 +96,7 @@ public class RentalDAOImpl implements RentalDAO
       statement.setInt(7, memberId);
       statement.executeUpdate();
 
-      int rentalId = 0;
-      //this gets the generated id of the member
+      int rentalId;
       ResultSet generatedKeys = statement.getGeneratedKeys();
       if (generatedKeys.next())
       {
@@ -146,22 +140,17 @@ public class RentalDAOImpl implements RentalDAO
       }
       if(categories.size() > 0){
         for (int i = 0; i < categories.size(); i++) {
-          //first from the list
           if(i == 0){
-            //more coming
             if(categories.size() != 1){
               addToStatement += " AND ((r.id = rc.rental_id AND rc.category_name = '"+categories.get(i)+"')";
             }
-            //only this one
             else{
               addToStatement += " AND r.id = rc.rental_id AND rc.category_name = '"+categories.get(i)+"'";
             }
           }
-          //last one
           else if(i == categories.size()-1){
             addToStatement += " OR (r.id = rc.rental_id AND rc.category_name = '"+categories.get(i)+"'))";
           }
-          //in the middle
           else{
             addToStatement += " OR (r.id = rc.rental_id AND rc.category_name = '"+categories.get(i)+"')";
           }
@@ -189,7 +178,6 @@ public class RentalDAOImpl implements RentalDAO
       while (resultSet.next())
       {
         int idOfSearchedRental = resultSet.getInt("id");
-        //Rental rental = new Rental(idOfSearchedRental);
         if(!listOfIds.contains(idOfSearchedRental)){
           listOfIds.add(idOfSearchedRental);
         }
@@ -218,7 +206,6 @@ public class RentalDAOImpl implements RentalDAO
 
         int rentalId = resultSet.getInt("id");
         String rentalName = resultSet.getString("name");
-        //picture link?
         String rentalDescription = resultSet.getString("description");
         int priceOfRental = resultSet.getInt("price");
         String rentalOtherInformation = resultSet.getString("other_information");
@@ -232,7 +219,6 @@ public class RentalDAOImpl implements RentalDAO
       }
       resultSet.close();
       statement.close();
-      //return array list
       return arrayListToReturn;
     }
     catch (IOException e) {
@@ -256,15 +242,7 @@ public class RentalDAOImpl implements RentalDAO
       PreparedStatement statement = connection
           .prepareStatement("SELECT * FROM share_it.rental WHERE name LIKE ?");
       statement.setString(1, "%" + name + "%");
-      ResultSet resultSet = statement.executeQuery();
       ArrayList<Rental> arrayListToReturn = new ArrayList<>();
-      while (resultSet.next())
-      {
-        int idOfSearchedRental = resultSet.getInt("id");
-        //get the member with this id or create it getting all the information
-        // and add him to the array list
-      }
-      //return array list
       return arrayListToReturn;
     }
   }
@@ -290,7 +268,6 @@ public class RentalDAOImpl implements RentalDAO
 
         int rentalId = resultSet.getInt("id");
         String rentalName = resultSet.getString("name");
-        //picture link?
         String rentalDescription = resultSet.getString("description");
         int priceOfRental = resultSet.getInt("price");
         String rentalOtherInformation = resultSet.getString("other_information");
@@ -304,46 +281,12 @@ public class RentalDAOImpl implements RentalDAO
       }
       resultSet.close();
       statement.close();
-      //return array list
       return arrayListToReturn;
     } catch (IOException e) {
       e.printStackTrace();
     }
     return null;
-      /*
-      while (resultSet.next())
-      {
-        int idOfSearchedRental = resultSet.getInt("id");
-
-        Rental rental = new Rental(idOfSearchedRental);
-        arrayListToReturn.add(rental);
-
-      }
-      //return array list
-      System.out.println(search);
-      for (Rental rental : arrayListToReturn)
-      {
-        System.out.println(rental);
-      }
-      return arrayListToReturn;
-
-    }
-    */
-
   }
-
-    /*public static Rental createBook(ResultSet resultSet) throws SQLException {
-        int id = resultSet.getInt("id");
-        String name = resultSet.getString("name");
-        String description = resultSet.getString("description");
-        int price = resultSet.getInt("price");
-        String other_information = resultSet.getString("other_information");
-        String state_name = resultSet.getString("state_name");
-        int member_id = resultSet.getInt("member_id");
-        String memberUsername = resultSet.getString("Username");
-        Member member = new Member(member_id, memberUsername);
-        return new Rental(id, name, description, price, other_information, state_name, member);
-    }*/
 
   /**
    * Updates rental object by connecting to a database then updating data provided by user to the database
@@ -395,7 +338,6 @@ public class RentalDAOImpl implements RentalDAO
   @Override public boolean delete(Rental rental) throws SQLException {
     try (Connection connection = getConnection())
     {
-      System.out.println("Databaseeeeeee: " + rental);
       PreparedStatement statement = connection
           .prepareStatement("DELETE FROM share_it.rental WHERE id = ?");
       statement.setInt(1, rental.getId());
@@ -416,13 +358,11 @@ public class RentalDAOImpl implements RentalDAO
       PreparedStatement statement = connection.prepareStatement(
           "SELECT nextval(pg_get_serial_sequence('share_it.rental', 'id')) AS available_id;");
       ResultSet resultSet = statement.executeQuery();
-      int nextAvailableId = 0;
-      if (resultSet.next())
-      {
+      int nextAvailableId;
+      if (resultSet.next()) {
         nextAvailableId = resultSet.getInt("available_id");
       }
-      else
-      {
+      else {
         throw new SQLException("No keys generated");
       }
       return nextAvailableId;
@@ -434,11 +374,8 @@ public class RentalDAOImpl implements RentalDAO
    * @return list of all rentals that are stored in the database
    * @throws SQLException
    */
-  @Override public List<Rental> readRentals() throws SQLException
-
-  {
-    try (Connection connection = getConnection())
-    {
+  @Override public List<Rental> readRentals() throws SQLException {
+    try (Connection connection = getConnection()) {
       PreparedStatement statement = connection
           .prepareStatement("SELECT * FROM share_it.rental");
       ResultSet resultSet = statement.executeQuery();
@@ -450,46 +387,8 @@ public class RentalDAOImpl implements RentalDAO
         byte[] imgBytes = resultSet.getBytes(3);
         Files.write(new File(filename).toPath(), imgBytes);
 
-
-        /*BufferedOutputStream bos = null;
-        FileOutputStream fos;
-
-        try
-        {
-          // create FileOutputStream from filename
-          fos = new FileOutputStream(filename);
-
-          // create BufferedOutputStream for FileOutputStream
-          bos = new BufferedOutputStream(fos);
-          bos.write(imgBytes);
-        }
-        catch (FileNotFoundException fnfe)
-        {
-          System.out.println("File not found" + fnfe);
-        }
-        catch (IOException ioe)
-        {
-          System.out.println("Error while writing to file" + ioe);
-        }
-        finally
-        {
-          try
-          {
-            if (bos != null)
-            {
-              bos.flush();
-              bos.close();
-            }
-          }
-          catch (Exception e)
-          {
-            System.out.println("Error while closing streams" + e);
-          }
-        }*/
-
         int rentalId = resultSet.getInt("id");
         String rentalName = resultSet.getString("name");
-        //picture link?
         String rentalDescription = resultSet.getString("description");
         int priceOfRental = resultSet.getInt("price");
         String rentalOtherInformation = resultSet.getString("other_information");
@@ -503,7 +402,6 @@ public class RentalDAOImpl implements RentalDAO
       }
       resultSet.close();
       statement.close();
-      //return array list
       return arrayListToReturn;
     }
     catch (IOException e)
@@ -536,7 +434,7 @@ public class RentalDAOImpl implements RentalDAO
 
         int rentalId = resultSet.getInt("id");
         String rentalName = resultSet.getString("name");
-        //picture link?
+
         String rentalDescription = resultSet.getString("description");
         int priceOfRental = resultSet.getInt("price");
         String rentalOtherInformation = resultSet.getString("other_information");
@@ -549,7 +447,6 @@ public class RentalDAOImpl implements RentalDAO
                         priceOfRental, rentalOtherInformation, rentalState, memberId,
                         RentalCategoryDAOImpl.getInstance().getSelectedCategoriesOnRental(rentalId)));
       }
-      //return array list
       return arrayListToReturn;
     } catch (SQLException | IOException e) {
       e.printStackTrace();

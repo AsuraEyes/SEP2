@@ -3,7 +3,6 @@ package client.views.welcome_page;
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
 import client.viewmodel.welcome_page.WelcomePageViewModel;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
@@ -27,7 +26,7 @@ public class WelcomePageController {
         }
     }
 
-    public void searchButton(ActionEvent actionEvent) throws IOException {
+    public void searchButton() throws IOException {
         welcomePageViewModel.setSearchText();
         if(welcomePageViewModel.getUserType().equals("Administrator")){
             viewHandler.setView(viewHandler.menu(), viewHandler.searchForMember());
