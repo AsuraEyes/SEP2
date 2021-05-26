@@ -50,6 +50,7 @@ public class EditAccountController {
         this.viewHandler = viewHandler;
         editAccountViewModel = viewModelFactory.getEditAccountViewModel();
         usernameField.textProperty().bind(editAccountViewModel.getUsernameField());
+        usernameField.setDisable(true);
         passwordField.textProperty().bindBidirectional(editAccountViewModel.getPasswordField());
         confirmPasswordField.textProperty().bindBidirectional(editAccountViewModel.getConfirmPasswordField());
         streetField.textProperty().bindBidirectional(editAccountViewModel.getStreetField());
