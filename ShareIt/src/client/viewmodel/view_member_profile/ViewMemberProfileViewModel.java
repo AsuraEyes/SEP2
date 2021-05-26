@@ -142,8 +142,7 @@ public class ViewMemberProfileViewModel
   }
 
   public boolean deleteAccount(){
-    Member member = model.getMemberByUsername(StateManager.getInstance()
-            .getUsername());
+    Member member = model.getMemberByUsername(model.getMemberUsername());
     return model.deleteMember(member);
   }
 }

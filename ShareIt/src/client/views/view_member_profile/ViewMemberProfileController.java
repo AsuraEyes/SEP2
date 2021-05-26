@@ -114,8 +114,7 @@ public class ViewMemberProfileController
     Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "");
     alert.setTitle("Delete account");
     alert.setHeaderText("Are you sure?");
-    alert.getDialogPane().setContentText(
-        "Are you sure you want to permanently delete your account?");
+    alert.getDialogPane().setContentText("Are you sure you want to permanently delete this account?");
 
     Optional<ButtonType> result = alert.showAndWait();
     if (result.get() == ButtonType.OK)
@@ -131,8 +130,7 @@ public class ViewMemberProfileController
         alert.getDialogPane().setContentText("Click ok to return to reported members.");
 
         result = alert.showAndWait();
-        if (result.get() == ButtonType.OK)
-        {
+        if (result.get() == ButtonType.OK) {
           viewHandler.setView(viewHandler.menu(), viewHandler.viewReportedMemberList());
         }
       }

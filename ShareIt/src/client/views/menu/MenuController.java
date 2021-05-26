@@ -54,7 +54,7 @@ public class MenuController
     else if (userType.equals("Administrator"))
     {
       reportedMembersButton.setVisible(true);
-      chatButton.setVisible(true);
+      chatButton.setVisible(false);
       logInOutLabel.setText("Log out");
     }
   }
