@@ -1,14 +1,12 @@
 package client.viewmodel.manage_rentals;
 
 import client.model.ShareItModel;
-import client.model.state.StateManager;
 import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.image.Image;
-import shared.transferobjects.Member;
 import shared.transferobjects.Rental;
 
 import java.beans.PropertyChangeEvent;
@@ -22,6 +20,7 @@ public class ManageRentalsViewModel {
     private StringProperty priceOfRental;
     private StringProperty otherInformationOfRental;
     private StringProperty categoryOfRental;
+    private ObjectProperty<Image> imageProperty;
 
     public ManageRentalsViewModel(ShareItModel shareItModel){
         this.shareItModel = shareItModel;
@@ -31,6 +30,7 @@ public class ManageRentalsViewModel {
         priceOfRental = new SimpleStringProperty();
         otherInformationOfRental = new SimpleStringProperty();
         categoryOfRental = new SimpleStringProperty();
+        imageProperty = new SimpleObjectProperty<>();
 
         shareItModel.addListener("selectedRental",this::selectedRental);
     }
@@ -46,6 +46,7 @@ public class ManageRentalsViewModel {
                 descriptionOfRental.setValue(rental.getDescription());
                 stateOfRental.setValue(rental.getStateName());
                 priceOfRental.setValue(String.valueOf(rental.getPrice()));
+                imageProperty.setValue(new Image(rental.getPictureLink()));
                 if(rental.getOtherInformation() !=null)
                 {
                     otherInformationOfRental.setValue(rental.getOtherInformation());
@@ -94,6 +95,9 @@ public class ManageRentalsViewModel {
     public void getSelectedRental(){
         shareItModel.sendSelectedRental(shareItModel.getSelectedRental());
     }
-
+    public ObjectProperty<Image> imagePropertyProperty()
+    {
+        return imageProperty;
+    }
 
 }
