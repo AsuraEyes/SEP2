@@ -6,9 +6,7 @@ import client.model.state.AdministratorState;
 import client.model.state.MemberState;
 import client.model.state.StateManager;
 import client.viewmodel.log_in.LogInViewModel;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
@@ -43,13 +41,13 @@ public class LogInController
 
     notifications =  Notifications.create()
             .title("Error - invalid input!")
-            .graphic(new Rectangle(300, 300, Color.RED)) // sets node to display
+            .graphic(new Rectangle(300, 300, Color.RED))
             .hideAfter(Duration.seconds(3));
     userNameField.clear();
     passwordField.clear();
   }
 
-  public void logInButton(ActionEvent actionEvent) throws IOException {
+  public void logInButton() throws IOException {
 
     if(checkFieldNotEmpty(userNameField) && checkPasswordFieldNotEmpty(passwordField)){
       String memberUsername = logInViewModel.onLogInButton();
@@ -70,7 +68,7 @@ public class LogInController
     }
   }
 
-  public void createNewAccount(ActionEvent actionEvent) throws IOException, SQLException {
+  public void createNewAccount() throws IOException, SQLException {
     viewHandler.setView(viewHandler.menu(), viewHandler.createAccount());
   }
 

@@ -4,7 +4,6 @@ import client.model.ShareItModel;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.collections.ObservableList;
 import shared.transferobjects.Warning;
 
 import java.beans.PropertyChangeEvent;
@@ -17,7 +16,6 @@ public class SendWarningViewModel {
     private StringProperty warnings;
     private StringProperty inputTextChat;
     private ShareItModel model;
-    private ObservableList<Warning> listOfWarnings;
 
     public SendWarningViewModel(ShareItModel model){
         this.model = model;
@@ -44,10 +42,6 @@ public class SendWarningViewModel {
     public StringProperty getInputTextChat()
     {
         return inputTextChat;
-    }
-
-    public ObservableList<Warning> getListOfWarnings() {
-        return listOfWarnings;
     }
 
     public void sendWarning(){

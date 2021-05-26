@@ -23,7 +23,7 @@ public class DataCheckSearch
         return RentalDAOImpl.getInstance().readBySearch(search);
       }
       catch (SQLException e){
-        //
+        e.printStackTrace();
       }
     }
     else {
@@ -32,25 +32,21 @@ public class DataCheckSearch
           return RentalDAOImpl.getInstance().readRentals();
         }
         catch (SQLException e){
-
+          e.printStackTrace();
         }
       }
     }
     return null;
   }
 
-  public List<Rental> checkSearchWithFilter(String search,String city,ArrayList<String> selectedCategories )
-  {
+  public List<Rental> checkSearchWithFilter(String search,String city,ArrayList<String> selectedCategories ) {
     this.search = search;
-      try
-      {
+      try {
         return RentalDAOImpl.getInstance().readBySearchAndFilter(search,city,selectedCategories);
       }
-      catch (SQLException e)
-      {
-        //
+      catch (SQLException e) {
+        e.printStackTrace();
       }
-    System.out.println("here");
       return null;
     }
 

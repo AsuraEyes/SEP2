@@ -3,7 +3,6 @@ package client.views.chat_write_message;
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
 import client.viewmodel.chat_write_message.ChatWriteMessageViewModel;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -23,9 +22,7 @@ public class ChatWriteMessageController
   private ViewHandler viewHandler;
   private ChatWriteMessageViewModel chatWriteMessageViewModel;
 
-  public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory)
-      throws IOException
-  {
+  public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws IOException {
     this.viewHandler = viewHandler;
     textChatArea.clear();
     chatWriteMessageViewModel = viewModelFactory.getChatWriteMessagesViewModel();
@@ -36,15 +33,13 @@ public class ChatWriteMessageController
     chatWriteMessageViewModel.loadLogs();
   }
 
-  public void onGoBack(ActionEvent actionEvent) throws IOException
-  {
+  public void onGoBack() throws IOException {
     textChatArea.clear();
     chatWriteMessageViewModel.loadAllReceivedMessages();
     viewHandler.setView(viewHandler.menu(), viewHandler.chatReceived());
   }
 
-  public void onSend(ActionEvent actionEvent)
-  {
+  public void onSend() {
     chatWriteMessageViewModel.sendMessage();
     inputTextChatField.clear();
   }

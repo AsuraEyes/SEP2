@@ -23,16 +23,8 @@ public class Warning implements Serializable
         return administratorFrom;
     }
 
-    public void setAdministratorFrom(String administratorFrom) {
-        this.administratorFrom = administratorFrom;
-    }
-
     public int getMemberTo() {
         return memberTo;
-    }
-
-    public void setMemberTo(int memberTo) {
-        this.memberTo = memberTo;
     }
 
     public String getText() {
@@ -45,10 +37,6 @@ public class Warning implements Serializable
 
     public Date getTimeStamp() {
         return timeStamp;
-    }
-
-    public void setTimeStamp(Date timeStamp) {
-        this.timeStamp = timeStamp;
     }
 
     public String toString(){

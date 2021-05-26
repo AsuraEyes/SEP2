@@ -5,7 +5,6 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import org.controlsfx.control.InfoOverlay;
@@ -99,9 +98,7 @@ public class SearchForRentalViewModel {
     }
 
     public void setSearchField(){
-
         searchField.setValue(model.getSearchText());
-        System.out.println("View model: " + searchField.getValue());
     }
 
 }

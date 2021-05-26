@@ -24,8 +24,7 @@ import client.viewmodel.welcome_page.WelcomePageViewModel;
 
 import java.io.IOException;
 
-public class ViewModelFactory
-{
+public class ViewModelFactory {
   private ModelFactory modelFactory;
 
   private LogInViewModel logInViewModel;
@@ -50,8 +49,7 @@ public class ViewModelFactory
   private ManageAccountViewModel manageAccountViewModel;
   private SendWarningViewModel sendWarningViewModel;
 
-  public ViewModelFactory(ModelFactory modelFactory) throws IOException
-  {
+  public ViewModelFactory(ModelFactory modelFactory) throws IOException {
     this.modelFactory = modelFactory;
     logInViewModel = new LogInViewModel(modelFactory.getShareItModel());
     chatReceivedMessagesViewModel = new ChatReceivedMessagesViewModel(
@@ -59,18 +57,15 @@ public class ViewModelFactory
     chatWriteMessageViewModel = new ChatWriteMessageViewModel(
         modelFactory.getShareItModel());
   }
-  public LogInViewModel getLogInViewModel() throws IOException
-  {
-    if(logInViewModel == null)
-    {
+
+  public LogInViewModel getLogInViewModel() throws IOException {
+    if(logInViewModel == null) {
       logInViewModel = new LogInViewModel(modelFactory.getShareItModel());
     }
     return logInViewModel;
   }
 
-  public ChatReceivedMessagesViewModel getChatReceivedMessagesViewModel()
-      throws IOException
-  {
+  public ChatReceivedMessagesViewModel getChatReceivedMessagesViewModel() throws IOException {
     if(chatReceivedMessagesViewModel == null)
     {
       chatReceivedMessagesViewModel = new ChatReceivedMessagesViewModel(
@@ -80,9 +75,7 @@ public class ViewModelFactory
   }
 
 
-  public ChatWriteMessageViewModel getChatWriteMessagesViewModel()
-      throws IOException
-  {
+  public ChatWriteMessageViewModel getChatWriteMessagesViewModel() throws IOException {
     if(chatWriteMessageViewModel == null)
     {
       chatWriteMessageViewModel = new ChatWriteMessageViewModel(
@@ -100,7 +93,6 @@ public class ViewModelFactory
 
   public WelcomePageViewModel getWelcomePageViewModel() throws IOException {
     if (welcomePageViewModel == null){
-      //System.out.println(modelFactory.getShareItModel());
       welcomePageViewModel = new WelcomePageViewModel(modelFactory.getShareItModel());
     }
     return welcomePageViewModel;
@@ -149,43 +141,35 @@ public class ViewModelFactory
   }
 
   public MenuViewModel getMenuViewModel() throws IOException {
-    if(menuViewModel == null)
-    {
+    if(menuViewModel == null) {
       menuViewModel = new MenuViewModel(modelFactory.getShareItModel());
     }
     return menuViewModel;
   }
 
   public ViewMemberProfileViewModel getViewMemberProfileViewModel() throws IOException {
-    if(viewMemberProfileViewModel == null)
-    {
+    if(viewMemberProfileViewModel == null) {
       viewMemberProfileViewModel = new ViewMemberProfileViewModel(modelFactory.getShareItModel());
     }
     return viewMemberProfileViewModel;
   }
 
-  public ViewRentalViewModel getViewRentalViewModel() throws IOException
-  {
-    if(viewRentalViewModel == null)
-    {
+  public ViewRentalViewModel getViewRentalViewModel() throws IOException {
+    if(viewRentalViewModel == null) {
       viewRentalViewModel = new ViewRentalViewModel(modelFactory.getShareItModel());
     }
     return viewRentalViewModel;
   }
 
-  public ReportMemberViewModel getReportMemberViewModel() throws IOException
-  {
-    if(reportMemberViewModel == null)
-    {
+  public ReportMemberViewModel getReportMemberViewModel() throws IOException {
+    if(reportMemberViewModel == null) {
       reportMemberViewModel = new ReportMemberViewModel(modelFactory.getShareItModel());
     }
     return reportMemberViewModel;
   }
 
-  public RateFeedbackViewModel getRateFeedbackViewModel() throws  IOException
-  {
-    if (rateFeedbackViewModel == null)
-    {
+  public RateFeedbackViewModel getRateFeedbackViewModel() throws  IOException {
+    if (rateFeedbackViewModel == null) {
       rateFeedbackViewModel = new RateFeedbackViewModel(modelFactory.getShareItModel());
     }
     return rateFeedbackViewModel;

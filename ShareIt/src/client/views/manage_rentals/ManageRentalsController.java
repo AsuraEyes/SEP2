@@ -3,22 +3,18 @@ package client.views.manage_rentals;
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
 import client.viewmodel.manage_rentals.ManageRentalsViewModel;
-import javafx.event.ActionEvent;
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import server.model.database.rental.RentalDAOImpl;
-import shared.transferobjects.Rental;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.Optional;
 
 public class ManageRentalsController {
-  @FXML private TextField searchField;
 
   @FXML private Label nameOfRentalLabel;
   @FXML private Label descriptionLabel;
@@ -26,6 +22,7 @@ public class ManageRentalsController {
   @FXML private Label priceLabel;
   @FXML private Label otherInformationLabel;
   @FXML private Label categoryLabel;
+  @FXML private ImageView imageView;
 
   private ViewHandler viewHandler;
   private ManageRentalsViewModel manageRentalsViewModel;
@@ -33,6 +30,8 @@ public class ManageRentalsController {
   public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws IOException {
     this.viewHandler = viewHandler;
     manageRentalsViewModel = viewModelFactory.getManageRentalsViewModel();
+
+    Bindings.bindBidirectional(this.imageView.imageProperty(), manageRentalsViewModel.imagePropertyProperty());
     nameOfRentalLabel.textProperty().bind(manageRentalsViewModel.nameOfRentalProperty());
     descriptionLabel.textProperty().bind(manageRentalsViewModel.descriptionOfRentalProperty());
     stateLabel.textProperty().bind(manageRentalsViewModel.stateOfRentalProperty());
@@ -41,12 +40,12 @@ public class ManageRentalsController {
     categoryLabel.textProperty().bind(manageRentalsViewModel.categoryOfRentalProperty());
   }
 
-  public void changeButton(ActionEvent actionEvent) throws IOException {
+  public void changeButton() throws IOException {
     viewHandler.setView(viewHandler.menu(), viewHandler.editRental());
     manageRentalsViewModel.getSelectedRental();
   }
 
-  public void deleteButton(ActionEvent actionEvent) throws IOException {
+  public void deleteButton() throws IOException {
     Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "");
     alert.setTitle("Delete rental");
     alert.setHeaderText("Are you sure?");
@@ -55,7 +54,6 @@ public class ManageRentalsController {
     Optional<ButtonType> result = alert.showAndWait();
     if (result.get() == ButtonType.OK) {
       boolean success = manageRentalsViewModel.deleteRental();
-      System.out.println("Controller delete" + success);
       if (success) {
         Stage stage = (Stage) viewHandler.getStage().getScene().getWindow();
         alert = new Alert(Alert.AlertType.INFORMATION, "");
@@ -71,8 +69,7 @@ public class ManageRentalsController {
       }
     }
   }
-
-  public void goBackToProfileOverviewButton(ActionEvent actionEvent) throws IOException {
+  public void goBackToProfileOverviewButton() throws IOException {
     viewHandler.setView(viewHandler.menu(), viewHandler.manageAccount());
   }
 }

@@ -1,6 +1,5 @@
 package shared.transferobjects;
 
-import java.awt.*;
 import java.io.Serializable;
 
 public class Member implements Serializable {
@@ -62,10 +61,6 @@ public class Member implements Serializable {
         return emailAddress;
     }
 
-    public void setEmailAddress(String emailAddress) {
-        this.emailAddress = emailAddress;
-    }
-
     public String getOtherInformation() {
         return otherInformation;
     }
@@ -78,48 +73,24 @@ public class Member implements Serializable {
         return phoneNo;
     }
 
-    public void setPhoneNo(String phoneNo) {
-        this.phoneNo = phoneNo;
-    }
-
     public String getAddressStreet() {
         return addressStreet;
-    }
-
-    public void setAddressStreet(String address_street) {
-        this.addressStreet = address_street;
     }
 
     public String getAddressNo() {
         return addressNo;
     }
 
-    public void setAddressNo(String address_no) {
-        this.addressNo = address_no;
-    }
-
     public int getAddressPostalCode() {
         return addressPostalCode;
-    }
-
-    public void setAddressPostalCode(int address_postal_code) {
-        this.addressPostalCode = address_postal_code;
     }
 
     public String getAddressCity() {
         return addressCity;
     }
 
-    public void setAddressCity(String address_city) {
-        this.addressCity = address_city;
-    }
-
     public float getAverageReview() {
         return averageReview;
-    }
-
-    public void setAverageReview(float average_review) {
-        this.averageReview = average_review;
     }
 
 

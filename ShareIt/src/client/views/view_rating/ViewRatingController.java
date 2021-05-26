@@ -3,20 +3,14 @@ package client.views.view_rating;
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
 import client.viewmodel.view_rating.ViewRatingViewModel;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.*;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
-import org.controlsfx.control.InfoOverlay;
 import shared.transferobjects.Rating;
 
 import java.io.IOException;
@@ -47,21 +41,13 @@ public class ViewRatingController {
         displayRatings(viewRatingViewModel.getAllRatingsOnMember(viewRatingViewModel.getMemberUsername()));
     }
 
-    public void searchButton(ActionEvent actionEvent) {
-
-    }
-
-    public void goBackToUserPage(ActionEvent actionEvent) throws IOException {
+    public void goBackToUserPage() throws IOException {
         if(userNameLabel.textProperty().getValue().equals(viewRatingViewModel.getUserType())){
             viewHandler.setView(viewHandler.menu(), viewHandler.manageAccount());
         }
         else{
             viewHandler.setView(viewHandler.menu(), viewHandler.viewMemberProfile());
         }
-
-    }
-
-    public void seeFullRating(ActionEvent actionEvent) {
 
     }
 

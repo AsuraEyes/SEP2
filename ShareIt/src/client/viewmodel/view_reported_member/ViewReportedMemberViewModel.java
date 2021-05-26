@@ -3,7 +3,6 @@ package client.viewmodel.view_reported_member;
 import client.model.ShareItModel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import shared.transferobjects.Rating;
 import shared.transferobjects.Report;
 
 public class ViewReportedMemberViewModel {
@@ -39,22 +38,20 @@ public class ViewReportedMemberViewModel {
         reporterNameLabel.setValue(model.getReporterPerson());
         return model.getReporterPerson();
     }
+
     public String getReportedPerson(){
         reportedNameLabel.setValue(model.getReportedPerson());
         return model.getReportedPerson();
     }
-    public void getComment()
-    {
+
+    public void getComment() {
         Report report = model.getReport(getReporterPerson(),getReportedPerson());
-        if(report != null)
-        {
+        if(report != null) {
             commentaryLabel.setValue(report.getCommentary());
         }
     }
 
-    public void setReportedNameLabel()
-    {
-        System.out.println("Here: "+reportedNameLabel.getValue());
+    public void setReportedNameLabel() {
         model.setReportedUsername(reportedNameLabel.getValue());
     }
 

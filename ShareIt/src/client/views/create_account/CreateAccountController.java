@@ -3,7 +3,6 @@ package client.views.create_account;
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
 import client.viewmodel.create_account.CreateAccountViewModel;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
@@ -13,7 +12,6 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
 import org.controlsfx.control.textfield.CustomPasswordField;
-import org.controlsfx.validation.ValidationSupport;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -45,7 +43,6 @@ public class CreateAccountController {
 
     private CreateAccountViewModel createAccountViewModel;
     private ViewHandler viewHandler;
-    private ValidationSupport validationSupport;
     private Notifications notifications;
 
     public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws SQLException, IOException {
@@ -64,28 +61,21 @@ public class CreateAccountController {
         locationBox.setItems(createAccountViewModel.getLocations());
         locationBox.getSelectionModel().selectFirst();
 
-//        validationSupport = new ValidationSupport();
-//        validationSupport.setErrorDecorationEnabled(false);
-//        validationSupport.registerValidator(usernameField, Validator.createEmptyValidator("Username is required"));
-
         notifications =  Notifications.create()
                 .title("Error - invalid input!")
-                .graphic(new Rectangle(300, 300, Color.RED)) // sets node to display
+                .graphic(new Rectangle(300, 300, Color.RED))
                 .hideAfter(Duration.seconds(3));
     }
 
-    public void goBackToLogInButton(ActionEvent actionEvent) throws IOException {
+    public void goBackToLogInButton() throws IOException {
         viewHandler.setView(viewHandler.menu(), viewHandler.logIn());
     }
 
-    public void createButton(ActionEvent actionEvent) throws IOException {
-        boolean ok = true;
+    public void createButton() throws IOException {
         if(checkField(usernameField) && checkField(passwordField) && checkField(confirmPasswordField) && checkField(streetField) && checkField(streetNumberField) && checkField(postalCodeField)){
             String message = createAccountViewModel.onCreateButtonPressed(locationBox.getValue());
             switch (message){
                 case "Adding successful":
-                    //notifications.owner(parent).text("Your account has been successfully created! ").title(message).showConfirm();
-
                     Stage stage = (Stage) viewHandler.getStage().getScene().getWindow();
                     Alert alert = new Alert(Alert.AlertType.INFORMATION, "");
                     alert.setTitle("Confirmation");

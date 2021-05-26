@@ -30,7 +30,6 @@ public class MemberDAOImpl implements MemberDAO{
     }
 
     private Connection getConnection() throws SQLException {
-        System.out.println("password: "+password);
         return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", password);
     }
 
@@ -63,7 +62,6 @@ public class MemberDAOImpl implements MemberDAO{
             statement.setString(9, addressCity);
             statement.executeUpdate();
 
-            //this gets the generated id of the member
             ResultSet generatedKeys = statement.getGeneratedKeys();
             if(generatedKeys.next()){
                 return new Member(generatedKeys.getInt(1), username, password, emailAddress, phoneNumber, otherInformation, addressStreet, addressNo, addressPostalCode, addressCity, 0);
@@ -145,15 +143,6 @@ public class MemberDAOImpl implements MemberDAO{
     @Override
     public void update(String username, String password, String emailAddress, String phoneNumber, String otherInformation, String addressStreet, String addressNo, int addressPostalCode, String addressCity) throws SQLException {
         try(Connection connection  = getConnection()){
-            System.out.println("In the member DAO: username: "+username);
-            System.out.println("In the member DAO: password: "+password);
-            System.out.println("In the member DAO: email address: "+ emailAddress);
-            System.out.println("In the member DAO: phone number: "+phoneNumber);
-            System.out.println("In the member DAO: other info: "+otherInformation);
-            System.out.println("In the member DAO: address street: "+addressStreet);
-            System.out.println("In the member DAO: address no: "+addressNo);
-            System.out.println("In the member DAO: postal code: "+addressPostalCode);
-            System.out.println("In the member DAO: city: "+addressCity);
             PreparedStatement statement = connection.prepareStatement("UPDATE share_it.member SET password = ?, email_address = ?, phone_number = ?, other_information = ?, address_street = ?, address_no = ?, address_postal_code = ?, address_city_name = ? WHERE username = ?");
             statement.setString(1, password);
             statement.setString(2, emailAddress);
@@ -167,34 +156,6 @@ public class MemberDAOImpl implements MemberDAO{
             statement.executeUpdate();
         }
     }
-    /*@Override
-    public void update(Member member) throws SQLException {
-        try(Connection connection  = getConnection()){
-            //for updating member information
-            //SET all except for primary key
-            //WHERE member.get primary key = member.primary key
-
-            PreparedStatement statement = connection.prepareStatement("UPDATE share_it.member SET username = ?, password = ?, email_address = ?, phone_number = ?, other_information = ?, address_street = ?, address_no = ?, address_postal_code = ?, address_city_name = ? WHERE member.getId = )");
-            statement.setString(1, member.getUsername());
-            statement.setString(2, member.getPassword());
-            statement.setString(3, member.getEmailAddress());
-            statement.setString(4, member.getPhoneNo());
-            statement.setString(5, member.getOtherInformation());
-            statement.setString(6, member.getAddressStreet());
-            statement.setString(7, member.getAddressNo());
-            statement.setInt(8, member.getAddressPostalCode());
-            statement.setString(9, member.getAddressCity());
-            statement.executeUpdate();
-
-            /*ResultSet generatedKeys = statement.getGeneratedKeys();
-            if(generatedKeys.next()){
-                return new Member(generatedKeys.getInt(1), username, password, emailAddress, phoneNumber, otherInformation, addressStreet, addressNo, addressPostalCode, addressCity, 0);
-            }
-            else{
-                throw new SQLException("No keys generated");
-            }
-        }
-    }*/
 
     /**
      * Deletes member from database by connecting to the database and deleting matched object's id with existing member
@@ -245,11 +206,9 @@ public class MemberDAOImpl implements MemberDAO{
     @Override
     public int readIdByUsername(String username) throws SQLException{
         try(Connection connection = getConnection()){
-            System.out.println("sldkfjsdlkfjs "+username);
             PreparedStatement statement = connection.prepareStatement("SELECT id FROM share_it.member WHERE username = ?");
             statement.setString(1, username);
             ResultSet resultSet = statement.executeQuery();
-            System.out.println("username "+username);
             if(resultSet.next()){
                 return (resultSet.getInt("id"));
             }
@@ -269,7 +228,6 @@ public class MemberDAOImpl implements MemberDAO{
     @Override
     public String checkLogInCredentials(String username, String password) throws SQLException{
         try(Connection connection = getConnection()){
-            System.out.println("username: " + username + ", password: " + password);
             PreparedStatement statement = connection.prepareStatement("SELECT username FROM share_it.member WHERE username = ? AND password = ?");
             statement.setString(1, username);
             statement.setString(2, password);

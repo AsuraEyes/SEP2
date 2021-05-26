@@ -7,12 +7,9 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import shared.transferobjects.Rental;
 
 import java.beans.PropertyChangeEvent;
-import java.rmi.RemoteException;
-import java.sql.SQLException;
 
 public class ViewRentalViewModel
 {

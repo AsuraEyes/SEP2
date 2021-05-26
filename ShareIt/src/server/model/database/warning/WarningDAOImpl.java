@@ -27,7 +27,6 @@ public class WarningDAOImpl implements WarningDAO {
     }
 
     private Connection getConnection() throws SQLException {
-        System.out.println("password: " + password);
         return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", password);
     }
 
@@ -78,9 +77,8 @@ public class WarningDAOImpl implements WarningDAO {
                 throw new SQLException("No keys generated");
             }
         }
-        catch (SQLException throwables)
-        {
-            throwables.printStackTrace();
+        catch (SQLException e) {
+            e.printStackTrace();
         }
         return null;
     }

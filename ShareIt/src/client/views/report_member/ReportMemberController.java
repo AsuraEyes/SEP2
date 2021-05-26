@@ -3,7 +3,6 @@ package client.views.report_member;
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
 import client.viewmodel.report_member.ReportMemberViewModel;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
@@ -21,8 +20,7 @@ public class ReportMemberController
   private ReportMemberViewModel reportMemberViewModel;
   private ViewHandler viewHandler;
 
-  public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws IOException
-  {
+  public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws IOException {
     this.viewHandler = viewHandler;
     reportMemberViewModel = viewModelFactory.getReportMemberViewModel();
     usernameLabel.textProperty().bind(reportMemberViewModel.getUsernameLabel());
@@ -30,26 +28,19 @@ public class ReportMemberController
     reportMemberViewModel.getMemberUsername();
   }
 
-  public void reportButton(ActionEvent actionEvent) throws IOException
-  {
+  public void reportButton() throws IOException {
     Stage stage = (Stage) viewHandler.getStage().getScene().getWindow();
     Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "");
     alert.initOwner(stage);
     alert.getDialogPane().setContentText("The report was " + reportMemberViewModel.onReportButtonPressed() + " successfully!");
 
     Optional<ButtonType> result = alert.showAndWait();
-    if (result.get() == ButtonType.OK)
-    {
-
+    if (result.get() == ButtonType.OK) {
       viewHandler.setView(viewHandler.menu(), viewHandler.viewMemberProfile());
-
     }
   }
 
-
-
-  public void goBackToUserPageButton(ActionEvent actionEvent)
-  {
-
+  public void goBackToUserPageButton() throws IOException {
+    viewHandler.setView(viewHandler.menu(), viewHandler.viewMemberProfile());
   }
 }

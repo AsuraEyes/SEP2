@@ -115,9 +115,7 @@ public class RatingDAOImpl implements RatingDAO
    */
   public Rating getRating(String fromUsername, String toUsername) throws SQLException
   {
-    try (Connection connection = getConnection())
-    {
-
+    try (Connection connection = getConnection()) {
       int fromId = MemberDAOImpl.getInstance().readIdByUsername(fromUsername);
       int toId = MemberDAOImpl.getInstance().readIdByUsername(toUsername);
       PreparedStatement statement = connection.prepareStatement(
@@ -140,8 +138,7 @@ public class RatingDAOImpl implements RatingDAO
    * @param rating new value of rating
    */
   public void updateRating(Rating rating){
-    try (Connection connection = getConnection())
-    {
+    try (Connection connection = getConnection()) {
       PreparedStatement statement = connection.prepareStatement(
           "UPDATE share_it.rating SET value = ?, commentary = ? WHERE member_from = ? AND member_to = ?");
       statement.setDouble(1, rating.getRating());
@@ -150,9 +147,8 @@ public class RatingDAOImpl implements RatingDAO
       statement.setInt(4, rating.getMemberTo());
       statement.executeQuery();
     }
-    catch (SQLException throwables)
-    {
-      throwables.printStackTrace();
+    catch (SQLException e) {
+      e.printStackTrace();
     }
   }
 

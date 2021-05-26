@@ -5,7 +5,6 @@ import client.core.ViewModelFactory;
 import client.viewmodel.edit_rental.EditRentalViewModel;
 
 import javafx.beans.binding.Bindings;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -18,23 +17,18 @@ import javafx.util.Duration;
 
 import org.controlsfx.control.CheckComboBox;
 import org.controlsfx.control.Notifications;
-import org.controlsfx.validation.ValidationSupport;
-import shared.transferobjects.Category;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import java.io.File;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Optional;
 
 public class EditRentalController {
     @FXML private ImageView imageView;
-    private Image picture;
     @FXML private CheckComboBox<String> categoryBox;
-    @FXML private TextField searchField;
     @FXML private AnchorPane parent;
     @FXML private ChoiceBox<String> stateBox;
     @FXML private TextField nameField;
@@ -51,7 +45,6 @@ public class EditRentalController {
         editRentalViewModel = viewModelFactory.getEditRentalViewModel();
 
         Bindings.bindBidirectional(imageView.imageProperty(), editRentalViewModel.imagePropertyProperty());
-
         nameField.textProperty().bindBidirectional(editRentalViewModel.getNameField());
         descriptionField.textProperty().bindBidirectional(editRentalViewModel.getDescriptionField());
         stateBox.setItems(editRentalViewModel.getStates());
@@ -61,24 +54,21 @@ public class EditRentalController {
         categoryBox.getItems().addAll(editRentalViewModel.getCategories());
         categoryBox.setShowCheckedCount(true);
 
-
-
         checkCategories();
 
         notifications =  Notifications.create()
                 .title("Error - invalid input!")
-                .graphic(new Rectangle(300, 300, Color.RED)) // sets node to display
+                .graphic(new Rectangle(300, 300, Color.RED))
                 .hideAfter(Duration.seconds(3));
     }
 
-    public void searchButton(ActionEvent actionEvent)
+    public void searchButton()
     {
         notifications.owner(parent).text("Search field cannot be empty")
                 .showError();
     }
 
-    public void editButton(ActionEvent actionEvent) throws IOException {
-        boolean ok = true;
+    public void editButton() throws IOException {
         if(checkField("Name", nameField) && checkField("Description",descriptionField) && checkField("Price", priceField) && checkPicture(imageView)){
             String message = editRentalViewModel.onEditRentalButtonPressed(stateBox.getValue(), categoryBox.getCheckModel().getCheckedItems());
 
@@ -108,7 +98,7 @@ public class EditRentalController {
         }
     }
 
-    public void editPictureButton(ActionEvent actionEvent)
+    public void editPictureButton()
     {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
@@ -125,7 +115,7 @@ public class EditRentalController {
         }
     }
 
-    public void onGoBack(ActionEvent actionEvent) throws IOException
+    public void onGoBack() throws IOException
     {
         viewHandler.setView(viewHandler.menu(),viewHandler.manageRentals());
     }
@@ -148,7 +138,6 @@ public class EditRentalController {
 
     private void checkCategories(){
         ArrayList<String> checkedCategories = editRentalViewModel.getCheckedCategories();
-        System.out.println(checkedCategories);
         for (int i = 0; i < checkedCategories.size(); i++)
         {
             for (int j = 0; j < categoryBox.getItems().size(); j++)

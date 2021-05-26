@@ -1,10 +1,5 @@
 package server.model.database.rental_category;
 
-import server.model.database.category.CategoryDAOImpl;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.sql.*;
 import java.util.ArrayList;
 

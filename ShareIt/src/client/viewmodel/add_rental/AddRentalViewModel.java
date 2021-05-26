@@ -5,31 +5,25 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
 import shared.transferobjects.Category;
-import shared.transferobjects.Member;
 import shared.transferobjects.State;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class AddRentalViewModel {
     private ShareItModel model;
     private final StringProperty nameField;
     private final StringProperty descriptionField;
-//    private final ObservableValue<String> stateBox;
     private ObservableList<String> statesList;
     private final StringProperty priceField;
     private final StringProperty otherInfoField;
-//    private final ObservableValue<String> categoryBox;
     private ObservableList<String> categoriesList;
     private ObjectProperty<Image> imageProperty;
-    private String username;
+
     
 
 
@@ -37,11 +31,8 @@ public class AddRentalViewModel {
         this.model = model;
         nameField = new SimpleStringProperty();
         descriptionField = new SimpleStringProperty();
-//        stateBox = new SimpleStringProperty();
         priceField = new SimpleStringProperty();
         otherInfoField = new SimpleStringProperty();
-        imageProperty = new SimpleObjectProperty<>();
-//        categoryBox = new SimpleStringProperty();
     }
 
     public StringProperty getNameField(){
@@ -50,9 +41,6 @@ public class AddRentalViewModel {
     public StringProperty getDescriptionField(){
         return descriptionField;
     }
-//    public ObservableValue<String> getStateBox(){
-//        return stateBox;
-//    }
     public StringProperty getPriceField(){
         return priceField;
     }
@@ -63,9 +51,6 @@ public class AddRentalViewModel {
     public StringProperty getOtherInfoField(){
         return otherInfoField;
     }
-//    public ObservableValue<String> getCategoryBox() {
-//        return categoryBox;
-//    }
 
     public String onAddRentalButtonPressed(Object selectedState, ObservableList<String> selectedCategory) throws IOException {
         ArrayList<String> selectedCategoriesList = new ArrayList<>(selectedCategory);

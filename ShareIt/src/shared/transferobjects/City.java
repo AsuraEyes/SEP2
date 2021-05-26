@@ -1,6 +1,5 @@
 package shared.transferobjects;
 
-import java.io.Serial;
 import java.io.Serializable;
 
 public class City implements Serializable

@@ -7,11 +7,11 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id = "anchorPane" prefHeight="183.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.menu.MenuController">
+<AnchorPane prefHeight="183.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.menu.MenuController">
    <children>
       <AnchorPane prefHeight="166.0" prefWidth="1280.0" style="-fx-background-color: #A3A1A8;">
          <children>
-            <Label fx:id="logoLabel" layoutX="65.0" layoutY="55.0" onMouseClicked="#onLogoClick" style="-fx-border-color: #fff587; -fx-border-width: 5px; -fx-border-radius: 10px;" text="Share it!" textFill="#fff587">
+            <Label  layoutX="65.0" layoutY="55.0" onMouseClicked="#onLogoClick" style="-fx-border-color: #fff587; -fx-border-width: 5px; -fx-border-radius: 10px;" text="Share it!" textFill="#fff587">
                <font>
                   <Font name="Californian FB Italic" size="40.0" />
                </font>

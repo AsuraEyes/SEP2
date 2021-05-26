@@ -43,13 +43,6 @@ public class ServerModelImpl implements ServerModelManager
       support.addPropertyChangeListener(listener);
   }
 
-  @Override public void removeListener(String propertyName, PropertyChangeListener listener) {
-    if(propertyName != null)
-      support.removePropertyChangeListener(propertyName, listener);
-    else
-      support.removePropertyChangeListener(listener);
-  }
-
   @Override
   public String checkMemberData(String username, String password, String confirmPassword, String email, String otherInformation, String phone, String street, String streetNo, String postalCode, String city) {
     return dataCheckMember.checkData(username, password, confirmPassword, email, otherInformation, phone, street, streetNo, postalCode, city);

@@ -1,8 +1,6 @@
 package server.model.database.report;
 
 import server.model.database.member.MemberDAOImpl;
-import shared.transferobjects.Member;
-import shared.transferobjects.Rating;
 import shared.transferobjects.Report;
 
 import java.sql.*;
@@ -33,11 +31,8 @@ public class ReportDAOImpl implements ReportDAO
     this.password = password;
   }
 
-  private Connection getConnection() throws SQLException
-  {
-    return DriverManager
-        .getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres",
-            password);
+  private Connection getConnection() throws SQLException {
+    return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", password);
   }
   @Override public Report create(String feedback, String username1,
       String username2) throws SQLException
@@ -46,9 +41,6 @@ public class ReportDAOImpl implements ReportDAO
 
       int memberId1 = MemberDAOImpl.getInstance().readIdByUsername(username1);
       int memberId2 = MemberDAOImpl.getInstance().readIdByUsername(username2);
-
-      System.out.println("member from: "+username1+" member to: "+username2);
-
 
       PreparedStatement statement = connection.prepareStatement("INSERT INTO share_it.report(commentary,member_from, member_to) VALUES (?, ?, ?);");
       statement.setString(1, feedback);
@@ -85,10 +77,8 @@ public class ReportDAOImpl implements ReportDAO
     }
   }
 
-  @Override public void updateReport(Report report)
-  {
-    try (Connection connection = getConnection())
-    {
+  @Override public void updateReport(Report report) {
+    try (Connection connection = getConnection()) {
       PreparedStatement statement = connection.prepareStatement(
           "UPDATE share_it.report SET commentary = ? WHERE member_from = ? AND member_to = ?");
       statement.setString(1, report.getCommentary());
@@ -96,9 +86,8 @@ public class ReportDAOImpl implements ReportDAO
       statement.setInt(3, report.getMemberTo());
       statement.executeQuery();
     }
-    catch (SQLException throwables)
-    {
-      throwables.printStackTrace();
+    catch (SQLException e) {
+      e.printStackTrace();
     }
   }
 

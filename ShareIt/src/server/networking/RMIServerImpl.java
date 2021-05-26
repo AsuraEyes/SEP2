@@ -30,36 +30,10 @@ public class RMIServerImpl implements RMIServer
     registry.bind("ShareIt", this);
   }
 
-  /*@Override public void sendMessage(Message msg) throws RemoteException
-  {
-    messageManager.sendMessage(msg);
-  }
-
-  @Override public String getMessages() throws RemoteException
-  {
-    return messageManager.getMessages();
-  }
-
-  @Override public void setUser(UserName userName) throws RemoteException
-  {
-    messageManager.setUserInTheList(userName);
-  }
-
-  @Override public UserName getUser() throws RemoteException
-  {
-    return null;
-  }
-
-  @Override public ArrayList<UserName> getUserList() throws RemoteException
-  {
-    return messageManager.getUserNamesList();
-  }
-*/
   @Override public void registerClient(RemoteObserver client)
       throws RemoteException
   {
     PropertyChangeListener listener;
-    //PropertyChangeListener finalListener = listener;
     listener = evt ->{
       try
       {
@@ -72,13 +46,6 @@ public class RMIServerImpl implements RMIServer
     };
     serverModelManager.addListener("newMessage", listener);
     serverModelManager.addListener("newWarning", listener);
-    //serverModelManager.addListener("selectedRental", listener);
-    //serverModelManager.addListener("NewUser", listener);
-  }
-
-  @Override public void unregisterClient(RemoteObserver client)
-      throws RemoteException
-  {
   }
 
   @Override
@@ -104,7 +71,6 @@ public class RMIServerImpl implements RMIServer
   @Override public String addFeedback(double starValue, String feedback, String username1, String username2)
       throws RemoteException
   {
-    System.out.println(starValue);
     return serverModelManager.addFeedback(starValue, feedback, username1, username2);
   }
 

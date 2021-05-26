@@ -1,9 +1,6 @@
 package client.viewmodel.view_member_profile;
 
 import client.model.ShareItModel;
-import client.model.state.StateManager;
-import client.model.state.VisitorState;
-import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.image.ImageView;
@@ -12,7 +9,6 @@ import org.controlsfx.control.InfoOverlay;
 import shared.transferobjects.Member;
 import shared.transferobjects.Rental;
 
-import java.beans.PropertyChangeEvent;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
@@ -37,24 +33,6 @@ public class ViewMemberProfileViewModel
     addressLabel = new SimpleStringProperty();
     contactLabel = new SimpleStringProperty();
     otherInformationLabel = new SimpleStringProperty();
-    model.addListener("getMember", this::getMember);
-  }
-
-  private void getMember(PropertyChangeEvent evt)
-  {
-    Platform.runLater(() -> {
-      if(evt.getNewValue() instanceof Member)
-      {
-        Member member = (Member) evt.getNewValue();
-        //usernameLabel.setValue(member.getUsername());
-//        System.out.println("after: "+usernameLabel.getValue());
-//        locationLabel.setValue(member.getAddressCity());
-//        ratingLabel.setValue(String.valueOf(member.getAverageReview()));
-//        addressLabel.setValue(member.getAddressStreet() + ", " + member.getAddressNo());
-//        contactLabel.setValue(member.getPhoneNo() + "\n" + member.getEmailAddress());
-//        otherInformationLabel.setValue(member.getOtherInformation());
-      }
-      });
   }
 
   public StringProperty getSearchField()
@@ -96,9 +74,7 @@ public class ViewMemberProfileViewModel
     return model.checkUserType();
   }
 
-  public ArrayList<Rental> getRentalsOfMemberList(String username) throws RemoteException
-  {
-    System.out.println(usernameLabel.getValue());
+  public ArrayList<Rental> getRentalsOfMemberList(String username) throws RemoteException {
     return model.getRentalsOfMemberList(username);
   }
 
@@ -127,7 +103,6 @@ public class ViewMemberProfileViewModel
 
   public String getMemberUsername(){
     usernameLabel.setValue(model.getMemberUsername());
-    System.out.println("View member profile username: "+usernameLabel.getValue());
     Member member = model.getMemberByUsername(model.getMemberUsername());
     locationLabel.setValue(member.getAddressCity());
     ratingLabel.setValue(String.valueOf(member.getAverageReview()));

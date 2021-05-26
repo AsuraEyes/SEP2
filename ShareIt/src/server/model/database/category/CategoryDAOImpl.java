@@ -49,7 +49,6 @@ public class CategoryDAOImpl implements CategoryDAO
       while(resultSet.next()){
         arrayListToReturn.add(new Category(resultSet.getString("name")));
       }
-      //return array list
       return arrayListToReturn;
     }
   }

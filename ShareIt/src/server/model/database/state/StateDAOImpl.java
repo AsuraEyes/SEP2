@@ -48,7 +48,6 @@ public class StateDAOImpl implements StateDAO
       while(resultSet.next()){
         arrayListToReturn.add(new State(resultSet.getString("name")));
       }
-      //return array list
       return arrayListToReturn;
     }
   }

@@ -3,7 +3,6 @@ package client.viewmodel.report_member;
 import client.model.ShareItModel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import shared.transferobjects.Rating;
 import shared.transferobjects.Report;
 
 import java.io.IOException;
@@ -30,10 +29,8 @@ public class ReportMemberViewModel
     return commentaryTextArea;
   }
 
-  public String getMemberUsername()
-  {
+  public String getMemberUsername() {
     usernameLabel.setValue(model.getMemberUsername());
-    System.out.println("this issmthmber VM : " + model.getMemberUsername());
     return model.getMemberUsername();
   }
 

@@ -1,11 +1,6 @@
 package server.model.database.administrator;
 
-import shared.transferobjects.Administrator;
-import shared.transferobjects.City;
-
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 /**
  * Class that implements methods from its interface and provides access to a database(Administrator in this case)
  *
@@ -32,7 +27,6 @@ public class AdministratorDAOImpl implements AdministratorDAO
   }
 
   private Connection getConnection() throws SQLException {
-    System.out.println(password);
     return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=share_it", "postgres", password);
   }
 
@@ -68,7 +62,6 @@ public class AdministratorDAOImpl implements AdministratorDAO
   @Override
   public String checkLogInCredentials(String username, String password) {
     try(Connection connection = getConnection()){
-      System.out.println("username: " + username + ", password: " + password);
       PreparedStatement statement = connection.prepareStatement("SELECT username FROM share_it.administrator WHERE username = ? AND password = ?");
       statement.setString(1, username);
       statement.setString(2, password);

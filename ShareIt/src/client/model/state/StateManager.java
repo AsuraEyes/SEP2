@@ -1,7 +1,5 @@
 package client.model.state;
 
-import shared.transferobjects.Administrator;
-
 import java.io.Serializable;
 
 public class StateManager implements Serializable {

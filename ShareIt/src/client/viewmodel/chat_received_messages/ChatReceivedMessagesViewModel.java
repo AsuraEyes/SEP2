@@ -2,10 +2,7 @@ package client.viewmodel.chat_received_messages;
 
 import client.model.ShareItModel;
 import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import org.controlsfx.control.InfoOverlay;
 import shared.transferobjects.Message;
 import shared.transferobjects.Warning;
 
@@ -29,7 +26,6 @@ public class ChatReceivedMessagesViewModel {
        VBox vBox = (VBox) object;
       if(vBox.getChildren().get(0) instanceof Label) {
         Label label = (Label) vBox.getChildren().get(0);
-        System.out.println(label.getText());
         model.setMemberUsername(label.getText());
       }
     }
