@@ -1,4 +1,4 @@
-package client.model;
+package client.model.message;
 
 import shared.transferobjects.*;
 import shared.util.Subject;

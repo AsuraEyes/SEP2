@@ -1,4 +1,4 @@
-package client.model;
+package client.model.rental;
 
 import shared.transferobjects.Category;
 import shared.transferobjects.City;

@@ -1,4 +1,4 @@
-package client.model;
+package client.model.rental;
 
 import client.model.state.StateManager;
 import client.network.Client;

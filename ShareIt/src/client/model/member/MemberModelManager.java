@@ -1,4 +1,4 @@
-package client.model;
+package client.model.member;
 
 import client.model.state.MemberState;
 import client.model.state.StateManager;

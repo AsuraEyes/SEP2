@@ -1,4 +1,4 @@
-package client.model;
+package client.model.message;
 
 import client.model.state.StateManager;
 import client.network.Client;
