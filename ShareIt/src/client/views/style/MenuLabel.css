@@ -1,13 +1,22 @@
+.label{
+    -fx-text-fill: #fff587;
+    -fx-border-color: #fff587;
+    -fx-border-width: 5px;
+    -fx-border-radius: 10px;
+}
+
 .label:hover {
     -fx-font-weight: bold;
-    -fx-text-fill: #63a4ff;
-    -fx-fontsize: 22px;
+    -fx-text-fill: #FF8C64;
+    -fx-border-color: #FF8C64;
+    -fx-fontsize: 40px;
     -fx-cursor: hand;
 }
 
 .label:pressed {
     -fx-font-weight: bold;
-    -fx-text-fill: #63a4ff;
-    -fx-fontsize: 22px;
+    -fx-text-fill: #FF8C64;
+    -fx-border-color: #FF8C64;
+    -fx-fontsize: 40px;
     -fx-cursor: hand;
 }

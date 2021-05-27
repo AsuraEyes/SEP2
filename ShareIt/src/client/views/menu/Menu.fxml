@@ -20,17 +20,17 @@
                </padding>
             </Label>
             <Label fx:id="usernameLabel" layoutX="1097.0" layoutY="125.0" text="Logged in as: username" />
-            <Button fx:id="reportedMembersButton" layoutX="735.0" layoutY="76.0" mnemonicParsing="false" onAction="#onReportedMembersButton" style="-fx-background-color: #A3A1A8;" stylesheets="@../style/MenuButton.css" text="Reported members" textFill="#fff587">
+            <Button fx:id="reportedMembersButton" layoutX="735.0" layoutY="76.0" mnemonicParsing="false" onAction="#onReportedMembersButton" stylesheets="@../style/MenuButton.css" text="Reported members" textFill="#fff587">
                <font>
                   <Font name="Californian FB" size="20.0" />
                </font>
             </Button>
-            <Button fx:id="chatButton" layoutX="951.0" layoutY="76.0" mnemonicParsing="false" onAction="#onChatButton" style="-fx-background-color: #A3A1A8;" stylesheets="@../style/MenuButton.css" text="Chat" textFill="#fff587">
+            <Button fx:id="chatButton" layoutX="951.0" layoutY="76.0" mnemonicParsing="false" onAction="#onChatButton" stylesheets="@../style/MenuButton.css" text="Chat" textFill="#fff587">
                <font>
                   <Font name="Californian FB" size="20.0" />
                </font>
             </Button>
-            <Button fx:id="logInOutLabel" layoutX="1084.0" layoutY="67.0" mnemonicParsing="false" onAction="#logInOutButton" style="-fx-background-color: #fff587; -fx-background-radius: 30px; -fx-border-width: 5px;" stylesheets="@../style/MenuButton.css" text="Log in / Sign in" textFill="#7d6b7d">
+            <Button fx:id="logInOutLabel" layoutX="1084.0" layoutY="67.0" mnemonicParsing="false" onAction="#logInOutButton" stylesheets="@../style/SignInButton.css" text="Log in / Sign in" textFill="#7d6b7d">
                <font>
                   <Font name="Californian FB" size="20.0" />
                </font>
