@@ -49,7 +49,7 @@ public class ViewReportedMemberViewModel {
         return memberModel.getReportedPerson();
     }
 
-    public void getComment() {
+    public void getComment(){
         Report report = messageModel.getReport(getReporterPerson(),getReportedPerson());
         if(report != null) {
             commentaryLabel.setValue(report.getCommentary());

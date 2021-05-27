@@ -104,7 +104,6 @@ public class MemberModelManager implements MemberModel
       String reportedNameLabel)
   {
     reporterPerson = reporterNameLabel;
-    reportedPerson = reportedNameLabel;
   }
 
   @Override public String getReporterPerson()

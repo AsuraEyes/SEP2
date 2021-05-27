@@ -128,7 +128,6 @@ public class MessageModelManager implements MessageModel
   {
     allWarnings = client.getWarnings("administrator", client.getMemberByUsername(
         StateManager.getInstance().getUsername()).getId());
-
   }
 
   @Override public void sendWarning(Warning warning)
