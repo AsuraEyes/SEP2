@@ -18,13 +18,13 @@ public class MessageModelManager implements MessageModel
   private String searchText;
   private ArrayList<Message> allReceivedMessages;
   private ArrayList<Warning> allWarnings;
-  private ArrayList<Report> allReports;
+
 
   public MessageModelManager(Client client){
     this.client = client;
     allReceivedMessages = new ArrayList<>();
     allWarnings = new ArrayList<>();
-    allReports = new ArrayList<>();
+
     support = new PropertyChangeSupport(this);
     client.addListener("newMessage", this::onNewMessage);
     client.addListener("newWarning", this::onNewWarning);
@@ -99,15 +99,7 @@ public class MessageModelManager implements MessageModel
     return allWarnings;
   }
 
-  @Override public List<Report> getReportList()
-  {
 
-    return allReports;
-  }
-  @Override public void setReportList()
-  {
-    allReports = (ArrayList<Report>) client.getReportList();
-  }
 
   @Override public ArrayList<Message> getMessagesFromUser(int loggedUserId,
       int fromUserid)

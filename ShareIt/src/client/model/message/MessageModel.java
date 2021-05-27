@@ -25,8 +25,7 @@ public interface MessageModel extends Subject
   void updateReport(Report report);
   ArrayList<Message> getAllReceivedMessages();
   ArrayList<Warning> getAllWarnings();
-  List<Report> getReportList();
-  void setReportList();
+
   ArrayList<Message> getMessagesFromUser(int loggedUserId, int fromUserid);
   ArrayList<Warning> getWarnings(String administrator, int idTo);
   void sendMessage(Message message);

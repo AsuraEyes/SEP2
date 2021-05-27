@@ -4,10 +4,12 @@ import client.model.state.MemberState;
 import client.model.state.StateManager;
 import client.network.Client;
 import shared.transferobjects.Member;
+import shared.transferobjects.Report;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MemberModelManager implements MemberModel
@@ -17,11 +19,13 @@ public class MemberModelManager implements MemberModel
   private String memberUsername;
   private String reporterPerson;
   private String reportedPerson;
+  private ArrayList<Report> allReports;
 
   public MemberModelManager(Client client) throws IOException
   {
     this.client = client;
     support = new PropertyChangeSupport(this);
+    allReports = new ArrayList<>();
   }
   @Override public String checkMemberData(String username, String password,
       String confirmPassword, String email, String phone,
@@ -134,5 +138,14 @@ public class MemberModelManager implements MemberModel
       support.addPropertyChangeListener(propertyName, listener);
     else
       support.addPropertyChangeListener(listener);
+  }
+  @Override public List<Report> getReportList()
+  {
+
+    return allReports;
+  }
+  @Override public void setReportList()
+  {
+    allReports = (ArrayList<Report>) client.getReportList();
   }
 }
