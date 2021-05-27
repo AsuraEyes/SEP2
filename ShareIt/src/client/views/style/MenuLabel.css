@@ -1,4 +1,5 @@
 .label{
+    -fx-fontsize: 40px;
     -fx-text-fill: #fff587;
     -fx-border-color: #fff587;
     -fx-border-width: 5px;
@@ -9,7 +10,6 @@
     -fx-font-weight: bold;
     -fx-text-fill: #FF8C64;
     -fx-border-color: #FF8C64;
-    -fx-fontsize: 40px;
     -fx-cursor: hand;
 }
 
@@ -17,6 +17,5 @@
     -fx-font-weight: bold;
     -fx-text-fill: #FF8C64;
     -fx-border-color: #FF8C64;
-    -fx-fontsize: 40px;
     -fx-cursor: hand;
 }
