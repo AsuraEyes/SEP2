@@ -1,6 +1,9 @@
 package client.viewmodel.edit_account;
 
-import client.model.ShareItModel;
+
+import client.model.member.MemberModel;
+import client.model.message.MessageModel;
+import client.model.rental.RentalModel;
 import client.model.state.StateManager;
 import client.model.state.VisitorState;
 import javafx.beans.property.SimpleStringProperty;
@@ -14,7 +17,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class EditAccountViewModel {
-    private ShareItModel shareItModel;
+    private RentalModel rentalModel;
+    private MemberModel memberModel;
+    private MessageModel messageModel;
+
     private final StringProperty usernameField;
     private final StringProperty passwordField;
     private final StringProperty confirmPasswordField;
@@ -26,8 +32,10 @@ public class EditAccountViewModel {
     private final StringProperty otherInfoField;
     private ObservableList<String> locationsList;
 
-    public EditAccountViewModel(ShareItModel model) {
-        shareItModel = model;
+    public EditAccountViewModel(RentalModel rentalModel, MemberModel memberModel, MessageModel messageModel) {
+        this.rentalModel = rentalModel;
+        this.memberModel = memberModel;
+        this.messageModel = messageModel;
         usernameField = new SimpleStringProperty();
         passwordField = new SimpleStringProperty();
         confirmPasswordField = new SimpleStringProperty();
@@ -69,13 +77,13 @@ public class EditAccountViewModel {
     }
 
     public String onEditButtonPressed(String selectedCity) throws IOException {
-        return shareItModel.updateCheckMemberData(StateManager.getInstance().getUsername(), passwordField.getValue(), confirmPasswordField.getValue(),
+        return memberModel.updateCheckMemberData(StateManager.getInstance().getUsername(), passwordField.getValue(), confirmPasswordField.getValue(),
                 emailField.getValue(), telephoneNoField.getValue(), otherInfoField.getValue(), streetField.getValue(),
                 streetNumberField.getValue(), postalCodeField.getValue(),  selectedCity);
     }
 
     public ObservableList<String> getLocations(){
-        ArrayList<City> cityList = shareItModel.getCityList();
+        ArrayList<City> cityList = rentalModel.getCityList();
         ArrayList<String> cityListString = new ArrayList<>();
         for (int i = 0; i < cityList.size(); i++) {
             cityListString.add(cityList.get(i).toString());
@@ -85,7 +93,7 @@ public class EditAccountViewModel {
     }
 
     public void setProfile(){
-        Member member = shareItModel.getMemberByUsername(StateManager.getInstance()
+        Member member = memberModel.getMemberByUsername(StateManager.getInstance()
             .getUsername());
         usernameField.setValue(member.getUsername());
         passwordField.setValue(member.getPassword());
@@ -99,9 +107,9 @@ public class EditAccountViewModel {
     }
     
     public boolean deleteAccount(){
-        Member member = shareItModel.getMemberByUsername(StateManager.getInstance()
+        Member member = memberModel.getMemberByUsername(StateManager.getInstance()
                 .getUsername());
-        boolean deleteSuccessful = shareItModel.deleteMember(member);
+        boolean deleteSuccessful = memberModel.deleteMember(member);
         if(deleteSuccessful){
             StateManager.getInstance().setLoginState(new VisitorState());
         }
@@ -109,6 +117,6 @@ public class EditAccountViewModel {
     }
 
     public String getSelectedLocation() {
-        return shareItModel.getMemberByUsername(usernameField.getValue()).getAddressCity();
+        return memberModel.getMemberByUsername(usernameField.getValue()).getAddressCity();
     }
 }

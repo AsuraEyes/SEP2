@@ -21,7 +21,6 @@ public class MemberModelManager implements MemberModel
   public MemberModelManager(Client client) throws IOException
   {
     this.client = client;
-    client.startClient();
     support = new PropertyChangeSupport(this);
   }
   @Override public String checkMemberData(String username, String password,

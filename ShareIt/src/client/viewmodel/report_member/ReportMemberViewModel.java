@@ -1,6 +1,9 @@
 package client.viewmodel.report_member;
 
-import client.model.ShareItModel;
+
+import client.model.member.MemberModel;
+import client.model.message.MessageModel;
+import client.model.rental.RentalModel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import shared.transferobjects.Report;
@@ -9,13 +12,19 @@ import java.io.IOException;
 
 public class ReportMemberViewModel
 {
-  private ShareItModel model;
+  private RentalModel rentalModel;
+  private MemberModel memberModel;
+  private MessageModel messageModel;
+
   private final StringProperty usernameLabel;
   private final StringProperty commentaryTextArea;
 
-  public ReportMemberViewModel(ShareItModel model)
+  public ReportMemberViewModel(RentalModel rentalModel, MemberModel memberModel, MessageModel messageModel)
   {
-    this.model = model;
+    this.rentalModel = rentalModel;
+    this.memberModel = memberModel;
+    this.messageModel = messageModel;
+
     usernameLabel = new SimpleStringProperty();
     commentaryTextArea = new SimpleStringProperty();
 
@@ -30,14 +39,14 @@ public class ReportMemberViewModel
   }
 
   public String getMemberUsername() {
-    usernameLabel.setValue(model.getMemberUsername());
-    return model.getMemberUsername();
+    usernameLabel.setValue(memberModel.getMemberUsername());
+    return memberModel.getMemberUsername();
   }
 
   public void getReport()
   {
-    Report report = model.getReport(model.getLoggedInUsername(),
-        model.getMemberUsername());
+    Report report = messageModel.getReport(memberModel.getLoggedInUsername(),
+        memberModel.getMemberUsername());
     if(report != null)
     {
       commentaryTextArea.setValue(report.getCommentary());
@@ -46,17 +55,17 @@ public class ReportMemberViewModel
 
   public void updateReport()
   {
-    int memberFromId = model.getMemberByUsername(model.getLoggedInUsername())
+    int memberFromId = memberModel.getMemberByUsername(memberModel.getLoggedInUsername())
         .getId();
-    int memberToId = model.getMemberByUsername(model.getMemberUsername())
+    int memberToId = memberModel.getMemberByUsername(memberModel.getMemberUsername())
         .getId();
     Report report = new Report(commentaryTextArea.getValue(), memberFromId, memberToId);
-    model.updateReport(report);
+    messageModel.updateReport(report);
   }
 
   public String addReport() throws IOException
   {
-    return model.addReport(commentaryTextArea.getValue(), model.getLoggedInUsername(),
+    return messageModel.addReport(commentaryTextArea.getValue(), memberModel.getLoggedInUsername(),
             getMemberUsername());
   }
 

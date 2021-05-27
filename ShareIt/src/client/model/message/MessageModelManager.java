@@ -101,7 +101,12 @@ public class MessageModelManager implements MessageModel
 
   @Override public List<Report> getReportList()
   {
-    return client.getReportList();
+
+    return allReports;
+  }
+  @Override public void setReportList()
+  {
+    allReports = (ArrayList<Report>) client.getReportList();
   }
 
   @Override public ArrayList<Message> getMessagesFromUser(int loggedUserId,
@@ -153,4 +158,5 @@ public class MessageModelManager implements MessageModel
     else
       support.addPropertyChangeListener(listener);
   }
+
 }

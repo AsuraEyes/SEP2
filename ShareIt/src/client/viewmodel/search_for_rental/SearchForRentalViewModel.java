@@ -1,6 +1,9 @@
 package client.viewmodel.search_for_rental;
 
-import client.model.ShareItModel;
+
+import client.model.member.MemberModel;
+import client.model.message.MessageModel;
+import client.model.rental.RentalModel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
@@ -18,15 +21,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SearchForRentalViewModel {
-    private ShareItModel model;
+    private RentalModel rentalModel;
+    private MemberModel memberModel;
+    private MessageModel messageModel;
+
+
     private final StringProperty searchField;
     private final StringProperty locationLabel;
     private ObservableList<String> locationsList;
     private ObservableList<String> categoriesList;
 
-    public SearchForRentalViewModel(ShareItModel model)
+    public SearchForRentalViewModel(RentalModel rentalModel, MemberModel memberModel, MessageModel messageModel)
     {
-        this.model = model;
+        this.rentalModel = rentalModel;
+        this.memberModel = memberModel;
+        this.messageModel = messageModel;
+
         searchField = new SimpleStringProperty();
         locationLabel = new SimpleStringProperty();
     }
@@ -54,7 +64,7 @@ public class SearchForRentalViewModel {
                    {
                        if(imageView.getId().equals(String.valueOf(getRentalsList().get(i).getId())))
                        {
-                           model.sendSelectedRental(getRentalsList().get(i));
+                           rentalModel.sendSelectedRental(getRentalsList().get(i));
                        }
                    }
                }
@@ -62,7 +72,7 @@ public class SearchForRentalViewModel {
        }
     }
     public ObservableList<String> getLocations(){
-        ArrayList<City> cityList = model.getCityList();
+        ArrayList<City> cityList = rentalModel.getCityList();
         ArrayList<String> cityListString = new ArrayList<>();
         for (int i = 0; i < cityList.size(); i++) {
             cityListString.add(cityList.get(i).toString());
@@ -72,7 +82,7 @@ public class SearchForRentalViewModel {
     }
 
     public ObservableList<String> getCategories(){
-        ArrayList<Category> categoryList = model.getCategoryList();
+        ArrayList<Category> categoryList = rentalModel.getCategoryList();
         ArrayList<String> categoryListString = new ArrayList<>();
         for (int i = 0; i < categoryList.size(); i++) {
             categoryListString.add(categoryList.get(i).toString());
@@ -83,21 +93,21 @@ public class SearchForRentalViewModel {
 
     public List<Rental> onSearchButtonPressed() throws IOException
     {
-        return model.checkSearch(searchField.getValue());
+        return rentalModel.checkSearch(searchField.getValue());
     }
 
     public List<Rental> onFilterButtonPressed(String selectedCity,ObservableList<String> selectedCategory) throws IOException
     {
         ArrayList<String> selectedCategoriesList = new ArrayList<>(selectedCategory);
-        return model.checkSearchWithFilter(searchField.getValue(),selectedCity, selectedCategoriesList);
+        return rentalModel.checkSearchWithFilter(searchField.getValue(),selectedCity, selectedCategoriesList);
     }
     public ArrayList<Rental> getRentalsList()
     {
-        return model.getRentalsList();
+        return rentalModel.getRentalsList();
     }
 
     public void setSearchField(){
-        searchField.setValue(model.getSearchText());
+        searchField.setValue(messageModel.getSearchText());
     }
 
 }

@@ -1,6 +1,9 @@
 package client.viewmodel.send_warning;
 
-import client.model.ShareItModel;
+
+import client.model.member.MemberModel;
+import client.model.message.MessageModel;
+import client.model.rental.RentalModel;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -12,22 +15,28 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class SendWarningViewModel {
+    private RentalModel rentalModel;
+    private MemberModel memberModel;
+    private MessageModel messageModel;
+
     private StringProperty username;
     private StringProperty warnings;
     private StringProperty inputTextChat;
-    private ShareItModel model;
 
-    public SendWarningViewModel(ShareItModel model){
-        this.model = model;
+
+    public SendWarningViewModel(RentalModel rentalModel, MemberModel memberModel, MessageModel messageModel){
+        this.rentalModel = rentalModel;
+        this.memberModel = memberModel;
+        this.messageModel = messageModel;
+
         username = new SimpleStringProperty();
         warnings = new SimpleStringProperty();
         inputTextChat = new SimpleStringProperty();
-        model.addListener("newWarning", this::onNewWarning);
+        messageModel.addListener("newWarning", this::onNewWarning);
     }
 
     private void onNewWarning(PropertyChangeEvent evt) {
         Platform.runLater(() ->{
-            Warning warning = (Warning) evt.getNewValue();
             warnings.setValue(warnings.getValue() + "\n" + evt.getNewValue().toString());
         });
     }
@@ -46,15 +55,15 @@ public class SendWarningViewModel {
 
     public void sendWarning(){
         String administratorFrom = "administrator";
-        int idTo = model.getMemberByUsername(model.getMemberUsername()).getId();
+        int idTo = memberModel.getMemberByUsername(memberModel.getMemberUsername()).getId();
         Date timeStamp = Calendar.getInstance().getTime();
         Warning warning = new Warning(administratorFrom, idTo, inputTextChat.getValue(), timeStamp);
-        model.sendWarning(warning);
+        messageModel.sendWarning(warning);
     }
     public void loadLogs() {
         warnings.setValue("Warning for this guy");
-        int idTo = model.getMemberByUsername(model.getMemberUsername()).getId();
-        ArrayList<Warning> listOfWarnings = model.getWarnings("administrator", idTo);
+        int idTo = memberModel.getMemberByUsername(memberModel.getMemberUsername()).getId();
+        ArrayList<Warning> listOfWarnings = messageModel.getWarnings("administrator", idTo);
         if(listOfWarnings != null){
             for (int i = 0; i < listOfWarnings.size(); i++) {
                 warnings.setValue(warnings.getValue() + "\n" + listOfWarnings.get(i).toString());
@@ -62,6 +71,6 @@ public class SendWarningViewModel {
         }
     }
     public void getMember(){
-        username.setValue(model.getMemberUsername());
+        username.setValue(memberModel.getMemberUsername());
     }
 }

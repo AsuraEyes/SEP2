@@ -1,6 +1,9 @@
 package client.viewmodel.manage_account;
 
-import client.model.ShareItModel;
+
+import client.model.member.MemberModel;
+import client.model.message.MessageModel;
+import client.model.rental.RentalModel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.image.ImageView;
@@ -13,7 +16,10 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public class ManageAccountViewModel {
-    private ShareItModel shareItModel;
+    private RentalModel rentalModel;
+    private MemberModel memberModel;
+    private MessageModel messageModel;
+
     private final SimpleStringProperty usernameLabel;
     private final SimpleStringProperty locationLabel;
     private final SimpleStringProperty ratingLabel;
@@ -21,8 +27,11 @@ public class ManageAccountViewModel {
     private final SimpleStringProperty contactLabel;
     private final SimpleStringProperty otherInformationLabel;
 
-    public ManageAccountViewModel(ShareItModel shareItModel) {
-        this.shareItModel = shareItModel;
+    public ManageAccountViewModel(RentalModel rentalModel, MemberModel memberModel, MessageModel messageModel) {
+        this.rentalModel = rentalModel;
+        this.memberModel = memberModel;
+        this.messageModel = messageModel;
+
         usernameLabel = new SimpleStringProperty();
         locationLabel = new SimpleStringProperty();
         ratingLabel = new SimpleStringProperty();
@@ -32,7 +41,7 @@ public class ManageAccountViewModel {
     }
 
     public void setProfile(){
-        Member member = shareItModel.getMemberByUsername(shareItModel.getLoggedInUsername());
+        Member member = memberModel.getMemberByUsername(memberModel.getLoggedInUsername());
         usernameLabel.setValue(member.getUsername());
         locationLabel.setValue(member.getAddressCity());
         ratingLabel.setValue(String.valueOf(member.getAverageReview()));
@@ -42,7 +51,7 @@ public class ManageAccountViewModel {
     }
 
     public ArrayList<Rental> getRentalsOfMemberList() throws RemoteException {
-        return shareItModel.getRentalsOfMemberList(shareItModel.getLoggedInUsername());
+        return rentalModel.getRentalsOfMemberList(memberModel.getLoggedInUsername());
     }
 
     public void getRental(Object object) throws RemoteException {
@@ -54,8 +63,7 @@ public class ManageAccountViewModel {
                     ImageView imageView = (ImageView) infoOverlay.getContent();
                     for (int i = 0; i < getRentalsOfMemberList().size(); i++) {
                         if(imageView.getId().equals(String.valueOf(getRentalsOfMemberList().get(i).getId()))) {
-                            shareItModel.sendSelectedRental(getRentalsOfMemberList().get(i));
-                            break;
+                            rentalModel.sendSelectedRental(getRentalsOfMemberList().get(i));
                         }
                     }
                 }
@@ -94,6 +102,6 @@ public class ManageAccountViewModel {
     }
 
     public void setMember() {
-        shareItModel.setMemberUsername(usernameLabel.getValue());
+        memberModel.setMemberUsername(usernameLabel.getValue());
     }
 }

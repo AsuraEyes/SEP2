@@ -1,28 +1,37 @@
 package client.viewmodel.view_reported_member_list;
 
-import client.model.ShareItModel;
+
+import client.model.member.MemberModel;
+import client.model.message.MessageModel;
+import client.model.rental.RentalModel;
 import shared.transferobjects.Member;
 import shared.transferobjects.Report;
 
 import java.util.List;
 
 public class ViewReportedMemberListViewModel {
-    private ShareItModel model;
+  private RentalModel rentalModel;
+  private MemberModel memberModel;
+  private MessageModel messageModel;
 
-    public ViewReportedMemberListViewModel(ShareItModel model){
-        this.model = model;
+
+    public ViewReportedMemberListViewModel(RentalModel rentalModel, MemberModel memberModel, MessageModel messageModel){
+      this.rentalModel = rentalModel;
+      this.memberModel = memberModel;
+      this.messageModel = messageModel;
+
     }
 
    public Member getMemberById(int id)
     {
-       return model.getMemberById(id);
+       return memberModel.getMemberById(id);
     }
 
     public List<Report> getReportList() {
-        return model.getReportList();
+        return messageModel.getReportList();
     }
 
     public void setUsernames(String reporterNameLabel, String reportedNameLabel) {
-      model.setUsernames(reporterNameLabel, reportedNameLabel);
+      memberModel.setUsernames(reporterNameLabel, reportedNameLabel);
     }
 }

@@ -1,6 +1,9 @@
 package client.viewmodel.search_for_member;
 
-import client.model.ShareItModel;
+
+import client.model.member.MemberModel;
+import client.model.message.MessageModel;
+import client.model.rental.RentalModel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.control.Label;
@@ -10,12 +13,18 @@ import shared.transferobjects.Member;
 import java.util.List;
 
 public class SearchForMemberViewModel {
-    private ShareItModel model;
+    private RentalModel rentalModel;
+    private MemberModel memberModel;
+    private MessageModel messageModel;
+
     private final StringProperty searchField;
 
-    public SearchForMemberViewModel(ShareItModel model)
+    public SearchForMemberViewModel(RentalModel rentalModel, MemberModel memberModel, MessageModel messageModel)
     {
-        this.model = model;
+        this.rentalModel = rentalModel;
+        this.memberModel = memberModel;
+        this.messageModel = messageModel;
+
         searchField = new SimpleStringProperty();
     }
 
@@ -24,15 +33,15 @@ public class SearchForMemberViewModel {
     }
 
     public void setSearchField(){
-        searchField.setValue(model.getSearchText());
+        searchField.setValue(messageModel.getSearchText());
     }
 
     public List<Member> onSearchButtonPressed() {
-        return model.checkSearchForMember(searchField.getValue());
+        return memberModel.checkSearchForMember(searchField.getValue());
     }
 
     public List<Member> getMembersList() {
-        return model.getMembersList();
+        return memberModel.getMembersList();
     }
 
     public void setMemberUsername(Object source) {
@@ -42,7 +51,7 @@ public class SearchForMemberViewModel {
             {
                 Label label = (Label) vBox.getChildren().get(0);
                 String username = label.getText();
-                model.setMemberUsername(username.substring(10));
+                memberModel.setMemberUsername(username.substring(10));
             }
         }
     }

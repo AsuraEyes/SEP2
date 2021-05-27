@@ -1,6 +1,9 @@
 package client.viewmodel.edit_rental;
 
-import client.model.ShareItModel;
+
+import client.model.member.MemberModel;
+import client.model.message.MessageModel;
+import client.model.rental.RentalModel;
 import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -18,7 +21,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class EditRentalViewModel {
-    private ShareItModel shareItModel;
+    private RentalModel rentalModel;
+    private MemberModel memberModel;
+    private MessageModel messageModel;
 
     private final StringProperty nameField;
     private final StringProperty descriptionField;
@@ -29,14 +34,17 @@ public class EditRentalViewModel {
     private ObjectProperty<Image> imageProperty;
 
 
-    public EditRentalViewModel(ShareItModel shareItModel) {
-        this.shareItModel = shareItModel;
+    public EditRentalViewModel(RentalModel rentalModel, MemberModel memberModel, MessageModel messageModel) {
+        this.rentalModel = rentalModel;
+        this.memberModel = memberModel;
+        this.messageModel = messageModel;
+
         nameField = new SimpleStringProperty();
         descriptionField = new SimpleStringProperty();
         priceField = new SimpleStringProperty();
         otherInfoField = new SimpleStringProperty();
         imageProperty = new SimpleObjectProperty<>();
-        shareItModel.addListener("selectedRental",this::selectedRental);
+        rentalModel.addListener("selectedRental",this::selectedRental);
     }
 
 
@@ -81,12 +89,12 @@ public class EditRentalViewModel {
         String path = imageProperty.get().getUrl();
         path = path.replaceAll("file:","");
 
-        return shareItModel.updateCheckRentalData(nameField.getValue(), path, descriptionField.getValue(), priceField.getValue(), otherInfoField.getValue(), (String) selectedState
+        return rentalModel.updateCheckRentalData(nameField.getValue(), path, descriptionField.getValue(), priceField.getValue(), otherInfoField.getValue(), (String) selectedState
             , selectedCategoriesList);
     }
 
     public ObservableList<String> getStates(){
-        ArrayList<State> stateList = shareItModel.getStateList();
+        ArrayList<State> stateList = rentalModel.getStateList();
         ArrayList<String> stateListString = new ArrayList<>();
         for (int i = 0; i < stateList.size(); i++) {
             stateListString.add(stateList.get(i).toString());
@@ -96,7 +104,7 @@ public class EditRentalViewModel {
     }
 
     public ObservableList<String> getCategories(){
-        ArrayList<Category> categoryList = shareItModel.getCategoryList();
+        ArrayList<Category> categoryList = rentalModel.getCategoryList();
         ArrayList<String> categoryListString = new ArrayList<>();
         for (int i = 0; i < categoryList.size(); i++) {
             categoryListString.add(categoryList.get(i).toString());
@@ -105,9 +113,9 @@ public class EditRentalViewModel {
         return categoriesList;
     }
     public String getSelectedState(){
-        return shareItModel.getSelectedRental().getStateName();
+        return rentalModel.getSelectedRental().getStateName();
     }
     public ArrayList<String> getCheckedCategories(){
-        return shareItModel.getSelectedRental().getSelectedCategories();
+        return rentalModel.getSelectedRental().getSelectedCategories();
     }
 }
