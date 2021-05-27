@@ -1,6 +1,9 @@
 package client.viewmodel.manage_rentals;
 
-import client.model.ShareItModel;
+
+import client.model.member.MemberModel;
+import client.model.message.MessageModel;
+import client.model.rental.RentalModel;
 import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -12,7 +15,9 @@ import shared.transferobjects.Rental;
 import java.beans.PropertyChangeEvent;
 
 public class ManageRentalsViewModel {
-    private ShareItModel shareItModel;
+    private RentalModel rentalModel;
+    private MemberModel memberModel;
+    private MessageModel messageModel;
 
     private StringProperty nameOfRental;
     private StringProperty descriptionOfRental;
@@ -22,8 +27,11 @@ public class ManageRentalsViewModel {
     private StringProperty categoryOfRental;
     private ObjectProperty<Image> imageProperty;
 
-    public ManageRentalsViewModel(ShareItModel shareItModel){
-        this.shareItModel = shareItModel;
+    public ManageRentalsViewModel(RentalModel rentalModel, MemberModel memberModel, MessageModel messageModel){
+        this.rentalModel = rentalModel;
+        this.memberModel = memberModel;
+        this.messageModel = messageModel;
+
         nameOfRental = new SimpleStringProperty();
         descriptionOfRental = new SimpleStringProperty();
         stateOfRental = new SimpleStringProperty();
@@ -32,7 +40,7 @@ public class ManageRentalsViewModel {
         categoryOfRental = new SimpleStringProperty();
         imageProperty = new SimpleObjectProperty<>();
 
-        shareItModel.addListener("selectedRental",this::selectedRental);
+        rentalModel.addListener("selectedRental",this::selectedRental);
     }
 
     private void selectedRental(PropertyChangeEvent evt) {
@@ -41,7 +49,7 @@ public class ManageRentalsViewModel {
             if (evt.getNewValue() instanceof Rental) {
 
                 Rental rental = (Rental) evt.getNewValue();
-                shareItModel.setSelectedRental(rental);
+                rentalModel.setSelectedRental(rental);
                 nameOfRental.setValue(rental.getName());
                 descriptionOfRental.setValue(rental.getDescription());
                 stateOfRental.setValue(rental.getStateName());
@@ -60,7 +68,7 @@ public class ManageRentalsViewModel {
     }
 
     public boolean deleteRental() {
-        return shareItModel.deleteRental(shareItModel.getSelectedRental());
+        return rentalModel.deleteRental(rentalModel.getSelectedRental());
     }
 
     public StringProperty nameOfRentalProperty()
@@ -93,7 +101,7 @@ public class ManageRentalsViewModel {
         return categoryOfRental;
     }
     public void getSelectedRental(){
-        shareItModel.sendSelectedRental(shareItModel.getSelectedRental());
+        rentalModel.sendSelectedRental(rentalModel.getSelectedRental());
     }
     public ObjectProperty<Image> imagePropertyProperty()
     {

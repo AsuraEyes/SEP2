@@ -1,6 +1,9 @@
 package client.viewmodel.add_rental;
 
-import client.model.ShareItModel;
+
+import client.model.member.MemberModel;
+import client.model.message.MessageModel;
+import client.model.rental.RentalModel;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -15,7 +18,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class AddRentalViewModel {
-    private ShareItModel model;
+    private RentalModel rentalModel;
+    private MemberModel memberModel;
+    private MessageModel messageModel;
+
     private final StringProperty nameField;
     private final StringProperty descriptionField;
     private ObservableList<String> statesList;
@@ -24,11 +30,10 @@ public class AddRentalViewModel {
     private ObservableList<String> categoriesList;
     private ObjectProperty<Image> imageProperty;
 
-    
-
-
-    public AddRentalViewModel(ShareItModel model){
-        this.model = model;
+    public AddRentalViewModel(RentalModel rentalModel, MemberModel memberModel, MessageModel messageModel){
+        this.rentalModel = rentalModel;
+        this.memberModel = memberModel;
+        this.messageModel = messageModel;
         nameField = new SimpleStringProperty();
         descriptionField = new SimpleStringProperty();
         priceField = new SimpleStringProperty();
@@ -59,10 +64,10 @@ public class AddRentalViewModel {
         String path = imageProperty.get().getUrl();
         path = path.replaceAll("file:","");
 
-        return model.checkRentalData(nameField.getValue(), path, descriptionField.getValue(), priceField.getValue(), otherInfoField.getValue(), (String) selectedState, selectedCategoriesList);
+        return rentalModel.checkRentalData(nameField.getValue(), path, descriptionField.getValue(), priceField.getValue(), otherInfoField.getValue(), (String) selectedState, selectedCategoriesList);
     }
     public ObservableList<String> getStates(){
-        ArrayList<State> stateList = model.getStateList();
+        ArrayList<State> stateList = rentalModel.getStateList();
         ArrayList<String> stateListString = new ArrayList<>();
         for (int i = 0; i < stateList.size(); i++) {
             stateListString.add(stateList.get(i).toString());
@@ -72,7 +77,7 @@ public class AddRentalViewModel {
     }
 
     public ObservableList<String> getCategories(){
-        ArrayList<Category> categoryList = model.getCategoryList();
+        ArrayList<Category> categoryList = rentalModel.getCategoryList();
         ArrayList<String> categoryListString = new ArrayList<>();
         for (int i = 0; i < categoryList.size(); i++) {
             categoryListString.add(categoryList.get(i).toString());

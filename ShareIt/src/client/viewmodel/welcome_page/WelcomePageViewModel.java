@@ -1,16 +1,24 @@
 package client.viewmodel.welcome_page;
 
-import client.model.ShareItModel;
+
+import client.model.member.MemberModel;
+import client.model.message.MessageModel;
+import client.model.rental.RentalModel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class WelcomePageViewModel {
-    private ShareItModel model;
+    private RentalModel rentalModel;
+    private MemberModel memberModel;
+    private MessageModel messageModel;
+
     private final StringProperty searchField;
 
-    public WelcomePageViewModel(ShareItModel model){
+    public WelcomePageViewModel(RentalModel rentalModel, MemberModel memberModel, MessageModel messageModel){
+        this.rentalModel = rentalModel;
+        this.memberModel = memberModel;
+        this.messageModel = messageModel;
         searchField = new SimpleStringProperty();
-        this.model = model;
     }
 
     public StringProperty getSearchField(){
@@ -18,10 +26,10 @@ public class WelcomePageViewModel {
     }
 
     public String getUserType(){
-        return model.checkUserType();
+        return memberModel.checkUserType();
     }
 
     public void setSearchText(){
-        model.setSearchText(searchField.getValue());
+        messageModel.setSearchText(searchField.getValue());
     }
 }

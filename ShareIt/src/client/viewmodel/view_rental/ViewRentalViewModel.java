@@ -1,6 +1,9 @@
 package client.viewmodel.view_rental;
 
-import client.model.ShareItModel;
+
+import client.model.member.MemberModel;
+import client.model.message.MessageModel;
+import client.model.rental.RentalModel;
 import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -14,7 +17,9 @@ import java.beans.PropertyChangeEvent;
 
 public class ViewRentalViewModel
 {
-  private ShareItModel shareItModel;
+  private RentalModel rentalModel;
+  private MemberModel memberModel;
+  private MessageModel messageModel;
 
   private StringProperty nameOfRental;
   private StringProperty descriptionOfRental;
@@ -28,8 +33,11 @@ public class ViewRentalViewModel
   private StringProperty imageIdMemberId;
   private ObjectProperty<Image> imageProperty;
 
-  public ViewRentalViewModel(ShareItModel shareItModel){
-    this.shareItModel = shareItModel;
+  public ViewRentalViewModel(RentalModel rentalModel, MemberModel memberModel, MessageModel messageModel){
+    this.rentalModel = rentalModel;
+    this.memberModel = memberModel;
+    this.messageModel = messageModel;
+
     imageProperty = new SimpleObjectProperty<>();
     imageIdMemberId = new SimpleStringProperty();
     nameOfRental = new SimpleStringProperty();
@@ -43,7 +51,7 @@ public class ViewRentalViewModel
     ratingOfUserOfRental = new SimpleStringProperty();
 
 
-    shareItModel.addListener("selectedRental",this::selectedRental);
+    rentalModel.addListener("selectedRental",this::selectedRental);
   }
 
   private void selectedRental(PropertyChangeEvent evt)
@@ -53,7 +61,7 @@ public class ViewRentalViewModel
       if (evt.getNewValue() instanceof Rental)
       {
         Rental rental = (Rental) evt.getNewValue();
-        Member member = shareItModel.getMemberById(rental.getMemberId());
+        Member member = memberModel.getMemberById(rental.getMemberId());
 
         nameOfRental.setValue(rental.getName());
         descriptionOfRental.setValue(rental.getDescription());
@@ -129,18 +137,18 @@ public class ViewRentalViewModel
 
   public void getMemberById()
   {
-    shareItModel.getMemberById(Integer.parseInt(imageIdMemberId.getValue()));
+    memberModel.getMemberById(Integer.parseInt(imageIdMemberId.getValue()));
   }
   public StringProperty getImageIdMemberId(){
     return imageIdMemberId;
   }
 
   public void setMemberUsername(){
-    shareItModel.setMemberUsername(usernameOfRental.getValue());
+    memberModel.setMemberUsername(usernameOfRental.getValue());
   }
 
   public String getUserType(){
-    return shareItModel.checkUserType();
+    return memberModel.checkUserType();
   }
 
 }

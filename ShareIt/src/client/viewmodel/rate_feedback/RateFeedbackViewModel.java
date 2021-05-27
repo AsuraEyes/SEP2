@@ -1,6 +1,9 @@
 package client.viewmodel.rate_feedback;
 
-import client.model.ShareItModel;
+
+import client.model.member.MemberModel;
+import client.model.message.MessageModel;
+import client.model.rental.RentalModel;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -11,15 +14,21 @@ import java.io.IOException;
 
 public class RateFeedbackViewModel
 {
-  private final ShareItModel model;
+  private RentalModel rentalModel;
+  private MemberModel memberModel;
+  private MessageModel messageModel;
+
   private final StringProperty commentaryTextArea;
   private final SimpleStringProperty usernameLabel;
   private final DoubleProperty ratingProperty;
 
 
-  public RateFeedbackViewModel(ShareItModel model)
+  public RateFeedbackViewModel(RentalModel rentalModel, MemberModel memberModel, MessageModel messageModel)
   {
-    this.model = model;
+    this.rentalModel = rentalModel;
+    this.memberModel = memberModel;
+    this.messageModel = messageModel;
+
     ratingProperty = new SimpleDoubleProperty();
     commentaryTextArea = new SimpleStringProperty();
     usernameLabel = new SimpleStringProperty();
@@ -41,15 +50,15 @@ public class RateFeedbackViewModel
 
   public String getMemberUsername()
   {
-    usernameLabel.setValue(model.getMemberUsername());
+    usernameLabel.setValue(memberModel.getMemberUsername());
     getRating();
-    return model.getMemberUsername();
+    return memberModel.getMemberUsername();
   }
 
   public void getRating()
   {
-    Rating rating = model.getRating(model.getLoggedInUsername(),
-        model.getMemberUsername());
+    Rating rating = messageModel.getRating(memberModel.getLoggedInUsername(),
+        memberModel.getMemberUsername());
     if(rating != null)
     {
       ratingProperty.setValue(rating.getRating());
@@ -57,17 +66,17 @@ public class RateFeedbackViewModel
     }
   }
   public void updateFeedback(){
-    int memberFromId = model.getMemberByUsername(model.getLoggedInUsername())
+    int memberFromId = memberModel.getMemberByUsername(memberModel.getLoggedInUsername())
         .getId();
-    int memberToId = model.getMemberByUsername(model.getMemberUsername()).getId();
+    int memberToId = memberModel.getMemberByUsername(memberModel.getMemberUsername()).getId();
     Rating rating = new Rating(ratingProperty.getValue(),
         commentaryTextArea.getValue(),memberFromId,memberToId);
-    model.updateRating(rating);
+    messageModel.updateRating(rating);
   }
   public String addFeedback() throws IOException
   {
-    return model.addFeedback(ratingProperty.getValue(),commentaryTextArea.getValue(),
-        model.getLoggedInUsername(), getMemberUsername());
+    return messageModel.addFeedback(ratingProperty.getValue(),commentaryTextArea.getValue(),
+        memberModel.getLoggedInUsername(), getMemberUsername());
   }
   public String onSubmitButtonPressed() throws IOException
   {

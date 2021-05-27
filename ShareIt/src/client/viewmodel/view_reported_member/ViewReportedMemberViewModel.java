@@ -1,26 +1,31 @@
 package client.viewmodel.view_reported_member;
 
-import client.model.ShareItModel;
+
+import client.model.member.MemberModel;
+import client.model.message.MessageModel;
+import client.model.rental.RentalModel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import shared.transferobjects.Report;
 
 public class ViewReportedMemberViewModel {
+    private RentalModel rentalModel;
+    private MemberModel memberModel;
+    private MessageModel messageModel;
 
     private final StringProperty reportedNameLabel;
     private final StringProperty reporterNameLabel;
     private final StringProperty commentaryLabel;
 
-    private ShareItModel model;
+    public ViewReportedMemberViewModel(RentalModel rentalModel, MemberModel memberModel, MessageModel messageModel){
+        this.rentalModel = rentalModel;
+        this.memberModel = memberModel;
+        this.messageModel = messageModel;
 
-    public ViewReportedMemberViewModel(ShareItModel model){
-        this.model = model;
         reportedNameLabel = new SimpleStringProperty();
         reporterNameLabel = new SimpleStringProperty();
         commentaryLabel = new SimpleStringProperty();
     }
-
-
 
     public StringProperty getReportedNameLabel(){
         return reportedNameLabel;
@@ -35,28 +40,28 @@ public class ViewReportedMemberViewModel {
     }
 
     public String getReporterPerson(){
-        reporterNameLabel.setValue(model.getReporterPerson());
-        return model.getReporterPerson();
+        reporterNameLabel.setValue(memberModel.getReporterPerson());
+        return memberModel.getReporterPerson();
     }
 
     public String getReportedPerson(){
-        reportedNameLabel.setValue(model.getReportedPerson());
-        return model.getReportedPerson();
+        reportedNameLabel.setValue(memberModel.getReportedPerson());
+        return memberModel.getReportedPerson();
     }
 
     public void getComment() {
-        Report report = model.getReport(getReporterPerson(),getReportedPerson());
+        Report report = messageModel.getReport(getReporterPerson(),getReportedPerson());
         if(report != null) {
             commentaryLabel.setValue(report.getCommentary());
         }
     }
 
     public void setReportedNameLabel() {
-        model.setReportedUsername(reportedNameLabel.getValue());
+        memberModel.setReportedUsername(reportedNameLabel.getValue());
     }
 
     public void setReporterNameLabel()
     {
-        model.setReporterUsername(reporterNameLabel.getValue());
+        memberModel.setReporterUsername(reporterNameLabel.getValue());
     }
 }

@@ -1,6 +1,9 @@
 package client.viewmodel.view_member_profile;
 
-import client.model.ShareItModel;
+
+import client.model.member.MemberModel;
+import client.model.message.MessageModel;
+import client.model.rental.RentalModel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.image.ImageView;
@@ -14,7 +17,10 @@ import java.util.ArrayList;
 
 public class ViewMemberProfileViewModel
 {
-  private ShareItModel model;
+  private RentalModel rentalModel;
+  private MemberModel memberModel;
+  private MessageModel messageModel;
+
   private final SimpleStringProperty searchField;
   private final SimpleStringProperty usernameLabel;
   private final SimpleStringProperty locationLabel;
@@ -23,9 +29,12 @@ public class ViewMemberProfileViewModel
   private final SimpleStringProperty contactLabel;
   private final SimpleStringProperty otherInformationLabel;
 
-  public ViewMemberProfileViewModel(ShareItModel model)
+  public ViewMemberProfileViewModel(RentalModel rentalModel, MemberModel memberModel, MessageModel messageModel)
   {
-    this.model = model;
+    this.rentalModel = rentalModel;
+    this.memberModel = memberModel;
+    this.messageModel = messageModel;
+
     searchField = new SimpleStringProperty();
     usernameLabel = new SimpleStringProperty();
     locationLabel = new SimpleStringProperty();
@@ -71,11 +80,11 @@ public class ViewMemberProfileViewModel
   }
 
   public String checkUserType(){
-    return model.checkUserType();
+    return memberModel.checkUserType();
   }
 
   public ArrayList<Rental> getRentalsOfMemberList(String username) throws RemoteException {
-    return model.getRentalsOfMemberList(username);
+    return rentalModel.getRentalsOfMemberList(username);
   }
 
   public void getRental(Object object) throws RemoteException
@@ -92,8 +101,7 @@ public class ViewMemberProfileViewModel
           {
             if(imageView.getId().equals(String.valueOf(getRentalsOfMemberList(usernameLabel.getValue()).get(i).getId())))
             {
-              model.sendSelectedRental(getRentalsOfMemberList(usernameLabel.getValue()).get(i));
-              break;
+              rentalModel.sendSelectedRental(getRentalsOfMemberList(usernameLabel.getValue()).get(i));
             }
           }
         }
@@ -102,22 +110,22 @@ public class ViewMemberProfileViewModel
   }
 
   public String getMemberUsername(){
-    usernameLabel.setValue(model.getMemberUsername());
-    Member member = model.getMemberByUsername(model.getMemberUsername());
+    usernameLabel.setValue(memberModel.getMemberUsername());
+    Member member = memberModel.getMemberByUsername(memberModel.getMemberUsername());
     locationLabel.setValue(member.getAddressCity());
     ratingLabel.setValue(String.valueOf(member.getAverageReview()));
     addressLabel.setValue(member.getAddressStreet() + ", " + member.getAddressNo());
     contactLabel.setValue(member.getPhoneNo() + "\n" + member.getEmailAddress());
     otherInformationLabel.setValue(member.getOtherInformation());
-    return model.getMemberUsername();
+    return memberModel.getMemberUsername();
   }
 
   public void setMemberUsername() {
-    model.setMemberUsername(usernameLabel.getValue());
+    memberModel.setMemberUsername(usernameLabel.getValue());
   }
 
   public boolean deleteAccount(){
-    Member member = model.getMemberByUsername(model.getMemberUsername());
-    return model.deleteMember(member);
+    Member member = memberModel.getMemberByUsername(memberModel.getMemberUsername());
+    return memberModel.deleteMember(member);
   }
 }

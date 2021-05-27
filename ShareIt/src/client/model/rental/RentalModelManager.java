@@ -1,5 +1,6 @@
 package client.model.rental;
 
+import client.core.ModelFactory;
 import client.model.state.StateManager;
 import client.network.Client;
 import shared.transferobjects.Category;
@@ -18,6 +19,9 @@ public class RentalModelManager implements RentalModel
 {
   private PropertyChangeSupport support;
   private Client client;
+  private ModelFactory modelFactory;
+
+
   private Rental rental;
   private ArrayList<Rental> allRentals;
   private ArrayList<Rental> allMemberRentals;
@@ -87,9 +91,19 @@ public class RentalModelManager implements RentalModel
     support.firePropertyChange("selectedRental",1,rental);
   }
 
-  @Override public ArrayList<Integer> getRentalsOfMemberList(String username)
+  @Override public ArrayList<Rental> getRentalsOfMemberList(String username)
   {
-    return client.getRentalsOfMemberList(username);
+    allMemberRentals.clear();
+    ArrayList<Integer> rentalsId = client.getRentalsOfMemberList(username);
+    for (int i = 0; i < rentalsId.size() ; i++)
+    {
+      for (int j = 0; j < allRentals.size(); j++)
+      {
+        if(rentalsId.get(i) == allRentals.get(j).getId())
+          allMemberRentals.add(allRentals.get(j));
+      }
+    }
+    return allMemberRentals;
   }
 
   @Override public boolean deleteRental(Rental rental)

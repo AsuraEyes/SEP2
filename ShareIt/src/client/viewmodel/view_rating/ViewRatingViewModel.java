@@ -1,6 +1,9 @@
 package client.viewmodel.view_rating;
 
-import client.model.ShareItModel;
+
+import client.model.member.MemberModel;
+import client.model.message.MessageModel;
+import client.model.rental.RentalModel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import shared.transferobjects.Member;
@@ -9,7 +12,11 @@ import shared.transferobjects.Rating;
 import java.util.ArrayList;
 
 public class ViewRatingViewModel {
-    private ShareItModel model;
+    private RentalModel rentalModel;
+    private MemberModel memberModel;
+    private MessageModel messageModel;
+
+
     private StringProperty username;
     private StringProperty location;
     private StringProperty rating;
@@ -17,8 +24,11 @@ public class ViewRatingViewModel {
     private StringProperty contact;
     private StringProperty otherInformation;
 
-    public ViewRatingViewModel(ShareItModel model){
-        this.model = model;
+    public ViewRatingViewModel(RentalModel rentalModel, MemberModel memberModel, MessageModel messageModel){
+        this.rentalModel = rentalModel;
+        this.memberModel = memberModel;
+        this.messageModel = messageModel;
+
         username = new SimpleStringProperty();
         location = new SimpleStringProperty();
         rating = new SimpleStringProperty();
@@ -53,21 +63,21 @@ public class ViewRatingViewModel {
     }
 
     public String getMemberUsername(){
-        username.setValue(model.getMemberUsername());
-        Member member = model.getMemberByUsername(model.getMemberUsername());
+        username.setValue(memberModel.getMemberUsername());
+        Member member = memberModel.getMemberByUsername(memberModel.getMemberUsername());
         location.setValue(member.getAddressCity());
         rating.setValue(String.valueOf(member.getAverageReview()));
         address.setValue(member.getAddressStreet() + ", " + member.getAddressNo());
         contact.setValue(member.getPhoneNo() + "\n" + member.getEmailAddress());
         otherInformation.setValue(member.getOtherInformation());
-        return model.getMemberUsername();
+        return memberModel.getMemberUsername();
     }
 
     public ArrayList<Rating> getAllRatingsOnMember(String memberUsername) {
-        return model.getAllRatingsOnMember(memberUsername);
+        return messageModel.getAllRatingsOnMember(memberUsername);
     }
 
     public String getUserType(){
-        return model.getLoggedInUsername();
+        return memberModel.getLoggedInUsername();
     }
 }
