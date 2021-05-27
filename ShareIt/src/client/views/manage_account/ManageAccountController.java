@@ -63,6 +63,7 @@ public class ManageAccountController {
         imageView.setSmooth(true);
         imageView.setCache(true);
         imageView.setId(String.valueOf(rentals.get(i).getId()));
+        imageView.getStyleClass().add("image");
         flowPane.getChildren().add(new StackPane(new InfoOverlay(imageView, rentals.get(i).toString())));
         flowPane.getChildren().get(i)
                 .addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
