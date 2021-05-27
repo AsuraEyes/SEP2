@@ -12,7 +12,7 @@
             <VBox layoutY="90.0" prefHeight="518.0" prefWidth="1280.0" style="-fx-background-color: #FF665A;">
 
                <children>
-                  <Label text="Reported members" textFill="WHITE">
+                  <Label text="Reported members"  textFill="WHITE">
                      <font>
                         <Font name="Californian FB" size="24.0" />
                      </font>
