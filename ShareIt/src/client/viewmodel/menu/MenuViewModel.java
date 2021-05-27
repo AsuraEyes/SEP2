@@ -54,4 +54,7 @@ public class MenuViewModel
     public void loadAllReportedMembers(){
     memberModel.setReportList();
     }
+  public void setMemberRentals(){
+    rentalModel.setAllMemberRentals(memberModel.getLoggedInUsername());
+  }
 }

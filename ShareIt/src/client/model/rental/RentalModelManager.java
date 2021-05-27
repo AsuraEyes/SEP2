@@ -19,8 +19,6 @@ public class RentalModelManager implements RentalModel
 {
   private PropertyChangeSupport support;
   private Client client;
-  private ModelFactory modelFactory;
-
 
   private Rental rental;
   private ArrayList<Rental> allRentals;
@@ -33,7 +31,7 @@ public class RentalModelManager implements RentalModel
     allMemberRentals = new ArrayList<>();
     support = new PropertyChangeSupport(this);
     client.addListener("newRental", this::onNewRental);
-    loadData();
+    loadRentals();
   }
 
   public void onNewRental(PropertyChangeEvent evt){
@@ -91,8 +89,11 @@ public class RentalModelManager implements RentalModel
     support.firePropertyChange("selectedRental",1,rental);
   }
 
-  @Override public ArrayList<Rental> getRentalsOfMemberList(String username)
+  @Override public ArrayList<Rental> getRentalsOfMemberList()
   {
+    return allMemberRentals;
+  }
+  @Override public void setAllMemberRentals(String username){
     allMemberRentals.clear();
     ArrayList<Integer> rentalsId = client.getRentalsOfMemberList(username);
     for (int i = 0; i < rentalsId.size() ; i++)
@@ -103,7 +104,6 @@ public class RentalModelManager implements RentalModel
           allMemberRentals.add(allRentals.get(j));
       }
     }
-    return allMemberRentals;
   }
 
   @Override public boolean deleteRental(Rental rental)
@@ -114,6 +114,7 @@ public class RentalModelManager implements RentalModel
       {
         if (allRentals.get(i).getId() == rental.getId())
         {
+          allMemberRentals.remove(allRentals.get(i));
           allRentals.remove(allRentals.get(i));
         }
       }
@@ -140,7 +141,8 @@ public class RentalModelManager implements RentalModel
     else
       support.addPropertyChangeListener(listener);
   }
-  private void loadData(){
+  @Override
+  public void loadRentals(){
     allRentals = client.getRentalsList();
   }
 }

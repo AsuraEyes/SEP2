@@ -26,10 +26,6 @@ public interface MemberModel extends Subject
   void setSelectedReport(String reporterNameLabel, String reportedNameLabel);
   List<Report> getReportList();
   Report getSelectedReport();
-  String getReporterPerson();
-  String getReportedPerson();
-  void setReporterUsername(String reporterUsername);
-  void setReportedUsername(String reportedUsername);
 
   boolean deleteMember(Member member);
 

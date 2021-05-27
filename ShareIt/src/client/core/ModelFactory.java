@@ -32,7 +32,7 @@ public RentalModel getRentalModel() throws IOException {
   public MemberModel getMemberModel() throws IOException {
     if(memberModel == null)
     {
-      memberModel = new MemberModelManager(clientFactory.getClient());
+      memberModel = new MemberModelManager(clientFactory.getClient(), this);
     }
     return memberModel;
   }

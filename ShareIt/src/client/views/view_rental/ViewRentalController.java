@@ -66,7 +66,8 @@ public class ViewRentalController {
   public void seeMoreButton() throws IOException
   {
     viewRentalViewModel.setMemberUsername();
-    if(viewRentalViewModel.usernameOfRentalProperty().getValue().equals(StateManager.getInstance().getUsername())){
+    viewRentalViewModel.setMemberRentals();
+    if(viewRentalViewModel.usernameOfRentalProperty().getValue().equals(viewRentalViewModel.getLoggedInUsername())){
       viewHandler.setView(viewHandler.menu(), viewHandler.manageAccount());
     }
     else{

@@ -51,7 +51,7 @@ public class ManageAccountViewModel {
     }
 
     public ArrayList<Rental> getRentalsOfMemberList() throws RemoteException {
-        return rentalModel.getRentalsOfMemberList(memberModel.getLoggedInUsername());
+        return rentalModel.getRentalsOfMemberList();
     }
 
     public void getRental(Object object) throws RemoteException {

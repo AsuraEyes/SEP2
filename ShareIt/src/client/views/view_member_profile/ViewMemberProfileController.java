@@ -52,9 +52,9 @@ public class ViewMemberProfileController
     addressLabel.textProperty().bind(viewMemberProfileViewModel.getAddressLabel());
     contactLabel.textProperty().bind(viewMemberProfileViewModel.getContactLabel());
     otherInformationLabel.textProperty().bind(viewMemberProfileViewModel.getOtherInformationLabel());
+    viewMemberProfileViewModel.loadMemberInformation();
 
-    displayRentals(viewMemberProfileViewModel.getRentalsOfMemberList(
-        viewMemberProfileViewModel.getMemberUsername()));
+    displayRentals(viewMemberProfileViewModel.getRentalsOfMemberList());
 
     switch (viewMemberProfileViewModel.checkUserType())
     {
