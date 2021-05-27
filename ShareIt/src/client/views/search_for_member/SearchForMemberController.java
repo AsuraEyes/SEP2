@@ -10,7 +10,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import shared.transferobjects.Member;
 
@@ -60,15 +59,13 @@ public class SearchForMemberController
       {
         VBox ratingBox = new VBox();
         Label ratingLabel = new Label("Username: " + members.get(i).getUsername());
-        ratingLabel.setFont(Font.font ("Californian FB", 24));
-        ratingLabel.setTextFill(Color.WHITE);
         Text rating = new Text("Average rating: " + members.get(i).getAverageReview());
         rating.setFill(Color.WHITE);
         ratingBox.getChildren().addAll(ratingLabel,rating);
         ratingBox.setSpacing(10);
         ratingBox.setPadding(new Insets(20,160,20,160));
-        ratingBox.setStyle("-fx-background-color: #FF8C64;");
         vBox.getChildren().add(ratingBox);
+        vBox.getStyleClass().add("vbox");
         vBox.getChildren().get(i)
                 .addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
                   try {
