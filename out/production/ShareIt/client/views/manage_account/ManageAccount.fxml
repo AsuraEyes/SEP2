@@ -54,7 +54,7 @@
                               </Label>
                            </children>
                         </AnchorPane>
-                        <Button layoutX="858.0" layoutY="88.0" mnemonicParsing="false" onAction="#editOrDeleteInformationButton" style="-fx-border-radius: 30px; -fx-background-radius: 30px; -fx-background-color: #A3A1A8; -fx-border-color: #A3A1A8;" stylesheets="@../style/Button.css" text="Edit/Delete" textFill="WHITE">
+                        <Button layoutX="858.0" layoutY="88.0" mnemonicParsing="false" onAction="#editOrDeleteInformationButton" style="-fx-border-radius: 30px; -fx-background-radius: 30px; -fx-background-color: #A3A1A8; -fx-border-color: #A3A1A8;" stylesheets="@../css/Button.css" text="Edit/Delete" textFill="WHITE">
                            <padding>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </padding>
@@ -68,12 +68,12 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
             </Button>
-            <Button layoutX="584.0" layoutY="374.0" mnemonicParsing="false" onAction="#addRentalButton" style="-fx-border-radius: 30px; -fx-background-radius: 30px; -fx-background-color: #A3A1A8; -fx-border-color: #A3A1A8;" stylesheets="@../style/Button.css" text="Add a new rental" textFill="WHITE">
+            <Button layoutX="584.0" layoutY="374.0" mnemonicParsing="false" onAction="#addRentalButton" style="-fx-border-radius: 30px; -fx-background-radius: 30px; -fx-background-color: #A3A1A8; -fx-border-color: #A3A1A8;" stylesheets="@../css/Button.css" text="Add a new rental" textFill="WHITE">
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
             </Button>
-            <FlowPane fx:id="flowPane" hgap="35.0" layoutX="32.0" layoutY="448.0" prefHeight="126.0" prefWidth="1214.0" vgap="35.0" />
+            <FlowPane fx:id="flowPane" hgap="35.0" layoutX="32.0" layoutY="448.0" prefHeight="126.0" prefWidth="1214.0" stylesheets="@../css/RentalImage.css" vgap="35.0" />
          </children>
       </AnchorPane>
    </content>
