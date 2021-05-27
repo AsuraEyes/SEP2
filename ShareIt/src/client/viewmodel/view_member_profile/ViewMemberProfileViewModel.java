@@ -83,8 +83,8 @@ public class ViewMemberProfileViewModel
     return memberModel.checkUserType();
   }
 
-  public ArrayList<Rental> getRentalsOfMemberList(String username) throws RemoteException {
-    return rentalModel.getRentalsOfMemberList(username);
+  public ArrayList<Rental> getRentalsOfMemberList() throws RemoteException {
+    return rentalModel.getRentalsOfMemberList();
   }
 
   public void getRental(Object object) throws RemoteException
@@ -97,11 +97,11 @@ public class ViewMemberProfileViewModel
         if(infoOverlay.getContent() instanceof ImageView)
         {
           ImageView imageView = (ImageView) infoOverlay.getContent();
-          for (int i = 0; i < getRentalsOfMemberList(usernameLabel.getValue()).size(); i++)
+          for (int i = 0; i < getRentalsOfMemberList().size(); i++)
           {
-            if(imageView.getId().equals(String.valueOf(getRentalsOfMemberList(usernameLabel.getValue()).get(i).getId())))
+            if(imageView.getId().equals(String.valueOf(getRentalsOfMemberList().get(i).getId())))
             {
-              rentalModel.sendSelectedRental(getRentalsOfMemberList(usernameLabel.getValue()).get(i));
+              rentalModel.sendSelectedRental(getRentalsOfMemberList().get(i));
             }
           }
         }
@@ -109,7 +109,7 @@ public class ViewMemberProfileViewModel
     }
   }
 
-  public String getMemberUsername(){
+  public void loadMemberInformation(){
     usernameLabel.setValue(memberModel.getMemberUsername());
     Member member = memberModel.getMemberByUsername(memberModel.getMemberUsername());
     locationLabel.setValue(member.getAddressCity());
@@ -117,7 +117,6 @@ public class ViewMemberProfileViewModel
     addressLabel.setValue(member.getAddressStreet() + ", " + member.getAddressNo());
     contactLabel.setValue(member.getPhoneNo() + "\n" + member.getEmailAddress());
     otherInformationLabel.setValue(member.getOtherInformation());
-    return memberModel.getMemberUsername();
   }
 
   public void setMemberUsername() {

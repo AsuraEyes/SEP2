@@ -146,9 +146,15 @@ public class ViewRentalViewModel
   public void setMemberUsername(){
     memberModel.setMemberUsername(usernameOfRental.getValue());
   }
+  public void setMemberRentals(){
+    rentalModel.setAllMemberRentals(usernameOfRental.getValue());
+  }
 
   public String getUserType(){
     return memberModel.checkUserType();
   }
 
+  public String getLoggedInUsername(){
+    return memberModel.getLoggedInUsername();
+  }
 }

@@ -21,8 +21,10 @@ public interface RentalModel extends Subject
   ArrayList<Category> getCategoryList();
   ArrayList<Rental> getRentalsList();
   void sendSelectedRental(Rental rental);
-  ArrayList<Rental> getRentalsOfMemberList(String username);
+  ArrayList<Rental> getRentalsOfMemberList();
+  void setAllMemberRentals(String username);
   boolean deleteRental(Rental rental);
   void setSelectedRental(Rental rental);
   Rental getSelectedRental();
+  void loadRentals();
 }

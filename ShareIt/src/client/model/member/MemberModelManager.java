@@ -1,8 +1,10 @@
 package client.model.member;
 
+import client.core.ModelFactory;
 import client.model.state.MemberState;
 import client.model.state.StateManager;
 import client.network.Client;
+import com.sun.webkit.Timer;
 import shared.transferobjects.Member;
 import shared.transferobjects.Report;
 
@@ -17,13 +19,13 @@ public class MemberModelManager implements MemberModel
   private PropertyChangeSupport support;
   private Client client;
   private String memberUsername;
-  private String reporterPerson;
-  private String reportedPerson;
   private ArrayList<Report> allReports;
   private Report selectedReport;
+  private ModelFactory modelFactory;
 
-  public MemberModelManager(Client client) throws IOException
+  public MemberModelManager(Client client, ModelFactory modelFactory) throws IOException
   {
+    this.modelFactory = modelFactory;
     this.client = client;
     support = new PropertyChangeSupport(this);
     allReports = new ArrayList<>();
@@ -119,7 +121,20 @@ public class MemberModelManager implements MemberModel
 
   @Override public boolean deleteMember(Member member)
   {
-    return client.deleteMember(member);  }
+    if(client.deleteMember(member))
+    {
+      try
+      {
+        modelFactory.getRentalModel().loadRentals();
+      }
+      catch (IOException e)
+      {
+        e.printStackTrace();
+      }
+      return true;
+    }
+    return false;
+  }
 
   @Override public void addListener(String propertyName,
       PropertyChangeListener listener)

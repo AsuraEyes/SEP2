@@ -73,18 +73,9 @@ public class MenuController
     }
   }
 
-    public void onReviewsButton() throws IOException {
-    if (menuViewModel.checkUserType().equals("Member")){
-      viewHandler.setView(viewHandler.menu(), viewHandler.manageAccount());
-    }
-
-    else {
-      viewHandler.setView(viewHandler.menu(), viewHandler.viewRatingFull());
-    }
-  }
-
   public void onReportedMembersButton () throws IOException {
     if (menuViewModel.checkUserType().equals("Member")){
+      menuViewModel.setMemberRentals();
         viewHandler.setView(viewHandler.menu(), viewHandler.manageAccount());
       }
       else {
