@@ -20,6 +20,7 @@ public class MemberModelManager implements MemberModel
   private String reporterPerson;
   private String reportedPerson;
   private ArrayList<Report> allReports;
+  private Report selectedReport;
 
   public MemberModelManager(Client client) throws IOException
   {
@@ -100,10 +101,19 @@ public class MemberModelManager implements MemberModel
     return client.checkSearchForMember(value);
   }
 
-  @Override public void setUsernames(String reporterNameLabel,
+  @Override public void setSelectedReport(String reporterNameLabel,
       String reportedNameLabel)
   {
-    reporterPerson = reporterNameLabel;
+    for (int i = 0; i < allReports.size(); i++)
+    {
+      if(allReports.get(i).getUsernameFrom().equals(reporterNameLabel) && allReports.get(i).getUsernameTo().equals(reportedNameLabel))
+      {
+        selectedReport = allReports.get(i);
+      }
+    }
+  }
+  @Override public Report getSelectedReport(){
+    return selectedReport;
   }
 
   @Override public String getReporterPerson()
@@ -140,7 +150,6 @@ public class MemberModelManager implements MemberModel
   }
   @Override public List<Report> getReportList()
   {
-
     return allReports;
   }
   @Override public void setReportList()

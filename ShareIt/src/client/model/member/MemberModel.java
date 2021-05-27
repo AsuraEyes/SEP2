@@ -23,8 +23,9 @@ public interface MemberModel extends Subject
 
   List<Member> checkSearchForMember(String value);
 
-  void setUsernames(String reporterNameLabel, String reportedNameLabel);
+  void setSelectedReport(String reporterNameLabel, String reportedNameLabel);
   List<Report> getReportList();
+  Report getSelectedReport();
   String getReporterPerson();
   String getReportedPerson();
   void setReporterUsername(String reporterUsername);

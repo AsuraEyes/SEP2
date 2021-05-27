@@ -39,29 +39,22 @@ public class ViewReportedMemberViewModel {
         return commentaryLabel;
     }
 
-    public String getReporterPerson(){
-        reporterNameLabel.setValue(memberModel.getReporterPerson());
-        return memberModel.getReporterPerson();
-    }
-
-    public String getReportedPerson(){
-        reportedNameLabel.setValue(memberModel.getReportedPerson());
-        return memberModel.getReportedPerson();
-    }
-
-    public void getComment(){
-        Report report = messageModel.getReport(getReporterPerson(),getReportedPerson());
-        if(report != null) {
-            commentaryLabel.setValue(report.getCommentary());
-        }
+    public void loadReport(){
+        Report report = memberModel.getSelectedReport();
+        reporterNameLabel.setValue(report.getUsernameFrom());
+        reportedNameLabel.setValue(report.getUsernameTo());
+        commentaryLabel.setValue(report.getCommentary());
     }
 
     public void setReportedNameLabel() {
-        memberModel.setReportedUsername(reportedNameLabel.getValue());
+        memberModel.setMemberUsername(reportedNameLabel.getValue());
     }
 
     public void setReporterNameLabel()
     {
-        memberModel.setReporterUsername(reporterNameLabel.getValue());
+        memberModel.setMemberUsername(reporterNameLabel.getValue());
+    }
+    public void loadAllReportedMembers(){
+        memberModel.setReportList();
     }
 }

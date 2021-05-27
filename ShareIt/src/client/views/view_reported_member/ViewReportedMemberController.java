@@ -22,12 +22,11 @@ public class ViewReportedMemberController {
         reportedMemberField.textProperty().bind(viewReportedMemberViewModel.getReportedNameLabel());
         reportedByField.textProperty().bind(viewReportedMemberViewModel.getReporterNameLabel());
         commentField.textProperty().bind(viewReportedMemberViewModel.getCommentaryLabel());
-        viewReportedMemberViewModel.getReportedPerson();
-        viewReportedMemberViewModel.getReporterPerson();
-        viewReportedMemberViewModel.getComment();
+        viewReportedMemberViewModel.loadReport();
     }
 
     public void goBackToReportedMembers() throws IOException {
+        viewReportedMemberViewModel.loadAllReportedMembers();
         viewHandler.setView(viewHandler.menu(), viewHandler.viewReportedMemberList());
     }
 

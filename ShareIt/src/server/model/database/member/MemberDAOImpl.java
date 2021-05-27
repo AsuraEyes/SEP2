@@ -293,6 +293,22 @@ public class MemberDAOImpl implements MemberDAO{
             return listToReturn;
         }
     }
+    @Override
+    public List<Member> readMembersIdsAndUsernames() throws SQLException
+    {
+        try (Connection connection = getConnection())
+        {
+            PreparedStatement statement = connection.prepareStatement("SELECT id, username FROM share_it.member");
+            ResultSet resultSet = statement.executeQuery();
+            List<Member> listToReturn = new ArrayList<>();
+            while (resultSet.next())
+            {
+                listToReturn.add(new Member(resultSet.getInt("id"),
+                    resultSet.getString("username")));
+            }
+            return listToReturn;
+        }
+    }
 
 
 }

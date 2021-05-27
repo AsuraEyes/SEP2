@@ -21,16 +21,11 @@ public class ViewReportedMemberListViewModel {
       this.messageModel = messageModel;
     }
 
-   public Member getMemberById(int id)
-    {
-       return memberModel.getMemberById(id);
-    }
-
     public List<Report> getReportList() {
         return memberModel.getReportList();
     }
 
     public void setUsernames(String reporterNameLabel, String reportedNameLabel) {
-      memberModel.setUsernames(reporterNameLabel, reportedNameLabel);
+      memberModel.setSelectedReport(reporterNameLabel, reportedNameLabel);
     }
 }

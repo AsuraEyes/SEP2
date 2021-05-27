@@ -31,10 +31,10 @@ public class ViewReportedMemberListController {
     {
         if (reports != null && !reports.isEmpty()) {
             for (int i = 0; i < reports.size(); i++) {
-                Label reportedNameLabel = new Label(viewReportedMemberListViewModel.getMemberById(reports.get(i).getMemberTo()).getUsername());
+                Label reportedNameLabel = new Label(reports.get(i).getUsernameTo());
                 reportedNameLabel.setFont(Font.font ("Californian FB", 24));
                 reportedNameLabel.setTextFill(Color.WHITE);
-                Label reporterNameLabel = new Label(viewReportedMemberListViewModel.getMemberById(reports.get(i).getMemberFrom()).getUsername());
+                Label reporterNameLabel = new Label(reports.get(i).getUsernameFrom());
                 reporterNameLabel.setFont(Font.font ("Californian FB", 16));
                 reporterNameLabel.setTextFill(Color.WHITE);
                 VBox littleVBox = new VBox();

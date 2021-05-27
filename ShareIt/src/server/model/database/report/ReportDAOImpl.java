@@ -1,6 +1,7 @@
 package server.model.database.report;
 
 import server.model.database.member.MemberDAOImpl;
+import shared.transferobjects.Member;
 import shared.transferobjects.Report;
 
 import java.sql.*;
@@ -93,18 +94,34 @@ public class ReportDAOImpl implements ReportDAO
 
   public List<Report> readReports() throws SQLException
   {
+    List<Member> members = MemberDAOImpl.getInstance().readMembersIdsAndUsernames();
     try(Connection connection = getConnection()){
     PreparedStatement statement = connection.prepareStatement("SELECT * FROM share_it.report");
     ResultSet resultSet = statement.executeQuery();
-    List<Report> listToReturn = new ArrayList<>();
+    List<Report> listOfReports= new ArrayList<>();
     while(resultSet.next()){
-      listToReturn.add(new Report(
+      listOfReports.add(new Report(
           resultSet.getString("commentary"),
           resultSet.getInt("member_from"),
           resultSet.getInt("member_to"))
       );
     }
-    return listToReturn;
+      for (int i = 0; i < members.size(); i++)
+      {
+        for (int j = 0; j < listOfReports.size(); j++)
+        {
+          if(listOfReports.get(j).getMemberFrom() == members.get(i).getId())
+          {
+            listOfReports.get(j).setUsernameFrom(members.get(i).getUsername());
+          }
+          else if(listOfReports.get(j).getMemberTo() == members.get(i).getId())
+          {
+            listOfReports.get(j).setUsernameTo(members.get(i).getUsername());
+          }
+        }
+
+      }
+    return listOfReports;
   }
   }
 }

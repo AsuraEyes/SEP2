@@ -87,4 +87,5 @@ public interface MemberDAO {
     Member getMemberByUsername(String username) throws SQLException;
 
     List<Member> readMembers() throws SQLException;
+  List<Member> readMembersIdsAndUsernames() throws SQLException;
 }

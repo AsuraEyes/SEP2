@@ -29,6 +29,10 @@ public class Member implements Serializable {
         this.addressCity = address_city;
         this.averageReview = averageReview;
     }
+    public Member(int id, String username){
+        this.id = id;
+        this.username = username;
+    }
     
     public Member(int id){this.id = id;}
 
