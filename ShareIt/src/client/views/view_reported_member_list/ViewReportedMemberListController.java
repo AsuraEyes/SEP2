@@ -29,10 +29,10 @@ public class ViewReportedMemberListController {
     {
         if (reports != null && !reports.isEmpty()) {
             for (int i = 0; i < reports.size(); i++) {
-                Label reportedNameLabel = new Label(reports.get(i).getUsernameTo()));
+                Label reportedNameLabel = new Label(reports.get(i).getUsernameTo());
                 reportedNameLabel.getStyleClass().add("reported");
 
-                Label reporterNameLabel = new Label(reports.get(i).getUsernameFrom()));
+                Label reporterNameLabel = new Label(reports.get(i).getUsernameFrom());
                 reporterNameLabel.getStyleClass().add("reporter");
 
                 VBox littleVBox = new VBox();
