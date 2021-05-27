@@ -116,25 +116,6 @@ public class MemberModelManager implements MemberModel
     return selectedReport;
   }
 
-  @Override public String getReporterPerson()
-  {
-    return reporterPerson;
-  }
-
-  @Override public String getReportedPerson()
-  {
-    return reportedPerson;
-  }
-
-  @Override public void setReporterUsername(String reporterUsername)
-  {
-    this.reporterPerson = reporterUsername;
-  }
-
-  @Override public void setReportedUsername(String reportedUsername)
-  {
-    this.reportedPerson = reportedUsername;
-  }
 
   @Override public boolean deleteMember(Member member)
   {
