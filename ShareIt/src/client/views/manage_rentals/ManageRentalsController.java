@@ -32,6 +32,7 @@ public class ManageRentalsController {
     manageRentalsViewModel = viewModelFactory.getManageRentalsViewModel();
 
     Bindings.bindBidirectional(this.imageView.imageProperty(), manageRentalsViewModel.imagePropertyProperty());
+
     nameOfRentalLabel.textProperty().bind(manageRentalsViewModel.nameOfRentalProperty());
     descriptionLabel.textProperty().bind(manageRentalsViewModel.descriptionOfRentalProperty());
     stateLabel.textProperty().bind(manageRentalsViewModel.stateOfRentalProperty());
@@ -69,6 +70,7 @@ public class ManageRentalsController {
       }
     }
   }
+
   public void goBackToProfileOverviewButton() throws IOException {
     viewHandler.setView(viewHandler.menu(), viewHandler.manageAccount());
   }
