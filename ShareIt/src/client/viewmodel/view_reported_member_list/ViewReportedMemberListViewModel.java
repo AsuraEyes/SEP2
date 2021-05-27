@@ -19,7 +19,6 @@ public class ViewReportedMemberListViewModel {
       this.rentalModel = rentalModel;
       this.memberModel = memberModel;
       this.messageModel = messageModel;
-
     }
 
    public Member getMemberById(int id)

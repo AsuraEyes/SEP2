@@ -73,7 +73,7 @@ public class MenuController
     }
   }
 
-    public void onReviewsButton () throws IOException {
+    public void onReviewsButton() throws IOException {
     if (menuViewModel.checkUserType().equals("Member")){
       viewHandler.setView(viewHandler.menu(), viewHandler.manageAccount());
     }

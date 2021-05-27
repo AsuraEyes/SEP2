@@ -120,13 +120,13 @@ public class MessageModelManager implements MessageModel
 
   @Override public void setAllReceivedMessages(String loggedUsername)
   {
-    allReceivedMessages = client.getAllReceivedMessages(getMemberByUsername(loggedUsername).getId());
+    allReceivedMessages = client.getAllReceivedMessages(client.getMemberByUsername(loggedUsername).getId());
 
   }
 
   @Override public void setAllReceivedWarnings()
   {
-    allWarnings = client.getWarnings("administrator", getMemberByUsername(
+    allWarnings = client.getWarnings("administrator", client.getMemberByUsername(
         StateManager.getInstance().getUsername()).getId());
 
   }
@@ -134,12 +134,6 @@ public class MessageModelManager implements MessageModel
   @Override public void sendWarning(Warning warning)
   {
     client.sendWarning(warning);
-
-  }
-
-  @Override public Member getMemberByUsername(String memberUsername)
-  {
-    return null;
   }
 
   @Override public void addListener(String propertyName,

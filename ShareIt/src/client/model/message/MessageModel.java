@@ -33,5 +33,4 @@ public interface MessageModel extends Subject
   void setAllReceivedWarnings();
   void sendWarning(Warning warning);
 
-  Member getMemberByUsername(String memberUsername);
 }
