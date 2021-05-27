@@ -28,7 +28,7 @@ public class ViewReportedMemberListViewModel {
     }
 
     public List<Report> getReportList() {
-        return messageModel.getReportList();
+        return memberModel.getReportList();
     }
 
     public void setUsernames(String reporterNameLabel, String reportedNameLabel) {

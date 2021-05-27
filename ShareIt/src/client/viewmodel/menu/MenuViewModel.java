@@ -51,4 +51,7 @@ public class MenuViewModel
     public void loadAllWarnings() {
     messageModel.setAllReceivedWarnings();
     }
+    public void loadAllReportedMembers(){
+    memberModel.setReportList();
+    }
 }

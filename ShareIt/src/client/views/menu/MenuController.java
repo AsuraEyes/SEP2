@@ -88,6 +88,7 @@ public class MenuController
         viewHandler.setView(viewHandler.menu(), viewHandler.manageAccount());
       }
       else {
+        menuViewModel.loadAllReportedMembers();
         viewHandler
                 .setView(viewHandler.menu(), viewHandler.viewReportedMemberList());
       }

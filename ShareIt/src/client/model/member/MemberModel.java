@@ -24,6 +24,7 @@ public interface MemberModel extends Subject
   List<Member> checkSearchForMember(String value);
 
   void setUsernames(String reporterNameLabel, String reportedNameLabel);
+  List<Report> getReportList();
   String getReporterPerson();
   String getReportedPerson();
   void setReporterUsername(String reporterUsername);
@@ -31,5 +32,5 @@ public interface MemberModel extends Subject
 
   boolean deleteMember(Member member);
 
-
+  void setReportList();
 }
