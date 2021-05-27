@@ -49,7 +49,7 @@
                   </Label>
                </children>
             </VBox>
-            <Button layoutX="25.0" layoutY="25.0" mnemonicParsing="false" onAction="#goBackToUserPage" style="-fx-border-radius: 30px; -fx-background-radius: 30px; -fx-background-color: #A3A1A8; -fx-border-color: #A3A1A8;" stylesheets="@../style/Button.css" text="Go back to user page" textFill="WHITE">
+            <Button layoutX="25.0" layoutY="25.0" mnemonicParsing="false" onAction="#goBackToUserPage" style="-fx-border-radius: 30px; -fx-background-radius: 30px; -fx-background-color: #A3A1A8; -fx-border-color: #A3A1A8;" stylesheets="@../css/Button.css" text="Go back to user page" textFill="WHITE">
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>

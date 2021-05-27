@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 
-<ScrollPane prefHeight="619.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.view_reported_member_list.ViewReportedMemberListController">
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.text.Font?>
+<?import javafx.geometry.Insets?>
+<ScrollPane prefHeight="619.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.view_reported_member_list.ViewReportedMemberListController">
    <content>
       <AnchorPane prefHeight="600.0" prefWidth="1280.0">
          <children>
-            <VBox layoutY="90.0" prefHeight="518.0" prefWidth="1280.0" style="-fx-background-color: #FF665A;">
-
+            <VBox layoutY="90.0" prefHeight="518.0" prefWidth="1280.0" style="-fx-background-color: #FF665A;" stylesheets="@../css/ReportedMemberList.css">
                <children>
                   <Label text="Reported members"  textFill="WHITE">
                      <font>
@@ -24,9 +25,8 @@
                      </padding>
                   </Label>
                </children>
-               <VBox fx:id="vBox" prefWidth="1280"/>
+               <VBox fx:id="vBox" prefWidth="1280" />
             </VBox>
-
          </children>
       </AnchorPane>
    </content>

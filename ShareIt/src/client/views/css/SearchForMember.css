@@ -4,7 +4,7 @@
 
 .label {
     -fx-text-fill: white;
-    -fx-font: Californian FB;
+    -fx-font-family: Californian FB;
     -fx-font-size: 24px;
 }
 
@@ -13,4 +13,7 @@
     -fx-cursor: hand;
 }
 
+.text {
+    -fx-fill: white;
+}
 

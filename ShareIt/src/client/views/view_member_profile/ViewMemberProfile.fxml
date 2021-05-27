@@ -20,7 +20,7 @@
                <children>
                   <AnchorPane prefHeight="255.0" prefWidth="952.0">
                      <children>
-                        <Button fx:id="reportButton" layoutX="830.0" layoutY="127.0" mnemonicParsing="false" onAction="#reportButton" style="-fx-border-radius: 30px; -fx-background-radius: 30px; -fx-background-color: #A3A1A8; -fx-border-color: #A3A1A8;" stylesheets="@../style/Button.css" text="Report" textFill="WHITE">
+                        <Button fx:id="reportButton" layoutX="830.0" layoutY="127.0" mnemonicParsing="false" onAction="#reportButton" style="-fx-border-radius: 30px; -fx-background-radius: 30px; -fx-background-color: #A3A1A8; -fx-border-color: #A3A1A8;" stylesheets="@../css/Button.css" text="Report" textFill="WHITE">
                            <padding>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </padding>
@@ -59,17 +59,17 @@
                               </Label>
                            </children>
                         </AnchorPane>
-                        <Button fx:id="chatButton" layoutX="865.0" layoutY="77.0" mnemonicParsing="false" onAction="#chatButton" style="-fx-border-radius: 30px; -fx-background-radius: 30px; -fx-background-color: #A3A1A8; -fx-border-color: #A3A1A8;" stylesheets="@../style/Button.css" text="Chat" textFill="WHITE">
+                        <Button fx:id="chatButton" layoutX="865.0" layoutY="77.0" mnemonicParsing="false" onAction="#chatButton" style="-fx-border-radius: 30px; -fx-background-radius: 30px; -fx-background-color: #A3A1A8; -fx-border-color: #A3A1A8;" stylesheets="@../css/Button.css" text="Chat" textFill="WHITE">
                            <padding>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </padding>
                         </Button>
-                        <Button fx:id="rateButton" layoutX="898.0" layoutY="127.0" mnemonicParsing="false" onAction="#rateButton" style="-fx-border-radius: 30px; -fx-background-radius: 30px; -fx-background-color: #A3A1A8; -fx-border-color: #A3A1A8;" stylesheets="@../style/Button.css" text="Rate" textFill="WHITE">
+                        <Button fx:id="rateButton" layoutX="898.0" layoutY="127.0" mnemonicParsing="false" onAction="#rateButton" style="-fx-border-radius: 30px; -fx-background-radius: 30px; -fx-background-color: #A3A1A8; -fx-border-color: #A3A1A8;" stylesheets="@../css/Button.css" text="Rate" textFill="WHITE">
                            <padding>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </padding>
                         </Button>
-                        <Button fx:id="deleteButton" layoutX="864.0" layoutY="176.0" mnemonicParsing="false" onAction="#deleteButton" style="-fx-border-radius: 30px; -fx-background-radius: 30px; -fx-background-color: #A3A1A8; -fx-border-color: #A3A1A8;" stylesheets="@../style/Button.css" text="Delete" textFill="WHITE">
+                        <Button fx:id="deleteButton" layoutX="864.0" layoutY="176.0" mnemonicParsing="false" onAction="#deleteButton" style="-fx-border-radius: 30px; -fx-background-radius: 30px; -fx-background-color: #A3A1A8; -fx-border-color: #A3A1A8;" stylesheets="@../css/Button.css" text="Delete" textFill="WHITE">
                            <padding>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </padding>
@@ -78,17 +78,17 @@
                   </AnchorPane>
                </children>
             </VBox>
-            <Button fx:id="goBackToViewedRentalButton" layoutX="25.0" layoutY="60.0" mnemonicParsing="false" onAction="#goBackToViewedRentalButton" style="-fx-border-radius: 30px; -fx-background-radius: 30px; -fx-background-color: #A3A1A8; -fx-border-color: #A3A1A8;" stylesheets="@../style/Button.css" text="Go back to viewed rental" textFill="WHITE">
+            <Button fx:id="goBackToViewedRentalButton" layoutX="25.0" layoutY="60.0" mnemonicParsing="false" onAction="#goBackToViewedRentalButton" style="-fx-border-radius: 30px; -fx-background-radius: 30px; -fx-background-color: #A3A1A8; -fx-border-color: #A3A1A8;" stylesheets="@../css/Button.css" text="Go back to viewed rental" textFill="WHITE">
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
             </Button>
-            <Button layoutX="1155.0" layoutY="60.0" mnemonicParsing="false" onAction="#viewRatingButton" style="-fx-border-radius: 30px; -fx-background-radius: 30px; -fx-background-color: #A3A1A8; -fx-border-color: #A3A1A8;" stylesheets="@../style/Button.css" text="View ratings" textFill="WHITE">
+            <Button layoutX="1155.0" layoutY="60.0" mnemonicParsing="false" onAction="#viewRatingButton" style="-fx-border-radius: 30px; -fx-background-radius: 30px; -fx-background-color: #A3A1A8; -fx-border-color: #A3A1A8;" stylesheets="@../css/Button.css" text="View ratings" textFill="WHITE">
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
             </Button>
-            <FlowPane fx:id="flowPane" hgap="35.0" layoutX="33.0" layoutY="450.0" prefWidth="1214.0" vgap="35.0" />
+            <FlowPane fx:id="flowPane" hgap="35.0" layoutX="33.0" layoutY="450.0" prefWidth="1214.0" stylesheets="@../css/RentalImage.css" vgap="35.0" />
          </children>
       </AnchorPane>
    </content>

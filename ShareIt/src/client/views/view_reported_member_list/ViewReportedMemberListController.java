@@ -8,8 +8,6 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import shared.transferobjects.Report;
 
 import java.io.IOException;
@@ -31,21 +29,18 @@ public class ViewReportedMemberListController {
     {
         if (reports != null && !reports.isEmpty()) {
             for (int i = 0; i < reports.size(); i++) {
-                Label reportedNameLabel = new Label(reports.get(i).getUsernameTo());
-                reportedNameLabel.setFont(Font.font ("Californian FB", 24));
-                reportedNameLabel.setTextFill(Color.WHITE);
-                Label reporterNameLabel = new Label(reports.get(i).getUsernameFrom());
-                reporterNameLabel.setFont(Font.font ("Californian FB", 16));
-                reporterNameLabel.setTextFill(Color.WHITE);
+                Label reportedNameLabel = new Label(reports.get(i).getUsernameTo()));
+                reportedNameLabel.getStyleClass().add("reported");
+
+                Label reporterNameLabel = new Label(reports.get(i).getUsernameFrom()));
+                reporterNameLabel.getStyleClass().add("reporter");
+
                 VBox littleVBox = new VBox();
                 littleVBox.getChildren().addAll(reportedNameLabel,reporterNameLabel);
-
-                vBox.setSpacing(35);
-                littleVBox.setPadding(new Insets(30,160,30,160));
-                littleVBox.setStyle("-fx-background-color:#7D6B7D");
+                littleVBox.getStyleClass().add("littleVbox");
 
                 vBox.getChildren().addAll(littleVBox);
-
+                vBox.getStyleClass().add("vbox");
                 vBox.getChildren().get(i)
                     .addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
                         try {
