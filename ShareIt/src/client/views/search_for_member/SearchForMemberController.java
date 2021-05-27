@@ -60,10 +60,10 @@ public class SearchForMemberController
         VBox ratingBox = new VBox();
         Label ratingLabel = new Label("Username: " + members.get(i).getUsername());
         Text rating = new Text("Average rating: " + members.get(i).getAverageReview());
-        rating.setFill(Color.WHITE);
         ratingBox.getChildren().addAll(ratingLabel,rating);
         ratingBox.setSpacing(10);
         ratingBox.setPadding(new Insets(20,160,20,160));
+        rating.getStyleClass().add("text");
         vBox.getChildren().add(ratingBox);
         vBox.getStyleClass().add("vbox");
         vBox.getChildren().get(i)

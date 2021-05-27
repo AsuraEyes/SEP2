@@ -13,4 +13,7 @@
     -fx-cursor: hand;
 }
 
+.text {
+    -fx-fill: white;
+}
 
