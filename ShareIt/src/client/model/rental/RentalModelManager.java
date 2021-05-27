@@ -7,6 +7,7 @@ import shared.transferobjects.City;
 import shared.transferobjects.Rental;
 import shared.transferobjects.State;
 
+import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.IOException;
@@ -18,12 +19,23 @@ public class RentalModelManager implements RentalModel
   private PropertyChangeSupport support;
   private Client client;
   private Rental rental;
+  private ArrayList<Rental> allRentals;
+  private ArrayList<Rental> allMemberRentals;
 
   public RentalModelManager(Client client)
   {
     this.client = client;
+    allRentals = new ArrayList<>();
+    allMemberRentals = new ArrayList<>();
     support = new PropertyChangeSupport(this);
+    client.addListener("newRental", this::onNewRental);
+    loadData();
   }
+
+  public void onNewRental(PropertyChangeEvent evt){
+    allRentals.add((Rental) evt.getNewValue());
+  }
+
   @Override public List<Rental> checkSearch(String search) throws IOException
   {
     return client.checkSearch(search);
@@ -67,7 +79,7 @@ public class RentalModelManager implements RentalModel
 
   @Override public ArrayList<Rental> getRentalsList()
   {
-    return client.getRentalsList();
+    return allRentals;
   }
 
   @Override public void sendSelectedRental(Rental rental)
@@ -75,14 +87,25 @@ public class RentalModelManager implements RentalModel
     support.firePropertyChange("selectedRental",1,rental);
   }
 
-  @Override public ArrayList<Rental> getRentalsOfMemberList(String username)
+  @Override public ArrayList<Integer> getRentalsOfMemberList(String username)
   {
     return client.getRentalsOfMemberList(username);
   }
 
   @Override public boolean deleteRental(Rental rental)
   {
-    return client.deleteRental(rental);
+    if(client.deleteRental(rental))
+    {
+      for (int i = 0; i < allRentals.size(); i++)
+      {
+        if (allRentals.get(i).getId() == rental.getId())
+        {
+          allRentals.remove(allRentals.get(i));
+        }
+      }
+      return true;
+    }
+    return false;
   }
 
   @Override public void setSelectedRental(Rental rental)
@@ -102,5 +125,8 @@ public class RentalModelManager implements RentalModel
       support.addPropertyChangeListener(propertyName, listener);
     else
       support.addPropertyChangeListener(listener);
+  }
+  private void loadData(){
+    allRentals = client.getRentalsList();
   }
 }

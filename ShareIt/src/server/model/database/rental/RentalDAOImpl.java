@@ -220,8 +220,6 @@ public class RentalDAOImpl implements RentalDAO
       e.printStackTrace();
     }
     return null;
-
-
   }
 
   /**
@@ -406,22 +404,16 @@ public class RentalDAOImpl implements RentalDAO
     return null;
   }
 
-  /**
-   * Reads all rentals connected to the username from database by connecting to the database then by using instance to get id by using username from member database then match all given data with existing database data
-   * @param username username that all rentals will be connected with
-   * @return list of rentals that are matching with members username
-   */
-  @Override
-  public ArrayList<Rental> getRentalsOfMemberList(String username) {
+  @Override public Rental getLastRental() throws SQLException
+  {
     try (Connection connection = getConnection())
     {
-      int member_id = MemberDAOImpl.getInstance().readIdByUsername(username);
       PreparedStatement statement = connection
-              .prepareStatement("SELECT * FROM share_it.rental WHERE rental.member_id = ?");
-      statement.setInt(1, member_id);
+          .prepareStatement("SELECT * FROM share_it.rental WHERE rental.id = ?");
+      statement.setInt(1, getNextAvailableId()-1);
       ResultSet resultSet = statement.executeQuery();
-      ArrayList<Rental> arrayListToReturn = new ArrayList<>();
-      while (resultSet.next())
+      Rental lastRental = null;
+      if(resultSet.next())
       {
         String filename = "image" + resultSet.getInt("id") + ".jpeg";
         byte[] imgBytes = resultSet.getBytes(3);
@@ -429,21 +421,88 @@ public class RentalDAOImpl implements RentalDAO
 
         int rentalId = resultSet.getInt("id");
         String rentalName = resultSet.getString("name");
-
         String rentalDescription = resultSet.getString("description");
         int priceOfRental = resultSet.getInt("price");
         String rentalOtherInformation = resultSet.getString("other_information");
         String rentalState = resultSet.getString("state_name");
         int memberId = resultSet.getInt("member_id");
 
+        lastRental = new Rental(rentalId, rentalName, "file:" + filename,
+                rentalDescription, priceOfRental, rentalOtherInformation,
+                rentalState, memberId, RentalCategoryDAOImpl.getInstance().getSelectedCategoriesOnRental(rentalId));
+      }
+      resultSet.close();
+      statement.close();
+      return lastRental;
+    }
+    catch (IOException e)
+    {
+      e.printStackTrace();
+    }
+    return null;
+  }
 
-        arrayListToReturn.add(
-                new Rental(rentalId, rentalName, "file:" + filename, rentalDescription,
-                        priceOfRental, rentalOtherInformation, rentalState, memberId,
-                        RentalCategoryDAOImpl.getInstance().getSelectedCategoriesOnRental(rentalId)));
+  /**
+   * Reads all rentals connected to the username from database by connecting to the database then by using instance to get id by using username from member database then match all given data with existing database data
+   * @param username username that all rentals will be connected with
+   * @return list of rentals that are matching with members username
+   */
+//  @Override
+//  public ArrayList<Rental> getRentalsOfMemberList(String username) {
+//    try (Connection connection = getConnection())
+//    {
+//      int member_id = MemberDAOImpl.getInstance().readIdByUsername(username);
+//      PreparedStatement statement = connection
+//              .prepareStatement("SELECT * FROM share_it.rental WHERE rental.member_id = ?");
+//      statement.setInt(1, member_id);
+//      ResultSet resultSet = statement.executeQuery();
+//      ArrayList<Rental> arrayListToReturn = new ArrayList<>();
+//      while (resultSet.next())
+//      {
+//        String filename = "image" + resultSet.getInt("id") + ".jpeg";
+//        byte[] imgBytes = resultSet.getBytes(3);
+//        Files.write(new File(filename).toPath(), imgBytes);
+//
+//        int rentalId = resultSet.getInt("id");
+//        String rentalName = resultSet.getString("name");
+//
+//        String rentalDescription = resultSet.getString("description");
+//        int priceOfRental = resultSet.getInt("price");
+//        String rentalOtherInformation = resultSet.getString("other_information");
+//        String rentalState = resultSet.getString("state_name");
+//        int memberId = resultSet.getInt("member_id");
+//
+//
+//        arrayListToReturn.add(
+//                new Rental(rentalId, rentalName, "file:" + filename, rentalDescription,
+//                        priceOfRental, rentalOtherInformation, rentalState, memberId,
+//                        RentalCategoryDAOImpl.getInstance().getSelectedCategoriesOnRental(rentalId)));
+//      }
+//      return arrayListToReturn;
+//    } catch (SQLException | IOException e) {
+//      e.printStackTrace();
+//    }
+//    return null;
+//  }
+  @Override
+  public ArrayList<Integer> getRentalsOfMemberList(String username) {
+    try (Connection connection = getConnection())
+    {
+      int member_id = MemberDAOImpl.getInstance().readIdByUsername(username);
+      PreparedStatement statement = connection
+          .prepareStatement("SELECT * FROM share_it.rental WHERE rental.member_id = ?");
+      statement.setInt(1, member_id);
+      ResultSet resultSet = statement.executeQuery();
+      ArrayList<Integer> arrayListToReturn = new ArrayList<>();
+      while (resultSet.next())
+      {
+        int rentalId = resultSet.getInt("id");
+
+        arrayListToReturn.add(rentalId);
+
       }
       return arrayListToReturn;
-    } catch (SQLException | IOException e) {
+    } catch (SQLException e) {
       e.printStackTrace();
     }
     return null;

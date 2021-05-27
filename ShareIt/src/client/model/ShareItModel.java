@@ -20,7 +20,7 @@ public interface ShareItModel extends Subject
     ArrayList<City> getCityList();
     ArrayList<State> getStateList();
     ArrayList<Category> getCategoryList();
-    ArrayList<Rental> getRentalsList();
+
     String checkUserType();
     String getLoggedInUsername();
     void sendSelectedRental(Rental rental);
@@ -67,4 +67,7 @@ public interface ShareItModel extends Subject
     void setAllReceivedMessages(String loggedUsername);
     void setAllReceivedWarnings();
     void sendWarning(Warning warning);
+
+    void setListOfRentals();
+    ArrayList<Rental> getRentalsList();
 }

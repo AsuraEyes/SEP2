@@ -21,6 +21,8 @@ public class ShareItModelManager implements ShareItModel
   private Rental rental;
   private ArrayList<Message> allReceivedMessages;
   private ArrayList<Warning> allWarnings;
+  private ArrayList<Rental> allRentals;
+  private ArrayList<Rental> allMemberRentals;
   private String reporterPerson;
   private String reportedPerson;
 
@@ -72,10 +74,12 @@ public class ShareItModelManager implements ShareItModel
     client.startClient();
     support = new PropertyChangeSupport(this);
     client.addListener("newMessage", this::onNewMessage);
-    client.addListener("dataValidation", this::onDataValidation);
     client.addListener("newWarning", this::onNewWarning);
+    client.addListener("newRental", this::onNewRental);
     allReceivedMessages = new ArrayList<>();
+    allMemberRentals = new ArrayList<>();
     allWarnings = new ArrayList<>();
+    loadData();
   }
 
   private void onNewWarning(PropertyChangeEvent evt)
@@ -88,8 +92,8 @@ public class ShareItModelManager implements ShareItModel
     support.firePropertyChange(evt);
   }
 
-  public void onDataValidation(PropertyChangeEvent evt){
-    support.firePropertyChange(evt);
+  public void onNewRental(PropertyChangeEvent evt){
+    allRentals.add((Rental) evt.getNewValue());
   }
 
   @Override public void addListener(String propertyName,
@@ -165,7 +169,7 @@ public class ShareItModelManager implements ShareItModel
 
   @Override public ArrayList<Rental> getRentalsList()
   {
-    return client.getRentalsList();
+    return allRentals;
   }
 
   @Override
@@ -184,8 +188,18 @@ public class ShareItModelManager implements ShareItModel
   }
 
   @Override
-  public ArrayList<Rental> getRentalsOfMemberList(String username) {
-    return client.getRentalsOfMemberList(username);
+  public ArrayList<Rental> getRentalsOfMemberList(String username){
+    allMemberRentals.clear();
+    ArrayList<Integer> rentalsId = client.getRentalsOfMemberList(username);
+    for (int i = 0; i < rentalsId.size() ; i++)
+    {
+      for (int j = 0; j < allRentals.size(); j++)
+      {
+        if(rentalsId.get(i) == allRentals.get(j).getId())
+          allMemberRentals.add(allRentals.get(j));
+      }
+    }
+    return allMemberRentals;
   }
 
   @Override
@@ -195,9 +209,7 @@ public class ShareItModelManager implements ShareItModel
   }
 
   @Override public Member getMemberById(int id) {
-    Member member = client.getMemberById(id);
-    support.firePropertyChange("getMember",1,member);
-    return member;
+    return client.getMemberById(id);
   }
 
   @Override public String getSearchText() {
@@ -239,7 +251,18 @@ public class ShareItModelManager implements ShareItModel
 
   @Override public boolean deleteRental(Rental rental)
   {
-    return client.deleteRental(rental);
+    if(client.deleteRental(rental))
+    {
+      for (int i = 0; i < allRentals.size(); i++)
+      {
+        if (allRentals.get(i).getId() == rental.getId())
+        {
+          allRentals.remove(allRentals.get(i));
+        }
+      }
+      return true;
+    }
+    return false;
   }
 
   @Override public void setSelectedRental(Rental rental)
@@ -281,6 +304,11 @@ public class ShareItModelManager implements ShareItModel
     client.sendWarning(warning);
   }
 
+  @Override public void setListOfRentals()
+  {
+    allRentals = client.getRentalsList();
+  }
+
   @Override public void setAllReceivedMessages(String loggedUsername) {
     allReceivedMessages = client.getAllReceivedMessages(getMemberByUsername(loggedUsername).getId());
   }
@@ -303,4 +331,7 @@ public class ShareItModelManager implements ShareItModel
   @Override
   public List<Report> getReportList() { return client.getReportList(); }
 
+  private void loadData(){
+     allRentals = client.getRentalsList();
+  }
 }

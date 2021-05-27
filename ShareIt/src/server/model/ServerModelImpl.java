@@ -54,8 +54,23 @@ public class ServerModelImpl implements ServerModelManager
   }
 
   @Override
-  public String checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, String username, ArrayList<String> selectedCategories) {
-    return dataCheckRental.checkRentalData(name, pictureLink, description, price, otherInformation, stateName, username, selectedCategories);
+  public String checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, String username, ArrayList<String> selectedCategories)
+
+  {
+
+    String message = dataCheckRental.checkRentalData(name, pictureLink, description, price, otherInformation, stateName, username, selectedCategories);
+    if(message.equals("Adding successful"))
+    {
+      try
+      {
+        support.firePropertyChange("newRental", 0,RentalDAOImpl.getInstance().getLastRental());
+      }
+      catch (SQLException throwables)
+      {
+        throwables.printStackTrace();
+      }
+    }
+    return message;
   }
 
   @Override
@@ -146,7 +161,7 @@ public class ServerModelImpl implements ServerModelManager
   }
 
   @Override
-  public ArrayList<Rental> getRentalsOfMemberList(String username) {
+  public ArrayList<Integer> getRentalsOfMemberList(String username) {
     try{
       return RentalDAOImpl.getInstance().getRentalsOfMemberList(username);
     }

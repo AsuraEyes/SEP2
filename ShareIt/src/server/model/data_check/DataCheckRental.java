@@ -2,6 +2,7 @@ package server.model.data_check;
 
 
 import server.model.database.rental.RentalDAOImpl;
+import shared.transferobjects.Rental;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

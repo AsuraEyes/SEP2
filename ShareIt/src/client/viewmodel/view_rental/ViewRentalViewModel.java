@@ -7,6 +7,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.image.Image;
+import shared.transferobjects.Member;
 import shared.transferobjects.Rental;
 
 import java.beans.PropertyChangeEvent;
@@ -52,6 +53,8 @@ public class ViewRentalViewModel
       if (evt.getNewValue() instanceof Rental)
       {
         Rental rental = (Rental) evt.getNewValue();
+        Member member = shareItModel.getMemberById(rental.getMemberId());
+
         nameOfRental.setValue(rental.getName());
         descriptionOfRental.setValue(rental.getDescription());
         stateOfRental.setValue(rental.getStateName());
@@ -66,9 +69,9 @@ public class ViewRentalViewModel
           categoryOfRental.setValue(rental.getSelectedCategories().toString());
         }
         imageIdMemberId.setValue(String.valueOf(rental.getMemberId()));
-        usernameOfRental.setValue(shareItModel.getMemberById(rental.getMemberId()).getUsername());
-        locationOfRental.setValue(shareItModel.getMemberById(rental.getMemberId()).getAddressCity());
-        ratingOfUserOfRental.setValue(String.valueOf(shareItModel.getMemberById(rental.getMemberId()).getAverageReview()));
+        usernameOfRental.setValue(member.getUsername());
+        locationOfRental.setValue(member.getAddressCity());
+        ratingOfUserOfRental.setValue(String.valueOf(member.getAverageReview()));
       }
     });
   }
@@ -139,4 +142,5 @@ public class ViewRentalViewModel
   public String getUserType(){
     return shareItModel.checkUserType();
   }
+
 }

@@ -4,6 +4,7 @@ import shared.transferobjects.*;
 import shared.util.Subject;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +13,8 @@ public interface ServerModelManager extends Subject
     String checkMemberData(String username, String password, String confirmPassword, String email, String otherInformation, String phone, String street, String streetNo, String postalCode, String city);
     String updateCheckMemberData(String username, String password, String confirmPassword, String email, String phone, String otherInformation, String street, String streetNo, String postalCode,  String city) throws IOException;
     List<Rental> checkSearch(String search);
-    String checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, String username, ArrayList<String> selectedCategories);
+    String checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, String username, ArrayList<String> selectedCategories)
+        throws SQLException;
     String updateCheckRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, int rentalId, ArrayList<String> selectedCategories);
     List<Rental> checkSearchWithFilter(String search, String city, ArrayList<String> selectedCategories);
     String addFeedback(double starValue, String feedback, String username1, String username2);
@@ -26,7 +28,7 @@ public interface ServerModelManager extends Subject
 
     String checkLogInCredentials(String username, String password);
 
-    ArrayList<Rental> getRentalsOfMemberList(String username);
+    ArrayList<Integer> getRentalsOfMemberList(String username);
 
     Member getMemberByUsername(String memberUsername);
 

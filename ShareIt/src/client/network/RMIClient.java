@@ -12,6 +12,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,7 +67,7 @@ public class RMIClient implements Client, RemoteObserver
     try {
       return server.checkRentalData(name, pictureLink, description, price, otherInformation, stateName, username, selectedCategories);
     }
-    catch (RemoteException e){
+    catch (RemoteException | SQLException e){
       e.printStackTrace();
       throw new RuntimeException("Could not contact server");
     }
@@ -101,7 +102,6 @@ public class RMIClient implements Client, RemoteObserver
   {
     try
     {
-
       return server.addReport(feedback, username1, username2);
     }
     catch (RemoteException e){
@@ -123,7 +123,7 @@ public class RMIClient implements Client, RemoteObserver
   {
     try
     {
-      return server.checkSearchWithFilter(search,city,selectedCategories );
+      return server.checkSearchWithFilter(search,city,selectedCategories);
     }catch (RemoteException e){
       e.printStackTrace();
       throw new RuntimeException("Could not contact server");
@@ -194,7 +194,7 @@ public class RMIClient implements Client, RemoteObserver
   }
 
   @Override
-  public ArrayList<Rental> getRentalsOfMemberList(String username) {
+  public ArrayList<Integer> getRentalsOfMemberList(String username) {
     try{
       return server.getRentalsOfMemberList(username);
     }
@@ -403,11 +403,6 @@ public class RMIClient implements Client, RemoteObserver
 
   @Override public void update(String propertyName, Object newValue) throws RemoteException
   {
-    if(propertyName.equals("dataValidation")){
-      support.firePropertyChange(propertyName, 0, newValue);
-      support.firePropertyChange("selectedRental", 0, 0);
-    }
-
     if(propertyName.equals("newMessage"))
     {
       support.firePropertyChange("newMessage", 0, newValue);
@@ -415,6 +410,10 @@ public class RMIClient implements Client, RemoteObserver
     if(propertyName.equals("newWarning"))
     {
       support.firePropertyChange("newWarning", 0, newValue);
+    }
+    if(propertyName.equals("newRental"))
+    {
+      support.firePropertyChange("newRental", 0, newValue);
     }
   }
 }

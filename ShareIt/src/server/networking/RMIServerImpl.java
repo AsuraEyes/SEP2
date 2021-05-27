@@ -12,6 +12,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,6 +47,8 @@ public class RMIServerImpl implements RMIServer
     };
     serverModelManager.addListener("newMessage", listener);
     serverModelManager.addListener("newWarning", listener);
+    serverModelManager.addListener("newRental", listener);
+
   }
 
   @Override
@@ -59,8 +62,18 @@ public class RMIServerImpl implements RMIServer
   }
 
   @Override
-  public String checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, String username, ArrayList<String> selectedCategories) throws RemoteException {
-    return serverModelManager.checkRentalData(name, pictureLink, description, price, otherInformation, stateName, username, selectedCategories);
+  public String checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, String username, ArrayList<String> selectedCategories)
+      throws RemoteException
+  {
+    try
+    {
+      return serverModelManager.checkRentalData(name, pictureLink, description, price, otherInformation, stateName, username, selectedCategories);
+    }
+    catch (SQLException throwables)
+    {
+      throwables.printStackTrace();
+    }
+    return null;
   }
 
   @Override
@@ -121,7 +134,7 @@ public class RMIServerImpl implements RMIServer
   }
 
   @Override
-  public ArrayList<Rental> getRentalsOfMemberList(String username) throws RemoteException {
+  public ArrayList<Integer> getRentalsOfMemberList(String username) throws RemoteException {
     return serverModelManager.getRentalsOfMemberList(username);
   }
 

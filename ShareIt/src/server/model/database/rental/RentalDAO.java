@@ -72,11 +72,12 @@ public interface RentalDAO {
      */
     List<Rental> readRentals()
         throws SQLException;
-    /**
+  Rental getLastRental() throws SQLException;
+  /**
      * Gets all rentals connected to the username
      * @param username username that all rentals will be connected with
      * @return list of rentals that are matching with members username
      */
-    ArrayList<Rental> getRentalsOfMemberList(String username);
+    ArrayList<Integer> getRentalsOfMemberList(String username);
 
 }

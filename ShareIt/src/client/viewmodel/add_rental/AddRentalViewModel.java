@@ -33,6 +33,7 @@ public class AddRentalViewModel {
         descriptionField = new SimpleStringProperty();
         priceField = new SimpleStringProperty();
         otherInfoField = new SimpleStringProperty();
+        imageProperty = new SimpleObjectProperty<>();
     }
 
     public StringProperty getNameField(){

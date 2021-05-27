@@ -55,7 +55,6 @@ public class SearchForRentalViewModel {
                        if(imageView.getId().equals(String.valueOf(getRentalsList().get(i).getId())))
                        {
                            model.sendSelectedRental(getRentalsList().get(i));
-                           break;
                        }
                    }
                }
