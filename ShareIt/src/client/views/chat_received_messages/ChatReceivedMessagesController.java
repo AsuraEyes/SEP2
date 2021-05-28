@@ -36,18 +36,16 @@ public class ChatReceivedMessagesController
       for (int i = 0; i < chatReceivedMessagesViewModel.getAllReceivedMessages().size(); i++) {
         VBox messageBox = new VBox();
         Label usernameLabel = new Label(chatReceivedMessagesViewModel.getAllReceivedMessages().get(i).getUsernameFrom());
-        usernameLabel.setFont(Font.font ("Californian FB", 24));
-        usernameLabel.setTextFill(Color.WHITE);
+        usernameLabel.getStyleClass().add("username");
         Text message = new Text("Received on: "  + chatReceivedMessagesViewModel.getAllReceivedMessages().get(i).getTimeStamp() + "\n" + chatReceivedMessagesViewModel.getAllReceivedMessages().get(i).getText());
-        message.setFill(Color.WHITE);
+        message.getStyleClass().add("messageText");
         TextFlow textFlow = new TextFlow();
         textFlow.getChildren().addAll(message);
         messageBox.getChildren().addAll(usernameLabel,textFlow);
-        messageBox.setSpacing(10);
+        messageBox.getStyleClass().add("message");
         messageBox.setPadding(new Insets(20,20,20,20));
-        message.setStyle("-fx-border-color: #FF8C64; -fx-border-width: 3; -fx-background-color: #FF8C64;");
         vBoxRight.getChildren().add(messageBox);
-
+        vBoxRight.getStyleClass().add("vbox");
         vBoxRight.getChildren().get(i)
             .addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
               chatReceivedMessagesViewModel.getUsername(event.getSource());
@@ -60,20 +58,17 @@ public class ChatReceivedMessagesController
   public void displayWarnings(){
     if (chatReceivedMessagesViewModel.getAllReceivedWarnings() != null && !chatReceivedMessagesViewModel.getAllReceivedWarnings().isEmpty()) {
       for (int i = 0; i < chatReceivedMessagesViewModel.getAllReceivedWarnings().size(); i++) {
-        VBox messageBox = new VBox();
-        Label usernameLabel = new Label(chatReceivedMessagesViewModel.getAllReceivedWarnings().get(i).getAdministratorFrom());
-        usernameLabel.setFont(Font.font ("Californian FB", 24));
-        usernameLabel.setTextFill(Color.WHITE);
+        VBox warningBox = new VBox();
+        Label administratorLabel = new Label(chatReceivedMessagesViewModel.getAllReceivedWarnings().get(i).getAdministratorFrom());
+        administratorLabel.getStyleClass().add("administrator");
         Text warning = new Text("Received on: "  + chatReceivedMessagesViewModel.getAllReceivedWarnings().get(i).getTimeStamp() + "\n" + chatReceivedMessagesViewModel.getAllReceivedWarnings().get(i).getText());
-        warning.setFill(Color.WHITE);
         TextFlow textFlow = new TextFlow();
         textFlow.getChildren().addAll(warning);
-        messageBox.getChildren().addAll(usernameLabel,textFlow);
-        messageBox.setSpacing(10);
-        messageBox.setPadding(new Insets(20,20,20,20));
-        messageBox.setStyle("-fx-background-color:#7D6B7D");
-        warning.setStyle("-fx-border-color: #FF8C64; -fx-border-width: 3; -fx-background-color: #FF8C64;");
-        vBoxLeft.getChildren().add(messageBox);
+        warningBox.getChildren().addAll(administratorLabel,textFlow);
+        warningBox.setPadding(new Insets(20,20,20,20));
+        warningBox.getStyleClass().add("warning");
+        warning.getStyleClass().add("warningText");
+        vBoxLeft.getChildren().add(warningBox);
       }
     }
   }
