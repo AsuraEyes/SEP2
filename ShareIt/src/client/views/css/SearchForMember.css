@@ -2,8 +2,8 @@
     -fx-background-color: #FF8C64;
 }
 
-.label:hover {
-    -fx-background-color: #fff587;
+.vbox:hover {
+    -fx-background-color: #FF665A;
     -fx-cursor: hand;
 }
 

@@ -64,8 +64,8 @@ public class SearchForMemberController
         ratingBox.setSpacing(10);
         ratingBox.setPadding(new Insets(20,160,20,160));
         rating.getStyleClass().add("text");
+        ratingBox.getStyleClass().add("vbox");
         vBox.getChildren().add(ratingBox);
-        vBox.getStyleClass().add("vbox");
         vBox.getChildren().get(i)
                 .addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
                   searchForMemberViewModel.setMemberUsername(event.getSource());
