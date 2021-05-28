@@ -47,12 +47,12 @@ public class ViewReportedMemberViewModel {
     }
 
     public void setReportedNameLabel() {
-        memberModel.setMemberUsername(reportedNameLabel.getValue());
+        memberModel.setMemberUsername("Reported: " + reportedNameLabel.getValue());
     }
 
     public void setReporterNameLabel()
     {
-        memberModel.setMemberUsername(reporterNameLabel.getValue());
+        memberModel.setMemberUsername("Reporter: " + reporterNameLabel.getValue());
     }
     public void loadAllReportedMembers(){
         memberModel.setReportList();

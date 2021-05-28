@@ -4,7 +4,6 @@
 
 .littleVbox {
     -fx-background-color: #7D6B7D;
-    -fx-padding: 30, 160, 30, 160;
 }
 
 .reported {
@@ -15,7 +14,6 @@
 
 .reported:hover {
     -fx-text-fill: #fff587;
-    -fx-cursor: hand;
 }
 
 .reporter {
@@ -26,5 +24,4 @@
 
 .reporter:hover {
     -fx-text-fill: #fff587;
-    -fx-cursor: hand;
 }
