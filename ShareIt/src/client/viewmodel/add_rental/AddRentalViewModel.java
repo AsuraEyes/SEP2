@@ -58,7 +58,7 @@ public class AddRentalViewModel {
         return otherInfoField;
     }
 
-    public String onAddRentalButtonPressed(Object selectedState, ObservableList<String> selectedCategory) throws IOException {
+    public String onAddRentalButtonPressed(Object selectedState, ObservableList<String> selectedCategory){
         ArrayList<String> selectedCategoriesList = new ArrayList<>(selectedCategory);
 
         String path = imageProperty.get().getUrl();

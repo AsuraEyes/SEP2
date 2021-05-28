@@ -45,7 +45,7 @@ public class CreateAccountController {
     private ViewHandler viewHandler;
     private Notifications notifications;
 
-    public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws SQLException, IOException {
+    public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory){
         this.viewHandler = viewHandler;
         createAccountViewModel = viewModelFactory.getCreateAccountViewModel();
         usernameField.textProperty().bindBidirectional(createAccountViewModel.getUsernameField());
@@ -67,7 +67,7 @@ public class CreateAccountController {
                 .hideAfter(Duration.seconds(3));
     }
 
-    public void goBackToLogInButton() throws IOException {
+    public void goBackToLogInButton(){
         usernameField.clear();
         passwordField.clear();
         confirmPasswordField.clear();
@@ -80,7 +80,7 @@ public class CreateAccountController {
         viewHandler.setView(viewHandler.menu(), viewHandler.logIn());
     }
 
-    public void createButton() throws IOException {
+    public void createButton(){
         if(checkField(usernameField) && checkField(passwordField) && checkField(confirmPasswordField) && checkField(streetField) && checkField(streetNumberField) && checkField(postalCodeField)){
             String message = createAccountViewModel.onCreateButtonPressed(locationBox.getValue());
             switch (message){

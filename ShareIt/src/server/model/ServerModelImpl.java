@@ -57,18 +57,10 @@ public class ServerModelImpl implements ServerModelManager
   public String checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, String username, ArrayList<String> selectedCategories)
 
   {
-
     String message = dataCheckRental.checkRentalData(name, pictureLink, description, price, otherInformation, stateName, username, selectedCategories);
     if(message.equals("Adding successful"))
     {
-      try
-      {
         support.firePropertyChange("newRental", 0,RentalDAOImpl.getInstance().getLastRental());
-      }
-      catch (SQLException throwables)
-      {
-        throwables.printStackTrace();
-      }
     }
     return message;
   }
@@ -98,239 +90,105 @@ public class ServerModelImpl implements ServerModelManager
 
   @Override
   public ArrayList<City> getCityList() {
-    try {
       return (ArrayList<City>) CityDAOImpl.getInstance().readCity();
-    }
-    catch (SQLException e) {
-      e.printStackTrace();
-    }
-    return null;
   }
 
   @Override
   public ArrayList<State> getStateList() {
-    try {
       return (ArrayList<State>) StateDAOImpl.getInstance().readState();
-    }
-    catch (SQLException e){
-      e.printStackTrace();
-    }
-    return null;
   }
 
   @Override
   public ArrayList<Category> getCategoryList() {
-    try {
       return (ArrayList<Category>) CategoryDAOImpl.getInstance().readCategory();
-    }
-    catch (SQLException e){
-      e.printStackTrace();
-    }
-    return null;
   }
 
   @Override public ArrayList<Rental> getRentalsList() {
-    try {
       return (ArrayList<Rental>) RentalDAOImpl.getInstance().readRentals();
-    }
-    catch (SQLException e) {
-      e.printStackTrace();
-    }
-    return null;
   }
 
   @Override public Member getMemberById(int id) {
-    try {
       return MemberDAOImpl.getInstance().getMemberById(id);
-    }
-    catch (SQLException e) {
-      e.printStackTrace();
-    }
-    return null;
   }
 
   @Override
   public String checkLogInCredentials(String username, String password) {
-    try{
       return MemberDAOImpl.getInstance().checkLogInCredentials(username, password);
-    }
-    catch (SQLException e) {
-      e.printStackTrace();
-      return null;
-    }
   }
 
   @Override
   public ArrayList<Integer> getRentalsOfMemberList(String username) {
-    try{
-      return RentalDAOImpl.getInstance().getRentalsOfMemberList(username);
-    }
-    catch (SQLException e) {
-      e.printStackTrace();
-      return null;
-    }
+    return RentalDAOImpl.getInstance().getRentalsOfMemberList(username);
   }
 
   @Override
   public Member getMemberByUsername(String memberUsername) {
-    try{
       return MemberDAOImpl.getInstance().getMemberByUsername(memberUsername);
-    }
-    catch (SQLException e){
-      e.printStackTrace();
-      return null;
-    }
   }
 
   @Override
   public ArrayList<Rating> getAllRatingsOnMember(String memberUsername) {
-    try{
       return RatingDAOImpl.getInstance().getAllRatingsOnMember(memberUsername);
-    }
-    catch (SQLException e){
-      e.printStackTrace();
-    }
-    return null;
   }
 
   @Override
   public boolean deleteMember(Member member) {
-    try{
       return MemberDAOImpl.getInstance().delete(member);
-    }
-    catch (SQLException e){
-      e.printStackTrace();
-    }
-    return false;
   }
 
   @Override public Rating getRating(String fromUsername, String toUsername) {
-    try {
       return RatingDAOImpl.getInstance().getRating(fromUsername, toUsername);
-    }
-    catch (SQLException e) {
-      e.printStackTrace();
-    }
-    return null;
   }
 
   @Override public Report getReport(String fromUsername, String toUsername) {
-    try {
       return ReportDAOImpl.getInstance().getReport(fromUsername, toUsername);
-    }
-    catch (SQLException e) {
-      e.printStackTrace();
-    }
-    return null;
   }
 
   @Override public void updateRating(Rating rating) {
-    try {
-      RatingDAOImpl.getInstance().updateRating(rating);
-    }
-    catch (SQLException e) {
-      e.printStackTrace();
-    }
+    RatingDAOImpl.getInstance().updateRating(rating);
   }
 
   @Override public void updateReport(Report report) {
-    try {
-      ReportDAOImpl.getInstance().updateReport(report);
-    }
-    catch (SQLException e) {
-      e.printStackTrace();
-    }
+    ReportDAOImpl.getInstance().updateReport(report);
   }
 
   @Override public boolean deleteRental(Rental rental) {
-    try {
       return RentalDAOImpl.getInstance().delete(rental);
-    }
-    catch (SQLException e) {
-      e.printStackTrace();
-    }
-    return false;
   }
 
   @Override
   public List<Member> checkSearchForMember(String value) {
-    try{
       return MemberDAOImpl.getInstance().readByUsername(value);
-    }
-    catch (SQLException e){
-      e.printStackTrace();
-    }
-    return null;
   }
 
   @Override
   public List<Member> getMembersList() {
-    try{
       return MemberDAOImpl.getInstance().readMembers();
-    }
-    catch (SQLException e){
-      e.printStackTrace();
-    }
-    return null;
   }
 
   @Override public List<Report> getReportList() {
-    try{
       return ReportDAOImpl.getInstance().readReports();
-    }
-    catch (SQLException e){
-      e.printStackTrace();
-    }
-    return null;
   }
 
   @Override public ArrayList<Message> getAllReceivedMessages(int loggedUserId) {
-    try {
-      return MessageDAOImpl.getInstance().getAllReceivedMessages(loggedUserId);
-    }
-    catch (SQLException e) {
-      e.printStackTrace();
-    }
-    return null;
+    return MessageDAOImpl.getInstance().getAllReceivedMessages(loggedUserId);
   }
 
   @Override public ArrayList<Message> getMessagesFromUser(int loggedUserId, int fromUserid) {
-    try {
-      return MessageDAOImpl
-          .getInstance().getMessagesFromUser(loggedUserId, fromUserid);
-    }
-    catch (SQLException e) {
-      e.printStackTrace();
-    }
-    return null;
+    return MessageDAOImpl
+        .getInstance().getMessagesFromUser(loggedUserId, fromUserid);
   }
 
   @Override
   public ArrayList<Warning> getWarnings(String administrator, int idTo) {
-    try {
-      return WarningDAOImpl.getInstance().getWarnings(administrator, idTo);
-    }
-    catch (SQLException e) {
-      e.printStackTrace();
-    }
-    return null;
+    return WarningDAOImpl.getInstance().getWarnings(administrator, idTo);
   }
 
   @Override public void sendMessage(Message message) {
-    try {
-      support.firePropertyChange("newMessage", 0, MessageDAOImpl.getInstance().sendMessage(message));
-    }
-    catch (SQLException e) {
-      e.printStackTrace();
-    }
+    support.firePropertyChange("newMessage", 0, MessageDAOImpl.getInstance().sendMessage(message));
   }
 
   @Override public void sendWarning(Warning warning){
-    try {
       support.firePropertyChange("newWarning", 0, WarningDAOImpl.getInstance().sendWarning(warning));
-    }
-    catch (SQLException e){
-      e.printStackTrace();
-    }
   }
 }

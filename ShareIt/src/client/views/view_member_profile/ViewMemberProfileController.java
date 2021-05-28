@@ -42,7 +42,6 @@ public class ViewMemberProfileController
   private ViewHandler viewHandler;
 
   public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory)
-      throws IOException
   {
     this.viewHandler = viewHandler;
     viewMemberProfileViewModel = viewModelFactory.getViewMemberProfileViewModel();
@@ -76,13 +75,13 @@ public class ViewMemberProfileController
     }
   }
 
-  public void reportButton() throws IOException
+  public void reportButton()
   {
     viewMemberProfileViewModel.setMemberUsername();
     viewHandler.setView(viewHandler.menu(), viewHandler.reportMember());
   }
 
-  public void chatButton() throws IOException {
+  public void chatButton(){
     if (viewMemberProfileViewModel.checkUserType().equals("Administrator")){
       viewHandler.setView(viewHandler.menu(), viewHandler.sendWarning());
       viewMemberProfileViewModel.setMemberUsername();
@@ -93,13 +92,13 @@ public class ViewMemberProfileController
     }
   }
 
-  public void rateButton () throws IOException {
+  public void rateButton (){
     viewMemberProfileViewModel.setMemberUsername();
     viewHandler.setView(viewHandler.menu(), viewHandler.rateFeedback());
 
   }
 
-    public void deleteButton() throws IOException {
+    public void deleteButton(){
     Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "");
     alert.setTitle("Delete account");
     alert.setHeaderText("Are you sure?");
@@ -124,10 +123,9 @@ public class ViewMemberProfileController
         }
       }
     }
-
   }
 
-    public void goBackToViewedRentalButton() throws IOException {
+    public void goBackToViewedRentalButton(){
     if (viewMemberProfileViewModel.checkUserType().equals("Administrator"))
     {
       viewHandler.setView(viewHandler.menu(), viewHandler.searchForMember());
@@ -139,7 +137,7 @@ public class ViewMemberProfileController
 
   }
 
-    public void viewRatingButton() throws IOException {
+    public void viewRatingButton(){
     viewMemberProfileViewModel.setMemberUsername();
     viewHandler.setView(viewHandler.menu(), viewHandler.viewRating());
   }
@@ -161,15 +159,8 @@ public class ViewMemberProfileController
           flowPane.getChildren().add(new StackPane(new InfoOverlay(imageView, rentals.get(i).toString())));
           flowPane.getChildren().get(i)
               .addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
-                try
-                {
-                  viewHandler.setView(viewHandler.menu(), viewHandler.viewRental());
-                  viewMemberProfileViewModel.getRental(event.getSource());
-                }
-                catch (IOException e)
-                {
-                  e.printStackTrace();
-                }
+                viewHandler.setView(viewHandler.menu(), viewHandler.viewRental());
+                viewMemberProfileViewModel.getRental(event.getSource());
               });
         }
       }

@@ -42,13 +42,13 @@ public class MessageModelManager implements MessageModel
   }
 
   @Override public String addFeedback(double starValue, String feedback,
-      String username1, String username2) throws IOException
+      String username1, String username2)
   {
     return client.addFeedback(starValue, feedback,username1,username2 );
   }
 
   @Override public String addReport(String feedback, String username1,
-      String username2) throws IOException
+      String username2)
   {
     return client.addReport(feedback,username1,username2);
   }

@@ -23,7 +23,7 @@ public class MemberModelManager implements MemberModel
   private Report selectedReport;
   private ModelFactory modelFactory;
 
-  public MemberModelManager(Client client, ModelFactory modelFactory) throws IOException
+  public MemberModelManager(Client client, ModelFactory modelFactory)
   {
     this.modelFactory = modelFactory;
     this.client = client;
@@ -33,7 +33,7 @@ public class MemberModelManager implements MemberModel
   @Override public String checkMemberData(String username, String password,
       String confirmPassword, String email, String phone,
       String otherInformation, String street, String streetNo,
-      String postalCode, String city) throws IOException
+      String postalCode, String city)
   {
     String messageToReturn = client.checkMemberData (username, password, confirmPassword, email, phone, otherInformation, street, streetNo, postalCode, city);
     if(messageToReturn.equals("Adding successful")){
@@ -46,7 +46,7 @@ public class MemberModelManager implements MemberModel
   @Override public String updateCheckMemberData(String username,
       String password, String confirmPassword, String email, String phone,
       String otherInformation, String street, String streetNo,
-      String postalCode, String city) throws IOException
+      String postalCode, String city)
   {
     String messageToReturn = client.updateCheckMemberData (username, password, confirmPassword, email, phone, otherInformation, street, streetNo, postalCode, city);
     if(messageToReturn.equals("Edit successful")){
@@ -123,14 +123,7 @@ public class MemberModelManager implements MemberModel
   {
     if(client.deleteMember(member))
     {
-      try
-      {
-        modelFactory.getRentalModel().loadRentals();
-      }
-      catch (IOException e)
-      {
-        e.printStackTrace();
-      }
+      modelFactory.getRentalModel().loadRentals();
       return true;
     }
     return false;

@@ -14,13 +14,8 @@ public class DataCheckRating
     this.feedback = feedback;
 
     if(FeedbackGiven()) {
-      try {
-        RatingDAOImpl.getInstance().create(starValue, feedback, username1, username2);
-        return "Added";
-      }
-      catch (SQLException e){
-        e.printStackTrace();
-      }
+      RatingDAOImpl.getInstance().create(starValue, feedback, username1, username2);
+      return "Added";
     }
     return "Ooops, something went wrong!!";
     }

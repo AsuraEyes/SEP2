@@ -27,7 +27,7 @@ import java.util.Optional;
 public class AddRentalController {
 
   @FXML private ImageView pictureView;
-  @FXML private CheckComboBox categoryBox;
+  @FXML private CheckComboBox<String> categoryBox;
   @FXML private AnchorPane parent;
   @FXML private ChoiceBox<String> stateBox;
   @FXML private TextField nameField;
@@ -39,7 +39,7 @@ public class AddRentalController {
   private ViewHandler viewHandler;
   private Notifications notifications;
 
-  public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws SQLException, IOException {
+  public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory){
 
     addRentalViewModel = viewModelFactory.getAddRentalViewModel();
     this.viewHandler = viewHandler;
@@ -59,7 +59,7 @@ public class AddRentalController {
             .hideAfter(Duration.seconds(3));
   }
 
-  public void addRentalButton() throws IOException {
+  public void addRentalButton(){
     boolean ok = true;
     if(checkField("Name", nameField) && checkField("Description",descriptionField) && checkField("Price", priceField) && checkPicture(pictureView)){
       String message = addRentalViewModel.onAddRentalButtonPressed(stateBox.getValue(), categoryBox.getCheckModel().getCheckedItems());
@@ -103,7 +103,7 @@ public class AddRentalController {
     }
   }
 
-  public void onGoBack() throws IOException {
+  public void onGoBack(){
     nameField.clear();
     descriptionField.clear();
     priceField.clear();

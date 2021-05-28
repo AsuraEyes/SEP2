@@ -50,7 +50,7 @@ public class SearchForRentalViewModel {
     }
 
 
-    public void getRental(Object object) throws RemoteException
+    public void getRental(Object object)
     {
        if(object instanceof StackPane){
            StackPane stackPane = (StackPane) object;
@@ -91,12 +91,12 @@ public class SearchForRentalViewModel {
         return categoriesList;
     }
 
-    public List<Rental> onSearchButtonPressed() throws IOException
+    public List<Rental> onSearchButtonPressed()
     {
         return rentalModel.checkSearch(searchField.getValue());
     }
 
-    public List<Rental> onFilterButtonPressed(String selectedCity,ObservableList<String> selectedCategory) throws IOException
+    public List<Rental> onFilterButtonPressed(String selectedCity,ObservableList<String> selectedCategory)
     {
         ArrayList<String> selectedCategoriesList = new ArrayList<>(selectedCategory);
         return rentalModel.checkSearchWithFilter(searchField.getValue(),selectedCity, selectedCategoriesList);

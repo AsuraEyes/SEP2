@@ -27,7 +27,7 @@ public class ManageRentalsController {
   private ViewHandler viewHandler;
   private ManageRentalsViewModel manageRentalsViewModel;
 
-  public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws IOException {
+  public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory){
     this.viewHandler = viewHandler;
     manageRentalsViewModel = viewModelFactory.getManageRentalsViewModel();
 
@@ -41,12 +41,12 @@ public class ManageRentalsController {
     categoryLabel.textProperty().bind(manageRentalsViewModel.categoryOfRentalProperty());
   }
 
-  public void changeButton() throws IOException {
+  public void changeButton(){
     viewHandler.setView(viewHandler.menu(), viewHandler.editRental());
     manageRentalsViewModel.getSelectedRental();
   }
 
-  public void deleteButton() throws IOException {
+  public void deleteButton(){
     Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "");
     alert.setTitle("Delete rental");
     alert.setHeaderText("Are you sure?");
@@ -71,7 +71,7 @@ public class ManageRentalsController {
     }
   }
 
-  public void goBackToProfileOverviewButton() throws IOException {
+  public void goBackToProfileOverviewButton(){
     viewHandler.setView(viewHandler.menu(), viewHandler.manageAccount());
   }
 }

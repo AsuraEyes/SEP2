@@ -15,9 +15,16 @@ public class WarningDAOImpl implements WarningDAO {
         DriverManager.registerDriver(new org.postgresql.Driver());
     }
 
-    public static synchronized WarningDAOImpl getInstance() throws SQLException {
+    public static synchronized WarningDAOImpl getInstance(){
         if(instance == null){
-            instance = new WarningDAOImpl();
+            try
+            {
+                instance = new WarningDAOImpl();
+            }
+            catch (SQLException throwables)
+            {
+                throwables.printStackTrace();
+            }
         }
         return instance;
     }

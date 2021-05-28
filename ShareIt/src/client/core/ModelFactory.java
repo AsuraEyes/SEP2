@@ -8,8 +8,6 @@ import client.model.message.MessageModelManager;
 import client.model.rental.RentalModel;
 import client.model.rental.RentalModelManager;
 
-import java.io.IOException;
-
 public class ModelFactory {
   private ClientFactory clientFactory;
 
@@ -21,7 +19,7 @@ public class ModelFactory {
     this.clientFactory = clientFactory;
   }
 
-public RentalModel getRentalModel() throws IOException {
+public RentalModel getRentalModel() {
   if(rentalModel == null)
   {
     rentalModel = new RentalModelManager(clientFactory.getClient());
@@ -29,7 +27,7 @@ public RentalModel getRentalModel() throws IOException {
   return rentalModel;
 }
 
-  public MemberModel getMemberModel() throws IOException {
+  public MemberModel getMemberModel(){
     if(memberModel == null)
     {
       memberModel = new MemberModelManager(clientFactory.getClient(), this);
@@ -37,7 +35,7 @@ public RentalModel getRentalModel() throws IOException {
     return memberModel;
   }
 
-  public MessageModel getMessageModel() throws IOException {
+  public MessageModel getMessageModel(){
     if(messageModel == null)
     {
       messageModel = new MessageModelManager(clientFactory.getClient());

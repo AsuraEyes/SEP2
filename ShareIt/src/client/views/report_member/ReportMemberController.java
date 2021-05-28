@@ -20,7 +20,7 @@ public class ReportMemberController
   private ReportMemberViewModel reportMemberViewModel;
   private ViewHandler viewHandler;
 
-  public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws IOException {
+  public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory){
     this.viewHandler = viewHandler;
     reportMemberViewModel = viewModelFactory.getReportMemberViewModel();
     usernameLabel.textProperty().bind(reportMemberViewModel.getUsernameLabel());
@@ -28,7 +28,7 @@ public class ReportMemberController
     reportMemberViewModel.getMemberUsername();
   }
 
-  public void reportButton() throws IOException {
+  public void reportButton(){
     Stage stage = (Stage) viewHandler.getStage().getScene().getWindow();
     Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "");
     alert.initOwner(stage);
@@ -40,7 +40,7 @@ public class ReportMemberController
     }
   }
 
-  public void goBackToUserPageButton() throws IOException {
+  public void goBackToUserPageButton(){
     viewHandler.setView(viewHandler.menu(), viewHandler.viewMemberProfile());
   }
 }

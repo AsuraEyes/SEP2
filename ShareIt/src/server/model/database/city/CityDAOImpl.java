@@ -19,9 +19,16 @@ public class CityDAOImpl implements CityDAO
     DriverManager.registerDriver(new org.postgresql.Driver());
   }
 
-  public static synchronized CityDAOImpl getInstance() throws SQLException{
+  public static synchronized CityDAOImpl getInstance(){
     if(instance == null){
-      instance = new CityDAOImpl();
+      try
+      {
+        instance = new CityDAOImpl();
+      }
+      catch (SQLException throwables)
+      {
+        throwables.printStackTrace();
+      }
     }
     return instance;
   }
@@ -39,15 +46,22 @@ public class CityDAOImpl implements CityDAO
    * @return returns all city names in a arraylist
    * @throws SQLException
    */
-  @Override public List<City> readCity() throws SQLException
+  @Override public List<City> readCity()
   {
-    try(Connection connection = getConnection()){
-      PreparedStatement statement = connection.prepareStatement("SELECT * FROM share_it.city");
-      ResultSet resultSet = statement.executeQuery();
-      ArrayList<City> arrayListToReturn = new ArrayList<>();
-      while(resultSet.next()){
-        arrayListToReturn.add(new City(resultSet.getString("name")));
+      try (Connection connection = getConnection())
+      {
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM share_it.city");
+        ResultSet resultSet = statement.executeQuery();
+        ArrayList<City> arrayListToReturn = new ArrayList<>();
+        while (resultSet.next())
+        {
+          arrayListToReturn.add(new City(resultSet.getString("name")));
+        }
+        return arrayListToReturn;
       }
-      return arrayListToReturn;
-    }
+      catch (SQLException throwables)
+      {
+        throwables.printStackTrace();
+      }
+    return null;
   }}

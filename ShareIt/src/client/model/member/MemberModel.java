@@ -9,9 +9,8 @@ import java.util.List;
 
 public interface MemberModel extends Subject
 {
-  String checkMemberData(String username, String password, String confirmPassword, String email, String phone, String otherInformation, String street, String streetNo, String postalCode,  String city) throws
-      IOException;
-  String updateCheckMemberData(String username, String password, String confirmPassword, String email, String phone, String otherInformation, String street, String streetNo, String postalCode,  String city) throws IOException;
+  String checkMemberData(String username, String password, String confirmPassword, String email, String phone, String otherInformation, String street, String streetNo, String postalCode,  String city);
+  String updateCheckMemberData(String username, String password, String confirmPassword, String email, String phone, String otherInformation, String street, String streetNo, String postalCode,  String city);
   String checkUserType();
   String checkLogInCredentials(String username, String password);
   String getLoggedInUsername();

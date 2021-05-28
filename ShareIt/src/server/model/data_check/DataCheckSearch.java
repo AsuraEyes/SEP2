@@ -28,12 +28,7 @@ public class DataCheckSearch
     }
     else {
       if(!searchGiven()){
-        try{
-          return RentalDAOImpl.getInstance().readRentals();
-        }
-        catch (SQLException e){
-          e.printStackTrace();
-        }
+        return RentalDAOImpl.getInstance().readRentals();
       }
     }
     return null;

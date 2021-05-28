@@ -19,9 +19,16 @@ public class CategoryDAOImpl implements CategoryDAO
     DriverManager.registerDriver(new org.postgresql.Driver());
   }
 
-  public static synchronized CategoryDAOImpl getInstance() throws SQLException{
+  public static synchronized CategoryDAOImpl getInstance(){
     if(instance == null){
-      instance = new CategoryDAOImpl();
+      try
+      {
+        instance = new CategoryDAOImpl();
+      }
+      catch (SQLException throwables)
+      {
+        throwables.printStackTrace();
+      }
     }
     return instance;
   }
@@ -40,17 +47,23 @@ public class CategoryDAOImpl implements CategoryDAO
    * @throws SQLException
    */
   @Override public List<Category> readCategory()
-      throws SQLException
   {
-    try(Connection connection = getConnection()){
-      PreparedStatement statement = connection.prepareStatement("SELECT * FROM share_it.category");
-      ResultSet resultSet = statement.executeQuery();
-      ArrayList<Category> arrayListToReturn = new ArrayList<>();
-      while(resultSet.next()){
-        arrayListToReturn.add(new Category(resultSet.getString("name")));
+      try (Connection connection = getConnection())
+      {
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM share_it.category");
+        ResultSet resultSet = statement.executeQuery();
+        ArrayList<Category> arrayListToReturn = new ArrayList<>();
+        while (resultSet.next())
+        {
+          arrayListToReturn.add(new Category(resultSet.getString("name")));
+        }
+        return arrayListToReturn;
       }
-      return arrayListToReturn;
-    }
+      catch (SQLException throwables)
+      {
+        throwables.printStackTrace();
+      }
+    return null;
   }
 
 }

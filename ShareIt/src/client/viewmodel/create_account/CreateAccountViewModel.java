@@ -72,7 +72,7 @@ public class CreateAccountViewModel {
         return otherInfoField;
     }
 
-    public String onCreateButtonPressed(String selectedCity) throws IOException {
+    public String onCreateButtonPressed(String selectedCity){
         return memberModel.checkMemberData(usernameField.getValue(), passwordField.getValue(), confirmPasswordField.getValue(), emailField.getValue(), telephoneNoField.getValue(), otherInfoField.getValue(), streetField.getValue(), streetNumberField.getValue(), postalCodeField.getValue(),  selectedCity);
     }
 

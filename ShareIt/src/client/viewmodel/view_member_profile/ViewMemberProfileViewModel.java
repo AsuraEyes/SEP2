@@ -83,11 +83,11 @@ public class ViewMemberProfileViewModel
     return memberModel.checkUserType();
   }
 
-  public ArrayList<Rental> getRentalsOfMemberList() throws RemoteException {
+  public ArrayList<Rental> getRentalsOfMemberList(){
     return rentalModel.getRentalsOfMemberList();
   }
 
-  public void getRental(Object object) throws RemoteException
+  public void getRental(Object object)
   {
     if(object instanceof StackPane){
       StackPane stackPane = (StackPane) object;

@@ -41,7 +41,7 @@ public class RMIClient implements Client, RemoteObserver
   }
 
   @Override
-  public String checkMemberData(String username, String password, String confirmPassword, String email, String phone, String otherInformation, String street, String streetNo, String postalCode, String city) throws IOException {
+  public String checkMemberData(String username, String password, String confirmPassword, String email, String phone, String otherInformation, String street, String streetNo, String postalCode, String city){
     try{
       return server.checkMemberData(username, password, confirmPassword, email, phone, otherInformation, street, streetNo, postalCode, city);
     }
@@ -52,7 +52,7 @@ public class RMIClient implements Client, RemoteObserver
   }
 
   @Override
-  public String updateCheckMemberData(String username, String password, String confirmPassword, String email, String phone, String otherInformation, String street, String streetNo, String postalCode, String city) throws IOException {
+  public String updateCheckMemberData(String username, String password, String confirmPassword, String email, String phone, String otherInformation, String street, String streetNo, String postalCode, String city){
     try{
       return server.updateCheckMemberData(username, password, confirmPassword, email, phone, otherInformation, street, streetNo, postalCode, city);
     }
@@ -63,18 +63,18 @@ public class RMIClient implements Client, RemoteObserver
   }
 
   @Override
-  public String checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, String username, ArrayList<String> selectedCategories) throws IOException {
+  public String checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, String username, ArrayList<String> selectedCategories){
     try {
       return server.checkRentalData(name, pictureLink, description, price, otherInformation, stateName, username, selectedCategories);
     }
-    catch (RemoteException | SQLException e){
+    catch (RemoteException e){
       e.printStackTrace();
       throw new RuntimeException("Could not contact server");
     }
   }
 
   @Override
-  public String updateCheckRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, int rentalId, ArrayList<String> selectedCategories) throws IOException {
+  public String updateCheckRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, int rentalId, ArrayList<String> selectedCategories){
     try {
       return server.updateCheckRentalData(name, pictureLink, description, price, otherInformation, stateName, rentalId, selectedCategories);
     }
@@ -84,11 +84,10 @@ public class RMIClient implements Client, RemoteObserver
     }
   }
 
-  @Override public String addFeedback(double starValue, String feedback, String username1, String username2) throws IOException
+  @Override public String addFeedback(double starValue, String feedback, String username1, String username2)
   {
     try
     {
-
       return server.addFeedback(starValue, feedback, username1, username2);
     }
     catch (RemoteException e){
@@ -98,7 +97,7 @@ public class RMIClient implements Client, RemoteObserver
   }
 
   @Override public String addReport(String feedback, String username1,
-      String username2) throws IOException
+      String username2)
   {
     try
     {
@@ -110,7 +109,7 @@ public class RMIClient implements Client, RemoteObserver
     }
   }
 
-  @Override public List<Rental> checkSearch(String search) throws IOException
+  @Override public List<Rental> checkSearch(String search)
   {
     try{
     return server.checkSearch(search);
@@ -119,7 +118,7 @@ public class RMIClient implements Client, RemoteObserver
       throw new RuntimeException("Could not contact server");
     }
   }
-  @Override public List<Rental> checkSearchWithFilter(String search,String city,ArrayList<String> selectedCategories ) throws IOException
+  @Override public List<Rental> checkSearchWithFilter(String search,String city,ArrayList<String> selectedCategories )
   {
     try
     {

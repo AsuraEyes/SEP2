@@ -2,6 +2,7 @@ package server.model.database.message;
 
 import shared.transferobjects.Message;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface MessageDAO

@@ -76,7 +76,7 @@ public class EditAccountViewModel {
         return otherInfoField;
     }
 
-    public String onEditButtonPressed(String selectedCity) throws IOException {
+    public String onEditButtonPressed(String selectedCity){
         return memberModel.updateCheckMemberData(StateManager.getInstance().getUsername(), passwordField.getValue(), confirmPasswordField.getValue(),
                 emailField.getValue(), telephoneNoField.getValue(), otherInfoField.getValue(), streetField.getValue(),
                 streetNumberField.getValue(), postalCodeField.getValue(),  selectedCity);

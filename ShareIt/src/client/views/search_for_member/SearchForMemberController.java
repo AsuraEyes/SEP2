@@ -25,7 +25,6 @@ public class SearchForMemberController
   private ViewHandler viewHandler;
 
   public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory)
-          throws IOException
   {
     this.viewHandler = viewHandler;
     searchForMemberViewModel = viewModelFactory.getSearchForMemberViewModel();
@@ -69,14 +68,8 @@ public class SearchForMemberController
         vBox.getStyleClass().add("vbox");
         vBox.getChildren().get(i)
                 .addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
-                  try {
-                    searchForMemberViewModel.setMemberUsername(event.getSource());
-                    viewHandler.setView(viewHandler.menu(), viewHandler.viewMemberProfile());
-                  }
-                  catch (IOException e)
-                  {
-                    e.printStackTrace();
-                  }
+                  searchForMemberViewModel.setMemberUsername(event.getSource());
+                  viewHandler.setView(viewHandler.menu(), viewHandler.viewMemberProfile());
                 });
       }
     }

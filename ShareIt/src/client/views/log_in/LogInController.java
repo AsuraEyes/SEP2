@@ -32,7 +32,6 @@ public class LogInController
   private Notifications notifications;
 
   public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory)
-      throws IOException
   {
     this.viewHandler = viewHandler;
     logInViewModel = viewModelFactory.getLogInViewModel();
@@ -47,7 +46,7 @@ public class LogInController
     passwordField.clear();
   }
 
-  public void logInButton() throws IOException {
+  public void logInButton(){
 
     if(checkFieldNotEmpty(userNameField) && checkPasswordFieldNotEmpty(passwordField)){
       String memberUsername = logInViewModel.onLogInButton();
@@ -68,7 +67,7 @@ public class LogInController
     }
   }
 
-  public void createNewAccount() throws IOException, SQLException {
+  public void createNewAccount(){
     viewHandler.setView(viewHandler.menu(), viewHandler.createAccount());
   }
 

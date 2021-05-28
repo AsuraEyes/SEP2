@@ -29,7 +29,7 @@ public class ManageAccountController {
   private ViewHandler viewHandler;
   private ManageAccountViewModel manageAccountViewModel;
 
-  public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws IOException {
+  public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory){
     this.viewHandler = viewHandler;
     manageAccountViewModel = viewModelFactory.getManageAccountViewModel();
     usernameLabel.textProperty().bind(manageAccountViewModel.getUsernameLabel());
@@ -42,11 +42,11 @@ public class ManageAccountController {
     displayRentals(manageAccountViewModel.getRentalsOfMemberList());
   }
 
-  public void editOrDeleteInformationButton() throws IOException, SQLException {
+  public void editOrDeleteInformationButton(){
     viewHandler.setView(viewHandler.menu(), viewHandler.editOrDeleteAccount());
   }
 
-  public void addRentalButton() throws SQLException, IOException {
+  public void addRentalButton(){
     viewHandler.setView(viewHandler.menu(), viewHandler.addRental());
   }
 
@@ -67,19 +67,14 @@ public class ManageAccountController {
         flowPane.getChildren().add(new StackPane(new InfoOverlay(imageView, rentals.get(i).toString())));
         flowPane.getChildren().get(i)
                 .addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
-                  try {
-                    viewHandler.setView(viewHandler.menu(), viewHandler.manageRentals());
-                    manageAccountViewModel.getRental(event.getSource());
-                  }
-                  catch (IOException e) {
-                    e.printStackTrace();
-                  }
+                  viewHandler.setView(viewHandler.menu(), viewHandler.manageRentals());
+                  manageAccountViewModel.getRental(event.getSource());
                 });
       }
     }
   }
 
-  public void viewRating() throws IOException {
+  public void viewRating(){
     manageAccountViewModel.setMember();
     viewHandler.setView(viewHandler.menu(), viewHandler.viewRating());
   }

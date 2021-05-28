@@ -40,7 +40,7 @@ public class EditRentalController {
     private ViewHandler viewHandler;
     private Notifications notifications;
 
-    public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws IOException {
+    public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory){
         this.viewHandler = viewHandler;
         editRentalViewModel = viewModelFactory.getEditRentalViewModel();
 
@@ -62,7 +62,7 @@ public class EditRentalController {
                 .hideAfter(Duration.seconds(3));
     }
 
-    public void editButton() throws IOException {
+    public void editButton(){
         if(checkField("Name", nameField) && checkField("Description",descriptionField) && checkField("Price", priceField) && checkPicture(imageView)){
             String message = editRentalViewModel.onEditRentalButtonPressed(stateBox.getValue(), categoryBox.getCheckModel().getCheckedItems());
 
@@ -109,7 +109,7 @@ public class EditRentalController {
         }
     }
 
-    public void onGoBack() throws IOException
+    public void onGoBack()
     {
         viewHandler.setView(viewHandler.menu(),viewHandler.manageRentals());
     }

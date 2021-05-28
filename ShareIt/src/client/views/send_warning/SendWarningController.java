@@ -18,7 +18,7 @@ public class SendWarningController {
     private ViewHandler viewHandler;
     private SendWarningViewModel sendWarningViewModel;
 
-    public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws IOException {
+    public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory){
         this.viewHandler = viewHandler;
         textChatArea.clear();
         sendWarningViewModel = viewModelFactory.getSendWarningViewModel();
@@ -29,7 +29,7 @@ public class SendWarningController {
         sendWarningViewModel.loadLogs();
     }
 
-    public void onGoBack() throws IOException {
+    public void onGoBack(){
         textChatArea.clear();
         viewHandler.setView(viewHandler.menu(), viewHandler.viewMemberProfile());
     }

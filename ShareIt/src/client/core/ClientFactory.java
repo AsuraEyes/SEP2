@@ -8,7 +8,7 @@ import java.io.IOException;
 public class ClientFactory {
   private Client client;
 
-  public Client getClient() throws IOException
+  public Client getClient()
   {
     if(client == null){
       client = new RMIClient();

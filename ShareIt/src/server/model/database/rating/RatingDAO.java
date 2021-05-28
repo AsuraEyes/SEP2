@@ -19,14 +19,14 @@ public interface RatingDAO
    * @return returns new object of Rating
    * @throws SQLException
    */
-  Rating create(double starValue, String feedback, String username1, String username2)throws SQLException;
+  Rating create(double starValue, String feedback, String username1, String username2);
   /**
    * Get all ratings that member has
    * @param username username of the user that method will get all ratings for
    * @return returns an arrayList of all user's ratings
    * @throws SQLException
    */
-  List<Rating> getAllRatingsOnMember(String username) throws SQLException;
+  List<Rating> getAllRatingsOnMember(String username);
   /**
    * Gets user's rating based on from which to which user was it
    * @param fromUsername User that feedback rating was from
@@ -34,7 +34,7 @@ public interface RatingDAO
    * @return returns rating object that has usernames matching
    * @throws SQLException
    */
-  Rating getRating(String fromUsername, String toUsername) throws SQLException;
+  Rating getRating(String fromUsername, String toUsername);
   /**
    * Updates rating feedback whenever user decides to change it
    * @param rating new value of rating

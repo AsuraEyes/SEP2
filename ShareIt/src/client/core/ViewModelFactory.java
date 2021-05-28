@@ -22,8 +22,6 @@ import client.viewmodel.view_reported_member.ViewReportedMemberViewModel;
 import client.viewmodel.view_reported_member_list.ViewReportedMemberListViewModel;
 import client.viewmodel.welcome_page.WelcomePageViewModel;
 
-import java.io.IOException;
-
 public class ViewModelFactory {
   private ModelFactory modelFactory;
 
@@ -49,18 +47,18 @@ public class ViewModelFactory {
   private ManageAccountViewModel manageAccountViewModel;
   private SendWarningViewModel sendWarningViewModel;
 
-  public ViewModelFactory(ModelFactory modelFactory) throws IOException {
+  public ViewModelFactory(ModelFactory modelFactory){
     this.modelFactory = modelFactory;
   }
 
-  public LogInViewModel getLogInViewModel() throws IOException {
+  public LogInViewModel getLogInViewModel(){
     if(logInViewModel == null) {
       logInViewModel = new LogInViewModel(modelFactory.getRentalModel(), modelFactory.getMemberModel(), modelFactory.getMessageModel());
     }
     return logInViewModel;
   }
 
-  public ChatReceivedMessagesViewModel getChatReceivedMessagesViewModel() throws IOException {
+  public ChatReceivedMessagesViewModel getChatReceivedMessagesViewModel(){
     if(chatReceivedMessagesViewModel == null)
     {
       chatReceivedMessagesViewModel = new ChatReceivedMessagesViewModel(
@@ -70,7 +68,7 @@ public class ViewModelFactory {
   }
 
 
-  public ChatWriteMessageViewModel getChatWriteMessagesViewModel() throws IOException {
+  public ChatWriteMessageViewModel getChatWriteMessagesViewModel(){
     if(chatWriteMessageViewModel == null)
     {
       chatWriteMessageViewModel = new ChatWriteMessageViewModel(
@@ -79,126 +77,126 @@ public class ViewModelFactory {
     return chatWriteMessageViewModel;
   }
 
-  public AddRentalViewModel getAddRentalViewModel() throws IOException {
+  public AddRentalViewModel getAddRentalViewModel(){
     if (addRentalViewModel == null){
       addRentalViewModel = new AddRentalViewModel(modelFactory.getRentalModel(), modelFactory.getMemberModel(), modelFactory.getMessageModel());
     }
     return addRentalViewModel;
   }
 
-  public WelcomePageViewModel getWelcomePageViewModel() throws IOException {
+  public WelcomePageViewModel getWelcomePageViewModel(){
     if (welcomePageViewModel == null){
       welcomePageViewModel = new WelcomePageViewModel(modelFactory.getRentalModel(), modelFactory.getMemberModel(), modelFactory.getMessageModel());
     }
     return welcomePageViewModel;
   }
 
-  public CreateAccountViewModel getCreateAccountViewModel() throws IOException {
+  public CreateAccountViewModel getCreateAccountViewModel(){
     if (createAccountViewModel == null){
       createAccountViewModel = new CreateAccountViewModel(modelFactory.getRentalModel(), modelFactory.getMemberModel(), modelFactory.getMessageModel());
     }
     return createAccountViewModel;
   }
 
-  public SearchForRentalViewModel getSearchForRentalViewModel() throws IOException {
+  public SearchForRentalViewModel getSearchForRentalViewModel(){
     if (searchForRentalViewModel == null){
       searchForRentalViewModel = new SearchForRentalViewModel(modelFactory.getRentalModel(), modelFactory.getMemberModel(), modelFactory.getMessageModel());
     }
     return searchForRentalViewModel;
   }
 
-  public SearchForMemberViewModel getSearchForMemberViewModel() throws IOException {
+  public SearchForMemberViewModel getSearchForMemberViewModel(){
     if (searchForMemberViewModel == null){
       searchForMemberViewModel = new SearchForMemberViewModel(modelFactory.getRentalModel(), modelFactory.getMemberModel(), modelFactory.getMessageModel());
     }
     return searchForMemberViewModel;
   }
 
-  public ViewRatingViewModel getViewRatingViewModel() throws IOException {
+  public ViewRatingViewModel getViewRatingViewModel(){
     if (viewRatingViewModel == null){
       viewRatingViewModel = new ViewRatingViewModel(modelFactory.getRentalModel(), modelFactory.getMemberModel(), modelFactory.getMessageModel());
     }
     return viewRatingViewModel;
   }
 
-  public ViewReportedMemberViewModel getViewReportedMemberViewModel() throws IOException {
+  public ViewReportedMemberViewModel getViewReportedMemberViewModel(){
     if (viewReportedMemberViewModel == null){
       viewReportedMemberViewModel = new ViewReportedMemberViewModel(modelFactory.getRentalModel(), modelFactory.getMemberModel(), modelFactory.getMessageModel());
     }
     return viewReportedMemberViewModel;
   }
 
-  public ViewReportedMemberListViewModel getViewReportedMemberListViewModel() throws IOException {
+  public ViewReportedMemberListViewModel getViewReportedMemberListViewModel(){
     if (viewReportedMemberListViewModel == null){
       viewReportedMemberListViewModel = new ViewReportedMemberListViewModel(modelFactory.getRentalModel(), modelFactory.getMemberModel(), modelFactory.getMessageModel());
     }
     return viewReportedMemberListViewModel;
   }
 
-  public MenuViewModel getMenuViewModel() throws IOException {
+  public MenuViewModel getMenuViewModel(){
     if(menuViewModel == null) {
       menuViewModel = new MenuViewModel(modelFactory.getRentalModel(), modelFactory.getMemberModel(), modelFactory.getMessageModel());
     }
     return menuViewModel;
   }
 
-  public ViewMemberProfileViewModel getViewMemberProfileViewModel() throws IOException {
+  public ViewMemberProfileViewModel getViewMemberProfileViewModel(){
     if(viewMemberProfileViewModel == null) {
       viewMemberProfileViewModel = new ViewMemberProfileViewModel(modelFactory.getRentalModel(), modelFactory.getMemberModel(), modelFactory.getMessageModel());
     }
     return viewMemberProfileViewModel;
   }
 
-  public ViewRentalViewModel getViewRentalViewModel() throws IOException {
+  public ViewRentalViewModel getViewRentalViewModel(){
     if(viewRentalViewModel == null) {
       viewRentalViewModel = new ViewRentalViewModel(modelFactory.getRentalModel(), modelFactory.getMemberModel(), modelFactory.getMessageModel());
     }
     return viewRentalViewModel;
   }
 
-  public ReportMemberViewModel getReportMemberViewModel() throws IOException {
+  public ReportMemberViewModel getReportMemberViewModel(){
     if(reportMemberViewModel == null) {
       reportMemberViewModel = new ReportMemberViewModel(modelFactory.getRentalModel(), modelFactory.getMemberModel(), modelFactory.getMessageModel());
     }
     return reportMemberViewModel;
   }
 
-  public RateFeedbackViewModel getRateFeedbackViewModel() throws  IOException {
+  public RateFeedbackViewModel getRateFeedbackViewModel(){
     if (rateFeedbackViewModel == null) {
       rateFeedbackViewModel = new RateFeedbackViewModel(modelFactory.getRentalModel(), modelFactory.getMemberModel(), modelFactory.getMessageModel());
     }
     return rateFeedbackViewModel;
   }
 
-  public EditRentalViewModel getEditRentalViewModel() throws IOException {
+  public EditRentalViewModel getEditRentalViewModel(){
     if (editRentalViewModel == null){
       editRentalViewModel = new EditRentalViewModel(modelFactory.getRentalModel(), modelFactory.getMemberModel(), modelFactory.getMessageModel());
     }
     return editRentalViewModel;
   }
 
-  public ManageRentalsViewModel getManageRentalsViewModel() throws IOException {
+  public ManageRentalsViewModel getManageRentalsViewModel(){
     if (manageRentalsViewModel == null){
       manageRentalsViewModel = new ManageRentalsViewModel(modelFactory.getRentalModel(), modelFactory.getMemberModel(), modelFactory.getMessageModel());
     }
     return manageRentalsViewModel;
   }
 
-  public EditAccountViewModel getEditAccountViewModel() throws IOException {
+  public EditAccountViewModel getEditAccountViewModel(){
     if (editAccountViewModel == null){
       editAccountViewModel = new EditAccountViewModel(modelFactory.getRentalModel(), modelFactory.getMemberModel(), modelFactory.getMessageModel());
     }
     return editAccountViewModel;
   }
 
-  public ManageAccountViewModel getManageAccountViewModel() throws IOException {
+  public ManageAccountViewModel getManageAccountViewModel(){
     if (manageAccountViewModel == null){
       manageAccountViewModel = new ManageAccountViewModel(modelFactory.getRentalModel(), modelFactory.getMemberModel(), modelFactory.getMessageModel());
     }
     return manageAccountViewModel;
   }
 
-  public SendWarningViewModel getSendWarningViewModel() throws IOException {
+  public SendWarningViewModel getSendWarningViewModel(){
     if (sendWarningViewModel == null){
       sendWarningViewModel = new SendWarningViewModel(modelFactory.getRentalModel(), modelFactory.getMemberModel(), modelFactory.getMessageModel());
     }

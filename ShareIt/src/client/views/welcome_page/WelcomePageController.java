@@ -15,7 +15,7 @@ public class WelcomePageController {
     private WelcomePageViewModel welcomePageViewModel;
     private ViewHandler viewHandler;
 
-    public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws IOException {
+    public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory){
         this.viewHandler = viewHandler;
         welcomePageViewModel = viewModelFactory.getWelcomePageViewModel();
         searchField.textProperty().bindBidirectional(welcomePageViewModel.getSearchField());
@@ -26,7 +26,7 @@ public class WelcomePageController {
         }
     }
 
-    public void searchButton() throws IOException {
+    public void searchButton(){
         welcomePageViewModel.setSearchText();
         if(welcomePageViewModel.getUserType().equals("Administrator")){
             viewHandler.setView(viewHandler.menu(), viewHandler.searchForMember());

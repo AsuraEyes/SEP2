@@ -28,7 +28,7 @@ public class SearchForRentalController
   private SearchForRentalViewModel searchForRentalViewModel;
   private ViewHandler viewHandler;
 
-  public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws IOException
+  public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory)
   {
     this.viewHandler = viewHandler;
     searchForRentalViewModel = viewModelFactory.getSearchForRentalViewModel();
@@ -50,14 +50,14 @@ public class SearchForRentalController
     }
   }
 
-  public void searchButton() throws IOException
+  public void searchButton()
   {
     List<Rental> rentals = searchForRentalViewModel.onSearchButtonPressed();
     flowPane.getChildren().clear();
     displayRentals(rentals);
   }
 
-  public void filterButton() throws IOException {
+  public void filterButton(){
     List<Rental> rentals = searchForRentalViewModel
         .onFilterButtonPressed(locationBox.getValue(),
             categoryCheckComboBox.getCheckModel().getCheckedItems());
@@ -83,15 +83,8 @@ public class SearchForRentalController
           flowPane.getChildren().add(new StackPane(new InfoOverlay(imageView, rentals.get(i).toString())));
           flowPane.getChildren().get(i)
               .addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
-                try
-                {
-                  viewHandler.setView(viewHandler.menu(), viewHandler.viewRental());
-                  searchForRentalViewModel.getRental(event.getSource());
-                }
-                catch (IOException e)
-                {
-                  e.printStackTrace();
-                }
+                viewHandler.setView(viewHandler.menu(), viewHandler.viewRental());
+                searchForRentalViewModel.getRental(event.getSource());
               });
         }
       }

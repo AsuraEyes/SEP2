@@ -57,7 +57,7 @@ public class RMIServerImpl implements RMIServer
   }
 
   @Override
-  public String updateCheckMemberData(String username, String password, String confirmPassword, String email, String phone, String otherInformation, String street, String streetNo, String postalCode, String city) throws IOException {
+  public String updateCheckMemberData(String username, String password, String confirmPassword, String email, String phone, String otherInformation, String street, String streetNo, String postalCode, String city) {
     return serverModelManager.updateCheckMemberData(username, password, confirmPassword, email, phone, otherInformation, street, streetNo, postalCode, city);
   }
 
@@ -65,15 +65,7 @@ public class RMIServerImpl implements RMIServer
   public String checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, String username, ArrayList<String> selectedCategories)
       throws RemoteException
   {
-    try
-    {
-      return serverModelManager.checkRentalData(name, pictureLink, description, price, otherInformation, stateName, username, selectedCategories);
-    }
-    catch (SQLException throwables)
-    {
-      throwables.printStackTrace();
-    }
-    return null;
+    return serverModelManager.checkRentalData(name, pictureLink, description, price, otherInformation, stateName, username, selectedCategories);
   }
 
   @Override
@@ -221,7 +213,4 @@ public class RMIServerImpl implements RMIServer
   {
     return serverModelManager.getReportList();
   }
-
-
-
 }
