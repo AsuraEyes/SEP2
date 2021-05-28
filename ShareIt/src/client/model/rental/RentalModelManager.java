@@ -96,12 +96,10 @@ public class RentalModelManager implements RentalModel
   @Override public void setAllMemberRentals(String username){
     allMemberRentals.clear();
     ArrayList<Integer> rentalsId = client.getRentalsOfMemberList(username);
-    for (int i = 0; i < rentalsId.size() ; i++)
-    {
-      for (int j = 0; j < allRentals.size(); j++)
-      {
-        if(rentalsId.get(i) == allRentals.get(j).getId())
-          allMemberRentals.add(allRentals.get(j));
+    for (Integer integer : rentalsId) {
+      for (Rental allRental : allRentals) {
+        if (integer == allRental.getId())
+          allMemberRentals.add(allRental);
       }
     }
   }
@@ -110,12 +108,12 @@ public class RentalModelManager implements RentalModel
   {
     if(client.deleteRental(rental))
     {
-      for (int i = 0; i < allRentals.size(); i++)
+      for (Rental allRental : allRentals)
       {
-        if (allRentals.get(i).getId() == rental.getId())
+        if (allRental.getId() == rental.getId())
         {
-          allMemberRentals.remove(allRentals.get(i));
-          allRentals.remove(allRentals.get(i));
+          allMemberRentals.remove(allRental);
+          allRentals.remove(allRental);
         }
       }
       return true;

@@ -35,7 +35,6 @@ public class ViewRentalController {
     this.viewHandler = viewHandler;
 
     Bindings.bindBidirectional(this.imageView.imageProperty(), viewRentalViewModel.imagePropertyProperty());
-    Bindings.bindBidirectional(this.imageView.idProperty(), viewRentalViewModel.getImageIdMemberId());
 
     nameOfRentalLabel.textProperty().bind(viewRentalViewModel.nameOfRentalProperty());
     descriptionLabel.textProperty().bind(viewRentalViewModel.descriptionOfRentalProperty());

@@ -42,12 +42,12 @@ public class ManageAccountViewModel {
 
     public void setProfile(){
         Member member = memberModel.getMemberByUsername(memberModel.getLoggedInUsername());
-        usernameLabel.setValue(member.getUsername());
-        locationLabel.setValue(member.getAddressCity());
-        ratingLabel.setValue(String.valueOf(member.getAverageReview()));
-        addressLabel.setValue(member.getAddressStreet() + ", " + member.getAddressNo());
-        contactLabel.setValue(member.getPhoneNo() + "\n" + member.getEmailAddress());
-        otherInformationLabel.setValue(member.getOtherInformation());
+        usernameLabel.setValue("Username: " + memberModel.getMemberUsername());
+        locationLabel.setValue("Location: " + member.getAddressCity());
+        ratingLabel.setValue("Rating: " + (member.getAverageReview()));
+        addressLabel.setValue("Address: " + member.getAddressStreet() + ", " + member.getAddressNo());
+        contactLabel.setValue("Contact: " + member.getPhoneNo() + "\n" + member.getEmailAddress());
+        otherInformationLabel.setValue("Other Information: " + member.getOtherInformation());
     }
 
     public ArrayList<Rental> getRentalsOfMemberList(){
