@@ -46,7 +46,7 @@ public class EditAccountController {
     private Notifications notifications;
 
 
-    public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws SQLException, IOException {
+    public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory){
         this.viewHandler = viewHandler;
         editAccountViewModel = viewModelFactory.getEditAccountViewModel();
         usernameField.textProperty().bind(editAccountViewModel.getUsernameField());
@@ -71,11 +71,11 @@ public class EditAccountController {
                 .hideAfter(Duration.seconds(3));
 
     }
-    public void goBackToProfile() throws IOException {
+    public void goBackToProfile(){
         viewHandler.setView(viewHandler.menu(), viewHandler.manageAccount());
     }
 
-    public void editButton() throws IOException {
+    public void editButton(){
         if(checkField(usernameField) && checkField(passwordField) && checkField(confirmPasswordField) && checkField(streetField) && checkField(streetNumberField) && checkField(postalCodeField)){
             String message = editAccountViewModel.onEditButtonPressed(locationBox.getValue());
             switch (message){
@@ -100,7 +100,7 @@ public class EditAccountController {
         }
     }
 
-    public void deleteButton() throws IOException {
+    public void deleteButton(){
     Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "");
     alert.setTitle("Delete account");
     alert.setHeaderText("Are you sure?");

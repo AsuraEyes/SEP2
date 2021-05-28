@@ -19,7 +19,7 @@ public class ViewReportedMemberListController {
     private ViewReportedMemberListViewModel viewReportedMemberListViewModel;
     private ViewHandler viewHandler;
 
-    public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws IOException {
+    public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory){
         this.viewHandler = viewHandler;
         viewReportedMemberListViewModel = viewModelFactory.getViewReportedMemberListViewModel();
         displayReports(viewReportedMemberListViewModel.getReportList()) ;
@@ -43,14 +43,8 @@ public class ViewReportedMemberListController {
                 vBox.getStyleClass().add("vbox");
                 vBox.getChildren().get(i)
                     .addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
-                        try {
-                            viewReportedMemberListViewModel.setUsernames(reporterNameLabel.getText(), reportedNameLabel.getText());
-                            viewHandler.setView(viewHandler.menu(), viewHandler.viewReportedMember());
-                        }
-                        catch (IOException e)
-                        {
-                            e.printStackTrace();
-                        }
+                        viewReportedMemberListViewModel.setUsernames(reporterNameLabel.getText(), reportedNameLabel.getText());
+                        viewHandler.setView(viewHandler.menu(), viewHandler.viewReportedMember());
                     });
             }
         }

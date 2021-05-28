@@ -38,14 +38,14 @@ public class RentalModelManager implements RentalModel
     allRentals.add((Rental) evt.getNewValue());
   }
 
-  @Override public List<Rental> checkSearch(String search) throws IOException
+  @Override public List<Rental> checkSearch(String search)
   {
     return client.checkSearch(search);
   }
 
   @Override public String checkRentalData(String name, String pictureLink,
       String description, String price, String otherInformation,
-      String stateName, ArrayList<String> selectedCategories) throws IOException
+      String stateName, ArrayList<String> selectedCategories)
   {
     return client.checkRentalData(name, pictureLink,  description,  price, otherInformation,  stateName,
         StateManager.getInstance().getUsername(), selectedCategories);
@@ -53,13 +53,13 @@ public class RentalModelManager implements RentalModel
 
   @Override public String updateCheckRentalData(String name, String pictureLink,
       String description, String price, String otherInformation,
-      String stateName, ArrayList<String> selectedCategories) throws IOException
+      String stateName, ArrayList<String> selectedCategories)
   {
     return client.updateCheckRentalData(name, pictureLink,  description,  price, otherInformation,  stateName, getSelectedRental().getId(), selectedCategories);
   }
 
   @Override public List<Rental> checkSearchWithFilter(String search,
-      String city, ArrayList<String> selectedCategories) throws IOException
+      String city, ArrayList<String> selectedCategories)
   {
     return client.checkSearchWithFilter(search,city, selectedCategories );
   }

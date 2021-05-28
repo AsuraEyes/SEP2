@@ -19,7 +19,7 @@ public class RateFeedbackController
   private RateFeedbackViewModel rateFeedbackViewModel;
   private ViewHandler viewHandler;
 
-  public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws  IOException
+  public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory)
   {
     this.viewHandler = viewHandler;
     rateFeedbackViewModel = viewModelFactory.getRateFeedbackViewModel();
@@ -32,7 +32,7 @@ public class RateFeedbackController
 
   }
 
-  public void submitButton() throws IOException {
+  public void submitButton(){
       Stage stage = (Stage) viewHandler.getStage().getScene().getWindow();
       Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "");
       alert.initOwner(stage);
@@ -44,7 +44,7 @@ public class RateFeedbackController
       }
   }
 
-  public void goBackToUsersPageButton() throws IOException {
+  public void goBackToUsersPageButton(){
     viewHandler.setView(viewHandler.menu(), viewHandler.viewMemberProfile());
   }
 }

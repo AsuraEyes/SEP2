@@ -28,7 +28,7 @@ public class ViewRatingController {
     private ViewRatingViewModel viewRatingViewModel;
     private ViewHandler viewHandler;
 
-    public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws IOException {
+    public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) {
         this.viewHandler = viewHandler;
         viewRatingViewModel = viewModelFactory.getViewRatingViewModel();
         userNameLabel.textProperty().bind(viewRatingViewModel.getUsername());
@@ -41,7 +41,7 @@ public class ViewRatingController {
         displayRatings(viewRatingViewModel.getAllRatingsOnMember(viewRatingViewModel.getMemberUsername()));
     }
 
-    public void goBackToUserPage() throws IOException {
+    public void goBackToUserPage(){
         if(userNameLabel.textProperty().getValue().equals(viewRatingViewModel.getUserType())){
             viewHandler.setView(viewHandler.menu(), viewHandler.manageAccount());
         }

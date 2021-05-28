@@ -24,7 +24,7 @@ public class ChatReceivedMessagesController
   private ViewHandler viewHandler;
   private ChatReceivedMessagesViewModel chatReceivedMessagesViewModel;
 
-  public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws IOException {
+  public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory){
     this.viewHandler = viewHandler;
     chatReceivedMessagesViewModel = viewModelFactory.getChatReceivedMessagesViewModel();
     displayMessages();
@@ -50,15 +50,8 @@ public class ChatReceivedMessagesController
 
         vBoxRight.getChildren().get(i)
             .addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
-              try
-              {
-                chatReceivedMessagesViewModel.getUsername(event.getSource());
-                viewHandler.setView(viewHandler.menu(), viewHandler.chatWrite());
-              }
-              catch (IOException e)
-              {
-                e.printStackTrace();
-              }
+              chatReceivedMessagesViewModel.getUsername(event.getSource());
+              viewHandler.setView(viewHandler.menu(), viewHandler.chatWrite());
             });
       }
     }

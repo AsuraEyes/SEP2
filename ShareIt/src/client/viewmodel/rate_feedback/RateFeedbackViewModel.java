@@ -73,12 +73,12 @@ public class RateFeedbackViewModel
         commentaryTextArea.getValue(),memberFromId,memberToId);
     messageModel.updateRating(rating);
   }
-  public String addFeedback() throws IOException
+  public String addFeedback()
   {
     return messageModel.addFeedback(ratingProperty.getValue(),commentaryTextArea.getValue(),
         memberModel.getLoggedInUsername(), getMemberUsername());
   }
-  public String onSubmitButtonPressed() throws IOException
+  public String onSubmitButtonPressed()
   {
     if(!addFeedback().equals("Added"))
     {

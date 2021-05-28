@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 public class ShareItApp extends Application
 {
   @Override
-  public void start(Stage stage) throws Exception {
+  public void start(Stage stage){
     ClientFactory clientFactory = new ClientFactory();
     ModelFactory modelFactory = new ModelFactory(clientFactory);
     ViewModelFactory viewModelFactory = new ViewModelFactory(modelFactory);

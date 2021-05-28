@@ -63,13 +63,13 @@ public class ReportMemberViewModel
     messageModel.updateReport(report);
   }
 
-  public String addReport() throws IOException
+  public String addReport()
   {
     return messageModel.addReport(commentaryTextArea.getValue(), memberModel.getLoggedInUsername(),
             getMemberUsername());
   }
 
-  public String onReportButtonPressed() throws IOException
+  public String onReportButtonPressed()
   {
     if (!addReport().equals("Added"))
     {

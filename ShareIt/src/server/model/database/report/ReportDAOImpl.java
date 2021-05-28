@@ -18,11 +18,18 @@ public class ReportDAOImpl implements ReportDAO
     DriverManager.registerDriver(new org.postgresql.Driver());
   }
 
-  public static synchronized ReportDAOImpl getInstance() throws SQLException
+  public static synchronized ReportDAOImpl getInstance()
   {
     if (instance == null)
     {
-      instance = new ReportDAOImpl();
+      try
+      {
+        instance = new ReportDAOImpl();
+      }
+      catch (SQLException throwables)
+      {
+        throwables.printStackTrace();
+      }
     }
     return instance;
   }
@@ -56,7 +63,6 @@ public class ReportDAOImpl implements ReportDAO
   }
 
   @Override public Report getReport(String fromUsername, String toUsername)
-      throws SQLException
   {
     try (Connection connection = getConnection())
     {
@@ -76,6 +82,11 @@ public class ReportDAOImpl implements ReportDAO
       }
       return null;
     }
+    catch (SQLException throwables)
+    {
+      throwables.printStackTrace();
+    }
+    return null;
   }
 
   @Override public void updateReport(Report report) {
@@ -92,36 +103,41 @@ public class ReportDAOImpl implements ReportDAO
     }
   }
 
-  public List<Report> readReports() throws SQLException
+  public List<Report> readReports()
   {
-    List<Member> members = MemberDAOImpl.getInstance().readMembersIdsAndUsernames();
-    try(Connection connection = getConnection()){
-    PreparedStatement statement = connection.prepareStatement("SELECT * FROM share_it.report");
-    ResultSet resultSet = statement.executeQuery();
-    List<Report> listOfReports= new ArrayList<>();
-    while(resultSet.next()){
-      listOfReports.add(new Report(
-          resultSet.getString("commentary"),
-          resultSet.getInt("member_from"),
-          resultSet.getInt("member_to"))
-      );
-    }
-      for (int i = 0; i < members.size(); i++)
-      {
-        for (int j = 0; j < listOfReports.size(); j++)
-        {
-          if(listOfReports.get(j).getMemberFrom() == members.get(i).getId())
-          {
-            listOfReports.get(j).setUsernameFrom(members.get(i).getUsername());
-          }
-          else if(listOfReports.get(j).getMemberTo() == members.get(i).getId())
-          {
-            listOfReports.get(j).setUsernameTo(members.get(i).getUsername());
-          }
-        }
 
+      try (Connection connection = getConnection())
+      {
+        List<Member> members = MemberDAOImpl.getInstance().readMembersIdsAndUsernames();
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM share_it.report");
+        ResultSet resultSet = statement.executeQuery();
+        List<Report> listOfReports = new ArrayList<>();
+        while (resultSet.next())
+        {
+          listOfReports.add(new Report(resultSet.getString("commentary"),
+              resultSet.getInt("member_from"), resultSet.getInt("member_to")));
+        }
+        for (int i = 0; i < members.size(); i++)
+        {
+          for (int j = 0; j < listOfReports.size(); j++)
+          {
+            if (listOfReports.get(j).getMemberFrom() == members.get(i).getId())
+            {
+              listOfReports.get(j).setUsernameFrom(members.get(i).getUsername());
+            }
+            else if (listOfReports.get(j).getMemberTo() == members.get(i).getId())
+            {
+              listOfReports.get(j).setUsernameTo(members.get(i).getUsername());
+            }
+          }
+
+        }
+        return listOfReports;
       }
-    return listOfReports;
-  }
+      catch (SQLException throwables)
+      {
+        throwables.printStackTrace();
+      }
+    return null;
   }
 }

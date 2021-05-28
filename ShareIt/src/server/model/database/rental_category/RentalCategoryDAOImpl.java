@@ -11,9 +11,16 @@ public class RentalCategoryDAOImpl implements RentalCategoryDAO{
         DriverManager.registerDriver(new org.postgresql.Driver());
     }
 
-    public static synchronized RentalCategoryDAOImpl getInstance() throws SQLException{
+    public static synchronized RentalCategoryDAOImpl getInstance(){
         if(instance == null){
-            instance = new RentalCategoryDAOImpl();
+            try
+            {
+                instance = new RentalCategoryDAOImpl();
+            }
+            catch (SQLException throwables)
+            {
+                throwables.printStackTrace();
+            }
         }
         return instance;
     }

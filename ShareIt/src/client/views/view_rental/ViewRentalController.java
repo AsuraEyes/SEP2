@@ -30,7 +30,7 @@ public class ViewRentalController {
   private ViewRentalViewModel viewRentalViewModel;
 
 
-  public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws IOException {
+  public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory){
     viewRentalViewModel = viewModelFactory.getViewRentalViewModel();
     this.viewHandler = viewHandler;
 
@@ -53,7 +53,7 @@ public class ViewRentalController {
   }
 
 
-  public void goBackToSearchResultsButton() throws IOException {
+  public void goBackToSearchResultsButton(){
     if(viewRentalViewModel.getUserType().equals("Administrator")){
       viewHandler.setView(viewHandler.menu(), viewHandler.viewMemberProfile());
     }
@@ -63,7 +63,7 @@ public class ViewRentalController {
 
   }
 
-  public void seeMoreButton() throws IOException
+  public void seeMoreButton()
   {
     viewRentalViewModel.setMemberUsername();
     viewRentalViewModel.setMemberRentals();

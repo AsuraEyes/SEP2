@@ -19,9 +19,16 @@ public class MessageDAOImpl implements MessageDAO
     DriverManager.registerDriver(new org.postgresql.Driver());
   }
 
-  public static synchronized MessageDAOImpl getInstance() throws SQLException {
+  public static synchronized MessageDAOImpl getInstance(){
     if(instance == null){
-      instance = new MessageDAOImpl();
+      try
+      {
+        instance = new MessageDAOImpl();
+      }
+      catch (SQLException throwables)
+      {
+        throwables.printStackTrace();
+      }
     }
     return instance;
   }

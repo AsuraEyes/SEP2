@@ -9,10 +9,9 @@ import java.util.List;
 
 public interface MessageModel extends Subject
 {
-  String addFeedback(double starValue, String feedback, String username1, String username2)throws
-      IOException;
+  String addFeedback(double starValue, String feedback, String username1, String username2);
 
-  String addReport(String feedback, String username1, String username2) throws IOException;
+  String addReport(String feedback, String username1, String username2);
 
 
   String getSearchText();

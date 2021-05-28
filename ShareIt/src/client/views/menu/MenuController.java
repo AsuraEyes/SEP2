@@ -25,7 +25,7 @@ public class MenuController
   private ViewHandler viewHandler;
   private MenuViewModel menuViewModel;
 
-  public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws IOException {
+  public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory){
     this.viewHandler = viewHandler;
     menuViewModel = viewModelFactory.getMenuViewModel();
     usernameLabel.textProperty().bind(menuViewModel.getUsernameLabel());
@@ -50,11 +50,11 @@ public class MenuController
     }
   }
 
-  public void onLogoClick() throws IOException {
+  public void onLogoClick(){
     viewHandler.setView(viewHandler.menu(), viewHandler.welcomePage());
   }
 
-  public void logInOutButton() throws IOException {
+  public void logInOutButton(){
     if (menuViewModel.checkUserType().equals("Administrator") ||
             (menuViewModel.checkUserType().equals("Member"))) {
       Stage stage = (Stage) viewHandler.getStage().getScene().getWindow();
@@ -73,7 +73,7 @@ public class MenuController
     }
   }
 
-  public void onReportedMembersButton () throws IOException {
+  public void onReportedMembersButton (){
     if (menuViewModel.checkUserType().equals("Member")){
       menuViewModel.setMemberRentals();
         viewHandler.setView(viewHandler.menu(), viewHandler.manageAccount());
@@ -85,7 +85,7 @@ public class MenuController
       }
   }
 
-    public void onChatButton() throws IOException {
+    public void onChatButton(){
     menuViewModel.loadAllReceivedMessages();
     menuViewModel.loadAllWarnings();
     viewHandler.setView(viewHandler.menu(), viewHandler.chatReceived());

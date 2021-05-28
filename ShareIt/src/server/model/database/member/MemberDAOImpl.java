@@ -18,9 +18,16 @@ public class MemberDAOImpl implements MemberDAO{
         DriverManager.registerDriver(new org.postgresql.Driver());
     }
 
-    public static synchronized MemberDAOImpl getInstance() throws SQLException {
+    public static synchronized MemberDAOImpl getInstance(){
         if(instance == null){
-            instance = new MemberDAOImpl();
+            try
+            {
+                instance = new MemberDAOImpl();
+            }
+            catch (SQLException throwables)
+            {
+                throwables.printStackTrace();
+            }
         }
         return instance;
     }
@@ -79,7 +86,7 @@ public class MemberDAOImpl implements MemberDAO{
      * @throws SQLException
      */
     @Override
-    public List<Member> readByUsername(String username) throws SQLException {
+    public List<Member> readByUsername(String username){
         try(Connection connection = getConnection()){
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM share_it.member WHERE username ILIKE ?");
             statement.setString(1, "%"+username+"%");
@@ -100,6 +107,11 @@ public class MemberDAOImpl implements MemberDAO{
             }
             return arrayListToReturn;
         }
+        catch (SQLException throwables)
+        {
+            throwables.printStackTrace();
+        }
+        return null;
     }
 
     /**
@@ -164,7 +176,7 @@ public class MemberDAOImpl implements MemberDAO{
      * @throws SQLException
      */
     @Override
-    public boolean delete(Member member) throws SQLException {
+    public boolean delete(Member member){
         try (Connection connection = getConnection()) {
             PreparedStatement statement = connection
                     .prepareStatement("DELETE FROM share_it.member WHERE id = ?");
@@ -172,6 +184,11 @@ public class MemberDAOImpl implements MemberDAO{
             statement.executeUpdate();
             return true;
         }
+        catch (SQLException throwables)
+        {
+            throwables.printStackTrace();
+        }
+        return false;
     }
 
     /**
@@ -181,19 +198,33 @@ public class MemberDAOImpl implements MemberDAO{
      * @throws SQLException
      */
     @Override
-    public Member getMemberById(int id) throws SQLException{
-        try(Connection connection = getConnection()){
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM share_it.member WHERE id = ?");
-            statement.setInt(1, id);
-            ResultSet resultSet = statement.executeQuery();
+    public Member getMemberById(int id){
+            try (Connection connection = getConnection())
+            {
+                PreparedStatement statement = connection.prepareStatement(
+                    "SELECT * FROM share_it.member WHERE id = ?");
+                statement.setInt(1, id);
+                ResultSet resultSet = statement.executeQuery();
 
-            if(resultSet.next()){
-                return new Member(resultSet.getInt("id"), resultSet.getString("username"), resultSet.getString("password"), resultSet.getString("email_address"), resultSet.getString("phone_number"), resultSet.getString("other_information"), resultSet.getString("address_street"), resultSet.getString("address_no"), resultSet.getInt("address_postal_code"), resultSet.getString("address_city_name"),resultSet.getFloat("average_review"));
+                if (resultSet.next())
+                {
+                    return new Member(resultSet.getInt("id"), resultSet.getString("username"),
+                        resultSet.getString("password"), resultSet.getString("email_address"),
+                        resultSet.getString("phone_number"), resultSet.getString("other_information"),
+                        resultSet.getString("address_street"), resultSet.getString("address_no"),
+                        resultSet.getInt("address_postal_code"), resultSet.getString("address_city_name"),
+                        resultSet.getFloat("average_review"));
+                }
+                else
+                {
+                    throw new SQLException("No keys generated");
+                }
             }
-            else{
-                throw new SQLException("No keys generated");
+            catch (SQLException throwables)
+            {
+                throwables.printStackTrace();
             }
-        }
+        return null;
     }
 
     /**
@@ -225,7 +256,7 @@ public class MemberDAOImpl implements MemberDAO{
      * @throws SQLException
      */
     @Override
-    public String checkLogInCredentials(String username, String password) throws SQLException{
+    public String checkLogInCredentials(String username, String password){
         try(Connection connection = getConnection()){
             PreparedStatement statement = connection.prepareStatement("SELECT username FROM share_it.member WHERE username = ? AND password = ?");
             statement.setString(1, username);
@@ -256,29 +287,46 @@ public class MemberDAOImpl implements MemberDAO{
      * @throws SQLException
      */
     @Override
-    public Member getMemberByUsername(String username) throws SQLException{
-        try(Connection connection = getConnection()){
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM share_it.member WHERE username = ?");
-            statement.setString(1, username);
-            ResultSet resultSet = statement.executeQuery();
+    public Member getMemberByUsername(String username){
+            try (Connection connection = getConnection())
+            {
+                PreparedStatement statement = connection.prepareStatement(
+                    "SELECT * FROM share_it.member WHERE username = ?");
+                statement.setString(1, username);
+                ResultSet resultSet = statement.executeQuery();
 
-            if(resultSet.next()){
-                return new Member(resultSet.getInt("id"), resultSet.getString("username"), resultSet.getString("password"), resultSet.getString("email_address"), resultSet.getString("phone_number"), resultSet.getString("other_information"), resultSet.getString("address_street"), resultSet.getString("address_no"), resultSet.getInt("address_postal_code"), resultSet.getString("address_city_name"),resultSet.getFloat("average_review"));
+                if (resultSet.next())
+                {
+                    return new Member(resultSet.getInt("id"), resultSet.getString("username"),
+                        resultSet.getString("password"), resultSet.getString("email_address"),
+                        resultSet.getString("phone_number"), resultSet.getString("other_information"),
+                        resultSet.getString("address_street"), resultSet.getString("address_no"),
+                        resultSet.getInt("address_postal_code"), resultSet.getString("address_city_name"),
+                        resultSet.getFloat("average_review"));
+                }
+                else
+                {
+                    throw new SQLException("No keys generated");
+                }
             }
-            else{
-                throw new SQLException("No keys generated");
+            catch (SQLException throwables)
+            {
+                throwables.printStackTrace();
             }
-        }
+
+        return null;
     }
 
     @Override
-    public List<Member> readMembers() throws SQLException {
-        try(Connection connection = getConnection()){
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM share_it.member");
-            ResultSet resultSet = statement.executeQuery();
-            List<Member> listToReturn = new ArrayList<>();
-            while(resultSet.next()){
-                listToReturn.add(new Member(resultSet.getInt("id"),
+    public List<Member> readMembers(){
+            try (Connection connection = getConnection())
+            {
+                PreparedStatement statement = connection.prepareStatement("SELECT * FROM share_it.member");
+                ResultSet resultSet = statement.executeQuery();
+                List<Member> listToReturn = new ArrayList<>();
+                while (resultSet.next())
+                {
+                    listToReturn.add(new Member(resultSet.getInt("id"),
                         resultSet.getString("username"),
                         resultSet.getString("password"),
                         resultSet.getString("email_address"),
@@ -289,9 +337,14 @@ public class MemberDAOImpl implements MemberDAO{
                         resultSet.getInt("address_postal_code"),
                         resultSet.getString("address_city_name"),
                         resultSet.getFloat("average_review")));
+                }
+                return listToReturn;
             }
-            return listToReturn;
-        }
+            catch (SQLException throwables)
+            {
+                throwables.printStackTrace();
+            }
+        return null;
     }
     @Override
     public List<Member> readMembersIdsAndUsernames() throws SQLException

@@ -84,7 +84,7 @@ public class EditRentalViewModel {
     }
 
 
-    public String onEditRentalButtonPressed(Object selectedState, ObservableList<String> selectedCategory) throws IOException {
+    public String onEditRentalButtonPressed(Object selectedState, ObservableList<String> selectedCategory){
         ArrayList<String> selectedCategoriesList = new ArrayList<>(selectedCategory);
         String path = imageProperty.get().getUrl();
         path = path.replaceAll("file:","");

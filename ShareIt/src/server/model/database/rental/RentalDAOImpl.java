@@ -23,11 +23,18 @@ public class RentalDAOImpl implements RentalDAO
     DriverManager.registerDriver(new org.postgresql.Driver());
   }
 
-  public static synchronized RentalDAOImpl getInstance() throws SQLException
+  public static synchronized RentalDAOImpl getInstance()
   {
     if (instance == null)
     {
-      instance = new RentalDAOImpl();
+      try
+      {
+        instance = new RentalDAOImpl();
+      }
+      catch (SQLException throwables)
+      {
+        throwables.printStackTrace();
+      }
     }
     return instance;
   }
@@ -328,7 +335,7 @@ public class RentalDAOImpl implements RentalDAO
    * @throws SQLException
    * @return
    */
-  @Override public boolean delete(Rental rental) throws SQLException {
+  @Override public boolean delete(Rental rental){
     try (Connection connection = getConnection())
     {
       PreparedStatement statement = connection
@@ -337,6 +344,11 @@ public class RentalDAOImpl implements RentalDAO
       statement.executeUpdate();
       return true;
     }
+    catch (SQLException throwables)
+    {
+      throwables.printStackTrace();
+    }
+    return false;
   }
 
   /**
@@ -367,7 +379,7 @@ public class RentalDAOImpl implements RentalDAO
    * @return list of all rentals that are stored in the database
    * @throws SQLException
    */
-  @Override public List<Rental> readRentals() throws SQLException {
+  @Override public List<Rental> readRentals(){
     try (Connection connection = getConnection()) {
       PreparedStatement statement = connection
           .prepareStatement("SELECT * FROM share_it.rental");
@@ -397,14 +409,14 @@ public class RentalDAOImpl implements RentalDAO
       statement.close();
       return arrayListToReturn;
     }
-    catch (IOException e)
+    catch (SQLException|IOException e)
     {
       e.printStackTrace();
     }
     return null;
   }
 
-  @Override public Rental getLastRental() throws SQLException
+  @Override public Rental getLastRental()
   {
     try (Connection connection = getConnection())
     {
@@ -435,7 +447,7 @@ public class RentalDAOImpl implements RentalDAO
       statement.close();
       return lastRental;
     }
-    catch (IOException e)
+    catch (SQLException|IOException e)
     {
       e.printStackTrace();
     }

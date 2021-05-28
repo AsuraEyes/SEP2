@@ -22,7 +22,7 @@ public class ChatWriteMessageController
   private ViewHandler viewHandler;
   private ChatWriteMessageViewModel chatWriteMessageViewModel;
 
-  public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws IOException {
+  public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory){
     this.viewHandler = viewHandler;
     textChatArea.clear();
     chatWriteMessageViewModel = viewModelFactory.getChatWriteMessagesViewModel();
@@ -33,7 +33,7 @@ public class ChatWriteMessageController
     chatWriteMessageViewModel.loadLogs();
   }
 
-  public void onGoBack() throws IOException {
+  public void onGoBack(){
     textChatArea.clear();
     chatWriteMessageViewModel.loadAllReceivedMessages();
     viewHandler.setView(viewHandler.menu(), viewHandler.chatReceived());

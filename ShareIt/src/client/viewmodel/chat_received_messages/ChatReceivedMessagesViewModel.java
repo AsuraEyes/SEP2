@@ -28,7 +28,7 @@ public class ChatReceivedMessagesViewModel {
   public ArrayList<Warning> getAllReceivedWarnings(){
     return messageModel.getAllWarnings();
   }
-  public void getUsername(Object object) throws RemoteException {
+  public void getUsername(Object object){
     if(object instanceof VBox){
        VBox vBox = (VBox) object;
       if(vBox.getChildren().get(0) instanceof Label) {

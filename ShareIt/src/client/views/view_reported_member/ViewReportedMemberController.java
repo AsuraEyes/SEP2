@@ -16,7 +16,7 @@ public class ViewReportedMemberController {
     private ViewReportedMemberViewModel viewReportedMemberViewModel;
     private ViewHandler viewHandler;
 
-    public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws IOException{
+    public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory){
         this.viewHandler = viewHandler;
         viewReportedMemberViewModel = viewModelFactory.getViewReportedMemberViewModel();
         reportedMemberField.textProperty().bind(viewReportedMemberViewModel.getReportedNameLabel());
@@ -25,17 +25,17 @@ public class ViewReportedMemberController {
         viewReportedMemberViewModel.loadReport();
     }
 
-    public void goBackToReportedMembers() throws IOException {
+    public void goBackToReportedMembers(){
         viewReportedMemberViewModel.loadAllReportedMembers();
         viewHandler.setView(viewHandler.menu(), viewHandler.viewReportedMemberList());
     }
 
-    public void reporterMemberClickedOn() throws IOException {
+    public void reporterMemberClickedOn(){
         viewReportedMemberViewModel.setReporterNameLabel();
         viewHandler.setView(viewHandler.menu(),viewHandler.viewMemberProfile());
     }
 
-    public void reportedMemberClickedOn() throws IOException {
+    public void reportedMemberClickedOn(){
         viewReportedMemberViewModel.setReportedNameLabel();
         viewHandler.setView(viewHandler.menu(),viewHandler.viewMemberProfile());
     }

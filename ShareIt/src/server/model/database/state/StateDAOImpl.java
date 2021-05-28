@@ -18,9 +18,17 @@ public class StateDAOImpl implements StateDAO
     DriverManager.registerDriver(new org.postgresql.Driver());
   }
 
-  public static synchronized StateDAOImpl getInstance() throws SQLException{
+  public static synchronized StateDAOImpl getInstance()
+  {
     if(instance == null){
-      instance = new StateDAOImpl();
+      try
+      {
+        instance = new StateDAOImpl();
+      }
+      catch (SQLException throwables)
+      {
+        throwables.printStackTrace();
+      }
     }
     return instance;
   }
@@ -39,16 +47,22 @@ public class StateDAOImpl implements StateDAO
    * @throws SQLException
    */
   @Override public List<State> readState()
-      throws SQLException
   {
-    try(Connection connection = getConnection()){
-      PreparedStatement statement = connection.prepareStatement("SELECT * FROM share_it.state");
-      ResultSet resultSet = statement.executeQuery();
-      ArrayList<State> arrayListToReturn = new ArrayList<>();
-      while(resultSet.next()){
-        arrayListToReturn.add(new State(resultSet.getString("name")));
+      try (Connection connection = getConnection())
+      {
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM share_it.state");
+        ResultSet resultSet = statement.executeQuery();
+        ArrayList<State> arrayListToReturn = new ArrayList<>();
+        while (resultSet.next())
+        {
+          arrayListToReturn.add(new State(resultSet.getString("name")));
+        }
+        return arrayListToReturn;
       }
-      return arrayListToReturn;
-    }
+      catch (SQLException throwables)
+      {
+        throwables.printStackTrace();
+      }
+    return null;
   }
 }

@@ -15,9 +15,16 @@ public class AdministratorDAOImpl implements AdministratorDAO
     DriverManager.registerDriver(new org.postgresql.Driver());
   }
 
-  public static synchronized AdministratorDAOImpl getInstance() throws SQLException{
+  public static synchronized AdministratorDAOImpl getInstance(){
     if(instance == null){
-      instance = new AdministratorDAOImpl();
+      try
+      {
+        instance = new AdministratorDAOImpl();
+      }
+      catch (SQLException throwables)
+      {
+        throwables.printStackTrace();
+      }
     }
     return instance;
   }
@@ -26,7 +33,8 @@ public class AdministratorDAOImpl implements AdministratorDAO
     this.password = password;
   }
 
-  private Connection getConnection() throws SQLException {
+  private Connection getConnection() throws SQLException
+  {
     return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=share_it", "postgres", password);
   }
 
