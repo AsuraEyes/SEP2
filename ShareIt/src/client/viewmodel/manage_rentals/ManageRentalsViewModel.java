@@ -52,7 +52,7 @@ public class ManageRentalsViewModel {
                 nameOfRental.setValue("Name: " + rental.getName());
                 descriptionOfRental.setValue("Description: " + rental.getDescription());
                 stateOfRental.setValue("State: " + rental.getStateName());
-                priceOfRental.setValue("Price: " + (rental.getPrice()));
+                priceOfRental.setValue("Price: " + (rental.getPrice()) + " DKK/day");
                 imageProperty.setValue(new Image(rental.getPictureLink()));
                 if(rental.getOtherInformation() !=null)
                 {
