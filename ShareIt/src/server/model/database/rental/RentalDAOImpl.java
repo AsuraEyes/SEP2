@@ -242,20 +242,43 @@ public class RentalDAOImpl implements RentalDAO
 
   /**
    *
-   * @param name
+   * @param
    * @return
    * @throws SQLException
    */
-  @Override public List<Rental> readByName(String name) throws SQLException
+  @Override public Rental getRentalById(int id)
   {
     try (Connection connection = getConnection())
     {
       PreparedStatement statement = connection
-          .prepareStatement("SELECT * FROM share_it.rental WHERE name LIKE ?");
-      statement.setString(1, "%" + name + "%");
-      ArrayList<Rental> arrayListToReturn = new ArrayList<>();
-      return arrayListToReturn;
+          .prepareStatement("SELECT * FROM share_it.rental WHERE id = ?");
+      statement.setInt(1, id);
+      ResultSet resultSet = statement.executeQuery();
+
+      if (resultSet.next())
+      {
+        String filename = "image"+resultSet.getInt("id")+".jpeg";
+        byte[] imgBytes = resultSet.getBytes(3);
+        Files.write(new File(filename).toPath(), imgBytes);
+
+        int rentalId = resultSet.getInt("id");
+        String rentalName = resultSet.getString("name");
+        String rentalDescription = resultSet.getString("description");
+        int priceOfRental = resultSet.getInt("price");
+        String rentalOtherInformation = resultSet.getString("other_information");
+        String rentalState = resultSet.getString("state_name");
+        int memberId = resultSet.getInt("member_id");
+
+        new Rental(rentalId, rentalName, "file:" + filename, rentalDescription,
+                priceOfRental, rentalOtherInformation, rentalState, memberId,
+                RentalCategoryDAOImpl.getInstance().getSelectedCategoriesOnRental(rentalId));
+      }
     }
+    catch (SQLException | IOException throwables)
+    {
+      throwables.printStackTrace();
+    }
+    return null;
   }
 
   /**

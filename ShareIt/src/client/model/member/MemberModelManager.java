@@ -8,6 +8,7 @@ import com.sun.webkit.Timer;
 import shared.transferobjects.Member;
 import shared.transferobjects.Report;
 
+import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.IOException;
@@ -29,7 +30,14 @@ public class MemberModelManager implements MemberModel
     this.client = client;
     support = new PropertyChangeSupport(this);
     allReports = new ArrayList<>();
+    client.addListener("deleteMember", this::onMemberDelete);
   }
+
+  private void onMemberDelete(PropertyChangeEvent evt)
+  {
+    modelFactory.getRentalModel().updateRentalsAfterMemberDelete((Member)evt.getNewValue());
+  }
+
   @Override public String checkMemberData(String username, String password,
       String confirmPassword, String email, String phone,
       String otherInformation, String street, String streetNo,
@@ -121,12 +129,7 @@ public class MemberModelManager implements MemberModel
 
   @Override public boolean deleteMember(Member member)
   {
-    if(client.deleteMember(member))
-    {
-      modelFactory.getRentalModel().loadRentals();
-      return true;
-    }
-    return false;
+    return client.deleteMember(member);
   }
 
   @Override public void addListener(String propertyName,

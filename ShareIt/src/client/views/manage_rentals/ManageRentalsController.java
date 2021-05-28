@@ -65,6 +65,7 @@ public class ManageRentalsController {
 
         Optional<ButtonType> result2 = alert.showAndWait();
         if (result2.get() == ButtonType.OK) {
+          manageRentalsViewModel.setAllMemberRentals();
           viewHandler.setView(viewHandler.menu(), viewHandler.manageAccount());
         }
       }

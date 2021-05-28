@@ -1,9 +1,6 @@
 package client.model.rental;
 
-import shared.transferobjects.Category;
-import shared.transferobjects.City;
-import shared.transferobjects.Rental;
-import shared.transferobjects.State;
+import shared.transferobjects.*;
 import shared.util.Subject;
 
 import java.io.IOException;
@@ -27,4 +24,5 @@ public interface RentalModel extends Subject
   void setSelectedRental(Rental rental);
   Rental getSelectedRental();
   void loadRentals();
+  void updateRentalsAfterMemberDelete(Member member);
 }

@@ -22,14 +22,6 @@ public interface RentalDAO {
      */
     Rental create(String name, String pictureLink, String description, int price, String otherInformation, String stateName, String username, ArrayList<String> selectedCategories) throws SQLException;
 
-
-    /**
-     *
-     * @param name
-     * @return
-     * @throws SQLException
-     */
-    List<Rental> readByName(String name) throws SQLException;
     /**
      * Checks all the rentals with given value
      * @param search
@@ -79,5 +71,6 @@ public interface RentalDAO {
      * @return list of rentals that are matching with members username
      */
     ArrayList<Integer> getRentalsOfMemberList(String username)throws SQLException;
+    Rental getRentalById(int id);
 
 }

@@ -3,10 +3,7 @@ package client.model.rental;
 import client.core.ModelFactory;
 import client.model.state.StateManager;
 import client.network.Client;
-import shared.transferobjects.Category;
-import shared.transferobjects.City;
-import shared.transferobjects.Rental;
-import shared.transferobjects.State;
+import shared.transferobjects.*;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -31,7 +28,35 @@ public class RentalModelManager implements RentalModel
     allMemberRentals = new ArrayList<>();
     support = new PropertyChangeSupport(this);
     client.addListener("newRental", this::onNewRental);
+    client.addListener("deleteRental", this::onDeleteRental);
+    client.addListener("updateRental", this::onUpdateRental);
     loadRentals();
+  }
+
+  private void onUpdateRental(PropertyChangeEvent evt)
+  {
+    Rental updatedRental = (Rental) evt.getNewValue();
+    for (int i = 0; i < allRentals.size(); i++)
+    {
+      if(allRentals.get(i).getId() == updatedRental.getId())
+      {
+        allRentals.remove(allRentals.get(i));
+        allRentals.add(updatedRental);
+      }
+    }
+  }
+
+  private void onDeleteRental(PropertyChangeEvent evt)
+  {
+    Rental deletedRental = (Rental) evt.getNewValue();
+    for (int i = 0; i < allRentals.size(); i++)
+    {
+      if(allRentals.get(i).getId() == deletedRental.getId())
+      {
+        allRentals.remove(allRentals.get(i));
+        allMemberRentals.remove(allRentals.get(i));
+      }
+    }
   }
 
   public void onNewRental(PropertyChangeEvent evt){
@@ -106,19 +131,7 @@ public class RentalModelManager implements RentalModel
 
   @Override public boolean deleteRental(Rental rental)
   {
-    if(client.deleteRental(rental))
-    {
-      for (int i = 0; i < allRentals.size(); i++)
-      {
-        if (allRentals.get(i).getId() == rental.getId())
-        {
-          allMemberRentals.remove(allRentals.get(i));
-          allRentals.remove(allRentals.get(i));
-        }
-      }
-      return true;
-    }
-    return false;
+    return client.deleteRental(rental);
   }
 
   @Override public void setSelectedRental(Rental rental)
@@ -142,5 +155,16 @@ public class RentalModelManager implements RentalModel
   @Override
   public void loadRentals(){
     allRentals = client.getRentalsList();
+  }
+  @Override
+  public void updateRentalsAfterMemberDelete(Member member){
+      for (int i = 0; i < allRentals.size(); i++)
+      {
+        if(member.getId() == allRentals.get(i).getMemberId())
+        {
+          allRentals.remove(allRentals.get(i));
+        }
+      }
+
   }
 }

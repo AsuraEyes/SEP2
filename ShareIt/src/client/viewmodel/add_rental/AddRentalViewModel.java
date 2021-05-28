@@ -85,4 +85,7 @@ public class AddRentalViewModel {
         categoriesList = FXCollections.observableArrayList(categoryListString);
         return categoriesList;
     }
+    public void setAllMemberRentals(){
+        rentalModel.setAllMemberRentals(memberModel.getLoggedInUsername());
+    }
 }

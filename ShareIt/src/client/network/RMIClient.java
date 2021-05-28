@@ -414,5 +414,18 @@ public class RMIClient implements Client, RemoteObserver
     {
       support.firePropertyChange("newRental", 0, newValue);
     }
+    if(propertyName.equals("deleteRental"))
+    {
+      support.firePropertyChange("deleteRental", 0, newValue);
+    }
+    if(propertyName.equals("deleteMember"))
+    {
+      support.firePropertyChange("deleteMember", 0, newValue);
+    }
+    if(propertyName.equals("updateRental"))
+    {
+      support.firePropertyChange("updateRental", 0, newValue);
+    }
+
   }
 }

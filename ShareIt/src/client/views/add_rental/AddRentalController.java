@@ -81,7 +81,7 @@ public class AddRentalController {
             descriptionField.clear();
             priceField.clear();
             otherInfoField.clear();
-
+            addRentalViewModel.setAllMemberRentals();
             viewHandler.setView(viewHandler.menu(), viewHandler.manageAccount());
           }
           break;

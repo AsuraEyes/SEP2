@@ -48,8 +48,9 @@ public class RMIServerImpl implements RMIServer
     serverModelManager.addListener("newMessage", listener);
     serverModelManager.addListener("newWarning", listener);
     serverModelManager.addListener("newRental", listener);
-    serverModelManager.addListener("onDelete", listener);
-
+    serverModelManager.addListener("deleteRental", listener);
+    serverModelManager.addListener("deleteMember", listener);
+    serverModelManager.addListener("updateRental", listener);
   }
 
   @Override

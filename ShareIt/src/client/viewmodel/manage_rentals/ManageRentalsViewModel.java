@@ -111,4 +111,7 @@ public class ManageRentalsViewModel {
     {
         memberModel.setMemberUsername(memberModel.getLoggedInUsername());
     }
+    public void setAllMemberRentals(){
+        rentalModel.setAllMemberRentals(memberModel.getLoggedInUsername());
+    }
 }

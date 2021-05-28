@@ -67,7 +67,12 @@ public class ServerModelImpl implements ServerModelManager
 
   @Override
   public String updateCheckRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, int rentalId, ArrayList<String> selectedCategories) {
-    return dataCheckRental.updateCheckRentalData(name, pictureLink, description, price, otherInformation, stateName, rentalId, selectedCategories);
+    String message = dataCheckRental.updateCheckRentalData(name, pictureLink, description, price, otherInformation, stateName, rentalId, selectedCategories);
+    if(message.equals(""))
+    {
+      support.firePropertyChange("updateRental", 0, RentalDAOImpl.getInstance().getRentalById(rentalId));
+    }
+    return message;
   }
 
   @Override
@@ -133,7 +138,12 @@ public class ServerModelImpl implements ServerModelManager
 
   @Override
   public boolean deleteMember(Member member) {
-      return MemberDAOImpl.getInstance().delete(member);
+    if(MemberDAOImpl.getInstance().delete(member))
+    {
+      support.firePropertyChange("deleteMember", 0, member);
+      return true;
+    }
+    return false;
   }
 
   @Override public Rating getRating(String fromUsername, String toUsername) {
@@ -153,7 +163,12 @@ public class ServerModelImpl implements ServerModelManager
   }
 
   @Override public boolean deleteRental(Rental rental) {
-      return RentalDAOImpl.getInstance().delete(rental);
+    if(RentalDAOImpl.getInstance().delete(rental))
+    {
+      support.firePropertyChange("deleteRental", 0, rental);
+      return true;
+    }
+    return false;
   }
 
   @Override
