@@ -42,7 +42,7 @@ public class ManageAccountViewModel {
 
     public void setProfile(){
         Member member = memberModel.getMemberByUsername(memberModel.getLoggedInUsername());
-        usernameLabel.setValue("Username: " + memberModel.getMemberUsername());
+        usernameLabel.setValue("Username: " + member.getUsername());
         locationLabel.setValue("Location: " + member.getAddressCity());
         ratingLabel.setValue("Rating: " + (member.getAverageReview()));
         addressLabel.setValue("Address: " + member.getAddressStreet() + ", " + member.getAddressNo());
@@ -103,6 +103,6 @@ public class ManageAccountViewModel {
     }
 
     public void setMember() {
-        memberModel.setMemberUsername(usernameLabel.getValue());
+        memberModel.setMemberUsername(usernameLabel.getValue().substring(10));
     }
 }

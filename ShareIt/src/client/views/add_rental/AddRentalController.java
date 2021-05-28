@@ -77,6 +77,11 @@ public class AddRentalController {
           Optional<ButtonType> result = alert.showAndWait();
           if (result.get() == ButtonType.OK)
           {
+            nameField.clear();
+            descriptionField.clear();
+            priceField.clear();
+            otherInfoField.clear();
+
             viewHandler.setView(viewHandler.menu(), viewHandler.manageAccount());
           }
           break;
@@ -85,10 +90,6 @@ public class AddRentalController {
       }
 
     }
-    nameField.clear();
-    descriptionField.clear();
-    priceField.clear();
-    otherInfoField.clear();
   }
 
   public void addPictureButton() {
