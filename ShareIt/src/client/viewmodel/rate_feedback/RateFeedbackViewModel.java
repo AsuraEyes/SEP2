@@ -9,6 +9,7 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import shared.transferobjects.Rating;
+import shared.transferobjects.Rental;
 
 import java.io.IOException;
 
@@ -51,11 +52,11 @@ public class RateFeedbackViewModel
   public String getMemberUsername()
   {
     usernameLabel.setValue(memberModel.getMemberUsername());
-    getRating();
+    setRating();
     return memberModel.getMemberUsername();
   }
 
-  public void getRating()
+  public void setRating()
   {
     Rating rating = messageModel.getRating(memberModel.getLoggedInUsername(),
         memberModel.getMemberUsername());
@@ -80,11 +81,18 @@ public class RateFeedbackViewModel
   }
   public String onSubmitButtonPressed()
   {
-    if(!addFeedback().equals("Added"))
+    Rating rating = messageModel.getRating(memberModel.getLoggedInUsername(),
+        memberModel.getMemberUsername());
+    if(rating != null)
     {
-      updateFeedback();
-      return "updated";
+      if(!rating.getCommentary().equals(commentaryTextArea.getValue()) || rating.getRating() != ratingProperty.getValue())
+      {
+        updateFeedback();
+        return "updated";
+      }
     }
+    else
+      addFeedback();
     return "created";
   }
 }
