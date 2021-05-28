@@ -132,10 +132,10 @@ public class ViewRentalViewModel
   }
 
   public void setMemberUsername(){
-    memberModel.setMemberUsername(usernameOfRental.getValue());
+    memberModel.setMemberUsername(usernameOfRental.getValue().substring(10));
   }
   public void setMemberRentals(){
-    rentalModel.setAllMemberRentals(usernameOfRental.getValue());
+    rentalModel.setAllMemberRentals(usernameOfRental.getValue().substring(10));
   }
 
   public String getUserType(){

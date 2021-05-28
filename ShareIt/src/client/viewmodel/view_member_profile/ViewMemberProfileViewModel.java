@@ -110,7 +110,7 @@ public class ViewMemberProfileViewModel
   }
 
   public void loadMemberInformation(){
-    Member member = memberModel.getMemberByUsername(memberModel.getLoggedInUsername());
+    Member member = memberModel.getMemberByUsername(memberModel.getMemberUsername());
     usernameLabel.setValue("Username: " + memberModel.getMemberUsername());
     locationLabel.setValue("Location: " + member.getAddressCity());
     ratingLabel.setValue("Rating: " + (member.getAverageReview()));

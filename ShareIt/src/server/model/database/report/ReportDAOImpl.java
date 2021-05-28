@@ -55,7 +55,6 @@ public class ReportDAOImpl implements ReportDAO
       statement.setInt(2,memberId1);
       statement.setInt(3,memberId2);
 
-      System.out.println(statement);
       statement.executeUpdate();
 
       return new Report(feedback,memberId1,memberId2);

@@ -41,18 +41,18 @@ public class ViewReportedMemberViewModel {
 
     public void loadReport(){
         Report report = memberModel.getSelectedReport();
-        reporterNameLabel.setValue(report.getUsernameFrom());
-        reportedNameLabel.setValue(report.getUsernameTo());
+        reporterNameLabel.setValue("Reporter: " + report.getUsernameFrom());
+        reportedNameLabel.setValue("Reported: " + report.getUsernameTo());
         commentaryLabel.setValue(report.getCommentary());
     }
 
     public void setReportedNameLabel() {
-        memberModel.setMemberUsername(reportedNameLabel.getValue());
+        memberModel.setMemberUsername(reportedNameLabel.getValue().substring(10));
     }
 
     public void setReporterNameLabel()
     {
-        memberModel.setMemberUsername(reporterNameLabel.getValue());
+        memberModel.setMemberUsername(reporterNameLabel.getValue().substring(10));
     }
     public void loadAllReportedMembers(){
         memberModel.setReportList();

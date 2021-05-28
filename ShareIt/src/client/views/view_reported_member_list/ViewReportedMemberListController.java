@@ -29,21 +29,24 @@ public class ViewReportedMemberListController {
     {
         if (reports != null && !reports.isEmpty()) {
             for (int i = 0; i < reports.size(); i++) {
-                Label reportedNameLabel = new Label(reports.get(i).getUsernameTo());
+                String reportedUsername = reports.get(i).getUsernameTo();
+                Label reportedNameLabel = new Label("Reported: " + reportedUsername);
                 reportedNameLabel.getStyleClass().add("reported");
 
-                Label reporterNameLabel = new Label(reports.get(i).getUsernameFrom());
+                String reporterUsername = reports.get(i).getUsernameFrom();
+                Label reporterNameLabel = new Label("Reporter: " + reporterUsername);
                 reporterNameLabel.getStyleClass().add("reporter");
 
                 VBox littleVBox = new VBox();
                 littleVBox.getChildren().addAll(reportedNameLabel,reporterNameLabel);
+                littleVBox.setPadding(new Insets(20,160,20,160));
                 littleVBox.getStyleClass().add("littleVbox");
 
                 vBox.getChildren().addAll(littleVBox);
                 vBox.getStyleClass().add("vbox");
                 vBox.getChildren().get(i)
                     .addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
-                        viewReportedMemberListViewModel.setUsernames(reporterNameLabel.getText(), reportedNameLabel.getText());
+                        viewReportedMemberListViewModel.setUsernames(reporterUsername, reportedUsername);
                         viewHandler.setView(viewHandler.menu(), viewHandler.viewReportedMember());
                     });
             }
