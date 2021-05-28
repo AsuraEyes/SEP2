@@ -77,7 +77,7 @@ public class AddRentalController {
           Optional<ButtonType> result = alert.showAndWait();
           if (result.get() == ButtonType.OK)
           {
-            viewHandler.setView(viewHandler.menu(), viewHandler.welcomePage());
+            viewHandler.setView(viewHandler.menu(), viewHandler.manageAccount());
           }
           break;
         default:
@@ -85,6 +85,10 @@ public class AddRentalController {
       }
 
     }
+    nameField.clear();
+    descriptionField.clear();
+    priceField.clear();
+    otherInfoField.clear();
   }
 
   public void addPictureButton() {

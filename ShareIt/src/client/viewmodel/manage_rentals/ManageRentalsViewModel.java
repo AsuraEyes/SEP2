@@ -107,4 +107,8 @@ public class ManageRentalsViewModel {
         return imageProperty;
     }
 
+    public void setMemberUsername()
+    {
+        memberModel.setMemberUsername(memberModel.getLoggedInUsername());
+    }
 }

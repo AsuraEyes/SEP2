@@ -108,12 +108,12 @@ public class RentalModelManager implements RentalModel
   {
     if(client.deleteRental(rental))
     {
-      for (Rental allRental : allRentals)
+      for (int i = 0; i < allRentals.size(); i++)
       {
-        if (allRental.getId() == rental.getId())
+        if (allRentals.get(i).getId() == rental.getId())
         {
-          allMemberRentals.remove(allRental);
-          allRentals.remove(allRental);
+          allMemberRentals.remove(allRentals.get(i));
+          allRentals.remove(allRentals.get(i));
         }
       }
       return true;

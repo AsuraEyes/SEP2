@@ -72,6 +72,7 @@ public class ManageRentalsController {
   }
 
   public void goBackToProfileOverviewButton(){
+    manageRentalsViewModel.setMemberUsername();
     viewHandler.setView(viewHandler.menu(), viewHandler.manageAccount());
   }
 }
