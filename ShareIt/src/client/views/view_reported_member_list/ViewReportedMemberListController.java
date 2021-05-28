@@ -10,7 +10,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import shared.transferobjects.Report;
 
-import java.io.IOException;
 import java.util.List;
 
 public class ViewReportedMemberListController {
@@ -32,13 +31,13 @@ public class ViewReportedMemberListController {
                 String reportedUsername = reports.get(i).getUsernameTo();
                 Label reportedNameLabel = new Label("Reported: " + reportedUsername);
                 reportedNameLabel.getStyleClass().add("reported");
-
                 String reporterUsername = reports.get(i).getUsernameFrom();
                 Label reporterNameLabel = new Label("Reporter: " + reporterUsername);
                 reporterNameLabel.getStyleClass().add("reporter");
 
+
                 VBox littleVBox = new VBox();
-                littleVBox.getChildren().addAll(reportedNameLabel,reporterNameLabel);
+                littleVBox.getChildren().addAll(reportedNameLabel, reporterNameLabel);
                 littleVBox.setPadding(new Insets(20,160,20,160));
                 littleVBox.getStyleClass().add("littleVbox");
 
