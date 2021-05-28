@@ -97,7 +97,7 @@ public class RentalModelManager implements RentalModel
     allMemberRentals.clear();
     ArrayList<Integer> rentalsId = client.getRentalsOfMemberList(username);
     for (Integer integer : rentalsId) {
-      for (Rental allRental : allRentals) {
+      for (Rental allRental : allRentals){
         if (integer == allRental.getId())
           allMemberRentals.add(allRental);
       }
