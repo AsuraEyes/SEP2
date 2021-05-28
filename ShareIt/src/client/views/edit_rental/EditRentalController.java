@@ -80,6 +80,7 @@ public class EditRentalController {
                 Optional<ButtonType> result = alert.showAndWait();
                 if (result.get() == ButtonType.OK)
                 {
+                    editRentalViewModel.updateRental();
                     viewHandler.setView(viewHandler.menu(),
                         viewHandler.manageRentals());
                 }

@@ -52,6 +52,7 @@ public class SearchForMemberViewModel {
                 Label label = (Label) vBox.getChildren().get(0);
                 String username = label.getText();
                 memberModel.setMemberUsername(username.substring(10));
+                rentalModel.setAllMemberRentals(username.substring(10));
             }
         }
     }

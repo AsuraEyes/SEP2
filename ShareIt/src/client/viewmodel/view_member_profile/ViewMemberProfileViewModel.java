@@ -120,7 +120,7 @@ public class ViewMemberProfileViewModel
   }
 
   public void setMemberUsername() {
-    memberModel.setMemberUsername(usernameLabel.getValue());
+    memberModel.setMemberUsername(usernameLabel.getValue().substring(10));
   }
 
   public boolean deleteAccount(){

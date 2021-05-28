@@ -64,6 +64,7 @@ public class ManageAccountViewModel {
                     for (int i = 0; i < getRentalsOfMemberList().size(); i++) {
                         if(imageView.getId().equals(String.valueOf(getRentalsOfMemberList().get(i).getId()))) {
                             rentalModel.sendSelectedRental(getRentalsOfMemberList().get(i));
+                            rentalModel.setSelectedRental(getRentalsOfMemberList().get(i));
                         }
                     }
                 }

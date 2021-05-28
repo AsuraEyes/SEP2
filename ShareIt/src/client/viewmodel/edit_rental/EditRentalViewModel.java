@@ -118,4 +118,8 @@ public class EditRentalViewModel {
     public ArrayList<String> getCheckedCategories(){
         return rentalModel.getSelectedRental().getSelectedCategories();
     }
+    public void updateRental(){
+        rentalModel.loadRentals();
+        rentalModel.setAllMemberRentals(memberModel.getLoggedInUsername());
+    }
 }

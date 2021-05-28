@@ -48,11 +48,13 @@ public class ViewReportedMemberViewModel {
 
     public void setReportedNameLabel() {
         memberModel.setMemberUsername(reportedNameLabel.getValue().substring(10));
+        rentalModel.setAllMemberRentals(reportedNameLabel.getValue().substring(10));
     }
 
     public void setReporterNameLabel()
     {
         memberModel.setMemberUsername(reporterNameLabel.getValue().substring(10));
+        rentalModel.setAllMemberRentals(reporterNameLabel.getValue().substring(10));
     }
     public void loadAllReportedMembers(){
         memberModel.setReportList();
