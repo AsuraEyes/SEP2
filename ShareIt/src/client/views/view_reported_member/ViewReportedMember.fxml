@@ -27,7 +27,7 @@
                   </Label>
                   <Label fx:id="reportedMemberField" onMouseClicked="#reportedMemberClickedOn" styleClass="reported" stylesheets="@../css/ReportedMember.css" text="Reported member: username" textFill="WHITE">
                      <font>
-                        <Font size="18.0" />
+                        <Font size="24.0" />
                      </font>
                      <VBox.margin>
                         <Insets />
