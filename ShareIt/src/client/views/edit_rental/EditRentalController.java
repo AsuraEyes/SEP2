@@ -62,12 +62,6 @@ public class EditRentalController {
                 .hideAfter(Duration.seconds(3));
     }
 
-    public void searchButton()
-    {
-        notifications.owner(parent).text("Search field cannot be empty")
-                .showError();
-    }
-
     public void editButton() throws IOException {
         if(checkField("Name", nameField) && checkField("Description",descriptionField) && checkField("Price", priceField) && checkPicture(imageView)){
             String message = editRentalViewModel.onEditRentalButtonPressed(stateBox.getValue(), categoryBox.getCheckModel().getCheckedItems());

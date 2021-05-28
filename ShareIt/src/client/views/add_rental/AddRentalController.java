@@ -104,6 +104,10 @@ public class AddRentalController {
   }
 
   public void onGoBack() throws IOException {
+    nameField.clear();
+    descriptionField.clear();
+    priceField.clear();
+    otherInfoField.clear();
     viewHandler.setView(viewHandler.menu(), viewHandler.manageAccount());
   }
 

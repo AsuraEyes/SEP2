@@ -68,6 +68,15 @@ public class CreateAccountController {
     }
 
     public void goBackToLogInButton() throws IOException {
+        usernameField.clear();
+        passwordField.clear();
+        confirmPasswordField.clear();
+        streetField.clear();
+        streetNumberField.clear();
+        postalCodeField.clear();
+        emailField.clear();
+        telephoneNoField.clear();
+        otherInfoField.clear();
         viewHandler.setView(viewHandler.menu(), viewHandler.logIn());
     }
 
