@@ -2,15 +2,15 @@
     -fx-background-color: #FF8C64;
 }
 
+.label:hover {
+    -fx-background-color: #fff587;
+    -fx-cursor: hand;
+}
+
 .label {
     -fx-text-fill: white;
     -fx-font-family: Californian FB;
     -fx-font-size: 24px;
-}
-
-.label:hover {
-    -fx-text-fill: #fff587;
-    -fx-cursor: hand;
 }
 
 .text {
