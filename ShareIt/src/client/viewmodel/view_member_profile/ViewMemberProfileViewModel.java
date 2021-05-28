@@ -110,13 +110,13 @@ public class ViewMemberProfileViewModel
   }
 
   public void loadMemberInformation(){
-    usernameLabel.setValue(memberModel.getMemberUsername());
+    usernameLabel.setValue("Username: " + memberModel.getMemberUsername());
     Member member = memberModel.getMemberByUsername(memberModel.getMemberUsername());
-    locationLabel.setValue(member.getAddressCity());
-    ratingLabel.setValue(String.valueOf(member.getAverageReview()));
-    addressLabel.setValue(member.getAddressStreet() + ", " + member.getAddressNo());
-    contactLabel.setValue(member.getPhoneNo() + "\n" + member.getEmailAddress());
-    otherInformationLabel.setValue(member.getOtherInformation());
+    locationLabel.setValue("Location: " + member.getAddressCity());
+    ratingLabel.setValue("Rating: " + (member.getAverageReview()));
+    addressLabel.setValue("Address: " + member.getAddressStreet() + ", " + member.getAddressNo());
+    contactLabel.setValue("Contact: " + member.getPhoneNo() + "\n" + member.getEmailAddress());
+    otherInformationLabel.setValue("Other Information: " + member.getOtherInformation());
   }
 
   public void setMemberUsername() {
