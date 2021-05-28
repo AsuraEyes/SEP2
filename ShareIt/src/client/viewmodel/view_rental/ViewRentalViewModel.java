@@ -60,7 +60,7 @@ public class ViewRentalViewModel
         Rental rental = (Rental) evt.getNewValue();
         Member member = memberModel.getMemberById(rental.getMemberId());
 
-        nameOfRental.setValue("Name" + rental.getName());
+        nameOfRental.setValue("Name: " + rental.getName());
         descriptionOfRental.setValue("Description: " + rental.getDescription());
         stateOfRental.setValue("State: " + rental.getStateName());
         priceOfRental.setValue("Price: " + (rental.getPrice()));
