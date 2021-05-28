@@ -188,40 +188,51 @@ public class RentalDAOImpl implements RentalDAO
         }
       }
 
-      String sqlToAppend = "SELECT * FROM share_it.rental WHERE";
-      for (int i = 0; i < listOfIds.size(); i++) {
-        if(i == 0){
-          sqlToAppend += " id="+listOfIds.get(i);
-        }
-        else{
-          sqlToAppend += " OR id="+listOfIds.get(i);
+      String sqlToAppend = "";
+      if(listOfIds.size() != 0)
+      {
+        sqlToAppend = "SELECT * FROM share_it.rental WHERE";
+        for (int i = 0; i < listOfIds.size(); i++)
+        {
+          if (i == 0)
+          {
+            sqlToAppend += " id=" + listOfIds.get(i);
+          }
+          else
+          {
+            sqlToAppend += " OR id=" + listOfIds.get(i);
+          }
         }
       }
       statement = connection.prepareStatement(sqlToAppend);
-      resultSet = statement.executeQuery();
-      ArrayList<Rental> arrayListToReturn = new ArrayList<>();
+      System.out.println(statement);
+      if(!sqlToAppend.isEmpty())
+      {
+        resultSet = statement.executeQuery();
+        ArrayList<Rental> arrayListToReturn = new ArrayList<>();
 
-      while (resultSet.next()) {
-        String filename = "image" + resultSet.getInt("id") + ".jpeg";
-        byte[] imgBytes = resultSet.getBytes(3);
-        Files.write(new File(filename).toPath(), imgBytes);
+        while (resultSet.next())
+        {
+          String filename = "image" + resultSet.getInt("id") + ".jpeg";
+          byte[] imgBytes = resultSet.getBytes(3);
+          Files.write(new File(filename).toPath(), imgBytes);
 
-        int rentalId = resultSet.getInt("id");
-        String rentalName = resultSet.getString("name");
-        String rentalDescription = resultSet.getString("description");
-        int priceOfRental = resultSet.getInt("price");
-        String rentalOtherInformation = resultSet.getString("other_information");
-        String rentalState = resultSet.getString("state_name");
-        int memberId = resultSet.getInt("member_id");
+          int rentalId = resultSet.getInt("id");
+          String rentalName = resultSet.getString("name");
+          String rentalDescription = resultSet.getString("description");
+          int priceOfRental = resultSet.getInt("price");
+          String rentalOtherInformation = resultSet.getString("other_information");
+          String rentalState = resultSet.getString("state_name");
+          int memberId = resultSet.getInt("member_id");
 
-        arrayListToReturn.add(
-                new Rental(rentalId, rentalName, "file:" + filename, rentalDescription,
-                        priceOfRental, rentalOtherInformation, rentalState, memberId,
-                        RentalCategoryDAOImpl.getInstance().getSelectedCategoriesOnRental(rentalId)));
+          arrayListToReturn.add(new Rental(rentalId, rentalName, "file:" + filename,
+              rentalDescription, priceOfRental, rentalOtherInformation,
+              rentalState, memberId, RentalCategoryDAOImpl.getInstance().getSelectedCategoriesOnRental(rentalId)));
+        }
+        resultSet.close();
+        statement.close();
+        return arrayListToReturn;
       }
-      resultSet.close();
-      statement.close();
-      return arrayListToReturn;
     }
     catch (IOException e) {
       e.printStackTrace();
