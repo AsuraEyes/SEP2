@@ -14,13 +14,15 @@ public class MessageDAOImpl implements MessageDAO
   private static MessageDAOImpl instance;
   private String password;
 
-  private MessageDAOImpl()throws SQLException
+  private MessageDAOImpl() throws SQLException
   {
     DriverManager.registerDriver(new org.postgresql.Driver());
   }
 
-  public static synchronized MessageDAOImpl getInstance(){
-    if(instance == null){
+  public static synchronized MessageDAOImpl getInstance()
+  {
+    if (instance == null)
+    {
       try
       {
         instance = new MessageDAOImpl();
@@ -33,17 +35,24 @@ public class MessageDAOImpl implements MessageDAO
     return instance;
   }
 
-  public void setPassword(String password){
+  public void setPassword(String password)
+  {
     this.password = password;
   }
 
-  private Connection getConnection() throws SQLException {
-    return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", password);
+  private Connection getConnection() throws SQLException
+  {
+    return DriverManager
+        .getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres",
+            password);
   }
+
   @Override public ArrayList<Message> getAllReceivedMessages(int loggedUserId)
   {
-    try (Connection connection = getConnection()) {
-      PreparedStatement statement = connection.prepareStatement("SELECT * FROM share_it.message WHERE member_to = ? AND time IN (SELECT MAX(time) FROM share_it.message WHERE member_to = ? GROUP BY member_from) ORDER BY time DESC ;");
+    try (Connection connection = getConnection())
+    {
+      PreparedStatement statement = connection.prepareStatement(
+          "SELECT * FROM share_it.message WHERE member_to = ? AND time IN (SELECT MAX(time) FROM share_it.message WHERE member_to = ? GROUP BY member_from) ORDER BY time DESC ;");
       statement.setInt(1, loggedUserId);
       statement.setInt(2, loggedUserId);
       ResultSet resultSet = statement.executeQuery();
@@ -59,7 +68,7 @@ public class MessageDAOImpl implements MessageDAO
         arrayListToReturn.add(new Message(d2, member.getUsername(), text));
       }
       return arrayListToReturn;
-      }
+    }
     catch (SQLException e)
     {
       e.printStackTrace();
@@ -67,9 +76,11 @@ public class MessageDAOImpl implements MessageDAO
     return null;
   }
 
-  @Override public Message sendMessage(Message message) {
+  @Override public Message sendMessage(Message message)
+  {
 
-    try (Connection connection = getConnection()) {
+    try (Connection connection = getConnection())
+    {
       PreparedStatement statement = connection.prepareStatement(
           "INSERT INTO share_it.message(text, time, member_from, member_to) VALUES (?, ?, ?, ?);",
           PreparedStatement.RETURN_GENERATED_KEYS);
@@ -82,23 +93,27 @@ public class MessageDAOImpl implements MessageDAO
       statement.setInt(4, message.getMemberTo());
       statement.executeUpdate();
 
-      Message returnMessage = new Message(ts, MemberDAOImpl.getInstance().getMemberById(
-          message.getMemberFrom()).getUsername(), message.getText());
+      Message returnMessage = new Message(ts,
+          MemberDAOImpl.getInstance().getMemberById(message.getMemberFrom())
+              .getUsername(), message.getText());
       returnMessage.setMemberFrom(message.getMemberFrom());
       returnMessage.setMemberTo(message.getMemberTo());
       return returnMessage;
     }
-    catch (SQLException e) {
+    catch (SQLException e)
+    {
       e.printStackTrace();
     }
     return null;
   }
 
-    @Override public ArrayList<Message> getMessagesFromUser(int loggedUserId, int fromUserid)
+  @Override public ArrayList<Message> getMessagesFromUser(int loggedUserId,
+      int fromUserid)
   {
-    try (Connection connection = getConnection()) {
-      PreparedStatement statement = connection
-          .prepareStatement("SELECT time, text, username FROM share_it.message, share_it.member WHERE ((member_from = ? AND member_to = ?)OR(member_from = ? AND member_to = ?))AND (member.id = message.member_from) ORDER BY time;");
+    try (Connection connection = getConnection())
+    {
+      PreparedStatement statement = connection.prepareStatement(
+          "SELECT time, text, username FROM share_it.message, share_it.member WHERE ((member_from = ? AND member_to = ?)OR(member_from = ? AND member_to = ?))AND (member.id = message.member_from) ORDER BY time;");
       statement.setInt(1, loggedUserId);
       statement.setInt(2, fromUserid);
       statement.setInt(3, fromUserid);
@@ -106,7 +121,8 @@ public class MessageDAOImpl implements MessageDAO
       ResultSet resultSet = statement.executeQuery();
       ArrayList<Message> arrayListToReturn = new ArrayList<>();
 
-      while (resultSet.next()) {
+      while (resultSet.next())
+      {
         String text = resultSet.getString("text");
         Date d2 = resultSet.getTimestamp("time");
         String username = resultSet.getString("username");
@@ -115,7 +131,8 @@ public class MessageDAOImpl implements MessageDAO
       }
       return arrayListToReturn;
     }
-    catch (SQLException e) {
+    catch (SQLException e)
+    {
       e.printStackTrace();
     }
     return null;

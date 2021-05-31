@@ -6,7 +6,8 @@ public class State implements Serializable
 {
   private String name;
 
-  public State(String name){
+  public State(String name)
+  {
     this.name = name;
   }
 

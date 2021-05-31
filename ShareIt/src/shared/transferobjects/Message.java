@@ -5,24 +5,27 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Message implements Serializable {
+public class Message implements Serializable
+{
   private int memberFrom;
   private String usernameFrom;
   private int memberTo;
   private String text;
   private Date timeStamp;
 
-  public Message(int memberFrom, int memberTo, String text, Date timeStamp) {
+  public Message(int memberFrom, int memberTo, String text, Date timeStamp)
+  {
     this.memberFrom = memberFrom;
     this.memberTo = memberTo;
     this.text = text;
     this.timeStamp = timeStamp;
   }
 
-  public Message(Date timeStamp, String usernameFrom, String text) {
-   this.timeStamp = timeStamp;
-   this.usernameFrom = usernameFrom;
-   this.text = text;
+  public Message(Date timeStamp, String usernameFrom, String text)
+  {
+    this.timeStamp = timeStamp;
+    this.usernameFrom = usernameFrom;
+    this.text = text;
   }
 
   public String getUsernameFrom()
@@ -65,13 +68,15 @@ public class Message implements Serializable {
     return timeStamp;
   }
 
-  public String toString(){
+  public String toString()
+  {
     DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
-    if(timeStamp != null){
+    if (timeStamp != null)
+    {
       String strDate = dateFormat.format(timeStamp);
       return usernameFrom + ": " + strDate + " : " + text;
     }
-    return usernameFrom + ": "+text;
+    return usernameFrom + ": " + text;
 
   }
 }

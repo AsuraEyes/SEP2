@@ -1,8 +1,6 @@
 package client.viewmodel.view_rental;
 
-
 import client.model.member.MemberModel;
-import client.model.message.MessageModel;
 import client.model.rental.RentalModel;
 import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
@@ -19,7 +17,6 @@ public class ViewRentalViewModel
 {
   private RentalModel rentalModel;
   private MemberModel memberModel;
-  private MessageModel messageModel;
 
   private StringProperty nameOfRental;
   private StringProperty descriptionOfRental;
@@ -32,10 +29,10 @@ public class ViewRentalViewModel
   private StringProperty ratingOfUserOfRental;
   private ObjectProperty<Image> imageProperty;
 
-  public ViewRentalViewModel(RentalModel rentalModel, MemberModel memberModel, MessageModel messageModel){
+  public ViewRentalViewModel(RentalModel rentalModel, MemberModel memberModel)
+  {
     this.rentalModel = rentalModel;
     this.memberModel = memberModel;
-    this.messageModel = messageModel;
 
     imageProperty = new SimpleObjectProperty<>();
     nameOfRental = new SimpleStringProperty();
@@ -48,7 +45,7 @@ public class ViewRentalViewModel
     locationOfRental = new SimpleStringProperty();
     ratingOfUserOfRental = new SimpleStringProperty();
 
-    rentalModel.addListener("selectedRental",this::selectedRental);
+    rentalModel.addListener("selectedRental", this::selectedRental);
   }
 
   private void selectedRental(PropertyChangeEvent evt)
@@ -65,13 +62,15 @@ public class ViewRentalViewModel
         stateOfRental.setValue("State: " + rental.getStateName());
         priceOfRental.setValue("Price: " + (rental.getPrice()) + " DKK/day");
         imageProperty.setValue(new Image(rental.getPictureLink()));
-        if(rental.getOtherInformation() !=null)
+        if (rental.getOtherInformation() != null)
         {
-          otherInformationOfRental.setValue("Other Information: " + rental.getOtherInformation());
+          otherInformationOfRental
+              .setValue("Other Information: " + rental.getOtherInformation());
         }
-        if(rental.getSelectedCategories() != null)
+        if (rental.getSelectedCategories() != null)
         {
-          categoryOfRental.setValue("Categories: " + rental.getSelectedCategories().toString());
+          categoryOfRental.setValue(
+              "Categories: " + rental.getSelectedCategories().toString());
         }
         usernameOfRental.setValue("Username: " + member.getUsername());
         locationOfRental.setValue("Location: " + member.getAddressCity());
@@ -94,7 +93,6 @@ public class ViewRentalViewModel
   {
     return stateOfRental;
   }
-
 
   public StringProperty priceOfRentalProperty()
   {
@@ -131,18 +129,23 @@ public class ViewRentalViewModel
     return imageProperty;
   }
 
-  public void setMemberUsername(){
+  public void setMemberUsername()
+  {
     memberModel.setMemberUsername(usernameOfRental.getValue().substring(10));
   }
-  public void setMemberRentals(){
+
+  public void setMemberRentals()
+  {
     rentalModel.setAllMemberRentals(usernameOfRental.getValue().substring(10));
   }
 
-  public String getUserType(){
+  public String getUserType()
+  {
     return memberModel.checkUserType();
   }
 
-  public String getLoggedInUsername(){
+  public String getLoggedInUsername()
+  {
     return memberModel.getLoggedInUsername();
   }
 }

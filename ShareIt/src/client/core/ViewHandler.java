@@ -29,220 +29,272 @@ import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
-public class ViewHandler {
+public class ViewHandler
+{
   private final Stage stage;
   private final Scene scene;
   private final ViewModelFactory viewModelFactory;
 
-    public ViewHandler(Stage stage, ViewModelFactory viewModelFactory) {
+  public ViewHandler(Stage stage, ViewModelFactory viewModelFactory)
+  {
     this.viewModelFactory = viewModelFactory;
     this.stage = stage;
     scene = new Scene(new Region());
   }
 
-  public void start(){
+  public void start()
+  {
     setView(menu(), welcomePage());
   }
 
-  public void setView(Node menu, Node content){
+  public void setView(Node menu, Node content)
+  {
     FXMLLoader loader = new FXMLLoader();
-    loader.setLocation(getClass().getResource("/client/views/main_view/Main.fxml"));
-    loadDotLoad(loader);
+    loader.setLocation(
+        getClass().getResource("/client/views/main_view/Main.fxml"));
+    loaderDotLoad(loader);
     MainController main = loader.getController();
-    main.getMainPane().getChildren().setAll(menu,content);
+    main.getMainPane().getChildren().setAll(menu, content);
     scene.setRoot(main.getMainPane());
     stage.setScene(scene);
     stage.setResizable(false);
     stage.show();
   }
 
-  public Node menu(){
+  public Node menu()
+  {
     FXMLLoader loader = new FXMLLoader();
     loader.setLocation(getClass().getResource("/client/views/menu/Menu.fxml"));
-    Node menu = loadDotLoad(loader);
+    Node menu = loaderDotLoad(loader);
     MenuController menuController = loader.getController();
     menuController.init(this, viewModelFactory);
     return menu;
   }
 
-  public Node addRental(){
+  public Node addRental()
+  {
     FXMLLoader loader = new FXMLLoader();
-    loader.setLocation(getClass().getResource("/client/views/add_rental/AddRental.fxml"));
-    Node content = loadDotLoad(loader);
+    loader.setLocation(
+        getClass().getResource("/client/views/add_rental/AddRental.fxml"));
+    Node content = loaderDotLoad(loader);
     AddRentalController addRentalController = loader.getController();
     addRentalController.init(this, viewModelFactory);
     stage.setTitle("Add Rental");
     return content;
   }
 
-  public Node chatReceived(){
+  public Node chatReceived()
+  {
     FXMLLoader loader = new FXMLLoader();
-    loader.setLocation(getClass().getResource("/client/views/chat_received_messages/ChatReceivedMessages.fxml"));
-    Node content = loadDotLoad(loader);
-    ChatReceivedMessagesController chatReceivedMessagesController = loader.getController();
+    loader.setLocation(getClass().getResource(
+        "/client/views/chat_received_messages/ChatReceivedMessages.fxml"));
+    Node content = loaderDotLoad(loader);
+    ChatReceivedMessagesController chatReceivedMessagesController = loader
+        .getController();
     chatReceivedMessagesController.init(this, viewModelFactory);
     return content;
   }
 
-  public Node chatWrite(){
+  public Node chatWrite()
+  {
     FXMLLoader loader = new FXMLLoader();
-    loader.setLocation(getClass().getResource("/client/views/chat_write_message/ChatWriteMessage.fxml"));
-    Node content = loadDotLoad(loader);
-    ChatWriteMessageController chatWriteMessageController = loader.getController();
+    loader.setLocation(getClass()
+        .getResource("/client/views/chat_write_message/ChatWriteMessage.fxml"));
+    Node content = loaderDotLoad(loader);
+    ChatWriteMessageController chatWriteMessageController = loader
+        .getController();
     chatWriteMessageController.init(this, viewModelFactory);
     return content;
   }
 
-  public Node sendWarning(){
+  public Node sendWarning()
+  {
     FXMLLoader loader = new FXMLLoader();
-    loader.setLocation(getClass().getResource("/client/views/send_warning/SendWarning.fxml"));
-    Node content = loadDotLoad(loader);
+    loader.setLocation(
+        getClass().getResource("/client/views/send_warning/SendWarning.fxml"));
+    Node content = loaderDotLoad(loader);
     SendWarningController sendWarningController = loader.getController();
     sendWarningController.init(this, viewModelFactory);
     return content;
   }
 
-  public Node createAccount(){
+  public Node createAccount()
+  {
     FXMLLoader loader = new FXMLLoader();
-    loader.setLocation(getClass().getResource("/client/views/create_account/CreateAccount.fxml"));
-    Node content = loadDotLoad(loader);
+    loader.setLocation(getClass()
+        .getResource("/client/views/create_account/CreateAccount.fxml"));
+    Node content = loaderDotLoad(loader);
     CreateAccountController createAccountController = loader.getController();
     createAccountController.init(this, viewModelFactory);
     return content;
   }
 
-  public Node logIn(){
+  public Node logIn()
+  {
     FXMLLoader loader = new FXMLLoader();
-    loader.setLocation(getClass().getResource("/client/views/log_in/LogIn.fxml"));
-    Node content = loadDotLoad(loader);
+    loader
+        .setLocation(getClass().getResource("/client/views/log_in/LogIn.fxml"));
+    Node content = loaderDotLoad(loader);
     LogInController logInController = loader.getController();
     logInController.init(this, viewModelFactory);
     return content;
   }
 
-  public Node manageAccount(){
+  public Node manageAccount()
+  {
     FXMLLoader loader = new FXMLLoader();
-    loader.setLocation(getClass().getResource("/client/views/manage_account/ManageAccount.fxml"));
-    Node content = loadDotLoad(loader);
+    loader.setLocation(getClass()
+        .getResource("/client/views/manage_account/ManageAccount.fxml"));
+    Node content = loaderDotLoad(loader);
     ManageAccountController manageAccountController = loader.getController();
     manageAccountController.init(this, viewModelFactory);
     return content;
   }
 
-  public Node editOrDeleteAccount(){
+  public Node editOrDeleteAccount()
+  {
     FXMLLoader loader = new FXMLLoader();
-    loader.setLocation(getClass().getResource("/client/views/edit_account/EditAccount.fxml"));
-    Node content = loadDotLoad(loader);
+    loader.setLocation(
+        getClass().getResource("/client/views/edit_account/EditAccount.fxml"));
+    Node content = loaderDotLoad(loader);
     EditAccountController editAccountController = loader.getController();
     editAccountController.init(this, viewModelFactory);
     return content;
   }
 
-  public Node manageRentals(){
+  public Node manageRentals()
+  {
     FXMLLoader loader = new FXMLLoader();
-    loader.setLocation(getClass().getResource("/client/views/manage_rentals/ManageRentals.fxml"));
-    Node content = loadDotLoad(loader);
+    loader.setLocation(getClass()
+        .getResource("/client/views/manage_rentals/ManageRentals.fxml"));
+    Node content = loaderDotLoad(loader);
     ManageRentalsController manageRentalsController = loader.getController();
     manageRentalsController.init(this, viewModelFactory);
     return content;
   }
 
-  public Node editRental(){
+  public Node editRental()
+  {
     FXMLLoader loader = new FXMLLoader();
-    loader.setLocation(getClass().getResource("/client/views/edit_rental/EditRental.fxml"));
-    Node content = loadDotLoad(loader);
+    loader.setLocation(
+        getClass().getResource("/client/views/edit_rental/EditRental.fxml"));
+    Node content = loaderDotLoad(loader);
     EditRentalController editRentalController = loader.getController();
     editRentalController.init(this, viewModelFactory);
     return content;
   }
 
-  public Node rateFeedback(){
+  public Node rateFeedback()
+  {
     FXMLLoader loader = new FXMLLoader();
-    loader.setLocation(getClass().getResource("/client/views/rate_feedback/RateFeedback.fxml"));
-    Node content = loadDotLoad(loader);
+    loader.setLocation(getClass()
+        .getResource("/client/views/rate_feedback/RateFeedback.fxml"));
+    Node content = loaderDotLoad(loader);
     RateFeedbackController rateFeedbackController = loader.getController();
     rateFeedbackController.init(this, viewModelFactory);
     return content;
   }
 
-  public Node reportMember(){
+  public Node reportMember()
+  {
     FXMLLoader loader = new FXMLLoader();
-    loader.setLocation(getClass().getResource("/client/views/report_member/ReportMember.fxml"));
-    Node content = loadDotLoad(loader);
+    loader.setLocation(getClass()
+        .getResource("/client/views/report_member/ReportMember.fxml"));
+    Node content = loaderDotLoad(loader);
     ReportMemberController reportMemberController = loader.getController();
     reportMemberController.init(this, viewModelFactory);
     return content;
   }
 
-  public Node searchForMember(){
+  public Node searchForMember()
+  {
     FXMLLoader loader = new FXMLLoader();
-    loader.setLocation(getClass().getResource("/client/views/search_for_member/SearchForMember.fxml"));
-    Node content = loadDotLoad(loader);
-    SearchForMemberController searchForMemberController = loader.getController();
+    loader.setLocation(getClass()
+        .getResource("/client/views/search_for_member/SearchForMember.fxml"));
+    Node content = loaderDotLoad(loader);
+    SearchForMemberController searchForMemberController = loader
+        .getController();
     searchForMemberController.init(this, viewModelFactory);
     return content;
   }
 
-  public Node searchForRental(){
+  public Node searchForRental()
+  {
     FXMLLoader loader = new FXMLLoader();
-    loader.setLocation(getClass().getResource("/client/views/search_for_rental/SearchForRental.fxml"));
-    Node content = loadDotLoad(loader);
-    SearchForRentalController searchForRentalController = loader.getController();
+    loader.setLocation(getClass()
+        .getResource("/client/views/search_for_rental/SearchForRental.fxml"));
+    Node content = loaderDotLoad(loader);
+    SearchForRentalController searchForRentalController = loader
+        .getController();
     searchForRentalController.init(this, viewModelFactory);
     return content;
   }
 
-  public Node viewMemberProfile(){
+  public Node viewMemberProfile()
+  {
     FXMLLoader loader = new FXMLLoader();
-    loader.setLocation(getClass().getResource("/client/views/view_member_profile/ViewMemberProfile.fxml"));
-    Node content = loadDotLoad(loader);
-    ViewMemberProfileController viewMemberProfileController = loader.getController();
-    viewMemberProfileController.init(this,viewModelFactory);
+    loader.setLocation(getClass().getResource(
+        "/client/views/view_member_profile/ViewMemberProfile.fxml"));
+    Node content = loaderDotLoad(loader);
+    ViewMemberProfileController viewMemberProfileController = loader
+        .getController();
+    viewMemberProfileController.init(this, viewModelFactory);
     return content;
   }
 
-  public Node viewRating(){
+  public Node viewRating()
+  {
     FXMLLoader loader = new FXMLLoader();
-    loader.setLocation(getClass().getResource("/client/views/view_rating/ViewRating.fxml"));
-    Node content = loadDotLoad(loader);
+    loader.setLocation(
+        getClass().getResource("/client/views/view_rating/ViewRating.fxml"));
+    Node content = loaderDotLoad(loader);
     ViewRatingController viewRatingController = loader.getController();
     viewRatingController.init(this, viewModelFactory);
     return content;
   }
 
-  public Node viewRental(){
+  public Node viewRental()
+  {
     FXMLLoader loader = new FXMLLoader();
-    loader.setLocation(getClass().getResource("/client/views/view_rental/ViewRental.fxml"));
-    Node content = loadDotLoad(loader);
+    loader.setLocation(
+        getClass().getResource("/client/views/view_rental/ViewRental.fxml"));
+    Node content = loaderDotLoad(loader);
     ViewRentalController viewRentalController = loader.getController();
-    viewRentalController.init(this,viewModelFactory);
+    viewRentalController.init(this, viewModelFactory);
     return content;
   }
 
-  public Node viewReportedMember(){
+  public Node viewReportedMember()
+  {
     FXMLLoader loader = new FXMLLoader();
-    loader.setLocation(getClass().getResource("/client/views/view_reported_member/ViewReportedMember.fxml"));
-    Node content = loadDotLoad(loader);
-    ViewReportedMemberController viewReportedMemberController = loader.getController();
+    loader.setLocation(getClass().getResource(
+        "/client/views/view_reported_member/ViewReportedMember.fxml"));
+    Node content = loaderDotLoad(loader);
+    ViewReportedMemberController viewReportedMemberController = loader
+        .getController();
     viewReportedMemberController.init(this, viewModelFactory);
     return content;
   }
 
-  public Node viewReportedMemberList(){
+  public Node viewReportedMemberList()
+  {
     FXMLLoader loader = new FXMLLoader();
-    loader.setLocation(getClass().getResource("/client/views/view_reported_member_list/ViewReportedMemberList.fxml"));
-    Node content = loadDotLoad(loader);
-    ViewReportedMemberListController viewReportedMemberListController = loader.getController();
+    loader.setLocation(getClass().getResource(
+        "/client/views/view_reported_member_list/ViewReportedMemberList.fxml"));
+    Node content = loaderDotLoad(loader);
+    ViewReportedMemberListController viewReportedMemberListController = loader
+        .getController();
     viewReportedMemberListController.init(this, viewModelFactory);
     return content;
   }
 
-  public Node welcomePage(){
+  public Node welcomePage()
+  {
     FXMLLoader loader = new FXMLLoader();
-    loader.setLocation(getClass().getResource("/client/views/welcome_page/WelcomePage.fxml"));
-    Node content = loadDotLoad(loader);
+    loader.setLocation(
+        getClass().getResource("/client/views/welcome_page/WelcomePage.fxml"));
+    Node content = loaderDotLoad(loader);
     WelcomePageController welcomePageController = loader.getController();
     welcomePageController.init(this, viewModelFactory);
     return content;
@@ -252,7 +304,8 @@ public class ViewHandler {
   {
     return stage;
   }
-  private Node loadDotLoad(FXMLLoader loader)
+
+  private Node loaderDotLoad(FXMLLoader loader)
   {
     try
     {
@@ -262,7 +315,7 @@ public class ViewHandler {
     {
       e.printStackTrace();
     }
-    return  null;
+    return null;
   }
 
 }

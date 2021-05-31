@@ -1,25 +1,21 @@
 package client.viewmodel.log_in;
 
-
 import client.model.member.MemberModel;
-import client.model.message.MessageModel;
-import client.model.rental.RentalModel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class LogInViewModel {
-  private RentalModel rentalModel;
+public class LogInViewModel
+{
+
+  private StringProperty userName;
+  private StringProperty searchField;
+  private StringProperty passwordField;
   private MemberModel memberModel;
-  private MessageModel messageModel;
 
-  private final StringProperty userName;
-  private final StringProperty searchField;
-  private final StringProperty passwordField;
+  public LogInViewModel(MemberModel memberModel)
+  {
 
-  public LogInViewModel(RentalModel rentalModel, MemberModel memberModel, MessageModel messageModel){
-    this.rentalModel = rentalModel;
     this.memberModel = memberModel;
-    this.messageModel = messageModel;
 
     userName = new SimpleStringProperty();
     searchField = new SimpleStringProperty();
@@ -41,7 +37,12 @@ public class LogInViewModel {
     return passwordField;
   }
 
-  public String onLogInButton() {
-    return memberModel.checkLogInCredentials(userName.getValue(), passwordField.getValue());
+  public String onLogInButton()
+  {
+    return memberModel
+        .checkLogInCredentials(userName.getValue(), passwordField.getValue());
+  }
+  public void setUserType(String userType){
+    memberModel.setUserType(userType,userName.getValue());
   }
 }

@@ -6,7 +6,8 @@ public class Category implements Serializable
 {
   private String name;
 
-  public Category(String name){
+  public Category(String name)
+  {
     this.name = name;
   }
 
@@ -20,7 +21,8 @@ public class Category implements Serializable
     this.name = name;
   }
 
-  public String toString(){
+  public String toString()
+  {
     return name;
   }
 }

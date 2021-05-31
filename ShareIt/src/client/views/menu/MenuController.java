@@ -2,7 +2,6 @@ package client.views.menu;
 
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
-import client.model.state.StateManager;
 import client.model.state.VisitorState;
 import client.viewmodel.menu.MenuViewModel;
 import javafx.fxml.FXML;
@@ -12,7 +11,6 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.util.Optional;
 
 public class MenuController
@@ -25,67 +23,80 @@ public class MenuController
   private ViewHandler viewHandler;
   private MenuViewModel menuViewModel;
 
-  public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory){
+  public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory)
+  {
     this.viewHandler = viewHandler;
     menuViewModel = viewModelFactory.getMenuViewModel();
     usernameLabel.textProperty().bind(menuViewModel.getUsernameLabel());
 
     String userType = menuViewModel.checkUserType();
 
-    if (userType.equals("Visitor")) {
+    if (userType.equals("Visitor"))
+    {
       reportedMembersButton.setVisible(false);
       chatButton.setVisible(false);
 
     }
-    else if (userType.equals("Member")) {
+    else if (userType.equals("Member"))
+    {
       reportedMembersButton.setVisible(true);
       reportedMembersButton.setText("Manage account");
       chatButton.setVisible(true);
       logInOutLabel.setText("Log out");
     }
-    else if (userType.equals("Administrator")) {
+    else if (userType.equals("Administrator"))
+    {
       reportedMembersButton.setVisible(true);
       chatButton.setVisible(false);
       logInOutLabel.setText("Log out");
     }
   }
 
-  public void onLogoClick(){
+  public void onLogoClick()
+  {
     viewHandler.setView(viewHandler.menu(), viewHandler.welcomePage());
   }
 
-  public void logInOutButton(){
-    if (menuViewModel.checkUserType().equals("Administrator") ||
-            (menuViewModel.checkUserType().equals("Member"))) {
+  public void logInOutButton()
+  {
+    if (menuViewModel.checkUserType().equals("Administrator") || (menuViewModel
+        .checkUserType().equals("Member")))
+    {
       Stage stage = (Stage) viewHandler.getStage().getScene().getWindow();
       Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "");
       alert.initOwner(stage);
       alert.getDialogPane().setContentText("Are you sure you want to log out?");
 
       Optional<ButtonType> result = alert.showAndWait();
-      if (result.get() == ButtonType.OK) {
-        StateManager.getInstance().setLoginState(new VisitorState());
+      if (result.get() == ButtonType.OK)
+      {
+        menuViewModel.setUserType("visitor");
         viewHandler.setView(viewHandler.menu(), viewHandler.welcomePage());
       }
     }
-    else {
+    else
+    {
       viewHandler.setView(viewHandler.menu(), viewHandler.logIn());
     }
   }
 
-  public void onReportedMembersButton (){
-    if (menuViewModel.checkUserType().equals("Member")){
+  public void onReportedMembersButton()
+  {
+    if (menuViewModel.checkUserType().equals("Member"))
+    {
       menuViewModel.setMemberRentals();
-        viewHandler.setView(viewHandler.menu(), viewHandler.manageAccount());
-      }
-      else {
-        menuViewModel.loadAllReportedMembers();
-        viewHandler
-                .setView(viewHandler.menu(), viewHandler.viewReportedMemberList());
-      }
+      viewHandler.setView(viewHandler.menu(), viewHandler.manageAccount());
+    }
+    else
+    {
+      menuViewModel.loadAllReportedMembers();
+      viewHandler
+          .setView(viewHandler.menu(), viewHandler.viewReportedMemberList());
+    }
   }
 
-    public void onChatButton(){
+  public void onChatButton()
+  {
     menuViewModel.loadAllReceivedMessages();
     menuViewModel.loadAllWarnings();
     viewHandler.setView(viewHandler.menu(), viewHandler.chatReceived());

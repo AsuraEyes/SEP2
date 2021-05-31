@@ -22,7 +22,8 @@ import client.viewmodel.view_reported_member.ViewReportedMemberViewModel;
 import client.viewmodel.view_reported_member_list.ViewReportedMemberListViewModel;
 import client.viewmodel.welcome_page.WelcomePageViewModel;
 
-public class ViewModelFactory {
+public class ViewModelFactory
+{
   private ModelFactory modelFactory;
 
   private LogInViewModel logInViewModel;
@@ -47,158 +48,217 @@ public class ViewModelFactory {
   private ManageAccountViewModel manageAccountViewModel;
   private SendWarningViewModel sendWarningViewModel;
 
-  public ViewModelFactory(ModelFactory modelFactory){
+  public ViewModelFactory(ModelFactory modelFactory)
+  {
     this.modelFactory = modelFactory;
   }
 
-  public LogInViewModel getLogInViewModel(){
-    if(logInViewModel == null) {
-      logInViewModel = new LogInViewModel(modelFactory.getRentalModel(), modelFactory.getMemberModel(), modelFactory.getMessageModel());
+  public LogInViewModel getLogInViewModel()
+  {
+    if (logInViewModel == null)
+    {
+      logInViewModel = new LogInViewModel(modelFactory.getMemberModel());
     }
     return logInViewModel;
   }
 
-  public ChatReceivedMessagesViewModel getChatReceivedMessagesViewModel(){
-    if(chatReceivedMessagesViewModel == null)
+  public ChatReceivedMessagesViewModel getChatReceivedMessagesViewModel()
+  {
+    if (chatReceivedMessagesViewModel == null)
     {
       chatReceivedMessagesViewModel = new ChatReceivedMessagesViewModel(
-          modelFactory.getRentalModel(), modelFactory.getMemberModel(), modelFactory.getMessageModel());
+          modelFactory.getMemberModel(), modelFactory.getMessageModel());
     }
     return chatReceivedMessagesViewModel;
   }
 
-
-  public ChatWriteMessageViewModel getChatWriteMessagesViewModel(){
-    if(chatWriteMessageViewModel == null)
+  public ChatWriteMessageViewModel getChatWriteMessagesViewModel()
+  {
+    if (chatWriteMessageViewModel == null)
     {
       chatWriteMessageViewModel = new ChatWriteMessageViewModel(
-          modelFactory.getRentalModel(), modelFactory.getMemberModel(), modelFactory.getMessageModel());
+          modelFactory.getMemberModel(), modelFactory.getMessageModel());
     }
     return chatWriteMessageViewModel;
   }
 
-  public AddRentalViewModel getAddRentalViewModel(){
-    if (addRentalViewModel == null){
-      addRentalViewModel = new AddRentalViewModel(modelFactory.getRentalModel(), modelFactory.getMemberModel(), modelFactory.getMessageModel());
+  public AddRentalViewModel getAddRentalViewModel()
+  {
+    if (addRentalViewModel == null)
+    {
+      addRentalViewModel = new AddRentalViewModel(modelFactory.getRentalModel(),
+          modelFactory.getMemberModel());
     }
     return addRentalViewModel;
   }
 
-  public WelcomePageViewModel getWelcomePageViewModel(){
-    if (welcomePageViewModel == null){
-      welcomePageViewModel = new WelcomePageViewModel(modelFactory.getRentalModel(), modelFactory.getMemberModel(), modelFactory.getMessageModel());
+  public WelcomePageViewModel getWelcomePageViewModel()
+  {
+    if (welcomePageViewModel == null)
+    {
+      welcomePageViewModel = new WelcomePageViewModel(
+          modelFactory.getMemberModel(), modelFactory.getMessageModel());
     }
     return welcomePageViewModel;
   }
 
-  public CreateAccountViewModel getCreateAccountViewModel(){
-    if (createAccountViewModel == null){
-      createAccountViewModel = new CreateAccountViewModel(modelFactory.getRentalModel(), modelFactory.getMemberModel(), modelFactory.getMessageModel());
+  public CreateAccountViewModel getCreateAccountViewModel()
+  {
+    if (createAccountViewModel == null)
+    {
+      createAccountViewModel = new CreateAccountViewModel(
+          modelFactory.getRentalModel(), modelFactory.getMemberModel());
     }
     return createAccountViewModel;
   }
 
-  public SearchForRentalViewModel getSearchForRentalViewModel(){
-    if (searchForRentalViewModel == null){
-      searchForRentalViewModel = new SearchForRentalViewModel(modelFactory.getRentalModel(), modelFactory.getMemberModel(), modelFactory.getMessageModel());
+  public SearchForRentalViewModel getSearchForRentalViewModel()
+  {
+    if (searchForRentalViewModel == null)
+    {
+      searchForRentalViewModel = new SearchForRentalViewModel(
+          modelFactory.getRentalModel(), modelFactory.getMessageModel());
     }
     return searchForRentalViewModel;
   }
 
-  public SearchForMemberViewModel getSearchForMemberViewModel(){
-    if (searchForMemberViewModel == null){
-      searchForMemberViewModel = new SearchForMemberViewModel(modelFactory.getRentalModel(), modelFactory.getMemberModel(), modelFactory.getMessageModel());
+  public SearchForMemberViewModel getSearchForMemberViewModel()
+  {
+    if (searchForMemberViewModel == null)
+    {
+      searchForMemberViewModel = new SearchForMemberViewModel(
+          modelFactory.getRentalModel(), modelFactory.getMemberModel(),
+          modelFactory.getMessageModel());
     }
     return searchForMemberViewModel;
   }
 
-  public ViewRatingViewModel getViewRatingViewModel(){
-    if (viewRatingViewModel == null){
-      viewRatingViewModel = new ViewRatingViewModel(modelFactory.getRentalModel(), modelFactory.getMemberModel(), modelFactory.getMessageModel());
+  public ViewRatingViewModel getViewRatingViewModel()
+  {
+    if (viewRatingViewModel == null)
+    {
+      viewRatingViewModel = new ViewRatingViewModel(
+          modelFactory.getMemberModel(), modelFactory.getMessageModel());
     }
     return viewRatingViewModel;
   }
 
-  public ViewReportedMemberViewModel getViewReportedMemberViewModel(){
-    if (viewReportedMemberViewModel == null){
-      viewReportedMemberViewModel = new ViewReportedMemberViewModel(modelFactory.getRentalModel(), modelFactory.getMemberModel(), modelFactory.getMessageModel());
+  public ViewReportedMemberViewModel getViewReportedMemberViewModel()
+  {
+    if (viewReportedMemberViewModel == null)
+    {
+      viewReportedMemberViewModel = new ViewReportedMemberViewModel(
+          modelFactory.getRentalModel(), modelFactory.getMemberModel());
     }
     return viewReportedMemberViewModel;
   }
 
-  public ViewReportedMemberListViewModel getViewReportedMemberListViewModel(){
-    if (viewReportedMemberListViewModel == null){
-      viewReportedMemberListViewModel = new ViewReportedMemberListViewModel(modelFactory.getRentalModel(), modelFactory.getMemberModel(), modelFactory.getMessageModel());
+  public ViewReportedMemberListViewModel getViewReportedMemberListViewModel()
+  {
+    if (viewReportedMemberListViewModel == null)
+    {
+      viewReportedMemberListViewModel = new ViewReportedMemberListViewModel(
+          modelFactory.getMemberModel());
     }
     return viewReportedMemberListViewModel;
   }
 
-  public MenuViewModel getMenuViewModel(){
-    if(menuViewModel == null) {
-      menuViewModel = new MenuViewModel(modelFactory.getRentalModel(), modelFactory.getMemberModel(), modelFactory.getMessageModel());
+  public MenuViewModel getMenuViewModel()
+  {
+    if (menuViewModel == null)
+    {
+      menuViewModel = new MenuViewModel(modelFactory.getRentalModel(),
+          modelFactory.getMemberModel(), modelFactory.getMessageModel());
     }
     return menuViewModel;
   }
 
-  public ViewMemberProfileViewModel getViewMemberProfileViewModel(){
-    if(viewMemberProfileViewModel == null) {
-      viewMemberProfileViewModel = new ViewMemberProfileViewModel(modelFactory.getRentalModel(), modelFactory.getMemberModel(), modelFactory.getMessageModel());
+  public ViewMemberProfileViewModel getViewMemberProfileViewModel()
+  {
+    if (viewMemberProfileViewModel == null)
+    {
+      viewMemberProfileViewModel = new ViewMemberProfileViewModel(
+          modelFactory.getRentalModel(), modelFactory.getMemberModel());
     }
     return viewMemberProfileViewModel;
   }
 
-  public ViewRentalViewModel getViewRentalViewModel(){
-    if(viewRentalViewModel == null) {
-      viewRentalViewModel = new ViewRentalViewModel(modelFactory.getRentalModel(), modelFactory.getMemberModel(), modelFactory.getMessageModel());
+  public ViewRentalViewModel getViewRentalViewModel()
+  {
+    if (viewRentalViewModel == null)
+    {
+      viewRentalViewModel = new ViewRentalViewModel(
+          modelFactory.getRentalModel(), modelFactory.getMemberModel());
     }
     return viewRentalViewModel;
   }
 
-  public ReportMemberViewModel getReportMemberViewModel(){
-    if(reportMemberViewModel == null) {
-      reportMemberViewModel = new ReportMemberViewModel(modelFactory.getRentalModel(), modelFactory.getMemberModel(), modelFactory.getMessageModel());
+  public ReportMemberViewModel getReportMemberViewModel()
+  {
+    if (reportMemberViewModel == null)
+    {
+      reportMemberViewModel = new ReportMemberViewModel(
+          modelFactory.getMemberModel(), modelFactory.getMessageModel());
     }
     return reportMemberViewModel;
   }
 
-  public RateFeedbackViewModel getRateFeedbackViewModel(){
-    if (rateFeedbackViewModel == null) {
-      rateFeedbackViewModel = new RateFeedbackViewModel(modelFactory.getRentalModel(), modelFactory.getMemberModel(), modelFactory.getMessageModel());
+  public RateFeedbackViewModel getRateFeedbackViewModel()
+  {
+    if (rateFeedbackViewModel == null)
+    {
+      rateFeedbackViewModel = new RateFeedbackViewModel(
+          modelFactory.getMemberModel(), modelFactory.getMessageModel());
     }
     return rateFeedbackViewModel;
   }
 
-  public EditRentalViewModel getEditRentalViewModel(){
-    if (editRentalViewModel == null){
-      editRentalViewModel = new EditRentalViewModel(modelFactory.getRentalModel(), modelFactory.getMemberModel(), modelFactory.getMessageModel());
+  public EditRentalViewModel getEditRentalViewModel()
+  {
+    if (editRentalViewModel == null)
+    {
+      editRentalViewModel = new EditRentalViewModel(
+          modelFactory.getRentalModel(), modelFactory.getMemberModel());
     }
     return editRentalViewModel;
   }
 
-  public ManageRentalsViewModel getManageRentalsViewModel(){
-    if (manageRentalsViewModel == null){
-      manageRentalsViewModel = new ManageRentalsViewModel(modelFactory.getRentalModel(), modelFactory.getMemberModel(), modelFactory.getMessageModel());
+  public ManageRentalsViewModel getManageRentalsViewModel()
+  {
+    if (manageRentalsViewModel == null)
+    {
+      manageRentalsViewModel = new ManageRentalsViewModel(
+          modelFactory.getRentalModel(), modelFactory.getMemberModel());
     }
     return manageRentalsViewModel;
   }
 
-  public EditAccountViewModel getEditAccountViewModel(){
-    if (editAccountViewModel == null){
-      editAccountViewModel = new EditAccountViewModel(modelFactory.getRentalModel(), modelFactory.getMemberModel(), modelFactory.getMessageModel());
+  public EditAccountViewModel getEditAccountViewModel()
+  {
+    if (editAccountViewModel == null)
+    {
+      editAccountViewModel = new EditAccountViewModel(
+          modelFactory.getRentalModel(), modelFactory.getMemberModel());
     }
     return editAccountViewModel;
   }
 
-  public ManageAccountViewModel getManageAccountViewModel(){
-    if (manageAccountViewModel == null){
-      manageAccountViewModel = new ManageAccountViewModel(modelFactory.getRentalModel(), modelFactory.getMemberModel(), modelFactory.getMessageModel());
+  public ManageAccountViewModel getManageAccountViewModel()
+  {
+    if (manageAccountViewModel == null)
+    {
+      manageAccountViewModel = new ManageAccountViewModel(
+          modelFactory.getRentalModel(), modelFactory.getMemberModel());
     }
     return manageAccountViewModel;
   }
 
-  public SendWarningViewModel getSendWarningViewModel(){
-    if (sendWarningViewModel == null){
-      sendWarningViewModel = new SendWarningViewModel(modelFactory.getRentalModel(), modelFactory.getMemberModel(), modelFactory.getMessageModel());
+  public SendWarningViewModel getSendWarningViewModel()
+  {
+    if (sendWarningViewModel == null)
+    {
+      sendWarningViewModel = new SendWarningViewModel(
+          modelFactory.getMemberModel(), modelFactory.getMessageModel());
     }
     return sendWarningViewModel;
   }
