@@ -164,6 +164,5 @@ public class RentalModelManager implements RentalModel
           allRentals.remove(allRentals.get(i));
         }
       }
-
   }
 }
