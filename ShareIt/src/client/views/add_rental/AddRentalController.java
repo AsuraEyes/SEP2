@@ -72,7 +72,7 @@ public class AddRentalController {
           alert.setTitle("Confirmation");
           alert.setHeaderText("New rental successfully created");
           alert.initOwner(stage);
-          alert.getDialogPane().setContentText("Click ok to get to welcome page.");
+          alert.getDialogPane().setContentText("Click ok to get to manage account page.");
 
           Optional<ButtonType> result = alert.showAndWait();
           if (result.get() == ButtonType.OK)
