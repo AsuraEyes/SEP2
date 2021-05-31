@@ -131,7 +131,7 @@ public class EditAccountViewModel
     boolean deleteSuccessful = memberModel.deleteMember(member);
     if (deleteSuccessful)
     {
-      memberModel.setUserType("visitor");
+      memberModel.setUserType("visitor", null);
     }
     return deleteSuccessful;
   }

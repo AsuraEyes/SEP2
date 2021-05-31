@@ -74,6 +74,6 @@ public class MenuViewModel
 
   public void setUserType(String userType)
   {
-    memberModel.setUserType(userType);
+    memberModel.setUserType(userType,memberModel.getLoggedInUsername());
   }
 }

@@ -43,6 +43,6 @@ public class LogInViewModel
         .checkLogInCredentials(userName.getValue(), passwordField.getValue());
   }
   public void setUserType(String userType){
-    memberModel.setUserType(userType);
+    memberModel.setUserType(userType,userName.getValue());
   }
 }

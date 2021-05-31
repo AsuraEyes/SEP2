@@ -24,7 +24,7 @@ public interface MemberModel extends Subject
   void setMemberUsername(String memberUsername);
   Member getMemberByUsername(String memberUsername);
   List<Member> getMembersList();
-  void setUserType(String userType);
+  void setUserType(String userType, String memberUsername);
 
   List<Member> checkSearchForMember(String value);
 

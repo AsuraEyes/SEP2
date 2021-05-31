@@ -114,7 +114,7 @@ public class MemberModelManager implements MemberModel
     return client.getMembersList();
   }
 
-  @Override public void setUserType(String userType)
+  @Override public void setUserType(String userType, String memberUsername)
   {
     switch (userType)
     {
@@ -127,7 +127,7 @@ public class MemberModelManager implements MemberModel
         break;
       case "member":
         StateManager.getInstance()
-            .setLoginState(new MemberState(getLoggedInUsername()));
+            .setLoginState(new MemberState(memberUsername));
         break;
     }
 

@@ -47,6 +47,7 @@ public class LogInController
         passwordField))
     {
       String memberUsername = logInViewModel.onLogInButton();
+      System.out.println(memberUsername);
 
       if (memberUsername != null)
       {
