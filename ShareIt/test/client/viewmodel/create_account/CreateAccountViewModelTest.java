@@ -34,17 +34,17 @@ class CreateAccountViewModelTest {
     private ModelFactory modelFactory;
 
     @BeforeEach
-    public void setup() throws IOException, SQLException {
+    public void setup(){
         ClientFactory clientFactory = new ClientFactory();
         modelFactory = new ModelFactory(clientFactory);
-        rentalModel = new RentalModelManager(clientFactory.getClient());
+        rentalModel = new RentalModelManager(clientFactory.getClient(), modelFactory);
         memberModel = new MemberModelManager(clientFactory.getClient(), modelFactory);
         messageModel = new MessageModelManager(clientFactory.getClient());
-        vm = new CreateAccountViewModel(rentalModel, memberModel, messageModel);
+        vm = new CreateAccountViewModel(rentalModel, memberModel);
     }
 
     @Test
-    public void createValidUser() throws IOException {
+    public void createValidUser(){
         //arrange
         StringProperty usernameField = new SimpleStringProperty();
         StringProperty passwordField = new SimpleStringProperty();
@@ -83,7 +83,7 @@ class CreateAccountViewModelTest {
     }
 
     @Test
-    public void notMatchingPasswords() throws IOException {
+    public void notMatchingPasswords(){
         //arrange
         StringProperty usernameField = new SimpleStringProperty();
         StringProperty passwordField = new SimpleStringProperty();
@@ -120,7 +120,7 @@ class CreateAccountViewModelTest {
     }
 
     @Test
-    public void notMatchingPasswordsCaseInsensitive() throws IOException {
+    public void notMatchingPasswordsCaseInsensitive(){
         //arrange
         StringProperty usernameField = new SimpleStringProperty();
         StringProperty passwordField = new SimpleStringProperty();
@@ -157,7 +157,7 @@ class CreateAccountViewModelTest {
     }
 
     @Test
-    public void usernameTaken() throws IOException {
+    public void usernameTaken(){
         //arrange
         StringProperty usernameField = new SimpleStringProperty();
         StringProperty passwordField = new SimpleStringProperty();
@@ -194,7 +194,7 @@ class CreateAccountViewModelTest {
     }
 
     @Test
-    public void zeroContactGiven() throws IOException {
+    public void zeroContactGiven(){
         StringProperty usernameField = new SimpleStringProperty();
         StringProperty passwordField = new SimpleStringProperty();
         StringProperty confirmPasswordField = new SimpleStringProperty();
@@ -230,7 +230,7 @@ class CreateAccountViewModelTest {
     }
 
     @Test
-    public void oneContactGivenEmail() throws IOException {
+    public void oneContactGivenEmail(){
         StringProperty usernameField = new SimpleStringProperty();
         StringProperty passwordField = new SimpleStringProperty();
         StringProperty confirmPasswordField = new SimpleStringProperty();
@@ -266,7 +266,7 @@ class CreateAccountViewModelTest {
     }
 
     @Test
-    public void oneContactGivenTelephone() throws IOException {
+    public void oneContactGivenTelephone(){
         StringProperty usernameField = new SimpleStringProperty();
         StringProperty passwordField = new SimpleStringProperty();
         StringProperty confirmPasswordField = new SimpleStringProperty();
@@ -302,7 +302,7 @@ class CreateAccountViewModelTest {
     }
 
     @Test
-    public void bothContactInformationGiven() throws IOException {
+    public void bothContactInformationGiven(){
         StringProperty usernameField = new SimpleStringProperty();
         StringProperty passwordField = new SimpleStringProperty();
         StringProperty confirmPasswordField = new SimpleStringProperty();
@@ -338,7 +338,7 @@ class CreateAccountViewModelTest {
     }
 
     @Test
-    public void invalidPostalCode() throws IOException {
+    public void invalidPostalCode(){
         StringProperty usernameField = new SimpleStringProperty();
         StringProperty passwordField = new SimpleStringProperty();
         StringProperty confirmPasswordField = new SimpleStringProperty();

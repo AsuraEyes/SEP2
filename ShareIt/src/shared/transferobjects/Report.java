@@ -16,6 +16,7 @@ public class Report implements Serializable
     this.memberFrom = memberFrom;
     this.memberTo = memberTo;
   }
+
   public String getUsernameFrom()
   {
     return usernameFrom;
@@ -35,7 +36,6 @@ public class Report implements Serializable
   {
     this.usernameTo = usernameTo;
   }
-
 
   public String getCommentary()
   {

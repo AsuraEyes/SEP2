@@ -8,7 +8,6 @@ import client.model.message.MessageModel;
 import client.model.message.MessageModelManager;
 import client.model.rental.RentalModel;
 import client.model.rental.RentalModelManager;
-import client.viewmodel.create_account.CreateAccountViewModel;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -19,14 +18,10 @@ import javafx.embed.swing.JFXPanel;
 import javafx.scene.image.Image;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import shared.transferobjects.Category;
-import shared.transferobjects.Member;
-import shared.transferobjects.State;
 
 import javax.swing.*;
 
-import static org.junit.jupiter.api.Assertions.*;
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AddRentalViewModelTest
 {
@@ -38,12 +33,13 @@ public class AddRentalViewModelTest
 
   @BeforeEach public void setup()
   {
-      ClientFactory clientFactory = new ClientFactory();
-      modelFactory = new ModelFactory(clientFactory);
-      rentalModel = new RentalModelManager(clientFactory.getClient());
-      memberModel = new MemberModelManager(clientFactory.getClient(), modelFactory);
-      messageModel = new MessageModelManager(clientFactory.getClient());
-      vm = new AddRentalViewModel(rentalModel, memberModel, messageModel);
+    ClientFactory clientFactory = new ClientFactory();
+    modelFactory = new ModelFactory(clientFactory);
+    rentalModel = new RentalModelManager(clientFactory.getClient(), modelFactory);
+    memberModel = new MemberModelManager(clientFactory.getClient(),
+        modelFactory);
+    messageModel = new MessageModelManager(clientFactory.getClient());
+    vm = new AddRentalViewModel(rentalModel, memberModel);
 
     JFrame frame = new JFrame("Java Swing And JavaFX");
     JFXPanel jfxPanel = new JFXPanel();
@@ -58,7 +54,6 @@ public class AddRentalViewModelTest
     StringProperty otherInfoField = new SimpleStringProperty();
     ObjectProperty<Image> imageProperty = new SimpleObjectProperty<>();
 
-
     vm.getNameField().bind(nameField);
     vm.getDescriptionField().bind(descriptionField);
     vm.getPriceField().bind(priceField);
@@ -72,10 +67,10 @@ public class AddRentalViewModelTest
 
     imageProperty.setValue(new Image("file:image1.jpeg"));
 
-    ObservableList<String> objects = FXCollections.observableArrayList("Tools","Kitchenware");
+    ObservableList<String> objects = FXCollections
+        .observableArrayList("Tools", "Kitchenware");
 
     String result = vm.onAddRentalButtonPressed("New", objects);
-
 
     assertEquals("Adding successful", result);
 
@@ -105,7 +100,8 @@ public class AddRentalViewModelTest
     otherInfoField.setValue("otherinfo");
     imageProperty.setValue(new Image("file:image1.jpeg"));
 
-    ObservableList<String> objects = FXCollections.observableArrayList("Tools","Kitchenware");
+    ObservableList<String> objects = FXCollections
+        .observableArrayList("Tools", "Kitchenware");
 
     String result = vm.onAddRentalButtonPressed("New", objects);
     assertEquals("Name cannot be empty", result);
@@ -137,8 +133,8 @@ public class AddRentalViewModelTest
     otherInfoField.setValue("otherinfo");
     imageProperty.setValue(new Image("file:image1.jpeg"));
 
-
-    ObservableList<String> objects = FXCollections.observableArrayList("Tools","Kitchenware");
+    ObservableList<String> objects = FXCollections
+        .observableArrayList("Tools", "Kitchenware");
     String result = vm.onAddRentalButtonPressed("New", objects);
     assertEquals("Description cannot be empty", result);
   }
@@ -169,8 +165,8 @@ public class AddRentalViewModelTest
     otherInfoField.setValue("otherinfo");
     imageProperty.setValue(new Image("file:/image1.jpeg"));
 
-
-    ObservableList<String> objects = FXCollections.observableArrayList("Tools","Kitchenware");
+    ObservableList<String> objects = FXCollections
+        .observableArrayList("Tools", "Kitchenware");
 
     String result = vm.onAddRentalButtonPressed("New", objects);
     assertEquals("Price is a not number", result);

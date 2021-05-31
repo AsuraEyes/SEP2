@@ -15,7 +15,6 @@ import org.controlsfx.control.CheckComboBox;
 import org.controlsfx.control.InfoOverlay;
 import shared.transferobjects.Rental;
 
-import java.io.IOException;
 import java.util.List;
 
 public class SearchForRentalController
@@ -40,7 +39,7 @@ public class SearchForRentalController
         .addAll(searchForRentalViewModel.getCategories());
     searchForRentalViewModel.setSearchField();
 
-    if(searchField.textProperty().getValue() != null)
+    if (searchField.textProperty().getValue() != null)
     {
       displayRentals(searchForRentalViewModel.onSearchButtonPressed());
     }
@@ -57,7 +56,8 @@ public class SearchForRentalController
     displayRentals(rentals);
   }
 
-  public void filterButton(){
+  public void filterButton()
+  {
     List<Rental> rentals = searchForRentalViewModel
         .onFilterButtonPressed(locationBox.getValue(),
             categoryCheckComboBox.getCheckModel().getCheckedItems());
@@ -67,26 +67,27 @@ public class SearchForRentalController
 
   public void displayRentals(List<Rental> rentals)
   {
-      if (rentals != null && !rentals.isEmpty())
+    if (rentals != null && !rentals.isEmpty())
+    {
+      for (int i = 0; i < rentals.size(); i++)
       {
-        for (int i = 0; i < rentals.size(); i++)
-        {
-          Image image = new Image(rentals.get(i).getPictureLink());
-          ImageView imageView = new ImageView();
-          imageView.setImage(image);
-          imageView.setFitWidth(275);
-          imageView.setPreserveRatio(true);
-          imageView.setSmooth(true);
-          imageView.setCache(true);
-          imageView.setId(String.valueOf(rentals.get(i).getId()));
-          imageView.getStyleClass().add("image");
-          flowPane.getChildren().add(new StackPane(new InfoOverlay(imageView, rentals.get(i).toString())));
-          flowPane.getChildren().get(i)
-              .addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
-                viewHandler.setView(viewHandler.menu(), viewHandler.viewRental());
-                searchForRentalViewModel.getRental(event.getSource());
-              });
-        }
+        Image image = new Image(rentals.get(i).getPictureLink());
+        ImageView imageView = new ImageView();
+        imageView.setImage(image);
+        imageView.setFitWidth(275);
+        imageView.setPreserveRatio(true);
+        imageView.setSmooth(true);
+        imageView.setCache(true);
+        imageView.setId(String.valueOf(rentals.get(i).getId()));
+        imageView.getStyleClass().add("image");
+        flowPane.getChildren().add(new StackPane(
+            new InfoOverlay(imageView, rentals.get(i).toString())));
+        flowPane.getChildren().get(i)
+            .addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
+              viewHandler.setView(viewHandler.menu(), viewHandler.viewRental());
+              searchForRentalViewModel.getRental(event.getSource());
+            });
       }
+    }
   }
 }

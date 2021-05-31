@@ -23,7 +23,7 @@ public class DataCheckReport
         return "Added";
       }
       catch (SQLException e){
-        //
+        e.printStackTrace();
       }
     }
 

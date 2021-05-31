@@ -1,17 +1,17 @@
 package client.model.member;
 
 import client.core.ModelFactory;
+import client.model.state.AdministratorState;
 import client.model.state.MemberState;
 import client.model.state.StateManager;
+import client.model.state.VisitorState;
 import client.network.Client;
-import com.sun.webkit.Timer;
 import shared.transferobjects.Member;
 import shared.transferobjects.Report;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,7 +35,8 @@ public class MemberModelManager implements MemberModel
 
   private void onMemberDelete(PropertyChangeEvent evt)
   {
-    modelFactory.getRentalModel().updateRentalsAfterMemberDelete((Member)evt.getNewValue());
+    modelFactory.getRentalModel()
+        .updateRentalsAfterMemberDelete((Member) evt.getNewValue());
   }
 
   @Override public String checkMemberData(String username, String password,
@@ -43,8 +44,11 @@ public class MemberModelManager implements MemberModel
       String otherInformation, String street, String streetNo,
       String postalCode, String city)
   {
-    String messageToReturn = client.checkMemberData (username, password, confirmPassword, email, phone, otherInformation, street, streetNo, postalCode, city);
-    if(messageToReturn.equals("Adding successful")){
+    String messageToReturn = client
+        .checkMemberData(username, password, confirmPassword, email, phone,
+            otherInformation, street, streetNo, postalCode, city);
+    if (messageToReturn.equals("Adding successful"))
+    {
       StateManager.getInstance().setLoginState(new MemberState(username));
     }
 
@@ -56,8 +60,11 @@ public class MemberModelManager implements MemberModel
       String otherInformation, String street, String streetNo,
       String postalCode, String city)
   {
-    String messageToReturn = client.updateCheckMemberData (username, password, confirmPassword, email, phone, otherInformation, street, streetNo, postalCode, city);
-    if(messageToReturn.equals("Edit successful")){
+    String messageToReturn = client
+        .updateCheckMemberData(username, password, confirmPassword, email,
+            phone, otherInformation, street, streetNo, postalCode, city);
+    if (messageToReturn.equals("Edit successful"))
+    {
       StateManager.getInstance().setLoginState(new MemberState(username));
     }
     return messageToReturn;
@@ -76,24 +83,25 @@ public class MemberModelManager implements MemberModel
 
   @Override public String getLoggedInUsername()
   {
-    return StateManager.getInstance().getUsername();  }
+    return StateManager.getInstance().getUsername();
+  }
 
   @Override public Member getMemberById(int id)
   {
     Member member = client.getMemberById(id);
-    support.firePropertyChange("getMember",1,member);
+    support.firePropertyChange("getMember", 1, member);
     return member;
+  }
+
+  @Override public String getMemberUsername()
+  {
+    return memberUsername;
   }
 
   @Override public void setMemberUsername(String memberUsername)
   {
     this.memberUsername = memberUsername;
 
-  }
-
-  @Override public String getMemberUsername()
-  {
-    return memberUsername;
   }
 
   @Override public Member getMemberByUsername(String memberUsername)
@@ -106,6 +114,25 @@ public class MemberModelManager implements MemberModel
     return client.getMembersList();
   }
 
+  @Override public void setUserType(String userType)
+  {
+    switch (userType)
+    {
+      case "visitor":
+        StateManager.getInstance().setLoginState(new VisitorState());
+        break;
+      case "administrator":
+        StateManager.getInstance()
+            .setLoginState(new AdministratorState("administrator"));
+        break;
+      case "member":
+        StateManager.getInstance()
+            .setLoginState(new MemberState(getLoggedInUsername()));
+        break;
+    }
+
+  }
+
   @Override public List<Member> checkSearchForMember(String value)
   {
     return client.checkSearchForMember(value);
@@ -116,16 +143,18 @@ public class MemberModelManager implements MemberModel
   {
     for (int i = 0; i < allReports.size(); i++)
     {
-      if(allReports.get(i).getUsernameFrom().equals(reporterNameLabel) && allReports.get(i).getUsernameTo().equals(reportedNameLabel))
+      if (allReports.get(i).getUsernameFrom().equals(reporterNameLabel)
+          && allReports.get(i).getUsernameTo().equals(reportedNameLabel))
       {
         selectedReport = allReports.get(i);
       }
     }
   }
-  @Override public Report getSelectedReport(){
+
+  @Override public Report getSelectedReport()
+  {
     return selectedReport;
   }
-
 
   @Override public boolean deleteMember(Member member)
   {
@@ -135,15 +164,17 @@ public class MemberModelManager implements MemberModel
   @Override public void addListener(String propertyName,
       PropertyChangeListener listener)
   {
-    if(propertyName != null)
+    if (propertyName != null)
       support.addPropertyChangeListener(propertyName, listener);
     else
       support.addPropertyChangeListener(listener);
   }
+
   @Override public List<Report> getReportList()
   {
     return allReports;
   }
+
   @Override public void setReportList()
   {
     allReports = (ArrayList<Report>) client.getReportList();

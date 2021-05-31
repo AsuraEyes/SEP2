@@ -1,14 +1,12 @@
 package client.model.rental;
 
 import client.core.ModelFactory;
-import client.model.state.StateManager;
 import client.network.Client;
 import shared.transferobjects.*;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,13 +14,15 @@ public class RentalModelManager implements RentalModel
 {
   private PropertyChangeSupport support;
   private Client client;
+  private ModelFactory modelFactory;
 
   private Rental rental;
   private ArrayList<Rental> allRentals;
   private ArrayList<Rental> allMemberRentals;
 
-  public RentalModelManager(Client client)
+  public RentalModelManager(Client client, ModelFactory modelFactory)
   {
+    this.modelFactory = modelFactory;
     this.client = client;
     allRentals = new ArrayList<>();
     allMemberRentals = new ArrayList<>();
@@ -38,7 +38,7 @@ public class RentalModelManager implements RentalModel
     Rental updatedRental = (Rental) evt.getNewValue();
     for (int i = 0; i < allRentals.size(); i++)
     {
-      if(allRentals.get(i).getId() == updatedRental.getId())
+      if (allRentals.get(i).getId() == updatedRental.getId())
       {
         allRentals.remove(allRentals.get(i));
         allRentals.add(updatedRental);
@@ -51,14 +51,15 @@ public class RentalModelManager implements RentalModel
     Rental deletedRental = (Rental) evt.getNewValue();
     for (int i = 0; i < allRentals.size(); i++)
     {
-      if(allRentals.get(i).getId() == deletedRental.getId())
+      if (allRentals.get(i).getId() == deletedRental.getId())
       {
         allRentals.remove(allRentals.get(i));
       }
     }
   }
 
-  public void onNewRental(PropertyChangeEvent evt){
+  public void onNewRental(PropertyChangeEvent evt)
+  {
     allRentals.add((Rental) evt.getNewValue());
   }
 
@@ -71,21 +72,25 @@ public class RentalModelManager implements RentalModel
       String description, String price, String otherInformation,
       String stateName, ArrayList<String> selectedCategories)
   {
-    return client.checkRentalData(name, pictureLink,  description,  price, otherInformation,  stateName,
-        StateManager.getInstance().getUsername(), selectedCategories);
+    return client.checkRentalData(name, pictureLink, description, price,
+        otherInformation, stateName,
+        modelFactory.getMemberModel().getLoggedInUsername(),
+        selectedCategories);
   }
 
   @Override public String updateCheckRentalData(String name, String pictureLink,
       String description, String price, String otherInformation,
       String stateName, ArrayList<String> selectedCategories)
   {
-    return client.updateCheckRentalData(name, pictureLink,  description,  price, otherInformation,  stateName, getSelectedRental().getId(), selectedCategories);
+    return client.updateCheckRentalData(name, pictureLink, description, price,
+        otherInformation, stateName, getSelectedRental().getId(),
+        selectedCategories);
   }
 
   @Override public List<Rental> checkSearchWithFilter(String search,
       String city, ArrayList<String> selectedCategories)
   {
-    return client.checkSearchWithFilter(search,city, selectedCategories );
+    return client.checkSearchWithFilter(search, city, selectedCategories);
   }
 
   @Override public ArrayList<City> getCityList()
@@ -110,18 +115,22 @@ public class RentalModelManager implements RentalModel
 
   @Override public void sendSelectedRental(Rental rental)
   {
-    support.firePropertyChange("selectedRental",1,rental);
+    support.firePropertyChange("selectedRental", 1, rental);
   }
 
   @Override public ArrayList<Rental> getRentalsOfMemberList()
   {
     return allMemberRentals;
   }
-  @Override public void setAllMemberRentals(String username){
+
+  @Override public void setAllMemberRentals(String username)
+  {
     allMemberRentals.clear();
     ArrayList<Integer> rentalsId = client.getRentalsOfMemberList(username);
-    for (Integer integer : rentalsId) {
-      for (Rental allRental : allRentals){
+    for (Integer integer : rentalsId)
+    {
+      for (Rental allRental : allRentals)
+      {
         if (integer == allRental.getId())
           allMemberRentals.add(allRental);
       }
@@ -133,36 +142,38 @@ public class RentalModelManager implements RentalModel
     return client.deleteRental(rental);
   }
 
-  @Override public void setSelectedRental(Rental rental)
-  {
-    this.rental = rental;
-  }
-
   @Override public Rental getSelectedRental()
   {
     return rental;
   }
 
+  @Override public void setSelectedRental(Rental rental)
+  {
+    this.rental = rental;
+  }
+
   @Override public void addListener(String propertyName,
       PropertyChangeListener listener)
   {
-    if(propertyName != null)
+    if (propertyName != null)
       support.addPropertyChangeListener(propertyName, listener);
     else
       support.addPropertyChangeListener(listener);
   }
-  @Override
-  public void loadRentals(){
+
+  @Override public void loadRentals()
+  {
     allRentals = client.getRentalsList();
   }
-  @Override
-  public void updateRentalsAfterMemberDelete(Member member){
-      for (int i = 0; i < allRentals.size(); i++)
+
+  @Override public void updateRentalsAfterMemberDelete(Member member)
+  {
+    for (int i = 0; i < allRentals.size(); i++)
+    {
+      if (member.getId() == allRentals.get(i).getMemberId())
       {
-        if(member.getId() == allRentals.get(i).getMemberId())
-        {
-          allRentals.remove(allRentals.get(i));
-        }
+        allRentals.remove(allRentals.get(i));
       }
+    }
   }
 }

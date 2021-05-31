@@ -13,11 +13,10 @@ import javafx.scene.layout.StackPane;
 import org.controlsfx.control.InfoOverlay;
 import shared.transferobjects.Rental;
 
-import java.io.IOException;
-import java.sql.SQLException;
 import java.util.List;
 
-public class ManageAccountController {
+public class ManageAccountController
+{
   @FXML private Label usernameLabel;
   @FXML private Label locationLabel;
   @FXML private Label ratingLabel;
@@ -29,28 +28,35 @@ public class ManageAccountController {
   private ViewHandler viewHandler;
   private ManageAccountViewModel manageAccountViewModel;
 
-  public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory){
+  public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory)
+  {
     this.viewHandler = viewHandler;
     manageAccountViewModel = viewModelFactory.getManageAccountViewModel();
-    usernameLabel.textProperty().bind(manageAccountViewModel.getUsernameLabel());
-    locationLabel.textProperty().bind(manageAccountViewModel.getLocationLabel());
+    usernameLabel.textProperty()
+        .bind(manageAccountViewModel.getUsernameLabel());
+    locationLabel.textProperty()
+        .bind(manageAccountViewModel.getLocationLabel());
     ratingLabel.textProperty().bind(manageAccountViewModel.getRatingLabel());
     addressLabel.textProperty().bind(manageAccountViewModel.getAddressLabel());
     contactLabel.textProperty().bind(manageAccountViewModel.getContactLabel());
-    otherInformationLabel.textProperty().bind(manageAccountViewModel.getOtherInformationLabel());
+    otherInformationLabel.textProperty()
+        .bind(manageAccountViewModel.getOtherInformationLabel());
     manageAccountViewModel.setProfile();
     displayRentals(manageAccountViewModel.getRentalsOfMemberList());
   }
 
-  public void editOrDeleteInformationButton(){
+  public void editOrDeleteInformationButton()
+  {
     viewHandler.setView(viewHandler.menu(), viewHandler.editOrDeleteAccount());
   }
 
-  public void addRentalButton(){
+  public void addRentalButton()
+  {
     viewHandler.setView(viewHandler.menu(), viewHandler.addRental());
   }
 
-  public void displayRentals(List<Rental> rentals) {
+  public void displayRentals(List<Rental> rentals)
+  {
     if (rentals != null && !rentals.isEmpty())
     {
       for (int i = 0; i < rentals.size(); i++)
@@ -64,17 +70,20 @@ public class ManageAccountController {
         imageView.setCache(true);
         imageView.setId(String.valueOf(rentals.get(i).getId()));
         imageView.getStyleClass().add("image");
-        flowPane.getChildren().add(new StackPane(new InfoOverlay(imageView, rentals.get(i).toString())));
+        flowPane.getChildren().add(new StackPane(
+            new InfoOverlay(imageView, rentals.get(i).toString())));
         flowPane.getChildren().get(i)
-                .addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
-                  viewHandler.setView(viewHandler.menu(), viewHandler.manageRentals());
-                  manageAccountViewModel.getRental(event.getSource());
-                });
+            .addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
+              viewHandler
+                  .setView(viewHandler.menu(), viewHandler.manageRentals());
+              manageAccountViewModel.getRental(event.getSource());
+            });
       }
     }
   }
 
-  public void viewRating(){
+  public void viewRating()
+  {
     manageAccountViewModel.setMember();
     viewHandler.setView(viewHandler.menu(), viewHandler.viewRating());
   }

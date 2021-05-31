@@ -44,7 +44,6 @@ public class CategoryDAOImpl implements CategoryDAO
   /**
    * Reads all categories from database by connecting to the database and get all table contents
    * @return returns all category names in a arraylist
-   * @throws SQLException
    */
   @Override public List<Category> readCategory()
   {

@@ -9,11 +9,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import shared.transferobjects.Member;
 
-import java.io.IOException;
 import java.util.List;
 
 public class SearchForMemberController
@@ -29,11 +27,11 @@ public class SearchForMemberController
     this.viewHandler = viewHandler;
     searchForMemberViewModel = viewModelFactory.getSearchForMemberViewModel();
     searchField.textProperty()
-            .bindBidirectional(searchForMemberViewModel.getSearchField());
+        .bindBidirectional(searchForMemberViewModel.getSearchField());
 
     searchForMemberViewModel.setSearchField();
 
-    if(searchField.textProperty().getValue() != null)
+    if (searchField.textProperty().getValue() != null)
     {
       displayMembers(searchForMemberViewModel.onSearchButtonPressed());
     }
@@ -57,20 +55,23 @@ public class SearchForMemberController
       for (int i = 0; i < members.size(); i++)
       {
         VBox ratingBox = new VBox();
-        Label ratingLabel = new Label("Username: " + members.get(i).getUsername());
+        Label ratingLabel = new Label(
+            "Username: " + members.get(i).getUsername());
         ratingLabel.getStyleClass().add("label");
-        Text rating = new Text("Average rating: " + members.get(i).getAverageReview());
-        ratingBox.getChildren().addAll(ratingLabel,rating);
+        Text rating = new Text(
+            "Average rating: " + members.get(i).getAverageReview());
+        ratingBox.getChildren().addAll(ratingLabel, rating);
         ratingBox.setSpacing(10);
-        ratingBox.setPadding(new Insets(20,160,20,160));
+        ratingBox.setPadding(new Insets(20, 160, 20, 160));
         rating.getStyleClass().add("text");
         ratingBox.getStyleClass().add("vbox");
         vBox.getChildren().add(ratingBox);
         vBox.getChildren().get(i)
-                .addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
-                  searchForMemberViewModel.setMemberUsername(event.getSource());
-                  viewHandler.setView(viewHandler.menu(), viewHandler.viewMemberProfile());
-                });
+            .addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
+              searchForMemberViewModel.setMemberUsername(event.getSource());
+              viewHandler
+                  .setView(viewHandler.menu(), viewHandler.viewMemberProfile());
+            });
       }
     }
   }
