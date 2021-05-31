@@ -41,7 +41,7 @@ public class ManageRentalsController {
     categoryLabel.textProperty().bind(manageRentalsViewModel.categoryOfRentalProperty());
   }
 
-  public void changeButton(){
+  public void editButton(){
     viewHandler.setView(viewHandler.menu(), viewHandler.editRental());
     manageRentalsViewModel.getSelectedRental();
   }
