@@ -54,7 +54,6 @@ public class RentalModelManager implements RentalModel
       if(allRentals.get(i).getId() == deletedRental.getId())
       {
         allRentals.remove(allRentals.get(i));
-        allMemberRentals.remove(allRentals.get(i));
       }
     }
   }
@@ -165,6 +164,5 @@ public class RentalModelManager implements RentalModel
           allRentals.remove(allRentals.get(i));
         }
       }
-
   }
 }
