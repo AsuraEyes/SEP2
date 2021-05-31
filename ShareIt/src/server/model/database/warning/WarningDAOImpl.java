@@ -52,8 +52,6 @@ public class WarningDAOImpl implements WarningDAO {
 
                 arrayListToReturn.add(new Warning(administrator, memberTo, text, date));
             }
-            resultSet.close();
-            statement.close();
             return arrayListToReturn;
         }
         catch (SQLException e) {

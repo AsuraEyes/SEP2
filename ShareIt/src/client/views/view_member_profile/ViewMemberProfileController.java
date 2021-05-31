@@ -119,7 +119,7 @@ public class ViewMemberProfileController
 
         result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
-          viewHandler.setView(viewHandler.menu(), viewHandler.viewReportedMemberList());
+          viewHandler.setView(viewHandler.menu(), viewHandler.welcomePage());
         }
       }
     }

@@ -229,8 +229,6 @@ public class RentalDAOImpl implements RentalDAO
               rentalDescription, priceOfRental, rentalOtherInformation,
               rentalState, memberId, RentalCategoryDAOImpl.getInstance().getSelectedCategoriesOnRental(rentalId)));
         }
-        resultSet.close();
-        statement.close();
         return arrayListToReturn;
       }
     }
@@ -313,8 +311,6 @@ public class RentalDAOImpl implements RentalDAO
                         priceOfRental, rentalOtherInformation, rentalState, memberId,
                         RentalCategoryDAOImpl.getInstance().getSelectedCategoriesOnRental(rentalId)));
       }
-      resultSet.close();
-      statement.close();
       return arrayListToReturn;
     } catch (IOException e) {
       e.printStackTrace();
@@ -439,8 +435,6 @@ public class RentalDAOImpl implements RentalDAO
                 priceOfRental, rentalOtherInformation, rentalState, memberId,
                 RentalCategoryDAOImpl.getInstance().getSelectedCategoriesOnRental(rentalId)));
       }
-      resultSet.close();
-      statement.close();
       return arrayListToReturn;
     }
     catch (SQLException|IOException e)
@@ -477,8 +471,6 @@ public class RentalDAOImpl implements RentalDAO
                 rentalDescription, priceOfRental, rentalOtherInformation,
                 rentalState, memberId, RentalCategoryDAOImpl.getInstance().getSelectedCategoriesOnRental(rentalId));
       }
-      resultSet.close();
-      statement.close();
       return lastRental;
     }
     catch (SQLException|IOException e)

@@ -82,7 +82,7 @@ public class EditRentalController {
                 {
                     editRentalViewModel.updateRental();
                     viewHandler.setView(viewHandler.menu(),
-                        viewHandler.manageRentals());
+                        viewHandler.manageAccount());
                 }
             }
             else
