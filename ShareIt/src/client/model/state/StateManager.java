@@ -7,7 +7,7 @@ public class StateManager implements Serializable {
     private static StateManager instance;
 
     private StateManager(){
-        currentState = new MemberState("bob");
+        currentState = new VisitorState();
     }
 
     public static synchronized StateManager getInstance(){
