@@ -58,8 +58,6 @@ public class MessageDAOImpl implements MessageDAO
 
         arrayListToReturn.add(new Message(d2, member.getUsername(), text));
       }
-      resultSet.close();
-      statement.close();
       return arrayListToReturn;
       }
     catch (SQLException e)
@@ -115,8 +113,6 @@ public class MessageDAOImpl implements MessageDAO
 
         arrayListToReturn.add(new Message(d2, username, text));
       }
-      resultSet.close();
-      statement.close();
       return arrayListToReturn;
     }
     catch (SQLException e) {
