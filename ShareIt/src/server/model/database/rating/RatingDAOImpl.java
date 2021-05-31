@@ -154,7 +154,7 @@ public class RatingDAOImpl implements RatingDAO
       statement.setString(2, rating.getCommentary());
       statement.setInt(3,rating.getMemberFrom());
       statement.setInt(4, rating.getMemberTo());
-      statement.executeQuery();
+      statement.executeUpdate();
     }
     catch (SQLException e) {
       e.printStackTrace();

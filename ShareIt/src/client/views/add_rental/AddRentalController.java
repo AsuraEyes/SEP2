@@ -72,7 +72,7 @@ public class AddRentalController {
           alert.setTitle("Confirmation");
           alert.setHeaderText("New rental successfully created");
           alert.initOwner(stage);
-          alert.getDialogPane().setContentText("Click ok to get to welcome page.");
+          alert.getDialogPane().setContentText("Click ok to get to manage account page.");
 
           Optional<ButtonType> result = alert.showAndWait();
           if (result.get() == ButtonType.OK)
@@ -82,6 +82,7 @@ public class AddRentalController {
             priceField.clear();
             otherInfoField.clear();
             addRentalViewModel.setAllMemberRentals();
+            pictureView.setImage(null);
             viewHandler.setView(viewHandler.menu(), viewHandler.manageAccount());
           }
           break;
@@ -113,6 +114,7 @@ public class AddRentalController {
     descriptionField.clear();
     priceField.clear();
     otherInfoField.clear();
+    pictureView.setImage(null);
     viewHandler.setView(viewHandler.menu(), viewHandler.manageAccount());
   }
 

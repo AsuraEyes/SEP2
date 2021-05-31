@@ -63,13 +63,13 @@ public class ViewRatingViewModel {
     }
 
     public String getMemberUsername(){
-        username.setValue(memberModel.getMemberUsername());
         Member member = memberModel.getMemberByUsername(memberModel.getMemberUsername());
-        location.setValue(member.getAddressCity());
-        rating.setValue(String.valueOf(member.getAverageReview()));
-        address.setValue(member.getAddressStreet() + ", " + member.getAddressNo());
-        contact.setValue(member.getPhoneNo() + "\n" + member.getEmailAddress());
-        otherInformation.setValue(member.getOtherInformation());
+        username.setValue("Username: " + memberModel.getMemberUsername());
+        location.setValue("Location: " + member.getAddressCity());
+        rating.setValue("Rating: " + (member.getAverageReview()));
+        address.setValue("Address: " + member.getAddressStreet() + ", " + member.getAddressNo());
+        contact.setValue("Contact: " + member.getPhoneNo() + "\n" + member.getEmailAddress());
+        otherInformation.setValue("Other Information: " + member.getOtherInformation());
         return memberModel.getMemberUsername();
     }
 
