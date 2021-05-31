@@ -82,6 +82,7 @@ public class AddRentalController {
             priceField.clear();
             otherInfoField.clear();
             addRentalViewModel.setAllMemberRentals();
+            pictureView.setImage(null);
             viewHandler.setView(viewHandler.menu(), viewHandler.manageAccount());
           }
           break;
@@ -113,6 +114,7 @@ public class AddRentalController {
     descriptionField.clear();
     priceField.clear();
     otherInfoField.clear();
+    pictureView.setImage(null);
     viewHandler.setView(viewHandler.menu(), viewHandler.manageAccount());
   }
 

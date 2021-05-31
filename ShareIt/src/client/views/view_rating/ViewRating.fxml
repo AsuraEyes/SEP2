@@ -37,7 +37,7 @@
                         <Insets bottom="10.0" top="10.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="contactLabel" text="Contact: 76 20 62 93 16" textFill="WHITE" wrapText="true">
+                  <Label fx:id="contactLabel" prefHeight="37.0" prefWidth="275.0" text="Contact: 76 20 62 93 16" textFill="WHITE" wrapText="true">
                      <padding>
                         <Insets bottom="10.0" top="10.0" />
                      </padding>
