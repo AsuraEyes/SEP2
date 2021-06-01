@@ -3,14 +3,13 @@ package client.views.report_member;
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
 import client.viewmodel.report_member.ReportMemberViewModel;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import javafx.stage.Stage;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.util.Optional;
 
 public class ReportMemberController
@@ -21,35 +20,34 @@ public class ReportMemberController
   private ReportMemberViewModel reportMemberViewModel;
   private ViewHandler viewHandler;
 
-  public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws IOException
+  public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory)
   {
     this.viewHandler = viewHandler;
     reportMemberViewModel = viewModelFactory.getReportMemberViewModel();
     usernameLabel.textProperty().bind(reportMemberViewModel.getUsernameLabel());
-    commentaryArea.textProperty().bindBidirectional(reportMemberViewModel.getCommentaryTextArea());
+    commentaryArea.textProperty()
+        .bindBidirectional(reportMemberViewModel.getCommentaryTextArea());
     reportMemberViewModel.getMemberUsername();
   }
 
-  public void reportButton(ActionEvent actionEvent) throws IOException
+  public void reportButton()
   {
     Stage stage = (Stage) viewHandler.getStage().getScene().getWindow();
     Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "");
     alert.initOwner(stage);
-    alert.getDialogPane().setContentText("The report was " + reportMemberViewModel.onReportButtonPressed() + " successfully!");
+    alert.getDialogPane().setContentText(
+        "The report was " + reportMemberViewModel.onReportButtonPressed()
+            + " successfully!");
 
     Optional<ButtonType> result = alert.showAndWait();
     if (result.get() == ButtonType.OK)
     {
-
       viewHandler.setView(viewHandler.menu(), viewHandler.viewMemberProfile());
-
     }
   }
 
-
-
-  public void goBackToUserPageButton(ActionEvent actionEvent)
+  public void goBackToUserPageButton()
   {
-
+    viewHandler.setView(viewHandler.menu(), viewHandler.viewMemberProfile());
   }
 }

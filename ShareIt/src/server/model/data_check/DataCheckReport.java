@@ -23,14 +23,12 @@ public class DataCheckReport
         return "Added";
       }
       catch (SQLException e){
-        //
+        e.printStackTrace();
       }
     }
 
     return "Ooops, something went wrong!!";
   }
-
-
 
   private boolean FeedbackGiven(){
     if (feedback != null){

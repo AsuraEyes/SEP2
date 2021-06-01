@@ -1,37 +1,34 @@
 package client.viewmodel.rate_feedback;
 
-import client.model.ShareItModel;
-import client.model.state.StateManager;
-import javafx.application.Platform;
+import client.model.member.MemberModel;
+import client.model.message.MessageModel;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import shared.transferobjects.Member;
 import shared.transferobjects.Rating;
-
-import java.beans.PropertyChangeEvent;
-import java.io.IOException;
-import java.sql.SQLException;
 
 public class RateFeedbackViewModel
 {
-  private final ShareItModel model;
-  private final StringProperty commentaryTextArea;
-  private final SimpleStringProperty usernameLabel;
-  private final DoubleProperty ratingProperty;
+  private StringProperty commentaryTextArea;
+  private SimpleStringProperty usernameLabel;
+  private DoubleProperty ratingProperty;
+  private MemberModel memberModel;
+  private MessageModel messageModel;
 
-
-  public RateFeedbackViewModel(ShareItModel model)
+  public RateFeedbackViewModel(MemberModel memberModel,
+      MessageModel messageModel)
   {
-    this.model = model;
+    this.memberModel = memberModel;
+    this.messageModel = messageModel;
+
     ratingProperty = new SimpleDoubleProperty();
     commentaryTextArea = new SimpleStringProperty();
     usernameLabel = new SimpleStringProperty();
   }
 
-
-  public StringProperty getCommentaryTextArea(){
+  public StringProperty getCommentaryTextArea()
+  {
     return commentaryTextArea;
   }
 
@@ -40,48 +37,62 @@ public class RateFeedbackViewModel
     return usernameLabel;
   }
 
-  public DoubleProperty getRatingProperty(){ return ratingProperty;}
-
-
+  public DoubleProperty getRatingProperty()
+  {
+    return ratingProperty;
+  }
 
   public String getMemberUsername()
   {
-    usernameLabel.setValue(model.getMemberUsername());
-    System.out.println("this issmthmber VM : " + model.getMemberUsername());
-    getRating();
-    return model.getMemberUsername();
+    usernameLabel.setValue(memberModel.getMemberUsername());
+    setRating();
+    return memberModel.getMemberUsername();
   }
 
-  public void getRating()
+  public void setRating()
   {
-    Rating rating = model.getRating(model.getLoggedInUsername(),
-        model.getMemberUsername());
-    if(rating != null)
+    Rating rating = messageModel.getRating(memberModel.getLoggedInUsername(),
+        memberModel.getMemberUsername());
+    if (rating != null)
     {
       ratingProperty.setValue(rating.getRating());
       commentaryTextArea.setValue(rating.getCommentary());
     }
   }
-  public void updateFeedback(){
-    int memberFromId = model.getMemberByUsername(model.getLoggedInUsername())
-        .getId();
-    int memberToId = model.getMemberByUsername(model.getMemberUsername()).getId();
+
+  public void updateFeedback()
+  {
+    int memberFromId = memberModel
+        .getMemberByUsername(memberModel.getLoggedInUsername()).getId();
+    int memberToId = memberModel
+        .getMemberByUsername(memberModel.getMemberUsername()).getId();
     Rating rating = new Rating(ratingProperty.getValue(),
-        commentaryTextArea.getValue(),memberFromId,memberToId);
-    model.updateRating(rating);
+        commentaryTextArea.getValue(), memberFromId, memberToId);
+    messageModel.updateRating(rating);
   }
-  public String addFeedback() throws IOException
+
+  public String addFeedback()
   {
-    return model.addFeedback(ratingProperty.getValue(),commentaryTextArea.getValue(),
-        model.getLoggedInUsername(), getMemberUsername());
+    return messageModel
+        .addFeedback(ratingProperty.getValue(), commentaryTextArea.getValue(),
+            memberModel.getLoggedInUsername(), getMemberUsername());
   }
-  public String onSubmitButtonPressed() throws IOException
+
+  public String onSubmitButtonPressed()
   {
-    if(!addFeedback().equals("Added"))
+    Rating rating = messageModel.getRating(memberModel.getLoggedInUsername(),
+        memberModel.getMemberUsername());
+    if (rating != null)
     {
-      updateFeedback();
-      return "updated";
+      if (!rating.getCommentary().equals(commentaryTextArea.getValue())
+          || rating.getRating() != ratingProperty.getValue())
+      {
+        updateFeedback();
+        return "updated";
+      }
     }
+    else
+      addFeedback();
     return "created";
   }
 }

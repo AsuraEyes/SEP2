@@ -7,6 +7,8 @@ public class Report implements Serializable
   private String commentary;
   private int memberFrom;
   private int memberTo;
+  private String usernameFrom;
+  private String usernameTo;
 
   public Report(String commentary, int memberFrom, int memberTo)
   {
@@ -15,14 +17,29 @@ public class Report implements Serializable
     this.memberTo = memberTo;
   }
 
+  public String getUsernameFrom()
+  {
+    return usernameFrom;
+  }
+
+  public void setUsernameFrom(String usernameFrom)
+  {
+    this.usernameFrom = usernameFrom;
+  }
+
+  public String getUsernameTo()
+  {
+    return usernameTo;
+  }
+
+  public void setUsernameTo(String usernameTo)
+  {
+    this.usernameTo = usernameTo;
+  }
+
   public String getCommentary()
   {
     return commentary;
-  }
-
-  public void setCommentary(String commentary)
-  {
-    this.commentary = commentary;
   }
 
   public int getMemberFrom()
@@ -30,18 +47,8 @@ public class Report implements Serializable
     return memberFrom;
   }
 
-  public void setMemberFrom(int memberFrom)
-  {
-    this.memberFrom = memberFrom;
-  }
-
   public int getMemberTo()
   {
     return memberTo;
-  }
-
-  public void setMemberTo(int memberTo)
-  {
-    this.memberTo = memberTo;
   }
 }

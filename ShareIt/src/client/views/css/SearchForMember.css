@@ -1,0 +1,19 @@
+.vbox {
+    -fx-background-color: #FF8C64;
+}
+
+.vbox:hover {
+    -fx-background-color: #FF665A;
+    -fx-cursor: hand;
+}
+
+.label {
+    -fx-text-fill: white;
+    -fx-font-family: Californian FB;
+    -fx-font-size: 24px;
+}
+
+.text {
+    -fx-fill: white;
+}
+

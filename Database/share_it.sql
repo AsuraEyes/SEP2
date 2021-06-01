@@ -32,7 +32,7 @@ CREATE TABLE member(
     address_no VARCHAR(100) NOT NULL,
     address_postal_code int NOT NULL,
     address_city_name VARCHAR (100) NOT NULL,
-    average_review DECIMAL(2, 1) DEFAULT 0 NOT NULL,
+    average_rating DECIMAL(2, 1) DEFAULT 0 NOT NULL,
     FOREIGN KEY (address_city_name) REFERENCES city(name)
 );
 

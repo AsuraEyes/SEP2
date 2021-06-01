@@ -1,7 +1,7 @@
 package client.viewmodel.manage_account;
 
-import client.model.ShareItModel;
-import client.model.state.StateManager;
+import client.model.member.MemberModel;
+import client.model.rental.RentalModel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.image.ImageView;
@@ -10,94 +10,110 @@ import org.controlsfx.control.InfoOverlay;
 import shared.transferobjects.Member;
 import shared.transferobjects.Rental;
 
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-public class ManageAccountViewModel {
-    private ShareItModel shareItModel;
-    private final SimpleStringProperty usernameLabel;
-    private final SimpleStringProperty locationLabel;
-    private final SimpleStringProperty ratingLabel;
-    private final SimpleStringProperty addressLabel;
-    private final SimpleStringProperty contactLabel;
-    private final SimpleStringProperty otherInformationLabel;
+public class ManageAccountViewModel
+{
+  private SimpleStringProperty usernameLabel;
+  private SimpleStringProperty locationLabel;
+  private SimpleStringProperty ratingLabel;
+  private SimpleStringProperty addressLabel;
+  private SimpleStringProperty contactLabel;
+  private SimpleStringProperty otherInformationLabel;
+  private RentalModel rentalModel;
+  private MemberModel memberModel;
 
-    public ManageAccountViewModel(ShareItModel shareItModel) {
-        this.shareItModel = shareItModel;
-        usernameLabel = new SimpleStringProperty();
-        locationLabel = new SimpleStringProperty();
-        ratingLabel = new SimpleStringProperty();
-        addressLabel = new SimpleStringProperty();
-        contactLabel = new SimpleStringProperty();
-        otherInformationLabel = new SimpleStringProperty();
-    }
+  public ManageAccountViewModel(RentalModel rentalModel,
+      MemberModel memberModel)
+  {
+    this.rentalModel = rentalModel;
+    this.memberModel = memberModel;
 
-    public void setProfile(){
-        Member member = shareItModel.getMemberByUsername(StateManager.getInstance()
-            .getUsername());
-        usernameLabel.setValue(member.getUsername());
-        locationLabel.setValue(member.getAddressCity());
-        ratingLabel.setValue(String.valueOf(member.getAverageReview()));
-        addressLabel.setValue(member.getAddressStreet() + ", " + member.getAddressNo());
-        contactLabel.setValue(member.getPhoneNo() + "\n" + member.getEmailAddress());
-        otherInformationLabel.setValue(member.getOtherInformation());
-        System.out.println(usernameLabel.getValue());
-    }
+    usernameLabel = new SimpleStringProperty();
+    locationLabel = new SimpleStringProperty();
+    ratingLabel = new SimpleStringProperty();
+    addressLabel = new SimpleStringProperty();
+    contactLabel = new SimpleStringProperty();
+    otherInformationLabel = new SimpleStringProperty();
+  }
 
-    public ArrayList<Rental> getRentalsOfMemberList() throws RemoteException {
-        System.out.println("This is the username i am looking for: "+shareItModel.getMemberUsername());
-        return shareItModel.getRentalsOfMemberList(shareItModel.getLoggedInUsername());
-    }
+  public void setProfile()
+  {
+    Member member = memberModel
+        .getMemberByUsername(memberModel.getLoggedInUsername());
+    usernameLabel.setValue("Username: " + member.getUsername());
+    locationLabel.setValue("Location: " + member.getAddressCity());
+    ratingLabel.setValue("Rating: " + (member.getAverageReview()));
+    addressLabel.setValue(
+        "Address: " + member.getAddressStreet() + ", " + member.getAddressNo());
+    contactLabel.setValue(
+        "Contact: " + member.getPhoneNo() + "\n" + member.getEmailAddress());
+    otherInformationLabel
+        .setValue("Other Information: " + member.getOtherInformation());
+  }
 
-    public void getRental(Object object) throws RemoteException {
-        if(object instanceof StackPane){
-            StackPane stackPane = (StackPane) object;
-            if(stackPane.getChildren().get(0) instanceof InfoOverlay) {
-                InfoOverlay infoOverlay = (InfoOverlay) stackPane.getChildren().get(0);
-                if(infoOverlay.getContent() instanceof ImageView) {
-                    ImageView imageView = (ImageView) infoOverlay.getContent();
-                    for (int i = 0; i < getRentalsOfMemberList().size(); i++) {
-                        if(imageView.getId().equals(String.valueOf(getRentalsOfMemberList().get(i).getId()))) {
-                            shareItModel.sendSelectedRental(getRentalsOfMemberList().get(i));
-                            break;
-                        }
-                    }
-                }
+  public ArrayList<Rental> getRentalsOfMemberList()
+  {
+    return rentalModel.getRentalsOfMemberList();
+  }
+
+  public void getRental(Object object)
+  {
+    if (object instanceof StackPane)
+    {
+      StackPane stackPane = (StackPane) object;
+      if (stackPane.getChildren().get(0) instanceof InfoOverlay)
+      {
+        InfoOverlay infoOverlay = (InfoOverlay) stackPane.getChildren().get(0);
+        if (infoOverlay.getContent() instanceof ImageView)
+        {
+          ImageView imageView = (ImageView) infoOverlay.getContent();
+          for (int i = 0; i < getRentalsOfMemberList().size(); i++)
+          {
+            if (imageView.getId().equals(
+                String.valueOf(getRentalsOfMemberList().get(i).getId())))
+            {
+              rentalModel.sendSelectedRental(getRentalsOfMemberList().get(i));
+              rentalModel.setSelectedRental(getRentalsOfMemberList().get(i));
             }
+          }
         }
+      }
     }
+  }
 
-    public StringProperty getUsernameLabel()
-    {
-        return usernameLabel;
-    }
+  public StringProperty getUsernameLabel()
+  {
+    return usernameLabel;
+  }
 
-    public StringProperty getLocationLabel()
-    {
-        return locationLabel;
-    }
+  public StringProperty getLocationLabel()
+  {
+    return locationLabel;
+  }
 
-    public StringProperty getRatingLabel()
-    {
-        return ratingLabel;
-    }
+  public StringProperty getRatingLabel()
+  {
+    return ratingLabel;
+  }
 
-    public StringProperty getAddressLabel()
-    {
-        return addressLabel;
-    }
+  public StringProperty getAddressLabel()
+  {
+    return addressLabel;
+  }
 
-    public StringProperty getContactLabel()
-    {
-        return contactLabel;
-    }
+  public StringProperty getContactLabel()
+  {
+    return contactLabel;
+  }
 
-    public StringProperty getOtherInformationLabel()
-    {
-        return otherInformationLabel;
-    }
+  public StringProperty getOtherInformationLabel()
+  {
+    return otherInformationLabel;
+  }
 
-    public void setMember() {
-        shareItModel.setMemberUsername(usernameLabel.getValue());
-    }
+  public void setMember()
+  {
+    memberModel.setMemberUsername(usernameLabel.getValue().substring(10));
+  }
 }

@@ -3,69 +3,60 @@ package client.views.manage_account;
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
 import client.viewmodel.manage_account.ManageAccountViewModel;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import org.controlsfx.control.InfoOverlay;
 import shared.transferobjects.Rental;
 
-import java.io.IOException;
-import java.rmi.RemoteException;
-import java.sql.SQLException;
 import java.util.List;
 
 public class ManageAccountController
 {
-  @FXML private TextField searchField;
   @FXML private Label usernameLabel;
   @FXML private Label locationLabel;
   @FXML private Label ratingLabel;
   @FXML private Label addressLabel;
   @FXML private Label contactLabel;
   @FXML private Label otherInformationLabel;
-  //rest for rental box
-  @FXML private VBox RentalVBox;
-  @FXML private Label nameOfRentalLabel;
-  @FXML private Label cityLabel;
-  @FXML private Label priceLabel;
-  @FXML private ImageView ImageView;
   @FXML private FlowPane flowPane;
 
   private ViewHandler viewHandler;
   private ManageAccountViewModel manageAccountViewModel;
 
-  public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws IOException {
+  public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory)
+  {
     this.viewHandler = viewHandler;
     manageAccountViewModel = viewModelFactory.getManageAccountViewModel();
-    usernameLabel.textProperty().bind(manageAccountViewModel.getUsernameLabel());
-    locationLabel.textProperty().bind(manageAccountViewModel.getLocationLabel());
+    usernameLabel.textProperty()
+        .bind(manageAccountViewModel.getUsernameLabel());
+    locationLabel.textProperty()
+        .bind(manageAccountViewModel.getLocationLabel());
     ratingLabel.textProperty().bind(manageAccountViewModel.getRatingLabel());
     addressLabel.textProperty().bind(manageAccountViewModel.getAddressLabel());
     contactLabel.textProperty().bind(manageAccountViewModel.getContactLabel());
-    otherInformationLabel.textProperty().bind(manageAccountViewModel.getOtherInformationLabel());
+    otherInformationLabel.textProperty()
+        .bind(manageAccountViewModel.getOtherInformationLabel());
     manageAccountViewModel.setProfile();
     displayRentals(manageAccountViewModel.getRentalsOfMemberList());
   }
 
-  public void searchButton(ActionEvent actionEvent) {
-  }
-
-  public void editOrDeleteInformationButton(ActionEvent actionEvent) throws IOException, SQLException {
+  public void editOrDeleteInformationButton()
+  {
     viewHandler.setView(viewHandler.menu(), viewHandler.editOrDeleteAccount());
   }
 
-  public void addRentalButton(ActionEvent actionEvent) throws SQLException, IOException {
+  public void addRentalButton()
+  {
     viewHandler.setView(viewHandler.menu(), viewHandler.addRental());
   }
 
-  public void displayRentals(List<Rental> rentals) throws RemoteException {
+  public void displayRentals(List<Rental> rentals)
+  {
     if (rentals != null && !rentals.isEmpty())
     {
       for (int i = 0; i < rentals.size(); i++)
@@ -78,22 +69,21 @@ public class ManageAccountController
         imageView.setSmooth(true);
         imageView.setCache(true);
         imageView.setId(String.valueOf(rentals.get(i).getId()));
-        flowPane.getChildren().add(new StackPane(new InfoOverlay(imageView, rentals.get(i).toString())));
+        imageView.getStyleClass().add("image");
+        flowPane.getChildren().add(new StackPane(
+            new InfoOverlay(imageView, rentals.get(i).toString())));
         flowPane.getChildren().get(i)
-                .addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
-                  try {
-                    viewHandler.setView(viewHandler.menu(), viewHandler.manageRentals());
-                    manageAccountViewModel.getRental(event.getSource());
-                  }
-                  catch (IOException e) {
-                    e.printStackTrace();
-                  }
-                });
+            .addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
+              viewHandler
+                  .setView(viewHandler.menu(), viewHandler.manageRentals());
+              manageAccountViewModel.getRental(event.getSource());
+            });
       }
     }
   }
 
-  public void viewRating() throws IOException {
+  public void viewRating()
+  {
     manageAccountViewModel.setMember();
     viewHandler.setView(viewHandler.menu(), viewHandler.viewRating());
   }

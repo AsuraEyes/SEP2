@@ -3,7 +3,7 @@ package client.views.add_rental;
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
 import client.viewmodel.add_rental.AddRentalViewModel;
-import javafx.event.ActionEvent;
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -19,15 +19,13 @@ import org.controlsfx.control.Notifications;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.File;
-import java.io.IOException;
-import java.sql.SQLException;
 import java.util.Optional;
 
-public class AddRentalController {
+public class AddRentalController
+{
 
   @FXML private ImageView pictureView;
-  @FXML private CheckComboBox categoryBox;
-  @FXML private TextField searchField;
+  @FXML private CheckComboBox<String> categoryBox;
   @FXML private AnchorPane parent;
   @FXML private ChoiceBox<String> stateBox;
   @FXML private TextField nameField;
@@ -35,43 +33,47 @@ public class AddRentalController {
   @FXML private TextField priceField;
   @FXML private TextArea otherInfoField;
 
-  private String path;
-
   private AddRentalViewModel addRentalViewModel;
   private ViewHandler viewHandler;
   private Notifications notifications;
 
-  public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws SQLException, IOException {
+  public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory)
+  {
 
     addRentalViewModel = viewModelFactory.getAddRentalViewModel();
     this.viewHandler = viewHandler;
     addRentalViewModel = viewModelFactory.getAddRentalViewModel();
-    nameField.textProperty().bindBidirectional(addRentalViewModel.getNameField());
-    descriptionField.textProperty().bindBidirectional(addRentalViewModel.getDescriptionField());
+    nameField.textProperty()
+        .bindBidirectional(addRentalViewModel.getNameField());
+    descriptionField.textProperty()
+        .bindBidirectional(addRentalViewModel.getDescriptionField());
     stateBox.setItems(addRentalViewModel.getStates());
     stateBox.getSelectionModel().selectFirst();
-    priceField.textProperty().bindBidirectional(addRentalViewModel.getPriceField());
-    otherInfoField.textProperty().bindBidirectional(addRentalViewModel.getOtherInfoField());
+    priceField.textProperty()
+        .bindBidirectional(addRentalViewModel.getPriceField());
+    otherInfoField.textProperty()
+        .bindBidirectional(addRentalViewModel.getOtherInfoField());
     categoryBox.getItems().addAll(addRentalViewModel.getCategories());
+    Bindings.bindBidirectional(pictureView.imageProperty(),
+        addRentalViewModel.imagePropertyProperty());
 
-    notifications =  Notifications.create()
-            .title("Error - invalid input!")
-            .graphic(new Rectangle(300, 300, Color.RED)) // sets node to display
-            .hideAfter(Duration.seconds(3));
+    notifications = Notifications.create().title("Error - invalid input!")
+        .graphic(new Rectangle(300, 300, Color.RED))
+        .hideAfter(Duration.seconds(3));
   }
 
-  public void searchButton(ActionEvent actionEvent)
+  public void addRentalButton()
   {
-    notifications.owner(parent).text("Search field cannot be empty")
-        .showError();
-  }
+    if (checkField("Name", nameField) && checkField("Description",
+        descriptionField) && checkField("Price", priceField) && checkPicture(
+        pictureView))
+    {
+      String message = addRentalViewModel
+          .onAddRentalButtonPressed(stateBox.getValue(),
+              categoryBox.getCheckModel().getCheckedItems());
 
-  public void addRentalButton(ActionEvent actionEvent) throws IOException {
-    boolean ok = true;
-    if(checkField("Name", nameField) && checkField("Description",descriptionField) && checkField("Price", priceField) && checkPicture(pictureView)){
-      String message = addRentalViewModel.onAddRentalButtonPressed(stateBox.getValue(), categoryBox.getCheckModel().getCheckedItems(), path);
-
-      switch (message){
+      switch (message)
+      {
         case "Adding successful":
 
           Stage stage = (Stage) viewHandler.getStage().getScene().getWindow();
@@ -79,12 +81,20 @@ public class AddRentalController {
           alert.setTitle("Confirmation");
           alert.setHeaderText("New rental successfully created");
           alert.initOwner(stage);
-          alert.getDialogPane().setContentText("Click ok to get to welcome page.");
+          alert.getDialogPane()
+              .setContentText("Click ok to get to manage account page.");
 
           Optional<ButtonType> result = alert.showAndWait();
           if (result.get() == ButtonType.OK)
           {
-            viewHandler.setView(viewHandler.menu(), viewHandler.welcomePage());
+            nameField.clear();
+            descriptionField.clear();
+            priceField.clear();
+            otherInfoField.clear();
+            addRentalViewModel.setAllMemberRentals();
+            pictureView.setImage(null);
+            viewHandler
+                .setView(viewHandler.menu(), viewHandler.manageAccount());
           }
           break;
         default:
@@ -94,41 +104,51 @@ public class AddRentalController {
     }
   }
 
-  public void addPictureButton(ActionEvent actionEvent) {
+  public void addPictureButton()
+  {
     JFileChooser fileChooser = new JFileChooser();
     fileChooser.setCurrentDirectory(new File(System.getProperty("os.name")));
-    FileNameExtensionFilter filter = new FileNameExtensionFilter("*.IMAGE", "jpg", "gif", "png");
+    FileNameExtensionFilter filter = new FileNameExtensionFilter("*.IMAGE",
+        "jpg", "gif", "png");
     fileChooser.addChoosableFileFilter(filter);
     int result = fileChooser.showSaveDialog(null);
-    if(result == JFileChooser.APPROVE_OPTION){
+    if (result == JFileChooser.APPROVE_OPTION)
+    {
       File selectedFile = fileChooser.getSelectedFile();
       String path = selectedFile.getPath();
       pictureView.setFitHeight(220);
       pictureView.setFitWidth(170);
       pictureView.setPreserveRatio(false);
-      System.out.println(path);
-      pictureView.setImage(new Image("file:///"+path));
-      this.path = path;
-    }
-    else if(result == JFileChooser.CANCEL_OPTION){
-      System.out.println("No DATA");
+      pictureView.setImage(new Image("file:///" + path));
     }
   }
 
-  public void onGoBack(ActionEvent actionEvent) throws IOException {
+  public void onGoBack()
+  {
+    nameField.clear();
+    descriptionField.clear();
+    priceField.clear();
+    otherInfoField.clear();
+    pictureView.setImage(null);
     viewHandler.setView(viewHandler.menu(), viewHandler.manageAccount());
   }
 
-  private boolean checkField (String message, TextField nameOfField){
-    if (nameOfField.textProperty().getValue() == null || nameOfField.textProperty().getValue().isBlank()) {
-      notifications.owner(parent).text(message + " cannot be empty").showError();
+  private boolean checkField(String message, TextField nameOfField)
+  {
+    if (nameOfField.textProperty().getValue() == null || nameOfField
+        .textProperty().getValue().isBlank())
+    {
+      notifications.owner(parent).text(message + " cannot be empty")
+          .showError();
       return false;
     }
     return true;
   }
 
-  private boolean checkPicture(ImageView imageView){
-    if(imageView.getImage() == null){
+  private boolean checkPicture(ImageView imageView)
+  {
+    if (imageView.getImage() == null)
+    {
       notifications.owner(parent).text("Picture has to be added").showError();
       return false;
     }

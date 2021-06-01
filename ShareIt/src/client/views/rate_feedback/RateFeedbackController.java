@@ -2,18 +2,15 @@ package client.views.rate_feedback;
 
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
-import client.model.state.StateManager;
-import client.model.state.VisitorState;
-import client.viewmodel.create_account.CreateAccountViewModel;
 import client.viewmodel.rate_feedback.RateFeedbackViewModel;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 import org.controlsfx.control.Rating;
 
-import java.io.IOException;
-import java.sql.SQLException;
 import java.util.Optional;
 
 public class RateFeedbackController
@@ -24,42 +21,38 @@ public class RateFeedbackController
   private RateFeedbackViewModel rateFeedbackViewModel;
   private ViewHandler viewHandler;
 
-  public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws  IOException
+  public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory)
   {
     this.viewHandler = viewHandler;
     rateFeedbackViewModel = viewModelFactory.getRateFeedbackViewModel();
-    commentaryTextArea.textProperty().bindBidirectional(rateFeedbackViewModel.getCommentaryTextArea());
+    commentaryTextArea.textProperty()
+        .bindBidirectional(rateFeedbackViewModel.getCommentaryTextArea());
     usernameLabel.textProperty().bind(rateFeedbackViewModel.getUsernameLabel());
-    ratingStars.ratingProperty().bindBidirectional(rateFeedbackViewModel.getRatingProperty());
+    ratingStars.ratingProperty()
+        .bindBidirectional(rateFeedbackViewModel.getRatingProperty());
     commentaryTextArea.clear();
     ratingStars.setRating(0);
     rateFeedbackViewModel.getMemberUsername();
 
   }
 
-  public void submitButton(ActionEvent actionEvent) throws IOException
+  public void submitButton()
   {
-      Stage stage = (Stage) viewHandler.getStage().getScene().getWindow();
-      Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "");
-      alert.initOwner(stage);
-      alert.getDialogPane().setContentText("The feedback was " + rateFeedbackViewModel.onSubmitButtonPressed() + " successfully!");
+    Stage stage = (Stage) viewHandler.getStage().getScene().getWindow();
+    Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "");
+    alert.initOwner(stage);
+    alert.getDialogPane().setContentText(
+        "The feedback was " + rateFeedbackViewModel.onSubmitButtonPressed()
+            + " successfully!");
 
-      Optional<ButtonType> result = alert.showAndWait();
-      if (result.get() == ButtonType.OK)
-      {
-
-        viewHandler.setView(viewHandler.menu(), viewHandler.viewMemberProfile());
-
-      }
-
-
-    //rateFeedbackViewModel.onSubmitButtonPressed();
-
-    //viewHandler.setView(viewHandler.menu(), viewHandler.viewMemberProfile());
+    Optional<ButtonType> result = alert.showAndWait();
+    if (result.get() == ButtonType.OK)
+    {
+      viewHandler.setView(viewHandler.menu(), viewHandler.viewMemberProfile());
+    }
   }
 
-  public void goBackToUsersPageButton(ActionEvent actionEvent)
-      throws IOException
+  public void goBackToUsersPageButton()
   {
     viewHandler.setView(viewHandler.menu(), viewHandler.viewMemberProfile());
   }

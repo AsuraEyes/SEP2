@@ -1,9 +1,7 @@
 package client.viewmodel.view_member_profile;
 
-import client.model.ShareItModel;
-import client.model.state.StateManager;
-import client.model.state.VisitorState;
-import javafx.application.Platform;
+import client.model.member.MemberModel;
+import client.model.rental.RentalModel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.image.ImageView;
@@ -12,24 +10,26 @@ import org.controlsfx.control.InfoOverlay;
 import shared.transferobjects.Member;
 import shared.transferobjects.Rental;
 
-import java.beans.PropertyChangeEvent;
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public class ViewMemberProfileViewModel
 {
-  private ShareItModel model;
-  private final SimpleStringProperty searchField;
-  private final SimpleStringProperty usernameLabel;
-  private final SimpleStringProperty locationLabel;
-  private final SimpleStringProperty ratingLabel;
-  private final SimpleStringProperty addressLabel;
-  private final SimpleStringProperty contactLabel;
-  private final SimpleStringProperty otherInformationLabel;
+  private SimpleStringProperty searchField;
+  private SimpleStringProperty usernameLabel;
+  private SimpleStringProperty locationLabel;
+  private SimpleStringProperty ratingLabel;
+  private SimpleStringProperty addressLabel;
+  private SimpleStringProperty contactLabel;
+  private SimpleStringProperty otherInformationLabel;
+  private RentalModel rentalModel;
+  private MemberModel memberModel;
 
-  public ViewMemberProfileViewModel(ShareItModel model)
+  public ViewMemberProfileViewModel(RentalModel rentalModel,
+      MemberModel memberModel)
   {
-    this.model = model;
+    this.rentalModel = rentalModel;
+    this.memberModel = memberModel;
+
     searchField = new SimpleStringProperty();
     usernameLabel = new SimpleStringProperty();
     locationLabel = new SimpleStringProperty();
@@ -37,24 +37,6 @@ public class ViewMemberProfileViewModel
     addressLabel = new SimpleStringProperty();
     contactLabel = new SimpleStringProperty();
     otherInformationLabel = new SimpleStringProperty();
-    model.addListener("getMember", this::getMember);
-  }
-
-  private void getMember(PropertyChangeEvent evt)
-  {
-    Platform.runLater(() -> {
-      if(evt.getNewValue() instanceof Member)
-      {
-        Member member = (Member) evt.getNewValue();
-        //usernameLabel.setValue(member.getUsername());
-//        System.out.println("after: "+usernameLabel.getValue());
-//        locationLabel.setValue(member.getAddressCity());
-//        ratingLabel.setValue(String.valueOf(member.getAverageReview()));
-//        addressLabel.setValue(member.getAddressStreet() + ", " + member.getAddressNo());
-//        contactLabel.setValue(member.getPhoneNo() + "\n" + member.getEmailAddress());
-//        otherInformationLabel.setValue(member.getOtherInformation());
-      }
-      });
   }
 
   public StringProperty getSearchField()
@@ -92,32 +74,33 @@ public class ViewMemberProfileViewModel
     return otherInformationLabel;
   }
 
-  public String checkUserType(){
-    return model.checkUserType();
+  public String checkUserType()
+  {
+    return memberModel.checkUserType();
   }
 
-  public ArrayList<Rental> getRentalsOfMemberList(String username) throws RemoteException
+  public ArrayList<Rental> getRentalsOfMemberList()
   {
-    System.out.println(usernameLabel.getValue());
-    return model.getRentalsOfMemberList(username);
+    return rentalModel.getRentalsOfMemberList();
   }
 
-  public void getRental(Object object) throws RemoteException
+  public void getRental(Object object)
   {
-    if(object instanceof StackPane){
+    if (object instanceof StackPane)
+    {
       StackPane stackPane = (StackPane) object;
-      if(stackPane.getChildren().get(0) instanceof InfoOverlay)
+      if (stackPane.getChildren().get(0) instanceof InfoOverlay)
       {
         InfoOverlay infoOverlay = (InfoOverlay) stackPane.getChildren().get(0);
-        if(infoOverlay.getContent() instanceof ImageView)
+        if (infoOverlay.getContent() instanceof ImageView)
         {
           ImageView imageView = (ImageView) infoOverlay.getContent();
-          for (int i = 0; i < getRentalsOfMemberList(usernameLabel.getValue()).size(); i++)
+          for (int i = 0; i < getRentalsOfMemberList().size(); i++)
           {
-            if(imageView.getId().equals(String.valueOf(getRentalsOfMemberList(usernameLabel.getValue()).get(i).getId())))
+            if (imageView.getId().equals(
+                String.valueOf(getRentalsOfMemberList().get(i).getId())))
             {
-              model.sendSelectedRental(getRentalsOfMemberList(usernameLabel.getValue()).get(i));
-              break;
+              rentalModel.sendSelectedRental(getRentalsOfMemberList().get(i));
             }
           }
         }
@@ -125,25 +108,30 @@ public class ViewMemberProfileViewModel
     }
   }
 
-  public String getMemberUsername(){
-    usernameLabel.setValue(model.getMemberUsername());
-    System.out.println("View member profile username: "+usernameLabel.getValue());
-    Member member = model.getMemberByUsername(model.getMemberUsername());
-    locationLabel.setValue(member.getAddressCity());
-    ratingLabel.setValue(String.valueOf(member.getAverageReview()));
-    addressLabel.setValue(member.getAddressStreet() + ", " + member.getAddressNo());
-    contactLabel.setValue(member.getPhoneNo() + "\n" + member.getEmailAddress());
-    otherInformationLabel.setValue(member.getOtherInformation());
-    return model.getMemberUsername();
+  public void loadMemberInformation()
+  {
+    Member member = memberModel
+        .getMemberByUsername(memberModel.getMemberUsername());
+    usernameLabel.setValue("Username: " + memberModel.getMemberUsername());
+    locationLabel.setValue("Location: " + member.getAddressCity());
+    ratingLabel.setValue("Rating: " + (member.getAverageReview()));
+    addressLabel.setValue(
+        "Address: " + member.getAddressStreet() + ", " + member.getAddressNo());
+    contactLabel.setValue(
+        "Contact: " + member.getPhoneNo() + "\n" + member.getEmailAddress());
+    otherInformationLabel
+        .setValue("Other Information: " + member.getOtherInformation());
   }
 
-  public void setMemberUsername() {
-    model.setMemberUsername(usernameLabel.getValue());
+  public void setMemberUsername()
+  {
+    memberModel.setMemberUsername(usernameLabel.getValue().substring(10));
   }
 
-  public boolean deleteAccount(){
-    Member member = model.getMemberByUsername(StateManager.getInstance()
-            .getUsername());
-    return model.deleteMember(member);
+  public boolean deleteAccount()
+  {
+    Member member = memberModel
+        .getMemberByUsername(memberModel.getMemberUsername());
+    return memberModel.deleteMember(member);
   }
 }

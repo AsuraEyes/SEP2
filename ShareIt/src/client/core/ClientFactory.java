@@ -9,8 +9,10 @@ public class ClientFactory
 
   public Client getClient()
   {
-    if(client == null){
+    if (client == null)
+    {
       client = new RMIClient();
+      client.startClient();
     }
     return client;
   }

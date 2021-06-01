@@ -1,65 +1,68 @@
 package client.viewmodel.view_reported_member;
 
-import client.model.ShareItModel;
+import client.model.member.MemberModel;
+import client.model.rental.RentalModel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import shared.transferobjects.Rating;
 import shared.transferobjects.Report;
 
-public class ViewReportedMemberViewModel {
+public class ViewReportedMemberViewModel
+{
+  private RentalModel rentalModel;
+  private MemberModel memberModel;
 
-    private final StringProperty reportedNameLabel;
-    private final StringProperty reporterNameLabel;
-    private final StringProperty commentaryLabel;
+  private StringProperty reportedNameLabel;
+  private StringProperty reporterNameLabel;
+  private StringProperty commentaryLabel;
 
-    private ShareItModel model;
+  public ViewReportedMemberViewModel(RentalModel rentalModel,
+      MemberModel memberModel)
+  {
+    this.rentalModel = rentalModel;
+    this.memberModel = memberModel;
 
-    public ViewReportedMemberViewModel(ShareItModel model){
-        this.model = model;
-        reportedNameLabel = new SimpleStringProperty();
-        reporterNameLabel = new SimpleStringProperty();
-        commentaryLabel = new SimpleStringProperty();
-    }
+    reportedNameLabel = new SimpleStringProperty();
+    reporterNameLabel = new SimpleStringProperty();
+    commentaryLabel = new SimpleStringProperty();
+  }
 
+  public StringProperty getReportedNameLabel()
+  {
+    return reportedNameLabel;
+  }
 
+  public StringProperty getReporterNameLabel()
+  {
+    return reporterNameLabel;
+  }
 
-    public StringProperty getReportedNameLabel(){
-        return reportedNameLabel;
-    }
+  public StringProperty getCommentaryLabel()
+  {
+    return commentaryLabel;
+  }
 
-    public StringProperty getReporterNameLabel(){
-        return reporterNameLabel;
-    }
+  public void loadReport()
+  {
+    Report report = memberModel.getSelectedReport();
+    reporterNameLabel.setValue("Reporter: " + report.getUsernameFrom());
+    reportedNameLabel.setValue("Reported: " + report.getUsernameTo());
+    commentaryLabel.setValue(report.getCommentary());
+  }
 
-    public StringProperty getCommentaryLabel(){
-        return commentaryLabel;
-    }
+  public void setReportedNameLabel()
+  {
+    memberModel.setMemberUsername(reportedNameLabel.getValue().substring(10));
+    rentalModel.setAllMemberRentals(reportedNameLabel.getValue().substring(10));
+  }
 
-    public String getReporterPerson(){
-        reporterNameLabel.setValue(model.getReporterPerson());
-        return model.getReporterPerson();
-    }
-    public String getReportedPerson(){
-        reportedNameLabel.setValue(model.getReportedPerson());
-        return model.getReportedPerson();
-    }
-    public void getComment()
-    {
-        Report report = model.getReport(getReporterPerson(),getReportedPerson());
-        if(report != null)
-        {
-            commentaryLabel.setValue(report.getCommentary());
-        }
-    }
+  public void setReporterNameLabel()
+  {
+    memberModel.setMemberUsername(reporterNameLabel.getValue().substring(10));
+    rentalModel.setAllMemberRentals(reporterNameLabel.getValue().substring(10));
+  }
 
-    public void setReportedNameLabel()
-    {
-        System.out.println("Here: "+reportedNameLabel.getValue());
-        model.setReportedUsername(reportedNameLabel.getValue());
-    }
-
-    public void setReporterNameLabel()
-    {
-        model.setReporterUsername(reporterNameLabel.getValue());
-    }
+  public void loadAllReportedMembers()
+  {
+    memberModel.setReportList();
+  }
 }

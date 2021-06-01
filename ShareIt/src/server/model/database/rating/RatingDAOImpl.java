@@ -2,18 +2,12 @@ package server.model.database.rating;
 
 import server.model.database.member.MemberDAOImpl;
 import shared.transferobjects.Rating;
-import shared.transferobjects.Rental;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Class that implements methods from its interface and provides access to a database(Rating in this case)
- *
  */
 public class RatingDAOImpl implements RatingDAO
 {
@@ -25,11 +19,18 @@ public class RatingDAOImpl implements RatingDAO
     DriverManager.registerDriver(new org.postgresql.Driver());
   }
 
-  public static synchronized RatingDAOImpl getInstance() throws SQLException
+  public static synchronized RatingDAOImpl getInstance()
   {
     if (instance == null)
     {
-      instance = new RatingDAOImpl();
+      try
+      {
+        instance = new RatingDAOImpl();
+      }
+      catch (SQLException throwables)
+      {
+        throwables.printStackTrace();
+      }
     }
     return instance;
   }
@@ -48,59 +49,69 @@ public class RatingDAOImpl implements RatingDAO
 
   /**
    * Creates new rating feedback of Member by connecting to the database then by using instance to get id by using username from member database then insert all given data into rating table
+   *
    * @param starValue value of rating (from 1.0 to 5.0)
-   * @param feedback optionally a written feedback that rating user can leave
+   * @param feedback  optionally a written feedback that rating user can leave
    * @param username1 user that is rating
    * @param username2 user that is rated
    * @return returns new object of Rating
    * @throws SQLException
    */
-  @Override public Rating create(double starValue, String feedback, String username1, String username2) throws SQLException
+  @Override public Rating create(double starValue, String feedback,
+      String username1, String username2)
   {
-    try(Connection connection = getConnection()){
+    try (Connection connection = getConnection())
+    {
 
       int memberId1 = MemberDAOImpl.getInstance().readIdByUsername(username1);
       int memberId2 = MemberDAOImpl.getInstance().readIdByUsername(username2);
 
-      System.out.println("member from: "+username1+" member to: "+username2);
-
-      System.out.println(starValue);
-      PreparedStatement statement = connection.prepareStatement("INSERT INTO share_it.rating(value, commentary,member_from, member_to) VALUES (?, ?, ?, ?);");
+      PreparedStatement statement = connection.prepareStatement(
+          "INSERT INTO share_it.rating(value, commentary,member_from, member_to) VALUES (?, ?, ?, ?);");
       statement.setDouble(1, starValue);
       statement.setString(2, feedback);
-      statement.setInt(3,memberId1);
-      statement.setInt(4,memberId2);
+      statement.setInt(3, memberId1);
+      statement.setInt(4, memberId2);
 
-      System.out.println(statement);
       statement.executeUpdate();
 
-      return new Rating(starValue,feedback,memberId1,memberId2);
+      return new Rating(starValue, feedback, memberId1, memberId2);
     }
-
+    catch (SQLException throwables)
+    {
+      throwables.printStackTrace();
+    }
+    return null;
   }
 
   /**
    * Get all ratings that member has from the database by connecting to the database then by using instance to get id by using username from member database and then match member's id with data member_to id from the database
+   *
    * @param username username of the user that method will get all ratings for
    * @return returns an array of all user's ratings
-   * @throws SQLException
    */
-  @Override
-  public ArrayList<Rating> getAllRatingsOnMember(String username) throws SQLException {
-    try (Connection connection = getConnection()) {
-
+  @Override public ArrayList<Rating> getAllRatingsOnMember(String username)
+  {
+    try (Connection connection = getConnection())
+    {
       int id = MemberDAOImpl.getInstance().readIdByUsername(username);
-      PreparedStatement statement = connection.prepareStatement("SELECT * FROM share_it.rating WHERE member_to = ?");
+      PreparedStatement statement = connection.prepareStatement(
+          "SELECT * FROM share_it.rating WHERE member_to = ?");
       statement.setInt(1, id);
       ResultSet resultSet = statement.executeQuery();
 
       ArrayList<Rating> arrayListToReturn = new ArrayList<>();
-      while (resultSet.next()) {
-        arrayListToReturn.add(new Rating(resultSet.getDouble("value"), resultSet.getString("commentary"), resultSet.getInt("member_from"), resultSet.getInt("member_to")));
+      while (resultSet.next())
+      {
+        arrayListToReturn.add(new Rating(resultSet.getDouble("value"),
+            resultSet.getString("commentary"), resultSet.getInt("member_from"),
+            resultSet.getInt("member_to")));
       }
       //return array list
       return arrayListToReturn;
-    } catch (SQLException e) {
+    }
+    catch (SQLException e)
+    {
       e.printStackTrace();
     }
     return null;
@@ -108,16 +119,15 @@ public class RatingDAOImpl implements RatingDAO
 
   /**
    * Gets user's rating based on from which to which user was it by connecting to the database then by using instance to get id by using username from member database then match all given data with existing database data
+   *
    * @param fromUsername User that feedback rating was from
-   * @param toUsername User that got rated
+   * @param toUsername   User that got rated
    * @return returns rating object that has usernames matching
-   * @throws SQLException
    */
-  public Rating getRating(String fromUsername, String toUsername) throws SQLException
+  public Rating getRating(String fromUsername, String toUsername)
   {
     try (Connection connection = getConnection())
     {
-
       int fromId = MemberDAOImpl.getInstance().readIdByUsername(fromUsername);
       int toId = MemberDAOImpl.getInstance().readIdByUsername(toUsername);
       PreparedStatement statement = connection.prepareStatement(
@@ -128,31 +138,38 @@ public class RatingDAOImpl implements RatingDAO
 
       if (resultSet.next())
       {
-        return new Rating(resultSet.getDouble("value"), resultSet.getString("commentary"),
-            fromId, toId);
+        return new Rating(resultSet.getDouble("value"),
+            resultSet.getString("commentary"), fromId, toId);
       }
       return null;
     }
+    catch (SQLException throwables)
+    {
+      throwables.printStackTrace();
+    }
+    return null;
   }
 
   /**
    * Updates rating feedback whenever user decides to change it by connecting to the database and update rating table based on given data
+   *
    * @param rating new value of rating
    */
-  public void updateRating(Rating rating){
+  public void updateRating(Rating rating)
+  {
     try (Connection connection = getConnection())
     {
       PreparedStatement statement = connection.prepareStatement(
           "UPDATE share_it.rating SET value = ?, commentary = ? WHERE member_from = ? AND member_to = ?");
       statement.setDouble(1, rating.getRating());
       statement.setString(2, rating.getCommentary());
-      statement.setInt(3,rating.getMemberFrom());
+      statement.setInt(3, rating.getMemberFrom());
       statement.setInt(4, rating.getMemberTo());
-      statement.executeQuery();
+      statement.executeUpdate();
     }
-    catch (SQLException throwables)
+    catch (SQLException e)
     {
-      throwables.printStackTrace();
+      e.printStackTrace();
     }
   }
 

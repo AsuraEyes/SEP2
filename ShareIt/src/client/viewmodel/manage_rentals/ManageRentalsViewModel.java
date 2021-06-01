@@ -1,103 +1,126 @@
 package client.viewmodel.manage_rentals;
 
-import client.model.ShareItModel;
-import client.model.state.StateManager;
+import client.model.member.MemberModel;
+import client.model.rental.RentalModel;
 import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.image.Image;
-import shared.transferobjects.Member;
 import shared.transferobjects.Rental;
 
 import java.beans.PropertyChangeEvent;
 
-public class ManageRentalsViewModel {
-    private ShareItModel shareItModel;
+public class ManageRentalsViewModel
+{
+  private RentalModel rentalModel;
+  private MemberModel memberModel;
 
-    private StringProperty nameOfRental;
-    private StringProperty descriptionOfRental;
-    private StringProperty stateOfRental;
-    private StringProperty priceOfRental;
-    private StringProperty otherInformationOfRental;
-    private StringProperty categoryOfRental;
+  private StringProperty nameOfRental;
+  private StringProperty descriptionOfRental;
+  private StringProperty stateOfRental;
+  private StringProperty priceOfRental;
+  private StringProperty otherInformationOfRental;
+  private StringProperty categoryOfRental;
+  private ObjectProperty<Image> imageProperty;
 
-    public ManageRentalsViewModel(ShareItModel shareItModel){
-        this.shareItModel = shareItModel;
-        nameOfRental = new SimpleStringProperty();
-        descriptionOfRental = new SimpleStringProperty();
-        stateOfRental = new SimpleStringProperty();
-        priceOfRental = new SimpleStringProperty();
-        otherInformationOfRental = new SimpleStringProperty();
-        categoryOfRental = new SimpleStringProperty();
+  public ManageRentalsViewModel(RentalModel rentalModel,
+      MemberModel memberModel)
+  {
+    this.rentalModel = rentalModel;
+    this.memberModel = memberModel;
 
-        shareItModel.addListener("selectedRental",this::selectedRental);
-    }
+    nameOfRental = new SimpleStringProperty();
+    descriptionOfRental = new SimpleStringProperty();
+    stateOfRental = new SimpleStringProperty();
+    priceOfRental = new SimpleStringProperty();
+    otherInformationOfRental = new SimpleStringProperty();
+    categoryOfRental = new SimpleStringProperty();
+    imageProperty = new SimpleObjectProperty<>();
 
-    private void selectedRental(PropertyChangeEvent evt)
-    {
-        Platform.runLater(() -> {
+    rentalModel.addListener("selectedRental", this::selectedRental);
+  }
 
-            if (evt.getNewValue() instanceof Rental)
-            {
+  private void selectedRental(PropertyChangeEvent evt)
+  {
+    Platform.runLater(() -> {
 
-                Rental rental = (Rental) evt.getNewValue();
-                shareItModel.setSelectedRental(rental);
-                nameOfRental.setValue(rental.getName());
-                descriptionOfRental.setValue(rental.getDescription());
-                stateOfRental.setValue(rental.getStateName());
-                priceOfRental.setValue(String.valueOf(rental.getPrice()));
-                if(rental.getOtherInformation() !=null)
-                {
-                    otherInformationOfRental.setValue(rental.getOtherInformation());
-                }
-                if(rental.getSelectedCategories() != null)
-                {
-                    categoryOfRental.setValue(rental.getSelectedCategories().toString());
-                }
-            }
-        });
-    }
+      if (evt.getNewValue() instanceof Rental)
+      {
+        Rental rental = (Rental) evt.getNewValue();
 
-    public boolean deleteRental() {
-        return shareItModel.deleteRental(shareItModel.getSelectedRental());
-    }
+        nameOfRental.setValue("Name: " + rental.getName());
+        descriptionOfRental.setValue("Description: " + rental.getDescription());
+        stateOfRental.setValue("State: " + rental.getStateName());
+        priceOfRental.setValue("Price: " + (rental.getPrice()) + " DKK/day");
+        imageProperty.setValue(new Image(rental.getPictureLink()));
+        if (rental.getOtherInformation() != null)
+        {
+          otherInformationOfRental
+              .setValue("Other Information: " + rental.getOtherInformation());
+        }
+        if (rental.getSelectedCategories() != null)
+        {
+          categoryOfRental.setValue(
+              "Categories: " + rental.getSelectedCategories().toString());
+        }
+      }
+    });
+  }
 
-    public StringProperty nameOfRentalProperty()
-    {
-        return nameOfRental;
-    }
+  public boolean deleteRental()
+  {
+    return rentalModel.deleteRental(rentalModel.getSelectedRental());
+  }
 
-    public StringProperty descriptionOfRentalProperty()
-    {
-        return descriptionOfRental;
-    }
+  public StringProperty nameOfRentalProperty()
+  {
+    return nameOfRental;
+  }
 
-    public StringProperty stateOfRentalProperty()
-    {
-        return stateOfRental;
-    }
+  public StringProperty descriptionOfRentalProperty()
+  {
+    return descriptionOfRental;
+  }
 
-    public StringProperty priceOfRentalProperty()
-    {
-        return priceOfRental;
-    }
+  public StringProperty stateOfRentalProperty()
+  {
+    return stateOfRental;
+  }
 
-    public StringProperty otherInformationOfRentalProperty()
-    {
-        return otherInformationOfRental;
-    }
+  public StringProperty priceOfRentalProperty()
+  {
+    return priceOfRental;
+  }
 
-    public StringProperty categoryOfRentalProperty()
-    {
-        return categoryOfRental;
-    }
-    public void getSelectedRental(){
-        //Rental rental = new Rental()
+  public StringProperty otherInformationOfRentalProperty()
+  {
+    return otherInformationOfRental;
+  }
 
-        shareItModel.sendSelectedRental(shareItModel.getSelectedRental());
-    }
+  public StringProperty categoryOfRentalProperty()
+  {
+    return categoryOfRental;
+  }
 
+  public void getSelectedRental()
+  {
+    rentalModel.sendSelectedRental(rentalModel.getSelectedRental());
+  }
 
+  public ObjectProperty<Image> imagePropertyProperty()
+  {
+    return imageProperty;
+  }
+
+  public void setMemberUsername()
+  {
+    memberModel.setMemberUsername(memberModel.getLoggedInUsername());
+  }
+
+  public void setAllMemberRentals()
+  {
+    rentalModel.setAllMemberRentals(memberModel.getLoggedInUsername());
+  }
 }

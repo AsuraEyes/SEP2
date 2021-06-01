@@ -1,30 +1,34 @@
 package client.viewmodel.report_member;
 
-import client.model.ShareItModel;
+import client.model.member.MemberModel;
+import client.model.message.MessageModel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import shared.transferobjects.Rating;
 import shared.transferobjects.Report;
-
-import java.io.IOException;
 
 public class ReportMemberViewModel
 {
-  private ShareItModel model;
-  private final StringProperty usernameLabel;
-  private final StringProperty commentaryTextArea;
+  private StringProperty usernameLabel;
+  private StringProperty commentaryTextArea;
+  private MemberModel memberModel;
+  private MessageModel messageModel;
 
-  public ReportMemberViewModel(ShareItModel model)
+  public ReportMemberViewModel(MemberModel memberModel,
+      MessageModel messageModel)
   {
-    this.model = model;
+    this.memberModel = memberModel;
+    this.messageModel = messageModel;
+
     usernameLabel = new SimpleStringProperty();
     commentaryTextArea = new SimpleStringProperty();
 
   }
+
   public StringProperty getUsernameLabel()
-{
-  return usernameLabel;
-}
+  {
+    return usernameLabel;
+  }
+
   public StringProperty getCommentaryTextArea()
   {
     return commentaryTextArea;
@@ -32,16 +36,15 @@ public class ReportMemberViewModel
 
   public String getMemberUsername()
   {
-    usernameLabel.setValue(model.getMemberUsername());
-    System.out.println("this issmthmber VM : " + model.getMemberUsername());
-    return model.getMemberUsername();
+    usernameLabel.setValue(memberModel.getMemberUsername());
+    return memberModel.getMemberUsername();
   }
 
   public void getReport()
   {
-    Report report = model.getReport(model.getLoggedInUsername(),
-        model.getMemberUsername());
-    if(report != null)
+    Report report = messageModel.getReport(memberModel.getLoggedInUsername(),
+        memberModel.getMemberUsername());
+    if (report != null)
     {
       commentaryTextArea.setValue(report.getCommentary());
     }
@@ -49,21 +52,22 @@ public class ReportMemberViewModel
 
   public void updateReport()
   {
-    int memberFromId = model.getMemberByUsername(model.getLoggedInUsername())
-        .getId();
-    int memberToId = model.getMemberByUsername(model.getMemberUsername())
-        .getId();
-    Report report = new Report(commentaryTextArea.getValue(), memberFromId, memberToId);
-    model.updateReport(report);
+    int memberFromId = memberModel
+        .getMemberByUsername(memberModel.getLoggedInUsername()).getId();
+    int memberToId = memberModel
+        .getMemberByUsername(memberModel.getMemberUsername()).getId();
+    Report report = new Report(commentaryTextArea.getValue(), memberFromId,
+        memberToId);
+    messageModel.updateReport(report);
   }
 
-  public String addReport() throws IOException
+  public String addReport()
   {
-    return model.addReport(commentaryTextArea.getValue(), model.getLoggedInUsername(),
-            getMemberUsername());
+    return messageModel.addReport(commentaryTextArea.getValue(),
+        memberModel.getLoggedInUsername(), getMemberUsername());
   }
 
-  public String onReportButtonPressed() throws IOException
+  public String onReportButtonPressed()
   {
     if (!addReport().equals("Added"))
     {

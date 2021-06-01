@@ -33,6 +33,6 @@ public interface ReportDAO
    *
    * @param report new value of report
    */
-  void updateReport(Report report);
+  void updateReport(Report report)throws SQLException;
 
 }
