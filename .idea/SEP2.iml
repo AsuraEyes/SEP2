@@ -22,5 +22,6 @@
     <orderEntry type="library" exported="" name="controlsfx-11.1.0" level="project" />
     <orderEntry type="library" exported="" name="postgresql-42.2.201" level="project" />
     <orderEntry type="library" name="postgresql-42.2.20" level="project" />
+    <orderEntry type="library" exported="" name="javafx16" level="application" />
   </component>
 </module>

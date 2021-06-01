@@ -21,6 +21,9 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * A class that manages an interface and handle interactions in ViewMemberProfile view
+ */
 public class ViewMemberProfileController
 {
   @FXML private Label usernameLabel;
@@ -36,11 +39,19 @@ public class ViewMemberProfileController
   @FXML private Button goBackToViewedRentalButton;
   @FXML private FlowPane flowPane;
 
+
   public ImageView ImageView;
 
   private ViewMemberProfileViewModel viewMemberProfileViewModel;
   private ViewHandler viewHandler;
 
+  /**
+   * Init.
+   *
+   * @param viewHandler      the view handler
+   * @param viewModelFactory the view model factory
+   * @throws IOException the io exception
+   */
   public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory)
       throws IOException
   {
@@ -76,12 +87,22 @@ public class ViewMemberProfileController
     }
   }
 
+  /**
+   * Changes view when button was pressed and sets data for selected Member.
+   *
+   * @throws IOException
+   */
   public void reportButton() throws IOException
   {
     viewMemberProfileViewModel.setMemberUsername();
     viewHandler.setView(viewHandler.menu(), viewHandler.reportMember());
   }
 
+  /**
+   * Changes view when button was pressed dependable on user type.
+   *
+   * @throws IOException
+   */
   public void chatButton() throws IOException {
     if (viewMemberProfileViewModel.checkUserType().equals("Administrator")){
       viewHandler.setView(viewHandler.menu(), viewHandler.sendWarning());
@@ -93,13 +114,23 @@ public class ViewMemberProfileController
     }
   }
 
+  /**
+   * Changes view when button was pressed and sets data for selected Member.
+   *
+   * @throws IOException
+   */
   public void rateButton () throws IOException {
     viewMemberProfileViewModel.setMemberUsername();
     viewHandler.setView(viewHandler.menu(), viewHandler.rateFeedback());
 
   }
 
-    public void deleteButton() throws IOException {
+  /**
+   * Deletes a member after validation.
+   *
+   * @throws IOException
+   */
+  public void deleteButton() throws IOException {
     Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "");
     alert.setTitle("Delete account");
     alert.setHeaderText("Are you sure?");
@@ -127,7 +158,12 @@ public class ViewMemberProfileController
 
   }
 
-    public void goBackToViewedRentalButton() throws IOException {
+  /**
+   * Changes a view when button was pressed dependable on user type.
+   *
+   * @throws IOException
+   */
+  public void goBackToViewedRentalButton() throws IOException {
     if (viewMemberProfileViewModel.checkUserType().equals("Administrator"))
     {
       viewHandler.setView(viewHandler.menu(), viewHandler.searchForMember());
@@ -139,12 +175,22 @@ public class ViewMemberProfileController
 
   }
 
-    public void viewRatingButton() throws IOException {
+  /**
+   *  Changes view when button was pressed and sets data for selected Member.
+   *
+   * @throws IOException
+   */
+  public void viewRatingButton() throws IOException {
     viewMemberProfileViewModel.setMemberUsername();
     viewHandler.setView(viewHandler.menu(), viewHandler.viewRating());
   }
 
-    public void displayRentals (List < Rental > rentals) {
+  /**
+   * Displays rentals.
+   *
+   * @param rentals Member's rentals
+   */
+  public void displayRentals (List < Rental > rentals) {
       if (rentals != null && !rentals.isEmpty())
       {
         for (int i = 0; i < rentals.size(); i++)

@@ -15,6 +15,9 @@ import javafx.scene.text.TextFlow;
 
 import java.io.IOException;
 
+/**
+ * A class that manages an interface and handle interactions in ChatReceivedMessages view
+ */
 public class ChatReceivedMessagesController
 {
   @FXML
@@ -24,6 +27,13 @@ public class ChatReceivedMessagesController
   private ViewHandler viewHandler;
   private ChatReceivedMessagesViewModel chatReceivedMessagesViewModel;
 
+  /**
+   * Init. (?)
+   *
+   * @param viewHandler      the view handler
+   * @param viewModelFactory the view model factory
+   * @throws IOException
+   */
   public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws IOException {
     this.viewHandler = viewHandler;
     chatReceivedMessagesViewModel = viewModelFactory.getChatReceivedMessagesViewModel();
@@ -31,6 +41,9 @@ public class ChatReceivedMessagesController
     displayWarnings();
   }
 
+  /**
+   * Displays messages.
+   */
   public void displayMessages(){
     if (chatReceivedMessagesViewModel.getAllReceivedMessages() != null && !chatReceivedMessagesViewModel.getAllReceivedMessages().isEmpty()) {
       for (int i = 0; i < chatReceivedMessagesViewModel.getAllReceivedMessages().size(); i++) {
@@ -64,6 +77,9 @@ public class ChatReceivedMessagesController
     }
   }
 
+  /**
+   * Displays warnings.
+   */
   public void displayWarnings(){
     if (chatReceivedMessagesViewModel.getAllReceivedWarnings() != null && !chatReceivedMessagesViewModel.getAllReceivedWarnings().isEmpty()) {
       for (int i = 0; i < chatReceivedMessagesViewModel.getAllReceivedWarnings().size(); i++) {

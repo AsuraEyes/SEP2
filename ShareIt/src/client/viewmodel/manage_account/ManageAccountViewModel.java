@@ -12,6 +12,9 @@ import shared.transferobjects.Rental;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+/**
+ * A class that holds and manages data from the ManageAccount view.
+ */
 public class ManageAccountViewModel {
     private ShareItModel shareItModel;
     private final SimpleStringProperty usernameLabel;
@@ -21,6 +24,11 @@ public class ManageAccountViewModel {
     private final SimpleStringProperty contactLabel;
     private final SimpleStringProperty otherInformationLabel;
 
+    /**
+     * Instantiates a new Manage account view model.
+     *
+     * @param shareItModel The model that this ViewModel uses
+     */
     public ManageAccountViewModel(ShareItModel shareItModel) {
         this.shareItModel = shareItModel;
         usernameLabel = new SimpleStringProperty();
@@ -31,6 +39,9 @@ public class ManageAccountViewModel {
         otherInformationLabel = new SimpleStringProperty();
     }
 
+    /**
+     * Sets profile.
+     */
     public void setProfile(){
         Member member = shareItModel.getMemberByUsername(shareItModel.getLoggedInUsername());
         usernameLabel.setValue(member.getUsername());
@@ -41,10 +52,22 @@ public class ManageAccountViewModel {
         otherInformationLabel.setValue(member.getOtherInformation());
     }
 
+    /**
+     * Gets rentals of member list.
+     *
+     * @return returns Member's rentals
+     * @throws RemoteException
+     */
     public ArrayList<Rental> getRentalsOfMemberList() throws RemoteException {
         return shareItModel.getRentalsOfMemberList(shareItModel.getLoggedInUsername());
     }
 
+    /**
+     * Gets selected rental.
+     *
+     * @param object the object
+     * @throws RemoteException
+     */
     public void getRental(Object object) throws RemoteException {
         if(object instanceof StackPane){
             StackPane stackPane = (StackPane) object;
@@ -63,36 +86,69 @@ public class ManageAccountViewModel {
         }
     }
 
+    /**
+     * Gets usernameLabel.
+     *
+     * @return returns usernameLabel input
+     */
     public StringProperty getUsernameLabel()
     {
         return usernameLabel;
     }
 
+    /**
+     * Gets locationLabel.
+     *
+     * @return returns locationLabel input
+     */
     public StringProperty getLocationLabel()
     {
         return locationLabel;
     }
 
+    /**
+     * Gets ratingLabel.
+     *
+     * @return returns ratingLabel input
+     */
     public StringProperty getRatingLabel()
     {
         return ratingLabel;
     }
 
+    /**
+     * Gets addressLabel.
+     *
+     * @return returns addressLabel input
+     */
     public StringProperty getAddressLabel()
     {
         return addressLabel;
     }
 
+    /**
+     * Gets contactLabel.
+     *
+     * @return returns contactLabel input
+     */
     public StringProperty getContactLabel()
     {
         return contactLabel;
     }
 
+    /**
+     * Gets otherInformationLabel.
+     *
+     * @return returns otherInformationLabel input
+     */
     public StringProperty getOtherInformationLabel()
     {
         return otherInformationLabel;
     }
 
+    /**
+     * Sets member.
+     */
     public void setMember() {
         shareItModel.setMemberUsername(usernameLabel.getValue());
     }

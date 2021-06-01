@@ -11,6 +11,9 @@ import org.controlsfx.control.Rating;
 import java.io.IOException;
 import java.util.Optional;
 
+/**
+ * A class that manages an interface and handle interactions in RateFeedback view
+ */
 public class RateFeedbackController
 {
   @FXML private Rating ratingStars;
@@ -19,6 +22,13 @@ public class RateFeedbackController
   private RateFeedbackViewModel rateFeedbackViewModel;
   private ViewHandler viewHandler;
 
+  /**
+   * Init.
+   *
+   * @param viewHandler      the view handler
+   * @param viewModelFactory the view model factory
+   * @throws IOException the io exception
+   */
   public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws  IOException
   {
     this.viewHandler = viewHandler;
@@ -32,6 +42,11 @@ public class RateFeedbackController
 
   }
 
+  /**
+   * Changes view when button was pressed and data validated.
+   *
+   * @throws IOException
+   */
   public void submitButton() throws IOException {
       Stage stage = (Stage) viewHandler.getStage().getScene().getWindow();
       Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "");
@@ -44,6 +59,11 @@ public class RateFeedbackController
       }
   }
 
+  /**
+   * Changes view when button was pressed.
+   *
+   * @throws IOException
+   */
   public void goBackToUsersPageButton() throws IOException {
     viewHandler.setView(viewHandler.menu(), viewHandler.viewMemberProfile());
   }

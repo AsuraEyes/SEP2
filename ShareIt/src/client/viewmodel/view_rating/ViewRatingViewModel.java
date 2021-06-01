@@ -8,6 +8,9 @@ import shared.transferobjects.Rating;
 
 import java.util.ArrayList;
 
+/**
+ * A class that holds and manages data from the ViewRating view.
+ */
 public class ViewRatingViewModel {
     private ShareItModel model;
     private StringProperty username;
@@ -17,6 +20,11 @@ public class ViewRatingViewModel {
     private StringProperty contact;
     private StringProperty otherInformation;
 
+    /**
+     * Instantiates a new ViewRatingViewModel.
+     *
+     * @param model The model that this ViewModel uses
+     */
     public ViewRatingViewModel(ShareItModel model){
         this.model = model;
         username = new SimpleStringProperty();
@@ -27,31 +35,65 @@ public class ViewRatingViewModel {
         otherInformation = new SimpleStringProperty();
     }
 
-
+    /**
+     * Gets username.
+     *
+     * @return returns username
+     */
     public StringProperty getUsername() {
         return username;
     }
 
+    /**
+     * Gets location.
+     *
+     * @return returns location
+     */
     public StringProperty getLocation() {
         return location;
     }
 
+    /**
+     * Gets rating.
+     *
+     * @return returns rating
+     */
     public StringProperty getRating() {
         return rating;
     }
 
+    /**
+     * Gets address.
+     *
+     * @return returns address
+     */
     public StringProperty getAddress() {
         return address;
     }
 
+    /**
+     * Gets contact.
+     *
+     * @return returns contact
+     */
     public StringProperty getContact() {
         return contact;
     }
 
+    /**
+     * Gets otherInformation.
+     *
+     * @return returns otherInformation
+     */
     public StringProperty getOtherInformation() {
         return otherInformation;
     }
 
+    /**
+     * Get member username that rating is viewed.
+     *
+     * @return returns all Member's data
+     */
     public String getMemberUsername(){
         username.setValue(model.getMemberUsername());
         Member member = model.getMemberByUsername(model.getMemberUsername());
@@ -63,10 +105,21 @@ public class ViewRatingViewModel {
         return model.getMemberUsername();
     }
 
+    /**
+     * Gets all ratings on member.
+     *
+     * @param memberUsername Member's username
+     * @return returns all ratings that are on member
+     */
     public ArrayList<Rating> getAllRatingsOnMember(String memberUsername) {
         return model.getAllRatingsOnMember(memberUsername);
     }
 
+    /**
+     * Checks user type.
+     *
+     * @return returns which type of account is viewing profile
+     */
     public String getUserType(){
         return model.getLoggedInUsername();
     }

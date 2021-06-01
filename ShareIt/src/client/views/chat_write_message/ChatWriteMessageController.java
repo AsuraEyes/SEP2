@@ -10,6 +10,9 @@ import javafx.scene.control.TextField;
 
 import java.io.IOException;
 
+/**
+ * A class that manages an interface and handle interactions in ChatWriteMessage view
+ */
 public class ChatWriteMessageController
 {
   @FXML
@@ -22,6 +25,13 @@ public class ChatWriteMessageController
   private ViewHandler viewHandler;
   private ChatWriteMessageViewModel chatWriteMessageViewModel;
 
+  /**
+   * Init.
+   *
+   * @param viewHandler      the view handler
+   * @param viewModelFactory the view model factory
+   * @throws IOException
+   */
   public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws IOException {
     this.viewHandler = viewHandler;
     textChatArea.clear();
@@ -33,12 +43,20 @@ public class ChatWriteMessageController
     chatWriteMessageViewModel.loadLogs();
   }
 
+  /**
+   * Changes a view if button was pressed.
+   *
+   * @throws IOException the io exception
+   */
   public void onGoBack() throws IOException {
     textChatArea.clear();
     chatWriteMessageViewModel.loadAllReceivedMessages();
     viewHandler.setView(viewHandler.menu(), viewHandler.chatReceived());
   }
 
+  /**
+   * Sends a message by using a method from ViewModel when button is pressed
+   */
   public void onSend() {
     chatWriteMessageViewModel.sendMessage();
     inputTextChatField.clear();

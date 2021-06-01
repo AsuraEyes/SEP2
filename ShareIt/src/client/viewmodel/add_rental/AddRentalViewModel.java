@@ -14,6 +14,9 @@ import shared.transferobjects.State;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * A class that holds and manages data from the AddRental view.
+ */
 public class AddRentalViewModel {
     private ShareItModel model;
     private final StringProperty nameField;
@@ -24,9 +27,11 @@ public class AddRentalViewModel {
     private ObservableList<String> categoriesList;
     private ObjectProperty<Image> imageProperty;
 
-    
-
-
+    /**
+     * Instantiates a new AddRentalViewModel.
+     *
+     * @param model The model that this ViewModel uses
+     */
     public AddRentalViewModel(ShareItModel model){
         this.model = model;
         nameField = new SimpleStringProperty();
@@ -36,23 +41,60 @@ public class AddRentalViewModel {
         imageProperty = new SimpleObjectProperty<>();
     }
 
+    /**
+     * Get nameField.
+     *
+     * @return returns nameField input
+     */
     public StringProperty getNameField(){
         return nameField;
     }
+
+    /**
+     * Get descriptionField.
+     *
+     * @return returns descriptionField input
+     */
     public StringProperty getDescriptionField(){
         return descriptionField;
     }
+
+    /**
+     * Gets priceField.
+     *
+     * @return returns priceField input
+     */
     public StringProperty getPriceField(){
         return priceField;
     }
+
+    /**
+     * Image property property object property.
+     *
+     * @return the object property
+     */
     public ObjectProperty<Image> imagePropertyProperty()
     {
         return imageProperty;
     }
+
+    /**
+     * Gets otherInformation.
+     *
+     * @return returns otherInformationField input
+     */
     public StringProperty getOtherInfoField(){
         return otherInfoField;
     }
 
+    /**
+     * After AddRental button have been pressed this method sends data to the model.
+     *
+     * @param selectedState    The selected state
+     * @param selectedCategory The selected category
+     * @return returns new Rental object
+     * @throws IOException
+     */
     public String onAddRentalButtonPressed(Object selectedState, ObservableList<String> selectedCategory) throws IOException {
         ArrayList<String> selectedCategoriesList = new ArrayList<>(selectedCategory);
 
@@ -61,6 +103,12 @@ public class AddRentalViewModel {
 
         return model.checkRentalData(nameField.getValue(), path, descriptionField.getValue(), priceField.getValue(), otherInfoField.getValue(), (String) selectedState, selectedCategoriesList);
     }
+
+    /**
+     * Get all the states in a list.
+     *
+     * @return returns a list of states
+     */
     public ObservableList<String> getStates(){
         ArrayList<State> stateList = model.getStateList();
         ArrayList<String> stateListString = new ArrayList<>();
@@ -71,6 +119,11 @@ public class AddRentalViewModel {
         return statesList;
     }
 
+    /**
+     * Get all the categories in a list.
+     *
+     * @return returns a list of categories
+     */
     public ObservableList<String> getCategories(){
         ArrayList<Category> categoryList = model.getCategoryList();
         ArrayList<String> categoryListString = new ArrayList<>();

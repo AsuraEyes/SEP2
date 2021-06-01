@@ -24,6 +24,9 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Optional;
 
+/**
+ * A class that manages an interface and handle interactions in AddRental view
+ */
 public class AddRentalController {
 
   @FXML private ImageView pictureView;
@@ -39,6 +42,14 @@ public class AddRentalController {
   private ViewHandler viewHandler;
   private Notifications notifications;
 
+  /**
+   * Init.
+   *
+   * @param viewHandler      the view handler
+   * @param viewModelFactory the view model factory
+   * @throws SQLException
+   * @throws IOException
+   */
   public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws SQLException, IOException {
 
     addRentalViewModel = viewModelFactory.getAddRentalViewModel();
@@ -59,6 +70,11 @@ public class AddRentalController {
             .hideAfter(Duration.seconds(3));
   }
 
+  /**
+   * If data is valid it uses a method from viewModel
+   *
+   * @throws IOException
+   */
   public void addRentalButton() throws IOException {
     boolean ok = true;
     if(checkField("Name", nameField) && checkField("Description",descriptionField) && checkField("Price", priceField) && checkPicture(pictureView)){
@@ -87,6 +103,9 @@ public class AddRentalController {
     }
   }
 
+  /**
+   * Handles adding a picutre.
+   */
   public void addPictureButton() {
     JFileChooser fileChooser = new JFileChooser();
     fileChooser.setCurrentDirectory(new File(System.getProperty("os.name")));
@@ -103,10 +122,21 @@ public class AddRentalController {
     }
   }
 
+  /**
+   * Changes a view if button was pressed.
+   *
+   * @throws IOException
+   */
   public void onGoBack() throws IOException {
     viewHandler.setView(viewHandler.menu(), viewHandler.manageAccount());
   }
 
+  /**
+   * Validates data
+   * @param message name of field in string in case of invalid data
+   * @param nameOfField name of field
+   * @return returns true if data is valid, false if not
+   */
   private boolean checkField (String message, TextField nameOfField){
     if (nameOfField.textProperty().getValue() == null || nameOfField.textProperty().getValue().isBlank()) {
       notifications.owner(parent).text(message + " cannot be empty").showError();
@@ -115,6 +145,11 @@ public class AddRentalController {
     return true;
   }
 
+  /**
+   * Checks if picture was added
+   * @param imageView picture
+   * @return returns true if picture was added, false if not
+   */
   private boolean checkPicture(ImageView imageView){
     if(imageView.getImage() == null){
       notifications.owner(parent).text("Picture has to be added").showError();

@@ -83,10 +83,9 @@ public class RatingDAOImpl implements RatingDAO
    * Get all ratings that member has from the database by connecting to the database then by using instance to get id by using username from member database and then match member's id with data member_to id from the database
    * @param username username of the user that method will get all ratings for
    * @return returns an array of all user's ratings
-   * @throws SQLException
    */
   @Override
-  public ArrayList<Rating> getAllRatingsOnMember(String username) throws SQLException {
+  public ArrayList<Rating> getAllRatingsOnMember(String username)  {
     try (Connection connection = getConnection()) {
 
       int id = MemberDAOImpl.getInstance().readIdByUsername(username);

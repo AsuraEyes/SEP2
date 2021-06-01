@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  * Class that checks data before running an instance(Search data in this case)
  */
@@ -14,6 +15,11 @@ public class DataCheckSearch
 {
   private String search;
 
+  /**
+   * Checks all the rentals with given value
+   * @param search
+   * @return returns list of rentals where value matches with their name or description
+   */
   public List<Rental> checkSearch(String search)
   {
     this.search = search;
@@ -39,6 +45,14 @@ public class DataCheckSearch
     return null;
   }
 
+  /**
+   * Check of the Search with Filter data before passing it into the DAO.
+   *
+   * @param search             Search input
+   * @param city               Selected city
+   * @param selectedCategories Selected categories
+   * @return returns null if none of the conditions were met
+   */
   public List<Rental> checkSearchWithFilter(String search,String city,ArrayList<String> selectedCategories ) {
     this.search = search;
       try {
@@ -49,7 +63,10 @@ public class DataCheckSearch
       }
       return null;
     }
-
+  /**
+   * Checks is search input was given.
+   * @return returns true if search input is not empty, false if it is empty
+   */
   private boolean searchGiven(){
     if (search != null){
       if (!(search.trim().equals("") && search.isBlank() && search.isEmpty())){

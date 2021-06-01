@@ -15,18 +15,33 @@ import shared.transferobjects.Report;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * A class that manages an interface and handle interactions in ViewReportedMembersList view
+ */
 public class ViewReportedMemberListController {
     @FXML private VBox vBox;
 
     private ViewReportedMemberListViewModel viewReportedMemberListViewModel;
     private ViewHandler viewHandler;
 
+    /**
+     * Init.
+     *
+     * @param viewHandler      the view handler
+     * @param viewModelFactory the view model factory
+     * @throws IOException the io exception
+     */
     public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws IOException {
         this.viewHandler = viewHandler;
         viewReportedMemberListViewModel = viewModelFactory.getViewReportedMemberListViewModel();
         displayReports(viewReportedMemberListViewModel.getReportList()) ;
     }
 
+    /**
+     * Displays all reports.
+     *
+     * @param reports All the reports that members have filed
+     */
     public void displayReports(List<Report> reports)
     {
         if (reports != null && !reports.isEmpty()) {

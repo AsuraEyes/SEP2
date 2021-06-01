@@ -5,6 +5,9 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import shared.transferobjects.Report;
 
+/**
+ * A class that holds and manages data from the ViewReportedMember view.
+ */
 public class ViewReportedMemberViewModel {
 
     private final StringProperty reportedNameLabel;
@@ -13,6 +16,11 @@ public class ViewReportedMemberViewModel {
 
     private ShareItModel model;
 
+    /**
+     * Instantiates a new ViewReportedMemberViewModel.
+     *
+     * @param model The model that this ViewModel uses
+     */
     public ViewReportedMemberViewModel(ShareItModel model){
         this.model = model;
         reportedNameLabel = new SimpleStringProperty();
@@ -20,30 +28,56 @@ public class ViewReportedMemberViewModel {
         commentaryLabel = new SimpleStringProperty();
     }
 
-
-
+    /**
+     * Get reportedNameLabel.
+     *
+     * @return returns reported member username
+     */
     public StringProperty getReportedNameLabel(){
         return reportedNameLabel;
     }
 
+    /**
+     * Get reporterNameLabel.
+     *
+     * @return returns reporter member username
+     */
     public StringProperty getReporterNameLabel(){
         return reporterNameLabel;
     }
 
+    /**
+     * Get commentaryLabel.
+     *
+     * @return returns report commentary
+     */
     public StringProperty getCommentaryLabel(){
         return commentaryLabel;
     }
 
+    /**
+     * Gets reporter person.
+     *
+     * @return returns reporter person profile
+     */
     public String getReporterPerson(){
         reporterNameLabel.setValue(model.getReporterPerson());
         return model.getReporterPerson();
     }
 
+    /**
+     * Get reported person.
+     *
+     * @return returns reported person profile
+     */
     public String getReportedPerson(){
         reportedNameLabel.setValue(model.getReportedPerson());
         return model.getReportedPerson();
     }
 
+    /**
+     * Gets comment.
+     */
     public void getComment() {
         Report report = model.getReport(getReporterPerson(),getReportedPerson());
         if(report != null) {
@@ -51,10 +85,16 @@ public class ViewReportedMemberViewModel {
         }
     }
 
+    /**
+     * Sets reported member username.
+     */
     public void setReportedNameLabel() {
         model.setReportedUsername(reportedNameLabel.getValue());
     }
 
+    /**
+     * Sets reporter member username.
+     */
     public void setReporterNameLabel()
     {
         model.setReporterUsername(reporterNameLabel.getValue());

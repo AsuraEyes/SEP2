@@ -12,6 +12,9 @@ import shared.transferobjects.Rental;
 
 import java.beans.PropertyChangeEvent;
 
+/**
+ * A class that holds and manages data from the ViewRental view.
+ */
 public class ViewRentalViewModel
 {
   private ShareItModel shareItModel;
@@ -28,6 +31,11 @@ public class ViewRentalViewModel
   private StringProperty imageIdMemberId;
   private ObjectProperty<Image> imageProperty;
 
+  /**
+   * Instantiates a new ViewRentalViewModel.
+   *
+   * @param shareItModel The model that this ViewModel uses
+   */
   public ViewRentalViewModel(ShareItModel shareItModel){
     this.shareItModel = shareItModel;
     imageProperty = new SimpleObjectProperty<>();
@@ -46,6 +54,10 @@ public class ViewRentalViewModel
     shareItModel.addListener("selectedRental",this::selectedRental);
   }
 
+  /**
+   * (?)
+   * @param evt
+   */
   private void selectedRental(PropertyChangeEvent evt)
   {
     Platform.runLater(() -> {
@@ -76,69 +88,135 @@ public class ViewRentalViewModel
     });
   }
 
+  /**
+   * Name of rental.
+   *
+   * @return returns nameOfRental
+   */
   public StringProperty nameOfRentalProperty()
   {
     return nameOfRental;
   }
 
+  /**
+   * Description of rental.
+   *
+   * @return returns descriptionOfRental
+   */
   public StringProperty descriptionOfRentalProperty()
   {
     return descriptionOfRental;
   }
 
+  /**
+   * State of rental.
+   *
+   * @return returns stateOfRental
+   */
   public StringProperty stateOfRentalProperty()
   {
     return stateOfRental;
   }
 
-
+  /**
+   * Price of rental.
+   *
+   * @return returns priceOfRental
+   */
   public StringProperty priceOfRentalProperty()
   {
     return priceOfRental;
   }
 
+  /**
+   * Other information of rental.
+   *
+   * @return returns otherInformationOfRental
+   */
   public StringProperty otherInformationOfRentalProperty()
   {
     return otherInformationOfRental;
   }
 
+  /**
+   * Category of rental.
+   *
+   * @return returns categoryOfRental
+   */
   public StringProperty categoryOfRentalProperty()
   {
     return categoryOfRental;
   }
 
+  /**
+   * Username member that posted rental.
+   *
+   * @return returns usernameOfRental
+   */
   public StringProperty usernameOfRentalProperty()
   {
     return usernameOfRental;
   }
 
+  /**
+   * Location of member that posted rental
+   *
+   * @return returns locationOfRental
+   */
   public StringProperty locationOfRentalProperty()
   {
     return locationOfRental;
   }
 
+  /**
+   * Rating of user that posted rental.
+   *
+   * @return returns ratingOfUserOfRental
+   */
   public StringProperty ratingOfUserOfRentalProperty()
   {
     return ratingOfUserOfRental;
   }
 
+  /**
+   * Image of posted rental.
+   *
+   * @return returns image
+   */
   public ObjectProperty<Image> imagePropertyProperty()
   {
     return imageProperty;
   }
 
+  /**
+   * Gets member by id.
+   */
   public void getMemberById()
   {
     shareItModel.getMemberById(Integer.parseInt(imageIdMemberId.getValue()));
   }
+
+  /**
+   * Gets image id by member id.
+   *
+   * @return returns image id that matches with member id
+   */
   public StringProperty getImageIdMemberId(){
     return imageIdMemberId;
   }
 
+  /**
+   * Sets member username.
+   */
   public void setMemberUsername(){
     shareItModel.setMemberUsername(usernameOfRental.getValue());
   }
 
+  /**
+   * Checks user type.
+   *
+   * @return returns which type of account is viewing profile
+   */
   public String getUserType(){
     return shareItModel.checkUserType();
   }

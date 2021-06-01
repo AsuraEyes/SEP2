@@ -18,6 +18,9 @@ import shared.transferobjects.Rental;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * A class that manages an interface and handle interactions in SearchForRentals view
+ */
 public class SearchForRentalController
 {
   @FXML private CheckComboBox<String> categoryCheckComboBox;
@@ -28,6 +31,13 @@ public class SearchForRentalController
   private SearchForRentalViewModel searchForRentalViewModel;
   private ViewHandler viewHandler;
 
+  /**
+   * Init.
+   *
+   * @param viewHandler      the view handler
+   * @param viewModelFactory the view model factory
+   * @throws IOException the io exception
+   */
   public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws IOException
   {
     this.viewHandler = viewHandler;
@@ -50,6 +60,11 @@ public class SearchForRentalController
     }
   }
 
+  /**
+   * Runs method from viewModel after button was pressed.
+   *
+   * @throws IOException
+   */
   public void searchButton() throws IOException
   {
     List<Rental> rentals = searchForRentalViewModel.onSearchButtonPressed();
@@ -57,6 +72,11 @@ public class SearchForRentalController
     displayRentals(rentals);
   }
 
+  /**
+   * Runs method from viewModel after button was pressed.
+   *
+   * @throws IOException the io exception
+   */
   public void filterButton() throws IOException {
     List<Rental> rentals = searchForRentalViewModel
         .onFilterButtonPressed(locationBox.getValue(),
@@ -65,6 +85,11 @@ public class SearchForRentalController
     displayRentals(rentals);
   }
 
+  /**
+   * Displays rentals.
+   *
+   * @param rentals Rentals that matched with input
+   */
   public void displayRentals(List<Rental> rentals)
   {
       if (rentals != null && !rentals.isEmpty())

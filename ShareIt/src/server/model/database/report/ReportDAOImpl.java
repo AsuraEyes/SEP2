@@ -6,7 +6,10 @@ import shared.transferobjects.Report;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Class that implements methods from its interface and provides access to a database(Report in this case)
+ *
+ */
 public class ReportDAOImpl implements ReportDAO
 {
   private static ReportDAOImpl instance;
@@ -34,6 +37,15 @@ public class ReportDAOImpl implements ReportDAO
   private Connection getConnection() throws SQLException {
     return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", password);
   }
+
+  /**
+   * Creates new report feedback of Member by connecting to a database then inserting data provided by user to the database
+   * @param feedback  optionally a written feedback that rating user can leave
+   * @param username1 username of user that is sending report
+   * @param username2 username of user that is reported
+   * @return returns new object of Report with data which was provided by user while filling a report
+   * @throws SQLException
+   */
   @Override public Report create(String feedback, String username1,
       String username2) throws SQLException
   {
@@ -54,6 +66,13 @@ public class ReportDAOImpl implements ReportDAO
     }
   }
 
+  /**
+   * Gets user's Report based on from which to which user was it by connecting to a database then inserting data provided by user to the database
+   * @param fromUsername User that was reporting
+   * @param toUsername   User that got reported
+   * @return returns Report object that has usernames matching
+   * @throws SQLException
+   */
   @Override public Report getReport(String fromUsername, String toUsername)
       throws SQLException
   {
@@ -77,6 +96,10 @@ public class ReportDAOImpl implements ReportDAO
     }
   }
 
+  /**
+   * Updates report feedback whenever user decides to change it by connecting to the database and update rating table based on given data
+   * @param report new value of report
+   */
   @Override public void updateReport(Report report) {
     try (Connection connection = getConnection()) {
       PreparedStatement statement = connection.prepareStatement(
@@ -91,6 +114,11 @@ public class ReportDAOImpl implements ReportDAO
     }
   }
 
+  /**
+   * Reads all rentals from database by connecting to the database and get all table contents
+   * @return returns a list of all reports that are stored in the database
+   * @throws SQLException
+   */
   public List<Report> readReports() throws SQLException
   {
     try(Connection connection = getConnection()){

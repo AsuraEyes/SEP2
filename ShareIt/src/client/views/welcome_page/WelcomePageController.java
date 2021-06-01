@@ -8,6 +8,9 @@ import javafx.scene.control.TextField;
 
 import java.io.IOException;
 
+/**
+ * A class that manages an interface and handle interactions in WelcomePage view
+ */
 public class WelcomePageController {
 
     @FXML private TextField searchField;
@@ -15,6 +18,13 @@ public class WelcomePageController {
     private WelcomePageViewModel welcomePageViewModel;
     private ViewHandler viewHandler;
 
+    /**
+     * Init.
+     *
+     * @param viewHandler      the view handler
+     * @param viewModelFactory the view model factory
+     * @throws IOException
+     */
     public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws IOException {
         this.viewHandler = viewHandler;
         welcomePageViewModel = viewModelFactory.getWelcomePageViewModel();
@@ -26,6 +36,11 @@ public class WelcomePageController {
         }
     }
 
+    /**
+     * Runs method from viewModel after button was pressed and type of user was checked.
+     *
+     * @throws IOException
+     */
     public void searchButton() throws IOException {
         welcomePageViewModel.setSearchText();
         if(welcomePageViewModel.getUserType().equals("Administrator")){

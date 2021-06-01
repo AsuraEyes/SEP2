@@ -17,6 +17,9 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * A class that manages an interface and handle interactions in ManageAccount view
+ */
 public class ManageAccountController {
   @FXML private Label usernameLabel;
   @FXML private Label locationLabel;
@@ -29,6 +32,13 @@ public class ManageAccountController {
   private ViewHandler viewHandler;
   private ManageAccountViewModel manageAccountViewModel;
 
+  /**
+   * Init.
+   *
+   * @param viewHandler      the view handler
+   * @param viewModelFactory the view model factory
+   * @throws IOException the io exception
+   */
   public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws IOException {
     this.viewHandler = viewHandler;
     manageAccountViewModel = viewModelFactory.getManageAccountViewModel();
@@ -42,14 +52,31 @@ public class ManageAccountController {
     displayRentals(manageAccountViewModel.getRentalsOfMemberList());
   }
 
+  /**
+   * Changes a view if button was pressed.
+   *
+   * @throws IOException
+   * @throws SQLException
+   */
   public void editOrDeleteInformationButton() throws IOException, SQLException {
     viewHandler.setView(viewHandler.menu(), viewHandler.editOrDeleteAccount());
   }
 
+  /**
+   * Changes a view if button was pressed.
+   *
+   * @throws SQLException
+   * @throws IOException
+   */
   public void addRentalButton() throws SQLException, IOException {
     viewHandler.setView(viewHandler.menu(), viewHandler.addRental());
   }
 
+  /**
+   * Displays rentals.
+   *
+   * @param rentals Rentals that are being displayed
+   */
   public void displayRentals(List<Rental> rentals) {
     if (rentals != null && !rentals.isEmpty())
     {
@@ -78,6 +105,11 @@ public class ManageAccountController {
     }
   }
 
+  /**
+   * Changes a view if button was pressed and sets data of actually viewed member to use it in another view.
+   *
+   * @throws IOException
+   */
   public void viewRating() throws IOException {
     manageAccountViewModel.setMember();
     viewHandler.setView(viewHandler.menu(), viewHandler.viewRating());

@@ -2,6 +2,9 @@ package server.model.database.administrator;
 
 import java.sql.SQLException;
 
+/**
+ * The interface of Administrator Data Access Object.
+ */
 public interface AdministratorDAO
 {
   /**

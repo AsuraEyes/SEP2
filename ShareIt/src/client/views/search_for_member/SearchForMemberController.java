@@ -17,6 +17,9 @@ import shared.transferobjects.Member;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * A class that manages an interface and handle interactions in SearchForMember view
+ */
 public class SearchForMemberController
 {
   @FXML private TextField searchField;
@@ -25,6 +28,13 @@ public class SearchForMemberController
   private SearchForMemberViewModel searchForMemberViewModel;
   private ViewHandler viewHandler;
 
+  /**
+   * Init.
+   *
+   * @param viewHandler      the view handler
+   * @param viewModelFactory the view model factory
+   * @throws IOException the io exception
+   */
   public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory)
           throws IOException
   {
@@ -45,6 +55,9 @@ public class SearchForMemberController
     }
   }
 
+  /**
+   * Runs method from viewModel after button was pressed.
+   */
   public void searchButton()
   {
     List<Member> members = searchForMemberViewModel.onSearchButtonPressed();
@@ -52,6 +65,11 @@ public class SearchForMemberController
     displayMembers(members);
   }
 
+  /**
+   * Displays members.
+   *
+   * @param members Members that matched with input
+   */
   public void displayMembers(List<Member> members)
   {
     if (members != null && !members.isEmpty())

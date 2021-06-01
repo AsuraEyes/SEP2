@@ -73,9 +73,9 @@ public class MemberDAOImpl implements MemberDAO{
     }
 
     /**
-     *
-     * @param username
-     * @return
+     * Gets all the possible Members by connecting to the database and get all table contents matched with given value
+     * @param username the value that has will be checked on database
+     * @return returns list of Members matched with given value
      * @throws SQLException
      */
     @Override
@@ -272,6 +272,11 @@ public class MemberDAOImpl implements MemberDAO{
         }
     }
 
+    /**
+     * Gets all the possible Members by connecting to the database and get all table contents
+     * @return returns a list of all Members that are stored in the database
+     * @throws SQLException
+     */
     @Override
     public List<Member> readMembers() throws SQLException {
         try(Connection connection = getConnection()){

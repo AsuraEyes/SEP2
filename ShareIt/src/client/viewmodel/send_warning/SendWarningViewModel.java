@@ -11,12 +11,20 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+/**
+ * A class that holds and manages data from the SendWarning view.
+ */
 public class SendWarningViewModel {
     private StringProperty username;
     private StringProperty warnings;
     private StringProperty inputTextChat;
     private ShareItModel model;
 
+    /**
+     * Instantiates a new SendWarningViewModel.
+     *
+     * @param model The model that this ViewModel uses
+     */
     public SendWarningViewModel(ShareItModel model){
         this.model = model;
         username = new SimpleStringProperty();
@@ -25,6 +33,10 @@ public class SendWarningViewModel {
         model.addListener("newWarning", this::onNewWarning);
     }
 
+    /**
+     * (?)
+     * @param evt
+     */
     private void onNewWarning(PropertyChangeEvent evt) {
         Platform.runLater(() ->{
             Warning warning = (Warning) evt.getNewValue();
@@ -32,18 +44,37 @@ public class SendWarningViewModel {
         });
     }
 
+    /**
+     * Gets username.
+     *
+     * @return returns username
+     */
     public StringProperty getUsername(){
         return username;
     }
+
+    /**
+     * Gets warnings.
+     *
+     * @return returns warnings
+     */
     public StringProperty getWarnings() {
         return warnings;
     }
 
+    /**
+     * Gets textChat.
+     *
+     * @return returns the input of textChat
+     */
     public StringProperty getInputTextChat()
     {
         return inputTextChat;
     }
 
+    /**
+     * Sends warning.
+     */
     public void sendWarning(){
         String administratorFrom = "administrator";
         int idTo = model.getMemberByUsername(model.getMemberUsername()).getId();
@@ -51,6 +82,10 @@ public class SendWarningViewModel {
         Warning warning = new Warning(administratorFrom, idTo, inputTextChat.getValue(), timeStamp);
         model.sendWarning(warning);
     }
+
+    /**
+     * Loads logs.
+     */
     public void loadLogs() {
         warnings.setValue("Warning for this guy");
         int idTo = model.getMemberByUsername(model.getMemberUsername()).getId();
@@ -61,6 +96,10 @@ public class SendWarningViewModel {
             }
         }
     }
+
+    /**
+     * Gets member's username.
+     */
     public void getMember(){
         username.setValue(model.getMemberUsername());
     }

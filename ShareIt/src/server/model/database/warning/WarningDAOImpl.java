@@ -6,7 +6,10 @@ import java.sql.*;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
-
+/**
+ * Class that implements methods from its interface and provides access to a database(Warning in this case)
+ *
+ */
 public class WarningDAOImpl implements WarningDAO {
     private static WarningDAOImpl instance;
     private String password;
@@ -30,6 +33,12 @@ public class WarningDAOImpl implements WarningDAO {
         return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", password);
     }
 
+    /**
+     * Gets all the Warnings connected to the administrator that gave it and member that received it by connecting to the database and get all table contents that are matched with given data
+     * @param administrator Administrator that filled the warning
+     * @param memberTo Member that is geting warned
+     * @return returns a list of all warnings that are matched with given data
+     */
     @Override
     public ArrayList<Warning> getWarnings(String administrator, int memberTo) {
         try (Connection connection = getConnection()) {
@@ -55,6 +64,11 @@ public class WarningDAOImpl implements WarningDAO {
         return null;
     }
 
+    /**
+     * Creates new warning by connecting to a database then inserting data provided by administrator to the database
+     * @param warning Warning object that will be sent
+     * @return returns new object of Warning with data which was provided by Administrator while creating new warning
+     */
     @Override
     public Warning sendWarning(Warning warning) {
         try (Connection connection = getConnection()) {

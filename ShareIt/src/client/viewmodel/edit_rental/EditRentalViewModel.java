@@ -17,6 +17,9 @@ import java.beans.PropertyChangeEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * A class that holds and manages data from the EditRental view.
+ */
 public class EditRentalViewModel {
     private ShareItModel shareItModel;
 
@@ -28,7 +31,11 @@ public class EditRentalViewModel {
     private ObservableList<String> categoriesList;
     private ObjectProperty<Image> imageProperty;
 
-
+    /**
+     * Instantiates a new EditRentalViewModel.
+     *
+     * @param shareItModel The model that this ViewModel uses
+     */
     public EditRentalViewModel(ShareItModel shareItModel) {
         this.shareItModel = shareItModel;
         nameField = new SimpleStringProperty();
@@ -39,7 +46,10 @@ public class EditRentalViewModel {
         shareItModel.addListener("selectedRental",this::selectedRental);
     }
 
-
+    /**
+     * (?)
+     * @param evt
+     */
     private void selectedRental(PropertyChangeEvent evt)
     {
         Platform.runLater(() -> {
@@ -58,24 +68,60 @@ public class EditRentalViewModel {
         });
     }
 
+    /**
+     * Gets nameField.
+     *
+     * @return returns nameField input
+     */
     public StringProperty getNameField(){
         return nameField;
     }
+
+    /**
+     * Gets descriptionField.
+     *
+     * @return returns descriptionField input
+     */
     public StringProperty getDescriptionField(){
         return descriptionField;
     }
+
+    /**
+     * Gets priceField.
+     *
+     * @return returns priceField input
+     */
     public StringProperty getPriceField(){
         return priceField;
     }
+
+    /**
+     * Image property property object property.
+     *
+     * @return the object property
+     */
     public ObjectProperty<Image> imagePropertyProperty()
     {
         return imageProperty;
     }
+
+    /**
+     * Gets otherInformation.
+     *
+     * @return returns otherInformationField input
+     */
     public StringProperty getOtherInfoField(){
         return otherInfoField;
     }
 
-
+    /**
+     * After EditRental button have been pressed this method sends data to the model.
+     *
+     * @param selectedState    The selected state
+     * @param selectedCategory The selected category
+     * @return returns Rental object with edited data
+     * @throws IOException
+     */
     public String onEditRentalButtonPressed(Object selectedState, ObservableList<String> selectedCategory) throws IOException {
         ArrayList<String> selectedCategoriesList = new ArrayList<>(selectedCategory);
         String path = imageProperty.get().getUrl();
@@ -85,6 +131,11 @@ public class EditRentalViewModel {
             , selectedCategoriesList);
     }
 
+    /**
+     * Gets all the states in a list.
+     *
+     * @return returns a list of states
+     */
     public ObservableList<String> getStates(){
         ArrayList<State> stateList = shareItModel.getStateList();
         ArrayList<String> stateListString = new ArrayList<>();
@@ -95,6 +146,11 @@ public class EditRentalViewModel {
         return statesList;
     }
 
+    /**
+     * Gets all the categories in a list.
+     *
+     * @return returns a list of categories
+     */
     public ObservableList<String> getCategories(){
         ArrayList<Category> categoryList = shareItModel.getCategoryList();
         ArrayList<String> categoryListString = new ArrayList<>();
@@ -104,9 +160,21 @@ public class EditRentalViewModel {
         categoriesList = FXCollections.observableArrayList(categoryListString);
         return categoriesList;
     }
+
+    /**
+     * Gets State that was selected while editing Rental.
+     *
+     * @return returns the state that was selected
+     */
     public String getSelectedState(){
         return shareItModel.getSelectedRental().getStateName();
     }
+
+    /**
+     * Gets Categories that were selected while editing Rental.
+     *
+     * @return returns the list of selected categories
+     */
     public ArrayList<String> getCheckedCategories(){
         return shareItModel.getSelectedRental().getSelectedCategories();
     }

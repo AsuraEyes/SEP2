@@ -15,6 +15,9 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Optional;
 
+/**
+ * A class that manages an interface and handle interactions in Menu view
+ */
 public class MenuController
 {
   @FXML private Button reportedMembersButton;
@@ -25,6 +28,13 @@ public class MenuController
   private ViewHandler viewHandler;
   private MenuViewModel menuViewModel;
 
+  /**
+   * Init.
+   *
+   * @param viewHandler      the view handler
+   * @param viewModelFactory the view model factory
+   * @throws IOException
+   */
   public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws IOException {
     this.viewHandler = viewHandler;
     menuViewModel = viewModelFactory.getMenuViewModel();
@@ -50,10 +60,20 @@ public class MenuController
     }
   }
 
+  /**
+   * Changes view when logo was pressed.
+   *
+   * @throws IOException the io exception
+   */
   public void onLogoClick() throws IOException {
     viewHandler.setView(viewHandler.menu(), viewHandler.welcomePage());
   }
 
+  /**
+   * Log out member after button was pressed and data validated.
+   *
+   * @throws IOException
+   */
   public void logInOutButton() throws IOException {
     if (menuViewModel.checkUserType().equals("Administrator") ||
             (menuViewModel.checkUserType().equals("Member"))) {
@@ -73,7 +93,12 @@ public class MenuController
     }
   }
 
-    public void onReviewsButton () throws IOException {
+  /**
+   * On reviews button. (CHECK)
+   *
+   * @throws IOException the io exception
+   */
+  public void onReviewsButton () throws IOException {
     if (menuViewModel.checkUserType().equals("Member")){
       viewHandler.setView(viewHandler.menu(), viewHandler.manageAccount());
     }
@@ -83,6 +108,11 @@ public class MenuController
     }
   }
 
+  /**
+   * Changes view when button was pressed dependable on user type.
+   *
+   * @throws IOException
+   */
   public void onReportedMembersButton () throws IOException {
     if (menuViewModel.checkUserType().equals("Member")){
         viewHandler.setView(viewHandler.menu(), viewHandler.manageAccount());
@@ -93,7 +123,12 @@ public class MenuController
       }
   }
 
-    public void onChatButton() throws IOException {
+  /**
+   * Changes view when button was pressed and sets member's messages and warnings.
+   *
+   * @throws IOException the io exception
+   */
+  public void onChatButton() throws IOException {
     menuViewModel.loadAllReceivedMessages();
     menuViewModel.loadAllWarnings();
     viewHandler.setView(viewHandler.menu(), viewHandler.chatReceived());

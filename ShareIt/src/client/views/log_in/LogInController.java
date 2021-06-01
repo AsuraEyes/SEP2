@@ -18,6 +18,9 @@ import org.controlsfx.control.textfield.CustomPasswordField;
 import java.io.IOException;
 import java.sql.SQLException;
 
+/**
+ * A class that manages an interface and handle interactions in LogIn view
+ */
 public class LogInController
 {
   @FXML
@@ -31,6 +34,13 @@ public class LogInController
   private ViewHandler viewHandler;
   private Notifications notifications;
 
+  /**
+   * Init.
+   *
+   * @param viewHandler      the view handler
+   * @param viewModelFactory the view model factory
+   * @throws IOException
+   */
   public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory)
       throws IOException
   {
@@ -47,6 +57,11 @@ public class LogInController
     passwordField.clear();
   }
 
+  /**
+   * If data is valid it uses a method from viewModel
+   *
+   * @throws IOException
+   */
   public void logInButton() throws IOException {
 
     if(checkFieldNotEmpty(userNameField) && checkPasswordFieldNotEmpty(passwordField)){
@@ -68,10 +83,22 @@ public class LogInController
     }
   }
 
+  /**
+   * Changes view if button was pressed
+   *
+   * @throws IOException
+   * @throws SQLException
+   */
   public void createNewAccount() throws IOException, SQLException {
     viewHandler.setView(viewHandler.menu(), viewHandler.createAccount());
   }
 
+  /**
+   * Check if field is not empty.
+   *
+   * @param textField field that is being checked
+   * @return returns true if data is valid, false if not
+   */
   public boolean checkFieldNotEmpty(TextField textField){
     if(textField.textProperty().getValue() == null || textField.textProperty().getValue().isBlank()){
       notifications.owner(parent).text("Username cannot be empty").showError();
@@ -80,6 +107,12 @@ public class LogInController
     return true;
   }
 
+  /**
+   * Check if password field is not empty.
+   *
+   * @param textField password feld that is being checked
+   * @return returns true if data is valid, false if not
+   */
   public boolean checkPasswordFieldNotEmpty(CustomPasswordField textField){
     if(textField.textProperty().getValue() == null || textField.textProperty().getValue().isBlank()){
       notifications.owner(parent).text("Password cannot be empty").showError();

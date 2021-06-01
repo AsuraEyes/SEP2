@@ -14,6 +14,9 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Optional;
 
+/**
+ * A class that manages an interface and handle interactions in ManageRentals view
+ */
 public class ManageRentalsController {
 
   @FXML private Label nameOfRentalLabel;
@@ -27,6 +30,13 @@ public class ManageRentalsController {
   private ViewHandler viewHandler;
   private ManageRentalsViewModel manageRentalsViewModel;
 
+  /**
+   * Init.
+   *
+   * @param viewHandler      the view handler
+   * @param viewModelFactory the view model factory
+   * @throws IOException
+   */
   public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws IOException {
     this.viewHandler = viewHandler;
     manageRentalsViewModel = viewModelFactory.getManageRentalsViewModel();
@@ -40,11 +50,21 @@ public class ManageRentalsController {
     categoryLabel.textProperty().bind(manageRentalsViewModel.categoryOfRentalProperty());
   }
 
+  /**
+   * Changes view when button was pressed and gets data for selected rental.
+   *
+   * @throws IOException
+   */
   public void changeButton() throws IOException {
     viewHandler.setView(viewHandler.menu(), viewHandler.editRental());
     manageRentalsViewModel.getSelectedRental();
   }
 
+  /**
+   * Deletes a rental after validation.
+   *
+   * @throws IOException
+   */
   public void deleteButton() throws IOException {
     Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "");
     alert.setTitle("Delete rental");
@@ -69,6 +89,12 @@ public class ManageRentalsController {
       }
     }
   }
+
+  /**
+   * Changes view when button was pressed.
+   *
+   * @throws IOException
+   */
   public void goBackToProfileOverviewButton() throws IOException {
     viewHandler.setView(viewHandler.menu(), viewHandler.manageAccount());
   }

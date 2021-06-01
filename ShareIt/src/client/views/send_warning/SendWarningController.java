@@ -10,6 +10,9 @@ import javafx.scene.control.TextField;
 
 import java.io.IOException;
 
+/**
+ * A class that manages an interface and handle interactions in SendWarning view
+ */
 public class SendWarningController {
     @FXML private Label toUsernameLabel;
     @FXML private TextArea textChatArea;
@@ -18,6 +21,13 @@ public class SendWarningController {
     private ViewHandler viewHandler;
     private SendWarningViewModel sendWarningViewModel;
 
+    /**
+     * Init.
+     *
+     * @param viewHandler      the view handler
+     * @param viewModelFactory the view model factory
+     * @throws IOException the io exception
+     */
     public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws IOException {
         this.viewHandler = viewHandler;
         textChatArea.clear();
@@ -29,11 +39,19 @@ public class SendWarningController {
         sendWarningViewModel.loadLogs();
     }
 
+    /**
+     * Changes a view when button was pressed.
+     *
+     * @throws IOException
+     */
     public void onGoBack() throws IOException {
         textChatArea.clear();
         viewHandler.setView(viewHandler.menu(), viewHandler.viewMemberProfile());
     }
 
+    /**
+     * Uses a method from viewModel.
+     */
     public void onSend() {
         sendWarningViewModel.sendWarning();
         inputTextChatField.clear();

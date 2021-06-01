@@ -44,7 +44,7 @@ public class RentalDAOImpl implements RentalDAO
   /**
    * Crates new rental object by connecting to a database then inserting data provided by user to the database
    * @param name name of the rental input by user while creating new rental offer
-   * @param pictureLink
+   * @param pictureLink picture storage path
    * @param description description of the rental input by user while creating new rental offer
    * @param price price of the rental input by user while creating new rental offer
    * @param otherInformation other information of the rental input by user while creating new rental offer
@@ -126,7 +126,7 @@ public class RentalDAOImpl implements RentalDAO
    * @param search search is a phrase that was input by user in order to get rentals matched with it
    * @param city city that member who posted rental should be from
    * @param categories categories that searched for rental should be in
-   * @return returns list of rentals where values input matches with rentals values
+   * @return returns a list of rentals where values input matches with rentals values
    * @throws SQLException
    */
   @Override
@@ -223,27 +223,9 @@ public class RentalDAOImpl implements RentalDAO
   }
 
   /**
-   *
-   * @param name
-   * @return
-   * @throws SQLException
-   */
-  @Override public List<Rental> readByName(String name) throws SQLException
-  {
-    try (Connection connection = getConnection())
-    {
-      PreparedStatement statement = connection
-          .prepareStatement("SELECT * FROM share_it.rental WHERE name LIKE ?");
-      statement.setString(1, "%" + name + "%");
-      ArrayList<Rental> arrayListToReturn = new ArrayList<>();
-      return arrayListToReturn;
-    }
-  }
-
-  /**
-   *
-   * @param search
-   * @return
+   * Checks all the rentals with given value
+   * @param search the search
+   * @return returns a list of rentals where value matches with their name or description
    * @throws SQLException
    */
   public List<Rental> readBySearch(String search) throws SQLException {
@@ -283,7 +265,14 @@ public class RentalDAOImpl implements RentalDAO
 
   /**
    * Updates rental object by connecting to a database then updating data provided by user to the database
-   * @param name Name of rental that was changed
+   * @param name               name of the rental input by user while creating new rental offer
+   * @param pictureLink        picture storage path
+   * @param description        description of the rental input by user while creating new rental offer
+   * @param price              price of the rental input by user while creating new rental offer
+   * @param otherInformation   other information of the rental input by user while creating new rental offer
+   * @param stateName          state of the rental chosen from the list of possible states by user while creating new rental offer
+   * @param rentalId           Rental's ID
+   * @param selectedCategories categories of the rental chosen from the list of possible categories by user while creating new rental offer
    * @throws SQLException
    */
   @Override public void update(String name, String pictureLink, String description, int price, String otherInformation, String stateName, int rentalId, ArrayList<String> selectedCategories) throws SQLException
@@ -326,7 +315,7 @@ public class RentalDAOImpl implements RentalDAO
    * Deletes rental from database by connecting to the database and deleting matched object's id with existing member
    * @param rental rental object that will be deleted
    * @throws SQLException
-   * @return
+   * @return returns true if rental gets deleted from the database
    */
   @Override public boolean delete(Rental rental) throws SQLException {
     try (Connection connection = getConnection())
@@ -340,8 +329,8 @@ public class RentalDAOImpl implements RentalDAO
   }
 
   /**
-   *
-   * @return
+   * Gets next available ID by connecting to the database and getting it by running a next value method.
+   * @return returns the next available ID
    * @throws SQLException
    */
   @Override public int getNextAvailableId() throws SQLException
@@ -364,7 +353,7 @@ public class RentalDAOImpl implements RentalDAO
 
   /**
    * Reads all rentals from database by connecting to the database and get all table contents
-   * @return list of all rentals that are stored in the database
+   * @return returns a list of all rentals that are stored in the database
    * @throws SQLException
    */
   @Override public List<Rental> readRentals() throws SQLException {
@@ -404,6 +393,11 @@ public class RentalDAOImpl implements RentalDAO
     return null;
   }
 
+  /**
+   * Gets last rental by connecting to the database and checking the rental that is matched with id which is taken from getNextAvailableId method subtracted by 1 to get id of the last added rental
+   * @return returns the last rental
+   * @throws SQLException
+   */
   @Override public Rental getLastRental() throws SQLException
   {
     try (Connection connection = getConnection())
@@ -484,6 +478,12 @@ public class RentalDAOImpl implements RentalDAO
 //    }
 //    return null;
 //  }
+
+  /**
+   * Gets all rentals connected to the username by connecting to the database and matching given username with existing rentals
+   * @param username username that all rentals will be connected with
+   * @return returns a list of rentals that are matching with members username
+   */
   @Override
   public ArrayList<Integer> getRentalsOfMemberList(String username) {
     try (Connection connection = getConnection())

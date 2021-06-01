@@ -12,6 +12,9 @@ import shared.transferobjects.Rental;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+/**
+ * A class that holds and manages data from the SendWarning view.
+ */
 public class ViewMemberProfileViewModel
 {
   private ShareItModel model;
@@ -23,6 +26,11 @@ public class ViewMemberProfileViewModel
   private final SimpleStringProperty contactLabel;
   private final SimpleStringProperty otherInformationLabel;
 
+  /**
+   * Instantiates a new ViewMemberProfileViewModel.
+   *
+   * @param model The model that this ViewModel uses
+   */
   public ViewMemberProfileViewModel(ShareItModel model)
   {
     this.model = model;
@@ -35,49 +43,101 @@ public class ViewMemberProfileViewModel
     otherInformationLabel = new SimpleStringProperty();
   }
 
+  /**
+   * Gets searchField.
+   *
+   * @return returns searchField input
+   */
   public StringProperty getSearchField()
   {
     return searchField;
   }
 
+  /**
+   * Gets usernameLabel.
+   *
+   * @return returns usernameLabel
+   */
   public StringProperty getUsernameLabel()
   {
     return usernameLabel;
   }
 
+  /**
+   * Gets locationLabel.
+   *
+   * @return returns locationLabel
+   */
   public StringProperty getLocationLabel()
   {
     return locationLabel;
   }
 
+  /**
+   * Gets ratingLabel.
+   *
+   * @return returns ratingLabel
+   */
   public StringProperty getRatingLabel()
   {
     return ratingLabel;
   }
 
+  /**
+   * Gets addressLabel.
+   *
+   * @return returns addressLabel
+   */
   public StringProperty getAddressLabel()
   {
     return addressLabel;
   }
 
+  /**
+   * Gets contactLabel.
+   *
+   * @return returns contactLabel
+   */
   public StringProperty getContactLabel()
   {
     return contactLabel;
   }
 
+  /**
+   * Gets otherInformationLabel.
+   *
+   * @return returns otherInformationLabel
+   */
   public StringProperty getOtherInformationLabel()
   {
     return otherInformationLabel;
   }
 
+  /**
+   * Checks user type.
+   *
+   * @return returns which type of account is viewing profile
+   */
   public String checkUserType(){
     return model.checkUserType();
   }
 
-  public ArrayList<Rental> getRentalsOfMemberList(String username) throws RemoteException {
+  /**
+   * Gets a list of member's rentals
+   *
+   * @param username username that will be checked for the list
+   * @return returns a list of viewed member's rentals
+   */
+  public ArrayList<Rental> getRentalsOfMemberList(String username)  {
     return model.getRentalsOfMemberList(username);
   }
 
+  /**
+   * Gets rental.
+   *
+   * @param object the object
+   * @throws RemoteException the remote exception
+   */
   public void getRental(Object object) throws RemoteException
   {
     if(object instanceof StackPane){
@@ -101,6 +161,11 @@ public class ViewMemberProfileViewModel
     }
   }
 
+  /**
+   * Get member username that profile is viewed.
+   *
+   * @return returns all Member's data
+   */
   public String getMemberUsername(){
     usernameLabel.setValue(model.getMemberUsername());
     Member member = model.getMemberByUsername(model.getMemberUsername());
@@ -112,10 +177,18 @@ public class ViewMemberProfileViewModel
     return model.getMemberUsername();
   }
 
+  /**
+   * Sets member username.
+   */
   public void setMemberUsername() {
     model.setMemberUsername(usernameLabel.getValue());
   }
 
+  /**
+   * Checks members data before deleting.
+   *
+   * @return  deletes if process was successful
+   */
   public boolean deleteAccount(){
     Member member = model.getMemberByUsername(model.getMemberUsername());
     return model.deleteMember(member);

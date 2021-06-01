@@ -17,6 +17,9 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Optional;
 
+/**
+ * A class that manages an interface and handle interactions in CreateAccount view
+ */
 public class CreateAccountController {
     @FXML
     private AnchorPane parent;
@@ -45,6 +48,14 @@ public class CreateAccountController {
     private ViewHandler viewHandler;
     private Notifications notifications;
 
+    /**
+     * Init.
+     *
+     * @param viewHandler      the view handler
+     * @param viewModelFactory the view model factory
+     * @throws SQLException the sql exception
+     * @throws IOException  the io exception
+     */
     public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws SQLException, IOException {
         this.viewHandler = viewHandler;
         createAccountViewModel = viewModelFactory.getCreateAccountViewModel();
@@ -67,10 +78,20 @@ public class CreateAccountController {
                 .hideAfter(Duration.seconds(3));
     }
 
+    /**
+     * Changes a view when button was pressed.
+     *
+     * @throws IOException the io exception
+     */
     public void goBackToLogInButton() throws IOException {
         viewHandler.setView(viewHandler.menu(), viewHandler.logIn());
     }
 
+    /**
+     * If data is valid it uses a method from viewModel
+     *
+     * @throws IOException the io exception
+     */
     public void createButton() throws IOException {
         if(checkField(usernameField) && checkField(passwordField) && checkField(confirmPasswordField) && checkField(streetField) && checkField(streetNumberField) && checkField(postalCodeField)){
             String message = createAccountViewModel.onCreateButtonPressed(locationBox.getValue());
@@ -95,6 +116,11 @@ public class CreateAccountController {
         }
     }
 
+    /**
+     * Validates data
+     * @param nameOfField name of field
+     * @return returns true if data is valid, false if not
+     */
     private boolean checkField(TextField nameOfField){
         if(nameOfField.textProperty().getValue() == null || nameOfField.textProperty().getValue().isBlank()){
             notifications.owner(parent).text(nameOfField.getPromptText()+" cannot be empty").showError();

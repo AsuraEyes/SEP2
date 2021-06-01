@@ -12,6 +12,9 @@ import javafx.scene.image.ImageView;
 
 import java.io.IOException;
 
+/**
+ * A class that manages an interface and handle interactions in ViewRental view
+ */
 public class ViewRentalController {
   @FXML private Label nameOfRentalLabel;
   @FXML private Label descriptionLabel;
@@ -29,7 +32,13 @@ public class ViewRentalController {
   private ViewHandler viewHandler;
   private ViewRentalViewModel viewRentalViewModel;
 
-
+  /**
+   * Init.
+   *
+   * @param viewHandler      the view handler
+   * @param viewModelFactory the view model factory
+   * @throws IOException the io exception
+   */
   public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws IOException {
     viewRentalViewModel = viewModelFactory.getViewRentalViewModel();
     this.viewHandler = viewHandler;
@@ -52,7 +61,11 @@ public class ViewRentalController {
     }
   }
 
-
+  /**
+   * Changes a view when button was pressed and user type checked.
+   *
+   * @throws IOException
+   */
   public void goBackToSearchResultsButton() throws IOException {
     if(viewRentalViewModel.getUserType().equals("Administrator")){
       viewHandler.setView(viewHandler.menu(), viewHandler.viewMemberProfile());
@@ -63,6 +76,11 @@ public class ViewRentalController {
 
   }
 
+  /**
+   * Changes a view when button was pressed and user type checked and sets data for selected Member.
+   *
+   * @throws IOException
+   */
   public void seeMoreButton() throws IOException
   {
     viewRentalViewModel.setMemberUsername();

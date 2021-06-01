@@ -4,7 +4,9 @@ import shared.transferobjects.State;
 
 import java.sql.SQLException;
 import java.util.List;
-
+/**
+ * The interface of State Data Access Object.
+ */
 public interface StateDAO
 {
   /**

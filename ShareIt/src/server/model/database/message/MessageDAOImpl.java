@@ -9,6 +9,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+/**
+ * Class that implements methods from its interface and provides access to a database(Message in this case)
+ *
+ */
 public class MessageDAOImpl implements MessageDAO
 {
   private static MessageDAOImpl instance;
@@ -33,6 +37,12 @@ public class MessageDAOImpl implements MessageDAO
   private Connection getConnection() throws SQLException {
     return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", password);
   }
+
+  /**
+   * Gets all received messages for logged in member by connecting to the database and get all table contents that are matched with given data
+   * @param loggedUserId The user that is currently logged in
+   * @return returns all the messages connected with this particular member
+   */
   @Override public ArrayList<Message> getAllReceivedMessages(int loggedUserId)
   {
     try (Connection connection = getConnection()) {
@@ -62,6 +72,11 @@ public class MessageDAOImpl implements MessageDAO
     return null;
   }
 
+  /**
+   * Creates new message by connecting to a database then inserting data provided by Member to the database
+   * @param message message object that will be sent
+   * @return returns new object of Message with data which was provided by Member while creating new Message
+   */
   @Override public Message sendMessage(Message message) {
 
     try (Connection connection = getConnection()) {
@@ -88,7 +103,12 @@ public class MessageDAOImpl implements MessageDAO
     }
     return null;
   }
-
+  /**
+   * Gets all the Messages connected to the Member that sent it and LoggedIn Member that received it by connecting to the database and get all table contents that are matched with given data
+   * @param fromUserid Member that sent a message
+   * @param loggedUserId Member that is geting messaged
+   * @return returns a list of all messages that are matched with given data
+   */
     @Override public ArrayList<Message> getMessagesFromUser(int loggedUserId, int fromUserid)
   {
     try (Connection connection = getConnection()) {

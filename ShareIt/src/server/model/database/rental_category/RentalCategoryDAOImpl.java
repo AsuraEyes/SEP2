@@ -2,7 +2,10 @@ package server.model.database.rental_category;
 
 import java.sql.*;
 import java.util.ArrayList;
-
+/**
+ * Class that implements methods from its interface and provides access to a database(Rental category in this case)
+ *
+ */
 public class RentalCategoryDAOImpl implements RentalCategoryDAO{
     private static RentalCategoryDAOImpl instance;
     private String password;
@@ -26,6 +29,12 @@ public class RentalCategoryDAOImpl implements RentalCategoryDAO{
         return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", password);
     }
 
+    /**
+     * Gets selected categories on rental by connecting to the database and matching given rentalId with existing data
+     * @param rentalId Rental's ID
+     * @return returns a list of all selected categories that were chosen during creation of new Rental offer
+     * @throws SQLException
+     */
     @Override
     public ArrayList<String> getSelectedCategoriesOnRental(int rentalId) throws SQLException {
         try (Connection connection = getConnection()) {

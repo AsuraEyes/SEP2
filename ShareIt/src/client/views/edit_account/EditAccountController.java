@@ -17,6 +17,9 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Optional;
 
+/**
+ * A class that manages an interface and handle interactions in EditAccount view
+ */
 public class EditAccountController {
     @FXML
     private AnchorPane parent;
@@ -45,8 +48,14 @@ public class EditAccountController {
     private ViewHandler viewHandler;
     private Notifications notifications;
 
-
-    public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws SQLException, IOException {
+    /**
+     * Init.
+     *
+     * @param viewHandler      the view handler
+     * @param viewModelFactory the view model factory
+     * @throws IOException
+     */
+    public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws  IOException {
         this.viewHandler = viewHandler;
         editAccountViewModel = viewModelFactory.getEditAccountViewModel();
         usernameField.textProperty().bind(editAccountViewModel.getUsernameField());
@@ -71,10 +80,21 @@ public class EditAccountController {
                 .hideAfter(Duration.seconds(3));
 
     }
+
+    /**
+     * Changes view when button was pressed.
+     *
+     * @throws IOException
+     */
     public void goBackToProfile() throws IOException {
         viewHandler.setView(viewHandler.menu(), viewHandler.manageAccount());
     }
 
+    /**
+     * If data is valid it uses a method from viewModel
+     *
+     * @throws IOException
+     */
     public void editButton() throws IOException {
         if(checkField(usernameField) && checkField(passwordField) && checkField(confirmPasswordField) && checkField(streetField) && checkField(streetNumberField) && checkField(postalCodeField)){
             String message = editAccountViewModel.onEditButtonPressed(locationBox.getValue());
@@ -100,6 +120,11 @@ public class EditAccountController {
         }
     }
 
+    /**
+     * If data is valid it uses a method from viewModel
+     *
+     * @throws IOException
+     */
     public void deleteButton() throws IOException {
     Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "");
     alert.setTitle("Delete account");
@@ -124,7 +149,11 @@ public class EditAccountController {
         }
     }
   }
-
+    /**
+     * Validates data
+     * @param nameOfField name of field
+     * @return returns true if data is valid, false if not
+     */
     private boolean checkField(TextField nameOfField){
         if(nameOfField.textProperty().getValue() == null || nameOfField.textProperty().getValue().isBlank()){
             notifications.owner(parent).text(nameOfField.getPromptText()+" cannot be empty").showError();

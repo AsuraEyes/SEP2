@@ -16,6 +16,9 @@ import shared.transferobjects.Rating;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * A class that manages an interface and handle interactions in ViewRating view
+ */
 public class ViewRatingController {
     @FXML private Label userNameLabel;
     @FXML private Label locationLabel;
@@ -28,6 +31,13 @@ public class ViewRatingController {
     private ViewRatingViewModel viewRatingViewModel;
     private ViewHandler viewHandler;
 
+    /**
+     * Init.
+     *
+     * @param viewHandler      the view handler
+     * @param viewModelFactory the view model factory
+     * @throws IOException the io exception
+     */
     public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws IOException {
         this.viewHandler = viewHandler;
         viewRatingViewModel = viewModelFactory.getViewRatingViewModel();
@@ -41,6 +51,11 @@ public class ViewRatingController {
         displayRatings(viewRatingViewModel.getAllRatingsOnMember(viewRatingViewModel.getMemberUsername()));
     }
 
+    /**
+     * Changes view when button was pressed and user type checked.
+     *
+     * @throws IOException
+     */
     public void goBackToUserPage() throws IOException {
         if(userNameLabel.textProperty().getValue().equals(viewRatingViewModel.getUserType())){
             viewHandler.setView(viewHandler.menu(), viewHandler.manageAccount());
@@ -51,6 +66,11 @@ public class ViewRatingController {
 
     }
 
+    /**
+     * Displays ratings.
+     *
+     * @param ratings All member's ratings
+     */
     public void displayRatings(ArrayList<Rating> ratings){
         if (ratings != null && !ratings.isEmpty())
         {

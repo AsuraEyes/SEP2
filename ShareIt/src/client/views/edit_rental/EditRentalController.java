@@ -26,6 +26,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
 
+/**
+ * A class that manages an interface and handle interactions in EditRental view
+ */
 public class EditRentalController {
     @FXML private ImageView imageView;
     @FXML private CheckComboBox<String> categoryBox;
@@ -40,6 +43,13 @@ public class EditRentalController {
     private ViewHandler viewHandler;
     private Notifications notifications;
 
+    /**
+     * Init.
+     *
+     * @param viewHandler      the view handler
+     * @param viewModelFactory the view model factory
+     * @throws IOException
+     */
     public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws IOException {
         this.viewHandler = viewHandler;
         editRentalViewModel = viewModelFactory.getEditRentalViewModel();
@@ -62,12 +72,20 @@ public class EditRentalController {
                 .hideAfter(Duration.seconds(3));
     }
 
+    /**
+     * Search button. (CHECK)
+     */
     public void searchButton()
     {
         notifications.owner(parent).text("Search field cannot be empty")
                 .showError();
     }
 
+    /**
+     * If data is valid it uses a method from viewModel
+     *
+     * @throws IOException
+     */
     public void editButton() throws IOException {
         if(checkField("Name", nameField) && checkField("Description",descriptionField) && checkField("Price", priceField) && checkPicture(imageView)){
             String message = editRentalViewModel.onEditRentalButtonPressed(stateBox.getValue(), categoryBox.getCheckModel().getCheckedItems());
@@ -98,6 +116,9 @@ public class EditRentalController {
         }
     }
 
+    /**
+     * Handles adding a picutre.
+     */
     public void editPictureButton()
     {
         JFileChooser fileChooser = new JFileChooser();
@@ -115,11 +136,21 @@ public class EditRentalController {
         }
     }
 
+    /**
+     * Changes a view if button was pressed.
+     *
+     * @throws IOException
+     */
     public void onGoBack() throws IOException
     {
         viewHandler.setView(viewHandler.menu(),viewHandler.manageRentals());
     }
-
+    /**
+     * Validates data
+     * @param message name of field in string in case of invalid data
+     * @param nameOfField name of field
+     * @return returns true if data is valid, false if not
+     */
     private boolean checkField (String message, TextField nameOfField){
         if (nameOfField.textProperty().getValue() == null || nameOfField.textProperty().getValue().isBlank()) {
             notifications.owner(parent).text(message + " cannot be empty").showError();
@@ -127,7 +158,11 @@ public class EditRentalController {
         }
         return true;
     }
-
+    /**
+     * Checks if picture was added
+     * @param imageView picture
+     * @return returns true if picture was added, false if not
+     */
     private boolean checkPicture(ImageView imageView){
         if(imageView.getImage() == null){
             notifications.owner(parent).text("Picture has to be added").showError();
@@ -136,6 +171,9 @@ public class EditRentalController {
         return true;
     }
 
+    /**
+     * Checks if categories were changed
+     */
     private void checkCategories(){
         ArrayList<String> checkedCategories = editRentalViewModel.getCheckedCategories();
         for (int i = 0; i < checkedCategories.size(); i++)

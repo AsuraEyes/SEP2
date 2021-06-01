@@ -4,7 +4,9 @@ import shared.transferobjects.Member;
 
 import java.sql.SQLException;
 import java.util.List;
-
+/**
+ * The interface of Member Data Access Object.
+ */
 public interface MemberDAO {
     /**'
      * Creates new member by putting data provided by user
@@ -22,9 +24,9 @@ public interface MemberDAO {
      */
     Member create(String username, String password, String emailAddress, String phoneNumber, String otherInformation, String addressStreet, String addressNo, int addressPostalCode, String addressCity) throws SQLException;
     /**
-     *
-     * @param username
-     * @return
+     * Gets all the possible Members with given value
+     * @param username the value that has will be checked on database
+     * @return returns list of Members matched with given value
      * @throws SQLException
      */
     List<Member> readByUsername(String username) throws SQLException;
@@ -85,6 +87,10 @@ public interface MemberDAO {
      * @throws SQLException
      */
     Member getMemberByUsername(String username) throws SQLException;
-
+    /**
+     * Gets all the possible Members
+     * @return returns a list of all Members that are stored in the database
+     * @throws SQLException
+     */
     List<Member> readMembers() throws SQLException;
 }

@@ -31,21 +31,42 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.SQLException;
 
+/**
+ * A class that helps to manage all views that ShareIt Application has
+ */
 public class ViewHandler {
   private final Stage stage;
   private final Scene scene;
   private final ViewModelFactory viewModelFactory;
 
-    public ViewHandler(Stage stage, ViewModelFactory viewModelFactory) {
+  /**
+   * Instantiates a new View handler.
+   *
+   * @param stage            the stage
+   * @param viewModelFactory the view model factory
+   */
+  public ViewHandler(Stage stage, ViewModelFactory viewModelFactory) {
     this.viewModelFactory = viewModelFactory;
     this.stage = stage;
     scene = new Scene(new Region());
   }
 
+  /**
+   * Sets default view at the start of an Application.
+   *
+   * @throws Exception
+   */
   public void start() throws Exception {
     setView(menu(), welcomePage());
   }
 
+  /**
+   * Sets view with particular chosen content.
+   *
+   * @param menu    Menu bar placed at the top part of an Application
+   * @param content The content below Menu bar
+   * @throws IOException
+   */
   public void setView(Node menu, Node content) throws IOException {
     FXMLLoader loader = new FXMLLoader();
     loader.setLocation(getClass().getResource("/client/views/main_view/Main.fxml"));
@@ -58,6 +79,12 @@ public class ViewHandler {
     stage.show();
   }
 
+  /**
+   * Loads Menu view.
+   *
+   * @return returns this view
+   * @throws IOException
+   */
   public Node menu() throws IOException {
     FXMLLoader loader = new FXMLLoader();
     loader.setLocation(getClass().getResource("/client/views/menu/Menu.fxml"));
@@ -67,6 +94,13 @@ public class ViewHandler {
     return menu;
   }
 
+  /**
+   * loads AddRental view.
+   *
+   * @return returns this view
+   * @throws IOException
+   * @throws SQLException
+   */
   public Node addRental() throws IOException, SQLException {
     FXMLLoader loader = new FXMLLoader();
     loader.setLocation(getClass().getResource("/client/views/add_rental/AddRental.fxml"));
@@ -77,6 +111,12 @@ public class ViewHandler {
     return content;
   }
 
+  /**
+   * Loads ChatReceivedMessages view.
+   *
+   * @return returns this view
+   * @throws IOException
+   */
   public Node chatReceived() throws IOException {
     FXMLLoader loader = new FXMLLoader();
     loader.setLocation(getClass().getResource("/client/views/chat_received_messages/ChatReceivedMessages.fxml"));
@@ -86,6 +126,12 @@ public class ViewHandler {
     return content;
   }
 
+  /**
+   * Loads ChatWriteMessage view.
+   *
+   * @return  returns this view
+   * @throws IOException
+   */
   public Node chatWrite() throws IOException {
     FXMLLoader loader = new FXMLLoader();
     loader.setLocation(getClass().getResource("/client/views/chat_write_message/ChatWriteMessage.fxml"));
@@ -95,6 +141,12 @@ public class ViewHandler {
     return content;
   }
 
+  /**
+   * Load SendWarning view
+   *
+   * @return returns this view
+   * @throws IOException
+   */
   public Node sendWarning() throws IOException {
     FXMLLoader loader = new FXMLLoader();
     loader.setLocation(getClass().getResource("/client/views/send_warning/SendWarning.fxml"));
@@ -104,6 +156,13 @@ public class ViewHandler {
     return content;
   }
 
+  /**
+   * Loads CreateAccount view.
+   *
+   * @return returns this view
+   * @throws IOException
+   * @throws SQLException
+   */
   public Node createAccount() throws IOException, SQLException {
     FXMLLoader loader = new FXMLLoader();
     loader.setLocation(getClass().getResource("/client/views/create_account/CreateAccount.fxml"));
@@ -113,6 +172,12 @@ public class ViewHandler {
     return content;
   }
 
+  /**
+   * Loads LogIn view.
+   *
+   * @return returns this view
+   * @throws IOException
+   */
   public Node logIn() throws IOException {
     FXMLLoader loader = new FXMLLoader();
     loader.setLocation(getClass().getResource("/client/views/log_in/LogIn.fxml"));
@@ -122,6 +187,12 @@ public class ViewHandler {
     return content;
   }
 
+  /**
+   * Loads ManageAccount view.
+   *
+   * @return returns this view
+   * @throws IOException
+   */
   public Node manageAccount() throws IOException {
     FXMLLoader loader = new FXMLLoader();
     loader.setLocation(getClass().getResource("/client/views/manage_account/ManageAccount.fxml"));
@@ -131,6 +202,13 @@ public class ViewHandler {
     return content;
   }
 
+  /**
+   * Load EditAccount view.
+   *
+   * @return returns this view
+   * @throws IOException
+   * @throws SQLException
+   */
   public Node editOrDeleteAccount() throws IOException, SQLException {
     FXMLLoader loader = new FXMLLoader();
     loader.setLocation(getClass().getResource("/client/views/edit_account/EditAccount.fxml"));
@@ -140,6 +218,12 @@ public class ViewHandler {
     return content;
   }
 
+  /**
+   * Loads ManageRentals view.
+   *
+   * @return returns this view
+   * @throws IOException
+   */
   public Node manageRentals() throws IOException {
     FXMLLoader loader = new FXMLLoader();
     loader.setLocation(getClass().getResource("/client/views/manage_rentals/ManageRentals.fxml"));
@@ -149,6 +233,12 @@ public class ViewHandler {
     return content;
   }
 
+  /**
+   * Loads EditRental view.
+   *
+   * @return returns this view
+   * @throws IOException
+   */
   public Node editRental() throws IOException{
     FXMLLoader loader = new FXMLLoader();
     loader.setLocation(getClass().getResource("/client/views/edit_rental/EditRental.fxml"));
@@ -158,6 +248,12 @@ public class ViewHandler {
     return content;
   }
 
+  /**
+   * Loads RateFeedback view
+   *
+   * @return returns this view
+   * @throws IOException
+   */
   public Node rateFeedback() throws IOException {
     FXMLLoader loader = new FXMLLoader();
     loader.setLocation(getClass().getResource("/client/views/rate_feedback/RateFeedback.fxml"));
@@ -167,6 +263,12 @@ public class ViewHandler {
     return content;
   }
 
+  /**
+   * Loads ReportMember view.
+   *
+   * @return returns this view
+   * @throws IOException
+   */
   public Node reportMember() throws IOException {
     FXMLLoader loader = new FXMLLoader();
     loader.setLocation(getClass().getResource("/client/views/report_member/ReportMember.fxml"));
@@ -176,6 +278,12 @@ public class ViewHandler {
     return content;
   }
 
+  /**
+   * Loads SearchForMember view.
+   *
+   * @return returns this view
+   * @throws IOException
+   */
   public Node searchForMember() throws IOException {
     FXMLLoader loader = new FXMLLoader();
     loader.setLocation(getClass().getResource("/client/views/search_for_member/SearchForMember.fxml"));
@@ -185,6 +293,12 @@ public class ViewHandler {
     return content;
   }
 
+  /**
+   * Loads SearchForRental view.
+   *
+   * @return returns this view
+   * @throws IOException
+   */
   public Node searchForRental() throws IOException {
     FXMLLoader loader = new FXMLLoader();
     loader.setLocation(getClass().getResource("/client/views/search_for_rental/SearchForRental.fxml"));
@@ -194,6 +308,12 @@ public class ViewHandler {
     return content;
   }
 
+  /**
+   * Loads ViewMemberProfile view.
+   *
+   * @return returns this view
+   * @throws IOException
+   */
   public Node viewMemberProfile() throws IOException {
     FXMLLoader loader = new FXMLLoader();
     loader.setLocation(getClass().getResource("/client/views/view_member_profile/ViewMemberProfile.fxml"));
@@ -203,6 +323,12 @@ public class ViewHandler {
     return content;
   }
 
+  /**
+   * Loads ViewRating view.
+   *
+   * @return returns this view
+   * @throws IOException
+   */
   public Node viewRating() throws IOException {
     FXMLLoader loader = new FXMLLoader();
     loader.setLocation(getClass().getResource("/client/views/view_rating/ViewRating.fxml"));
@@ -212,6 +338,12 @@ public class ViewHandler {
     return content;
   }
 
+  /**
+   * Loads ViewRating view.
+   *
+   * @return returns this view
+   * @throws IOException
+   */
   public Node viewRatingFull() throws IOException {
     FXMLLoader loader = new FXMLLoader();
     loader.setLocation(getClass().getResource("/client/views/view_rating/ViewRating.fxml"));
@@ -221,6 +353,12 @@ public class ViewHandler {
     return content;
   }
 
+  /**
+   * Loads ViewRental view.
+   *
+   * @return returns this view
+   * @throws IOException
+   */
   public Node viewRental() throws IOException {
     FXMLLoader loader = new FXMLLoader();
     loader.setLocation(getClass().getResource("/client/views/view_rental/ViewRental.fxml"));
@@ -230,6 +368,12 @@ public class ViewHandler {
     return content;
   }
 
+  /**
+   * Loads ViewReportedMember view.
+   *
+   * @return returns this view
+   * @throws IOException
+   */
   public Node viewReportedMember() throws IOException {
     FXMLLoader loader = new FXMLLoader();
     loader.setLocation(getClass().getResource("/client/views/view_reported_member/ViewReportedMember.fxml"));
@@ -239,6 +383,12 @@ public class ViewHandler {
     return content;
   }
 
+  /**
+   * Loads ViewReportedMemberList view.
+   *
+   * @return returns this view
+   * @throws IOException
+   */
   public Node viewReportedMemberList() throws IOException {
     FXMLLoader loader = new FXMLLoader();
     loader.setLocation(getClass().getResource("/client/views/view_reported_member_list/ViewReportedMemberList.fxml"));
@@ -248,6 +398,12 @@ public class ViewHandler {
     return content;
   }
 
+  /**
+   * Loads WelcomePage view.
+   *
+   * @return returns this view
+   * @throws IOException
+   */
   public Node welcomePage() throws IOException {
     FXMLLoader loader = new FXMLLoader();
     loader.setLocation(getClass().getResource("/client/views/welcome_page/WelcomePage.fxml"));
@@ -257,6 +413,11 @@ public class ViewHandler {
     return content;
   }
 
+  /**
+   * Gets stage container.
+   *
+   * @return the stage
+   */
   public Stage getStage()
   {
     return stage;

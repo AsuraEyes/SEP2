@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 /**
- * Interface
+ * The interface of Rating Data Access Object.
  */
 public interface RatingDAO
 {
