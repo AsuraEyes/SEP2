@@ -135,16 +135,3 @@ CREATE TRIGGER update_avg_review_trigger
     ON share_it.rating
     FOR EACH ROW
     EXECUTE FUNCTION upd_average_review();
-
-
---SELECT nextval(pg_get_serial_sequence('share_it.member', 'id')) AS available_id;
-
-SELECT * FROM share_it.rental, share_it.category, share_it.rental_category WHERE share_it.rental.name || share_it.rental.description ILIKE '%bowl%' AND share_it.category.name ILIKE 'tools' AND share_it.rental_category.rental_id = share_it.rental.id AND share_it.rental_category.category_name = share_it.category.name;
-SELECT * FROM share_it.rental;
-
-SHOW data_directory;
-
-
-SELECT time, username, text FROM share_it.message, share_it.member WHERE member_to = member.id ORDER BY time desc;
-
-SELECT time, username, text FROM share_it.message, share_it.member WHERE member_to = member.id AND (member_to = 4 AND  member_from = 8)
