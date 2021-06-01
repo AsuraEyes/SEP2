@@ -2,15 +2,12 @@ package server.model.data_check;
 
 import server.model.database.rating.RatingDAOImpl;
 
-import java.sql.SQLException;
-
 /**
  * Class that checks data before running an instance(Rating data in this case)
  */
 public class DataCheckRating
 {
   private String feedback;
-
   /**
    * Check of the Rating data before passing it into the DAO.
    *
@@ -20,19 +17,30 @@ public class DataCheckRating
    * @param username2     Member's ID that was rated.
    * @return returns String type dependable on the result.
    */
-  public String addFeedback(double starValue, String feedback, String username1, String username2){
+  public String addFeedback(double starValue, String feedback, String username1,
+      String username2)
+  {
     this.feedback = feedback;
 
-
-      try {
-        RatingDAOImpl.getInstance().create(starValue, feedback, username1, username2);
-        return "Added";
-      }
-      catch (SQLException e){
-        e.printStackTrace();
-      }
-
+    if (FeedbackGiven())
+    {
+      RatingDAOImpl.getInstance()
+          .create(starValue, feedback, username1, username2);
+      return "Added";
+    }
     return "Ooops, something went wrong!!";
-    }}
+  }
 
-
+  private boolean FeedbackGiven()
+  {
+    if (feedback != null)
+    {
+      if (!(feedback.trim().equals("") && feedback.isBlank() && feedback
+          .isEmpty()))
+      {
+        return true;
+      }
+    }
+    return true;
+  }
+}

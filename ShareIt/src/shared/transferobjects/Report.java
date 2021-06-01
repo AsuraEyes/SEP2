@@ -10,6 +10,8 @@ public class Report implements Serializable
   private String commentary;
   private int memberFrom;
   private int memberTo;
+  private String usernameFrom;
+  private String usernameTo;
 
   /**
    * Constructor initializing fields.
@@ -25,6 +27,25 @@ public class Report implements Serializable
     this.memberTo = memberTo;
   }
 
+  public String getUsernameFrom()
+  {
+    return usernameFrom;
+  }
+
+  public void setUsernameFrom(String usernameFrom)
+  {
+    this.usernameFrom = usernameFrom;
+  }
+
+  public String getUsernameTo()
+  {
+    return usernameTo;
+  }
+
+  public void setUsernameTo(String usernameTo)
+  {
+    this.usernameTo = usernameTo;
+  }
   /**
    * Gets commentary that Member gave.
    *

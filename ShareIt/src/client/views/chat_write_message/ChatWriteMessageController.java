@@ -7,24 +7,17 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-
-import java.io.IOException;
-
 /**
  * A class that manages an interface and handle interactions in ChatWriteMessage view
  */
 public class ChatWriteMessageController
 {
-  @FXML
-  private Label toUsernameLabel;
-  @FXML
-  private TextArea textChatArea;
-  @FXML
-  private TextField inputTextChatField;
+  @FXML private Label toUsernameLabel;
+  @FXML private TextArea textChatArea;
+  @FXML private TextField inputTextChatField;
 
   private ViewHandler viewHandler;
   private ChatWriteMessageViewModel chatWriteMessageViewModel;
-
   /**
    * Init.
    *
@@ -32,32 +25,36 @@ public class ChatWriteMessageController
    * @param viewModelFactory the view model factory
    * @throws IOException
    */
-  public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws IOException {
+  public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory)
+  {
     this.viewHandler = viewHandler;
     textChatArea.clear();
-    chatWriteMessageViewModel = viewModelFactory.getChatWriteMessagesViewModel();
-    toUsernameLabel.textProperty().bind(chatWriteMessageViewModel.getUsername());
-    inputTextChatField.textProperty().bindBidirectional(chatWriteMessageViewModel.getInputTextChat());
+    chatWriteMessageViewModel = viewModelFactory
+        .getChatWriteMessagesViewModel();
+    toUsernameLabel.textProperty()
+        .bind(chatWriteMessageViewModel.getUsername());
+    inputTextChatField.textProperty()
+        .bindBidirectional(chatWriteMessageViewModel.getInputTextChat());
     chatWriteMessageViewModel.getMember();
     textChatArea.textProperty().bind(chatWriteMessageViewModel.getMessages());
     chatWriteMessageViewModel.loadLogs();
   }
-
   /**
    * Changes a view if button was pressed.
    *
    * @throws IOException the io exception
    */
-  public void onGoBack() throws IOException {
+  public void onGoBack()
+  {
     textChatArea.clear();
     chatWriteMessageViewModel.loadAllReceivedMessages();
     viewHandler.setView(viewHandler.menu(), viewHandler.chatReceived());
   }
-
   /**
    * Sends a message by using a method from ViewModel when button is pressed
    */
-  public void onSend() {
+  public void onSend()
+  {
     chatWriteMessageViewModel.sendMessage();
     inputTextChatField.clear();
   }

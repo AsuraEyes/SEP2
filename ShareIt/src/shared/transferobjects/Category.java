@@ -14,7 +14,8 @@ public class Category implements Serializable
    *
    * @param name name of the Category
    */
-  public Category(String name){
+  public Category(String name)
+  {
     this.name = name;
   }
 
@@ -42,7 +43,8 @@ public class Category implements Serializable
    * Gets category name as a string.
    * @return returns name of the Category
    */
-  public String toString(){
+  public String toString()
+  {
     return name;
   }
 }

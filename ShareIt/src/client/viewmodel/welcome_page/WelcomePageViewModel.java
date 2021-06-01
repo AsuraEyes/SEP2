@@ -1,6 +1,8 @@
 package client.viewmodel.welcome_page;
 
-import client.model.ShareItModel;
+
+import client.model.member.MemberModel;
+import client.model.message.MessageModel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -8,17 +10,19 @@ import javafx.beans.property.StringProperty;
  * A class that holds and manages data from the WelcomePage view.
  */
 public class WelcomePageViewModel {
-    private ShareItModel model;
-    private final StringProperty searchField;
+    private MemberModel memberModel;
+    private MessageModel messageModel;
 
+    private final StringProperty searchField;
     /**
      * Instantiates a new WelcomePageViewModel.
      *
      * @param model The model that this ViewModel uses
      */
-    public WelcomePageViewModel(ShareItModel model){
+    public WelcomePageViewModel(MemberModel memberModel, MessageModel messageModel){
+        this.memberModel = memberModel;
+        this.messageModel = messageModel;
         searchField = new SimpleStringProperty();
-        this.model = model;
     }
 
     /**
@@ -36,13 +40,13 @@ public class WelcomePageViewModel {
      * @return returns which type of account is viewing profile
      */
     public String getUserType(){
-        return model.checkUserType();
+        return memberModel.checkUserType();
     }
 
     /**
      * Sets search text.
      */
     public void setSearchText(){
-        model.setSearchText(searchField.getValue());
+        messageModel.setSearchText(searchField.getValue());
     }
 }

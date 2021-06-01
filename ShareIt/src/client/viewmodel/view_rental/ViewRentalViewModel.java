@@ -1,6 +1,7 @@
 package client.viewmodel.view_rental;
 
-import client.model.ShareItModel;
+import client.model.member.MemberModel;
+import client.model.rental.RentalModel;
 import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -17,7 +18,8 @@ import java.beans.PropertyChangeEvent;
  */
 public class ViewRentalViewModel
 {
-  private ShareItModel shareItModel;
+  private RentalModel rentalModel;
+  private MemberModel memberModel;
 
   private StringProperty nameOfRental;
   private StringProperty descriptionOfRental;
@@ -28,18 +30,18 @@ public class ViewRentalViewModel
   private StringProperty usernameOfRental;
   private StringProperty locationOfRental;
   private StringProperty ratingOfUserOfRental;
-  private StringProperty imageIdMemberId;
   private ObjectProperty<Image> imageProperty;
-
   /**
    * Instantiates a new ViewRentalViewModel.
    *
    * @param shareItModel The model that this ViewModel uses
    */
-  public ViewRentalViewModel(ShareItModel shareItModel){
-    this.shareItModel = shareItModel;
+  public ViewRentalViewModel(RentalModel rentalModel, MemberModel memberModel)
+  {
+    this.rentalModel = rentalModel;
+    this.memberModel = memberModel;
+
     imageProperty = new SimpleObjectProperty<>();
-    imageIdMemberId = new SimpleStringProperty();
     nameOfRental = new SimpleStringProperty();
     descriptionOfRental = new SimpleStringProperty();
     stateOfRental = new SimpleStringProperty();
@@ -50,8 +52,7 @@ public class ViewRentalViewModel
     locationOfRental = new SimpleStringProperty();
     ratingOfUserOfRental = new SimpleStringProperty();
 
-
-    shareItModel.addListener("selectedRental",this::selectedRental);
+    rentalModel.addListener("selectedRental", this::selectedRental);
   }
 
   /**
@@ -65,25 +66,26 @@ public class ViewRentalViewModel
       if (evt.getNewValue() instanceof Rental)
       {
         Rental rental = (Rental) evt.getNewValue();
-        Member member = shareItModel.getMemberById(rental.getMemberId());
+        Member member = memberModel.getMemberById(rental.getMemberId());
 
-        nameOfRental.setValue(rental.getName());
-        descriptionOfRental.setValue(rental.getDescription());
-        stateOfRental.setValue(rental.getStateName());
-        priceOfRental.setValue(String.valueOf(rental.getPrice()));
+        nameOfRental.setValue("Name: " + rental.getName());
+        descriptionOfRental.setValue("Description: " + rental.getDescription());
+        stateOfRental.setValue("State: " + rental.getStateName());
+        priceOfRental.setValue("Price: " + (rental.getPrice()) + " DKK/day");
         imageProperty.setValue(new Image(rental.getPictureLink()));
-        if(rental.getOtherInformation() !=null)
+        if (rental.getOtherInformation() != null)
         {
-          otherInformationOfRental.setValue(rental.getOtherInformation());
+          otherInformationOfRental
+              .setValue("Other Information: " + rental.getOtherInformation());
         }
-        if(rental.getSelectedCategories() != null)
+        if (rental.getSelectedCategories() != null)
         {
-          categoryOfRental.setValue(rental.getSelectedCategories().toString());
+          categoryOfRental.setValue(
+              "Categories: " + rental.getSelectedCategories().toString());
         }
-        imageIdMemberId.setValue(String.valueOf(rental.getMemberId()));
-        usernameOfRental.setValue(member.getUsername());
-        locationOfRental.setValue(member.getAddressCity());
-        ratingOfUserOfRental.setValue(String.valueOf(member.getAverageReview()));
+        usernameOfRental.setValue("Username: " + member.getUsername());
+        locationOfRental.setValue("Location: " + member.getAddressCity());
+        ratingOfUserOfRental.setValue("Rating: " + (member.getAverageReview()));
       }
     });
   }
@@ -117,7 +119,6 @@ public class ViewRentalViewModel
   {
     return stateOfRental;
   }
-
   /**
    * Price of rental.
    *
@@ -188,37 +189,27 @@ public class ViewRentalViewModel
     return imageProperty;
   }
 
-  /**
-   * Gets member by id.
-   */
-  public void getMemberById()
+  public void setMemberUsername()
   {
-    shareItModel.getMemberById(Integer.parseInt(imageIdMemberId.getValue()));
+    memberModel.setMemberUsername(usernameOfRental.getValue().substring(10));
   }
 
-  /**
-   * Gets image id by member id.
-   *
-   * @return returns image id that matches with member id
-   */
-  public StringProperty getImageIdMemberId(){
-    return imageIdMemberId;
+  public void setMemberRentals()
+  {
+    rentalModel.setAllMemberRentals(usernameOfRental.getValue().substring(10));
   }
-
-  /**
-   * Sets member username.
-   */
-  public void setMemberUsername(){
-    shareItModel.setMemberUsername(usernameOfRental.getValue());
-  }
-
   /**
    * Checks user type.
    *
    * @return returns which type of account is viewing profile
    */
-  public String getUserType(){
-    return shareItModel.checkUserType();
+  public String getUserType()
+  {
+    return memberModel.checkUserType();
   }
 
+  public String getLoggedInUsername()
+  {
+    return memberModel.getLoggedInUsername();
+  }
 }

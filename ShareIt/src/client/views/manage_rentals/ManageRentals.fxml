@@ -27,7 +27,7 @@
                                     <Font name="Californian FB" size="24.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="descriptionLabel" layoutY="54.0" prefHeight="98.0" prefWidth="769.0" text="DescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescription" textFill="WHITE" wrapText="true">
+                              <Label fx:id="descriptionLabel" layoutY="54.0" prefHeight="98.0" prefWidth="660.0" text="DescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescription" textFill="WHITE" wrapText="true">
                                  <padding>
                                     <Insets bottom="10.0" top="10.0" />
                                  </padding>
@@ -54,22 +54,22 @@
                               </Label>
                            </children>
                         </AnchorPane>
-                        <ImageView fx:id="imageView" fitHeight="150.0" fitWidth="200.0" layoutX="775.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="imageView" fitHeight="253.0" fitWidth="292.0" layoutX="683.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </AnchorPane>
                </children>
             </VBox>
-            <Button layoutX="25.0" layoutY="25.0" mnemonicParsing="false" onAction="#goBackToProfileOverviewButton" style="-fx-border-radius: 30px; -fx-background-radius: 30px; -fx-background-color: #A3A1A8; -fx-border-color: #A3A1A8;" text="Go back to profile overview" textFill="WHITE">
+            <Button layoutX="25.0" layoutY="25.0" mnemonicParsing="false" onAction="#goBackToProfileOverviewButton" onMouseClicked="#goBackToProfileOverviewButton" style="-fx-border-radius: 30px; -fx-background-radius: 30px; -fx-background-color: #A3A1A8; -fx-border-color: #A3A1A8;" stylesheets="@../css/Button.css" text="Go back to profile overview" textFill="WHITE">
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
             </Button>
-            <Button layoutX="482.0" layoutY="448.0" mnemonicParsing="false" onAction="#changeButton" style="-fx-border-radius: 30px; -fx-background-radius: 30px; -fx-background-color: #A3A1A8; -fx-border-color: #A3A1A8;" text="Change" textFill="WHITE">
+            <Button layoutX="482.0" layoutY="448.0" mnemonicParsing="false" onAction="#editButton" style="-fx-border-radius: 30px; -fx-background-radius: 30px; -fx-background-color: #A3A1A8; -fx-border-color: #A3A1A8;" stylesheets="@../css/Button.css" text="Edit" textFill="WHITE">
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
             </Button>
-            <Button layoutX="602.0" layoutY="448.0" mnemonicParsing="false" onAction="#deleteButton" style="-fx-border-radius: 30px; -fx-background-radius: 30px; -fx-background-color: #A3A1A8; -fx-border-color: #A3A1A8;" text="Delete" textFill="WHITE">
+            <Button layoutX="602.0" layoutY="448.0" mnemonicParsing="false" onAction="#deleteButton" style="-fx-border-radius: 30px; -fx-background-radius: 30px; -fx-background-color: #A3A1A8; -fx-border-color: #A3A1A8;" stylesheets="@../css/Button.css" text="Delete" textFill="WHITE">
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>

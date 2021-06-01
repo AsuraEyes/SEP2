@@ -1,43 +1,44 @@
 package client.viewmodel.rate_feedback;
 
-import client.model.ShareItModel;
+import client.model.member.MemberModel;
+import client.model.message.MessageModel;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import shared.transferobjects.Rating;
-
-import java.io.IOException;
-
 /**
  * A class that holds and manages data from the RateFeedback view.
  */
 public class RateFeedbackViewModel
 {
-  private final ShareItModel model;
-  private final StringProperty commentaryTextArea;
-  private final SimpleStringProperty usernameLabel;
-  private final DoubleProperty ratingProperty;
-
+  private StringProperty commentaryTextArea;
+  private SimpleStringProperty usernameLabel;
+  private DoubleProperty ratingProperty;
+  private MemberModel memberModel;
+  private MessageModel messageModel;
   /**
    * Instantiates a new RateFeedbackViewModel.
    *
    * @param model The model that this ViewModel uses
    */
-  public RateFeedbackViewModel(ShareItModel model)
+  public RateFeedbackViewModel(MemberModel memberModel,
+      MessageModel messageModel)
   {
-    this.model = model;
+    this.memberModel = memberModel;
+    this.messageModel = messageModel;
+
     ratingProperty = new SimpleDoubleProperty();
     commentaryTextArea = new SimpleStringProperty();
     usernameLabel = new SimpleStringProperty();
   }
-
   /**
    * Gets Member's commentary.
    *
    * @return returns commentary input
    */
-  public StringProperty getCommentaryTextArea(){
+  public StringProperty getCommentaryTextArea()
+  {
     return commentaryTextArea;
   }
 
@@ -50,14 +51,15 @@ public class RateFeedbackViewModel
   {
     return usernameLabel;
   }
-
   /**
    * Gets how high Member did rate
    *
    * @return returns rating(from 1.0 to 5.0)
    */
-  public DoubleProperty getRatingProperty(){ return ratingProperty;}
-
+  public DoubleProperty getRatingProperty()
+  {
+    return ratingProperty;
+  }
   /**
    * Gets rated memberUsername.
    *
@@ -65,62 +67,67 @@ public class RateFeedbackViewModel
    */
   public String getMemberUsername()
   {
-    usernameLabel.setValue(model.getMemberUsername());
-    getRating();
-    return model.getMemberUsername();
+    usernameLabel.setValue(memberModel.getMemberUsername());
+    setRating();
+    return memberModel.getMemberUsername();
   }
-
   /**
    * Gets rating of rated member.
    */
-  public void getRating()
+  public void setRating()
   {
-    Rating rating = model.getRating(model.getLoggedInUsername(),
-        model.getMemberUsername());
-    if(rating != null)
+    Rating rating = messageModel.getRating(memberModel.getLoggedInUsername(),
+        memberModel.getMemberUsername());
+    if (rating != null)
     {
       ratingProperty.setValue(rating.getRating());
       commentaryTextArea.setValue(rating.getCommentary());
     }
   }
-
   /**
    * Updates feedback based on if member already rated this member.
    */
-  public void updateFeedback(){
-    int memberFromId = model.getMemberByUsername(model.getLoggedInUsername())
-        .getId();
-    int memberToId = model.getMemberByUsername(model.getMemberUsername()).getId();
+  public void updateFeedback()
+  {
+    int memberFromId = memberModel
+        .getMemberByUsername(memberModel.getLoggedInUsername()).getId();
+    int memberToId = memberModel
+        .getMemberByUsername(memberModel.getMemberUsername()).getId();
     Rating rating = new Rating(ratingProperty.getValue(),
-        commentaryTextArea.getValue(),memberFromId,memberToId);
-    model.updateRating(rating);
+        commentaryTextArea.getValue(), memberFromId, memberToId);
+    messageModel.updateRating(rating);
   }
-
   /**
    * Adds new rating feedback.
    *
    * @return returns new Rating object
-   * @throws IOException
    */
-  public String addFeedback() throws IOException
+  public String addFeedback()
   {
-    return model.addFeedback(ratingProperty.getValue(),commentaryTextArea.getValue(),
-        model.getLoggedInUsername(), getMemberUsername());
+    return messageModel
+        .addFeedback(ratingProperty.getValue(), commentaryTextArea.getValue(),
+            memberModel.getLoggedInUsername(), getMemberUsername());
   }
-
   /**
    * After Submit button have been pressed this method sends data to the model.
    *
    * @return returns string based on if feedback has been created or updated
-   * @throws IOException
    */
-  public String onSubmitButtonPressed() throws IOException
+  public String onSubmitButtonPressed()
   {
-    if(!addFeedback().equals("Added"))
+    Rating rating = messageModel.getRating(memberModel.getLoggedInUsername(),
+        memberModel.getMemberUsername());
+    if (rating != null)
     {
-      updateFeedback();
-      return "updated";
+      if (!rating.getCommentary().equals(commentaryTextArea.getValue())
+          || rating.getRating() != ratingProperty.getValue())
+      {
+        updateFeedback();
+        return "updated";
+      }
     }
+    else
+      addFeedback();
     return "created";
   }
 }

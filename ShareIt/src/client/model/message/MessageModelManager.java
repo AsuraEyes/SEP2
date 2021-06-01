@@ -2,14 +2,15 @@ package client.model.message;
 
 import client.model.state.StateManager;
 import client.network.Client;
-import shared.transferobjects.*;
+import shared.transferobjects.Message;
+import shared.transferobjects.Rating;
+import shared.transferobjects.Report;
+import shared.transferobjects.Warning;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class MessageModelManager implements MessageModel
 {
@@ -18,13 +19,13 @@ public class MessageModelManager implements MessageModel
   private String searchText;
   private ArrayList<Message> allReceivedMessages;
   private ArrayList<Warning> allWarnings;
-  private ArrayList<Report> allReports;
 
-  public MessageModelManager(Client client){
+  public MessageModelManager(Client client)
+  {
     this.client = client;
     allReceivedMessages = new ArrayList<>();
     allWarnings = new ArrayList<>();
-    allReports = new ArrayList<>();
+
     support = new PropertyChangeSupport(this);
     client.addListener("newMessage", this::onNewMessage);
     client.addListener("newWarning", this::onNewWarning);
@@ -42,15 +43,15 @@ public class MessageModelManager implements MessageModel
   }
 
   @Override public String addFeedback(double starValue, String feedback,
-      String username1, String username2) throws IOException
+      String username1, String username2)
   {
-    return client.addFeedback(starValue, feedback,username1,username2 );
+    return client.addFeedback(starValue, feedback, username1, username2);
   }
 
   @Override public String addReport(String feedback, String username1,
-      String username2) throws IOException
+      String username2)
   {
-    return client.addReport(feedback,username1,username2);
+    return client.addReport(feedback, username1, username2);
   }
 
   @Override public String getSearchText()
@@ -94,14 +95,16 @@ public class MessageModelManager implements MessageModel
     return allReceivedMessages;
   }
 
+  @Override public void setAllReceivedMessages(String loggedUsername)
+  {
+    allReceivedMessages = client.getAllReceivedMessages(
+        client.getMemberByUsername(loggedUsername).getId());
+
+  }
+
   @Override public ArrayList<Warning> getAllWarnings()
   {
     return allWarnings;
-  }
-
-  @Override public List<Report> getReportList()
-  {
-    return client.getReportList();
   }
 
   @Override public ArrayList<Message> getMessagesFromUser(int loggedUserId,
@@ -121,36 +124,25 @@ public class MessageModelManager implements MessageModel
     client.sendMessage(message);
   }
 
-  @Override public void setAllReceivedMessages(String loggedUsername)
-  {
-    allReceivedMessages = client.getAllReceivedMessages(getMemberByUsername(loggedUsername).getId());
-
-  }
-
   @Override public void setAllReceivedWarnings()
   {
-    allWarnings = client.getWarnings("administrator", getMemberByUsername(
-        StateManager.getInstance().getUsername()).getId());
-
+    allWarnings = client.getWarnings("administrator",
+        client.getMemberByUsername(StateManager.getInstance().getUsername())
+            .getId());
   }
 
   @Override public void sendWarning(Warning warning)
   {
     client.sendWarning(warning);
-
-  }
-
-  @Override public Member getMemberByUsername(String memberUsername)
-  {
-    return null;
   }
 
   @Override public void addListener(String propertyName,
       PropertyChangeListener listener)
   {
-    if(propertyName != null)
+    if (propertyName != null)
       support.addPropertyChangeListener(propertyName, listener);
     else
       support.addPropertyChangeListener(listener);
   }
+
 }

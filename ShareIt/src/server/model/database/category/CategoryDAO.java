@@ -11,8 +11,7 @@ public interface CategoryDAO
   /**
    * Reads all categories from database
    * @return returns all category names in a arraylist
-   * @throws SQLException
    */
-  List<Category> readCategory() throws SQLException;
+  List<Category> readCategory();
 
 }

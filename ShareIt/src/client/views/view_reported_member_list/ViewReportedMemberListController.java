@@ -8,72 +8,65 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import shared.transferobjects.Report;
 
-import java.io.IOException;
 import java.util.List;
-
 /**
  * A class that manages an interface and handle interactions in ViewReportedMembersList view
  */
-public class ViewReportedMemberListController {
-    @FXML private VBox vBox;
+public class ViewReportedMemberListController
+{
+  @FXML private VBox vBox;
 
-    private ViewReportedMemberListViewModel viewReportedMemberListViewModel;
-    private ViewHandler viewHandler;
-
-    /**
-     * Init.
-     *
-     * @param viewHandler      the view handler
-     * @param viewModelFactory the view model factory
-     * @throws IOException the io exception
-     */
-    public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws IOException {
-        this.viewHandler = viewHandler;
-        viewReportedMemberListViewModel = viewModelFactory.getViewReportedMemberListViewModel();
-        displayReports(viewReportedMemberListViewModel.getReportList()) ;
-    }
-
-    /**
-     * Displays all reports.
-     *
-     * @param reports All the reports that members have filed
-     */
-    public void displayReports(List<Report> reports)
+  private ViewReportedMemberListViewModel viewReportedMemberListViewModel;
+  private ViewHandler viewHandler;
+  /**
+   * Init.
+   *
+   * @param viewHandler      the view handler
+   * @param viewModelFactory the view model factory
+   */
+  public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory)
+  {
+    this.viewHandler = viewHandler;
+    viewReportedMemberListViewModel = viewModelFactory
+        .getViewReportedMemberListViewModel();
+    displayReports(viewReportedMemberListViewModel.getReportList());
+  }
+  /**
+   * Displays all reports.
+   *
+   * @param reports All the reports that members have filed
+   */
+  public void displayReports(List<Report> reports)
+  {
+    if (reports != null && !reports.isEmpty())
     {
-        if (reports != null && !reports.isEmpty()) {
-            for (int i = 0; i < reports.size(); i++) {
-                Label reportedNameLabel = new Label(viewReportedMemberListViewModel.getMemberById(reports.get(i).getMemberTo()).getUsername());
-                reportedNameLabel.setFont(Font.font ("Californian FB", 24));
-                reportedNameLabel.setTextFill(Color.WHITE);
-                Label reporterNameLabel = new Label(viewReportedMemberListViewModel.getMemberById(reports.get(i).getMemberFrom()).getUsername());
-                reporterNameLabel.setFont(Font.font ("Californian FB", 16));
-                reporterNameLabel.setTextFill(Color.WHITE);
-                VBox littleVBox = new VBox();
-                littleVBox.getChildren().addAll(reportedNameLabel,reporterNameLabel);
+      for (int i = 0; i < reports.size(); i++)
+      {
+        String reportedUsername = reports.get(i).getUsernameTo();
+        Label reportedNameLabel = new Label("Reported: " + reportedUsername);
+        reportedNameLabel.getStyleClass().add("reported");
+        String reporterUsername = reports.get(i).getUsernameFrom();
+        Label reporterNameLabel = new Label("Reporter: " + reporterUsername);
+        reporterNameLabel.getStyleClass().add("reporter");
 
-                vBox.setSpacing(35);
-                littleVBox.setPadding(new Insets(30,160,30,160));
-                littleVBox.setStyle("-fx-background-color:#7D6B7D");
+        VBox littleVBox = new VBox();
+        littleVBox.getChildren().addAll(reportedNameLabel, reporterNameLabel);
+        littleVBox.setPadding(new Insets(20, 160, 20, 160));
+        littleVBox.getStyleClass().add("littleVbox");
 
-                vBox.getChildren().addAll(littleVBox);
-
-                vBox.getChildren().get(i)
-                    .addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
-                        try {
-                            viewReportedMemberListViewModel.setUsernames(reporterNameLabel.getText(), reportedNameLabel.getText());
-                            viewHandler.setView(viewHandler.menu(), viewHandler.viewReportedMember());
-                        }
-                        catch (IOException e)
-                        {
-                            e.printStackTrace();
-                        }
-                    });
-            }
-        }
+        vBox.getChildren().addAll(littleVBox);
+        vBox.getStyleClass().add("vbox");
+        vBox.getChildren().get(i)
+            .addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
+              viewReportedMemberListViewModel
+                  .setUsernames(reporterUsername, reportedUsername);
+              viewHandler.setView(viewHandler.menu(),
+                  viewHandler.viewReportedMember());
+            });
+      }
     }
+  }
 
 }

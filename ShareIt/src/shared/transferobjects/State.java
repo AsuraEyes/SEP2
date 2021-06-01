@@ -8,13 +8,13 @@ import java.io.Serializable;
 public class State implements Serializable
 {
   private String name;
-
   /**
    * Constructor initializing field.
    *
    * @param name The name of a state that rental can be in.
    */
-  public State(String name){
+  public State(String name)
+  {
     this.name = name;
   }
 

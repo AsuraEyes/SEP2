@@ -1,6 +1,8 @@
 package client.viewmodel.menu;
 
-import client.model.ShareItModel;
+import client.model.member.MemberModel;
+import client.model.message.MessageModel;
+import client.model.rental.RentalModel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -9,46 +11,47 @@ import javafx.beans.property.StringProperty;
  */
 public class MenuViewModel
 {
-  private ShareItModel model;
-  private StringProperty usernameLabel;
+  private RentalModel rentalModel;
+  private MemberModel memberModel;
+  private MessageModel messageModel;
 
+  private StringProperty usernameLabel;
   /**
    * Instantiates a new MenuViewModel.
    *
    * @param model The model that this ViewModel uses
    */
-  public MenuViewModel(ShareItModel model){
+  public MenuViewModel(RentalModel rentalModel, MemberModel memberModel,
+      MessageModel messageModel)
+  {
+    this.rentalModel = rentalModel;
+    this.memberModel = memberModel;
+    this.messageModel = messageModel;
     usernameLabel = new SimpleStringProperty();
-    this.model = model;
-  }
 
+  }
   /**
    * Checks who is logged in.
    *
    * @return returns type of account who is logged in, where ("") means Visitor
    */
-  public String checkUserType(){
-    String userType = model.checkUserType();
-    if(userType.equals("Member")){
-      usernameLabel.setValue("Logged in as: "+model.getLoggedInUsername());
+  public String checkUserType()
+  {
+    String userType = memberModel.checkUserType();
+    if (userType.equals("Member"))
+    {
+      usernameLabel
+          .setValue("Logged in as: " + memberModel.getLoggedInUsername());
     }
-    else if(userType.equals("Administrator")){
-      usernameLabel.setValue("Administrator: "+model.getLoggedInUsername());
+    else if (userType.equals("Administrator"))
+    {
+      usernameLabel
+          .setValue("Administrator: " + memberModel.getLoggedInUsername());
     }
     else
       usernameLabel.setValue("");
     return userType;
   }
-
-  /**
-   * Gets username of currently logged in person.
-   *
-   * @return returns username of logged in person
-   */
-  public String getUsernameLoggedIn(){
-    return model.getLoggedInUsername();
-  }
-
   /**
    * Gets usernameLabel.
    *
@@ -58,25 +61,40 @@ public class MenuViewModel
   {
     return usernameLabel;
   }
-
   /**
    * Sets member username.
    */
-  public void setMemberUsername(){
-    model.setMemberUsername(usernameLabel.getValue());
+  public void setMemberUsername()
+  {
+    memberModel.setMemberUsername(usernameLabel.getValue());
   }
-
   /**
    * Loads all received messages.
    */
-  public void loadAllReceivedMessages(){
-    model.setAllReceivedMessages(model.getLoggedInUsername());
+  public void loadAllReceivedMessages()
+  {
+    messageModel.setAllReceivedMessages(memberModel.getLoggedInUsername());
   }
-
   /**
    * Loads all warnings.
    */
-  public void loadAllWarnings() {
-    model.setAllReceivedWarnings();
-    }
+  public void loadAllWarnings()
+  {
+    messageModel.setAllReceivedWarnings();
+  }
+
+  public void loadAllReportedMembers()
+  {
+    memberModel.setReportList();
+  }
+
+  public void setMemberRentals()
+  {
+    rentalModel.setAllMemberRentals(memberModel.getLoggedInUsername());
+  }
+
+  public void setUserType(String userType)
+  {
+    memberModel.setUserType(userType,memberModel.getLoggedInUsername());
+  }
 }

@@ -15,7 +15,6 @@ import org.controlsfx.control.CheckComboBox;
 import org.controlsfx.control.InfoOverlay;
 import shared.transferobjects.Rental;
 
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -30,15 +29,13 @@ public class SearchForRentalController
 
   private SearchForRentalViewModel searchForRentalViewModel;
   private ViewHandler viewHandler;
-
   /**
    * Init.
    *
    * @param viewHandler      the view handler
    * @param viewModelFactory the view model factory
-   * @throws IOException the io exception
    */
-  public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws IOException
+  public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory)
   {
     this.viewHandler = viewHandler;
     searchForRentalViewModel = viewModelFactory.getSearchForRentalViewModel();
@@ -50,7 +47,7 @@ public class SearchForRentalController
         .addAll(searchForRentalViewModel.getCategories());
     searchForRentalViewModel.setSearchField();
 
-    if(searchField.textProperty().getValue() != null)
+    if (searchField.textProperty().getValue() != null)
     {
       displayRentals(searchForRentalViewModel.onSearchButtonPressed());
     }
@@ -59,25 +56,20 @@ public class SearchForRentalController
       displayRentals(searchForRentalViewModel.getRentalsList());
     }
   }
-
   /**
    * Runs method from viewModel after button was pressed.
-   *
-   * @throws IOException
    */
-  public void searchButton() throws IOException
+  public void searchButton()
   {
     List<Rental> rentals = searchForRentalViewModel.onSearchButtonPressed();
     flowPane.getChildren().clear();
     displayRentals(rentals);
   }
-
   /**
    * Runs method from viewModel after button was pressed.
-   *
-   * @throws IOException the io exception
    */
-  public void filterButton() throws IOException {
+  public void filterButton()
+  {
     List<Rental> rentals = searchForRentalViewModel
         .onFilterButtonPressed(locationBox.getValue(),
             categoryCheckComboBox.getCheckModel().getCheckedItems());
@@ -92,32 +84,27 @@ public class SearchForRentalController
    */
   public void displayRentals(List<Rental> rentals)
   {
-      if (rentals != null && !rentals.isEmpty())
+    if (rentals != null && !rentals.isEmpty())
+    {
+      for (int i = 0; i < rentals.size(); i++)
       {
-        for (int i = 0; i < rentals.size(); i++)
-        {
-          Image image = new Image(rentals.get(i).getPictureLink());
-          ImageView imageView = new ImageView();
-          imageView.setImage(image);
-          imageView.setFitWidth(275);
-          imageView.setPreserveRatio(true);
-          imageView.setSmooth(true);
-          imageView.setCache(true);
-          imageView.setId(String.valueOf(rentals.get(i).getId()));
-          flowPane.getChildren().add(new StackPane(new InfoOverlay(imageView, rentals.get(i).toString())));
-          flowPane.getChildren().get(i)
-              .addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
-                try
-                {
-                  viewHandler.setView(viewHandler.menu(), viewHandler.viewRental());
-                  searchForRentalViewModel.getRental(event.getSource());
-                }
-                catch (IOException e)
-                {
-                  e.printStackTrace();
-                }
-              });
-        }
+        Image image = new Image(rentals.get(i).getPictureLink());
+        ImageView imageView = new ImageView();
+        imageView.setImage(image);
+        imageView.setFitWidth(275);
+        imageView.setPreserveRatio(true);
+        imageView.setSmooth(true);
+        imageView.setCache(true);
+        imageView.setId(String.valueOf(rentals.get(i).getId()));
+        imageView.getStyleClass().add("image");
+        flowPane.getChildren().add(new StackPane(
+            new InfoOverlay(imageView, rentals.get(i).toString())));
+        flowPane.getChildren().get(i)
+            .addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
+              viewHandler.setView(viewHandler.menu(), viewHandler.viewRental());
+              searchForRentalViewModel.getRental(event.getSource());
+            });
       }
+    }
   }
 }

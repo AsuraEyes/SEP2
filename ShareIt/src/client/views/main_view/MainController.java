@@ -9,17 +9,15 @@ import javafx.scene.layout.VBox;
  */
 public class MainController
 {
-  @FXML
-  private ViewHandler viewHandler;
-  @FXML
-  private VBox mainPane;
-
+  @FXML private ViewHandler viewHandler;
+  @FXML private VBox mainPane;
   /**
    * Init.
    *
    * @param viewHandler the view handler
    */
-  public void init(ViewHandler viewHandler){
+  public void init(ViewHandler viewHandler)
+  {
     this.viewHandler = viewHandler;
   }
 

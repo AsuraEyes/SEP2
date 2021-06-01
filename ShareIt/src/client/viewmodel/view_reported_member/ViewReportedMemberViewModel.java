@@ -1,102 +1,90 @@
 package client.viewmodel.view_reported_member;
 
-import client.model.ShareItModel;
+import client.model.member.MemberModel;
+import client.model.rental.RentalModel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import shared.transferobjects.Report;
-
 /**
  * A class that holds and manages data from the ViewReportedMember view.
  */
-public class ViewReportedMemberViewModel {
+public class ViewReportedMemberViewModel
+{
+  private RentalModel rentalModel;
+  private MemberModel memberModel;
 
-    private final StringProperty reportedNameLabel;
-    private final StringProperty reporterNameLabel;
-    private final StringProperty commentaryLabel;
-
-    private ShareItModel model;
-
+  private StringProperty reportedNameLabel;
+  private StringProperty reporterNameLabel;
+  private StringProperty commentaryLabel;
     /**
      * Instantiates a new ViewReportedMemberViewModel.
      *
      * @param model The model that this ViewModel uses
      */
-    public ViewReportedMemberViewModel(ShareItModel model){
-        this.model = model;
-        reportedNameLabel = new SimpleStringProperty();
-        reporterNameLabel = new SimpleStringProperty();
-        commentaryLabel = new SimpleStringProperty();
-    }
+  public ViewReportedMemberViewModel(RentalModel rentalModel,
+      MemberModel memberModel)
+  {
+    this.rentalModel = rentalModel;
+    this.memberModel = memberModel;
 
+    reportedNameLabel = new SimpleStringProperty();
+    reporterNameLabel = new SimpleStringProperty();
+    commentaryLabel = new SimpleStringProperty();
+  }
     /**
      * Get reportedNameLabel.
      *
      * @return returns reported member username
      */
-    public StringProperty getReportedNameLabel(){
-        return reportedNameLabel;
-    }
-
+  public StringProperty getReportedNameLabel()
+  {
+    return reportedNameLabel;
+  }
     /**
      * Get reporterNameLabel.
      *
      * @return returns reporter member username
      */
-    public StringProperty getReporterNameLabel(){
-        return reporterNameLabel;
-    }
-
+  public StringProperty getReporterNameLabel()
+  {
+    return reporterNameLabel;
+  }
     /**
      * Get commentaryLabel.
      *
      * @return returns report commentary
      */
-    public StringProperty getCommentaryLabel(){
-        return commentaryLabel;
-    }
+  public StringProperty getCommentaryLabel()
+  {
+    return commentaryLabel;
+  }
 
+  public void loadReport()
+  {
+    Report report = memberModel.getSelectedReport();
+    reporterNameLabel.setValue("Reporter: " + report.getUsernameFrom());
+    reportedNameLabel.setValue("Reported: " + report.getUsernameTo());
+    commentaryLabel.setValue(report.getCommentary());
+  }
     /**
-     * Gets reporter person.
-     *
-     * @return returns reporter person profile
+     * Sets reported person.
      */
-    public String getReporterPerson(){
-        reporterNameLabel.setValue(model.getReporterPerson());
-        return model.getReporterPerson();
-    }
+  public void setReportedNameLabel()
+  {
+    memberModel.setMemberUsername(reportedNameLabel.getValue().substring(10));
+    rentalModel.setAllMemberRentals(reportedNameLabel.getValue().substring(10));
+  }
+    /**
+     * Sets reporter person.
+     */
+  public void setReporterNameLabel()
+  {
+    memberModel.setMemberUsername(reporterNameLabel.getValue().substring(10));
+    rentalModel.setAllMemberRentals(reporterNameLabel.getValue().substring(10));
+  }
 
-    /**
-     * Get reported person.
-     *
-     * @return returns reported person profile
-     */
-    public String getReportedPerson(){
-        reportedNameLabel.setValue(model.getReportedPerson());
-        return model.getReportedPerson();
-    }
-
-    /**
-     * Gets comment.
-     */
-    public void getComment() {
-        Report report = model.getReport(getReporterPerson(),getReportedPerson());
-        if(report != null) {
-            commentaryLabel.setValue(report.getCommentary());
-        }
-    }
-
-    /**
-     * Sets reported member username.
-     */
-    public void setReportedNameLabel() {
-        model.setReportedUsername(reportedNameLabel.getValue());
-    }
-
-    /**
-     * Sets reporter member username.
-     */
-    public void setReporterNameLabel()
-    {
-        model.setReporterUsername(reporterNameLabel.getValue());
-    }
+  public void loadAllReportedMembers()
+  {
+    memberModel.setReportList();
+  }
 }

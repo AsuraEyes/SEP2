@@ -9,12 +9,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import shared.transferobjects.Member;
 
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -36,16 +33,15 @@ public class SearchForMemberController
    * @throws IOException the io exception
    */
   public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory)
-          throws IOException
   {
     this.viewHandler = viewHandler;
     searchForMemberViewModel = viewModelFactory.getSearchForMemberViewModel();
     searchField.textProperty()
-            .bindBidirectional(searchForMemberViewModel.getSearchField());
+        .bindBidirectional(searchForMemberViewModel.getSearchField());
 
     searchForMemberViewModel.setSearchField();
 
-    if(searchField.textProperty().getValue() != null)
+    if (searchField.textProperty().getValue() != null)
     {
       displayMembers(searchForMemberViewModel.onSearchButtonPressed());
     }
@@ -77,27 +73,23 @@ public class SearchForMemberController
       for (int i = 0; i < members.size(); i++)
       {
         VBox ratingBox = new VBox();
-        Label ratingLabel = new Label("Username: " + members.get(i).getUsername());
-        ratingLabel.setFont(Font.font ("Californian FB", 24));
-        ratingLabel.setTextFill(Color.WHITE);
-        Text rating = new Text("Average rating: " + members.get(i).getAverageReview());
-        rating.setFill(Color.WHITE);
-        ratingBox.getChildren().addAll(ratingLabel,rating);
+        Label ratingLabel = new Label(
+            "Username: " + members.get(i).getUsername());
+        ratingLabel.getStyleClass().add("label");
+        Text rating = new Text(
+            "Average rating: " + members.get(i).getAverageReview());
+        ratingBox.getChildren().addAll(ratingLabel, rating);
         ratingBox.setSpacing(10);
-        ratingBox.setPadding(new Insets(20,160,20,160));
-        ratingBox.setStyle("-fx-background-color: #FF8C64;");
+        ratingBox.setPadding(new Insets(20, 160, 20, 160));
+        rating.getStyleClass().add("text");
+        ratingBox.getStyleClass().add("vbox");
         vBox.getChildren().add(ratingBox);
         vBox.getChildren().get(i)
-                .addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
-                  try {
-                    searchForMemberViewModel.setMemberUsername(event.getSource());
-                    viewHandler.setView(viewHandler.menu(), viewHandler.viewMemberProfile());
-                  }
-                  catch (IOException e)
-                  {
-                    e.printStackTrace();
-                  }
-                });
+            .addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
+              searchForMemberViewModel.setMemberUsername(event.getSource());
+              viewHandler
+                  .setView(viewHandler.menu(), viewHandler.viewMemberProfile());
+            });
       }
     }
   }

@@ -31,6 +31,6 @@ public interface ReportDAO
    * Updates Report feedback whenever user decides to change it
    * @param report new value of report
    */
-  void updateReport(Report report);
+  void updateReport(Report report)throws SQLException;
 
 }

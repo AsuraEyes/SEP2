@@ -93,4 +93,5 @@ public interface MemberDAO {
      * @throws SQLException
      */
     List<Member> readMembers() throws SQLException;
+  List<Member> readMembersIdsAndUsernames() throws SQLException;
 }

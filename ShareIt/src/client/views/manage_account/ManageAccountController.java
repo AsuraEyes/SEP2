@@ -13,14 +13,12 @@ import javafx.scene.layout.StackPane;
 import org.controlsfx.control.InfoOverlay;
 import shared.transferobjects.Rental;
 
-import java.io.IOException;
-import java.sql.SQLException;
 import java.util.List;
-
 /**
  * A class that manages an interface and handle interactions in ManageAccount view
  */
-public class ManageAccountController {
+public class ManageAccountController
+{
   @FXML private Label usernameLabel;
   @FXML private Label locationLabel;
   @FXML private Label ratingLabel;
@@ -31,53 +29,49 @@ public class ManageAccountController {
 
   private ViewHandler viewHandler;
   private ManageAccountViewModel manageAccountViewModel;
-
   /**
    * Init.
    *
    * @param viewHandler      the view handler
    * @param viewModelFactory the view model factory
-   * @throws IOException the io exception
    */
-  public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws IOException {
+  public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory)
+  {
     this.viewHandler = viewHandler;
     manageAccountViewModel = viewModelFactory.getManageAccountViewModel();
-    usernameLabel.textProperty().bind(manageAccountViewModel.getUsernameLabel());
-    locationLabel.textProperty().bind(manageAccountViewModel.getLocationLabel());
+    usernameLabel.textProperty()
+        .bind(manageAccountViewModel.getUsernameLabel());
+    locationLabel.textProperty()
+        .bind(manageAccountViewModel.getLocationLabel());
     ratingLabel.textProperty().bind(manageAccountViewModel.getRatingLabel());
     addressLabel.textProperty().bind(manageAccountViewModel.getAddressLabel());
     contactLabel.textProperty().bind(manageAccountViewModel.getContactLabel());
-    otherInformationLabel.textProperty().bind(manageAccountViewModel.getOtherInformationLabel());
+    otherInformationLabel.textProperty()
+        .bind(manageAccountViewModel.getOtherInformationLabel());
     manageAccountViewModel.setProfile();
     displayRentals(manageAccountViewModel.getRentalsOfMemberList());
   }
-
   /**
    * Changes a view if button was pressed.
-   *
-   * @throws IOException
-   * @throws SQLException
    */
-  public void editOrDeleteInformationButton() throws IOException, SQLException {
+  public void editOrDeleteInformationButton()
+  {
     viewHandler.setView(viewHandler.menu(), viewHandler.editOrDeleteAccount());
   }
-
   /**
    * Changes a view if button was pressed.
-   *
-   * @throws SQLException
-   * @throws IOException
    */
-  public void addRentalButton() throws SQLException, IOException {
+  public void addRentalButton()
+  {
     viewHandler.setView(viewHandler.menu(), viewHandler.addRental());
   }
-
   /**
    * Displays rentals.
    *
    * @param rentals Rentals that are being displayed
    */
-  public void displayRentals(List<Rental> rentals) {
+  public void displayRentals(List<Rental> rentals)
+  {
     if (rentals != null && !rentals.isEmpty())
     {
       for (int i = 0; i < rentals.size(); i++)
@@ -90,27 +84,23 @@ public class ManageAccountController {
         imageView.setSmooth(true);
         imageView.setCache(true);
         imageView.setId(String.valueOf(rentals.get(i).getId()));
-        flowPane.getChildren().add(new StackPane(new InfoOverlay(imageView, rentals.get(i).toString())));
+        imageView.getStyleClass().add("image");
+        flowPane.getChildren().add(new StackPane(
+            new InfoOverlay(imageView, rentals.get(i).toString())));
         flowPane.getChildren().get(i)
-                .addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
-                  try {
-                    viewHandler.setView(viewHandler.menu(), viewHandler.manageRentals());
-                    manageAccountViewModel.getRental(event.getSource());
-                  }
-                  catch (IOException e) {
-                    e.printStackTrace();
-                  }
-                });
+            .addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
+              viewHandler
+                  .setView(viewHandler.menu(), viewHandler.manageRentals());
+              manageAccountViewModel.getRental(event.getSource());
+            });
       }
     }
   }
-
   /**
    * Changes a view if button was pressed and sets data of actually viewed member to use it in another view.
-   *
-   * @throws IOException
    */
-  public void viewRating() throws IOException {
+  public void viewRating()
+  {
     manageAccountViewModel.setMember();
     viewHandler.setView(viewHandler.menu(), viewHandler.viewRating());
   }

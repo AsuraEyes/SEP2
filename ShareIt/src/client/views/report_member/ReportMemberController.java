@@ -4,12 +4,12 @@ import client.core.ViewHandler;
 import client.core.ViewModelFactory;
 import client.viewmodel.report_member.ReportMemberViewModel;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import javafx.stage.Stage;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.util.Optional;
 
 /**
@@ -22,45 +22,44 @@ public class ReportMemberController
 
   private ReportMemberViewModel reportMemberViewModel;
   private ViewHandler viewHandler;
-
   /**
    * Init.
    *
    * @param viewHandler      the view handler
    * @param viewModelFactory the view model factory
-   * @throws IOException the io exception
    */
-  public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws IOException {
+  public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory)
+  {
     this.viewHandler = viewHandler;
     reportMemberViewModel = viewModelFactory.getReportMemberViewModel();
     usernameLabel.textProperty().bind(reportMemberViewModel.getUsernameLabel());
-    commentaryArea.textProperty().bindBidirectional(reportMemberViewModel.getCommentaryTextArea());
+    commentaryArea.textProperty()
+        .bindBidirectional(reportMemberViewModel.getCommentaryTextArea());
     reportMemberViewModel.getMemberUsername();
   }
-
   /**
    *  Changes a view when button was pressed and data validated.
-   *
-   * @throws IOException the io exception
    */
-  public void reportButton() throws IOException {
+  public void reportButton()
+  {
     Stage stage = (Stage) viewHandler.getStage().getScene().getWindow();
     Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "");
     alert.initOwner(stage);
-    alert.getDialogPane().setContentText("The report was " + reportMemberViewModel.onReportButtonPressed() + " successfully!");
+    alert.getDialogPane().setContentText(
+        "The report was " + reportMemberViewModel.onReportButtonPressed()
+            + " successfully!");
 
     Optional<ButtonType> result = alert.showAndWait();
-    if (result.get() == ButtonType.OK) {
+    if (result.get() == ButtonType.OK)
+    {
       viewHandler.setView(viewHandler.menu(), viewHandler.viewMemberProfile());
     }
   }
-
   /**
    * Changes view when button was pressed.
-   *
-   * @throws IOException
    */
-  public void goBackToUserPageButton() throws IOException {
+  public void goBackToUserPageButton()
+  {
     viewHandler.setView(viewHandler.menu(), viewHandler.viewMemberProfile());
   }
 }

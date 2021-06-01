@@ -86,6 +86,7 @@ public interface RentalDAO {
      * @param username username that all rentals will be connected with
      * @return returns a list of rentals that are matching with members username
      */
-    ArrayList<Integer> getRentalsOfMemberList(String username);
+    ArrayList<Integer> getRentalsOfMemberList(String username)throws SQLException;
+    Rental getRentalById(int id);
 
 }

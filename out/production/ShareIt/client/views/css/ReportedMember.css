@@ -1,0 +1,9 @@
+.reported:hover {
+    -fx-text-fill: #fff587;
+    -fx-cursor: hand;
+}
+
+.reporter:hover {
+    -fx-text-fill: #fff587;
+    -fx-cursor: hand;
+}

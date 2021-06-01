@@ -4,17 +4,16 @@ import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 /**
  * A class that creates and handles Messages.
  */
-public class Message implements Serializable {
+public class Message implements Serializable
+{
   private int memberFrom;
   private String usernameFrom;
   private int memberTo;
   private String text;
   private Date timeStamp;
-
   /**
    * Constructor initializing fields.
    *
@@ -23,13 +22,13 @@ public class Message implements Serializable {
    * @param text       Content of message that was sent.
    * @param timeStamp  The time when message was sent.
    */
-  public Message(int memberFrom, int memberTo, String text, Date timeStamp) {
+  public Message(int memberFrom, int memberTo, String text, Date timeStamp)
+  {
     this.memberFrom = memberFrom;
     this.memberTo = memberTo;
     this.text = text;
     this.timeStamp = timeStamp;
   }
-
   /**
    * Constructor initializing fields.
    *
@@ -37,10 +36,11 @@ public class Message implements Serializable {
    * @param usernameFrom Username of who is sending a message.(Specified by username)
    * @param text         Content of message that was sent.
    */
-  public Message(Date timeStamp, String usernameFrom, String text) {
-   this.timeStamp = timeStamp;
-   this.usernameFrom = usernameFrom;
-   this.text = text;
+  public Message(Date timeStamp, String usernameFrom, String text)
+  {
+    this.timeStamp = timeStamp;
+    this.usernameFrom = usernameFrom;
+    this.text = text;
   }
 
   /**
@@ -122,18 +122,19 @@ public class Message implements Serializable {
   {
     return timeStamp;
   }
-
   /**
    * Gets message and all its content as a String.
    * @return returns information about who sent a message(username) and its content if time was set it is returned as well.
    */
-  public String toString(){
+  public String toString()
+  {
     DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
-    if(timeStamp != null){
+    if (timeStamp != null)
+    {
       String strDate = dateFormat.format(timeStamp);
       return usernameFrom + ": " + strDate + " : " + text;
     }
-    return usernameFrom + ": "+text;
+    return usernameFrom + ": " + text;
 
   }
 }

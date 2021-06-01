@@ -2,20 +2,17 @@ package client.views.view_rental;
 
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
-import client.model.state.StateManager;
 import client.viewmodel.view_rental.ViewRentalViewModel;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-
-import java.io.IOException;
-
 /**
  * A class that manages an interface and handle interactions in ViewRental view
  */
-public class ViewRentalController {
+public class ViewRentalController
+{
   @FXML private Label nameOfRentalLabel;
   @FXML private Label descriptionLabel;
   @FXML private Label stateLabel;
@@ -28,66 +25,73 @@ public class ViewRentalController {
   @FXML private Label locationLabel;
   @FXML private Label ratingLabel;
 
-
   private ViewHandler viewHandler;
   private ViewRentalViewModel viewRentalViewModel;
-
   /**
    * Init.
    *
    * @param viewHandler      the view handler
    * @param viewModelFactory the view model factory
-   * @throws IOException the io exception
    */
-  public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) throws IOException {
+  public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory)
+  {
     viewRentalViewModel = viewModelFactory.getViewRentalViewModel();
     this.viewHandler = viewHandler;
 
-    Bindings.bindBidirectional(this.imageView.imageProperty(), viewRentalViewModel.imagePropertyProperty());
-    Bindings.bindBidirectional(this.imageView.idProperty(), viewRentalViewModel.getImageIdMemberId());
+    Bindings.bindBidirectional(this.imageView.imageProperty(),
+        viewRentalViewModel.imagePropertyProperty());
 
-    nameOfRentalLabel.textProperty().bind(viewRentalViewModel.nameOfRentalProperty());
-    descriptionLabel.textProperty().bind(viewRentalViewModel.descriptionOfRentalProperty());
+    nameOfRentalLabel.textProperty()
+        .bind(viewRentalViewModel.nameOfRentalProperty());
+    descriptionLabel.textProperty()
+        .bind(viewRentalViewModel.descriptionOfRentalProperty());
     stateLabel.textProperty().bind(viewRentalViewModel.stateOfRentalProperty());
     priceLabel.textProperty().bind(viewRentalViewModel.priceOfRentalProperty());
-    otherInformationLabel.textProperty().bind(viewRentalViewModel.otherInformationOfRentalProperty());
-    categoriesLabel.textProperty().bind(viewRentalViewModel.categoryOfRentalProperty());
-    usernameLabel.textProperty().bind(viewRentalViewModel.usernameOfRentalProperty());
-    locationLabel.textProperty().bind(viewRentalViewModel.locationOfRentalProperty());
-    ratingLabel.textProperty().bind(viewRentalViewModel.ratingOfUserOfRentalProperty());
+    otherInformationLabel.textProperty()
+        .bind(viewRentalViewModel.otherInformationOfRentalProperty());
+    categoriesLabel.textProperty()
+        .bind(viewRentalViewModel.categoryOfRentalProperty());
+    usernameLabel.textProperty()
+        .bind(viewRentalViewModel.usernameOfRentalProperty());
+    locationLabel.textProperty()
+        .bind(viewRentalViewModel.locationOfRentalProperty());
+    ratingLabel.textProperty()
+        .bind(viewRentalViewModel.ratingOfUserOfRentalProperty());
 
-    if(viewRentalViewModel.getUserType().equals("Administrator")){
+    if (viewRentalViewModel.getUserType().equals("Administrator"))
+    {
       goBackButton.setText("Go back to member page");
     }
   }
-
   /**
    * Changes a view when button was pressed and user type checked.
-   *
-   * @throws IOException
    */
-  public void goBackToSearchResultsButton() throws IOException {
-    if(viewRentalViewModel.getUserType().equals("Administrator")){
+  public void goBackToSearchResultsButton()
+  {
+    if (viewRentalViewModel.getUserType().equals("Administrator"))
+    {
       viewHandler.setView(viewHandler.menu(), viewHandler.viewMemberProfile());
     }
-    else{
+    else
+    {
       viewHandler.setView(viewHandler.menu(), viewHandler.searchForRental());
     }
 
   }
-
   /**
    * Changes a view when button was pressed and user type checked and sets data for selected Member.
-   *
-   * @throws IOException
    */
-  public void seeMoreButton() throws IOException
+  public void seeMoreButton()
   {
     viewRentalViewModel.setMemberUsername();
-    if(viewRentalViewModel.usernameOfRentalProperty().getValue().equals(StateManager.getInstance().getUsername())){
+    viewRentalViewModel.setMemberRentals();
+    if (viewRentalViewModel.usernameOfRentalProperty().getValue()
+        .equals(viewRentalViewModel.getLoggedInUsername()))
+    {
       viewHandler.setView(viewHandler.menu(), viewHandler.manageAccount());
     }
-    else{
+    else
+    {
       viewHandler.setView(viewHandler.menu(), viewHandler.viewMemberProfile());
     }
   }

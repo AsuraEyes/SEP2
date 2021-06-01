@@ -6,13 +6,11 @@ import shared.transferobjects.*;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.io.IOException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +19,8 @@ public class RMIClient implements Client, RemoteObserver
   private PropertyChangeSupport support;
   private RMIServer server;
 
-  public RMIClient(){
+  public RMIClient()
+  {
     support = new PropertyChangeSupport(this);
   }
 
@@ -29,7 +28,7 @@ public class RMIClient implements Client, RemoteObserver
   {
     try
     {
-      UnicastRemoteObject.exportObject(this,0);
+      UnicastRemoteObject.exportObject(this, 0);
       Registry registry = LocateRegistry.getRegistry("localhost", 1199);
       server = (RMIServer) registry.lookup("ShareIt");
       server.registerClient(this);
@@ -40,124 +39,163 @@ public class RMIClient implements Client, RemoteObserver
     }
   }
 
-  @Override
-  public String checkMemberData(String username, String password, String confirmPassword, String email, String phone, String otherInformation, String street, String streetNo, String postalCode, String city) throws IOException {
-    try{
-      return server.checkMemberData(username, password, confirmPassword, email, phone, otherInformation, street, streetNo, postalCode, city);
-    }
-    catch (RemoteException e){
-      e.printStackTrace();
-      throw new RuntimeException("Could not contact server");
-    }
-  }
-
-  @Override
-  public String updateCheckMemberData(String username, String password, String confirmPassword, String email, String phone, String otherInformation, String street, String streetNo, String postalCode, String city) throws IOException {
-    try{
-      return server.updateCheckMemberData(username, password, confirmPassword, email, phone, otherInformation, street, streetNo, postalCode, city);
-    }
-    catch (RemoteException e){
-      e.printStackTrace();
-      throw new RuntimeException("Could not contact server");
-    }
-  }
-
-  @Override
-  public String checkRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, String username, ArrayList<String> selectedCategories) throws IOException {
-    try {
-      return server.checkRentalData(name, pictureLink, description, price, otherInformation, stateName, username, selectedCategories);
-    }
-    catch (RemoteException | SQLException e){
-      e.printStackTrace();
-      throw new RuntimeException("Could not contact server");
-    }
-  }
-
-  @Override
-  public String updateCheckRentalData(String name, String pictureLink, String description, String price, String otherInformation, String stateName, int rentalId, ArrayList<String> selectedCategories) throws IOException {
-    try {
-      return server.updateCheckRentalData(name, pictureLink, description, price, otherInformation, stateName, rentalId, selectedCategories);
-    }
-    catch (RemoteException e){
-      e.printStackTrace();
-      throw new RuntimeException("Could not contact server");
-    }
-  }
-
-  @Override public String addFeedback(double starValue, String feedback, String username1, String username2) throws IOException
+  @Override public String checkMemberData(String username, String password,
+      String confirmPassword, String email, String phone,
+      String otherInformation, String street, String streetNo,
+      String postalCode, String city)
   {
     try
     {
+      return server
+          .checkMemberData(username, password, confirmPassword, email, phone,
+              otherInformation, street, streetNo, postalCode, city);
+    }
+    catch (RemoteException e)
+    {
+      e.printStackTrace();
+      throw new RuntimeException("Could not contact server");
+    }
+  }
 
+  @Override public String updateCheckMemberData(String username,
+      String password, String confirmPassword, String email, String phone,
+      String otherInformation, String street, String streetNo,
+      String postalCode, String city)
+  {
+    try
+    {
+      return server
+          .updateCheckMemberData(username, password, confirmPassword, email,
+              phone, otherInformation, street, streetNo, postalCode, city);
+    }
+    catch (RemoteException e)
+    {
+      e.printStackTrace();
+      throw new RuntimeException("Could not contact server");
+    }
+  }
+
+  @Override public String checkRentalData(String name, String pictureLink,
+      String description, String price, String otherInformation,
+      String stateName, String username, ArrayList<String> selectedCategories)
+  {
+    try
+    {
+      return server.checkRentalData(name, pictureLink, description, price,
+          otherInformation, stateName, username, selectedCategories);
+    }
+    catch (RemoteException e)
+    {
+      e.printStackTrace();
+      throw new RuntimeException("Could not contact server");
+    }
+  }
+
+  @Override public String updateCheckRentalData(String name, String pictureLink,
+      String description, String price, String otherInformation,
+      String stateName, int rentalId, ArrayList<String> selectedCategories)
+  {
+    try
+    {
+      return server.updateCheckRentalData(name, pictureLink, description, price,
+          otherInformation, stateName, rentalId, selectedCategories);
+    }
+    catch (RemoteException e)
+    {
+      e.printStackTrace();
+      throw new RuntimeException("Could not contact server");
+    }
+  }
+
+  @Override public String addFeedback(double starValue, String feedback,
+      String username1, String username2)
+  {
+    try
+    {
       return server.addFeedback(starValue, feedback, username1, username2);
     }
-    catch (RemoteException e){
+    catch (RemoteException e)
+    {
       e.printStackTrace();
       throw new RuntimeException("Could not contact server");
     }
   }
 
   @Override public String addReport(String feedback, String username1,
-      String username2) throws IOException
+      String username2)
   {
     try
     {
       return server.addReport(feedback, username1, username2);
     }
-    catch (RemoteException e){
+    catch (RemoteException e)
+    {
       e.printStackTrace();
       throw new RuntimeException("Could not contact server");
     }
   }
 
-  @Override public List<Rental> checkSearch(String search) throws IOException
-  {
-    try{
-    return server.checkSearch(search);
-  } catch (RemoteException e){
-      e.printStackTrace();
-      throw new RuntimeException("Could not contact server");
-    }
-  }
-  @Override public List<Rental> checkSearchWithFilter(String search,String city,ArrayList<String> selectedCategories ) throws IOException
+  @Override public List<Rental> checkSearch(String search)
   {
     try
     {
-      return server.checkSearchWithFilter(search,city,selectedCategories);
-    }catch (RemoteException e){
+      return server.checkSearch(search);
+    }
+    catch (RemoteException e)
+    {
       e.printStackTrace();
       throw new RuntimeException("Could not contact server");
     }
   }
 
-  @Override
-  public ArrayList<City> getCityList() {
-    try {
+  @Override public List<Rental> checkSearchWithFilter(String search,
+      String city, ArrayList<String> selectedCategories)
+  {
+    try
+    {
+      return server.checkSearchWithFilter(search, city, selectedCategories);
+    }
+    catch (RemoteException e)
+    {
+      e.printStackTrace();
+      throw new RuntimeException("Could not contact server");
+    }
+  }
+
+  @Override public ArrayList<City> getCityList()
+  {
+    try
+    {
       return server.getCityList();
     }
-    catch (RemoteException e) {
+    catch (RemoteException e)
+    {
       e.printStackTrace();
     }
     return null;
   }
 
-  @Override
-  public ArrayList<State> getStateList() {
-    try{
+  @Override public ArrayList<State> getStateList()
+  {
+    try
+    {
       return server.getStateList();
     }
-    catch (RemoteException e){
+    catch (RemoteException e)
+    {
       e.printStackTrace();
     }
-    return  null;
+    return null;
   }
 
-  @Override
-  public ArrayList<Category> getCategoryList() {
-    try{
+  @Override public ArrayList<Category> getCategoryList()
+  {
+    try
+    {
       return server.getCategoryList();
     }
-    catch (RemoteException e){
+    catch (RemoteException e)
+    {
       e.printStackTrace();
     }
     return null;
@@ -165,9 +203,12 @@ public class RMIClient implements Client, RemoteObserver
 
   @Override public ArrayList<Rental> getRentalsList()
   {
-    try {
+    try
+    {
       return server.getRentalsList();
-    } catch (RemoteException e) {
+    }
+    catch (RemoteException e)
+    {
       e.printStackTrace();
     }
     return null;
@@ -175,73 +216,92 @@ public class RMIClient implements Client, RemoteObserver
 
   @Override public Member getMemberById(int id)
   {
-    try {
+    try
+    {
       return server.getMemberById(id);
-    } catch (RemoteException e) {
+    }
+    catch (RemoteException e)
+    {
       e.printStackTrace();
     }
     return null;
   }
 
-  @Override
-  public String checkLogInCredentials(String username, String password){
-    try {
+  @Override public String checkLogInCredentials(String username,
+      String password)
+  {
+    try
+    {
       return server.checkLogInCredentials(username, password);
-    } catch (RemoteException e) {
+    }
+    catch (RemoteException e)
+    {
       e.printStackTrace();
     }
     return null;
   }
 
-  @Override
-  public ArrayList<Integer> getRentalsOfMemberList(String username) {
-    try{
+  @Override public ArrayList<Integer> getRentalsOfMemberList(String username)
+  {
+    try
+    {
       return server.getRentalsOfMemberList(username);
     }
-    catch (RemoteException e){
+    catch (RemoteException e)
+    {
       e.printStackTrace();
     }
     return null;
   }
 
-  @Override
-  public Member getMemberByUsername(String memberUsername) {
-    try{
+  @Override public Member getMemberByUsername(String memberUsername)
+  {
+    try
+    {
       return server.getMemberByUsername(memberUsername);
-    } catch (Exception e) {
+    }
+    catch (Exception e)
+    {
       e.printStackTrace();
     }
     return null;
   }
 
-  @Override
-  public ArrayList<Rating> getAllRatingsOnMember(String memberUsername) {
-    try{
+  @Override public ArrayList<Rating> getAllRatingsOnMember(
+      String memberUsername)
+  {
+    try
+    {
       return server.getAllRatingsOnMember(memberUsername);
     }
-    catch (Exception e){
+    catch (Exception e)
+    {
       e.printStackTrace();
     }
     return null;
   }
 
-  @Override
-  public boolean deleteMember(Member member) {
-    try{
+  @Override public boolean deleteMember(Member member)
+  {
+    try
+    {
       return server.deleteMember(member);
     }
-    catch (Exception e){
+    catch (Exception e)
+    {
       e.printStackTrace();
     }
     return false;
   }
 
-  @Override
-  public boolean deleteRental(Rental rental) {
-    try {
+  @Override public boolean deleteRental(Rental rental)
+  {
+    try
+    {
       return server.deleteRental(rental);
     }
-    catch (Exception e){
+    catch (Exception e)
+    {
       e.printStackTrace();
     }
     return false;
@@ -274,12 +334,15 @@ public class RMIClient implements Client, RemoteObserver
     return null;
   }
 
-  @Override
-  public ArrayList<Warning> getWarnings(String administrator, int idTo) {
-    try {
+  @Override public ArrayList<Warning> getWarnings(String administrator,
+      int idTo)
+  {
+    try
+    {
       return server.getWarnings(administrator, idTo);
     }
-    catch (RemoteException e) {
+    catch (RemoteException e)
+    {
       e.printStackTrace();
     }
     return null;
@@ -297,50 +360,56 @@ public class RMIClient implements Client, RemoteObserver
     }
   }
 
-  @Override
-  public void sendWarning(Warning warning) {
-    try{
+  @Override public void sendWarning(Warning warning)
+  {
+    try
+    {
       server.sendWarning(warning);
     }
-    catch (RemoteException e){
+    catch (RemoteException e)
+    {
       e.printStackTrace();
     }
   }
 
-  @Override
-  public List<Member> checkSearchForMember(String value) {
-    try{
+  @Override public List<Member> checkSearchForMember(String value)
+  {
+    try
+    {
       return server.checkSearchForMember(value);
     }
-    catch (Exception e){
+    catch (Exception e)
+    {
       e.printStackTrace();
     }
     return null;
   }
 
-  @Override
-  public List<Member> getMembersList() {
-    try{
+  @Override public List<Member> getMembersList()
+  {
+    try
+    {
       return server.getMembersList();
     }
-    catch (Exception e){
+    catch (Exception e)
+    {
       e.printStackTrace();
     }
     return null;
   }
 
-  @Override
-  public List<Report> getReportList()
+  @Override public List<Report> getReportList()
   {
-    try{
+    try
+    {
       return server.getReportList();
     }
-    catch (Exception e){
+    catch (Exception e)
+    {
       e.printStackTrace();
     }
     return null;
   }
-
 
   @Override public Rating getRating(String fromUsername, String toUsername)
   {
@@ -395,25 +464,39 @@ public class RMIClient implements Client, RemoteObserver
   @Override public void addListener(String propertyName,
       PropertyChangeListener listener)
   {
-    if(propertyName != null)
+    if (propertyName != null)
       support.addPropertyChangeListener(propertyName, listener);
     else
       support.addPropertyChangeListener(listener);
   }
 
-  @Override public void update(String propertyName, Object newValue) throws RemoteException
+  @Override public void update(String propertyName, Object newValue)
+      throws RemoteException
   {
-    if(propertyName.equals("newMessage"))
+    if (propertyName.equals("newMessage"))
     {
       support.firePropertyChange("newMessage", 0, newValue);
     }
-    if(propertyName.equals("newWarning"))
+    if (propertyName.equals("newWarning"))
     {
       support.firePropertyChange("newWarning", 0, newValue);
     }
-    if(propertyName.equals("newRental"))
+    if (propertyName.equals("newRental"))
     {
       support.firePropertyChange("newRental", 0, newValue);
     }
+    if (propertyName.equals("deleteRental"))
+    {
+      support.firePropertyChange("deleteRental", 0, newValue);
+    }
+    if (propertyName.equals("deleteMember"))
+    {
+      support.firePropertyChange("deleteMember", 0, newValue);
+    }
+    if (propertyName.equals("updateRental"))
+    {
+      support.firePropertyChange("updateRental", 0, newValue);
+    }
+
   }
 }
