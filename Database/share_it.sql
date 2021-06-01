@@ -110,7 +110,7 @@ CREATE TABLE warning(
     FOREIGN KEY (member_to) REFERENCES member(id) ON DELETE CASCADE
 );
 
-CREATE OR REPLACE FUNCTION upd_average_review()
+CREATE OR REPLACE FUNCTION upd_average_rating()
     RETURNS TRIGGER
     LANGUAGE plpgsql
 AS
@@ -130,11 +130,11 @@ AS
     END;
     $$;
 
-CREATE TRIGGER update_avg_review_trigger
+CREATE TRIGGER update_avg_rating_trigger
     AFTER INSERT OR UPDATE
     ON share_it.rating
     FOR EACH ROW
-    EXECUTE FUNCTION upd_average_review();
+    EXECUTE FUNCTION upd_average_rating();
 
 
 --SELECT nextval(pg_get_serial_sequence('share_it.member', 'id')) AS available_id;
