@@ -123,7 +123,7 @@ $$
         WHERE member_to = NEW.member_to;
 
         UPDATE share_it.member
-        SET average_review = calculated_review
+        SET average_rating = calculated_review
         WHERE id = NEW.member_to;
 
         RETURN NEW;
