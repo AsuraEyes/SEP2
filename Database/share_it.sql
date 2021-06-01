@@ -115,15 +115,15 @@ CREATE OR REPLACE FUNCTION upd_average_review()
     LANGUAGE plpgsql
 AS
     $$
-    DECLARE calculated_review DECIMAL(2,1);
+    DECLARE calculated_rating DECIMAL(2,1);
         BEGIN
         SELECT AVG(value)
-        INTO calculated_review
+        INTO calculated_rating
         FROM share_it.rating
         WHERE member_to = NEW.member_to;
 
         UPDATE share_it.member
-        SET average_review = calculated_review
+        SET average_rating = calculated_rating
         WHERE id = NEW.member_to;
 
         RETURN NEW;
