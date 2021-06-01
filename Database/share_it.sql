@@ -32,7 +32,7 @@ CREATE TABLE member(
     address_no VARCHAR(100) NOT NULL,
     address_postal_code int NOT NULL,
     address_city_name VARCHAR (100) NOT NULL,
-    average_review DECIMAL(2, 1) DEFAULT 0 NOT NULL,
+    average_rating DECIMAL(2, 1) DEFAULT 0 NOT NULL,
     FOREIGN KEY (address_city_name) REFERENCES city(name)
 );
 
@@ -102,11 +102,11 @@ CREATE TABLE administrator(
 DROP TABLE IF EXISTS warning;
 CREATE TABLE warning(
     text bla_bla_type NOT NULL,
-    time TIMESTAMP NOT NULL ,
-    administrator_from VARCHAR(100) NOT NULL ,
-    member_to INTEGER NOT NULL ,
+    time TIMESTAMP NOT NULL,
+    administrator_from VARCHAR(100) NOT NULL,
+    member_to INTEGER NOT NULL,
     PRIMARY KEY (administrator_from, member_to, time),
-    FOREIGN KEY (administrator_from) REFERENCES administrator(username) ON DELETE CASCADE ,
+    FOREIGN KEY (administrator_from) REFERENCES administrator(username) ON DELETE CASCADE,
     FOREIGN KEY (member_to) REFERENCES member(id) ON DELETE CASCADE
 );
 
@@ -114,7 +114,7 @@ CREATE OR REPLACE FUNCTION upd_average_review()
     RETURNS TRIGGER
     LANGUAGE plpgsql
 AS
-    $$
+$$
     DECLARE calculated_review DECIMAL(2,1);
         BEGIN
         SELECT AVG(value)
@@ -128,23 +128,10 @@ AS
 
         RETURN NEW;
     END;
-    $$;
+$$;
 
 CREATE TRIGGER update_avg_review_trigger
     AFTER INSERT OR UPDATE
     ON share_it.rating
     FOR EACH ROW
     EXECUTE FUNCTION upd_average_review();
-
-
---SELECT nextval(pg_get_serial_sequence('share_it.member', 'id')) AS available_id;
-
-SELECT * FROM share_it.rental, share_it.category, share_it.rental_category WHERE share_it.rental.name || share_it.rental.description ILIKE '%bowl%' AND share_it.category.name ILIKE 'tools' AND share_it.rental_category.rental_id = share_it.rental.id AND share_it.rental_category.category_name = share_it.category.name;
-SELECT * FROM share_it.rental;
-
-SHOW data_directory;
-
-
-SELECT time, username, text FROM share_it.message, share_it.member WHERE member_to = member.id ORDER BY time desc;
-
-SELECT time, username, text FROM share_it.message, share_it.member WHERE member_to = member.id AND (member_to = 4 AND  member_from = 8)
