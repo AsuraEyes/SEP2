@@ -20,17 +20,18 @@ import java.util.List;
  */
 public class SearchForRentalViewModel
 {
-  private final RentalModel rentalModel;
-  private final MessageModel messageModel;
+  private RentalModel rentalModel;
+  private MessageModel messageModel;
 
-  private final StringProperty searchField;
-  private final StringProperty locationLabel;
+  private StringProperty searchField;
+  private StringProperty locationLabel;
   private ObservableList<String> locationsList;
   private ObservableList<String> categoriesList;
     /**
-     * Instantiates a new SearchForRentalViewModel.
+     * Instantiates StringProperties used for binding with the fields in the controller
      *
-     * @param model The model that this ViewModel uses
+     * @param rentalModel The model that this ViewModel uses
+     * @param messageModel The model that this ViewModel uses
      */
   public SearchForRentalViewModel(RentalModel rentalModel,
       MessageModel messageModel)
@@ -41,28 +42,23 @@ public class SearchForRentalViewModel
     searchField = new SimpleStringProperty();
     locationLabel = new SimpleStringProperty();
   }
-    /**
-     * Gets searchField.
-     *
-     * @return returns searchField input
-     */
+
   public StringProperty getSearchField()
   {
     return searchField;
   }
-    /**
-     * Get location label string property.
-     *
-     * @return the string property
-     */
+
   public StringProperty getLocationLabel()
   {
     return locationLabel;
   }
     /**
-     * Gets rental.
+     * On mouse click, the clicked object is retrieved and analyzed. The purpose
+     * is to get the rental's id stored in the ImageView id field. The id is
+     * used to retrieve the selected rental from the  list of rentals, and
+     * send it further.
      *
-     * @param object (?)
+     * @param object
      */
   public void getRental(Object object)
   {
@@ -88,7 +84,8 @@ public class SearchForRentalViewModel
     }
   }
     /**
-     * Gets cities in a list.
+     * Gets cities in a list from the database and places them in a Observable
+     * list to be bound to a listing element in controller.
      * @return returns a list of cities
      */
   public ObservableList<String> getLocations()
@@ -103,7 +100,8 @@ public class SearchForRentalViewModel
     return locationsList;
   }
     /**
-     * Get all the categories in a list.
+     * Get all the categories in a list from the database and places them in a Observable
+     * list to be bound to a listing element in controller.
      *
      * @return returns a list of categories
      */
@@ -143,18 +141,12 @@ public class SearchForRentalViewModel
         .checkSearchWithFilter(searchField.getValue(), selectedCity,
             selectedCategoriesList);
   }
-    /**
-     * Gets list of rentals.
-     *
-     * @return returns list of rentals
-     */
+
   public ArrayList<Rental> getRentalsList()
   {
     return rentalModel.getRentalsList();
   }
-    /**
-     * Sets search field.
-     */
+
   public void setSearchField()
   {
     searchField.setValue(messageModel.getSearchText());

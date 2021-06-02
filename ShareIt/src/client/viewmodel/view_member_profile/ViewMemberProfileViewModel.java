@@ -17,19 +17,20 @@ import java.util.ArrayList;
  */
 public class ViewMemberProfileViewModel
 {
-  private final SimpleStringProperty searchField;
-  private final SimpleStringProperty usernameLabel;
-  private final SimpleStringProperty locationLabel;
-  private final SimpleStringProperty ratingLabel;
-  private final SimpleStringProperty addressLabel;
-  private final SimpleStringProperty contactLabel;
-  private final SimpleStringProperty otherInformationLabel;
-  private final RentalModel rentalModel;
-  private final MemberModel memberModel;
+  private SimpleStringProperty searchField;
+  private SimpleStringProperty usernameLabel;
+  private SimpleStringProperty locationLabel;
+  private SimpleStringProperty ratingLabel;
+  private SimpleStringProperty addressLabel;
+  private SimpleStringProperty contactLabel;
+  private SimpleStringProperty otherInformationLabel;
+  private RentalModel rentalModel;
+  private MemberModel memberModel;
   /**
-   * Instantiates a new ViewMemberProfileViewModel.
+   * Instantiates StringProperties used for binding with the fields in the controller
    *
-   * @param model The model that this ViewModel uses
+   * @param rentalModel The model that this ViewModel uses
+   * @param memberModel The model that this ViewModel uses
    */
   public ViewMemberProfileViewModel(RentalModel rentalModel,
       MemberModel memberModel)
@@ -46,98 +47,57 @@ public class ViewMemberProfileViewModel
     otherInformationLabel = new SimpleStringProperty();
   }
 
-  /**
-   * Gets searchField.
-   *
-   * @return returns searchField input
-   */
   public StringProperty getSearchField()
   {
     return searchField;
   }
 
-  /**
-   * Gets usernameLabel.
-   *
-   * @return returns usernameLabel
-   */
   public StringProperty getUsernameLabel()
   {
     return usernameLabel;
   }
 
-  /**
-   * Gets locationLabel.
-   *
-   * @return returns locationLabel
-   */
   public StringProperty getLocationLabel()
   {
     return locationLabel;
   }
 
-  /**
-   * Gets ratingLabel.
-   *
-   * @return returns ratingLabel
-   */
   public StringProperty getRatingLabel()
   {
     return ratingLabel;
   }
 
-  /**
-   * Gets addressLabel.
-   *
-   * @return returns addressLabel
-   */
   public StringProperty getAddressLabel()
   {
     return addressLabel;
   }
 
-  /**
-   * Gets contactLabel.
-   *
-   * @return returns contactLabel
-   */
   public StringProperty getContactLabel()
   {
     return contactLabel;
   }
 
-  /**
-   * Gets otherInformationLabel.
-   *
-   * @return returns otherInformationLabel
-   */
   public StringProperty getOtherInformationLabel()
   {
     return otherInformationLabel;
   }
-  /**
-   * Checks user type.
-   *
-   * @return returns which type of account is viewing profile
-   */
+
   public String checkUserType()
   {
     return memberModel.checkUserType();
   }
-  /**
-   * Gets a list of member's rentals
-   *
-   * @param username username that will be checked for the list
-   * @return returns a list of viewed member's rentals
-   */
+
   public ArrayList<Rental> getRentalsOfMemberList()
   {
     return rentalModel.getRentalsOfMemberList();
   }
   /**
-   * Gets rental.
+   * On mouse click, the clicked object is retrieved and analyzed. The purpose
+   * is to get the member's id stored in the ImageView id field. The id is
+   * used to retrieve the selected rental from the member's list of rentals, and
+   * send it further.
    *
-   * @param object the object
+   * @param object
    */
   public void getRental(Object object)
   {
@@ -181,18 +141,12 @@ public class ViewMemberProfileViewModel
     otherInformationLabel
         .setValue("Other Information: " + member.getOtherInformation());
   }
-  /**
-   * Sets member username.
-   */
+
   public void setMemberUsername()
   {
     memberModel.setMemberUsername(usernameLabel.getValue().substring(10));
   }
-  /**
-   * Checks members data before deleting.
-   *
-   * @return  deletes if process was successful
-   */
+
   public boolean deleteAccount()
   {
     Member member = memberModel

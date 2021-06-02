@@ -68,7 +68,7 @@ public class ViewRatingController
 
   }
   /**
-   * Displays ratings.
+   * For every rating from the array list it creates a
    *
    * @param ratings All member's ratings
    */

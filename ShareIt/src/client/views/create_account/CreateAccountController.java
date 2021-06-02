@@ -39,8 +39,6 @@ public class CreateAccountController
      *
      * @param viewHandler      the view handler
      * @param viewModelFactory the view model factory
-     * @throws SQLException the sql exception
-     * @throws IOException  the io exception
      */
   public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory)
   {

@@ -15,14 +15,15 @@ import java.util.List;
  */
 public class SearchForMemberViewModel
 {
-  private final StringProperty searchField;
-  private final RentalModel rentalModel;
-  private final MemberModel memberModel;
-  private final MessageModel messageModel;
+  private StringProperty searchField;
+  private RentalModel rentalModel;
+  private MemberModel memberModel;
+  private MessageModel messageModel;
   /**
-   * Instantiates a new SearchForMemberViewModel.
+   * Instantiates StringProperties used for binding with the fields in the controller
    *
-   * @param model The model that this ViewModel uses
+   * @param rentalModel The model that this ViewModel uses
+   * @param messageModel The model that this ViewModel uses
    */
   public SearchForMemberViewModel(RentalModel rentalModel,
       MemberModel memberModel, MessageModel messageModel)
@@ -33,44 +34,31 @@ public class SearchForMemberViewModel
 
     searchField = new SimpleStringProperty();
   }
-    /**
-     * Gets searchField.
-     *
-     * @return returns searchField input
-     */
+
   public StringProperty getSearchField()
   {
     return searchField;
   }
-    /**
-     * Sets search field.
-     */
+
   public void setSearchField()
   {
     searchField.setValue(messageModel.getSearchText());
   }
-    /**
-     * After Search button have been pressed this method sends data to the model.
-     *
-     * @return returns a list of Members dependable on input
-     */
+
   public List<Member> onSearchButtonPressed()
   {
     return memberModel.checkSearchForMember(searchField.getValue());
   }
-    /**
-     * Gets list of Members.
-     *
-     * @return returns list of members
-     */
+
   public List<Member> getMembersList()
   {
     return memberModel.getMembersList();
   }
     /**
-     * Sets member username.
-     *
-     * @param source (?)
+     * On mouse click, the clicked object is retrieved and analyzed. The purpose
+     * is to get the username that is being hold by a label and store it in the
+     * MemberModelManager and sets allMemberRentals in RentalModel.
+     * @param source
      */
   public void setMemberUsername(Object source)
   {

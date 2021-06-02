@@ -20,10 +20,9 @@ public class ChatWriteMessageController
   private ChatWriteMessageViewModel chatWriteMessageViewModel;
   /**
    * Init.
-   *
+   * loads the initial data
    * @param viewHandler      the view handler
    * @param viewModelFactory the view model factory
-   * @throws IOException
    */
   public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory)
   {
@@ -39,20 +38,14 @@ public class ChatWriteMessageController
     textChatArea.textProperty().bind(chatWriteMessageViewModel.getMessages());
     chatWriteMessageViewModel.loadLogs();
   }
-  /**
-   * Changes a view if button was pressed.
-   *
-   * @throws IOException the io exception
-   */
+
   public void onGoBack()
   {
     textChatArea.clear();
     chatWriteMessageViewModel.loadAllReceivedMessages();
     viewHandler.setView(viewHandler.menu(), viewHandler.chatReceived());
   }
-  /**
-   * Sends a message by using a method from ViewModel when button is pressed
-   */
+
   public void onSend()
   {
     chatWriteMessageViewModel.sendMessage();

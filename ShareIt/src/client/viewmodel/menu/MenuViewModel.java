@@ -11,15 +11,17 @@ import javafx.beans.property.StringProperty;
  */
 public class MenuViewModel
 {
-  private final RentalModel rentalModel;
-  private final MemberModel memberModel;
-  private final MessageModel messageModel;
+  private RentalModel rentalModel;
+  private MemberModel memberModel;
+  private MessageModel messageModel;
 
-  private final StringProperty usernameLabel;
+  private StringProperty usernameLabel;
   /**
-   * Instantiates a new MenuViewModel.
+   * Instantiates StringProperties used for binding with the fields in the controller
    *
-   * @param model The model that this ViewModel uses
+   * @param rentalModel The model that this ViewModel uses
+   * @param memberModel The model that this ViewModel uses
+   * @param messageModel The model that this ViewModel uses
    */
   public MenuViewModel(RentalModel rentalModel, MemberModel memberModel,
       MessageModel messageModel)
@@ -52,32 +54,22 @@ public class MenuViewModel
       usernameLabel.setValue("");
     return userType;
   }
-  /**
-   * Gets usernameLabel.
-   *
-   * @return returns usernameLabel
-   */
+
   public StringProperty getUsernameLabel()
   {
     return usernameLabel;
   }
-  /**
-   * Sets member username.
-   */
+
   public void setMemberUsername()
   {
     memberModel.setMemberUsername(usernameLabel.getValue());
   }
-  /**
-   * Loads all received messages.
-   */
+
   public void loadAllReceivedMessages()
   {
     messageModel.setAllReceivedMessages(memberModel.getLoggedInUsername());
   }
-  /**
-   * Loads all warnings.
-   */
+
   public void loadAllWarnings()
   {
     messageModel.setAllReceivedWarnings();

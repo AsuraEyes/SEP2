@@ -41,7 +41,7 @@ public class AddRentalController {
 
   /**
    * Init.
-   *
+   * Instantiates the notification feature
    * @param viewHandler      the view handler
    * @param viewModelFactory the view model factory
    */
@@ -118,7 +118,10 @@ public class AddRentalController {
   }
 
   /**
-   * Handles adding a picutre.
+   * Handles adding a picture. It allows the member to browse available pictures
+   * from their computer by using a GUI windows browser, implemented with the
+   * help of JFileChooser.
+   *
    */
   public void addPictureButton()
   {
@@ -138,10 +141,7 @@ public class AddRentalController {
       pictureView.setImage(new Image("file:///" + path));
     }
   }
-      /**
-       * Changes a view if button was pressed.
-       *
-       */
+
   public void onGoBack()
   {
     nameField.clear();

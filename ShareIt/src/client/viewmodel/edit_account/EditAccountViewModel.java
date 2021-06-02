@@ -16,23 +16,24 @@ import java.util.ArrayList;
  */
 public class EditAccountViewModel
 {
-  private final RentalModel rentalModel;
-  private final MemberModel memberModel;
+  private RentalModel rentalModel;
+  private MemberModel memberModel;
 
-  private final StringProperty usernameField;
-  private final StringProperty passwordField;
-  private final StringProperty confirmPasswordField;
-  private final StringProperty streetField;
-  private final StringProperty streetNumberField;
-  private final StringProperty postalCodeField;
-  private final StringProperty emailField;
-  private final StringProperty telephoneNoField;
-  private final StringProperty otherInfoField;
+  private StringProperty usernameField;
+  private StringProperty passwordField;
+  private StringProperty confirmPasswordField;
+  private StringProperty streetField;
+  private StringProperty streetNumberField;
+  private StringProperty postalCodeField;
+  private StringProperty emailField;
+  private StringProperty telephoneNoField;
+  private StringProperty otherInfoField;
   private ObservableList<String> locationsList;
     /**
-     * Instantiates a new EditAccountViewModel.
+     * Instantiates StringProperties used for binding with the fields in the controller
      *
-     * @param model The model that this ViewModel uses
+     * @param rentalModel The model that this ViewModel uses
+     * @param memberModel The model that this ViewModel uses
      */
   public EditAccountViewModel(RentalModel rentalModel, MemberModel memberModel)
   {
@@ -48,93 +49,58 @@ public class EditAccountViewModel
     telephoneNoField = new SimpleStringProperty();
     otherInfoField = new SimpleStringProperty();
   }
-    /**
-     * Gets userNameField.
-     *
-     * @return returns userNameField input
-     */
+
   public StringProperty getUsernameField()
   {
     return usernameField;
   }
-    /**
-     * Gets passwordField.
-     *
-     * @return returns userNameField input
-     */
+
   public StringProperty getPasswordField()
   {
     return passwordField;
   }
-    /**
-     * Gets confirmPasswordField.
-     *
-     * @return returns confirmPasswordField input
-     */
+
   public StringProperty getConfirmPasswordField()
   {
     return confirmPasswordField;
   }
-    /**
-     * Gets streetField.
-     *
-     * @return returns streetField input
-     */
+
   public StringProperty getStreetField()
   {
     return streetField;
   }
-    /**
-     * Gets streetNumberField.
-     *
-     * @return returns streetNumberField input
-     */
+
   public StringProperty getStreetNumberField()
   {
     return streetNumberField;
   }
-    /**
-     * Gets postalCodeField.
-     *
-     * @return returns postalCodeField input
-     */
+
   public StringProperty getPostalCodeField()
   {
     return postalCodeField;
   }
-    /**
-     * Gets emailField.
-     *
-     * @return returns emailField input
-     */
+
   public StringProperty getEmailField()
   {
     return emailField;
   }
-    /**
-     * Gets telephoneField.
-     *
-     * @return returns telephoneField input
-     */
+
   public StringProperty getTelephoneNoField()
   {
     return telephoneNoField;
   }
-    /**
-     * Gets otherInformationField.
-     *
-     * @return returns otherInformationField input
-     */
+
   public StringProperty getOtherInfoField()
   {
     return otherInfoField;
   }
     /**
-     * After Edit button have been pressed this method sends data to the model.
+     * After Edit button have been pressed this method sends data to the model
+     * and receives a validation message if data is missing, invalid or the account
+     * was successfully edited.
      *
      * @param selectedCity The selected city
      * @return returns Member object with edited data
-     * @throws IOException
      */
   public String onEditButtonPressed(String selectedCity)
   {
@@ -145,7 +111,8 @@ public class EditAccountViewModel
         streetNumberField.getValue(), postalCodeField.getValue(), selectedCity);
   }
     /**
-     * Gets cities in a list.
+     * Gets cities in a list from the database and places them in a Observable
+     * list to be bound to a listing element in controller..
      *
      * @return returns a list of cities
      */
@@ -161,7 +128,8 @@ public class EditAccountViewModel
     return locationsList;
   }
     /**
-     * Sets profile information.
+     * Sets the logged in username data in the controller by getting it from the
+     * database.
      */
   public void setProfile()
   {
@@ -178,9 +146,9 @@ public class EditAccountViewModel
     otherInfoField.setValue(member.getOtherInformation());
   }
     /**
-     * Checks members data before deleting.
+     * Deletes logged member account and sets user type to Visitor
      *
-     * @return  deletes if process was successful
+     * @return true if process was successful
      */
   public boolean deleteAccount()
   {
