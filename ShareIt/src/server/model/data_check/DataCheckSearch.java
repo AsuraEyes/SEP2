@@ -58,10 +58,7 @@ public class DataCheckSearch
   {
     if (search != null)
     {
-      if (!(search.trim().equals("") && search.isBlank() && search.isEmpty()))
-      {
-        return true;
-      }
+        return !(search.trim().equals("") && search.isBlank() && search.isEmpty());
     }
     return false;
   }

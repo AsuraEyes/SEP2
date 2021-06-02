@@ -11,15 +11,15 @@ import java.util.ArrayList;
 
 public class ViewRatingViewModel
 {
-  private MemberModel memberModel;
-  private MessageModel messageModel;
+  private final MemberModel memberModel;
+  private final MessageModel messageModel;
 
-  private StringProperty username;
-  private StringProperty location;
-  private StringProperty rating;
-  private StringProperty address;
-  private StringProperty contact;
-  private StringProperty otherInformation;
+  private final StringProperty username;
+  private final StringProperty location;
+  private final StringProperty rating;
+  private final StringProperty address;
+  private final StringProperty contact;
+  private final StringProperty otherInformation;
 
   public ViewRatingViewModel(MemberModel memberModel, MessageModel messageModel)
   {

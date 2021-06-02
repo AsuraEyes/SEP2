@@ -14,12 +14,12 @@ import java.util.Date;
 
 public class SendWarningViewModel
 {
-  private MemberModel memberModel;
-  private MessageModel messageModel;
+  private final MemberModel memberModel;
+  private final MessageModel messageModel;
 
-  private StringProperty username;
-  private StringProperty warnings;
-  private StringProperty inputTextChat;
+  private final StringProperty username;
+  private final StringProperty warnings;
+  private final StringProperty inputTextChat;
 
   public SendWarningViewModel(MemberModel memberModel,
       MessageModel messageModel)

@@ -19,12 +19,12 @@ import java.util.List;
 
 public class ServerModelImpl implements ServerModelManager
 {
-  private PropertyChangeSupport support;
-  private DataCheckMember dataCheckMember;
-  private DataCheckRental dataCheckRental;
-  private DataCheckSearch dataCheckSearch;
-  private DataCheckRating dataCheckRating;
-  private DataCheckReport dataCheckReport;
+  private final PropertyChangeSupport support;
+  private final DataCheckMember dataCheckMember;
+  private final DataCheckRental dataCheckRental;
+  private final DataCheckSearch dataCheckSearch;
+  private final DataCheckRating dataCheckRating;
+  private final DataCheckReport dataCheckReport;
 
   public ServerModelImpl()
   {

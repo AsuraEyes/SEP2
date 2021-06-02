@@ -99,10 +99,7 @@ public class DataCheckRental
   {
     if (name != null)
     {
-      if (!(name.trim().equals("") && name.isBlank() && name.isEmpty()))
-      {
-        return true;
-      }
+        return !(name.trim().equals("") && name.isBlank() && name.isEmpty());
     }
     return false;
   }
@@ -111,11 +108,8 @@ public class DataCheckRental
   {
     if (description != null)
     {
-      if (!(description.trim().equals("") && description.isBlank()
-          && description.isEmpty()))
-      {
-        return true;
-      }
+        return !(description.trim().equals("") && description.isBlank()
+                && description.isEmpty());
     }
     return false;
   }

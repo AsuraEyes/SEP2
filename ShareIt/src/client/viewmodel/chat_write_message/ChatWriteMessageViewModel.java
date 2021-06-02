@@ -12,12 +12,12 @@ import java.util.ArrayList;
 
 public class ChatWriteMessageViewModel
 {
-  private MemberModel memberModel;
-  private MessageModel messageModel;
+  private final MemberModel memberModel;
+  private final MessageModel messageModel;
 
-  private StringProperty username;
-  private StringProperty messages;
-  private StringProperty inputTextChat;
+  private final StringProperty username;
+  private final StringProperty messages;
+  private final StringProperty inputTextChat;
 
   public ChatWriteMessageViewModel(MemberModel memberModel,
       MessageModel messageModel)

@@ -5,9 +5,9 @@ import java.io.Serializable;
 public class Rating implements Serializable
 {
   private double rating;
-  private String commentary;
-  private int memberFrom;
-  private int memberTo;
+  private final String commentary;
+  private final int memberFrom;
+  private final int memberTo;
 
   public Rating(double rating, String commentary, int memberFrom, int memberTo)
   {

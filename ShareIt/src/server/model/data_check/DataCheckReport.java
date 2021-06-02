@@ -32,9 +32,7 @@ public class DataCheckReport
 
   private boolean FeedbackGiven(){
     if (feedback != null){
-      if (!(feedback.trim().equals("") && feedback.isBlank() && feedback.isEmpty())){
-        return true;
-      }
+        return !(feedback.trim().equals("") && feedback.isBlank() && feedback.isEmpty());
     }
     return false;
   }

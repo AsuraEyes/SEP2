@@ -14,16 +14,16 @@ import java.beans.PropertyChangeEvent;
 
 public class ManageRentalsViewModel
 {
-  private RentalModel rentalModel;
-  private MemberModel memberModel;
+  private final RentalModel rentalModel;
+  private final MemberModel memberModel;
 
-  private StringProperty nameOfRental;
-  private StringProperty descriptionOfRental;
-  private StringProperty stateOfRental;
-  private StringProperty priceOfRental;
-  private StringProperty otherInformationOfRental;
-  private StringProperty categoryOfRental;
-  private ObjectProperty<Image> imageProperty;
+  private final StringProperty nameOfRental;
+  private final StringProperty descriptionOfRental;
+  private final StringProperty stateOfRental;
+  private final StringProperty priceOfRental;
+  private final StringProperty otherInformationOfRental;
+  private final StringProperty categoryOfRental;
+  private final ObjectProperty<Image> imageProperty;
 
   public ManageRentalsViewModel(RentalModel rentalModel,
       MemberModel memberModel)

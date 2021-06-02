@@ -11,7 +11,7 @@ public class Message implements Serializable
   private String usernameFrom;
   private int memberTo;
   private String text;
-  private Date timeStamp;
+  private final Date timeStamp;
 
   public Message(int memberFrom, int memberTo, String text, Date timeStamp)
   {

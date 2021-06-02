@@ -28,7 +28,7 @@ public class RunServer
     String maggiePassword = "SQLdatabaze";
     String bartoszPassword = "hehe2137";
     String claudiuPassword = "ohno...anyway";
-    String currentPassword = maggiePassword;
+    String currentPassword = timothyPassword;
     CityDAOImpl.getInstance().setPassword(currentPassword);
     RentalDAOImpl.getInstance().setPassword(currentPassword);
     CategoryDAOImpl.getInstance().setPassword(currentPassword);

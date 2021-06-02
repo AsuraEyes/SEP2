@@ -7,8 +7,8 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class WelcomePageViewModel {
-    private MemberModel memberModel;
-    private MessageModel messageModel;
+    private final MemberModel memberModel;
+    private final MessageModel messageModel;
 
     private final StringProperty searchField;
 

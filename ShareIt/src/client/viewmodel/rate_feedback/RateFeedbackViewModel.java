@@ -10,11 +10,11 @@ import shared.transferobjects.Rating;
 
 public class RateFeedbackViewModel
 {
-  private StringProperty commentaryTextArea;
-  private SimpleStringProperty usernameLabel;
-  private DoubleProperty ratingProperty;
-  private MemberModel memberModel;
-  private MessageModel messageModel;
+  private final StringProperty commentaryTextArea;
+  private final SimpleStringProperty usernameLabel;
+  private final DoubleProperty ratingProperty;
+  private final MemberModel memberModel;
+  private final MessageModel messageModel;
 
   public RateFeedbackViewModel(MemberModel memberModel,
       MessageModel messageModel)

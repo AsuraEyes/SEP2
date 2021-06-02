@@ -14,14 +14,14 @@ import java.util.ArrayList;
 
 public class ManageAccountViewModel
 {
-  private SimpleStringProperty usernameLabel;
-  private SimpleStringProperty locationLabel;
-  private SimpleStringProperty ratingLabel;
-  private SimpleStringProperty addressLabel;
-  private SimpleStringProperty contactLabel;
-  private SimpleStringProperty otherInformationLabel;
-  private RentalModel rentalModel;
-  private MemberModel memberModel;
+  private final SimpleStringProperty usernameLabel;
+  private final SimpleStringProperty locationLabel;
+  private final SimpleStringProperty ratingLabel;
+  private final SimpleStringProperty addressLabel;
+  private final SimpleStringProperty contactLabel;
+  private final SimpleStringProperty otherInformationLabel;
+  private final RentalModel rentalModel;
+  private final MemberModel memberModel;
 
   public ManageAccountViewModel(RentalModel rentalModel,
       MemberModel memberModel)

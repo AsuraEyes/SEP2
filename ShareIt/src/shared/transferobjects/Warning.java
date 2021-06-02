@@ -7,10 +7,10 @@ import java.util.Date;
 
 public class Warning implements Serializable
 {
-  private String administratorFrom;
-  private int memberTo;
+  private final String administratorFrom;
+  private final int memberTo;
   private String text;
-  private Date timeStamp;
+  private final Date timeStamp;
 
   public Warning(String administratorFrom, int memberTo, String text,
       Date timeStamp)

@@ -12,13 +12,13 @@ import java.util.List;
 
 public class RentalModelManager implements RentalModel
 {
-  private PropertyChangeSupport support;
-  private Client client;
-  private ModelFactory modelFactory;
+  private final PropertyChangeSupport support;
+  private final Client client;
+  private final ModelFactory modelFactory;
 
   private Rental rental;
   private ArrayList<Rental> allRentals;
-  private ArrayList<Rental> allMemberRentals;
+  private final ArrayList<Rental> allMemberRentals;
 
   public RentalModelManager(Client client, ModelFactory modelFactory)
   {

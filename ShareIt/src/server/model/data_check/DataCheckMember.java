@@ -111,11 +111,7 @@ public class DataCheckMember
 
   private boolean matchingPasswords()
   {
-    if (password.equals(passwordAgain))
-    {
-      return true;
-    }
-    return false;
+      return password.equals(passwordAgain);
   }
 
   private boolean uniqueUsername()

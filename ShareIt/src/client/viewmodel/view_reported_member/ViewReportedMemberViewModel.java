@@ -8,12 +8,12 @@ import shared.transferobjects.Report;
 
 public class ViewReportedMemberViewModel
 {
-  private RentalModel rentalModel;
-  private MemberModel memberModel;
+  private final RentalModel rentalModel;
+  private final MemberModel memberModel;
 
-  private StringProperty reportedNameLabel;
-  private StringProperty reporterNameLabel;
-  private StringProperty commentaryLabel;
+  private final StringProperty reportedNameLabel;
+  private final StringProperty reporterNameLabel;
+  private final StringProperty commentaryLabel;
 
   public ViewReportedMemberViewModel(RentalModel rentalModel,
       MemberModel memberModel)

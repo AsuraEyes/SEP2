@@ -17,12 +17,12 @@ import java.util.List;
 
 public class MemberModelManager implements MemberModel
 {
-  private PropertyChangeSupport support;
-  private Client client;
+  private final PropertyChangeSupport support;
+  private final Client client;
   private String memberUsername;
   private ArrayList<Report> allReports;
   private Report selectedReport;
-  private ModelFactory modelFactory;
+  private final ModelFactory modelFactory;
 
   public MemberModelManager(Client client, ModelFactory modelFactory)
   {

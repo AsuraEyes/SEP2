@@ -8,10 +8,10 @@ import shared.transferobjects.Report;
 
 public class ReportMemberViewModel
 {
-  private StringProperty usernameLabel;
-  private StringProperty commentaryTextArea;
-  private MemberModel memberModel;
-  private MessageModel messageModel;
+  private final StringProperty usernameLabel;
+  private final StringProperty commentaryTextArea;
+  private final MemberModel memberModel;
+  private final MessageModel messageModel;
 
   public ReportMemberViewModel(MemberModel memberModel,
       MessageModel messageModel)

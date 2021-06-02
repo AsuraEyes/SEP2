@@ -13,10 +13,10 @@ import java.util.List;
 
 public class SearchForMemberViewModel
 {
-  private StringProperty searchField;
-  private RentalModel rentalModel;
-  private MemberModel memberModel;
-  private MessageModel messageModel;
+  private final StringProperty searchField;
+  private final RentalModel rentalModel;
+  private final MemberModel memberModel;
+  private final MessageModel messageModel;
 
   public SearchForMemberViewModel(RentalModel rentalModel,
       MemberModel memberModel, MessageModel messageModel)

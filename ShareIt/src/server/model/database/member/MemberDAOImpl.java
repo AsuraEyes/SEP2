@@ -157,10 +157,7 @@ public class MemberDAOImpl implements MemberDAO
       }
       if (numberOfResults == 0)
       {
-        if (AdministratorDAOImpl.getInstance().uniqueUsername(username))
-        {
-          return true;
-        }
+          return AdministratorDAOImpl.getInstance().uniqueUsername(username);
       }
       return false;
     }
