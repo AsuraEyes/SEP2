@@ -7,7 +7,7 @@ import client.model.message.MessageModelManager;
 import client.model.rental.RentalModel;
 import client.model.rental.RentalModelManager;
 /**
- * A class that creates a Model object without having to specify the exact class of the object.
+ * A class that creates a Model object, uses factory pattern.
  */
 public class ModelFactory
 {
@@ -26,9 +26,9 @@ public class ModelFactory
     this.clientFactory = clientFactory;
   }
   /**
-   * Gets RentalModel when it needs to be accessed..
+   * Creates a RentalModel if not created, otherwise returns it.
    *
-   * @return returns the RentalModel
+   * @return the RentalModel
    */
   public RentalModel getRentalModel()
   {
@@ -39,9 +39,9 @@ public class ModelFactory
     return rentalModel;
   }
   /**
-   * Gets MemberModel when it needs to be accessed.
+   * Creates a MemberModel if not created, otherwise returns it.
    *
-   * @return returns the MemberModel
+   * @return the MemberModel
    */
   public MemberModel getMemberModel()
   {
@@ -52,9 +52,9 @@ public class ModelFactory
     return memberModel;
   }
   /**
-   * Gets MessageModel when it needs to be accessed..
+   * Creates a MessageModel if not created, otherwise returns it.
    *
-   * @return returns the MessageModel
+   * @return the MessageModel
    */
   public MessageModel getMessageModel()
   {

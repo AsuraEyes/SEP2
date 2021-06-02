@@ -22,7 +22,7 @@ import client.viewmodel.view_reported_member.ViewReportedMemberViewModel;
 import client.viewmodel.view_reported_member_list.ViewReportedMemberListViewModel;
 import client.viewmodel.welcome_page.WelcomePageViewModel;
 /**
- * A class that creates a ViewModel object without having to specify the exact class of the object.
+ * A class that creates a ViewModel object, uses factory pattern.
  */
 public class ViewModelFactory
 {
