@@ -78,7 +78,7 @@ public class ViewHandler
   /**
    * Loads Menu view.
    *
-   * @return returns this view
+   *  @return a Node for this view
    */
   public Node menu()
   {
@@ -92,7 +92,7 @@ public class ViewHandler
   /**
    * loads AddRental view.
    *
-   * @return returns this view
+   *  @return a Node for this view
    */
   public Node addRental()
   {
@@ -108,7 +108,7 @@ public class ViewHandler
   /**
    * Loads ChatReceivedMessages view.
    *
-   * @return returns this view
+   *  @return a Node for this view
    */
   public Node chatReceived()
   {
@@ -124,7 +124,7 @@ public class ViewHandler
   /**
    * Loads ChatWriteMessage view.
    *
-   * @return  returns this view
+   * @return    this view
    */
   public Node chatWrite()
   {
@@ -140,7 +140,7 @@ public class ViewHandler
   /**
    * Load SendWarning view
    *
-   * @return returns this view
+   *  @return a Node for this view
    */
   public Node sendWarning()
   {
@@ -155,7 +155,7 @@ public class ViewHandler
   /**
    * Loads CreateAccount view.
    *
-   * @return returns this view
+   *  @return a Node for this view
    */
   public Node createAccount()
   {
@@ -170,7 +170,7 @@ public class ViewHandler
   /**
    * Loads LogIn view.
    *
-   * @return returns this view
+   *  @return a Node for this view
    */
   public Node logIn()
   {
@@ -185,7 +185,7 @@ public class ViewHandler
   /**
    * Loads ManageAccount view.
    *
-   * @return returns this view
+   *  @return a Node for this view
    */
   public Node manageAccount()
   {
@@ -200,7 +200,7 @@ public class ViewHandler
   /**
    * Load EditAccount view.
    *
-   * @return returns this view
+   *  @return a Node for this view
    */
   public Node editOrDeleteAccount()
   {
@@ -215,7 +215,7 @@ public class ViewHandler
   /**
    * Loads ManageRentals view.
    *
-   * @return returns this view
+   *  @return a Node for this view
    */
   public Node manageRentals()
   {
@@ -230,7 +230,7 @@ public class ViewHandler
   /**
    * Loads EditRental view.
    *
-   * @return returns this view
+   *  @return a Node for this view
    */
   public Node editRental()
   {
@@ -245,7 +245,7 @@ public class ViewHandler
   /**
    * Loads RateFeedback view
    *
-   * @return returns this view
+   *  @return a Node for this view
    */
   public Node rateFeedback()
   {
@@ -260,7 +260,7 @@ public class ViewHandler
   /**
    * Loads ReportMember view.
    *
-   * @return returns this view
+   *  @return a Node for this view
    */
   public Node reportMember()
   {
@@ -275,7 +275,7 @@ public class ViewHandler
   /**
    * Loads SearchForMember view.
    *
-   * @return returns this view
+   *  @return a Node for this view
    */
   public Node searchForMember()
   {
@@ -291,7 +291,7 @@ public class ViewHandler
   /**
    * Loads SearchForRental view.
    *
-   * @return returns this view
+   *  @return a Node for this view
    */
   public Node searchForRental()
   {
@@ -307,7 +307,7 @@ public class ViewHandler
   /**
    * Loads ViewMemberProfile view.
    *
-   * @return returns this view
+   *  @return a Node for this view
    */
   public Node viewMemberProfile()
   {
@@ -323,7 +323,7 @@ public class ViewHandler
   /**
    * Loads ViewRating view.
    *
-   * @return returns this view
+   *  @return a Node for this view
    */
   public Node viewRating()
   {
@@ -338,7 +338,7 @@ public class ViewHandler
   /**
    * Loads ViewRental view.
    *
-   * @return returns this view
+   *  @return a Node for this view
    */
   public Node viewRental()
   {
@@ -353,7 +353,7 @@ public class ViewHandler
   /**
    * Loads ViewReportedMember view.
    *
-   * @return returns this view
+   *  @return a Node for this view
    */
   public Node viewReportedMember()
   {
@@ -369,7 +369,7 @@ public class ViewHandler
   /**
    * Loads ViewReportedMemberList view.
    *
-   * @return returns this view
+   *  @return a Node for this view
    */
   public Node viewReportedMemberList()
   {
@@ -385,7 +385,7 @@ public class ViewHandler
   /**
    * Loads WelcomePage view.
    *
-   * @return returns this view
+   *  @return a Node for this view
    */
   public Node welcomePage()
   {
