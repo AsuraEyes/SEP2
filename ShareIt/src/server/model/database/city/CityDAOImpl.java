@@ -6,7 +6,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CityDAOImpl implements CityDAO
+public class CityDAOImpl
 {
   private static CityDAOImpl instance;
   private String password;
@@ -53,7 +53,7 @@ public class CityDAOImpl implements CityDAO
    * @return returns all city names in a arraylist
    * @throws SQLException
    */
-  @Override public List<City> readCity()
+  public List<City> readCity()
   {
     try (Connection connection = getConnection())
     {
