@@ -9,10 +9,10 @@ import javafx.beans.property.StringProperty;
 public class LogInViewModel
 {
 
-  private StringProperty userName;
-  private StringProperty searchField;
-  private StringProperty passwordField;
-  private MemberModel memberModel;
+  private final StringProperty userName;
+  private final StringProperty searchField;
+  private final StringProperty passwordField;
+  private final MemberModel memberModel;
   /**
    * Instantiates a new LogInViewModel.
    *

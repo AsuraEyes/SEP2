@@ -142,11 +142,7 @@ public class DataCheckMember
      */
   private boolean matchingPasswords()
   {
-    if (password.equals(passwordAgain))
-    {
-      return true;
-    }
-    return false;
+      return password.equals(passwordAgain);
   }
     /**
      * Checks if username already exist in the database

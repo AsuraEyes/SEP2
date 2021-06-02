@@ -7,17 +7,17 @@ import java.io.Serializable;
 public class Rating implements Serializable
 {
   private double rating;
-  private String commentary;
-  private int memberFrom;
-  private int memberTo;
-    /**
-     * Constructor initializing fields.
-     *
-     * @param rating     Rating that was chosen while rating a member.
-     * @param commentary Commentary that was added while rating a member.
-     * @param memberFrom Member's ID that rated another member.
-     * @param memberTo   Member's ID that was rated.
-     */
+  private final String commentary;
+  private final int memberFrom;
+  private final int memberTo;
+  /**
+   * Constructor initializing fields.
+   *
+   * @param rating     Rating that was chosen while rating a member.
+   * @param commentary Commentary that was added while rating a member.
+   * @param memberFrom Member's ID that rated another member.
+   * @param memberTo   Member's ID that was rated.
+   */
   public Rating(double rating, String commentary, int memberFrom, int memberTo)
   {
     this.rating = rating;

@@ -10,17 +10,17 @@ import shared.transferobjects.Report;
  */
 public class ViewReportedMemberViewModel
 {
-  private RentalModel rentalModel;
-  private MemberModel memberModel;
+  private final RentalModel rentalModel;
+  private final MemberModel memberModel;
 
-  private StringProperty reportedNameLabel;
-  private StringProperty reporterNameLabel;
-  private StringProperty commentaryLabel;
-    /**
-     * Instantiates a new ViewReportedMemberViewModel.
-     *
-     * @param model The model that this ViewModel uses
-     */
+  private final StringProperty reportedNameLabel;
+  private final StringProperty reporterNameLabel;
+  private final StringProperty commentaryLabel;
+  /**
+   * Instantiates a new ViewReportedMemberViewModel.
+   *
+   * @param model The model that this ViewModel uses
+   */
   public ViewReportedMemberViewModel(RentalModel rentalModel,
       MemberModel memberModel)
   {

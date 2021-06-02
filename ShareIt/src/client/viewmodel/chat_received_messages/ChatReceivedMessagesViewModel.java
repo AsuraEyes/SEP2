@@ -13,8 +13,8 @@ import java.util.ArrayList;
  */
 public class ChatReceivedMessagesViewModel
 {
-  private MemberModel memberModel;
-  private MessageModel messageModel;
+  private final MemberModel memberModel;
+  private final MessageModel messageModel;
   /**
    * Instantiates a new ChatReceivedMessagesViewModel.
    *

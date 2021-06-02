@@ -16,17 +16,17 @@ import java.util.Date;
  */
 public class SendWarningViewModel
 {
-  private MemberModel memberModel;
-  private MessageModel messageModel;
+  private final MemberModel memberModel;
+  private final MessageModel messageModel;
 
-  private StringProperty username;
-  private StringProperty warnings;
-  private StringProperty inputTextChat;
-    /**
-     * Instantiates a new SendWarningViewModel.
-     *
-     * @param model The model that this ViewModel uses
-     */
+  private final StringProperty username;
+  private final StringProperty warnings;
+  private final StringProperty inputTextChat;
+  /**
+   * Instantiates a new SendWarningViewModel.
+   *
+   * @param model The model that this ViewModel uses
+   */
   public SendWarningViewModel(MemberModel memberModel,
       MessageModel messageModel)
   {

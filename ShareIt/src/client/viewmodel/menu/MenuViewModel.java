@@ -11,11 +11,11 @@ import javafx.beans.property.StringProperty;
  */
 public class MenuViewModel
 {
-  private RentalModel rentalModel;
-  private MemberModel memberModel;
-  private MessageModel messageModel;
+  private final RentalModel rentalModel;
+  private final MemberModel memberModel;
+  private final MessageModel messageModel;
 
-  private StringProperty usernameLabel;
+  private final StringProperty usernameLabel;
   /**
    * Instantiates a new MenuViewModel.
    *

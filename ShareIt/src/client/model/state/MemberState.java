@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class MemberState implements LoginState, Serializable
 {
   private final String USERTYPE = "Member";
-  private String username;
+  private final String username;
 
   /**
    * Instantiates a new Member state.

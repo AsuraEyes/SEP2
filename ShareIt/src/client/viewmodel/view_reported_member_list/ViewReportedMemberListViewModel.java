@@ -4,13 +4,13 @@ import client.model.member.MemberModel;
 import shared.transferobjects.Report;
 
 import java.util.List;
-
+/**
+ * A class that holds and manages data from the ViewReportedMemberList view.
+ */
 public class ViewReportedMemberListViewModel
 {
-  /**
-   * A class that holds and manages data from the ViewReportedMemberList view.
-   */
-  private MemberModel memberModel;
+
+  private final MemberModel memberModel;
   /**
    * Instantiates a new ViewReportedMemberListViewModel.
    *

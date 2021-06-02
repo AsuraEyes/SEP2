@@ -7,9 +7,9 @@ import java.io.Serializable;
  */
 public class Report implements Serializable
 {
-  private String commentary;
-  private int memberFrom;
-  private int memberTo;
+  private final String commentary;
+  private final int memberFrom;
+  private final int memberTo;
   private String usernameFrom;
   private String usernameTo;
 

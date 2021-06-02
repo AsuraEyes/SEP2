@@ -19,21 +19,21 @@ import java.util.ArrayList;
  */
 public class AddRentalViewModel
 {
-  private StringProperty nameField;
-  private StringProperty descriptionField;
-  private StringProperty priceField;
-  private StringProperty otherInfoField;
-  private RentalModel rentalModel;
-  private MemberModel memberModel;
+  private final StringProperty nameField;
+  private final StringProperty descriptionField;
+  private final StringProperty priceField;
+  private final StringProperty otherInfoField;
+  private final RentalModel rentalModel;
+  private final MemberModel memberModel;
   private ObservableList<String> statesList;
   private ObservableList<String> categoriesList;
-  private ObjectProperty<Image> imageProperty;
-    /**
-     * Instantiates a new AddRentalViewModel.
-     *
-     * @param rentalModel The model that this ViewModel uses
-     * @param memberModel The model that this ViewModel uses
-     */
+  private final ObjectProperty<Image> imageProperty;
+  /**
+   * Instantiates a new AddRentalViewModel.
+   *
+   * @param rentalModel The model that this ViewModel uses
+   * @param memberModel The model that this ViewModel uses
+   */
   public AddRentalViewModel(RentalModel rentalModel, MemberModel memberModel)
   {
     this.rentalModel = rentalModel;

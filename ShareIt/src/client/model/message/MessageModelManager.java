@@ -17,8 +17,8 @@ import java.util.ArrayList;
  */
 public class MessageModelManager implements MessageModel
 {
-  private PropertyChangeSupport support;
-  private Client client;
+  private final PropertyChangeSupport support;
+  private final Client client;
   private String searchText;
   private ArrayList<Message> allReceivedMessages;
   private ArrayList<Warning> allWarnings;

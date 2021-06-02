@@ -11,7 +11,7 @@ import client.model.rental.RentalModelManager;
  */
 public class ModelFactory
 {
-  private ClientFactory clientFactory;
+  private final ClientFactory clientFactory;
 
   private RentalModel rentalModel;
   private MessageModel messageModel;

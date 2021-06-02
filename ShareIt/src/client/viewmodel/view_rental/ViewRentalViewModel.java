@@ -18,19 +18,19 @@ import java.beans.PropertyChangeEvent;
  */
 public class ViewRentalViewModel
 {
-  private RentalModel rentalModel;
-  private MemberModel memberModel;
+  private final RentalModel rentalModel;
+  private final MemberModel memberModel;
 
-  private StringProperty nameOfRental;
-  private StringProperty descriptionOfRental;
-  private StringProperty stateOfRental;
-  private StringProperty priceOfRental;
-  private StringProperty otherInformationOfRental;
-  private StringProperty categoryOfRental;
-  private StringProperty usernameOfRental;
-  private StringProperty locationOfRental;
-  private StringProperty ratingOfUserOfRental;
-  private ObjectProperty<Image> imageProperty;
+  private final StringProperty nameOfRental;
+  private final StringProperty descriptionOfRental;
+  private final StringProperty stateOfRental;
+  private final StringProperty priceOfRental;
+  private final StringProperty otherInformationOfRental;
+  private final StringProperty categoryOfRental;
+  private final StringProperty usernameOfRental;
+  private final StringProperty locationOfRental;
+  private final StringProperty ratingOfUserOfRental;
+  private final ObjectProperty<Image> imageProperty;
   /**
    * Instantiates a new ViewRentalViewModel.
    *
@@ -56,8 +56,8 @@ public class ViewRentalViewModel
   }
 
   /**
-   * (?)
-   * @param evt
+   * An event that selects rental
+   * @param evt value of selected rental
    */
   private void selectedRental(PropertyChangeEvent evt)
   {

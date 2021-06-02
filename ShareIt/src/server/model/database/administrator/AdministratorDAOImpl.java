@@ -64,11 +64,7 @@ public class AdministratorDAOImpl implements AdministratorDAO
       {
         numberOfResults++;
       }
-      if (numberOfResults == 0)
-      {
-        return true;
-      }
-      return false;
+        return numberOfResults == 0;
     }
   }
 

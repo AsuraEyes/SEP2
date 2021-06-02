@@ -114,4 +114,4 @@ SELECT * FROM share_it.city;
 
 SELECT * FROM message WHERE member_to = 1 AND time IN (SELECT MAX(time) FROM message WHERE member_to = 1 GROUP BY member_from) ORDER BY time DESC ;
 
-
+SELECT time, text, username FROM share_it.message, share_it.member WHERE ((member_from = 1 AND member_to = 5)OR(member_from = 5 AND member_to = 1))AND (member.id = message.member_from) ORDER BY time;

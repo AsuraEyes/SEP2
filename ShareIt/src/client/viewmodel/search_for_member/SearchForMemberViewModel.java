@@ -15,15 +15,15 @@ import java.util.List;
  */
 public class SearchForMemberViewModel
 {
-  private StringProperty searchField;
-  private RentalModel rentalModel;
-  private MemberModel memberModel;
-  private MessageModel messageModel;
-    /**
-     * Instantiates a new SearchForMemberViewModel.
-     *
-     * @param model The model that this ViewModel uses
-     */
+  private final StringProperty searchField;
+  private final RentalModel rentalModel;
+  private final MemberModel memberModel;
+  private final MessageModel messageModel;
+  /**
+   * Instantiates a new SearchForMemberViewModel.
+   *
+   * @param model The model that this ViewModel uses
+   */
   public SearchForMemberViewModel(RentalModel rentalModel,
       MemberModel memberModel, MessageModel messageModel)
   {

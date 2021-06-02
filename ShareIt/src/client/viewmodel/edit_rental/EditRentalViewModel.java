@@ -21,15 +21,15 @@ import java.util.ArrayList;
  */
 public class EditRentalViewModel
 {
-  private StringProperty nameField;
-  private StringProperty descriptionField;
-  private StringProperty priceField;
-  private StringProperty otherInfoField;
-  private RentalModel rentalModel;
-  private MemberModel memberModel;
+  private final StringProperty nameField;
+  private final StringProperty descriptionField;
+  private final StringProperty priceField;
+  private final StringProperty otherInfoField;
+  private final RentalModel rentalModel;
+  private final MemberModel memberModel;
   private ObservableList<String> statesList;
   private ObservableList<String> categoriesList;
-  private ObjectProperty<Image> imageProperty;
+  private final ObjectProperty<Image> imageProperty;
 
     /**
      * Instantiates a new EditRentalViewModel.

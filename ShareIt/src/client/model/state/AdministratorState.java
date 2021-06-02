@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class AdministratorState implements LoginState, Serializable
 {
   private final String USERTYPE = "Administrator";
-  private String username;
+  private final String username;
 
   /**
    * Instantiates a new Administrator state.

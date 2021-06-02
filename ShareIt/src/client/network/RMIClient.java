@@ -19,7 +19,7 @@ import java.util.List;
  */
 public class RMIClient implements Client, RemoteObserver
 {
-  private PropertyChangeSupport support;
+  private final PropertyChangeSupport support;
   private RMIServer server;
 
   /**

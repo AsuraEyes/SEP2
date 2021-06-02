@@ -10,18 +10,18 @@ import java.util.Date;
  */
 public class Warning implements Serializable
 {
-  private String administratorFrom;
-  private int memberTo;
+  private final String administratorFrom;
+  private final int memberTo;
   private String text;
-  private Date timeStamp;
-    /**
-     * Constructor initializing fields.
-     *
-     * @param administratorFrom Username of administrator that sent a warning.
-     * @param memberTo          ID of member that got warned.
-     * @param text              Content of warning that was sent.
-     * @param timeStamp         The time when warning was sent.
-     */
+  private final Date timeStamp;
+  /**
+   * Constructor initializing fields.
+   *
+   * @param administratorFrom Username of administrator that sent a warning.
+   * @param memberTo          ID of member that got warned.
+   * @param text              Content of warning that was sent.
+   * @param timeStamp         The time when warning was sent.
+   */
   public Warning(String administratorFrom, int memberTo, String text,
       Date timeStamp)
   {
