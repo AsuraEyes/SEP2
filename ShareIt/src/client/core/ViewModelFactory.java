@@ -22,7 +22,8 @@ import client.viewmodel.view_reported_member.ViewReportedMemberViewModel;
 import client.viewmodel.view_reported_member_list.ViewReportedMemberListViewModel;
 import client.viewmodel.welcome_page.WelcomePageViewModel;
 /**
- * A class that creates a ViewModel object, uses factory pattern.
+ * A class that creates or gets a ViewModel object, uses factory pattern.
+ * All the methods are using get methods from the ModelFactory to get the needed models
  */
 public class ViewModelFactory
 {
@@ -50,7 +51,7 @@ public class ViewModelFactory
   private ManageAccountViewModel manageAccountViewModel;
   private SendWarningViewModel sendWarningViewModel;
   /**
-   * Instantiates a new View model factory.
+   * Instantiates a new ModelFactory.
    *
    * @param modelFactory the model factory
    */
@@ -59,9 +60,9 @@ public class ViewModelFactory
     this.modelFactory = modelFactory;
   }
   /**
-   * Gets LogInViewModel when it needs to be accessed.
+   * Creates LogInViewModel if not created, otherwise returns it.
    *
-   * @return returns the LogInViewModel
+   * @return LogInViewModel
    */
   public LogInViewModel getLogInViewModel()
   {
@@ -72,9 +73,9 @@ public class ViewModelFactory
     return logInViewModel;
   }
   /**
-   * Gets ChatReceivedMessagesViewModel when it needs to be accessed.
+   * Creates ChatReceivedMessagesViewModel if not created, otherwise returns it.
    *
-   * @return returns the ChatReceivedMessagesViewModel
+   * @return ChatReceivedMessagesViewModel
    */
   public ChatReceivedMessagesViewModel getChatReceivedMessagesViewModel()
   {
@@ -86,9 +87,9 @@ public class ViewModelFactory
     return chatReceivedMessagesViewModel;
   }
   /**
-   * Gets ChatWriteMessagesViewModel when it needs to be accessed.
+   * Creates ChatWriteMessagesViewModel if not created, otherwise returns it.
    *
-   * @return returns the ChatWriteMessagesViewModel
+   * @return ChatWriteMessagesViewModel
    */
   public ChatWriteMessageViewModel getChatWriteMessagesViewModel()
   {
@@ -100,9 +101,9 @@ public class ViewModelFactory
     return chatWriteMessageViewModel;
   }
   /**
-   * Gets AddRentalViewModel when it needs to be accessed.
+   * Creates AddRentalViewModel if not created, otherwise returns it.
    *
-   * @return returns the AddRentalViewModel
+   * @return AddRentalViewModel
    */
   public AddRentalViewModel getAddRentalViewModel()
   {
@@ -114,9 +115,9 @@ public class ViewModelFactory
     return addRentalViewModel;
   }
   /**
-   * Gets WelcomePageViewModel when it needs to be accessed.
+   * Creates WelcomePageViewModel if not created, otherwise returns it.
    *
-   * @return returns the WelcomePageViewModel
+   * @return WelcomePageViewModel
    */
   public WelcomePageViewModel getWelcomePageViewModel()
   {
@@ -128,9 +129,9 @@ public class ViewModelFactory
     return welcomePageViewModel;
   }
   /**
-   * Gets CreateAccountViewModel when it needs to be accessed.
+   * Creates CreateAccountViewModel if not created, otherwise returns it.
    *
-   * @return returns the CreateAccountViewModel
+   * @return CreateAccountViewModel
    */
   public CreateAccountViewModel getCreateAccountViewModel()
   {
@@ -142,9 +143,9 @@ public class ViewModelFactory
     return createAccountViewModel;
   }
   /**
-   * Gets SearchForRentalViewModel when it needs to be accessed.
+   * Creates SearchForRentalViewModel if not created, otherwise returns it.
    *
-   * @return returns the SearchForRentalViewModel
+   * @return SearchForRentalViewModel
    */
   public SearchForRentalViewModel getSearchForRentalViewModel()
   {
@@ -156,9 +157,9 @@ public class ViewModelFactory
     return searchForRentalViewModel;
   }
   /**
-   * Gets SearchForMemberViewModel when it needs to be accessed.
+   * Creates SearchForMemberViewModel if not created, otherwise returns it.
    *
-   * @return returns the SearchForMemberViewModel
+   * @return SearchForMemberViewModel
    */
   public SearchForMemberViewModel getSearchForMemberViewModel()
   {
@@ -171,9 +172,9 @@ public class ViewModelFactory
     return searchForMemberViewModel;
   }
   /**
-   * Gets ViewRatingViewModel when it needs to be accessed.
+   * Creates ViewRatingViewModel if not created, otherwise returns it.
    *
-   * @return returns the ViewRatingViewModel
+   * @return ViewRatingViewModel
    */
   public ViewRatingViewModel getViewRatingViewModel()
   {
@@ -185,9 +186,9 @@ public class ViewModelFactory
     return viewRatingViewModel;
   }
   /**
-   * Gets ViewReportedMemberViewModel when it needs to be accessed.
+   * Creates ViewReportedMemberViewModel if not created, otherwise returns it.
    *
-   * @return  returns the ViewReportedMemberViewModel
+   * @return  ViewReportedMemberViewModel
    */
   public ViewReportedMemberViewModel getViewReportedMemberViewModel()
   {
@@ -199,9 +200,9 @@ public class ViewModelFactory
     return viewReportedMemberViewModel;
   }
   /**
-   * Gets ViewReportedMemberListViewModel when it needs to be accessed.
+   * Creates ViewReportedMemberListViewModel if not created, otherwise returns it.
    *
-   * @return returns the ViewReportedMemberListViewModel
+   * @return ViewReportedMemberListViewModel
    */
   public ViewReportedMemberListViewModel getViewReportedMemberListViewModel()
   {
@@ -213,9 +214,9 @@ public class ViewModelFactory
     return viewReportedMemberListViewModel;
   }
   /**
-   * Gets MenuViewModel when it needs to be accessed.
+   * Creates MenuViewModel if not created, otherwise returns it.
    *
-   * @return returns the MenuViewModel
+   * @return MenuViewModel
    */
   public MenuViewModel getMenuViewModel()
   {
@@ -227,9 +228,9 @@ public class ViewModelFactory
     return menuViewModel;
   }
   /**
-   * Gets ViewMemberProfileViewModel when it needs to be accessed.
+   * Creates ViewMemberProfileViewModel if not created, otherwise returns it.
    *
-   * @return returns the ViewMemberProfileViewModel
+   * @return ViewMemberProfileViewModel
    */
   public ViewMemberProfileViewModel getViewMemberProfileViewModel()
   {
@@ -241,9 +242,9 @@ public class ViewModelFactory
     return viewMemberProfileViewModel;
   }
   /**
-   * Gets ViewRentalViewModel when it needs to be accessed.
+   * Creates ViewRentalViewModel if not created, otherwise returns it.
    *
-   * @return returns the ViewRentalViewModel
+   * @return ViewRentalViewModel
    */
   public ViewRentalViewModel getViewRentalViewModel()
   {
@@ -255,9 +256,9 @@ public class ViewModelFactory
     return viewRentalViewModel;
   }
   /**
-   * Gets ReportMemberViewModel when it needs to be accessed.
+   * Creates ReportMemberViewModel if not created, otherwise returns it.
    *
-   * @return returns the ReportMemberViewModel
+   * @return ReportMemberViewModel
    */
   public ReportMemberViewModel getReportMemberViewModel()
   {
@@ -269,9 +270,9 @@ public class ViewModelFactory
     return reportMemberViewModel;
   }
   /**
-   * Gets RateFeedbackViewModel when it needs to be accessed.
+   * Creates RateFeedbackViewModel if not created, otherwise returns it.
    *
-   * @return returns the RateFeedbackViewModel
+   * @return RateFeedbackViewModel
    */
   public RateFeedbackViewModel getRateFeedbackViewModel()
   {
@@ -283,9 +284,9 @@ public class ViewModelFactory
     return rateFeedbackViewModel;
   }
   /**
-   * Gets EditRentalViewModel when it needs to be accessed.
+   * Creates EditRentalViewModel if not created, otherwise returns it.
    *
-   * @return returns the EditRentalViewModel
+   * @return EditRentalViewModel
    */
   public EditRentalViewModel getEditRentalViewModel()
   {
@@ -297,9 +298,9 @@ public class ViewModelFactory
     return editRentalViewModel;
   }
   /**
-   * Gets ManageRentalsViewModel when it needs to be accessed.
+   * Creates ManageRentalsViewModel if not created, otherwise returns it.
    *
-   * @return returns the ManageRentalsViewModel
+   * @return ManageRentalsViewModel
    */
   public ManageRentalsViewModel getManageRentalsViewModel()
   {
@@ -311,9 +312,9 @@ public class ViewModelFactory
     return manageRentalsViewModel;
   }
   /**
-   * Gets EditAccountViewModel when it needs to be accessed.
+   * Creates EditAccountViewModel if not created, otherwise returns it.
    *
-   * @return returns the EditAccountViewModel
+   * @return EditAccountViewModel
    */
   public EditAccountViewModel getEditAccountViewModel()
   {
@@ -325,9 +326,9 @@ public class ViewModelFactory
     return editAccountViewModel;
   }
   /**
-   * Gets ManageAccountViewModel when it needs to be accessed..
+   * Creates ManageAccountViewModel if not created, otherwise returns it..
    *
-   * @return returns the ManageAccountViewModel
+   * @return ManageAccountViewModel
    */
   public ManageAccountViewModel getManageAccountViewModel()
   {
@@ -339,9 +340,9 @@ public class ViewModelFactory
     return manageAccountViewModel;
   }
   /**
-   * Gets SendWarningViewModel when it needs to be accessed.
+   * Creates SendWarningViewModel if not created, otherwise returns it.
    *
-   * @return returns the SendWarningViewModel
+   * @return SendWarningViewModel
    */
   public SendWarningViewModel getSendWarningViewModel()
   {
