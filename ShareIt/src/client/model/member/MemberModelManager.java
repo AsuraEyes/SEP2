@@ -30,8 +30,9 @@ public class MemberModelManager implements MemberModel
 
   /**
    * Constructor for MemberModelManager.
-   * Listens to the member related properties, fired by the Client. In this case deleteMember property
-   * updates the list of rentals stored in RentalModelManager after the deletion of a member's account
+   * Listens to the member related properties, fired by the Client.
+   * In this case deleteMember property updates the list of rentals stored
+   * in RentalModelManager after the deletion of a member's account
    * and its rentals.
    * Instantiates the lists for all reported members as new Arraylist.
    * @param client       the client

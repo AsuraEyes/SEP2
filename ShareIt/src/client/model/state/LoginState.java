@@ -1,7 +1,8 @@
 package client.model.state;
 
 /**
- * The interface of Login state.
+ * The interface of Login state. It is set everytime the user is changed in
+ * the application
  */
 public interface LoginState
 {

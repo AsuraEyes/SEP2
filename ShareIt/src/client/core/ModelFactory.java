@@ -17,7 +17,7 @@ public class ModelFactory
   private MessageModel messageModel;
   private MemberModel memberModel;
   /**
-   * Instantiates a new Model factory.
+   * ModelFactory constructor
    *
    * @param clientFactory
    */

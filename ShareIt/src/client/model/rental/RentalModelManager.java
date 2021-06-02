@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  * Rental model class that implements methods from its interface.
- * Middle point between Client and ViewModels handling member data
+ * Middle point between Client and ViewModels handling rental data
  */
 public class RentalModelManager implements RentalModel
 {
@@ -25,10 +25,15 @@ public class RentalModelManager implements RentalModel
   private final ArrayList<Rental> allMemberRentals;
 
   /**
-   * Instantiates a new Rental model manager.
+   * Constructor RentalModelManager. It loads all the rentals from the database.
+   * Listens to the rental related properties, fired by the Client where:
+   * newRental property updates the allRentals list when a rental is added to the database,
+   * deleteRental property updates the allRentals list when a rental is deleted from the database,
+   * updateRental property updates the allRentals list when a rental is updated in the database.
+   * Instantiates the lists for allReceivedMessages and allMemberRentals as new Arraylist.
    *
    * @param client       the client
-   * @param modelFactory the model factory
+   * @param modelFactory the model factory needed to access the other ModelManagers.
    */
   public RentalModelManager(Client client, ModelFactory modelFactory)
   {

@@ -9,7 +9,7 @@ public class ClientFactory
 {
   private Client client;
   /**
-   * Creates client when it needs to be accessed. Starts the client at creation.
+   * Creates a Client if not created, otherwise returns it. Starts the client at creation.
    *
    * @return Client
    */

@@ -13,7 +13,8 @@ import java.util.List;
 public interface MemberModel extends Subject
 {
   /**
-   * Middle point between Client and ViewModels handling member data
+   * Calls DataCheckMember to check if the data is valid, and if so it creates
+   * a new account by storing it in the database.
    *
    * @param username         the username
    * @param password         the password
@@ -32,7 +33,8 @@ public interface MemberModel extends Subject
       String otherInformation, String street, String streetNo,
       String postalCode, String city);
   /**
-   * Gets updated member data from ViewModel and sends it to the database.
+   * Calls DataCheckMember to check if the data is valid, and if so it updates
+   * the existing account by updating it in the database.
    *
    * @param username         the username
    * @param password         the password
@@ -51,7 +53,7 @@ public interface MemberModel extends Subject
       String otherInformation, String street, String streetNo,
       String postalCode, String city);
   /**
-   * Checks user type by getting data from ViewModel.
+   * Checks user type that currently handles the application.
    *
    * @return String type of user that is using an application
    */
@@ -85,7 +87,7 @@ public interface MemberModel extends Subject
    */
   String getMemberUsername();
   /**
-   * Sets member username from MemberModelManager.
+   * Sets member username in MemberModelManager.
    *
    * @param memberUsername Member's username
    */
@@ -104,7 +106,7 @@ public interface MemberModel extends Subject
    */
   List<Member> getMembersList();
   /**
-   * Sets user type.
+   * Sets the user type that currently uses the application.
    *
    * @param userType       Type of user
    * @param memberUsername Member's username

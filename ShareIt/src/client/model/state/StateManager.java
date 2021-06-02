@@ -16,7 +16,7 @@ public class StateManager implements Serializable
   }
 
   /**
-   * Creates stateManager when it needs to be accessed
+   * Creates a StateManager if not created, otherwise returns it
    *
    * @return returns new StateManager
    */

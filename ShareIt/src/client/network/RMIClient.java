@@ -22,9 +22,6 @@ public class RMIClient implements Client, RemoteObserver
   private final PropertyChangeSupport support;
   private RMIServer server;
 
-  /**
-   * Instantiates a new Rmi client.
-   */
   public RMIClient()
   {
     support = new PropertyChangeSupport(this);

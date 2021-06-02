@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 /**
  * Message model class that implements methods from its interface.
- * Middle point between Client and ViewModels handling member data
+ * Middle point between Client and ViewModels handling messages data
  */
 public class MessageModelManager implements MessageModel
 {
@@ -25,8 +25,8 @@ public class MessageModelManager implements MessageModel
   private ArrayList<Warning> allWarnings;
 
   /**
-   * Constructor Message model manager.
-   * Listens to the message related properties, fired by the Client.
+   * Constructor MessageModelManager.
+   * Listens to the message related properties, fired by the Client where:
    * newMessage property, is fired further to the ViewModel, and is used in the live chat function.
    * Instantiates the lists for allReceivedMessages and allWarnings as new Arraylist.
    * @param client the client

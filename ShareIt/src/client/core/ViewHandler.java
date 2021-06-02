@@ -38,7 +38,8 @@ public class ViewHandler
   private final Scene scene;
   private final ViewModelFactory viewModelFactory;
   /**
-   * Instantiates a new View handler.
+   * View handler constructor.
+   * Instantiates a new scene.
    *
    * @param stage            the stage
    * @param viewModelFactory the view model factory
