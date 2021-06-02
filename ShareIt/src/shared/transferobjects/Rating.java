@@ -2,7 +2,7 @@ package shared.transferobjects;
 
 import java.io.Serializable;
 /**
- * A class that creates and handles Ratings.
+ * A class that handles Ratings information.
  */
 public class Rating implements Serializable
 {

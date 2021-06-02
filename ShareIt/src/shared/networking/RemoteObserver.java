@@ -9,7 +9,8 @@ import java.rmi.RemoteException;
 public interface RemoteObserver extends Remote
 {
   /**
-   * Updates on every value that has been changed.
+   * Gets the name of fired property from the server together with the new value
+   *Sends it further to the model
    *
    * @param propertyName the property name
    * @param newValue     the new value
