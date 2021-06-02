@@ -31,7 +31,7 @@ public interface MemberModel extends Subject
       String otherInformation, String street, String streetNo,
       String postalCode, String city);
   /**
-   * Gets updated member data from ViewModel and sends it to the Client.
+   * Gets updated member data from ViewModel and sends it to the database.
    *
    * @param username         the username
    * @param password         the password
@@ -56,7 +56,7 @@ public interface MemberModel extends Subject
    */
   String checkUserType();
   /**
-   * Check logIn credentials by getting data from ViewModel and sends it to the Client.
+   * Check logIn credentials by getting data from ViewModel and sends it to the database.
    *
    * @param username the username
    * @param password the password
@@ -111,7 +111,7 @@ public interface MemberModel extends Subject
   void setUserType(String userType, String memberUsername);
 
   /**
-   * Checks search for member input from ViewModel and sends it to the Client .
+   * Checks search for member input from ViewModel and sends it to the database .
    *
    * @param value the value
    * @return the list of members with data matching the input from the Client
