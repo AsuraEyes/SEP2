@@ -102,7 +102,7 @@ VALUES ('This is a warning for your misconduct', '2021-05-03 15:15:38', 'adminis
        ('This is a warning for your misconduct', '2021-05-03 15:18:47', 'administrator', 1),
        ('This is a warning for your misconduct.', '2021-05-03 15:33:09', 'administrator', 3),
        ('This user is not worthy of this community.', '2021-05-03 15:38:06', 'administrator', 2),
-       ('Your account is currently being suspended and put under investigation', '2021-05-03 15:37:52', 'administrator', 5),
+       ('Your account is currently being suspended and put under investigation', '2021/05/03 15:37:52', 'administrator', 5),
        ('Your account shall be deleted in the next 24 hours, due to your repeated inability to stick to our community guidelines.', '2021-05-03 15:15:39', 'administrator', 7),
        ('Your account is currently being suspended and put under investigation', '2021-05-03 15:16:38', 'administrator', 4);
 
@@ -114,4 +114,4 @@ SELECT * FROM share_it.city;
 
 SELECT * FROM message WHERE member_to = 1 AND time IN (SELECT MAX(time) FROM message WHERE member_to = 1 GROUP BY member_from) ORDER BY time DESC ;
 
-
+SELECT time, text, username FROM share_it.message, share_it.member WHERE ((member_from = 1 AND member_to = 5)OR(member_from = 5 AND member_to = 1))AND (member.id = message.member_from) ORDER BY time;
