@@ -44,7 +44,6 @@ public class EditRentalController
    *
    * @param viewHandler      the view handler
    * @param viewModelFactory the view model factory
-   * @throws IOException
    */
   public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory)
   {
@@ -75,7 +74,6 @@ public class EditRentalController
   /**
    * If data is valid it uses a method from viewModel
    *
-   * @throws IOException
    */
   public void editButton()
   {
@@ -94,7 +92,7 @@ public class EditRentalController
         alert.setTitle("Confirmation");
         alert.setHeaderText("Rental successfully edited");
         alert.initOwner(stage);
-        alert.getDialogPane().setContentText("Click ok to return rental.");
+        alert.getDialogPane().setContentText("Click ok to return to manage account.");
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK)
@@ -134,7 +132,6 @@ public class EditRentalController
   /**
    * Changes a view if button was pressed.
    *
-   * @throws IOException
    */
   public void onGoBack()
   {

@@ -85,7 +85,7 @@ public class ViewRentalController
   {
     viewRentalViewModel.setMemberUsername();
     viewRentalViewModel.setMemberRentals();
-    if (viewRentalViewModel.usernameOfRentalProperty().getValue()
+    if (viewRentalViewModel.usernameOfRentalProperty().getValue().substring(10)
         .equals(viewRentalViewModel.getLoggedInUsername()))
     {
       viewHandler.setView(viewHandler.menu(), viewHandler.manageAccount());

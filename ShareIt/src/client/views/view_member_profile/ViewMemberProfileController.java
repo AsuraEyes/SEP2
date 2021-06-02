@@ -45,7 +45,6 @@ public class ViewMemberProfileController
    *
    * @param viewHandler      the view handler
    * @param viewModelFactory the view model factory
-   * @throws IOException the io exception
    */
   public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory)
   {
@@ -143,13 +142,11 @@ public class ViewMemberProfileController
         alert.setHeaderText("Account successfully deleted");
         alert.initOwner(stage);
         alert.getDialogPane()
-            .setContentText("Click ok to return to reported members.");
+            .setContentText("Click ok to return to welcome page.");
 
         result = alert.showAndWait();
-        if (result.get() == ButtonType.OK)
-        {
           viewHandler.setView(viewHandler.menu(), viewHandler.welcomePage());
-        }
+
       }
     }
   }

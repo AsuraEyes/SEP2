@@ -71,7 +71,7 @@ public class AddRentalViewModelTest
 
     String result = vm.onAddRentalButtonPressed("New", objects);
 
-    assertEquals("", result);
+    assertEquals("Adding successful", result);
 
   }
 
