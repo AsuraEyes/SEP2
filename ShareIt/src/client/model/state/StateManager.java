@@ -12,7 +12,7 @@ public class StateManager implements Serializable
 
   private StateManager()
   {
-    currentState = new MemberState("bob");
+    currentState = new VisitorState();
   }
 
   /**
