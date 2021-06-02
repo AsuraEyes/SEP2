@@ -15,10 +15,10 @@ import java.util.List;
  */
 public class SearchForMemberViewModel
 {
-  private final StringProperty searchField;
-  private final RentalModel rentalModel;
-  private final MemberModel memberModel;
-  private final MessageModel messageModel;
+  private StringProperty searchField;
+  private RentalModel rentalModel;
+  private MemberModel memberModel;
+  private MessageModel messageModel;
   /**
    * Instantiates StringProperties used for binding with the fields in the controller
    *

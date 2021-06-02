@@ -20,11 +20,11 @@ import java.util.List;
  */
 public class SearchForRentalViewModel
 {
-  private final RentalModel rentalModel;
-  private final MessageModel messageModel;
+  private RentalModel rentalModel;
+  private MessageModel messageModel;
 
-  private final StringProperty searchField;
-  private final StringProperty locationLabel;
+  private StringProperty searchField;
+  private StringProperty locationLabel;
   private ObservableList<String> locationsList;
   private ObservableList<String> categoriesList;
     /**

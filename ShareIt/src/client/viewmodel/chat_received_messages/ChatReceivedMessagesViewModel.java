@@ -13,8 +13,8 @@ import java.util.ArrayList;
  */
 public class ChatReceivedMessagesViewModel
 {
-  private final MemberModel memberModel;
-  private final MessageModel messageModel;
+  private MemberModel memberModel;
+  private MessageModel messageModel;
   /**
    * Instantiates StringProperties used for binding with the fields in the controller
    *

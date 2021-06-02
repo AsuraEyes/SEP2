@@ -10,7 +10,7 @@ import java.util.List;
 public class ViewReportedMemberListViewModel
 {
 
-  private final MemberModel memberModel;
+  private MemberModel memberModel;
   /**
    * Instantiates StringProperties used for binding with the fields in the controller
    *

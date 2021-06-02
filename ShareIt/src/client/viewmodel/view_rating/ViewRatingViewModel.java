@@ -13,15 +13,15 @@ import java.util.ArrayList;
  */
 public class ViewRatingViewModel
 {
-  private final MemberModel memberModel;
-  private final MessageModel messageModel;
+  private MemberModel memberModel;
+  private MessageModel messageModel;
 
-  private final StringProperty username;
-  private final StringProperty location;
-  private final StringProperty rating;
-  private final StringProperty address;
-  private final StringProperty contact;
-  private final StringProperty otherInformation;
+  private StringProperty username;
+  private StringProperty location;
+  private StringProperty rating;
+  private StringProperty address;
+  private StringProperty contact;
+  private StringProperty otherInformation;
   /**
    * Instantiates StringProperties used for binding with the fields in the controller
    *

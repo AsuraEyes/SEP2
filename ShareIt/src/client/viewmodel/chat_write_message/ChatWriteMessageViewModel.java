@@ -15,12 +15,12 @@ import java.util.ArrayList;
  */
 public class ChatWriteMessageViewModel
 {
-  private final MemberModel memberModel;
-  private final MessageModel messageModel;
+  private MemberModel memberModel;
+  private MessageModel messageModel;
 
-  private final StringProperty username;
-  private final StringProperty messages;
-  private final StringProperty inputTextChat;
+  private StringProperty username;
+  private StringProperty messages;
+  private StringProperty inputTextChat;
   /**
    * Instantiates StringProperties used for binding with the fields in the controller
    *

@@ -16,18 +16,18 @@ import java.util.ArrayList;
  */
 public class EditAccountViewModel
 {
-  private final RentalModel rentalModel;
-  private final MemberModel memberModel;
+  private RentalModel rentalModel;
+  private MemberModel memberModel;
 
-  private final StringProperty usernameField;
-  private final StringProperty passwordField;
-  private final StringProperty confirmPasswordField;
-  private final StringProperty streetField;
-  private final StringProperty streetNumberField;
-  private final StringProperty postalCodeField;
-  private final StringProperty emailField;
-  private final StringProperty telephoneNoField;
-  private final StringProperty otherInfoField;
+  private StringProperty usernameField;
+  private StringProperty passwordField;
+  private StringProperty confirmPasswordField;
+  private StringProperty streetField;
+  private StringProperty streetNumberField;
+  private StringProperty postalCodeField;
+  private StringProperty emailField;
+  private StringProperty telephoneNoField;
+  private StringProperty otherInfoField;
   private ObservableList<String> locationsList;
     /**
      * Instantiates StringProperties used for binding with the fields in the controller

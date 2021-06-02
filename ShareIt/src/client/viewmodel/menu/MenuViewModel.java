@@ -11,11 +11,11 @@ import javafx.beans.property.StringProperty;
  */
 public class MenuViewModel
 {
-  private final RentalModel rentalModel;
-  private final MemberModel memberModel;
-  private final MessageModel messageModel;
+  private RentalModel rentalModel;
+  private MemberModel memberModel;
+  private MessageModel messageModel;
 
-  private final StringProperty usernameLabel;
+  private StringProperty usernameLabel;
   /**
    * Instantiates StringProperties used for binding with the fields in the controller
    *

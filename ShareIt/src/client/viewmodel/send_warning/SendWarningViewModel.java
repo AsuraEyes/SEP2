@@ -16,12 +16,12 @@ import java.util.Date;
  */
 public class SendWarningViewModel
 {
-  private final MemberModel memberModel;
-  private final MessageModel messageModel;
+  private MemberModel memberModel;
+  private MessageModel messageModel;
 
-  private final StringProperty username;
-  private final StringProperty warnings;
-  private final StringProperty inputTextChat;
+  private StringProperty username;
+  private StringProperty warnings;
+  private StringProperty inputTextChat;
   /**
    * Instantiates StringProperties used for binding with the fields in the controller
    *

@@ -12,11 +12,11 @@ import shared.transferobjects.Rating;
  */
 public class RateFeedbackViewModel
 {
-  private final StringProperty commentaryTextArea;
-  private final SimpleStringProperty usernameLabel;
-  private final DoubleProperty ratingProperty;
-  private final MemberModel memberModel;
-  private final MessageModel messageModel;
+  private StringProperty commentaryTextArea;
+  private SimpleStringProperty usernameLabel;
+  private DoubleProperty ratingProperty;
+  private MemberModel memberModel;
+  private MessageModel messageModel;
   /**
    * Instantiates StringProperties used for binding with the fields in the controller
    *

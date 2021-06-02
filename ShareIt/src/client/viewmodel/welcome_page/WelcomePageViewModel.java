@@ -10,10 +10,10 @@ import javafx.beans.property.StringProperty;
  * A class that holds and manages data from the WelcomePage view.
  */
 public class WelcomePageViewModel {
-    private final MemberModel memberModel;
-    private final MessageModel messageModel;
+    private MemberModel memberModel;
+    private MessageModel messageModel;
 
-    private final StringProperty searchField;
+    private StringProperty searchField;
     /**
      * Instantiates StringProperties used for binding with the fields in the controller
      *

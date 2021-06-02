@@ -10,12 +10,12 @@ import shared.transferobjects.Report;
  */
 public class ViewReportedMemberViewModel
 {
-  private final RentalModel rentalModel;
-  private final MemberModel memberModel;
+  private RentalModel rentalModel;
+  private MemberModel memberModel;
 
-  private final StringProperty reportedNameLabel;
-  private final StringProperty reporterNameLabel;
-  private final StringProperty commentaryLabel;
+  private StringProperty reportedNameLabel;
+  private StringProperty reporterNameLabel;
+  private StringProperty commentaryLabel;
   /**
    * Instantiates StringProperties used for binding with the fields in the controller
    *
