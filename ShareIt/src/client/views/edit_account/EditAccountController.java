@@ -36,10 +36,9 @@ public class EditAccountController
   private Notifications notifications;
     /**
      * Init.
-     *
+     * Instantiates the notification feature
      * @param viewHandler      the view handler
      * @param viewModelFactory the view model factory
-     * @throws IOException
      */
   public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory)
   {

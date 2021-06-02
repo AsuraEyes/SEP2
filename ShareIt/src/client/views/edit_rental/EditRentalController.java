@@ -41,7 +41,8 @@ public class EditRentalController
   private Notifications notifications;
   /**
    * Init.
-   *
+   * Instantiates the notification feature.
+   * It checks which categories the rental belongs to.
    * @param viewHandler      the view handler
    * @param viewModelFactory the view model factory
    */
@@ -109,7 +110,9 @@ public class EditRentalController
     }
   }
   /**
-   * Handles adding a picutre.
+   * Handles adding different picture. It allows the member to browse available
+   * pictures from their computer by using a GUI windows browser, implemented with the
+   * help of JFileChooser.
    */
   public void editPictureButton()
   {
@@ -129,10 +132,7 @@ public class EditRentalController
       imageView.setImage(new Image("file:///" + path));
     }
   }
-  /**
-   * Changes a view if button was pressed.
-   *
-   */
+
   public void onGoBack()
   {
     viewHandler.setView(viewHandler.menu(), viewHandler.manageRentals());
@@ -169,7 +169,7 @@ public class EditRentalController
     return true;
   }
   /**
-   * Checks if categories were changed
+   * Checks which categories are selected for the rental
    */
   private void checkCategories()
   {

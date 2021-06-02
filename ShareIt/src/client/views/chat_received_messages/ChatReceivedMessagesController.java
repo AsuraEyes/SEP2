@@ -21,8 +21,8 @@ public class ChatReceivedMessagesController
   private ViewHandler viewHandler;
   private ChatReceivedMessagesViewModel chatReceivedMessagesViewModel;
   /**
-   * Init. (?)
-   *
+   * Init.
+   * loads all the messages and warnings
    * @param viewHandler      the view handler
    * @param viewModelFactory the view model factory
    */
@@ -35,7 +35,9 @@ public class ChatReceivedMessagesController
     displayWarnings();
   }
   /**
-   * Displays messages.
+   * Loads all the member's received messages and places them individually in a
+   * separate Vbox. The Vbox's are created for each message and display with the
+   * help of Label and TextFlow the required content.
    */
   public void displayMessages()
   {
@@ -71,7 +73,9 @@ public class ChatReceivedMessagesController
     }
   }
   /**
-   * Displays warnings.
+   * Loads all the member's received warnings and places them individually in a
+   * separate Vbox. The Vbox's are created for each warning and display with the
+   * help of Label and TextFlow the needed content.
    */
   public void displayWarnings()
   {

@@ -28,7 +28,7 @@ public class LogInController
 
   /**
    * Init.
-   *
+   * Instantiates the notification feature.
    * @param viewHandler      the view handler
    * @param viewModelFactory the view model factory
    */
@@ -48,9 +48,7 @@ public class LogInController
     passwordField.clear();
   }
   /**
-   * If data is valid it uses a method from viewModel
-   *
-   * @throws IOException
+   * Checks if data is valid and sets user type accordingly
    */
   public void logInButton()
   {
@@ -59,8 +57,6 @@ public class LogInController
         passwordField))
     {
       String memberUsername = logInViewModel.onLogInButton();
-      System.out.println(memberUsername);
-
       if (memberUsername != null)
       {
         if (memberUsername.equals("administrator"))
@@ -81,22 +77,12 @@ public class LogInController
       }
     }
   }
-  /**
-   * Changes view if button was pressed
-   *
-   * @throws IOException
-   * @throws SQLException
-   */
+
   public void createNewAccount()
   {
     viewHandler.setView(viewHandler.menu(), viewHandler.createAccount());
   }
-  /**
-   * Check if field is not empty.
-   *
-   * @param textField field that is being checked
-   * @return returns true if data is valid, false if not
-   */
+
   public boolean checkFieldNotEmpty(TextField textField)
   {
     if (textField.textProperty().getValue() == null || textField.textProperty()
@@ -107,12 +93,7 @@ public class LogInController
     }
     return true;
   }
-  /**
-   * Check if password field is not empty.
-   *
-   * @param textField password feld that is being checked
-   * @return returns true if data is valid, false if not
-   */
+
   public boolean checkPasswordFieldNotEmpty(CustomPasswordField textField)
   {
     if (textField.textProperty().getValue() == null || textField.textProperty()
