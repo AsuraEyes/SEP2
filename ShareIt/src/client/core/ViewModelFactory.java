@@ -22,7 +22,7 @@ import client.viewmodel.view_reported_member.ViewReportedMemberViewModel;
 import client.viewmodel.view_reported_member_list.ViewReportedMemberListViewModel;
 import client.viewmodel.welcome_page.WelcomePageViewModel;
 /**
- * A class that creates a ViewModel object without having to specify the exact class of the object,.
+ * A class that creates a ViewModel object without having to specify the exact class of the object.
  */
 public class ViewModelFactory
 {
@@ -59,7 +59,7 @@ public class ViewModelFactory
     this.modelFactory = modelFactory;
   }
   /**
-   * Gets LogInViewModel when it needs to be accessed..
+   * Gets LogInViewModel when it needs to be accessed.
    *
    * @return returns the LogInViewModel
    */
@@ -72,7 +72,7 @@ public class ViewModelFactory
     return logInViewModel;
   }
   /**
-   * Gets ChatReceivedMessagesViewModel when it needs to be accessed..
+   * Gets ChatReceivedMessagesViewModel when it needs to be accessed.
    *
    * @return returns the ChatReceivedMessagesViewModel
    */
@@ -114,7 +114,7 @@ public class ViewModelFactory
     return addRentalViewModel;
   }
   /**
-   * Gets WelcomePageViewModel when it needs to be accessed..
+   * Gets WelcomePageViewModel when it needs to be accessed.
    *
    * @return returns the WelcomePageViewModel
    */
@@ -142,7 +142,7 @@ public class ViewModelFactory
     return createAccountViewModel;
   }
   /**
-   * Gets SearchForRentalViewModel
+   * Gets SearchForRentalViewModel when it needs to be accessed.
    *
    * @return returns the SearchForRentalViewModel
    */
@@ -269,7 +269,7 @@ public class ViewModelFactory
     return reportMemberViewModel;
   }
   /**
-   * Gets RateFeedbackViewModel when it needs to be accessed..
+   * Gets RateFeedbackViewModel when it needs to be accessed.
    *
    * @return returns the RateFeedbackViewModel
    */
@@ -297,7 +297,7 @@ public class ViewModelFactory
     return editRentalViewModel;
   }
   /**
-   * Gets ManageRentalsViewModel when it needs to be accessed..
+   * Gets ManageRentalsViewModel when it needs to be accessed.
    *
    * @return returns the ManageRentalsViewModel
    */

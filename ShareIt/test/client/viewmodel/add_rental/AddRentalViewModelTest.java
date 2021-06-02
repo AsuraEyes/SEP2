@@ -46,8 +46,7 @@ public class AddRentalViewModelTest
     frame.add(jfxPanel);
   }
 
-  @Test public void addValidRental()
-  {
+  @Test public void addValidRental() {
     StringProperty nameField = new SimpleStringProperty();
     StringProperty descriptionField = new SimpleStringProperty();
     StringProperty priceField = new SimpleStringProperty();
@@ -60,7 +59,7 @@ public class AddRentalViewModelTest
     vm.getOtherInfoField().bind(otherInfoField);
     vm.imagePropertyProperty().bind(imageProperty);
 
-    nameField.setValue("new drill");
+    nameField.setValue("new drillx");
     descriptionField.setValue("description");
     priceField.setValue("15");
     otherInfoField.setValue("otherinfo");
@@ -72,7 +71,7 @@ public class AddRentalViewModelTest
 
     String result = vm.onAddRentalButtonPressed("New", objects);
 
-    assertEquals("Adding successful", result);
+    assertEquals("", result);
 
   }
 

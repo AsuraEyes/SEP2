@@ -14,10 +14,19 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * RMIServerImpl class that implements methods from its interface.
+ */
 public class RMIServerImpl implements RMIServer
 {
   private final ServerModelManager serverModelManager;
 
+  /**
+   * Instantiates a new Rmi server.
+   *
+   * @param serverModelManager the server model manager
+   * @throws RemoteException
+   */
   public RMIServerImpl(ServerModelManager serverModelManager)
       throws RemoteException
   {

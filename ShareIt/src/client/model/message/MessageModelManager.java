@@ -12,6 +12,9 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 
+/**
+ * Message model class that implements methods from its interface.
+ */
 public class MessageModelManager implements MessageModel
 {
   private PropertyChangeSupport support;
@@ -20,6 +23,11 @@ public class MessageModelManager implements MessageModel
   private ArrayList<Message> allReceivedMessages;
   private ArrayList<Warning> allWarnings;
 
+  /**
+   * Instantiates a new Message model manager.
+   *
+   * @param client the client
+   */
   public MessageModelManager(Client client)
   {
     this.client = client;

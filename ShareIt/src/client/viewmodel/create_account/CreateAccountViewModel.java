@@ -30,7 +30,8 @@ public class CreateAccountViewModel
     /**
      * Instantiates a new CreateAccountViewModel.
      *
-     * @param model The model that this ViewModel uses
+     * @param rentalModel The model that this ViewModel uses
+     * @param memberModel The model that this ViewModel uses
      */
   public CreateAccountViewModel(RentalModel rentalModel,
       MemberModel memberModel)
@@ -133,7 +134,6 @@ public class CreateAccountViewModel
      *
      * @param selectedCity The selected city
      * @return returns new Member object
-     * @throws IOException
      */
   public String onCreateButtonPressed(String selectedCity)
   {

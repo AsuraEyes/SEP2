@@ -17,6 +17,10 @@ import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * ServerModelImpl class that implements methods from its interface.
+ */
 public class ServerModelImpl implements ServerModelManager
 {
   private PropertyChangeSupport support;
@@ -26,6 +30,9 @@ public class ServerModelImpl implements ServerModelManager
   private DataCheckRating dataCheckRating;
   private DataCheckReport dataCheckReport;
 
+  /**
+   * Instantiates a new Server model.
+   */
   public ServerModelImpl()
   {
     support = new PropertyChangeSupport(this);

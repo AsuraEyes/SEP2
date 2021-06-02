@@ -19,6 +19,9 @@ import java.io.IOException;
 import java.rmi.AlreadyBoundException;
 import java.sql.SQLException;
 
+/**
+ * A class that is starting the server
+ */
 public class RunServer
 {
   public static void main(String[] args)
@@ -28,7 +31,7 @@ public class RunServer
     String maggiePassword = "SQLdatabaze";
     String bartoszPassword = "hehe2137";
     String claudiuPassword = "ohno...anyway";
-    String currentPassword = maggiePassword;
+    String currentPassword = bartoszPassword;
     CityDAOImpl.getInstance().setPassword(currentPassword);
     RentalDAOImpl.getInstance().setPassword(currentPassword);
     CategoryDAOImpl.getInstance().setPassword(currentPassword);

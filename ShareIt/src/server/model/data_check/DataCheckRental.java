@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
- * Class that checks data before running an instance(Rental data in this case)
+ * Class that checks data from ServerModelManager before running an instance(Rental data in this case)
  */
 public class DataCheckRental
 {

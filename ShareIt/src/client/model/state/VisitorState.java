@@ -2,6 +2,9 @@ package client.model.state;
 
 import java.io.Serializable;
 
+/**
+ * A class representing Visitor state.
+ */
 public class VisitorState implements LoginState, Serializable
 {
   private final String USERTYPE = "Visitor";

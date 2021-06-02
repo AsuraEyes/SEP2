@@ -56,7 +56,6 @@ class CreateAccountViewModelTest {
         StringProperty telephoneNoField = new SimpleStringProperty();
         StringProperty otherInfoField = new SimpleStringProperty();
 
-
         vm.getUsernameField().bind(usernameField);
         vm.getPasswordField().bind(passwordField);
         vm.getConfirmPasswordField().bind(confirmPasswordField);
@@ -67,7 +66,7 @@ class CreateAccountViewModelTest {
         vm.getTelephoneNoField().bind(telephoneNoField);
         vm.getOtherInfoField().bind(otherInfoField);
 
-        usernameField.setValue("brandNewUsername");
+        usernameField.setValue("brandNexwUsxername");
         passwordField.setValue("password");
         confirmPasswordField.setValue("password");
         streetField.setValue("Sundvej");

@@ -10,6 +10,9 @@ import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Rental model class that implements methods from its interface.
+ */
 public class RentalModelManager implements RentalModel
 {
   private PropertyChangeSupport support;
@@ -20,6 +23,12 @@ public class RentalModelManager implements RentalModel
   private ArrayList<Rental> allRentals;
   private ArrayList<Rental> allMemberRentals;
 
+  /**
+   * Instantiates a new Rental model manager.
+   *
+   * @param client       the client
+   * @param modelFactory the model factory
+   */
   public RentalModelManager(Client client, ModelFactory modelFactory)
   {
     this.modelFactory = modelFactory;
@@ -58,6 +67,11 @@ public class RentalModelManager implements RentalModel
     }
   }
 
+  /**
+   * On new rental.
+   *
+   * @param evt the evt
+   */
   public void onNewRental(PropertyChangeEvent evt)
   {
     allRentals.add((Rental) evt.getNewValue());

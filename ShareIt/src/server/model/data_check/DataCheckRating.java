@@ -3,7 +3,7 @@ package server.model.data_check;
 import server.model.database.rating.RatingDAOImpl;
 
 /**
- * Class that checks data before running an instance(Rating data in this case)
+ * Class that checks data from ServerModelManager before running an instance(Rating data in this case)
  */
 public class DataCheckRating
 {

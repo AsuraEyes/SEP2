@@ -6,6 +6,9 @@ import shared.util.Subject;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * An interface of Client where it takes data from Models and sends them to the RMIServer
+ */
 public interface Client extends Subject
 {
   void startClient();

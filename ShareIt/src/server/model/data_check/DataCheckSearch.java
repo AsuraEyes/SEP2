@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Class that checks data before running an instance(Search data in this case)
+ * Class that checks data from ServerModelManager before running an instance(Search data in this case)
  */
 public class DataCheckSearch
 {

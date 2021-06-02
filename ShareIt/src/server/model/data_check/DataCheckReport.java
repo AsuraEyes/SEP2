@@ -5,7 +5,7 @@ import server.model.database.report.ReportDAOImpl;
 import java.sql.SQLException;
 
 /**
- * Class that checks data before running an instance(Report data in this case)
+ * Class that checks data from ServerModelManager before running an instance(Report data in this case)
  */
 public class DataCheckReport
 {

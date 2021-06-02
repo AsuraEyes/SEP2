@@ -5,7 +5,9 @@ import shared.util.Subject;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * An interface of ServerModelManager where it takes data from RMIServer and sends them to the DataCheck classes
+ */
 public interface ServerModelManager extends Subject
 {
   String checkMemberData(String username, String password,

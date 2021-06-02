@@ -31,7 +31,8 @@ public class AddRentalViewModel
     /**
      * Instantiates a new AddRentalViewModel.
      *
-     * @param model The model that this ViewModel uses
+     * @param rentalModel The model that this ViewModel uses
+     * @param memberModel The model that this ViewModel uses
      */
   public AddRentalViewModel(RentalModel rentalModel, MemberModel memberModel)
   {
@@ -94,7 +95,6 @@ public class AddRentalViewModel
      * @param selectedState    The selected state
      * @param selectedCategory The selected category
      * @return returns new Rental object
-     * @throws IOException
      */
   public String onAddRentalButtonPressed(Object selectedState,
       ObservableList<String> selectedCategory)

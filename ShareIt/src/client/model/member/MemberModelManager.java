@@ -15,6 +15,9 @@ import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Member model class that implements methods from its interface.
+ */
 public class MemberModelManager implements MemberModel
 {
   private PropertyChangeSupport support;
@@ -24,6 +27,12 @@ public class MemberModelManager implements MemberModel
   private Report selectedReport;
   private ModelFactory modelFactory;
 
+  /**
+   * Instantiates a new Member model manager.
+   *
+   * @param client       the client
+   * @param modelFactory the model factory
+   */
   public MemberModelManager(Client client, ModelFactory modelFactory)
   {
     this.modelFactory = modelFactory;

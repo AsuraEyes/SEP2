@@ -74,12 +74,7 @@ public class AddRentalController {
   /**
    * If data is valid it uses a method from viewModel
    *
-   * @throws IOException
    */
-  public void addRentalButton() throws IOException {
-    boolean ok = true;
-    if(checkField("Name", nameField) && checkField("Description",descriptionField) && checkField("Price", priceField) && checkPicture(pictureView)){
-      String message = addRentalViewModel.onAddRentalButtonPressed(stateBox.getValue(), categoryBox.getCheckModel().getCheckedItems());
   public void addRentalButton()
   {
     if (checkField("Name", nameField) && checkField("Description",

@@ -14,11 +14,17 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * RMIClient class that implements methods from its interface.
+ */
 public class RMIClient implements Client, RemoteObserver
 {
   private PropertyChangeSupport support;
   private RMIServer server;
 
+  /**
+   * Instantiates a new Rmi client.
+   */
   public RMIClient()
   {
     support = new PropertyChangeSupport(this);

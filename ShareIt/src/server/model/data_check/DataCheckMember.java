@@ -5,7 +5,7 @@ import server.model.database.member.MemberDAOImpl;
 import java.sql.SQLException;
 
 /**
- * Class that checks data before running an instance(Member data in this case)
+ * Class that checks data from ServerModelManager before running an instance(Member data in this case)
  */
 public class DataCheckMember
 {

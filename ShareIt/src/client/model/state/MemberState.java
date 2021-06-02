@@ -2,11 +2,19 @@ package client.model.state;
 
 import java.io.Serializable;
 
+/**
+ * A class representing Member state.
+ */
 public class MemberState implements LoginState, Serializable
 {
   private final String USERTYPE = "Member";
   private String username;
 
+  /**
+   * Instantiates a new Member state.
+   *
+   * @param username the username
+   */
   public MemberState(String username)
   {
     this.username = username;
