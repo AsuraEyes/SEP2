@@ -503,6 +503,5 @@ public class RMIClient implements Client, RemoteObserver
     {
       support.firePropertyChange("updateRental", 0, newValue);
     }
-
   }
 }

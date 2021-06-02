@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 /**
  * The interface of Message model.
+ * Middle point between Client and ViewModels handling member data
  */
 public interface MessageModel extends Subject
 {

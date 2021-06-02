@@ -8,6 +8,7 @@ import java.util.List;
 
 /**
  * The interface of Member model.
+ * Middle point between Client and ViewModels handling member data
  */
 public interface MemberModel extends Subject
 {
