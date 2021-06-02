@@ -10,11 +10,6 @@ public class MemberState implements LoginState, Serializable
   private final String USERTYPE = "Member";
   private final String username;
 
-  /**
-   * Instantiates a new Member state.
-   *
-   * @param username the username
-   */
   public MemberState(String username)
   {
     this.username = username;

@@ -3,7 +3,7 @@ package shared.transferobjects;
 import java.io.Serializable;
 
 /**
- * A class that creates and handles Reports.
+ * A class that handles Reports information.
  */
 public class Report implements Serializable
 {

@@ -29,10 +29,14 @@ public class MemberModelManager implements MemberModel
   private final ModelFactory modelFactory;
 
   /**
-   * Instantiates a new Member model manager.
-   *
+   * Constructor for MemberModelManager.
+   * Listens to the member related properties, fired by the Client.
+   * In this case deleteMember property updates the list of rentals stored
+   * in RentalModelManager after the deletion of a member's account
+   * and its rentals.
+   * Instantiates the lists for all reported members as new Arraylist.
    * @param client       the client
-   * @param modelFactory the model factory
+   * @param modelFactory the model factory needed to access the other ModelManagers.
    */
   public MemberModelManager(Client client, ModelFactory modelFactory)
   {

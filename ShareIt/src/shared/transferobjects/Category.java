@@ -3,7 +3,7 @@ package shared.transferobjects;
 import java.io.Serializable;
 
 /**
- * A class that creates and handles Categories.
+ * A class that handles Categories information.
  */
 public class Category implements Serializable
 {
@@ -40,7 +40,7 @@ public class Category implements Serializable
   }
 
   /**
-   * Gets category name as a string.
+   * Gets category name as a String.
    * @return returns name of the Category
    */
   public String toString()

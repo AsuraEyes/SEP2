@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 /**
  * An interface of RMIServer where it takes data from Client and sends them to the ServerModelManager
+ * All the methods throw RemoteException so that it is not thrown in other classes
  */
 public interface RMIServer extends Remote
 {

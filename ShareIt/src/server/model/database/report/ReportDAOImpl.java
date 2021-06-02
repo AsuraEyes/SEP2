@@ -11,7 +11,7 @@ import java.util.List;
  * Class that implements methods from its interface and provides access to a database(Report in this case)
  *
  */
-public class ReportDAOImpl implements ReportDAO
+public class ReportDAOImpl
 {
   private static ReportDAOImpl instance;
   private String password;
@@ -56,7 +56,7 @@ public class ReportDAOImpl implements ReportDAO
    * @return returns new object of Report with data which was provided by user while filling a report
    * @throws SQLException
    */
-  @Override public Report create(String feedback, String username1,
+  public Report create(String feedback, String username1,
       String username2) throws SQLException
   {
     try (Connection connection = getConnection())
@@ -84,7 +84,7 @@ public class ReportDAOImpl implements ReportDAO
    * @return returns Report object that has usernames matching
    * @throws SQLException
    */
-  @Override public Report getReport(String fromUsername, String toUsername)
+  public Report getReport(String fromUsername, String toUsername)
   {
     try (Connection connection = getConnection())
     {
@@ -112,7 +112,7 @@ public class ReportDAOImpl implements ReportDAO
    * Updates report feedback whenever user decides to change it by connecting to the database and update rating table based on given data
    * @param report new value of report
    */
-  @Override public void updateReport(Report report)
+  public void updateReport(Report report)
   {
     try (Connection connection = getConnection())
     {

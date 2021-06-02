@@ -30,9 +30,6 @@ public class ServerModelImpl implements ServerModelManager
   private final DataCheckRating dataCheckRating;
   private final DataCheckReport dataCheckReport;
 
-  /**
-   * Instantiates a new Server model.
-   */
   public ServerModelImpl()
   {
     support = new PropertyChangeSupport(this);

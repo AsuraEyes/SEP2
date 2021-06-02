@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Class that implements methods from its interface and provides access to a database(Rental category in this case)
  *
  */
-public class RentalCategoryDAOImpl implements RentalCategoryDAO
+public class RentalCategoryDAOImpl
 {
   private static RentalCategoryDAOImpl instance;
   private String password;
@@ -49,7 +49,7 @@ public class RentalCategoryDAOImpl implements RentalCategoryDAO
      * @return returns a list of all selected categories that were chosen during creation of new Rental offer
      * @throws SQLException
      */
-  @Override public ArrayList<String> getSelectedCategoriesOnRental(int rentalId)
+  public ArrayList<String> getSelectedCategoriesOnRental(int rentalId)
       throws SQLException
   {
     try (Connection connection = getConnection())

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * An interface of Client where it takes data from Models and sends them to the RMIServer
+ * An interface of Client that transfers data between RMIServer and Models
  */
 public interface Client extends Subject
 {

@@ -3,7 +3,7 @@ package shared.transferobjects;
 import java.io.Serializable;
 import java.util.ArrayList;
 /**
- * A class that creates and handles Rentals.
+ * A class that handles Rentals information.
  */
 public class Rental implements Serializable
 {

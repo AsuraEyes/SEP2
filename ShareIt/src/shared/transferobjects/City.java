@@ -3,7 +3,7 @@ package shared.transferobjects;
 import java.io.Serializable;
 
 /**
- * A class that creates and handles Cities.
+ * A class that handles Cities information.
  */
 public class City implements Serializable
 {
@@ -36,7 +36,7 @@ public class City implements Serializable
     this.name = name;
   }
   /**
-   * Gets city name as a string.
+   * Gets city name as a String.
    * @return returns name of the City
    */
   public String toString()

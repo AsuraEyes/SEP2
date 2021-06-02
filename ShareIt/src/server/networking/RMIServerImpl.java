@@ -16,17 +16,14 @@ import java.util.List;
 
 /**
  * RMIServerImpl class that implements methods from its interface.
+ * It communicates directly with the Client, by registering them individually,
+ * and sending them the property names and newValues of the observer.
+ * It also transfers data between Client and ServerModelImpl.
  */
 public class RMIServerImpl implements RMIServer
 {
   private final ServerModelManager serverModelManager;
 
-  /**
-   * Instantiates a new Rmi server.
-   *
-   * @param serverModelManager the server model manager
-   * @throws RemoteException
-   */
   public RMIServerImpl(ServerModelManager serverModelManager)
       throws RemoteException
   {

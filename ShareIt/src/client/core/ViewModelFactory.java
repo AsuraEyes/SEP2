@@ -51,7 +51,7 @@ public class ViewModelFactory
   private ManageAccountViewModel manageAccountViewModel;
   private SendWarningViewModel sendWarningViewModel;
   /**
-   * Instantiates a new ModelFactory.
+   * ViewModelFactory constructor
    *
    * @param modelFactory the model factory
    */

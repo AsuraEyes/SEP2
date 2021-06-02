@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Class that implements methods from its interface and provides access to a database(Rental in this case)
  */
-public class RentalDAOImpl implements RentalDAO
+public class RentalDAOImpl
 {
   private static RentalDAOImpl instance;
   private String password;
@@ -49,6 +49,7 @@ public class RentalDAOImpl implements RentalDAO
 
   private Connection getConnection() throws SQLException
   {
+    System.out.println("password: "+password);
     return DriverManager
         .getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres",
             password);
@@ -66,7 +67,7 @@ public class RentalDAOImpl implements RentalDAO
    * @return returns new object of Rental with data which was provided by user while creating new rental offer
    * @throws SQLException
    */
-  @Override public Rental create(String name, String pictureLink,
+  public Rental create(String name, String pictureLink,
       String description, int price, String otherInformation, String stateName,
       String username, ArrayList<String> selectedCategories) throws SQLException
   {
@@ -144,7 +145,7 @@ public class RentalDAOImpl implements RentalDAO
    * @return returns a list of rentals where values input matches with rentals values
    * @throws SQLException
    */
-  @Override public List<Rental> readBySearchAndFilter(String search,
+  public List<Rental> readBySearchAndFilter(String search,
       String city, ArrayList<String> categories) throws SQLException
   {
     try (Connection connection = getConnection())
@@ -278,7 +279,7 @@ public class RentalDAOImpl implements RentalDAO
    * @return
    * @throws SQLException
    */
-  @Override public Rental getRentalById(int id)
+  public Rental getRentalById(int id)
   {
     try (Connection connection = getConnection())
     {
@@ -373,7 +374,7 @@ public class RentalDAOImpl implements RentalDAO
    * @param selectedCategories categories of the rental chosen from the list of possible categories by user while creating new rental offer
    * @throws SQLException
    */
-  @Override public void update(String name, String pictureLink,
+  public void update(String name, String pictureLink,
       String description, int price, String otherInformation, String stateName,
       int rentalId, ArrayList<String> selectedCategories) throws SQLException
   {
@@ -416,7 +417,7 @@ public class RentalDAOImpl implements RentalDAO
    * @param rental rental object that will be deleted
    * @return returns true if rental gets deleted from the database
    */
-  @Override public boolean delete(Rental rental)
+  public boolean delete(Rental rental)
   {
     try (Connection connection = getConnection())
     {
@@ -438,7 +439,7 @@ public class RentalDAOImpl implements RentalDAO
    * @return returns the next available ID
    * @throws SQLException
    */
-  @Override public int getNextAvailableId() throws SQLException
+  public int getNextAvailableId() throws SQLException
   {
     try (Connection connection = getConnection())
     {
@@ -463,7 +464,7 @@ public class RentalDAOImpl implements RentalDAO
    * @return returns a list of all rentals that are stored in the database
    * @throws SQLException
    */
-  @Override public List<Rental> readRentals()
+  public List<Rental> readRentals()
   {
     try (Connection connection = getConnection())
     {
@@ -505,7 +506,7 @@ public class RentalDAOImpl implements RentalDAO
    * Gets last rental by connecting to the database and checking the rental that is matched with id which is taken from getNextAvailableId method subtracted by 1 to get id of the last added rental
    * @return returns the last rental
    */
-  @Override public Rental getLastRental()
+  public Rental getLastRental()
   {
     try (Connection connection = getConnection())
     {
@@ -548,7 +549,7 @@ public class RentalDAOImpl implements RentalDAO
    * @param username username that all rentals will be connected with
    * @return list of rentals that are matching with members username
    */
-  @Override public ArrayList<Integer> getRentalsOfMemberList(String username)
+  public ArrayList<Integer> getRentalsOfMemberList(String username)
   {
     try (Connection connection = getConnection())
     {

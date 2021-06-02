@@ -8,11 +8,13 @@ import java.util.List;
 
 /**
  * The interface of Member model.
+ * Middle point between Client and ViewModels handling member data
  */
 public interface MemberModel extends Subject
 {
   /**
-   * Middle point between Client and ViewModels handling member data
+   * Calls DataCheckMember to check if the data is valid, and if so it creates
+   * a new account by storing it in the database.
    *
    * @param username         the username
    * @param password         the password
@@ -31,7 +33,8 @@ public interface MemberModel extends Subject
       String otherInformation, String street, String streetNo,
       String postalCode, String city);
   /**
-   * Gets updated member data from ViewModel and sends it to the Client.
+   * Calls DataCheckMember to check if the data is valid, and if so it updates
+   * the existing account by updating it in the database.
    *
    * @param username         the username
    * @param password         the password
@@ -50,13 +53,13 @@ public interface MemberModel extends Subject
       String otherInformation, String street, String streetNo,
       String postalCode, String city);
   /**
-   * Checks user type by getting data from ViewModel.
+   * Checks user type that currently handles the application.
    *
    * @return String type of user that is using an application
    */
   String checkUserType();
   /**
-   * Check logIn credentials by getting data from ViewModel and sends it to the Client.
+   * Check logIn credentials by getting data from ViewModel and sends it to the database.
    *
    * @param username the username
    * @param password the password
@@ -84,7 +87,7 @@ public interface MemberModel extends Subject
    */
   String getMemberUsername();
   /**
-   * Sets member username from MemberModelManager.
+   * Sets member username in MemberModelManager.
    *
    * @param memberUsername Member's username
    */
@@ -103,7 +106,7 @@ public interface MemberModel extends Subject
    */
   List<Member> getMembersList();
   /**
-   * Sets user type.
+   * Sets the user type that currently uses the application.
    *
    * @param userType       Type of user
    * @param memberUsername Member's username
@@ -111,7 +114,7 @@ public interface MemberModel extends Subject
   void setUserType(String userType, String memberUsername);
 
   /**
-   * Checks search for member input from ViewModel and sends it to the Client .
+   * Checks search for member input from ViewModel and sends it to the database .
    *
    * @param value the value
    * @return the list of members with data matching the input from the Client

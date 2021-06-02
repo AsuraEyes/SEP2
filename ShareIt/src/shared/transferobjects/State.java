@@ -3,7 +3,7 @@ package shared.transferobjects;
 import java.io.Serializable;
 
 /**
- * A class that creates and handles States.
+ * A class that handles States information.
  */
 public class State implements Serializable
 {

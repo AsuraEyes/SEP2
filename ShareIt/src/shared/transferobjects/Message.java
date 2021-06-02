@@ -5,7 +5,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 /**
- * A class that creates and handles Messages.
+ * A class that handles Messages information.
  */
 public class Message implements Serializable
 {
@@ -124,7 +124,7 @@ public class Message implements Serializable
   }
   /**
    * Gets message and all its content as a String.
-   * @return returns information about who sent a message(username) and its content if time was set it is returned as well.
+   * @return returns information about who sent a message (username) and its content, if time was set it is returned as well.
    */
   public String toString()
   {
