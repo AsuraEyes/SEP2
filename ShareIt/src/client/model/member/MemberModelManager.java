@@ -17,6 +17,7 @@ import java.util.List;
 
 /**
  * Member model class that implements methods from its interface.
+ * Middle point between Client and ViewModels handling member data
  */
 public class MemberModelManager implements MemberModel
 {
