@@ -17,7 +17,6 @@ import shared.networking.RMIServer;
 
 import java.io.IOException;
 import java.rmi.AlreadyBoundException;
-import java.sql.SQLException;
 
 /**
  * A class that is starting the server
@@ -25,13 +24,13 @@ import java.sql.SQLException;
 public class RunServer
 {
   public static void main(String[] args)
-          throws IOException, AlreadyBoundException{
+          throws IOException, AlreadyBoundException {
     RMIServer ss = new RMIServerImpl(new ServerModelImpl());
     String timothyPassword = "CoDex21";
     String maggiePassword = "SQLdatabaze";
     String bartoszPassword = "hehe2137";
     String claudiuPassword = "ohno...anyway";
-    String currentPassword = maggiePassword;
+    String currentPassword = timothyPassword;
     CityDAOImpl.getInstance().setPassword(currentPassword);
     RentalDAOImpl.getInstance().setPassword(currentPassword);
     CategoryDAOImpl.getInstance().setPassword(currentPassword);
