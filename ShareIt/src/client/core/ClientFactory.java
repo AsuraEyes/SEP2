@@ -3,15 +3,15 @@ package client.core;
 import client.network.Client;
 import client.network.RMIClient;
 /**
- * A class that creates a client object without having to specify the exact class of the object,
+ * A class that creates a client object, uses factory pattern.
  */
 public class ClientFactory
 {
   private Client client;
   /**
-   * Creates client when it needs to be accessed.
+   * Creates client when it needs to be accessed. Starts the client at creation.
    *
-   * @return returns Client
+   * @return Client
    */
   public Client getClient()
   {
