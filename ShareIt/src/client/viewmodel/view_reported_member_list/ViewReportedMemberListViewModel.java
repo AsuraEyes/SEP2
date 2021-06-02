@@ -12,9 +12,9 @@ public class ViewReportedMemberListViewModel
 
   private final MemberModel memberModel;
   /**
-   * Instantiates a new ViewReportedMemberListViewModel.
+   * Instantiates StringProperties used for binding with the fields in the controller
    *
-   * @param model The model that this ViewModel uses
+   * @param memberModel The model that this ViewModel uses
    */
   public ViewReportedMemberListViewModel(MemberModel memberModel)
   {
@@ -22,11 +22,7 @@ public class ViewReportedMemberListViewModel
     this.memberModel = memberModel;
 
   }
-  /**
-   * Gets report list.
-   *
-   * @return returns list all reports
-   */
+
   public List<Report> getReportList()
   {
     return memberModel.getReportList();

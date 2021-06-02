@@ -27,9 +27,10 @@ public class ManageRentalsViewModel
   private final StringProperty categoryOfRental;
   private final ObjectProperty<Image> imageProperty;
   /**
-   * Instantiates a new ManageRentalsViewModel.
+   * Instantiates StringProperties used for binding with the fields in the controller
    *
-   * @param shareItModel The model that this ViewModel uses
+   * @param rentalModel The model that this ViewModel uses
+   * @param memberModel The model that this ViewModel uses
    */
   public ManageRentalsViewModel(RentalModel rentalModel,
       MemberModel memberModel)
@@ -48,7 +49,8 @@ public class ManageRentalsViewModel
     rentalModel.addListener("selectedRental", this::selectedRental);
   }
     /**
-     *
+     * The method listens for events with selectedRental propertyName and
+     * rental related data is sent to the controller through binding.
      * @param evt
      */
   private void selectedRental(PropertyChangeEvent evt)
@@ -77,81 +79,47 @@ public class ManageRentalsViewModel
       }
     });
   }
-    /**
-     * Checks rental data before deleting.
-     *
-     * @return  deletes if process was successful
-     */
+
   public boolean deleteRental()
   {
     return rentalModel.deleteRental(rentalModel.getSelectedRental());
   }
-    /**
-     * Gets nameOfRental.
-     *
-     * @return returns nameOfRental
-     */
+
   public StringProperty nameOfRentalProperty()
   {
     return nameOfRental;
   }
-    /**
-     * Gets descriptionOfRental.
-     *
-     * @return returns descriptionOfRental
-     */
+
   public StringProperty descriptionOfRentalProperty()
   {
     return descriptionOfRental;
   }
-    /**
-     * Gets stateOfRental.
-     *
-     * @return returns stateOfRental
-     */
+
   public StringProperty stateOfRentalProperty()
   {
     return stateOfRental;
   }
-    /**
-     * Gets priceOfRental.
-     *
-     * @return returns nameOfRental
-     */
+
   public StringProperty priceOfRentalProperty()
   {
     return priceOfRental;
   }
-    /**
-     * Gets otherInformationOfRental.
-     *
-     * @return returns otherInformationOfRental
-     */
+
   public StringProperty otherInformationOfRentalProperty()
   {
     return otherInformationOfRental;
   }
-    /**
-     * Category of rental property string property.
-     *
-     * @return the string property
-     */
+
   public StringProperty categoryOfRentalProperty()
   {
     return categoryOfRental;
   }
-    /**
-     * Gets selected rental.
-     */
+
   public void getSelectedRental()
   {
     rentalModel.sendSelectedRental(rentalModel.getSelectedRental());
   }
-    /**
-     * Image property property object property.
-     *
-     * @return the object property
-     */
+
   public ObjectProperty<Image> imagePropertyProperty()
   {
     return imageProperty;

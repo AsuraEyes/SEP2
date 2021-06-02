@@ -17,9 +17,10 @@ public class ViewReportedMemberViewModel
   private final StringProperty reporterNameLabel;
   private final StringProperty commentaryLabel;
   /**
-   * Instantiates a new ViewReportedMemberViewModel.
+   * Instantiates StringProperties used for binding with the fields in the controller
    *
-   * @param model The model that this ViewModel uses
+   * @param rentalModel The model that this ViewModel uses
+   * @param memberModel The model that this ViewModel uses
    */
   public ViewReportedMemberViewModel(RentalModel rentalModel,
       MemberModel memberModel)
@@ -31,34 +32,27 @@ public class ViewReportedMemberViewModel
     reporterNameLabel = new SimpleStringProperty();
     commentaryLabel = new SimpleStringProperty();
   }
-    /**
-     * Get reportedNameLabel.
-     *
-     * @return returns reported member username
-     */
+
   public StringProperty getReportedNameLabel()
   {
     return reportedNameLabel;
   }
-    /**
-     * Get reporterNameLabel.
-     *
-     * @return returns reporter member username
-     */
+
   public StringProperty getReporterNameLabel()
   {
     return reporterNameLabel;
   }
-    /**
-     * Get commentaryLabel.
-     *
-     * @return returns report commentary
-     */
+
   public StringProperty getCommentaryLabel()
   {
     return commentaryLabel;
   }
 
+  /**
+   * Sets the names of the member that reported and the one that got reported
+   * together with the commentary, in the controller.
+   *
+   */
   public void loadReport()
   {
     Report report = memberModel.getSelectedReport();
@@ -66,17 +60,13 @@ public class ViewReportedMemberViewModel
     reportedNameLabel.setValue("Reported: " + report.getUsernameTo());
     commentaryLabel.setValue(report.getCommentary());
   }
-    /**
-     * Sets reported person.
-     */
+
   public void setReportedNameLabel()
   {
     memberModel.setMemberUsername(reportedNameLabel.getValue().substring(10));
     rentalModel.setAllMemberRentals(reportedNameLabel.getValue().substring(10));
   }
-    /**
-     * Sets reporter person.
-     */
+
   public void setReporterNameLabel()
   {
     memberModel.setMemberUsername(reporterNameLabel.getValue().substring(10));

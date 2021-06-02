@@ -14,9 +14,9 @@ public class LogInViewModel
   private final StringProperty passwordField;
   private final MemberModel memberModel;
   /**
-   * Instantiates a new LogInViewModel.
+   * Instantiates StringProperties used for binding with the fields in the controller
    *
-   * @param shareItModel The model that this ViewModel uses
+   * @param memberModel The model that this ViewModel uses
    */
   public LogInViewModel(MemberModel memberModel)
   {
@@ -28,31 +28,17 @@ public class LogInViewModel
     passwordField = new SimpleStringProperty();
   }
 
-  /**
-   * Gets searchField.
-   *
-   * @return returns searchField input
-   */
   public StringProperty getSearchField()
   {
     return searchField;
   }
 
-  /**
-   * Gets usernameField.
-   *
-   * @return returns usernameField input
-   */
   public StringProperty getUserName()
   {
     return userName;
   }
 
-  /**
-   * Gets passwordField.
-   *
-   * @return returns passwordField input
-   */
+
   public StringProperty getPasswordField()
   {
     return passwordField;
@@ -60,7 +46,7 @@ public class LogInViewModel
   /**
    * After LogIn button have been pressed this method sends data to the model.
    *
-   * @return (?)
+   * @return validation message
    */
   public String onLogInButton()
   {

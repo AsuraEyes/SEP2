@@ -18,9 +18,10 @@ public class RateFeedbackViewModel
   private final MemberModel memberModel;
   private final MessageModel messageModel;
   /**
-   * Instantiates a new RateFeedbackViewModel.
+   * Instantiates StringProperties used for binding with the fields in the controller
    *
-   * @param model The model that this ViewModel uses
+   * @param memberModel The model that this ViewModel uses
+   * @param messageModel The model that this ViewModel uses
    */
   public RateFeedbackViewModel(MemberModel memberModel,
       MessageModel messageModel)
@@ -32,36 +33,24 @@ public class RateFeedbackViewModel
     commentaryTextArea = new SimpleStringProperty();
     usernameLabel = new SimpleStringProperty();
   }
-  /**
-   * Gets Member's commentary.
-   *
-   * @return returns commentary input
-   */
+
   public StringProperty getCommentaryTextArea()
   {
     return commentaryTextArea;
   }
 
-  /**
-   * Gets Member's username.
-   *
-   * @return returns the usernameLabel
-   */
   public StringProperty getUsernameLabel()
   {
     return usernameLabel;
   }
-  /**
-   * Gets how high Member did rate
-   *
-   * @return returns rating(from 1.0 to 5.0)
-   */
+
   public DoubleProperty getRatingProperty()
   {
     return ratingProperty;
   }
   /**
-   * Gets rated memberUsername.
+   * Sends the username to the controller.
+   * calls the setRating() method
    *
    * @return returns username of Member that is rated
    */
@@ -72,7 +61,7 @@ public class RateFeedbackViewModel
     return memberModel.getMemberUsername();
   }
   /**
-   * Gets rating of rated member.
+   * Retrieves the rating, and sets it in the controller
    */
   public void setRating()
   {

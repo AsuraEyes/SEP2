@@ -15,9 +15,10 @@ public class WelcomePageViewModel {
 
     private final StringProperty searchField;
     /**
-     * Instantiates a new WelcomePageViewModel.
+     * Instantiates StringProperties used for binding with the fields in the controller
      *
-     * @param model The model that this ViewModel uses
+     * @param memberModel The model that this ViewModel uses
+     * @param messageModel The model that this ViewModel uses
      */
     public WelcomePageViewModel(MemberModel memberModel, MessageModel messageModel){
         this.memberModel = memberModel;
@@ -25,27 +26,14 @@ public class WelcomePageViewModel {
         searchField = new SimpleStringProperty();
     }
 
-    /**
-     * Gets searchField.
-     *
-     * @return returns searchField input
-     */
     public StringProperty getSearchField(){
         return searchField;
     }
 
-    /**
-     * Checks user type.
-     *
-     * @return returns which type of account is viewing profile
-     */
     public String getUserType(){
         return memberModel.checkUserType();
     }
 
-    /**
-     * Sets search text.
-     */
     public void setSearchText(){
         messageModel.setSearchText(searchField.getValue());
     }

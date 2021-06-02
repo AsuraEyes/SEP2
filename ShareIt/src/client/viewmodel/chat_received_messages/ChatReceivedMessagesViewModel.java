@@ -16,37 +16,32 @@ public class ChatReceivedMessagesViewModel
   private final MemberModel memberModel;
   private final MessageModel messageModel;
   /**
-   * Instantiates a new ChatReceivedMessagesViewModel.
+   * Instantiates StringProperties used for binding with the fields in the controller
    *
-   * @param model The model that this ViewModel uses
+   * @param memberModel The model that this ViewModel uses
+   * @param messageModel The model that this ViewModel uses
    */
   public ChatReceivedMessagesViewModel(MemberModel memberModel, MessageModel messageModel)
   {
     this.memberModel = memberModel;
     this.messageModel = messageModel;
   }
-  /**
-   * Get all the messages in a list.
-   *
-   * @return returns a list of messages
-   */
+
   public ArrayList<Message> getAllReceivedMessages()
   {
     return messageModel.getAllReceivedMessages();
   }
-  /**
-   * Get all the warnings in a list.
-   *
-   * @return returns a list of all warnings
-   */
+
   public ArrayList<Warning> getAllReceivedWarnings()
   {
     return messageModel.getAllWarnings();
   }
   /**
-   * Gets username.
+   * On mouse click, the clicked object is retrieved and analyzed. The purpose
+   * is to get the username that is being hold by a label and store it in the
+   * MemberModelManager.
    *
-   * @param object (?)
+   * @param object
    */
   public void getUsername(Object object)
   {

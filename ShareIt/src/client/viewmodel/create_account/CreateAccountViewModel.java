@@ -28,7 +28,7 @@ public class CreateAccountViewModel
   private final StringProperty otherInfoField;
   private ObservableList<String> locationsList;
     /**
-     * Instantiates a new CreateAccountViewModel.
+     * Instantiates StringProperties used for binding with the fields in the controller
      *
      * @param rentalModel The model that this ViewModel uses
      * @param memberModel The model that this ViewModel uses
@@ -48,89 +48,55 @@ public class CreateAccountViewModel
     telephoneNoField = new SimpleStringProperty();
     otherInfoField = new SimpleStringProperty();
   }
-    /**
-     * Gets userNameField.
-     *
-     * @return returns userNameField input
-     */
+
   public StringProperty getUsernameField()
   {
     return usernameField;
   }
-    /**
-     * Gets passwordField.
-     *
-     * @return returns passwordField input
-     */
+
   public StringProperty getPasswordField()
   {
     return passwordField;
   }
-    /**
-     * Gets confirmPasswordField.
-     *
-     * @return returns confirmPasswordField input
-     */
+
   public StringProperty getConfirmPasswordField()
   {
     return confirmPasswordField;
   }
-    /**
-     * Gets streetField.
-     *
-     * @return returns streetField input
-     */
+
   public StringProperty getStreetField()
   {
     return streetField;
   }
-    /**
-     * Gets streetNumberField.
-     *
-     * @return returns streetNumberField input
-     */
+
   public StringProperty getStreetNumberField()
   {
     return streetNumberField;
   }
-    /**
-     * Gets postalCodeField.
-     *
-     * @return returns postalCodeField input
-     */
+
   public StringProperty getPostalCodeField()
   {
     return postalCodeField;
   }
-    /**
-     * Gets emailField.
-     *
-     * @return returns emailField input
-     */
+
   public StringProperty getEmailField()
   {
     return emailField;
   }
-    /**
-     * Gets telephoneField.
-     *
-     * @return returns telephoneField input
-     */
+
   public StringProperty getTelephoneNoField()
   {
     return telephoneNoField;
   }
-    /**
-     * Gets otherInformationField.
-     *
-     * @return returns otherInformationField input
-     */
+
   public StringProperty getOtherInfoField()
   {
     return otherInfoField;
   }
     /**
-     * After Create button have been pressed this method sends data to the model.
+     * After Create button have been pressed this method sends data to the model
+     * and receives a validation message if data is missing, invalid or the account
+     * was successfully created.
      *
      * @param selectedCity The selected city
      * @return returns new Member object
@@ -145,7 +111,8 @@ public class CreateAccountViewModel
             postalCodeField.getValue(), selectedCity);
   }
     /**
-     * Gets cities in a list.
+     * Gets cities in a list from the database and places them in a Observable
+     * list to be bound to a listing element in controller..
      *
      * @return returns a list of cities
      */
