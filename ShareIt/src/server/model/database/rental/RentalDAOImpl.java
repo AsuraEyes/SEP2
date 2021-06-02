@@ -49,6 +49,7 @@ public class RentalDAOImpl implements RentalDAO
 
   private Connection getConnection() throws SQLException
   {
+    System.out.println("password: "+password);
     return DriverManager
         .getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres",
             password);

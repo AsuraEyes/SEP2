@@ -2,7 +2,7 @@ package shared.transferobjects;
 
 import java.io.Serializable;
 /**
- * A class that creates and handles Members.
+ * A class that handles Members information.
  */
 public class Member implements Serializable
 {
@@ -40,9 +40,20 @@ public class Member implements Serializable
     this.id = id;
     this.username = username;
     this.password = password;
-    this.emailAddress = emailAddress;
+    if(emailAddress == null){
+      this.emailAddress = "";
+    }
+    else{
+      this.emailAddress = emailAddress;
+    }
     this.otherInformation = otherInformation;
-    this.phoneNo = phoneNo;
+    if(phoneNo == null){
+      this.phoneNo = "";
+    }
+    else{
+      this.phoneNo = phoneNo;
+    }
+
     this.addressStreet = address_street;
     this.addressNo = address_no;
     this.addressPostalCode = address_postal_code;
@@ -53,6 +64,7 @@ public class Member implements Serializable
      * Constructor initializing fields.
      *
      * @param id Id of the member that is assigned to him automatically when creating account.
+     * @param username Username of the member
      */
   public Member(int id, String username)
   {
@@ -60,6 +72,11 @@ public class Member implements Serializable
     this.username = username;
   }
 
+  /**
+   * Constructor initializing fields.
+   *
+   * @param id Id of the member that is assigned to him automatically when creating account.
+   */
   public Member(int id)
   {
     this.id = id;
@@ -94,7 +111,7 @@ public class Member implements Serializable
     /**
      * Gets Member's username.
      *
-     * @return returns String type of Member's username.
+     * @param username String type of Member's username.
      */
   public void setUsername(String username)
   {
