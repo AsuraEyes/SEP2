@@ -172,7 +172,7 @@ public class EditRentalViewModel
 
   public void updateRental()
   {
-    //rentalModel.loadRentals();
+    rentalModel.loadRentals();
     rentalModel.setAllMemberRentals(memberModel.getLoggedInUsername());
   }
 }

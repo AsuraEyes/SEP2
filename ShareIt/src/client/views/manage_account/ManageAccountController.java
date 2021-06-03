@@ -31,7 +31,7 @@ public class ManageAccountController
   private ManageAccountViewModel manageAccountViewModel;
   /**
    * Init.
-   *
+   * Loads the member's rentals
    * @param viewHandler      the view handler
    * @param viewModelFactory the view model factory
    */
@@ -51,23 +51,23 @@ public class ManageAccountController
     manageAccountViewModel.setProfile();
     displayRentals(manageAccountViewModel.getRentalsOfMemberList());
   }
-  /**
-   * Changes a view if button was pressed.
-   */
+
   public void editOrDeleteInformationButton()
   {
     viewHandler.setView(viewHandler.menu(), viewHandler.editOrDeleteAccount());
   }
-  /**
-   * Changes a view if button was pressed.
-   */
+
   public void addRentalButton()
   {
     viewHandler.setView(viewHandler.menu(), viewHandler.addRental());
   }
   /**
-   * Displays rentals.
-   *
+   * Loads all the member's rentals and places them individually in a
+   * separate Vbox. The Vbox's are created for each rental and with the
+   * help of StackPane, InfoOverlay and ImageView, it displays the required data.
+   * InfoOverlay places the text on top of the ImageView as a translucent node,
+   * which on mouse hover it expands from the bottom to the top, and it retracts
+   * on no action.
    * @param rentals Rentals that are being displayed
    */
   public void displayRentals(List<Rental> rentals)
@@ -96,9 +96,7 @@ public class ManageAccountController
       }
     }
   }
-  /**
-   * Changes a view if button was pressed and sets data of actually viewed member to use it in another view.
-   */
+
   public void viewRating()
   {
     manageAccountViewModel.setMember();

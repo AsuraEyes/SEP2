@@ -24,6 +24,7 @@ import client.viewmodel.welcome_page.WelcomePageViewModel;
 /**
  * A class that creates or gets a ViewModel object, uses factory pattern.
  * All the methods are using get methods from the ModelFactory to get the needed models
+ * 
  */
 public class ViewModelFactory
 {

@@ -58,7 +58,8 @@ public class ViewHandler
     setView(menu(), welcomePage());
   }
   /**
-   * Sets view with particular chosen content.
+   * Sets and empty view that is ready to accept a node for the menu and another
+   * as the content.
    *
    * @param menu    Menu bar placed at the top part of an Application
    * @param content The content below Menu bar
@@ -408,6 +409,14 @@ public class ViewHandler
   {
     return stage;
   }
+
+  /**
+   * Method used in all the methods where the views are loaded. The purpose of
+   * this method is to catch only once the IOException thrown by loading the
+   * FXMLLoader
+   * @param loader
+   * @return Node
+   */
 
   private Node loaderDotLoad(FXMLLoader loader)
   {
