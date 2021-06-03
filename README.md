@@ -4,7 +4,7 @@ First off, open DataGrip, and do the following:
 - Now run **share_it.sql** and **dummy_data.sql** in that exact order.
 
 After you have connected to the database, open IntelliJ and do the following:
-- add the libraries that are in the **Library** folder 
+- add the libraries that are in the **Java Library** folder 
 - in **RunServer.java** change **currentPassword** to your **PostgreSQL password** and run it 
 - Run **StartShareItApp.java**
 
