@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Class that implements methods from its interface and provides access to a database(State in this case)
  */
-public class StateDAOImpl implements StateDAO
+public class StateDAOImpl
 {
   private static StateDAOImpl instance;
   private String password;
@@ -51,9 +51,8 @@ public class StateDAOImpl implements StateDAO
    * Reads all states from database by connecting to the database and get all table contents
    *
    * @return returns all state names in a arraylist
-   * @throws SQLException
    */
-  @Override public List<State> readState()
+  public List<State> readState()
   {
     try (Connection connection = getConnection())
     {

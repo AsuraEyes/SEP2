@@ -31,10 +31,9 @@ public class ViewRatingController
   private ViewHandler viewHandler;
   /**
    * Init.
-   *
+   * Loads all the ratings given to the selected member
    * @param viewHandler      the view handler
    * @param viewModelFactory the view model factory
-   * @throws IOException the io exception
    */
   public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory)
   {
@@ -68,7 +67,9 @@ public class ViewRatingController
 
   }
   /**
-   * Displays ratings.
+   * Loads all the member's ratings and places them individually in a
+   * separate Vbox. The VBox's are created for each rating and display with the
+   * help of Label and TextFlow the required content.
    *
    * @param ratings All member's ratings
    */

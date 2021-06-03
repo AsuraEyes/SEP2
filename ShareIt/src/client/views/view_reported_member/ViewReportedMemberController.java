@@ -17,6 +17,13 @@ public class ViewReportedMemberController
   private ViewReportedMemberViewModel viewReportedMemberViewModel;
   private ViewHandler viewHandler;
 
+  /**
+   * Init.
+   * Loads all reported members
+   * @param viewHandler      the view handler
+   * @param viewModelFactory the view model factory
+   */
+
   public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory)
   {
     this.viewHandler = viewHandler;
@@ -30,32 +37,20 @@ public class ViewReportedMemberController
         .bind(viewReportedMemberViewModel.getCommentaryLabel());
     viewReportedMemberViewModel.loadReport();
   }
-  /**
-   * Changes a view when button was pressed.
-   *
-   * @throws IOException
-   */
+
   public void goBackToReportedMembers()
   {
     viewReportedMemberViewModel.loadAllReportedMembers();
     viewHandler
         .setView(viewHandler.menu(), viewHandler.viewReportedMemberList());
   }
-  /**
-   * Views profile of chosen reporter member.
-   *
-   * @throws IOException
-   */
+
   public void reporterMemberClickedOn()
   {
     viewReportedMemberViewModel.setReporterNameLabel();
     viewHandler.setView(viewHandler.menu(), viewHandler.viewMemberProfile());
   }
-  /**
-   * Views profile of chosen reported member.
-   *
-   * @throws IOException
-   */
+
   public void reportedMemberClickedOn()
   {
     viewReportedMemberViewModel.setReportedNameLabel();

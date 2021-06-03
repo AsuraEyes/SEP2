@@ -6,7 +6,7 @@ import java.sql.*;
  * Class that implements methods from its interface and provides access to a database(Administrator in this case)
  */
 
-public class AdministratorDAOImpl implements AdministratorDAO
+public class AdministratorDAOImpl
 {
   private static AdministratorDAOImpl instance;
   private String password;
@@ -51,7 +51,7 @@ public class AdministratorDAOImpl implements AdministratorDAO
    * @return returns username if the data matches from given username and password
    * @throws SQLException
    */
-  @Override public boolean uniqueUsername(String username) throws SQLException
+  public boolean uniqueUsername(String username) throws SQLException
   {
     try (Connection connection = getConnection())
     {
@@ -75,7 +75,7 @@ public class AdministratorDAOImpl implements AdministratorDAO
    * @param password password that has to be checked
    * @return returns username if the data matches from given username and password
    */
-  @Override public String checkLogInCredentials(String username,
+  public String checkLogInCredentials(String username,
       String password)
   {
     try (Connection connection = getConnection())

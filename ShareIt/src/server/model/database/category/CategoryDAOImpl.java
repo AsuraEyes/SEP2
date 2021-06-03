@@ -10,7 +10,7 @@ import java.util.List;
  * Class that implements methods from its interface and provides access to a database(Category in this case)
  *
  */
-public class CategoryDAOImpl implements CategoryDAO
+public class CategoryDAOImpl
 {
   private static CategoryDAOImpl instance;
   private String password;
@@ -45,7 +45,7 @@ public class CategoryDAOImpl implements CategoryDAO
    * Reads all categories from database by connecting to the database and get all table contents
    * @return returns all category names in a arraylist
    */
-  @Override public List<Category> readCategory()
+  public List<Category> readCategory()
   {
       try (Connection connection = getConnection())
       {

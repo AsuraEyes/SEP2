@@ -18,23 +18,24 @@ import java.beans.PropertyChangeEvent;
  */
 public class ViewRentalViewModel
 {
-  private final RentalModel rentalModel;
-  private final MemberModel memberModel;
+  private RentalModel rentalModel;
+  private MemberModel memberModel;
 
-  private final StringProperty nameOfRental;
-  private final StringProperty descriptionOfRental;
-  private final StringProperty stateOfRental;
-  private final StringProperty priceOfRental;
-  private final StringProperty otherInformationOfRental;
-  private final StringProperty categoryOfRental;
-  private final StringProperty usernameOfRental;
-  private final StringProperty locationOfRental;
-  private final StringProperty ratingOfUserOfRental;
-  private final ObjectProperty<Image> imageProperty;
+  private StringProperty nameOfRental;
+  private StringProperty descriptionOfRental;
+  private StringProperty stateOfRental;
+  private StringProperty priceOfRental;
+  private StringProperty otherInformationOfRental;
+  private StringProperty categoryOfRental;
+  private StringProperty usernameOfRental;
+  private StringProperty locationOfRental;
+  private StringProperty ratingOfUserOfRental;
+  private ObjectProperty<Image> imageProperty;
   /**
-   * Instantiates a new ViewRentalViewModel.
+   * Instantiates StringProperties used for binding with the fields in the controller
    *
-   * @param shareItModel The model that this ViewModel uses
+   * @param rentalModel The model that this ViewModel uses
+   * @param memberModel The model that this ViewModel uses
    */
   public ViewRentalViewModel(RentalModel rentalModel, MemberModel memberModel)
   {
@@ -56,7 +57,9 @@ public class ViewRentalViewModel
   }
 
   /**
-   * An event that selects rental
+   * The method listens for events with selectedRental propertyName and
+   * rental related data together with member's data, is sent to the controller
+   * through binding.
    * @param evt value of selected rental
    */
   private void selectedRental(PropertyChangeEvent evt)
@@ -90,100 +93,51 @@ public class ViewRentalViewModel
     });
   }
 
-  /**
-   * Name of rental.
-   *
-   * @return returns nameOfRental
-   */
   public StringProperty nameOfRentalProperty()
   {
     return nameOfRental;
   }
 
-  /**
-   * Description of rental.
-   *
-   * @return returns descriptionOfRental
-   */
   public StringProperty descriptionOfRentalProperty()
   {
     return descriptionOfRental;
   }
 
-  /**
-   * State of rental.
-   *
-   * @return returns stateOfRental
-   */
   public StringProperty stateOfRentalProperty()
   {
     return stateOfRental;
   }
-  /**
-   * Price of rental.
-   *
-   * @return returns priceOfRental
-   */
+
   public StringProperty priceOfRentalProperty()
   {
     return priceOfRental;
   }
 
-  /**
-   * Other information of rental.
-   *
-   * @return returns otherInformationOfRental
-   */
   public StringProperty otherInformationOfRentalProperty()
   {
     return otherInformationOfRental;
   }
 
-  /**
-   * Category of rental.
-   *
-   * @return returns categoryOfRental
-   */
   public StringProperty categoryOfRentalProperty()
   {
     return categoryOfRental;
   }
 
-  /**
-   * Username member that posted rental.
-   *
-   * @return returns usernameOfRental
-   */
   public StringProperty usernameOfRentalProperty()
   {
     return usernameOfRental;
   }
 
-  /**
-   * Location of member that posted rental
-   *
-   * @return returns locationOfRental
-   */
   public StringProperty locationOfRentalProperty()
   {
     return locationOfRental;
   }
 
-  /**
-   * Rating of user that posted rental.
-   *
-   * @return returns ratingOfUserOfRental
-   */
   public StringProperty ratingOfUserOfRentalProperty()
   {
     return ratingOfUserOfRental;
   }
 
-  /**
-   * Image of posted rental.
-   *
-   * @return returns image
-   */
   public ObjectProperty<Image> imagePropertyProperty()
   {
     return imageProperty;
@@ -198,11 +152,7 @@ public class ViewRentalViewModel
   {
     rentalModel.setAllMemberRentals(usernameOfRental.getValue().substring(10));
   }
-  /**
-   * Checks user type.
-   *
-   * @return returns which type of account is viewing profile
-   */
+
   public String getUserType()
   {
     return memberModel.checkUserType();

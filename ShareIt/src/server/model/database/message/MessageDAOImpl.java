@@ -13,7 +13,7 @@ import java.util.Date;
  * Class that implements methods from its interface and provides access to a database(Message in this case)
  *
  */
-public class MessageDAOImpl implements MessageDAO
+public class MessageDAOImpl
 {
   private static MessageDAOImpl instance;
   private String password;
@@ -55,7 +55,7 @@ public class MessageDAOImpl implements MessageDAO
    * @param loggedUserId The user that is currently logged in
    * @return returns all the messages connected with this particular member
    */
-  @Override public ArrayList<Message> getAllReceivedMessages(int loggedUserId)
+  public ArrayList<Message> getAllReceivedMessages(int loggedUserId)
   {
     try (Connection connection = getConnection())
     {
@@ -88,7 +88,7 @@ public class MessageDAOImpl implements MessageDAO
    * @param message message object that will be sent
    * @return returns new object of Message with data which was provided by Member while creating new Message
    */
-  @Override public Message sendMessage(Message message)
+  public Message sendMessage(Message message)
   {
 
     try (Connection connection = getConnection())
@@ -124,7 +124,7 @@ public class MessageDAOImpl implements MessageDAO
    * @param loggedUserId Member that is geting messaged
    * @return returns a list of all messages that are matched with given data
    */
-  @Override public ArrayList<Message> getMessagesFromUser(int loggedUserId,
+  public ArrayList<Message> getMessagesFromUser(int loggedUserId,
       int fromUserid)
   {
     try (Connection connection = getConnection())

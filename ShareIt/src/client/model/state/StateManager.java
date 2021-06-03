@@ -10,13 +10,13 @@ public class StateManager implements Serializable
   private static StateManager instance;
   private LoginState currentState;
 
-  private StateManager()
+  public StateManager()
   {
-    currentState = new MemberState("bob");
+    currentState = new VisitorState();
   }
 
   /**
-   * Creates stateManager when it needs to be accessed
+   * Creates a StateManager if not created, otherwise returns it
    *
    * @return returns new StateManager
    */

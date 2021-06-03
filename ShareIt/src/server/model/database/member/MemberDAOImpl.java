@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Class that implements methods from its interface and provides access to a database(Member in this case)
  */
-public class MemberDAOImpl implements MemberDAO
+public class MemberDAOImpl
 {
   private static MemberDAOImpl instance;
   private String password;
@@ -61,9 +61,8 @@ public class MemberDAOImpl implements MemberDAO
    * @param addressPostalCode postal code of the place where user lives input by user while creating new account
    * @param addressCity       city where user lives chosen from the list of possible cities by user while creating new account
    * @return returns new object of Member with data which was provided by user while creating new account
-   * @throws SQLException
    */
-  @Override public Member create(String username, String password,
+  public Member create(String username, String password,
       String emailAddress, String phoneNumber, String otherInformation,
       String addressStreet, String addressNo, int addressPostalCode,
       String addressCity) throws SQLException
@@ -98,11 +97,7 @@ public class MemberDAOImpl implements MemberDAO
     }
   }
 
-  /**
-   * @param username
-   * @return
-   */
-  @Override public List<Member> readByUsername(String username)
+  public List<Member> readByUsername(String username)
   {
     try (Connection connection = getConnection())
     {
@@ -141,7 +136,7 @@ public class MemberDAOImpl implements MemberDAO
    * @return returns true if it is unique or false if it is already in database
    * @throws SQLException
    */
-  @Override public boolean uniqueUsername(String username) throws SQLException
+  public boolean uniqueUsername(String username) throws SQLException
   {
     try (Connection connection = getConnection())
     {
@@ -176,7 +171,7 @@ public class MemberDAOImpl implements MemberDAO
    * @param addressCity       new city chosen from the list of possible cities by user(if it was changed)
    * @throws SQLException
    */
-  @Override public void update(String username, String password,
+  public void update(String username, String password,
       String emailAddress, String phoneNumber, String otherInformation,
       String addressStreet, String addressNo, int addressPostalCode,
       String addressCity) throws SQLException
@@ -204,7 +199,7 @@ public class MemberDAOImpl implements MemberDAO
    * @param member Member object that is about to be deleted
    * @return returns true if deleting process was successful
    */
-  @Override public boolean delete(Member member)
+  public boolean delete(Member member)
   {
     try (Connection connection = getConnection())
     {
@@ -227,7 +222,7 @@ public class MemberDAOImpl implements MemberDAO
    * @param id ID of the member that information is needed
    * @return returns member object with all his information
    */
-  @Override public Member getMemberById(int id)
+  public Member getMemberById(int id)
   {
     try (Connection connection = getConnection())
     {
@@ -268,7 +263,7 @@ public class MemberDAOImpl implements MemberDAO
    * @return returns ID of checked member
    * @throws SQLException
    */
-  @Override public int readIdByUsername(String username) throws SQLException
+  public int readIdByUsername(String username) throws SQLException
   {
     try (Connection connection = getConnection())
     {
@@ -294,7 +289,7 @@ public class MemberDAOImpl implements MemberDAO
    * @param password password that has to be checked
    * @return returns username if the data matches from given username and password(if username and password belongs to an administrator it returns administrator data)
    */
-  @Override public String checkLogInCredentials(String username,
+  public String checkLogInCredentials(String username,
       String password)
   {
     try (Connection connection = getConnection())
@@ -333,7 +328,7 @@ public class MemberDAOImpl implements MemberDAO
    * @param username username of the member that information is needed
    * @return returns Member object with all his information
    */
-  @Override public Member getMemberByUsername(String username)
+  public Member getMemberByUsername(String username)
   {
     try (Connection connection = getConnection())
     {
@@ -371,7 +366,7 @@ public class MemberDAOImpl implements MemberDAO
      * Gets all the possible Members by connecting to the database and get all table contents
      * @return returns a list of all Members that are stored in the database
      */
-  @Override public List<Member> readMembers()
+  public List<Member> readMembers()
   {
     try (Connection connection = getConnection())
     {
@@ -402,7 +397,7 @@ public class MemberDAOImpl implements MemberDAO
     return null;
   }
 
-  @Override public List<Member> readMembersIdsAndUsernames() throws SQLException
+  public List<Member> readMembersIdsAndUsernames() throws SQLException
   {
     try (Connection connection = getConnection())
     {

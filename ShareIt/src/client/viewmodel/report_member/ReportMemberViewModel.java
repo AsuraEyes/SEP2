@@ -10,14 +10,15 @@ import shared.transferobjects.Report;
  */
 public class ReportMemberViewModel
 {
-  private final StringProperty usernameLabel;
-  private final StringProperty commentaryTextArea;
-  private final MemberModel memberModel;
-  private final MessageModel messageModel;
+  private StringProperty usernameLabel;
+  private StringProperty commentaryTextArea;
+  private MemberModel memberModel;
+  private MessageModel messageModel;
   /**
-   * Instantiates a new ReportMemberViewModel.
+   * Instantiates StringProperties used for binding with the fields in the controller
    *
-   * @param model The model that this ViewModel uses
+   * @param memberModel The model that this ViewModel uses
+   * @param messageModel The model that this ViewModel uses
    */
   public ReportMemberViewModel(MemberModel memberModel,
       MessageModel messageModel)
@@ -29,51 +30,23 @@ public class ReportMemberViewModel
     commentaryTextArea = new SimpleStringProperty();
 
   }
-  /**
-   * Gets Member's username.
-   *
-   * @return returns the usernameLabel
-   */
+
   public StringProperty getUsernameLabel()
   {
     return usernameLabel;
   }
-  /**
-   * Gets Member's commentary.
-   *
-   * @return returns commentary input
-   */
+
   public StringProperty getCommentaryTextArea()
   {
     return commentaryTextArea;
   }
-  /**
-   * Gets reported memberUsername.
-   *
-   * @return returns username of Member that is reported
-   */
+
   public String getMemberUsername()
   {
     usernameLabel.setValue(memberModel.getMemberUsername());
     return memberModel.getMemberUsername();
   }
 
-  /**
-   * Gets report.
-   */
-  public void getReport()
-  {
-    Report report = messageModel.getReport(memberModel.getLoggedInUsername(),
-        memberModel.getMemberUsername());
-    if (report != null)
-    {
-      commentaryTextArea.setValue(report.getCommentary());
-    }
-  }
-
-  /**
-   * Updates report based on if member already reported this member.
-   */
   public void updateReport()
   {
     int memberFromId = memberModel
@@ -84,11 +57,7 @@ public class ReportMemberViewModel
         memberToId);
     messageModel.updateReport(report);
   }
-  /**
-   * Adds new report.
-   *
-   * @return returns new Report object
-   */
+
   public String addReport()
   {
     return messageModel.addReport(commentaryTextArea.getValue(),

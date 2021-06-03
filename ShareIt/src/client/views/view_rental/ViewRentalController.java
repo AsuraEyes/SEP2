@@ -29,7 +29,7 @@ public class ViewRentalController
   private ViewRentalViewModel viewRentalViewModel;
   /**
    * Init.
-   *
+   * Changes the view depending on the user type
    * @param viewHandler      the view handler
    * @param viewModelFactory the view model factory
    */
@@ -79,7 +79,7 @@ public class ViewRentalController
 
   }
   /**
-   * Changes a view when button was pressed and user type checked and sets data for selected Member.
+   * Changes a view when button was pressed depending on the user type.
    */
   public void seeMoreButton()
   {

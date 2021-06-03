@@ -30,9 +30,6 @@ public class ServerModelImpl implements ServerModelManager
   private final DataCheckRating dataCheckRating;
   private final DataCheckReport dataCheckReport;
 
-  /**
-   * Instantiates a new Server model.
-   */
   public ServerModelImpl()
   {
     support = new PropertyChangeSupport(this);
@@ -95,7 +92,7 @@ public class ServerModelImpl implements ServerModelManager
     String message = dataCheckRental
         .updateCheckRentalData(name, pictureLink, description, price,
             otherInformation, stateName, rentalId, selectedCategories);
-    if (message.equals(""))
+    if (message.equals("Edit successful"))
     {
       support.firePropertyChange("updateRental", 0,
           RentalDAOImpl.getInstance().getRentalById(rentalId));

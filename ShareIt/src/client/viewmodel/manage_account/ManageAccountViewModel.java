@@ -16,18 +16,19 @@ import java.util.ArrayList;
  */
 public class ManageAccountViewModel
 {
-  private final SimpleStringProperty usernameLabel;
-  private final SimpleStringProperty locationLabel;
-  private final SimpleStringProperty ratingLabel;
-  private final SimpleStringProperty addressLabel;
-  private final SimpleStringProperty contactLabel;
-  private final SimpleStringProperty otherInformationLabel;
-  private final RentalModel rentalModel;
-  private final MemberModel memberModel;
+  private SimpleStringProperty usernameLabel;
+  private SimpleStringProperty locationLabel;
+  private SimpleStringProperty ratingLabel;
+  private SimpleStringProperty addressLabel;
+  private SimpleStringProperty contactLabel;
+  private SimpleStringProperty otherInformationLabel;
+  private RentalModel rentalModel;
+  private MemberModel memberModel;
   /**
-   * Instantiates a new Manage account view model.
+   * Instantiates StringProperties used for binding with the fields in the controller
    *
-   * @param shareItModel The model that this ViewModel uses
+   * @param rentalModel The model that this ViewModel uses
+   * @param memberModel The model that this ViewModel uses
    */
   public ManageAccountViewModel(RentalModel rentalModel,
       MemberModel memberModel)
@@ -43,7 +44,7 @@ public class ManageAccountViewModel
     otherInformationLabel = new SimpleStringProperty();
   }
     /**
-     * Sets profile.
+     * Sets logged in member information in the controller.
      */
   public void setProfile()
   {
@@ -59,21 +60,18 @@ public class ManageAccountViewModel
     otherInformationLabel
         .setValue("Other Information: " + member.getOtherInformation());
   }
-    /**
-     * Gets rentals of member list.
-     *
-     * @return returns Member's rentals
-     * @throws RemoteException
-     */
+
   public ArrayList<Rental> getRentalsOfMemberList()
   {
     return rentalModel.getRentalsOfMemberList();
   }
     /**
-     * Gets selected rental.
+     * On mouse click, the clicked object is retrieved and analyzed. The purpose
+     * is to get the the member's id stored in the ImageView id field. The id is
+     * used to retrieve the selected rental from the member's list of rentals, and
+     * set it to the RentalModel.
      *
      * @param object the object
-     * @throws RemoteException
      */
   public void getRental(Object object)
   {
@@ -99,63 +97,37 @@ public class ManageAccountViewModel
       }
     }
   }
-    /**
-     * Gets usernameLabel.
-     *
-     * @return returns usernameLabel input
-     */
+
   public StringProperty getUsernameLabel()
   {
     return usernameLabel;
   }
-    /**
-     * Gets locationLabel.
-     *
-     * @return returns locationLabel input
-     */
+
   public StringProperty getLocationLabel()
   {
     return locationLabel;
   }
-    /**
-     * Gets ratingLabel.
-     *
-     * @return returns ratingLabel input
-     */
+
   public StringProperty getRatingLabel()
   {
     return ratingLabel;
   }
-    /**
-     * Gets addressLabel.
-     *
-     * @return returns addressLabel input
-     */
+
   public StringProperty getAddressLabel()
   {
     return addressLabel;
   }
-    /**
-     * Gets contactLabel.
-     *
-     * @return returns contactLabel input
-     */
+
   public StringProperty getContactLabel()
   {
     return contactLabel;
   }
-    /**
-     * Gets otherInformationLabel.
-     *
-     * @return returns otherInformationLabel input
-     */
+
   public StringProperty getOtherInformationLabel()
   {
     return otherInformationLabel;
   }
-    /**
-     * Sets member.
-     */
+
   public void setMember()
   {
     memberModel.setMemberUsername(usernameLabel.getValue().substring(10));

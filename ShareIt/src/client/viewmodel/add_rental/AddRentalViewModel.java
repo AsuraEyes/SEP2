@@ -19,17 +19,17 @@ import java.util.ArrayList;
  */
 public class AddRentalViewModel
 {
-  private final StringProperty nameField;
-  private final StringProperty descriptionField;
-  private final StringProperty priceField;
-  private final StringProperty otherInfoField;
-  private final RentalModel rentalModel;
-  private final MemberModel memberModel;
+  private StringProperty nameField;
+  private StringProperty descriptionField;
+  private StringProperty priceField;
+  private StringProperty otherInfoField;
+  private RentalModel rentalModel;
+  private MemberModel memberModel;
   private ObservableList<String> statesList;
   private ObservableList<String> categoriesList;
-  private final ObjectProperty<Image> imageProperty;
+  private ObjectProperty<Image> imageProperty;
   /**
-   * Instantiates a new AddRentalViewModel.
+   * Instantiates StringProperties used for binding with the fields in the controller
    *
    * @param rentalModel The model that this ViewModel uses
    * @param memberModel The model that this ViewModel uses
@@ -44,47 +44,27 @@ public class AddRentalViewModel
     otherInfoField = new SimpleStringProperty();
     imageProperty = new SimpleObjectProperty<>();
   }
-    /**
-     * Get nameField.
-     *
-     * @return returns nameField input
-     */
+
   public StringProperty getNameField()
   {
     return nameField;
   }
-    /**
-     * Get descriptionField.
-     *
-     * @return returns descriptionField input
-     */
+
   public StringProperty getDescriptionField()
   {
     return descriptionField;
   }
-    /**
-     * Gets priceField.
-     *
-     * @return returns priceField input
-     */
+
   public StringProperty getPriceField()
   {
     return priceField;
   }
-    /**
-     * Image property property object property.
-     *
-     * @return the object property
-     */
+
   public ObjectProperty<Image> imagePropertyProperty()
   {
     return imageProperty;
   }
-    /**
-     * Gets otherInformation.
-     *
-     * @return returns otherInformationField input
-     */
+
   public StringProperty getOtherInfoField()
   {
     return otherInfoField;
@@ -111,7 +91,8 @@ public class AddRentalViewModel
         selectedCategoriesList);
   }
     /**
-     * Get all the states in a list.
+     * Get all the states from the database and places them in a Observable
+     * list to be bound to a listing element in controller.
      *
      * @return returns a list of states
      */
@@ -127,7 +108,8 @@ public class AddRentalViewModel
     return statesList;
   }
     /**
-     * Get all the categories in a list.
+     * Get all the categories from the database and places them in a Observable
+     * list to be bound to a listing element in controller.
      *
      * @return returns a list of categories
      */

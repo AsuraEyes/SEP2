@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * A class that creates and handles Warning.
+ * A class that handles Warning information.
  */
 public class Warning implements Serializable
 {

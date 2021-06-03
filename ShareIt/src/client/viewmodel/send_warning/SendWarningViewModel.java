@@ -16,16 +16,17 @@ import java.util.Date;
  */
 public class SendWarningViewModel
 {
-  private final MemberModel memberModel;
-  private final MessageModel messageModel;
+  private MemberModel memberModel;
+  private MessageModel messageModel;
 
-  private final StringProperty username;
-  private final StringProperty warnings;
-  private final StringProperty inputTextChat;
+  private StringProperty username;
+  private StringProperty warnings;
+  private StringProperty inputTextChat;
   /**
-   * Instantiates a new SendWarningViewModel.
+   * Instantiates StringProperties used for binding with the fields in the controller
    *
-   * @param model The model that this ViewModel uses
+   * @param memberModel The model that this ViewModel uses
+   * @param messageModel The model that this ViewModel uses
    */
   public SendWarningViewModel(MemberModel memberModel,
       MessageModel messageModel)
@@ -39,7 +40,7 @@ public class SendWarningViewModel
     messageModel.addListener("newWarning", this::onNewWarning);
   }
     /**
-     * (?)
+     * Updates administrator's text area with the new warning
      * @param evt
      */
   private void onNewWarning(PropertyChangeEvent evt)
@@ -49,36 +50,22 @@ public class SendWarningViewModel
           .setValue(warnings.getValue() + "\n" + evt.getNewValue().toString());
     });
   }
-    /**
-     * Gets username.
-     *
-     * @return returns username
-     */
+
   public StringProperty getUsername()
   {
     return username;
   }
-    /**
-     * Gets warnings.
-     *
-     * @return returns warnings
-     */
+
   public StringProperty getWarnings()
   {
     return warnings;
   }
-    /**
-     * Gets textChat.
-     *
-     * @return returns the input of textChat
-     */
+
   public StringProperty getInputTextChat()
   {
     return inputTextChat;
   }
-    /**
-     * Sends warning.
-     */
+
   public void sendWarning()
   {
     String administratorFrom = "administrator";
@@ -90,11 +77,11 @@ public class SendWarningViewModel
     messageModel.sendWarning(warning);
   }
     /**
-     * Loads logs.
+     * Loads initial list of warnings towards a specific member.
      */
   public void loadLogs()
   {
-    warnings.setValue("Warning for this guy");
+    warnings.setValue("");
     int idTo = memberModel.getMemberByUsername(memberModel.getMemberUsername())
         .getId();
     ArrayList<Warning> listOfWarnings = messageModel
@@ -108,9 +95,7 @@ public class SendWarningViewModel
       }
     }
   }
-    /**
-     * Gets member's username.
-     */
+
   public void getMember()
   {
     username.setValue(memberModel.getMemberUsername());

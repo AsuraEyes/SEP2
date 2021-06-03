@@ -10,7 +10,7 @@ import java.util.Date;
  * Class that implements methods from its interface and provides access to a database(Warning in this case)
  *
  */
-public class WarningDAOImpl implements WarningDAO
+public class WarningDAOImpl
 {
   private static WarningDAOImpl instance;
   private String password;
@@ -53,7 +53,7 @@ public class WarningDAOImpl implements WarningDAO
      * @param memberTo Member that is geting warned
      * @return returns a list of all warnings that are matched with given data
      */
-  @Override public ArrayList<Warning> getWarnings(String administrator,
+  public ArrayList<Warning> getWarnings(String administrator,
       int memberTo)
   {
     try (Connection connection = getConnection())
@@ -85,7 +85,7 @@ public class WarningDAOImpl implements WarningDAO
      * @param warning Warning object that will be sent
      * @return returns new object of Warning with data which was provided by Administrator while creating new warning
      */
-  @Override public Warning sendWarning(Warning warning)
+  public Warning sendWarning(Warning warning)
   {
     try (Connection connection = getConnection())
     {

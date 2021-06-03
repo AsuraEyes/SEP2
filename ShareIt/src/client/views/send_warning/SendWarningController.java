@@ -20,7 +20,7 @@ public class SendWarningController
   private SendWarningViewModel sendWarningViewModel;
     /**
      * Init.
-     *
+     * Loads the list of warnings for the specified member
      * @param viewHandler      the view handler
      * @param viewModelFactory the view model factory
      */
@@ -36,17 +36,13 @@ public class SendWarningController
     textChatArea.textProperty().bind(sendWarningViewModel.getWarnings());
     sendWarningViewModel.loadLogs();
   }
-    /**
-     * Changes a view when button was pressed.
-     */
+
   public void onGoBack()
   {
     textChatArea.clear();
     viewHandler.setView(viewHandler.menu(), viewHandler.viewMemberProfile());
   }
-    /**
-     * Uses a method from viewModel.
-     */
+
   public void onSend()
   {
     sendWarningViewModel.sendWarning();

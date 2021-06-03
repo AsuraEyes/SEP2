@@ -27,10 +27,10 @@ public class SearchForMemberController
 
   /**
    * Init.
-   *
+   * It loads either the full list of members or the filtered list, depending
+   * on the searchField from Welcome Page, if a keyword was used or it was empty
    * @param viewHandler      the view handler
    * @param viewModelFactory the view model factory
-   * @throws IOException the io exception
    */
   public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory)
   {
@@ -62,8 +62,9 @@ public class SearchForMemberController
   }
 
   /**
-   * Displays members.
-   *
+   * Loads all the members and places them individually in a separate Vbox.
+   * The VBox's are created for each member and display with the
+   * help of Label and Text the required content.
    * @param members Members that matched with input
    */
   public void displayMembers(List<Member> members)

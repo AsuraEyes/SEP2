@@ -15,16 +15,17 @@ import java.util.ArrayList;
  */
 public class ChatWriteMessageViewModel
 {
-  private final MemberModel memberModel;
-  private final MessageModel messageModel;
+  private MemberModel memberModel;
+  private MessageModel messageModel;
 
-  private final StringProperty username;
-  private final StringProperty messages;
-  private final StringProperty inputTextChat;
+  private StringProperty username;
+  private StringProperty messages;
+  private StringProperty inputTextChat;
   /**
-   * Instantiates a new ChatWriteMessageViewModel.
+   * Instantiates StringProperties used for binding with the fields in the controller
    *
-   * @param model The model that this ViewModel uses
+   * @param memberModel The model that this ViewModel uses
+   * @param messageModel The model that this ViewModel uses
    */
   public ChatWriteMessageViewModel(MemberModel memberModel,
       MessageModel messageModel)
@@ -39,7 +40,9 @@ public class ChatWriteMessageViewModel
   }
 
   /**
-   * (?)
+   * The method listens for events with newMessage propertyName, and updates the
+   * chat box in real time with a message that can be seen only by the two members
+   * engaged in the discussion.
    * @param evt an event that is happening
    */
   private void onNewMessage(PropertyChangeEvent evt)
@@ -62,33 +65,23 @@ public class ChatWriteMessageViewModel
       }
     });
   }
-  /**
-   * Gets username.
-   *
-   * @return returns Member's username
-   */
+
   public StringProperty getUsername()
   {
     return username;
   }
-  /**
-   * Sets username for a Member.
-   */
+
   public void getMember()
   {
     username.setValue(memberModel.getMemberUsername());
   }
-  /**
-   * Gets all the messages.
-   *
-   * @return the messages
-   */
+
   public StringProperty getMessages()
   {
     return messages;
   }
   /**
-   * Load logs. (?)
+   * Loads all the messages the logged member has with the specified member
    */
   public void loadLogs()
   {
@@ -109,18 +102,11 @@ public class ChatWriteMessageViewModel
 
   }
 
-  /**
-   * Gets input text from the chat.
-   *
-   * @return returns the input text
-   */
   public StringProperty getInputTextChat()
   {
     return inputTextChat;
   }
-  /**
-   * Sends a message to another Member.
-   */
+
   public void sendMessage()
   {
     int idFrom = memberModel

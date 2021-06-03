@@ -9,7 +9,7 @@ import java.util.ArrayList;
 /**
  * Class that implements methods from its interface and provides access to a database(Rating in this case)
  */
-public class RatingDAOImpl implements RatingDAO
+public class RatingDAOImpl
 {
   private static RatingDAOImpl instance;
   private String password;
@@ -55,9 +55,8 @@ public class RatingDAOImpl implements RatingDAO
    * @param username1 user that is rating
    * @param username2 user that is rated
    * @return returns new object of Rating
-   * @throws SQLException
    */
-  @Override public Rating create(double starValue, String feedback,
+  public Rating create(double starValue, String feedback,
       String username1, String username2)
   {
     try (Connection connection = getConnection())
@@ -90,7 +89,7 @@ public class RatingDAOImpl implements RatingDAO
    * @param username username of the user that method will get all ratings for
    * @return returns an array of all user's ratings
    */
-  @Override public ArrayList<Rating> getAllRatingsOnMember(String username)
+  public ArrayList<Rating> getAllRatingsOnMember(String username)
   {
     try (Connection connection = getConnection())
     {
@@ -107,7 +106,6 @@ public class RatingDAOImpl implements RatingDAO
             resultSet.getString("commentary"), resultSet.getInt("member_from"),
             resultSet.getInt("member_to")));
       }
-      //return array list
       return arrayListToReturn;
     }
     catch (SQLException e)

@@ -21,20 +21,21 @@ import java.util.ArrayList;
  */
 public class EditRentalViewModel
 {
-  private final StringProperty nameField;
-  private final StringProperty descriptionField;
-  private final StringProperty priceField;
-  private final StringProperty otherInfoField;
-  private final RentalModel rentalModel;
-  private final MemberModel memberModel;
+  private StringProperty nameField;
+  private StringProperty descriptionField;
+  private StringProperty priceField;
+  private StringProperty otherInfoField;
+  private RentalModel rentalModel;
+  private MemberModel memberModel;
   private ObservableList<String> statesList;
   private ObservableList<String> categoriesList;
-  private final ObjectProperty<Image> imageProperty;
+  private ObjectProperty<Image> imageProperty;
 
     /**
-     * Instantiates a new EditRentalViewModel.
+     * Instantiates StringProperties used for binding with the fields in the controller
      *
-     * @param shareItModel The model that this ViewModel uses
+     * @param rentalModel The model that this ViewModel uses
+     * @param memberModel The model that this ViewModel uses
      */
   public EditRentalViewModel(RentalModel rentalModel, MemberModel memberModel)
   {
@@ -49,7 +50,7 @@ public class EditRentalViewModel
     rentalModel.addListener("selectedRental", this::selectedRental);
   }
     /**
-     * (?)
+     * Rental related data is sent to the controller through binding.
      * @param evt
      */
   private void selectedRental(PropertyChangeEvent evt)
@@ -70,58 +71,38 @@ public class EditRentalViewModel
       }
     });
   }
-    /**
-     * Gets nameField.
-     *
-     * @return returns nameField input
-     */
+
   public StringProperty getNameField()
   {
     return nameField;
   }
-    /**
-     * Gets descriptionField.
-     *
-     * @return returns descriptionField input
-     */
+
   public StringProperty getDescriptionField()
   {
     return descriptionField;
   }
-    /**
-     * Gets priceField.
-     *
-     * @return returns priceField input
-     */
+
   public StringProperty getPriceField()
   {
     return priceField;
   }
-    /**
-     * Image property property object property.
-     *
-     * @return the object property
-     */
+
   public ObjectProperty<Image> imagePropertyProperty()
   {
     return imageProperty;
   }
-    /**
-     * Gets otherInformation.
-     *
-     * @return returns otherInformationField input
-     */
+
   public StringProperty getOtherInfoField()
   {
     return otherInfoField;
   }
     /**
-     * After EditRental button have been pressed this method sends data to the model.
-     *
+     * After EditRental button have been pressed this method sends data to the model
+     * and receives a validation message if data is missing, invalid or the rental
+     * was successfully edited.
      * @param selectedState    The selected state
      * @param selectedCategory The selected category
      * @return returns Rental object with edited data
-     * @throws IOException
      */
   public String onEditRentalButtonPressed(Object selectedState,
       ObservableList<String> selectedCategory)
@@ -137,7 +118,8 @@ public class EditRentalViewModel
         selectedCategoriesList);
   }
     /**
-     * Gets all the states in a list.
+     * Gets all the states in a list from the database and places them in a Observable
+     * list to be bound to a listing element in controller.
      *
      * @return returns a list of states
      */
@@ -153,7 +135,8 @@ public class EditRentalViewModel
     return statesList;
   }
     /**
-     * Gets all the categories in a list.
+     * Gets all the categories in a list from the database and places them in a Observable
+     * list to be bound to a listing element in controller.
      *
      * @return returns a list of categories
      */
@@ -189,7 +172,6 @@ public class EditRentalViewModel
 
   public void updateRental()
   {
-    rentalModel.loadRentals();
     rentalModel.setAllMemberRentals(memberModel.getLoggedInUsername());
   }
 }
