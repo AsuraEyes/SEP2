@@ -275,9 +275,9 @@ public class RentalDAOImpl
   }
 
   /**
-   * @param
-   * @return
-   * @throws SQLException
+   * Get Rental object by its id
+   * @param id
+   * @return Rental object
    */
   public Rental getRentalById(int id)
   {
@@ -462,7 +462,6 @@ public class RentalDAOImpl
   /**
    * Reads all rentals from database by connecting to the database and get all table contents
    * @return returns a list of all rentals that are stored in the database
-   * @throws SQLException
    */
   public List<Rental> readRentals()
   {

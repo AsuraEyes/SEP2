@@ -16,7 +16,7 @@ public class DataCheckSearch
 
   /**
    * Checks all the rentals with given value
-   * @param search
+   * @param search keyword
    * @return returns list of rentals where value matches with their name or description
    */
   public List<Rental> checkSearch(String search)
@@ -66,7 +66,7 @@ public class DataCheckSearch
     return null;
   }
   /**
-   * Checks is search input was given.
+   * Checks if search input was given.
    * @return returns true if search input is not empty, false if it is empty
    */
   private boolean searchGiven()

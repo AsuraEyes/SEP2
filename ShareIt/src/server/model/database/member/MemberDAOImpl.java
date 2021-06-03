@@ -61,7 +61,6 @@ public class MemberDAOImpl
    * @param addressPostalCode postal code of the place where user lives input by user while creating new account
    * @param addressCity       city where user lives chosen from the list of possible cities by user while creating new account
    * @return returns new object of Member with data which was provided by user while creating new account
-   * @throws SQLException
    */
   public Member create(String username, String password,
       String emailAddress, String phoneNumber, String otherInformation,
@@ -98,10 +97,6 @@ public class MemberDAOImpl
     }
   }
 
-  /**
-   * @param username
-   * @return
-   */
   public List<Member> readByUsername(String username)
   {
     try (Connection connection = getConnection())
