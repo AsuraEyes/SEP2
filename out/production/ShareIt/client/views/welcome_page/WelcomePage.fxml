@@ -34,7 +34,7 @@
                            </font>
                         </Label>
                         <!--prefHeight="144.0" prefWidth="470.0"-->
-                        <Label text="We are a company founded in August 2020. If you are a fan of saying Sharing is caring, then you are on a right place! The idea of this project is to give everybody the opportunity to offer things they own to others that might need them. This idea was inspired by Libraries of things, which are stone shops offering tools, boardgames, sport equipment and other things that are not used on a daily basis." textFill="WHITE" wrapText="true" />
+                        <Label text="We are a company founded in August 2020. If you are a fan of saying Sharing is caring, then you are at the right place! The idea of this project is to give everybody the opportunity to offer things they own to others that might need them. This idea was inspired by Libraries of things, which are stone shops offering tools, boardgames, sport equipment and other things that are not used on a daily basis." textFill="WHITE" wrapText="true" />
                      </children>
                      <effect>
                         <ColorAdjust />
@@ -50,7 +50,7 @@
                               <Font name="Californian FB" size="24.0" />
                            </font>
                         </Label>
-                        <Label text="Start by logging in. If you do not have a profile yet, create one! Write into search on the top of the page to search for a rental. You can always get back here by clicking on the logo in the left of the menu. If desired, filter for the results. Click on a chosen rental to see more information about them. " textFill="WHITE" wrapText="true" />
+                        <Label text="Start by logging in. If you do not have a profile yet, create one! Write into search on the top of the page to search for a rental. You can always get back here by clicking on the logo on the left side of the menu. If desired, filter for the results. Click on a chosen rental to see more information about it. " textFill="WHITE" wrapText="true" />
                      </children>
                      <effect>
                         <ColorAdjust />
