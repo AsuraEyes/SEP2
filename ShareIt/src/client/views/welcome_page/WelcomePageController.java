@@ -18,7 +18,7 @@ public class WelcomePageController
 
   /**
    * Init.
-   *
+   * Sets the view depending on the user type
    * @param viewHandler      the view handler
    * @param viewModelFactory the view model factory
    */

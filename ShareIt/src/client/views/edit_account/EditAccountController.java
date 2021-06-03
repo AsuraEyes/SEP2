@@ -71,19 +71,13 @@ public class EditAccountController
         .hideAfter(Duration.seconds(3));
 
   }
-    /**
-     * Changes view when button was pressed.
-     *
-     * @throws IOException
-     */
+
   public void goBackToProfile()
   {
     viewHandler.setView(viewHandler.menu(), viewHandler.manageAccount());
   }
     /**
-     * If data is valid it uses a method from viewModel
-     *
-     * @throws IOException
+     * If the data is valid confirm the editing in the popup alert
      */
   public void editButton()
   {
@@ -117,9 +111,7 @@ public class EditAccountController
     }
   }
     /**
-     * If data is valid it uses a method from viewModel
-     *
-     * @throws IOException
+     * If the data is valid confirm the deletion in the popup alert
      */
   public void deleteButton()
   {
@@ -151,11 +143,7 @@ public class EditAccountController
       }
     }
   }
-    /**
-     * Validates data
-     * @param nameOfField name of field
-     * @return returns true if data is valid, false if not
-     */
+
   private boolean checkField(TextField nameOfField)
   {
     if (nameOfField.textProperty().getValue() == null || nameOfField

@@ -6,6 +6,7 @@ import javafx.scene.layout.VBox;
 
 /**
  * A class that manages an interface and handle interactions in Main view
+ * Empty view, is used as a base for the other views
  */
 public class MainController
 {
@@ -21,11 +22,6 @@ public class MainController
     this.viewHandler = viewHandler;
   }
 
-  /**
-   * Gets main pane.
-   *
-   * @return the main pane
-   */
   public VBox getMainPane()
   {
     return mainPane;

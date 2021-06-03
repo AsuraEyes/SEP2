@@ -124,8 +124,6 @@ public class ViewMemberProfileViewModel
   }
   /**
    * Loads member's information that profile is viewed.
-   *
-   * @return returns all Member's data
    */
   public void loadMemberInformation()
   {

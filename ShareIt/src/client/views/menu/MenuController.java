@@ -27,7 +27,7 @@ public class MenuController
   private MenuViewModel menuViewModel;
   /**
    * Init.
-   *
+   * Sets the menu view depending on the user type that uses the application
    * @param viewHandler      the view handler
    * @param viewModelFactory the view model factory
    */
@@ -59,9 +59,7 @@ public class MenuController
       logInOutLabel.setText("Log out");
     }
   }
-  /**
-   * Changes view when logo was pressed.
-   */
+
   public void onLogoClick()
   {
     viewHandler.setView(viewHandler.menu(), viewHandler.welcomePage());

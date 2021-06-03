@@ -43,9 +43,7 @@ public class RateFeedbackController
     rateFeedbackViewModel.getMemberUsername();
 
   }
-  /**
-   * Changes view when button was pressed and data validated.
-   */
+
   public void submitButton()
   {
     Stage stage = (Stage) viewHandler.getStage().getScene().getWindow();
@@ -61,9 +59,7 @@ public class RateFeedbackController
       viewHandler.setView(viewHandler.menu(), viewHandler.viewMemberProfile());
     }
   }
-  /**
-   * Changes view when button was pressed.
-   */
+
   public void goBackToUsersPageButton()
   {
     viewHandler.setView(viewHandler.menu(), viewHandler.viewMemberProfile());

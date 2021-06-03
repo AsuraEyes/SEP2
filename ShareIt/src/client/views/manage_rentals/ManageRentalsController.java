@@ -33,7 +33,6 @@ public class ManageRentalsController
    *
    * @param viewHandler      the view handler
    * @param viewModelFactory the view model factory
-   * @throws IOException
    */
   public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory)
   {
@@ -56,9 +55,7 @@ public class ManageRentalsController
     categoryLabel.textProperty()
         .bind(manageRentalsViewModel.categoryOfRentalProperty());
   }
-  /**
-   * Changes view when button was pressed and gets data for selected rental.
-   */
+
   public void editButton()
   {
     viewHandler.setView(viewHandler.menu(), viewHandler.editRental());
@@ -98,9 +95,7 @@ public class ManageRentalsController
       }
     }
   }
-  /**
-   * Changes view when button was pressed.
-   */
+
   public void goBackToProfileOverviewButton()
   {
     manageRentalsViewModel.setMemberUsername();

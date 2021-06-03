@@ -73,7 +73,7 @@ public class EditRentalController
         .hideAfter(Duration.seconds(3));
   }
   /**
-   * If data is valid it uses a method from viewModel
+   * If the data is valid confirm the editing in the popup alert
    *
    */
   public void editButton()

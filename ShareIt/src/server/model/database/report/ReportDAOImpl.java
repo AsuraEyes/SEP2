@@ -82,7 +82,6 @@ public class ReportDAOImpl
    * @param fromUsername User that was reporting
    * @param toUsername   User that got reported
    * @return returns Report object that has usernames matching
-   * @throws SQLException
    */
   public Report getReport(String fromUsername, String toUsername)
   {

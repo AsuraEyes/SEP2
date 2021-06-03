@@ -55,7 +55,6 @@ public class RatingDAOImpl
    * @param username1 user that is rating
    * @param username2 user that is rated
    * @return returns new object of Rating
-   * @throws SQLException
    */
   public Rating create(double starValue, String feedback,
       String username1, String username2)
@@ -107,7 +106,6 @@ public class RatingDAOImpl
             resultSet.getString("commentary"), resultSet.getInt("member_from"),
             resultSet.getInt("member_to")));
       }
-      //return array list
       return arrayListToReturn;
     }
     catch (SQLException e)

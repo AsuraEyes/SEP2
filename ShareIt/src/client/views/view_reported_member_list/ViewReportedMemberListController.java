@@ -22,7 +22,8 @@ public class ViewReportedMemberListController
   private ViewHandler viewHandler;
   /**
    * Init.
-   *
+   * Loads the list of all reports and display the username of the reported member
+   * and the member that got reported
    * @param viewHandler      the view handler
    * @param viewModelFactory the view model factory
    */
@@ -34,8 +35,9 @@ public class ViewReportedMemberListController
     displayReports(viewReportedMemberListViewModel.getReportList());
   }
   /**
-   * Displays all reports.
-   *
+   * Loads all the member's reports and places them individually in a
+   * separate Vbox. The VBox's are created for each message and display with the
+   * help of Label the required content.
    * @param reports All the reports that members have filed
    */
   public void displayReports(List<Report> reports)

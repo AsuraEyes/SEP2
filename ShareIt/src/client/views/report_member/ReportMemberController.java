@@ -37,9 +37,7 @@ public class ReportMemberController
         .bindBidirectional(reportMemberViewModel.getCommentaryTextArea());
     reportMemberViewModel.getMemberUsername();
   }
-  /**
-   *  Changes a view when button was pressed and data validated.
-   */
+
   public void reportButton()
   {
     Stage stage = (Stage) viewHandler.getStage().getScene().getWindow();
@@ -55,9 +53,7 @@ public class ReportMemberController
       viewHandler.setView(viewHandler.menu(), viewHandler.viewMemberProfile());
     }
   }
-  /**
-   * Changes view when button was pressed.
-   */
+
   public void goBackToUserPageButton()
   {
     viewHandler.setView(viewHandler.menu(), viewHandler.viewMemberProfile());
