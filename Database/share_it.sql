@@ -32,7 +32,7 @@ CREATE TABLE member(
     address_no VARCHAR(100) NOT NULL,
     address_postal_code int NOT NULL,
     address_city_name VARCHAR (100) NOT NULL,
-    average_rating DECIMAL(2, 1) DEFAULT 0 NOT NULL,
+    average_review DECIMAL(2, 1) DEFAULT 0 NOT NULL,
     FOREIGN KEY (address_city_name) REFERENCES city(name)
 );
 
@@ -123,7 +123,7 @@ $$
         WHERE member_to = NEW.member_to;
 
         UPDATE share_it.member
-        SET average_rating = calculated_review
+        SET average_review = calculated_review
         WHERE id = NEW.member_to;
 
         RETURN NEW;
