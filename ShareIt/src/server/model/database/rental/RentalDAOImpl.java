@@ -303,7 +303,7 @@ public class RentalDAOImpl
         String rentalState = resultSet.getString("state_name");
         int memberId = resultSet.getInt("member_id");
 
-        new Rental(rentalId, rentalName, "file:" + filename, rentalDescription,
+        return new Rental(rentalId, rentalName, "file:" + filename, rentalDescription,
             priceOfRental, rentalOtherInformation, rentalState, memberId,
             RentalCategoryDAOImpl.getInstance()
                 .getSelectedCategoriesOnRental(rentalId));

@@ -92,7 +92,7 @@ public class ServerModelImpl implements ServerModelManager
     String message = dataCheckRental
         .updateCheckRentalData(name, pictureLink, description, price,
             otherInformation, stateName, rentalId, selectedCategories);
-    if (message.equals(""))
+    if (message.equals("Edit successful"))
     {
       support.firePropertyChange("updateRental", 0,
           RentalDAOImpl.getInstance().getRentalById(rentalId));
