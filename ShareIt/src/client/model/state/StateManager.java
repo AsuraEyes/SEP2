@@ -10,7 +10,7 @@ public class StateManager implements Serializable
   private static StateManager instance;
   private LoginState currentState;
 
-  private StateManager()
+  public StateManager()
   {
     currentState = new VisitorState();
   }

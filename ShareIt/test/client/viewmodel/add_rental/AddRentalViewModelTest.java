@@ -8,6 +8,9 @@ import client.model.message.MessageModel;
 import client.model.message.MessageModelManager;
 import client.model.rental.RentalModel;
 import client.model.rental.RentalModelManager;
+import client.model.state.LoginState;
+import client.model.state.MemberState;
+import client.model.state.StateManager;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -18,6 +21,8 @@ import javafx.embed.swing.JFXPanel;
 import javafx.scene.image.Image;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import server.model.database.member.MemberDAOImpl;
+import shared.transferobjects.Member;
 
 import javax.swing.*;
 
@@ -40,6 +45,8 @@ public class AddRentalViewModelTest
         modelFactory);
     messageModel = new MessageModelManager(clientFactory.getClient());
     vm = new AddRentalViewModel(rentalModel, memberModel);
+    StateManager.getInstance().setLoginState(new MemberState("bob"));
+
 
     JFrame frame = new JFrame("Java Swing And JavaFX");
     JFXPanel jfxPanel = new JFXPanel();
@@ -59,16 +66,14 @@ public class AddRentalViewModelTest
     vm.getOtherInfoField().bind(otherInfoField);
     vm.imagePropertyProperty().bind(imageProperty);
 
-    nameField.setValue("new drillx");
+    nameField.setValue("new drilxlx");
     descriptionField.setValue("description");
     priceField.setValue("15");
     otherInfoField.setValue("otherinfo");
-
     imageProperty.setValue(new Image("file:image1.jpeg"));
 
     ObservableList<String> objects = FXCollections
         .observableArrayList("Tools", "Kitchenware");
-
     String result = vm.onAddRentalButtonPressed("New", objects);
 
     assertEquals("Adding successful", result);
