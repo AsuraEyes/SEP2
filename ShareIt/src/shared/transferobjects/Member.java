@@ -46,7 +46,13 @@ public class Member implements Serializable
     else{
       this.emailAddress = emailAddress;
     }
-    this.otherInformation = otherInformation;
+    if(otherInformation == null){
+      this.otherInformation = "";
+    }
+    else{
+      this.otherInformation = otherInformation;
+    }
+
     if(phoneNo == null){
       this.phoneNo = "";
     }
