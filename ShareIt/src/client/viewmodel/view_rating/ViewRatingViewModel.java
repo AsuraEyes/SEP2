@@ -91,7 +91,7 @@ public class ViewRatingViewModel
     }
     else{
       contact.setValue(
-              "Contact: " + member.getPhoneNo() + "\n" + member.getEmailAddress() + "\n");
+              "Contact: " + member.getPhoneNo() + "\n" + member.getEmailAddress());
     }
     otherInformation
         .setValue("Other Information: " + member.getOtherInformation());

@@ -56,8 +56,8 @@ public class SearchForMemberController
    */
   public void searchButton()
   {
-//    vBox.getChildren().clear();
     List<Member> members = searchForMemberViewModel.onSearchButtonPressed();
+    vBox.getChildren().clear();
     displayMembers(members);
   }
 

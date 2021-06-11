@@ -46,15 +46,15 @@ public class DataCheckSearch
   }
   /**
    * Checks all the rentals with given value
-   * @param value keyword
+   * @param search keyword
    * @return returns list of rentals where value matches with their name or description
    */
-  public List<Member> checkSearchForMember(String value)
+  public List<Member> checkSearchForMember(String search)
   {
     this.search = search;
     if (searchGiven())
     {
-      return MemberDAOImpl.getInstance().readByUsername(value);
+      return MemberDAOImpl.getInstance().readByUsername(search);
     }
     else
     {
