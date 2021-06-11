@@ -24,6 +24,7 @@ public class ManageAccountViewModel
   private SimpleStringProperty otherInformationLabel;
   private RentalModel rentalModel;
   private MemberModel memberModel;
+
   /**
    * Instantiates StringProperties used for binding with the fields in the controller
    *
@@ -43,6 +44,7 @@ public class ManageAccountViewModel
     contactLabel = new SimpleStringProperty();
     otherInformationLabel = new SimpleStringProperty();
   }
+
     /**
      * Sets logged in member information in the controller.
      */
@@ -65,6 +67,7 @@ public class ManageAccountViewModel
   {
     return rentalModel.getRentalsOfMemberList();
   }
+
     /**
      * On mouse click, the clicked object is retrieved and analyzed. The purpose
      * is to get the the member's id stored in the ImageView id field. The id is

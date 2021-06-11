@@ -85,8 +85,14 @@ public class ViewRatingViewModel
     rating.setValue("Rating: " + (member.getAverageReview()));
     address.setValue(
         "Address: " + member.getAddressStreet() + ", " + member.getAddressNo());
-    contact.setValue(
-        "Contact: " + member.getPhoneNo() + "\n" + member.getEmailAddress());
+    if (member.getPhoneNo().isEmpty()){
+      contact.setValue(
+              "Contact: " + member.getEmailAddress());
+    }
+    else{
+      contact.setValue(
+              "Contact: " + member.getPhoneNo() + "\n" + member.getEmailAddress() + "\n");
+    }
     otherInformation
         .setValue("Other Information: " + member.getOtherInformation());
     return memberModel.getMemberUsername();

@@ -1,6 +1,8 @@
 package server.model.data_check;
 
+import server.model.database.member.MemberDAOImpl;
 import server.model.database.rental.RentalDAOImpl;
+import shared.transferobjects.Member;
 import shared.transferobjects.Rental;
 
 import java.sql.SQLException;
@@ -42,6 +44,28 @@ public class DataCheckSearch
     }
     return null;
   }
+  /**
+   * Checks all the rentals with given value
+   * @param value keyword
+   * @return returns list of rentals where value matches with their name or description
+   */
+  public List<Member> checkSearchForMember(String value)
+  {
+    this.search = search;
+    if (searchGiven())
+    {
+      return MemberDAOImpl.getInstance().readByUsername(value);
+    }
+    else
+    {
+      if (!searchGiven())
+      {
+        return MemberDAOImpl.getInstance().readMembers();
+      }
+    }
+    return null;
+  }
+
   /**
    * Check of the Search with Filter data before passing it into the DAO.
    *
