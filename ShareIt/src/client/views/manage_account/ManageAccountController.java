@@ -29,6 +29,7 @@ public class ManageAccountController
 
   private ViewHandler viewHandler;
   private ManageAccountViewModel manageAccountViewModel;
+
   /**
    * Init.
    * Loads the member's rentals

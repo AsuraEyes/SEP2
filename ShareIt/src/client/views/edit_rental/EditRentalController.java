@@ -11,13 +11,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.controlsfx.control.CheckComboBox;
 import org.controlsfx.control.Notifications;
 
-import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -72,6 +71,7 @@ public class EditRentalController
         .graphic(new Rectangle(300, 300, Color.RED))
         .hideAfter(Duration.seconds(3));
   }
+
   /**
    * If the data is valid confirm the editing in the popup alert
    *
@@ -116,16 +116,19 @@ public class EditRentalController
    */
   public void editPictureButton()
   {
-    JFileChooser fileChooser = new JFileChooser();
-    fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
-    FileNameExtensionFilter filter = new FileNameExtensionFilter("*.IMAGE",
-        "jpg", "gif", "png");
-    fileChooser.addChoosableFileFilter(filter);
-    int result = fileChooser.showSaveDialog(null);
-    if (result == JFileChooser.APPROVE_OPTION)
+    FileChooser fileChooser = new FileChooser();
+    fileChooser.setTitle("Select an image");
+    fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+    fileChooser.getExtensionFilters().addAll(
+            new FileChooser.ExtensionFilter("All files", "*.*"),
+            new FileChooser.ExtensionFilter("Image files", "*.jpg", "*.gif", "*.png", "*.jpeg")
+    );
+
+    File file = fileChooser.showOpenDialog(viewHandler.getStage());
+
+    if (file != null)
     {
-      File selectedFile = fileChooser.getSelectedFile();
-      String path = selectedFile.getPath();
+      String path = file.getPath();
       imageView.setFitHeight(220);
       imageView.setFitWidth(170);
       imageView.setPreserveRatio(false);

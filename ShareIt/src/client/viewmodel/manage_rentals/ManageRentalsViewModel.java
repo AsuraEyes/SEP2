@@ -74,7 +74,7 @@ public class ManageRentalsViewModel
         if (rental.getSelectedCategories() != null)
         {
           categoryOfRental.setValue(
-              "Categories: " + rental.getSelectedCategories().toString());
+              "Categories: " + rental.toArrayString());
         }
       }
     });

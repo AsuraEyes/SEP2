@@ -134,8 +134,14 @@ public class ViewMemberProfileViewModel
     ratingLabel.setValue("Rating: " + (member.getAverageReview()));
     addressLabel.setValue(
         "Address: " + member.getAddressStreet() + ", " + member.getAddressNo());
-    contactLabel.setValue(
-        "Contact: " + member.getPhoneNo() + "\n" + member.getEmailAddress());
+    if (member.getPhoneNo().isEmpty()){
+      contactLabel.setValue(
+              "Contact: " + member.getEmailAddress());
+    }
+    else{
+      contactLabel.setValue(
+              "Contact: " + member.getPhoneNo() + "\n" + member.getEmailAddress());
+    }
     otherInformationLabel
         .setValue("Other Information: " + member.getOtherInformation());
   }

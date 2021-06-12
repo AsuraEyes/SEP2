@@ -2,6 +2,8 @@ package shared.transferobjects;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
+
 /**
  * A class that handles Rentals information.
  */
@@ -208,5 +210,10 @@ public class Rental implements Serializable
   @Override public String toString()
   {
     return name + "\n\n" + description;
+  }
+
+  public String toArrayString()
+  {
+   return Arrays.toString(selectedCategories.toArray()).replace("[", "").replace("]", "");
   }
 }

@@ -37,7 +37,7 @@
                                     <Font name="Californian FB" size="24.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="descriptionLabel" prefHeight="88.0" prefWidth="430.0" text="Description very very long description. Description very very long description. Description very very long description. Description very very long description. Description very very long description. Description very very long description. " textFill="WHITE" wrapText="true">
+                              <Label fx:id="descriptionLabel" text="Description very very long description. Description very very long description. Description very very long description. Description very very long description. Description very very long description. Description very very long description. " textFill="WHITE" wrapText="true">
                                  <padding>
                                     <Insets bottom="10.0" top="10.0" />
                                  </padding>

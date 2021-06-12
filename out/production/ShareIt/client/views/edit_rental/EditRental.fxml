@@ -22,7 +22,7 @@
    <content>
       <AnchorPane fx:id="parent" prefHeight="600.0" prefWidth="1280.0">
          <children>
-            <VBox layoutY="90.0" prefHeight="485.0" prefWidth="1280.0" style="-fx-border-color: #FF665A; -fx-border-width: 3; -fx-background-color: #FF665A;">
+            <VBox layoutY="90.0" prefHeight="485.0" prefWidth="1280.0" style="-fx-border-color: #FF665A; -fx-border-width: 3; -fx-background-color: #FF665A;" stylesheets="@../css/Button.css">
                <effect>
                   <ColorAdjust />
                </effect>

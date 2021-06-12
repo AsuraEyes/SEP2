@@ -44,8 +44,8 @@ public class MemberDAOImpl
   private Connection getConnection() throws SQLException
   {
     return DriverManager
-        .getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres",
-            password);
+            .getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres",
+                    password);
   }
 
   /**
@@ -63,15 +63,15 @@ public class MemberDAOImpl
    * @return returns new object of Member with data which was provided by user while creating new account
    */
   public Member create(String username, String password,
-      String emailAddress, String phoneNumber, String otherInformation,
-      String addressStreet, String addressNo, int addressPostalCode,
-      String addressCity) throws SQLException
+                       String emailAddress, String phoneNumber, String otherInformation,
+                       String addressStreet, String addressNo, int addressPostalCode,
+                       String addressCity) throws SQLException
   {
     try (Connection connection = getConnection())
     {
       PreparedStatement statement = connection.prepareStatement(
-          "INSERT INTO share_it.member(username, password, email_address, phone_number, other_information, address_street, address_no, address_postal_code, address_city_name) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);",
-          PreparedStatement.RETURN_GENERATED_KEYS);
+              "INSERT INTO share_it.member(username, password, email_address, phone_number, other_information, address_street, address_no, address_postal_code, address_city_name) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);",
+              PreparedStatement.RETURN_GENERATED_KEYS);
       statement.setString(1, username);
       statement.setString(2, password);
       statement.setString(3, emailAddress);
@@ -87,8 +87,8 @@ public class MemberDAOImpl
       if (generatedKeys.next())
       {
         return new Member(generatedKeys.getInt(1), username, password,
-            emailAddress, phoneNumber, otherInformation, addressStreet,
-            addressNo, addressPostalCode, addressCity, 0);
+                emailAddress, phoneNumber, otherInformation, addressStreet,
+                addressNo, addressPostalCode, addressCity, 0);
       }
       else
       {
@@ -102,23 +102,23 @@ public class MemberDAOImpl
     try (Connection connection = getConnection())
     {
       PreparedStatement statement = connection.prepareStatement(
-          "SELECT * FROM share_it.member WHERE username ILIKE ?");
+              "SELECT * FROM share_it.member WHERE username ILIKE ?");
       statement.setString(1, "%" + username + "%");
       ResultSet resultSet = statement.executeQuery();
       ArrayList<Member> arrayListToReturn = new ArrayList<>();
       while (resultSet.next())
       {
         arrayListToReturn.add(
-            new Member(resultSet.getInt("id"), resultSet.getString("username"),
-                resultSet.getString("password"),
-                resultSet.getString("email_address"),
-                resultSet.getString("phone_number"),
-                resultSet.getString("other_information"),
-                resultSet.getString("address_street"),
-                resultSet.getString("address_no"),
-                resultSet.getInt("address_postal_code"),
-                resultSet.getString("address_city_name"),
-                resultSet.getFloat("average_review")));
+                new Member(resultSet.getInt("id"), resultSet.getString("username"),
+                        resultSet.getString("password"),
+                        resultSet.getString("email_address"),
+                        resultSet.getString("phone_number"),
+                        resultSet.getString("other_information"),
+                        resultSet.getString("address_street"),
+                        resultSet.getString("address_no"),
+                        resultSet.getInt("address_postal_code"),
+                        resultSet.getString("address_city_name"),
+                        resultSet.getFloat("average_review")));
       }
       return arrayListToReturn;
     }
@@ -141,7 +141,7 @@ public class MemberDAOImpl
     try (Connection connection = getConnection())
     {
       PreparedStatement statement = connection
-          .prepareStatement("SELECT * FROM share_it.member WHERE username = ?");
+              .prepareStatement("SELECT * FROM share_it.member WHERE username = ?");
       statement.setString(1, username);
       ResultSet resultSet = statement.executeQuery();
       int numberOfResults = 0;
@@ -151,7 +151,7 @@ public class MemberDAOImpl
       }
       if (numberOfResults == 0)
       {
-          return AdministratorDAOImpl.getInstance().uniqueUsername(username);
+        return AdministratorDAOImpl.getInstance().uniqueUsername(username);
       }
       return false;
     }
@@ -172,14 +172,14 @@ public class MemberDAOImpl
    * @throws SQLException
    */
   public void update(String username, String password,
-      String emailAddress, String phoneNumber, String otherInformation,
-      String addressStreet, String addressNo, int addressPostalCode,
-      String addressCity) throws SQLException
+                     String emailAddress, String phoneNumber, String otherInformation,
+                     String addressStreet, String addressNo, int addressPostalCode,
+                     String addressCity) throws SQLException
   {
     try (Connection connection = getConnection())
     {
       PreparedStatement statement = connection.prepareStatement(
-          "UPDATE share_it.member SET password = ?, email_address = ?, phone_number = ?, other_information = ?, address_street = ?, address_no = ?, address_postal_code = ?, address_city_name = ? WHERE username = ?");
+              "UPDATE share_it.member SET password = ?, email_address = ?, phone_number = ?, other_information = ?, address_street = ?, address_no = ?, address_postal_code = ?, address_city_name = ? WHERE username = ?");
       statement.setString(1, password);
       statement.setString(2, emailAddress);
       statement.setString(3, phoneNumber);
@@ -204,7 +204,7 @@ public class MemberDAOImpl
     try (Connection connection = getConnection())
     {
       PreparedStatement statement = connection
-          .prepareStatement("DELETE FROM share_it.member WHERE id = ?");
+              .prepareStatement("DELETE FROM share_it.member WHERE id = ?");
       statement.setInt(1, member.getId());
       statement.executeUpdate();
       return true;
@@ -227,22 +227,22 @@ public class MemberDAOImpl
     try (Connection connection = getConnection())
     {
       PreparedStatement statement = connection
-          .prepareStatement("SELECT * FROM share_it.member WHERE id = ?");
+              .prepareStatement("SELECT * FROM share_it.member WHERE id = ?");
       statement.setInt(1, id);
       ResultSet resultSet = statement.executeQuery();
 
       if (resultSet.next())
       {
         return new Member(resultSet.getInt("id"),
-            resultSet.getString("username"), resultSet.getString("password"),
-            resultSet.getString("email_address"),
-            resultSet.getString("phone_number"),
-            resultSet.getString("other_information"),
-            resultSet.getString("address_street"),
-            resultSet.getString("address_no"),
-            resultSet.getInt("address_postal_code"),
-            resultSet.getString("address_city_name"),
-            resultSet.getFloat("average_review"));
+                resultSet.getString("username"), resultSet.getString("password"),
+                resultSet.getString("email_address"),
+                resultSet.getString("phone_number"),
+                resultSet.getString("other_information"),
+                resultSet.getString("address_street"),
+                resultSet.getString("address_no"),
+                resultSet.getInt("address_postal_code"),
+                resultSet.getString("address_city_name"),
+                resultSet.getFloat("average_review"));
       }
       else
       {
@@ -268,7 +268,7 @@ public class MemberDAOImpl
     try (Connection connection = getConnection())
     {
       PreparedStatement statement = connection.prepareStatement(
-          "SELECT id FROM share_it.member WHERE username = ?");
+              "SELECT id FROM share_it.member WHERE username = ?");
       statement.setString(1, username);
       ResultSet resultSet = statement.executeQuery();
       if (resultSet.next())
@@ -290,12 +290,12 @@ public class MemberDAOImpl
    * @return returns username if the data matches from given username and password(if username and password belongs to an administrator it returns administrator data)
    */
   public String checkLogInCredentials(String username,
-      String password)
+                                      String password)
   {
     try (Connection connection = getConnection())
     {
       PreparedStatement statement = connection.prepareStatement(
-          "SELECT username FROM share_it.member WHERE username = ? AND password = ?");
+              "SELECT username FROM share_it.member WHERE username = ? AND password = ?");
       statement.setString(1, username);
       statement.setString(2, password);
 
@@ -308,7 +308,7 @@ public class MemberDAOImpl
       else
       {
         String adminUsername = AdministratorDAOImpl.getInstance()
-            .checkLogInCredentials(username, password);
+                .checkLogInCredentials(username, password);
         if (adminUsername != null)
         {
           return adminUsername;
@@ -333,22 +333,22 @@ public class MemberDAOImpl
     try (Connection connection = getConnection())
     {
       PreparedStatement statement = connection
-          .prepareStatement("SELECT * FROM share_it.member WHERE username = ?");
+              .prepareStatement("SELECT * FROM share_it.member WHERE username = ?");
       statement.setString(1, username);
       ResultSet resultSet = statement.executeQuery();
 
       if (resultSet.next())
       {
         return new Member(resultSet.getInt("id"),
-            resultSet.getString("username"), resultSet.getString("password"),
-            resultSet.getString("email_address"),
-            resultSet.getString("phone_number"),
-            resultSet.getString("other_information"),
-            resultSet.getString("address_street"),
-            resultSet.getString("address_no"),
-            resultSet.getInt("address_postal_code"),
-            resultSet.getString("address_city_name"),
-            resultSet.getFloat("average_review"));
+                resultSet.getString("username"), resultSet.getString("password"),
+                resultSet.getString("email_address"),
+                resultSet.getString("phone_number"),
+                resultSet.getString("other_information"),
+                resultSet.getString("address_street"),
+                resultSet.getString("address_no"),
+                resultSet.getInt("address_postal_code"),
+                resultSet.getString("address_city_name"),
+                resultSet.getFloat("average_review"));
       }
       else
       {
@@ -362,31 +362,31 @@ public class MemberDAOImpl
 
     return null;
   }
-    /**
-     * Gets all the possible Members by connecting to the database and get all table contents
-     * @return returns a list of all Members that are stored in the database
-     */
+  /**
+   * Gets all the possible Members by connecting to the database and get all table contents
+   * @return returns a list of all Members that are stored in the database
+   */
   public List<Member> readMembers()
   {
     try (Connection connection = getConnection())
     {
       PreparedStatement statement = connection
-          .prepareStatement("SELECT * FROM share_it.member");
+              .prepareStatement("SELECT * FROM share_it.member");
       ResultSet resultSet = statement.executeQuery();
       List<Member> listToReturn = new ArrayList<>();
       while (resultSet.next())
       {
         listToReturn.add(
-            new Member(resultSet.getInt("id"), resultSet.getString("username"),
-                resultSet.getString("password"),
-                resultSet.getString("email_address"),
-                resultSet.getString("phone_number"),
-                resultSet.getString("other_information"),
-                resultSet.getString("address_street"),
-                resultSet.getString("address_no"),
-                resultSet.getInt("address_postal_code"),
-                resultSet.getString("address_city_name"),
-                resultSet.getFloat("average_review")));
+                new Member(resultSet.getInt("id"), resultSet.getString("username"),
+                        resultSet.getString("password"),
+                        resultSet.getString("email_address"),
+                        resultSet.getString("phone_number"),
+                        resultSet.getString("other_information"),
+                        resultSet.getString("address_street"),
+                        resultSet.getString("address_no"),
+                        resultSet.getInt("address_postal_code"),
+                        resultSet.getString("address_city_name"),
+                        resultSet.getFloat("average_review")));
       }
       return listToReturn;
     }
@@ -402,13 +402,13 @@ public class MemberDAOImpl
     try (Connection connection = getConnection())
     {
       PreparedStatement statement = connection
-          .prepareStatement("SELECT id, username FROM share_it.member");
+              .prepareStatement("SELECT id, username FROM share_it.member");
       ResultSet resultSet = statement.executeQuery();
       List<Member> listToReturn = new ArrayList<>();
       while (resultSet.next())
       {
         listToReturn.add(new Member(resultSet.getInt("id"),
-            resultSet.getString("username")));
+                resultSet.getString("username")));
       }
       return listToReturn;
     }

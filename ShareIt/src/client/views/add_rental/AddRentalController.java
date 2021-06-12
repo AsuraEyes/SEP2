@@ -11,13 +11,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.controlsfx.control.CheckComboBox;
 import org.controlsfx.control.Notifications;
 
-import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.File;
 import java.util.Optional;
 
@@ -45,7 +44,6 @@ public class AddRentalController {
    * @param viewHandler      the view handler
    * @param viewModelFactory the view model factory
    */
-
   public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory)
   {
 
@@ -125,16 +123,19 @@ public class AddRentalController {
    */
   public void addPictureButton()
   {
-    JFileChooser fileChooser = new JFileChooser();
-    fileChooser.setCurrentDirectory(new File(System.getProperty("os.name")));
-    FileNameExtensionFilter filter = new FileNameExtensionFilter("*.IMAGE",
-        "jpg", "gif", "png");
-    fileChooser.addChoosableFileFilter(filter);
-    int result = fileChooser.showSaveDialog(null);
-    if (result == JFileChooser.APPROVE_OPTION)
+    FileChooser fileChooser = new FileChooser();
+    fileChooser.setTitle("Select an image");
+    fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+    fileChooser.getExtensionFilters().addAll(
+            new FileChooser.ExtensionFilter("All files", "*.*"),
+            new FileChooser.ExtensionFilter("Image files", "*.jpg", "*.gif", "*.png", "*.jpeg")
+    );
+
+    File file = fileChooser.showOpenDialog(viewHandler.getStage());
+
+    if (file != null)
     {
-      File selectedFile = fileChooser.getSelectedFile();
-      String path = selectedFile.getPath();
+      String path = file.getPath();
       pictureView.setFitHeight(220);
       pictureView.setFitWidth(170);
       pictureView.setPreserveRatio(false);
@@ -169,6 +170,7 @@ public class AddRentalController {
     }
     return true;
   }
+
       /**
        * Checks if picture was added
        * @param imageView picture

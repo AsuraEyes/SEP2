@@ -84,7 +84,7 @@ public class ViewRentalViewModel
         if (rental.getSelectedCategories() != null)
         {
           categoryOfRental.setValue(
-              "Categories: " + rental.getSelectedCategories().toString());
+              "Categories: " + rental.toArrayString());
         }
         usernameOfRental.setValue("Username: " + member.getUsername());
         locationOfRental.setValue("Location: " + member.getAddressCity());

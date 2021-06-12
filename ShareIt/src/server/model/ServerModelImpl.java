@@ -112,6 +112,11 @@ public class ServerModelImpl implements ServerModelManager
     return dataCheckSearch.checkSearch(search);
   }
 
+  @Override public List<Member> checkSearchForMember(String value)
+  {
+    return dataCheckSearch.checkSearchForMember(value);
+  }
+
   @Override public String addFeedback(double starValue, String feedback,
       String username1, String username2)
   {
@@ -211,11 +216,6 @@ public class ServerModelImpl implements ServerModelManager
       return true;
     }
     return false;
-  }
-
-  @Override public List<Member> checkSearchForMember(String value)
-  {
-    return MemberDAOImpl.getInstance().readByUsername(value);
   }
 
   @Override public List<Member> getMembersList()
