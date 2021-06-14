@@ -50,7 +50,7 @@ public class CityDAOImpl
   /**
    * Reads all cities from database by connecting to the database and get all table contents
    *
-   * @return returns all city names in a arraylist
+   * @return all city names in a arraylist
    */
   public List<City> readCity()
   {

@@ -24,9 +24,9 @@ public class RentalCategoryDAOImpl
       {
         instance = new RentalCategoryDAOImpl();
       }
-      catch (SQLException throwables)
+      catch (SQLException e)
       {
-        throwables.printStackTrace();
+        e.printStackTrace();
       }
     }
     return instance;
@@ -46,8 +46,7 @@ public class RentalCategoryDAOImpl
     /**
      * Gets selected categories on rental by connecting to the database and matching given rentalId with existing data
      * @param rentalId Rental's ID
-     * @return returns a list of all selected categories that were chosen during creation of new Rental offer
-     * @throws SQLException
+     * @return list of all selected categories that were chosen during creation of new Rental offer
      */
   public ArrayList<String> getSelectedCategoriesOnRental(int rentalId)
       throws SQLException

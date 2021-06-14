@@ -28,8 +28,8 @@ public class RentalDAOImpl {
         if (instance == null) {
             try {
                 instance = new RentalDAOImpl();
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
         }
         return instance;
@@ -55,15 +55,14 @@ public class RentalDAOImpl {
      * @param otherInformation   other information of the rental input by user while creating new rental offer
      * @param stateName          state of the rental chosen from the list of possible states by user while creating new rental offer
      * @param selectedCategories categories of the rental chosen from the list of possible categories by user while creating new rental offer
-     * @return returns new object of Rental with data which was provided by user while creating new rental offer
+     * @return new object of Rental with data which was provided by user while creating new rental offer
      * @throws SQLException
      */
     public Rental create(String name, String pictureLink,
                          String description, int price, String otherInformation, String stateName,
                          String username, ArrayList<String> selectedCategories) throws SQLException {
         try (Connection connection = getConnection()) {
-            File file = null;
-            file = new File(pictureLink);
+            File file = new File(pictureLink);
             FileInputStream fis = null;
             try {
                 fis = new FileInputStream(file);
@@ -75,7 +74,7 @@ public class RentalDAOImpl {
                     .prepareStatement("SELECT * FROM share_it.member WHERE username = ?");
             statement.setString(1, username);
             ResultSet resultSet = statement.executeQuery();
-            int memberId = 0;
+            int memberId;
             if (resultSet.next()) {
                 memberId = resultSet.getInt("id");
             } else {
@@ -121,7 +120,7 @@ public class RentalDAOImpl {
      * @param search     search is a phrase that was input by user in order to get rentals matched with it
      * @param city       city that member who posted rental should be from
      * @param categories categories that searched for rental should be in
-     * @return returns a list of rentals where values input matches with rentals values
+     * @return a list of rentals where values input matches with rentals values
      * @throws SQLException
      */
     public List<Rental> readBySearchAndFilter(String search,
@@ -255,8 +254,8 @@ public class RentalDAOImpl {
                         RentalCategoryDAOImpl.getInstance()
                                 .getSelectedCategoriesOnRental(rentalId));
             }
-        } catch (SQLException | IOException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException | IOException e) {
+            e.printStackTrace();
         }
         return null;
     }
@@ -265,7 +264,7 @@ public class RentalDAOImpl {
      * Checks all the rentals with given value
      *
      * @param search the search
-     * @return returns a list of rentals where value matches with their name or description
+     * @return a list of rentals where value matches with their name or description
      * @throws SQLException
      */
     public List<Rental> readBySearch(String search) throws SQLException {
@@ -358,7 +357,7 @@ public class RentalDAOImpl {
      * Deletes rental from database by connecting to the database and deleting matched object's id with existing member
      *
      * @param rental rental object that will be deleted
-     * @return returns true if rental gets deleted from the database
+     * @return true if rental gets deleted from the database
      */
     public boolean delete(Rental rental) {
         try (Connection connection = getConnection()) {
@@ -367,8 +366,8 @@ public class RentalDAOImpl {
             statement.setInt(1, rental.getId());
             statement.executeUpdate();
             return true;
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return false;
     }
@@ -376,7 +375,7 @@ public class RentalDAOImpl {
     /**
      * Gets next available ID by connecting to the database and getting it by running a next value method.
      *
-     * @return returns the next available ID
+     * @return the next available ID
      * @throws SQLException
      */
     public int getNextAvailableId() throws SQLException {
@@ -397,7 +396,7 @@ public class RentalDAOImpl {
     /**
      * Reads all rentals from database by connecting to the database and get all table contents
      *
-     * @return returns a list of all rentals that are stored in the database
+     * @return a list of all rentals that are stored in the database
      */
     public List<Rental> readRentals() {
         try (Connection connection = getConnection()) {
@@ -436,7 +435,7 @@ public class RentalDAOImpl {
     /**
      * Gets last rental by connecting to the database and checking the rental that is matched with id which is taken from getNextAvailableId method subtracted by 1 to get id of the last added rental
      *
-     * @return returns the last rental
+     * @return the last rental
      */
     public Rental getLastRental() {
         try (Connection connection = getConnection()) {

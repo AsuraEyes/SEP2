@@ -53,7 +53,7 @@ public class Rental implements Serializable
     /**
      * Gets selected categories.
      *
-     * @return returns an ArrayList of type String of categories that were selected.
+     * @return an ArrayList of type String of categories that were selected.
      */
   public ArrayList<String> getSelectedCategories()
   {
@@ -71,7 +71,7 @@ public class Rental implements Serializable
     /**
      * Gets ID of the Rental.
      *
-     * @return returns int type of Rental's ID.
+     * @return int type of Rental's ID.
      */
   public int getId()
   {
@@ -89,7 +89,7 @@ public class Rental implements Serializable
     /**
      * Gets name of the Rental.
      *
-     * @return returns String type of Rental's name.
+     * @return String type of Rental's name.
      */
   public String getName()
   {
@@ -107,7 +107,7 @@ public class Rental implements Serializable
     /**
      * Gets picture storage path.
      *
-     * @return returns String type of picture storage path.
+     * @return String type of picture storage path.
      */
   public String getPictureLink()
   {
@@ -125,7 +125,7 @@ public class Rental implements Serializable
     /**
      * Gets description of the Rental.
      *
-     * @return returns String type of Rental's description.
+     * @return String type of Rental's description.
      */
   public String getDescription()
   {
@@ -161,7 +161,7 @@ public class Rental implements Serializable
     /**
      * Gets other information of the Rental.
      *
-     * @return returns String type of Rental's other information.
+     * @return String type of Rental's other information.
      */
   public String getOtherInformation()
   {
@@ -179,7 +179,7 @@ public class Rental implements Serializable
     /**
      * Gets the name of a state that the Rental is in.
      *
-     * @return returns String type of state name.
+     * @return String type of state name.
      */
   public String getStateName()
   {
@@ -197,7 +197,7 @@ public class Rental implements Serializable
     /**
      * Gets ID of a member that posted a rental.
      *
-     * @return returns int type of members ID.
+     * @return int type of members ID.
      */
   public int getMemberId()
   {
@@ -205,7 +205,7 @@ public class Rental implements Serializable
   }
     /**
      * Gets rental with its name and description as a String.
-     * @return returns Rental's name and description.
+     * @return Rental's name and description.
      */
   @Override public String toString()
   {

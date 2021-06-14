@@ -20,7 +20,7 @@ public class City implements Serializable
   /**
    * Gets name of the city.
    *
-   * @return returns String type of name of the City
+   * @return String type of name of the City
    */
   public String getName()
   {
@@ -37,7 +37,7 @@ public class City implements Serializable
   }
   /**
    * Gets city name as a String.
-   * @return returns name of the City
+   * @return name of the City
    */
   public String toString()
   {

@@ -21,7 +21,7 @@ public class State implements Serializable
   /**
    * Gets state name.
    *
-   * @return returns String type of state name.
+   * @return String type of state name.
    */
   public String getName()
   {
@@ -40,7 +40,7 @@ public class State implements Serializable
 
   /**
    * Gets name of a state as a String
-   * @return returns name of the State
+   * @return name of the State
    */
   @Override public String toString()
   {

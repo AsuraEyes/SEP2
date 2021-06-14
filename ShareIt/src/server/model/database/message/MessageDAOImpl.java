@@ -53,7 +53,7 @@ public class MessageDAOImpl
   /**
    * Gets all received messages for logged in member by connecting to the database and get all table contents that are matched with given data
    * @param loggedUserId The user that is currently logged in
-   * @return returns all the messages connected with this particular member
+   * @return all the messages connected with this particular member
    */
   public ArrayList<Message> getAllReceivedMessages(int loggedUserId)
   {
@@ -86,7 +86,7 @@ public class MessageDAOImpl
   /**
    * Creates new message by connecting to a database then inserting data provided by Member to the database
    * @param message message object that will be sent
-   * @return returns new object of Message with data which was provided by Member while creating new Message
+   * @return new object of Message with data which was provided by Member while creating new Message
    */
   public Message sendMessage(Message message)
   {
@@ -122,7 +122,7 @@ public class MessageDAOImpl
    * Gets all the Messages connected to the Member that sent it and LoggedIn Member that received it by connecting to the database and get all table contents that are matched with given data
    * @param fromUserid Member that sent a message
    * @param loggedUserId Member that is geting messaged
-   * @return returns a list of all messages that are matched with given data
+   * @return a list of all messages that are matched with given data
    */
   public ArrayList<Message> getMessagesFromUser(int loggedUserId,
       int fromUserid)

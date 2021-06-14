@@ -19,7 +19,7 @@ public class DataCheckSearch
   /**
    * Checks all the rentals with given value
    * @param search keyword
-   * @return returns list of rentals where value matches with their name or description
+   * @return list of rentals where value matches with their name or description
    */
   public List<Rental> checkSearch(String search)
   {
@@ -47,7 +47,7 @@ public class DataCheckSearch
   /**
    * Checks all the rentals with given value
    * @param search keyword
-   * @return returns list of rentals where value matches with their name or description
+   * @return list of rentals where value matches with their name or description
    */
   public List<Member> checkSearchForMember(String search)
   {
@@ -72,7 +72,7 @@ public class DataCheckSearch
    * @param search             Search input
    * @param city               Selected city
    * @param selectedCategories Selected categories
-   * @return returns null if none of the conditions were met
+   * @return null if none of the conditions were met
    */
   public List<Rental> checkSearchWithFilter(String search, String city,
       ArrayList<String> selectedCategories)
@@ -91,7 +91,7 @@ public class DataCheckSearch
   }
   /**
    * Checks if search input was given.
-   * @return returns true if search input is not empty, false if it is empty
+   * @return true if search input is not empty, false if it is empty
    */
   private boolean searchGiven()
   {

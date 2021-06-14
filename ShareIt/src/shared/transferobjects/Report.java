@@ -49,7 +49,7 @@ public class Report implements Serializable
   /**
    * Gets commentary that Member gave.
    *
-   * @return returns String of commentary.
+   * @return String of commentary.
    */
   public String getCommentary()
   {
@@ -59,7 +59,7 @@ public class Report implements Serializable
   /**
    * Gets member that was reporting.
    *
-   * @return returns int type of Member's ID that reported other member.
+   * @return int type of Member's ID that reported other member.
    */
   public int getMemberFrom()
   {
@@ -69,7 +69,7 @@ public class Report implements Serializable
   /**
    * Gets member that was reported.
    *
-   * @return returns int type of Member's ID that was reported.
+   * @return int type of Member's ID that was reported.
    */
   public int getMemberTo()
   {

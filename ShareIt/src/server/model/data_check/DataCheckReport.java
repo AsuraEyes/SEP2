@@ -18,7 +18,7 @@ public class DataCheckReport
    * @param feedback  Commentary that was added while reporting a member.
    * @param username1 Member's ID that reported another member.
    * @param username2 Member's ID that was reported.
-   * @return returns String type dependable on the result.
+   * @return String type dependable on the result.
    */
   public String addReport(String feedback, String username1, String username2){
     this.feedback = feedback;
@@ -40,7 +40,7 @@ public class DataCheckReport
   }
   /**
    * Checks is feedback was given.
-   * @return returns true if feedback is not empty, false if it is empty
+   * @return true if feedback is not empty, false if it is empty
    */
   private boolean FeedbackGiven(){
     if (feedback != null){

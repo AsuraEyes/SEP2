@@ -50,7 +50,7 @@ public class StateDAOImpl
   /**
    * Reads all states from database by connecting to the database and get all table contents
    *
-   * @return returns all state names in a arraylist
+   * @return all state names in a arraylist
    */
   public List<State> readState()
   {

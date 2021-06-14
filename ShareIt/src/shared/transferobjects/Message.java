@@ -46,7 +46,7 @@ public class Message implements Serializable {
     /**
      * Gets Member's username that sent a message.
      *
-     * @return returns String type of Member's username who sent a message.
+     * @return String type of Member's username who sent a message.
      */
     public String getUsernameFrom() {
         return usernameFrom;
@@ -55,7 +55,7 @@ public class Message implements Serializable {
     /**
      * Gets Member's ID that sent a message.
      *
-     * @return returns int type of Member's ID who sent a message.
+     * @return int type of Member's ID who sent a message.
      */
     public int getMemberFrom() {
         return memberFrom;
@@ -73,7 +73,7 @@ public class Message implements Serializable {
     /**
      * Gets Member's ID that receives a message.
      *
-     * @return returns int type of Member's ID who received a message.
+     * @return int type of Member's ID who received a message.
      */
     public int getMemberTo() {
         return memberTo;
@@ -91,7 +91,7 @@ public class Message implements Serializable {
     /**
      * Gets content of message.
      *
-     * @return returns String type of text message that was sent.
+     * @return String type of text message that was sent.
      */
     public String getText() {
         return text;
@@ -109,7 +109,7 @@ public class Message implements Serializable {
     /**
      * Gets exact time when message was sent.
      *
-     * @return returns Date type of time when message was sent.
+     * @return Date type of time when message was sent.
      */
     public Date getTimeStamp() {
         return timeStamp;
@@ -118,7 +118,7 @@ public class Message implements Serializable {
     /**
      * Gets message and all its content as a String.
      *
-     * @return returns information about who sent a message (username) and its content, if time was set it is returned as well.
+     * @return information about who sent a message (username) and its content, if time was set it is returned as well.
      */
     public String toString() {
         DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm");

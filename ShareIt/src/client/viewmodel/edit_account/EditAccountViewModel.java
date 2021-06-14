@@ -100,7 +100,7 @@ public class EditAccountViewModel
      * was successfully edited.
      *
      * @param selectedCity The selected city
-     * @return returns Member object with edited data
+     * @return Member object with edited data
      */
   public String onEditButtonPressed(String selectedCity)
   {
@@ -114,7 +114,7 @@ public class EditAccountViewModel
      * Gets cities in a list from the database and places them in a Observable
      * list to be bound to a listing element in controller..
      *
-     * @return returns a list of cities
+     * @return a list of cities
      */
   public ObservableList<String> getLocations()
   {
@@ -164,7 +164,7 @@ public class EditAccountViewModel
     /**
      * Gets selected location.
      *
-     * @return returns the selected location
+     * @return the selected location
      */
   public String getSelectedLocation()
   {

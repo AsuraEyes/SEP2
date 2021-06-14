@@ -74,7 +74,7 @@ public class ViewRatingViewModel
      * Get member username that rating is viewed and sets the data in the
      * controller.
      *
-     * @return returns all Member's data
+     * @return all Member's data
      */
   public String getMemberUsername()
   {

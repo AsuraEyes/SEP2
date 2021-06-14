@@ -60,7 +60,7 @@ public class MemberDAOImpl
    * @param addressNo         street's number of the place where user lives input by user while creating new account
    * @param addressPostalCode postal code of the place where user lives input by user while creating new account
    * @param addressCity       city where user lives chosen from the list of possible cities by user while creating new account
-   * @return returns new object of Member with data which was provided by user while creating new account
+   * @return  new object of Member with data which was provided by user while creating new account
    */
   public Member create(String username, String password,
                        String emailAddress, String phoneNumber, String otherInformation,
@@ -133,8 +133,7 @@ public class MemberDAOImpl
    * Checks if the username is unique(not in database) by connecting to the database and try to match given username with existing ones
    *
    * @param username username that has to be checked for being unique
-   * @return returns true if it is unique or false if it is already in database
-   * @throws SQLException
+   * @return  true if it is unique or false if it is already in database
    */
   public boolean uniqueUsername(String username) throws SQLException
   {
@@ -197,7 +196,7 @@ public class MemberDAOImpl
    * Deletes member from database by connecting to the database and deleting matched object's id with existing member
    *
    * @param member Member object that is about to be deleted
-   * @return returns true if deleting process was successful
+   * @return true if deleting process was successful
    */
   public boolean delete(Member member)
   {
@@ -220,7 +219,7 @@ public class MemberDAOImpl
    * Gets member object based on given ID by connecting to the database and matching given id with existing member
    *
    * @param id ID of the member that information is needed
-   * @return returns member object with all his information
+   * @return  member object with all his information
    */
   public Member getMemberById(int id)
   {
@@ -260,7 +259,7 @@ public class MemberDAOImpl
    * Checks ID of member based on his username by connecting to the database and match existing member with given username
    *
    * @param username username that has to be checked for ID
-   * @return returns ID of checked member
+   * @return  ID of checked member
    * @throws SQLException
    */
   public int readIdByUsername(String username) throws SQLException
@@ -287,7 +286,7 @@ public class MemberDAOImpl
    *
    * @param username username that has to be checked
    * @param password password that has to be checked
-   * @return returns username if the data matches from given username and password(if username and password belongs to an administrator it returns administrator data)
+   * @return username if the data matches from given username and password(if username and password belongs to an administrator it  administrator data)
    */
   public String checkLogInCredentials(String username,
                                       String password)
@@ -326,7 +325,7 @@ public class MemberDAOImpl
    * Gets member object based on given username by connecting to the database and matching given username with existing member
    *
    * @param username username of the member that information is needed
-   * @return returns Member object with all his information
+   * @return Member object with all his information
    */
   public Member getMemberByUsername(String username)
   {
@@ -364,7 +363,7 @@ public class MemberDAOImpl
   }
   /**
    * Gets all the possible Members by connecting to the database and get all table contents
-   * @return returns a list of all Members that are stored in the database
+   * @return  a list of all Members that are stored in the database
    */
   public List<Member> readMembers()
   {

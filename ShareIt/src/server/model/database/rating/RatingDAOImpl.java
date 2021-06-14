@@ -54,7 +54,7 @@ public class RatingDAOImpl
    * @param feedback  optionally a written feedback that rating user can leave
    * @param username1 user that is rating
    * @param username2 user that is rated
-   * @return returns new object of Rating
+   * @return new object of Rating
    */
   public Rating create(double starValue, String feedback,
       String username1, String username2)
@@ -87,7 +87,7 @@ public class RatingDAOImpl
    * Get all ratings that member has from the database by connecting to the database then by using instance to get id by using username from member database and then match member's id with data member_to id from the database
    *
    * @param username username of the user that method will get all ratings for
-   * @return returns an array of all user's ratings
+   * @return an array of all user's ratings
    */
   public ArrayList<Rating> getAllRatingsOnMember(String username)
   {
@@ -120,7 +120,7 @@ public class RatingDAOImpl
    *
    * @param fromUsername User that feedback rating was from
    * @param toUsername   User that got rated
-   * @return returns rating object that has usernames matching
+   * @return rating object that has usernames matching
    */
   public Rating getRating(String fromUsername, String toUsername)
   {

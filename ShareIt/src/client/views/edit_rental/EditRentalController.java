@@ -144,7 +144,7 @@ public class EditRentalController
    * Validates data
    * @param message name of field in string in case of invalid data
    * @param nameOfField name of field
-   * @return returns true if data is valid, false if not
+   * @return true if data is valid, false if not
    */
   private boolean checkField(String message, TextField nameOfField)
   {
@@ -160,7 +160,7 @@ public class EditRentalController
   /**
    * Checks if picture was added
    * @param imageView picture
-   * @return returns true if picture was added, false if not
+   * @return true if picture was added, false if not
    */
   private boolean checkPicture(ImageView imageView)
   {

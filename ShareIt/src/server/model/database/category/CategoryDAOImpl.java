@@ -41,9 +41,10 @@ public class CategoryDAOImpl
     return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", password);
   }
 
+
   /**
    * Reads all categories from database by connecting to the database and get all table contents
-   * @return returns all category names in a arraylist
+   * @return all category names in a arraylist
    */
   public List<Category> readCategory()
   {

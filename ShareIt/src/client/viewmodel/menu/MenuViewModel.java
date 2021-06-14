@@ -35,7 +35,7 @@ public class MenuViewModel
   /**
    * Checks who is logged in.
    *
-   * @return returns type of account who is logged in, where ("") means Visitor
+   * @return  type of account who is logged in, where ("") means Visitor
    */
   public String checkUserType()
   {

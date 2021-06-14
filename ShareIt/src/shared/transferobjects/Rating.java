@@ -28,7 +28,7 @@ public class Rating implements Serializable
     /**
      * Gets rating that Member gave.
      *
-     * @return returns double type of rating.
+     * @return double type of rating.
      */
   public double getRating()
   {
@@ -46,7 +46,7 @@ public class Rating implements Serializable
     /**
      * Gets commentary that Member gave.
      *
-     * @return returns String of commentary.
+     * @return String of commentary.
      */
   public String getCommentary()
   {
@@ -55,7 +55,7 @@ public class Rating implements Serializable
     /**
      * Gets member that was rating.
      *
-     * @return returns int type of Member's ID that rated other member.
+     * @return int type of Member's ID that rated other member.
      */
   public int getMemberFrom()
   {
@@ -64,7 +64,7 @@ public class Rating implements Serializable
     /**
      * Gets member that was rated.
      *
-     * @return returns int type of Member's ID that was rated.
+     * @return int type of Member's ID that was rated.
      */
   public int getMemberTo()
   {

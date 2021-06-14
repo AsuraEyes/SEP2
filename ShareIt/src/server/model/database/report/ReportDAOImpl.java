@@ -53,7 +53,7 @@ public class ReportDAOImpl
    * @param feedback  optionally a written feedback that rating user can leave
    * @param username1 username of user that is sending report
    * @param username2 username of user that is reported
-   * @return returns new object of Report with data which was provided by user while filling a report
+   * @return new object of Report with data which was provided by user while filling a report
    * @throws SQLException
    */
   public Report create(String feedback, String username1,
@@ -81,7 +81,7 @@ public class ReportDAOImpl
    * Gets user's Report based on from which to which user was it by connecting to a database then inserting data provided by user to the database
    * @param fromUsername User that was reporting
    * @param toUsername   User that got reported
-   * @return returns Report object that has usernames matching
+   * @return Report object that has usernames matching
    */
   public Report getReport(String fromUsername, String toUsername)
   {
@@ -129,7 +129,7 @@ public class ReportDAOImpl
   }
   /**
    * Reads all rentals from database by connecting to the database and get all table contents
-   * @return returns a list of all reports that are stored in the database
+   * @return a list of all reports that are stored in the database
    */
   public List<Report> readReports()
   {

@@ -29,7 +29,7 @@ public class DataCheckMember
      * @param streetNumber     The address number of a street that the member is living on.
      * @param postalCode       The postal code of a place that the member is living on.
      * @param city             The name of the city that the member is living in.
-     * @return returns String type dependable on the result.
+     * @return String type dependable on the result.
      */
   public String checkData(String username, String password,
       String passwordAgain, String email, String otherInformation, String phone,
@@ -91,7 +91,7 @@ public class DataCheckMember
      * @param streetNumber     Updated address number of a street that the member is living on.
      * @param postalCode       Updated postal code of a place that the member is living on.
      * @param city             Updated name of the city that the member is living in.
-     * @return returns String type dependable on the result.
+     * @return String type dependable on the result.
      */
   public String updateCheckData(String username, String password,
       String passwordAgain, String email, String otherInformation, String phone,
@@ -138,7 +138,7 @@ public class DataCheckMember
   }
     /**
      * Compares password with passwordAgain.
-     * @return returns true if passwords are the same if not returns false
+     * @return true if passwords are the same if not returns false
      */
   private boolean matchingPasswords()
   {
@@ -146,7 +146,7 @@ public class DataCheckMember
   }
     /**
      * Checks if username already exist in the database
-     * @return returns false if username does not exist in the database yet
+     * @return false if username does not exist in the database yet
      */
   private boolean uniqueUsername()
   {
@@ -162,7 +162,7 @@ public class DataCheckMember
   }
     /**
      * Checks if at least one contact information was given
-     * @return returns false if both phone and email were not given
+     * @return false if both phone and email were not given
      */
   private boolean oneContactInformationGiven()
   {
@@ -181,7 +181,7 @@ public class DataCheckMember
   }
     /**
      * Checks if given postal code is a number
-     * @return returns true if object is returning a integer, false if not
+     * @return true if object is returning a integer, false if not
      */
   private boolean postalCodeIsNumber()
   {

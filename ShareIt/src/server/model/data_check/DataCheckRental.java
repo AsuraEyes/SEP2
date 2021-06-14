@@ -24,7 +24,7 @@ public class DataCheckRental
      * @param otherInformation   Other information put by Member when creating a new rental offer.
      * @param stateName          The name of a state that rental is in.
      * @param selectedCategories Categories that were selected when creating a new rental offer.
-     * @return returns String type dependable on the result.
+     * @return String type dependable on the result.
      */
   public String checkRentalData(String name, String pictureLink,
       String description, String price, String otherInformation,
@@ -76,7 +76,7 @@ public class DataCheckRental
      * @param stateName          Updated name of a state that rental is in.
      * @param rentalId           Id of the rental that is assigned to it automatically when creating a new rental offer.(It cannot be updated)
      * @param selectedCategories Updated categories that were selected.
-     * @return returns String type dependable on the result.
+     * @return String type dependable on the result.
      */
   public String updateCheckRentalData(String name, String pictureLink,
       String description, String price, String otherInformation,
@@ -119,7 +119,7 @@ public class DataCheckRental
   }
     /**
      * Checks is name was given.
-     * @return returns true if name is not empty, false if it is empty
+     * @return true if name is not empty, false if it is empty
      */
   private boolean nameGiven()
   {
@@ -131,7 +131,7 @@ public class DataCheckRental
   }
     /**
      * Checks is description was given.
-     * @return returns true if description is not empty, false if it is empty
+     * @return true if description is not empty, false if it is empty
      */
   private boolean descriptionGiven()
   {
@@ -144,7 +144,7 @@ public class DataCheckRental
   }
     /**
      * Checks if given price is a number
-     * @return returns true if object is returning a integer, false if not
+     * @return true if object is returning a integer, false if not
      */
   private boolean priceIsNumber()
   {

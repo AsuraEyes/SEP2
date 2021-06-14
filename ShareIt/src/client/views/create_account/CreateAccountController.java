@@ -124,7 +124,7 @@ public class CreateAccountController
     /**
      * Validates data
      * @param nameOfField name of field
-     * @return returns true if data is valid, false if not
+     * @return true if data is valid, false if not
      */
   private boolean checkField(TextField nameOfField)
   {

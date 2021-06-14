@@ -28,7 +28,7 @@ public class ModelFactory
   /**
    * Creates a RentalModel if not created, otherwise returns it.
    *
-   * @return the RentalModel
+   * @return RentalModel
    */
   public RentalModel getRentalModel()
   {
@@ -41,7 +41,7 @@ public class ModelFactory
   /**
    * Creates a MemberModel if not created, otherwise returns it.
    *
-   * @return the MemberModel
+   * @return MemberModel
    */
   public MemberModel getMemberModel()
   {
@@ -54,7 +54,7 @@ public class ModelFactory
   /**
    * Creates a MessageModel if not created, otherwise returns it.
    *
-   * @return the MessageModel
+   * @return MessageModel
    */
   public MessageModel getMessageModel()
   {

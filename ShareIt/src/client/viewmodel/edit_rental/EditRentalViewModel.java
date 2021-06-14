@@ -102,7 +102,7 @@ public class EditRentalViewModel
      * was successfully edited.
      * @param selectedState    The selected state
      * @param selectedCategory The selected category
-     * @return returns Rental object with edited data
+     * @return Rental object with edited data
      */
   public String onEditRentalButtonPressed(Object selectedState,
       ObservableList<String> selectedCategory)
@@ -121,7 +121,7 @@ public class EditRentalViewModel
      * Gets all the states in a list from the database and places them in a Observable
      * list to be bound to a listing element in controller.
      *
-     * @return returns a list of states
+     * @return a list of states
      */
   public ObservableList<String> getStates()
   {
@@ -138,7 +138,7 @@ public class EditRentalViewModel
      * Gets all the categories in a list from the database and places them in a Observable
      * list to be bound to a listing element in controller.
      *
-     * @return returns a list of categories
+     * @return a list of categories
      */
   public ObservableList<String> getCategories()
   {
@@ -154,7 +154,7 @@ public class EditRentalViewModel
     /**
      * Gets State that was selected while editing Rental.
      *
-     * @return returns the state that was selected
+     * @return the state that was selected
      */
   public String getSelectedState()
   {
@@ -163,7 +163,7 @@ public class EditRentalViewModel
     /**
      * Gets Categories that were selected while editing Rental.
      *
-     * @return returns the list of selected categories
+     * @return the list of selected categories
      */
   public ArrayList<String> getCheckedCategories()
   {

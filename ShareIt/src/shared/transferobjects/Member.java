@@ -90,7 +90,7 @@ public class Member implements Serializable
     /**
      * Gets id of the Member.
      *
-     * @return returns int type of Member's Id.
+     * @return int type of Member's Id.
      */
   public int getId()
   {
@@ -108,7 +108,7 @@ public class Member implements Serializable
     /**
      * Gets Member's username.
      *
-     * @return returns String type of Member's username.
+     * @return String type of Member's username.
      */
   public String getUsername()
   {
@@ -126,7 +126,7 @@ public class Member implements Serializable
     /**
      * Gets Member's password.
      *
-     * @return returns String type of Member's password.
+     * @return String type of Member's password.
      */
   public String getPassword()
   {
@@ -144,7 +144,7 @@ public class Member implements Serializable
     /**
      * Gets Member's email address.
      *
-     * @return returns String type of Member's email address.
+     * @return String type of Member's email address.
      */
   public String getEmailAddress()
   {
@@ -153,7 +153,7 @@ public class Member implements Serializable
     /**
      * Gets Member's other information.
      *
-     * @return returns String type of Member's other information.
+     * @return String type of Member's other information.
      */
   public String getOtherInformation()
   {
@@ -171,7 +171,7 @@ public class Member implements Serializable
     /**
      * Gets Member's phone number.
      *
-     * @return returns String type of Member's phone number(String type because there is possibility of occurrence the phone number's prefix with plus at the beginning).
+     * @return String type of Member's phone number(String type because there is possibility of occurrence the phone number's prefix with plus at the beginning).
      */
   public String getPhoneNo()
   {
@@ -181,7 +181,7 @@ public class Member implements Serializable
     /**
      * Gets Member's address street.
      *
-     * @return returns String type of street where Member lives.
+     * @return String type of street where Member lives.
      */
   public String getAddressStreet()
   {
@@ -190,7 +190,7 @@ public class Member implements Serializable
     /**
      * Gets Member's address number.
      *
-     * @return returns String type of street number where Member lives(String in case of occurrence numbers with letters like: 6A).
+     * @return String type of street number where Member lives(String in case of occurrence numbers with letters like: 6A).
      */
   public String getAddressNo()
   {
@@ -199,7 +199,7 @@ public class Member implements Serializable
     /**
      * Gets Member's address postal code.
      *
-     * @return returns int type of place where Member lives.
+     * @return int type of place where Member lives.
      */
   public int getAddressPostalCode()
   {
@@ -208,7 +208,7 @@ public class Member implements Serializable
     /**
      * Gets Member's city.
      *
-     * @return returns String type of Member's city.
+     * @return String type of Member's city.
      */
   public String getAddressCity()
   {
@@ -217,7 +217,7 @@ public class Member implements Serializable
     /**
      * Gets Member's average review.
      *
-     * @return returns float type of Member's average of reviews.
+     * @return float type of Member's average of reviews.
      */
   public float getAverageReview()
   {

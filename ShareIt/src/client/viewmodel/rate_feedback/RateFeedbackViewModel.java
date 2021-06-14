@@ -52,7 +52,7 @@ public class RateFeedbackViewModel
    * Sends the username to the controller.
    * calls the setRating() method
    *
-   * @return returns username of Member that is rated
+   * @return username of Member that is rated
    */
   public String getMemberUsername()
   {
@@ -89,7 +89,7 @@ public class RateFeedbackViewModel
   /**
    * Adds new rating feedback.
    *
-   * @return returns new Rating object
+   * @return new Rating object
    */
   public String addFeedback()
   {
@@ -100,7 +100,7 @@ public class RateFeedbackViewModel
   /**
    * After Submit button have been pressed this method sends data to the model.
    *
-   * @return returns string based on if feedback has been created or updated
+   * @return string based on if feedback has been created or updated
    */
   public String onSubmitButtonPressed()
   {

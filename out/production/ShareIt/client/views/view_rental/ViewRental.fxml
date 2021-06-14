@@ -24,7 +24,7 @@
                   </Button>
                   <HBox alignment="CENTER" layoutY="65.0" prefHeight="371.0" prefWidth="1280.0" style="-fx-background-color: #FF8C64;">
                      <children>
-                        <VBox prefHeight="371.0" prefWidth="1012.0" style="-fx-border-color: #FF8C64; -fx-border-width: 3; -fx-background-color: #FF8C64;">
+                        <VBox prefWidth="1012.0" style="-fx-border-color: #FF8C64; -fx-border-width: 3; -fx-background-color: #FF8C64;">
                            <effect>
                               <ColorAdjust />
                            </effect>

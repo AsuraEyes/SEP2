@@ -99,7 +99,7 @@ public class CreateAccountViewModel
      * was successfully created.
      *
      * @param selectedCity The selected city
-     * @return returns new Member object
+     * @return new Member object
      */
   public String onCreateButtonPressed(String selectedCity)
   {
@@ -114,7 +114,7 @@ public class CreateAccountViewModel
      * Gets cities in a list from the database and places them in a Observable
      * list to be bound to a listing element in controller..
      *
-     * @return returns a list of cities
+     * @return a list of cities
      */
   public ObservableList<String> getLocations()
   {

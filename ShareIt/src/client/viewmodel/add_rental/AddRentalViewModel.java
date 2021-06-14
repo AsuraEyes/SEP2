@@ -74,7 +74,7 @@ public class AddRentalViewModel
      *
      * @param selectedState    The selected state
      * @param selectedCategory The selected category
-     * @return returns new Rental object
+     * @return new Rental object
      */
   public String onAddRentalButtonPressed(Object selectedState,
       ObservableList<String> selectedCategory)
@@ -94,7 +94,7 @@ public class AddRentalViewModel
      * Get all the states from the database and places them in a Observable
      * list to be bound to a listing element in controller.
      *
-     * @return returns a list of states
+     * @return a list of states
      */
   public ObservableList<String> getStates()
   {
@@ -111,7 +111,7 @@ public class AddRentalViewModel
      * Get all the categories from the database and places them in a Observable
      * list to be bound to a listing element in controller.
      *
-     * @return returns a list of categories
+     * @return a list of categories
      */
   public ObservableList<String> getCategories()
   {

@@ -86,7 +86,7 @@ public class SearchForRentalViewModel
     /**
      * Gets cities in a list from the database and places them in a Observable
      * list to be bound to a listing element in controller.
-     * @return returns a list of cities
+     * @return a list of cities
      */
   public ObservableList<String> getLocations()
   {
@@ -103,7 +103,7 @@ public class SearchForRentalViewModel
      * Get all the categories in a list from the database and places them in a Observable
      * list to be bound to a listing element in controller.
      *
-     * @return returns a list of categories
+     * @return a list of categories
      */
   public ObservableList<String> getCategories()
   {
@@ -119,7 +119,7 @@ public class SearchForRentalViewModel
     /**
      * After Search button have been pressed this method sends data to the model.
      *
-     * @return returns a list of Rentals dependable on input
+     * @return a list of Rentals dependable on input
      */
   public List<Rental> onSearchButtonPressed()
   {
@@ -130,7 +130,7 @@ public class SearchForRentalViewModel
      *
      * @param selectedCity     Selected city
      * @param selectedCategory Selected category
-     * @return returns a list of Rentals dependable on input and selected city, category
+     * @return a list of Rentals dependable on input and selected city, category
      */
   public List<Rental> onFilterButtonPressed(String selectedCity,
       ObservableList<String> selectedCategory)

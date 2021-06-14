@@ -22,7 +22,7 @@ public class Category implements Serializable
   /**
    * Gets name of the category.
    *
-   * @return returns Sting type of name of the Category
+   * @return Sting type of name of the Category
    */
   public String getName()
   {
@@ -41,7 +41,7 @@ public class Category implements Serializable
 
   /**
    * Gets category name as a String.
-   * @return returns name of the Category
+   * @return name of the Category
    */
   public String toString()
   {

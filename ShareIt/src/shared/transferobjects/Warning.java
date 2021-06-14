@@ -33,7 +33,7 @@ public class Warning implements Serializable
     /**
      * Gets administrator username.
      *
-     * @return returns String type of administrator's  username.
+     * @return String type of administrator's  username.
      */
   public String getAdministratorFrom()
   {
@@ -42,7 +42,7 @@ public class Warning implements Serializable
     /**
      * Gets member that was warned.
      *
-     * @return returns int type of Member's ID that was warned.
+     * @return int type of Member's ID that was warned.
      */
   public int getMemberTo()
   {
@@ -51,7 +51,7 @@ public class Warning implements Serializable
     /**
      * Gets content of warning.
      *
-     * @return returns String type of warning message that was sent.
+     * @return String type of warning message that was sent.
      */
   public String getText()
   {
@@ -69,7 +69,7 @@ public class Warning implements Serializable
     /**
      * Gets exact time when warning was sent.
      *
-     * @return returns Date type of time when warning was sent.
+     * @return Date type of time when warning was sent.
      */
   public Date getTimeStamp()
   {
@@ -77,7 +77,7 @@ public class Warning implements Serializable
   }
     /**
      * Gets warning and all its content as a String.
-     * @return returns information about who sent a warning(administrator's username) and its content and date when it was sent.
+     * @return information about who sent a warning(administrator's username) and its content and date when it was sent.
      */
   public String toString()
   {

@@ -66,7 +66,7 @@ public class ReportMemberViewModel
   /**
    * After Report button have been pressed this method sends data to the model.
    *
-   * @return returns string based on if report has been created or updated
+   * @return string based on if report has been created or updated
    */
   public String onReportButtonPressed()
   {

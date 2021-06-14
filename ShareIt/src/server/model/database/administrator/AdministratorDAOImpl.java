@@ -48,8 +48,7 @@ public class AdministratorDAOImpl
    * Checks if the username is unique(not in database)(specifically for administrator) by connecting to the database and try to match given username with existing ones
    *
    * @param username username that has to be checked for being unique
-   * @return returns username if the data matches from given username and password
-   * @throws SQLException
+   * @return username if the data matches from given username and password
    */
   public boolean uniqueUsername(String username) throws SQLException
   {
@@ -73,7 +72,7 @@ public class AdministratorDAOImpl
    *
    * @param username username that has to be checked
    * @param password password that has to be checked
-   * @return returns username if the data matches from given username and password
+   * @return username if the data matches from given username and password
    */
   public String checkLogInCredentials(String username,
       String password)

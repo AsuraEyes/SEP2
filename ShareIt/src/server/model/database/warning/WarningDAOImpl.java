@@ -51,7 +51,7 @@ public class WarningDAOImpl
      * Gets all the Warnings connected to the administrator that gave it and member that received it by connecting to the database and get all table contents that are matched with given data
      * @param administrator Administrator that filled the warning
      * @param memberTo Member that is geting warned
-     * @return returns a list of all warnings that are matched with given data
+     * @return a list of all warnings that are matched with given data
      */
   public ArrayList<Warning> getWarnings(String administrator,
       int memberTo)
@@ -83,7 +83,7 @@ public class WarningDAOImpl
     /**
      * Creates new warning by connecting to a database then inserting data provided by administrator to the database
      * @param warning Warning object that will be sent
-     * @return returns new object of Warning with data which was provided by Administrator while creating new warning
+     * @return new object of Warning with data which was provided by Administrator while creating new warning
      */
   public Warning sendWarning(Warning warning)
   {

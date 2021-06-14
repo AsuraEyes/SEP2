@@ -17,7 +17,7 @@ public interface RentalModel extends Subject
    * The list is filtered in DataCheckRental and retrieved from database.
    *
    * @param search the search
-   * @return returns the list of rentals
+   * @return the list of rentals
    */
   List<Rental> checkSearch(String search);
   /**
@@ -47,7 +47,7 @@ public interface RentalModel extends Subject
    * @param otherInformation   the other information
    * @param stateName          the state name
    * @param selectedCategories the selected categories
-   * @return returns data from Client
+   * @return data from Client
    */
   String updateCheckRentalData(String name, String pictureLink,
       String description, String price, String otherInformation,
@@ -59,7 +59,7 @@ public interface RentalModel extends Subject
    * @param search             the search
    * @param city               the city
    * @param selectedCategories the selected categories
-   * @return returns the list of rentals
+   * @return the list of rentals
    */
   List<Rental> checkSearchWithFilter(String search, String city,
       ArrayList<String> selectedCategories);
@@ -111,7 +111,7 @@ public interface RentalModel extends Subject
    * Deletes the rental from the database and the lists from the RentalModelManager.
    *
    * @param rental The rental that is being deleted
-   * @return returns true if data was validated properly
+   * @return true if data was validated properly
    */
   boolean deleteRental(Rental rental);
   /**

@@ -18,7 +18,7 @@ public class StateManager implements Serializable
   /**
    * Creates a StateManager if not created, otherwise returns it
    *
-   * @return returns new StateManager
+   * @return new StateManager
    */
   public static synchronized StateManager getInstance()
   {

@@ -21,7 +21,7 @@ public interface MessageModel extends Subject
    * @param feedback  the feedback
    * @param username1 username of Member filing the feedback
    * @param username2 username of Member being rated
-   * @return returns data from Client
+   * @return data from Client
    */
   String addFeedback(double starValue, String feedback, String username1,
       String username2);
@@ -32,14 +32,14 @@ public interface MessageModel extends Subject
    * @param feedback  the feedback
    * @param username1 username of Member filing the report
    * @param username2 username of Member being reported
-   * @return returns data from Client
+   * @return data from Client
    */
   String addReport(String feedback, String username1, String username2);
 
   /**
    * Gets search text .
    *
-   * @return returns a phrase that was used for searching on WelcomePage view.
+   * @return a phrase that was used for searching on WelcomePage view.
    */
   String getSearchText();
   /**
@@ -53,7 +53,7 @@ public interface MessageModel extends Subject
    * Gets all ratings on member from database.
    *
    * @param memberUsername the member username
-   * @return returns all ratings on member
+   * @return all ratings on member
    */
   ArrayList<Rating> getAllRatingsOnMember(String memberUsername);
   /**
@@ -61,7 +61,7 @@ public interface MessageModel extends Subject
    *
    * @param fromUsername the from username
    * @param toUsername   the to username
-   * @return returns rating that matched the data
+   * @return rating that matched the data
    */
   Rating getRating(String fromUsername, String toUsername);
   /**
@@ -69,7 +69,7 @@ public interface MessageModel extends Subject
    *
    * @param fromUsername the from username
    * @param toUsername   the to username
-   * @return returns report that matched the data
+   * @return report that matched the data
    */
   Report getReport(String fromUsername, String toUsername);
   /**
@@ -87,7 +87,7 @@ public interface MessageModel extends Subject
   /**
    * Gets all received messages from MessageModelManager for the logged user.
    *
-   * @return returns all received messages
+   * @return all received messages
    */
   ArrayList<Message> getAllReceivedMessages();
   /**
@@ -99,7 +99,7 @@ public interface MessageModel extends Subject
   /**
    * Gets all warnings, for all the members, from MessageModelManager.
    *
-   * @return returns all warnings
+   * @return all warnings
    */
   ArrayList<Warning> getAllWarnings();
   /**
@@ -107,7 +107,7 @@ public interface MessageModel extends Subject
    *
    * @param loggedUserId the logged user id
    * @param fromUserid   the from userid
-   * @return returns messages from user
+   * @return messages from user
    */
   ArrayList<Message> getMessagesFromUser(int loggedUserId, int fromUserid);
   /**
@@ -115,7 +115,7 @@ public interface MessageModel extends Subject
    *
    * @param administrator the administrator
    * @param idTo          the id of the logged user.
-   * @return returns warnings that matched the data
+   * @return warnings that matched the data
    */
   ArrayList<Warning> getWarnings(String administrator, int idTo);
   /**

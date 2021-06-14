@@ -15,7 +15,7 @@ public class DataCheckRating
    * @param feedback      Commentary that was added while rating a member.
    * @param username1     Member's ID that rated another member.
    * @param username2     Member's ID that was rated.
-   * @return returns String type dependable on the result.
+   * @return String type dependable on the result.
    */
   public String addFeedback(double starValue, String feedback, String username1,
       String username2)
