@@ -56,7 +56,7 @@
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </padding>
                               </TextField>
-                              <Label text="Description" textFill="WHITE" GridPane.rowIndex="2" />
+                              <Label text="Description*" textFill="WHITE" GridPane.rowIndex="2" />
                               <Label text="Other information" textFill="WHITE" GridPane.rowIndex="5" />
                               <TextField fx:id="descriptionField" promptText="MAKITA HP333DZ 10.8V / 12V MAX CXT SLIDE COMBI DRILL BODY ONLY" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                  <GridPane.margin>

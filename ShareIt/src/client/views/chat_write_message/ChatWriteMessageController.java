@@ -46,9 +46,13 @@ public class ChatWriteMessageController
     viewHandler.setView(viewHandler.menu(), viewHandler.chatReceived());
   }
 
-  public void onSend()
-  {
+  public void onSend() {
     chatWriteMessageViewModel.sendMessage();
     inputTextChatField.clear();
+  }
+
+  public void reporterMemberClickedOn() {
+    chatWriteMessageViewModel.setReceiverNameLabel();
+    viewHandler.setView(viewHandler.menu(), viewHandler.viewMemberProfile());
   }
 }

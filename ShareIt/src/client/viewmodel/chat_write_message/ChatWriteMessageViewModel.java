@@ -13,23 +13,22 @@ import java.util.ArrayList;
 /**
  * A class that holds and manages data from the ChatWriteMessage view.
  */
-public class ChatWriteMessageViewModel
-{
-  private MemberModel memberModel;
-  private MessageModel messageModel;
+public class ChatWriteMessageViewModel {
+  private final MemberModel memberModel;
+  private final MessageModel messageModel;
 
-  private StringProperty username;
-  private StringProperty messages;
-  private StringProperty inputTextChat;
+  private final StringProperty username;
+  private final StringProperty messages;
+  private final StringProperty inputTextChat;
+
   /**
    * Instantiates StringProperties used for binding with the fields in the controller
    *
-   * @param memberModel The model that this ViewModel uses
+   * @param memberModel  The model that this ViewModel uses
    * @param messageModel The model that this ViewModel uses
    */
   public ChatWriteMessageViewModel(MemberModel memberModel,
-      MessageModel messageModel)
-  {
+                                   MessageModel messageModel) {
     this.memberModel = memberModel;
     this.messageModel = messageModel;
 
@@ -116,12 +115,15 @@ public class ChatWriteMessageViewModel
     Message message = new Message(idFrom, idTo, inputTextChat.getValue(), null);
     messageModel.sendMessage(message);
   }
+
   /**
    * Loads all received messages.
    */
-  public void loadAllReceivedMessages()
-  {
+  public void loadAllReceivedMessages() {
     messageModel.setAllReceivedMessages(memberModel.getLoggedInUsername());
   }
 
+  public void setReceiverNameLabel() {
+    memberModel.setMemberUsername(username.getValue());
+  }
 }
