@@ -55,8 +55,7 @@ public class RentalModelManager implements RentalModel
     {
       if (allRentals.get(i).getId() == updatedRental.getId())
       {
-        allRentals.remove(allRentals.get(i));
-        allRentals.add(updatedRental);
+        allRentals.set(allRentals.indexOf(allRentals.get(i)), updatedRental);
       }
     }
   }
